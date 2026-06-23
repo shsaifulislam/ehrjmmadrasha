@@ -1,0 +1,84 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>আমার প্রোফাইল — Student Profile</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.profile-card {background:#fff;border:1px solid #D9E1DD;border-radius:18px;padding:30px;max-width:600px;margin:20px auto;box-shadow:0 10px 30px rgba(0,0,0,0.05)}
+.profile-header {display:flex;gap:20px;align-items:center;border-bottom:2px solid #D9E1DD;padding-bottom:20px;margin-bottom:20px}
+.profile-img {width:90px;height:90px;border-radius:50%;border:3px solid #0F5C4D;object-fit:cover}
+.profile-name {font-size:22px;font-weight:bold;color:#0A3F36;margin:0}
+.profile-meta {color:#667874;font-size:14px;margin-top:4px}
+.profile-row {display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #F0F0F0}
+.profile-row strong {color:#667874}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Student Portal</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/student/dashboard">Dashboard</a>
+    <a href="/student/profile" style="background:#0F5C4D;color:#fff;border-radius:10px">প্রোফাইল</a>
+    <a href="/student/fees">বেতন ও ফি</a>
+    <a href="/student/results">ফলাফল</a>
+    <a href="/student/notices">নোটিশ</a>
+    <a href="/student/id-card">আইডি কার্ড</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>👤 আমার প্রোফাইল</h1>
+    <p>আপনার একাডেমিক এবং অভিভাবক সংক্রান্ত বিস্তারিত তথ্য নিচে দেয়া হলো।</p>
+  </section>
+
+  <div id="profileArea">
+    <div class="loader">👤 প্রোফাইল লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+const taka = n => new Intl.NumberFormat('bn-BD').format(n||0) + ' ৳';
+
+async function loadProfile() {
+  try {
+    const student = await API('/api/student/me');
+    if (student.error) {
+      document.getElementById('profileArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Student Login করুন।</div>';
+      return;
+    }
+
+    document.getElementById('profileArea').innerHTML = `
+      <div class="profile-card">
+        <div class="profile-header">
+          <img class="profile-img" src="${student.photo || '/assets/img/logo.png'}" onerror="this.src='/assets/img/logo.png'">
+          <div>
+            <h2 class="profile-name">${student.name}</h2>
+            <div class="profile-meta">শ্রেণী: ${student.className} | রোল: ${student.roll}</div>
+          </div>
+        </div>
+        <div class="profile-row"><strong>শিক্ষার্থী আইডি</strong> <span>${student.id}</span></div>
+        <div class="profile-row"><strong>বিভাগ/শ্রেণী</strong> <span>${student.className}</span></div>
+        <div class="profile-row"><strong>রোল নম্বর</strong> <span>${student.roll}</span></div>
+        <div class="profile-row"><strong>অভিভাবকের নাম</strong> <span>${student.guardian}</span></div>
+        <div class="profile-row"><strong>যোগাযোগের ফোন নম্বর</strong> <span>${student.phone}</span></div>
+        <div class="profile-row"><strong>মাসিক বেতন/ফি</strong> <span>${taka(student.fee)}</span></div>
+        <div class="profile-row"><strong>ভর্তির তারিখ</strong> <span>${student.admissionDate || '-'}</span></div>
+        <div class="profile-row"><strong>অবস্থা (Status)</strong> <span style="color:#15803D;font-weight:bold">${student.status === 'active' ? 'সচল (Active)' : 'নিষ্ক্রিয়'}</span></div>
+      </div>
+    `;
+  } catch(e) {
+    document.getElementById('profileArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+loadProfile();
+</script>
+</body></html>

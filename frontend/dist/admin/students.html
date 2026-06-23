@@ -1,0 +1,281 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ছাত্র ব্যবস্থাপনা — Admin Students</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input,.modal select{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-danger{background:#DC2626;color:#fff;border:0}
+.btn-success{background:#15803D;color:#fff;border:0}
+.loader{text-align:center;padding:40px;color:#667874}
+.empty-state{text-align:center;padding:40px;color:#667874;font-size:16px}
+.error-state{text-align:center;padding:40px;color:#DC2626;font-size:16px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانج حاجي رحمة الله زميرية</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students" style="background:#0F5C4D;color:#fff;border-radius:10px">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>👨‍🎓 ছাত্র ব্যবস্থাপনা</h1>
+    <p>ছাত্রদের তালিকা প্রদর্শন, নতুন ছাত্র যোগ, তথ্য সংশোধন ও বকেয়া ফি নিয়ন্ত্রণ করুন।</p>
+  </section>
+
+  <!-- Toolbar: Search, Filter, Add New -->
+  <section class="toolbar">
+    <input id="searchBox" placeholder="🔍 ছাত্রের নাম, আইডি বা ফোন দিয়ে খুঁজুন..." oninput="filterStudents()">
+    <select id="classFilter" onchange="filterStudents()">
+      <option value="">সব বিভাগ</option>
+      <option value="C-001">নূরানী বিভাগ</option>
+      <option value="C-002">হিফজ বিভাগ</option>
+      <option value="C-003">কিতাব বিভাগ</option>
+    </select>
+    <button onclick="openAddModal()" id="btnAddStudent">➕ নতুন ছাত্র যোগ</button>
+  </section>
+
+  <!-- Student Table Area -->
+  <div id="studentTableArea">
+    <div class="loader">📋 ছাত্র তথ্য লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- ADD/EDIT STUDENT MODAL -->
+<div class="modal-overlay" id="studentModal">
+  <div class="modal">
+    <h2 id="modalTitle">➕ নতুন ছাত্র যোগ</h2>
+    <input type="hidden" id="studentIdField">
+    
+    <label>ছাত্রের নাম</label>
+    <input id="stName" placeholder="যেমন: মুহাম্মদ আব্দুল্লাহ">
+    
+    <label>বিভাগ/শ্রেণী</label>
+    <select id="stClass" onchange="updateClassDetails()">
+      <option value="C-001" data-name="নূরানী বিভাগ" data-fee="600">নূরানী বিভাগ</option>
+      <option value="C-002" data-name="হিফজ বিভাগ" data-fee="800">হিফজ বিভাগ</option>
+      <option value="C-003" data-name="কিতাব বিভাগ" data-fee="700">কিতাব বিভাগ</option>
+    </select>
+
+    <label>রোল নম্বর</label>
+    <input id="stRoll" placeholder="যেমন: 01">
+
+    <label>অভিভাবকের নাম</label>
+    <input id="stGuardian" placeholder="যেমন: মো. রহিম">
+
+    <label>অভিভাবকের ফোন নম্বর</label>
+    <input id="stPhone" placeholder="যেমন: 01845162664">
+
+    <label>মাসিক ফি (টাকা)</label>
+    <input id="stFee" type="number" min="0" placeholder="মাসিক বেতন">
+
+    <label>বর্তমান বকেয়া (টাকা)</label>
+    <input id="stDue" type="number" min="0" value="0" placeholder="শুরুর বকেয়া">
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('studentModal')">বাতিল</button>
+      <button class="btn-success" onclick="saveStudent()" id="btnSaveStudent">✅ সংরক্ষণ করুন</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+const taka = n => new Intl.NumberFormat('bn-BD').format(n||0) + ' ৳';
+
+let allStudents = [];
+let isEditMode = false;
+
+async function loadStudents() {
+  try {
+    const data = await API('/api/students');
+    if (data.error) {
+      document.getElementById('studentTableArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন। <a href="/admin/login.html">Login</a></div>';
+      return;
+    }
+    allStudents = Array.isArray(data) ? data : [];
+    renderStudentsTable();
+  } catch(e) {
+    document.getElementById('studentTableArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderStudentsTable() {
+  let rows = [...allStudents];
+
+  // Search
+  const q = (document.getElementById('searchBox').value || '').toLowerCase();
+  if (q) {
+    rows = rows.filter(s => 
+      (s.name || '').toLowerCase().includes(q) || 
+      (s.id || '').toLowerCase().includes(q) || 
+      (s.phone || '').toLowerCase().includes(q)
+    );
+  }
+
+  // Class Filter
+  const cf = document.getElementById('classFilter').value;
+  if (cf) {
+    rows = rows.filter(s => s.classId === cf);
+  }
+
+  if (rows.length === 0) {
+    document.getElementById('studentTableArea').innerHTML = '<div class="empty-state">📭 কোনো ছাত্র পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('studentTableArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>আইডি</th><th>নাম</th><th>বিভাগ</th><th>রোল</th><th>অভিভাবক</th><th>ফোন</th><th>বেতন</th><th>বকেয়া</th><th>Action</th>
+      </tr></thead>
+      <tbody>${rows.map(s => `<tr>
+        <td>${s.id}</td>
+        <td>${s.name}</td>
+        <td>${s.className || '-'}</td>
+        <td>${s.roll || '-'}</td>
+        <td>${s.guardian || '-'}</td>
+        <td>${s.phone || '-'}</td>
+        <td>${taka(s.fee)}</td>
+        <td style="font-weight:bold;color:${s.due > 0 ? '#DC2626' : '#15803D'}">${taka(s.due)}</td>
+        <td>
+          <button onclick="openEditModal('${s.id}')" style="font-size:12px;padding:6px 10px">✏️ সম্পাদনা</button>
+          <button onclick="deleteStudent('${s.id}')" style="font-size:12px;padding:6px 10px;background:#DC2626">🗑️ মুছুন</button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+function filterStudents() { renderStudentsTable(); }
+
+// Modals
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function updateClassDetails() {
+  const sel = document.getElementById('stClass');
+  const opt = sel.options[sel.selectedIndex];
+  if (!isEditMode) {
+    document.getElementById('stFee').value = opt.getAttribute('data-fee');
+  }
+}
+
+function openAddModal() {
+  isEditMode = false;
+  document.getElementById('modalTitle').textContent = '➕ নতুন ছাত্র যোগ';
+  document.getElementById('studentIdField').value = '';
+  document.getElementById('stName').value = '';
+  document.getElementById('stRoll').value = '';
+  document.getElementById('stGuardian').value = '';
+  document.getElementById('stPhone').value = '';
+  document.getElementById('stClass').selectedIndex = 0;
+  updateClassDetails();
+  document.getElementById('stDue').value = '0';
+  document.getElementById('stDue').disabled = false;
+  openModal('studentModal');
+}
+
+function openEditModal(id) {
+  isEditMode = true;
+  const s = allStudents.find(x => x.id === id);
+  if (!s) return;
+
+  document.getElementById('modalTitle').textContent = '✏️ ছাত্রের তথ্য সংশোধন';
+  document.getElementById('studentIdField').value = s.id;
+  document.getElementById('stName').value = s.name || '';
+  document.getElementById('stRoll').value = s.roll || '';
+  document.getElementById('stGuardian').value = s.guardian || '';
+  document.getElementById('stPhone').value = s.phone || '';
+  document.getElementById('stFee').value = s.fee || 0;
+  document.getElementById('stDue').value = s.due || 0;
+  document.getElementById('stDue').disabled = true; // prevent changing due directly (use finance module instead)
+  
+  // Set class select
+  const sel = document.getElementById('stClass');
+  for (let i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].value === s.classId) {
+      sel.selectedIndex = i;
+      break;
+    }
+  }
+
+  openModal('studentModal');
+}
+
+async function saveStudent() {
+  const id = document.getElementById('studentIdField').value;
+  const name = document.getElementById('stName').value;
+  const classId = document.getElementById('stClass').value;
+  
+  const sel = document.getElementById('stClass');
+  const className = sel.options[sel.selectedIndex].getAttribute('data-name');
+  
+  const roll = document.getElementById('stRoll').value;
+  const guardian = document.getElementById('stGuardian').value;
+  const phone = document.getElementById('stPhone').value;
+  const fee = parseInt(document.getElementById('stFee').value) || 0;
+  const due = parseInt(document.getElementById('stDue').value) || 0;
+
+  if (!name || !roll) { alert('নাম এবং রোল নম্বর দিতে হবে!'); return; }
+
+  const payload = { name, classId, className, roll, guardian, phone, fee, due };
+
+  try {
+    let result;
+    if (isEditMode) {
+      result = await API('/api/students/' + id, {
+        method: 'PUT',
+        body: JSON.stringify(payload)
+      });
+    } else {
+      result = await API('/api/students', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+    }
+
+    if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+    alert(isEditMode ? '✅ ছাত্রের তথ্য সংশোধন সফল!' : '✅ নতুন ছাত্র যোগ সফল!');
+    closeModal('studentModal');
+    loadStudents();
+  } catch(e) {
+    alert('❌ সংরক্ষণ ব্যর্থ হয়েছে।');
+  }
+}
+
+async function deleteStudent(id) {
+  if (!confirm('আপনি কি নিশ্চিতভাবে এই ছাত্রের তথ্য মুছতে চান?')) return;
+  try {
+    const result = await API('/api/students/' + id, { method: 'DELETE' });
+    if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+    alert('✅ ছাত্রের তথ্য মুছে ফেলা হয়েছে।');
+    loadStudents();
+  } catch(e) {
+    alert('❌ মুছতে সমস্যা হয়েছে।');
+  }
+}
+
+loadStudents();
+</script>
+</body></html>

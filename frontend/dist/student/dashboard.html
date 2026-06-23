@@ -1,0 +1,93 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>শিক্ষার্থী ড্যাশবোর্ড — Student Dashboard</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0}
+.summary-card{background:#fff;border:1px solid #D9E1DD;border-radius:14px;padding:18px;text-align:center}
+.summary-card h4{margin:0;color:#667874;font-size:13px}
+.summary-card .val{font-size:24px;font-weight:700;color:#0A3F36;margin:6px 0}
+.summary-card.due .val{color:#DC2626}
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Student Portal</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/student/dashboard" style="background:#0F5C4D;color:#fff;border-radius:10px">Dashboard</a>
+    <a href="/student/profile">প্রোফাইল</a>
+    <a href="/student/fees">বেতন ও ফি</a>
+    <a href="/student/results">ফলাফল</a>
+    <a href="/student/notices">নোটিশ</a>
+    <a href="/student/id-card">আইডি কার্ড</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1 id="welcomeTitle">👋 আসসালামু আলাইকুম</h1>
+    <p>শিক্ষার্থী পোর্টালে আপনাকে স্বাগতম। এখান থেকে আপনার বেতন, হাজিরা, ফলাফল ও আইডি কার্ড দেখতে পারবেন।</p>
+  </section>
+
+  <!-- Quick Info Cards -->
+  <div id="studentInfoArea">
+    <div class="loader">📊 তথ্য লোড হচ্ছে...</div>
+  </div>
+
+  <!-- Services Portal Grid -->
+  <section class="grid">
+    <div class="card" style="text-align:center;">
+      <h3>👤 আমার প্রোফাইল</h3>
+      <p>আপনার মৌলিক তথ্য ও যোগাযোগের বিবরণ দেখুন।</p>
+      <a class="btn primary" href="/student/profile">প্রোফাইল দেখুন</a>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>💵 বেতন ও ফি</h3>
+      <p>পরিশোধিত বেতন ও বর্তমান বকেয়ার পরিমাণ চেক করুন।</p>
+      <a class="btn primary" href="/student/fees">বেতন বিবরণী</a>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>🎓 পরীক্ষার ফলাফল</h3>
+      <p>পরীক্ষার বিষয়ভিত্তিক নম্বর ও জিপিএ গ্রেডশিট দেখুন।</p>
+      <a class="btn primary" href="/student/results">ফলাফল দেখুন</a>
+    </div>
+  </section>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+const taka = n => new Intl.NumberFormat('bn-BD').format(n||0) + ' ৳';
+
+async function loadStudentDashboard() {
+  try {
+    const student = await API('/api/student/me');
+    if (student.error) {
+      document.getElementById('studentInfoArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Student Login করুন। <a href="/admin/login.html">Login</a></div>';
+      return;
+    }
+
+    document.getElementById('welcomeTitle').textContent = `👋 আসসালামু আলাইকুম, ${student.name}`;
+
+    document.getElementById('studentInfoArea').innerHTML = `
+      <div class="summary-grid">
+        <div class="summary-card"><h4>শ্রেণী/বিভাগ</h4><div class="val">${student.className}</div></div>
+        <div class="summary-card"><h4>রোল নম্বর</h4><div class="val">${student.roll}</div></div>
+        <div class="summary-card"><h4>ছাত্র আইডি</h4><div class="val">${student.id}</div></div>
+        <div class="summary-card due"><h4>মোট বকেয়া</h4><div class="val">${taka(student.due)}</div></div>
+      </div>
+    `;
+  } catch(e) {
+    document.getElementById('studentInfoArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+loadStudentDashboard();
+</script>
+</body></html>

@@ -1,0 +1,10 @@
+.env
+node_modules/
+.replit
+replit.nix
+*.log
+*.zip
+*.webp
+*.png
+.tempmediaStorage/
+C:\Users\shsai\.gemini\antigravity-ide\

@@ -1,0 +1,239 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>শাখা/বিভাগ ব্যবস্থাপনা — Admin Departments</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input,.modal textarea,.modal select{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal textarea{resize:vertical;min-height:80px}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-danger{background:#DC2626;color:#fff;border:0}
+.btn-success{background:#15803D;color:#fff;border:0}
+.loader{text-align:center;padding:40px;color:#667874}
+.empty-state{text-align:center;padding:40px;color:#667874;font-size:16px}
+.error-state{text-align:center;padding:40px;color:#DC2626;font-size:16px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانج حاجي رحمة الله زميرية</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>🗂️ শাখা/বিভাগ ব্যবস্থাপনা</h1>
+    <p>মাদ্রাসার মূল শিক্ষা বিভাগসমূহ, প্রধানদের নাম ও বিবরণ নিয়ন্ত্রণ করুন।</p>
+  </section>
+
+  <!-- Toolbar: Search, Add New -->
+  <section class="toolbar">
+    <input id="searchBox" placeholder="🔍 বিভাগের নাম দিয়ে খুঁজুন..." oninput="filterDepts()">
+    <button onclick="openAddModal()" id="btnAddDept">➕ নতুন বিভাগ যোগ</button>
+    <button onclick="exportCSV()" class="btn-cancel">📥 CSV এক্সপোর্ট</button>
+    <button onclick="window.print()" class="btn-cancel">🖨️ প্রিন্ট</button>
+  </section>
+
+  <!-- Table Area -->
+  <div id="tableArea">
+    <div class="loader">📋 বিভাগ তালিকা লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-overlay" id="deptModal">
+  <div class="modal">
+    <h2 id="modalTitle">➕ নতুন বিভাগ যোগ</h2>
+    <input type="hidden" id="deptIdField">
+    
+    <label>বিভাগের নাম</label>
+    <input id="depName" placeholder="যেমন: হিফজ বিভাগ">
+    
+    <label>বিভাগীয় প্রধান (Head)</label>
+    <select id="depHead">
+      <option value="">নির্বাচন করুন</option>
+    </select>
+
+    <label>বিবরণ</label>
+    <textarea id="depDesc" placeholder="যেমন: পবিত্র কুরআন মুখস্থকরণ ও তাজবীদ শিক্ষা।"></textarea>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('deptModal')">বাতিল</button>
+      <button class="btn-success" onclick="saveDept()" id="btnSaveDept">✅ সংরক্ষণ করুন</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let allDepts = [];
+let allTeachers = [];
+let isEditMode = false;
+
+async function loadData() {
+  try {
+    const [depts, teachers] = await Promise.all([
+      API('/api/departments'),
+      API('/api/teachers')
+    ]);
+
+    if (depts.error || teachers.error) {
+      document.getElementById('tableArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন। <a href="/admin/login.html">Login</a></div>';
+      return;
+    }
+
+    allDepts = Array.isArray(depts) ? depts : [];
+    allTeachers = Array.isArray(teachers) ? teachers : [];
+
+    // Populate dropdown
+    const headSelect = document.getElementById('depHead');
+    headSelect.innerHTML = '<option value="">নির্বাচন করুন</option>' + 
+      allTeachers.map(t => `<option value="${t.name}">${t.name} (${t.subject})</option>`).join('');
+
+    renderTable();
+  } catch(e) {
+    document.getElementById('tableArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderTable() {
+  let rows = [...allDepts];
+  const q = (document.getElementById('searchBox').value || '').toLowerCase();
+  if (q) {
+    rows = rows.filter(d => 
+      (d.name || '').toLowerCase().includes(q) || 
+      (d.head || '').toLowerCase().includes(q)
+    );
+  }
+
+  if (rows.length === 0) {
+    document.getElementById('tableArea').innerHTML = '<div class="empty-state">📭 কোনো বিভাগ পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('tableArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>আইডি</th><th>বিভাগের নাম</th><th>বিভাগীয় প্রধান (Head)</th><th>বিবরণ</th><th>Action</th>
+      </tr></thead>
+      <tbody>${rows.map(d => `<tr>
+        <td>${d.id}</td>
+        <td><strong>${d.name}</strong></td>
+        <td>${d.head || '-'}</td>
+        <td style="max-width:300px">${d.description || '-'}</td>
+        <td>
+          <button onclick="openEditModal('${d.id}')" style="font-size:12px;padding:6px 10px">✏️ সম্পাদনা</button>
+          <button onclick="deleteDept('${d.id}')" style="font-size:12px;padding:6px 10px;background:#DC2626">🗑️ মুছুন</button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+function filterDepts() { renderTable(); }
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openAddModal() {
+  isEditMode = false;
+  document.getElementById('modalTitle').textContent = '➕ নতুন বিভাগ যোগ';
+  document.getElementById('deptIdField').value = '';
+  document.getElementById('depName').value = '';
+  document.getElementById('depHead').value = '';
+  document.getElementById('depDesc').value = '';
+  openModal('deptModal');
+}
+
+function openEditModal(id) {
+  isEditMode = true;
+  const d = allDepts.find(x => x.id === id);
+  if (!d) return;
+
+  document.getElementById('modalTitle').textContent = '✏️ বিভাগের তথ্য সংশোধন';
+  document.getElementById('deptIdField').value = d.id;
+  document.getElementById('depName').value = d.name || '';
+  document.getElementById('depHead').value = d.head || '';
+  document.getElementById('depDesc').value = d.description || '';
+
+  openModal('deptModal');
+}
+
+async function saveDept() {
+  const id = document.getElementById('deptIdField').value;
+  const name = document.getElementById('depName').value;
+  const head = document.getElementById('depHead').value;
+  const description = document.getElementById('depDesc').value;
+
+  if (!name) { alert('বিভাগের নাম দিতে হবে!'); return; }
+
+  const payload = { name, head, description };
+
+  try {
+    let result;
+    if (isEditMode) {
+      result = await API('/api/departments/' + id, {
+        method: 'PUT',
+        body: JSON.stringify(payload)
+      });
+    } else {
+      result = await API('/api/departments', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+    }
+
+    if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+    alert(isEditMode ? '✅ বিভাগের তথ্য সংশোধন সফল!' : '✅ নতুন বিভাগ যোগ সফল!');
+    closeModal('deptModal');
+    loadData();
+  } catch(e) {
+    alert('❌ সংরক্ষণ ব্যর্থ হয়েছে।');
+  }
+}
+
+async function deleteDept(id) {
+  if (!confirm('আপনি কি নিশ্চিতভাবে এই বিভাগটি মুছতে চান?')) return;
+  try {
+    const result = await API('/api/departments/' + id, { method: 'DELETE' });
+    if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+    alert('✅ বিভাগটি মুছে ফেলা হয়েছে।');
+    loadData();
+  } catch(e) {
+    alert('❌ মুছতে সমস্যা হয়েছে।');
+  }
+}
+
+function exportCSV() {
+  let csv = 'ID,Department Name,Head,Description\n';
+  allDepts.forEach(d => {
+    csv += `"${d.id}","${d.name}","${d.head || ''}","${d.description || ''}"\n`;
+  });
+  const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'departments_report.csv';
+  link.click();
+}
+
+loadData();
+</script>
+</body></html>

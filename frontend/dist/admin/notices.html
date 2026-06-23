@@ -1,0 +1,147 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>নোটিশ বোর্ড — Admin Notices</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input,.modal select,.modal textarea{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal textarea{min-height:100px}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-success{background:#15803D;color:#fff;border:0}
+.loader{text-align:center;padding:40px;color:#667874}
+.empty-state{text-align:center;padding:40px;color:#667874;font-size:16px}
+.error-state{text-align:center;padding:40px;color:#DC2626;font-size:16px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📌 নোটিশ বোর্ড ব্যবস্থাপনা</h1>
+    <p>মাদ্রাসার শিক্ষার্থীদের জন্য নতুন নোটিশ প্রকাশ ও নোটিশ তালিকা পরিচালনা করুন।</p>
+  </section>
+
+  <!-- Toolbar: Add New Notice -->
+  <section class="toolbar">
+    <button onclick="openModal('noticeModal')" id="btnNewNotice">➕ নতুন নোটিশ প্রকাশ</button>
+  </section>
+
+  <!-- Notices List -->
+  <div id="noticesArea">
+    <div class="loader">📋 নোটিশ লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- ADD NOTICE MODAL -->
+<div class="modal-overlay" id="noticeModal">
+  <div class="modal">
+    <h2>➕ নতুন নোটিশ প্রকাশ</h2>
+    <label>নোটিশের শিরোনাম</label>
+    <input id="noticeTitle" placeholder="যেমন: ঈদুল ফিতরের ছুটি">
+    <label>নোটিশের ধরন</label>
+    <select id="noticeType">
+      <option value="general">সাধারণ নোটিশ</option>
+      <option value="admission">ভর্তি সংক্রান্ত</option>
+      <option value="exam">পরীক্ষা সংক্রান্ত</option>
+      <option value="holiday">ছুটি সংক্রান্ত</option>
+    </select>
+    <label>নোটিশের বিস্তারিত বিবরণ</label>
+    <textarea id="noticeBody" placeholder="নোটিশের মূল বক্তব্য এখানে লিখুন..."></textarea>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('noticeModal')">বাতিল</button>
+      <button class="btn-success" onclick="publishNotice()" id="btnSubmitNotice">✅ নোটিশ প্রকাশ করুন</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let allNotices = [];
+
+async function loadNotices() {
+  try {
+    const data = await API('/api/notices');
+    if (data.error) {
+      document.getElementById('noticesArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন।</div>';
+      return;
+    }
+    allNotices = Array.isArray(data) ? data : [];
+    renderNoticesTable();
+  } catch(e) {
+    document.getElementById('noticesArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderNoticesTable() {
+  if (allNotices.length === 0) {
+    document.getElementById('noticesArea').innerHTML = '<div class="empty-state">📭 কোনো নোটিশ পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('noticesArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>তারিখ</th><th>শিরোনাম</th><th>ধরন</th><th>বিবরণ</th>
+      </tr></thead>
+      <tbody>${allNotices.map(n => `<tr>
+        <td>${n.date}</td>
+        <td style="font-weight:bold;color:#0F5C4D">${n.title}</td>
+        <td><span class="badge" style="background:#e8f5e9;color:#15803D">${n.type === 'general' ? 'সাধারণ' : n.type === 'admission' ? 'ভর্তি' : n.type === 'exam' ? 'পরীক্ষা' : 'ছুটি'}</span></td>
+        <td>${n.body}</td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+async function publishNotice() {
+  const title = document.getElementById('noticeTitle').value;
+  const type = document.getElementById('noticeType').value;
+  const bodyText = document.getElementById('noticeBody').value;
+
+  if (!title || !bodyText) { alert('শিরোনাম ও বিবরণ পূরণ করুন!'); return; }
+
+  try {
+    const res = await API('/api/notices', {
+      method: 'POST',
+      body: JSON.stringify({ title, type, body: bodyText })
+    });
+
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ নোটিশ প্রকাশ সফল হয়েছে!');
+    closeModal('noticeModal');
+    document.getElementById('noticeTitle').value = '';
+    document.getElementById('noticeBody').value = '';
+    loadNotices();
+  } catch(e) {
+    alert('❌ নোটিশ প্রকাশ করতে ব্যর্থ হয়েছে।');
+  }
+}
+
+loadNotices();
+</script>
+</body></html>

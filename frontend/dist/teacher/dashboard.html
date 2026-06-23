@@ -1,0 +1,87 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>শিক্ষক ড্যাশবোর্ড — Teacher Dashboard</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0}
+.summary-card{background:#fff;border:1px solid #D9E1DD;border-radius:14px;padding:18px;text-align:center}
+.summary-card h4{margin:0;color:#667874;font-size:13px}
+.summary-card .val{font-size:24px;font-weight:700;color:#0A3F36;margin:6px 0}
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Teacher Portal</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/teacher/dashboard" style="background:#0F5C4D;color:#fff;border-radius:10px">Dashboard</a>
+    <a href="/teacher/students">ছাত্র তালিকা</a>
+    <a href="/teacher/attendance-entry">হাজিরা এন্ট্রি</a>
+    <a href="/teacher/marks-entry">নম্বর এন্ট্রি</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1 id="welcomeTitle">👋 আসসালামু আলাইকুম, শিক্ষক মহোদয়</h1>
+    <p>শিক্ষক পোর্টালে আপনাকে স্বাগতম। এখান থেকে আপনার নির্ধারিত ক্লাসের শিক্ষার্থীদের তালিকা দেখতে পারবেন, হাজিরা নিতে পারবেন এবং পরীক্ষার নম্বর এন্ট্রি করতে পারবেন।</p>
+  </section>
+
+  <!-- Quick stats & profile -->
+  <div id="teacherInfoArea">
+    <div class="loader">📊 তথ্য লোড হচ্ছে...</div>
+  </div>
+
+  <section class="grid">
+    <div class="card" style="text-align:center;">
+      <h3>📅 দৈনিক হাজিরা এন্ট্রি</h3>
+      <p>নির্ধারিত ক্লাসের শিক্ষার্থীদের আজকের হাজিরা রেকর্ড করুন।</p>
+      <a class="btn primary" href="/teacher/attendance-entry">হাজিরা রেজিস্টার</a>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>📝 পরীক্ষার নম্বর ইনপুট</h3>
+      <p>অর্ধবার্ষিক ও বার্ষিক পরীক্ষার নম্বর ও ফলাফল এন্ট্রি করুন।</p>
+      <a class="btn primary" href="/teacher/marks-entry">নম্বর এন্ট্রি করুন</a>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>👨‍🎓 আমার ছাত্রবৃন্দ</h3>
+      <p>আপনার ক্লাসে নির্ধারিত শিক্ষার্থীদের তালিকা ও অভিভাবকের ফোন নম্বর দেখুন।</p>
+      <a class="btn primary" href="/teacher/students">ছাত্র তালিকা</a>
+    </div>
+  </section>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+async function loadTeacherDashboard() {
+  try {
+    const teacher = await API('/api/teacher/me');
+    if (teacher.error) {
+      document.getElementById('teacherInfoArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Teacher Login করুন। <a href="/admin/login.html">Login</a></div>';
+      return;
+    }
+
+    document.getElementById('welcomeTitle').textContent = `👋 আসসালামু আলাইকুম, ${teacher.name}`;
+
+    document.getElementById('teacherInfoArea').innerHTML = `
+      <div class="summary-grid">
+        <div class="summary-card"><h4>শিক্ষক আইডি</h4><div class="val">${teacher.id}</div></div>
+        <div class="summary-card"><h4>পদবি/বিষয়</h4><div class="val">${teacher.subject}</div></div>
+        <div class="summary-card"><h4>নির্ধারিত ক্লাস সংখ্যা</h4><div class="val">${teacher.assignedClasses ? teacher.assignedClasses.length : 0} টি</div></div>
+        <div class="summary-card"><h4>অবস্থা (Status)</h4><div class="val" style="color:#15803D">${teacher.status === 'active' ? 'সক্রিয়' : 'নিষ্ক্রিয়'}</div></div>
+      </div>
+    `;
+  } catch(e) {
+    document.getElementById('teacherInfoArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+loadTeacherDashboard();
+</script>
+</body></html>

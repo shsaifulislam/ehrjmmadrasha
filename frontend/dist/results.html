@@ -1,0 +1,80 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ফলাফল — ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</title><meta name="description" content="ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসার পরীক্ষার ফলাফল দেখুন। রোল নম্বর দিয়ে সার্চ করুন।"><link rel="stylesheet" href="/assets/css/app.css"><style>.result-card{background:#fff;border:1px solid #D9E1DD;border-radius:16px;padding:20px;margin:12px 0}.subject-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f0}.grade-badge{display:inline-block;background:#0F5C4D;color:#fff;padding:4px 14px;border-radius:8px;font-weight:700;font-size:18px}</style></head><body>
+<div class="top"><span>📞 01845-162664</span><span>📍 Eliotganj, Daudkandi, Comilla</span><a href="https://wa.me/8801845162664?text=আমি%20ফলাফল%20জানতে%20চাই" style="color:#C79A2B">ফলাফল WhatsApp →</a></div>
+<nav class="nav"><a class="brand" href="/"><img src="/assets/img/logo.png"><div><b>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</b><span>Eliotganj Hazi Rohmatollah Jamiria Madrasha</span></div></a><button class="menu-toggle" onclick="toggleMenu()">☰</button><div class="menu" id="navMenu"><a href="/">Home</a><a href="/admission">ভর্তি</a><a class="active" href="/results">ফলাফল</a><a href="/donation">দান</a><a href="/contact">যোগাযোগ</a><a href="/admin/login.html">Admin</a></div></nav>
+
+<section class="hero" style="grid-template-columns:1fr"><div style="text-align:center">
+  <h1>📊 পরীক্ষার ফলাফল</h1>
+  <p>রোল নম্বর অথবা বিভাগ দিয়ে ফলাফল সার্চ করুন।</p>
+</div></section>
+
+<section class="section">
+<div class="card" style="max-width:600px;margin:auto">
+  <div class="toolbar" style="margin:0">
+    <input id="searchRoll" placeholder="রোল নম্বর লিখুন" style="flex:1;min-height:48px;font-size:16px">
+    <select id="searchClass" style="min-height:48px;font-size:16px">
+      <option value="">সব বিভাগ</option>
+      <option value="হিফজ বিভাগ">হিফজ বিভাগ</option>
+      <option value="নূরানী বিভাগ">নূরানী বিভাগ</option>
+      <option value="কিতাব বিভাগ">কিতাব বিভাগ</option>
+    </select>
+    <button onclick="searchResults()" style="min-height:48px;font-size:16px" id="btnSearchResult">🔍 সার্চ করুন</button>
+  </div>
+</div>
+</section>
+
+<section class="section" id="resultsArea">
+  <div style="text-align:center;color:#667874;padding:30px">
+    <p style="font-size:48px">📋</p>
+    <p style="font-size:18px">রোল নম্বর বা বিভাগ দিয়ে ফলাফল সার্চ করুন।</p>
+  </div>
+</section>
+
+<footer class="footer"><h3>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</h3><p>Established 2021 · Eliotganj, Daudkandi, Comilla, Bangladesh</p><p><a href="https://www.facebook.com/ehrjmadrasda" style="color:#C79A2B">Facebook</a> · <a href="https://www.youtube.com/@ehrjmadrasha" style="color:#C79A2B">YouTube</a> · <a href="https://whatsapp.com/channel/0029VbC30aF6buMF0LGPMp3F" style="color:#C79A2B">WhatsApp Channel</a></p></footer>
+<a class="whatsapp" href="https://wa.me/8801845162664?text=আমি%20মাদ্রাসার%20ওয়েবসাইট%20থেকে%20সহায়তা%20চাই">WhatsApp Help</a>
+<script>
+async function searchResults() {
+  const roll = document.getElementById('searchRoll').value.trim();
+  const className = document.getElementById('searchClass').value;
+  const area = document.getElementById('resultsArea');
+
+  if (!roll && !className) {
+    area.innerHTML = '<div style="text-align:center;color:#F59E0B;padding:30px"><p>⚠️ অনুগ্রহ করে রোল নম্বর বা বিভাগ দিন।</p></div>';
+    return;
+  }
+
+  area.innerHTML = '<div style="text-align:center;padding:30px;color:#667874">🔄 ফলাফল খোঁজা হচ্ছে...</div>';
+
+  try {
+    const params = new URLSearchParams();
+    if (roll) params.set('roll', roll);
+    if (className) params.set('className', className);
+
+    const resp = await fetch('/api/results?' + params.toString());
+    const results = await resp.json();
+
+    if (!results.length) {
+      area.innerHTML = '<div style="text-align:center;color:#DC2626;padding:30px"><p style="font-size:48px">📭</p><p style="font-size:18px">কোনো ফলাফল পাওয়া যায়নি। রোল নম্বর বা বিভাগ পরীক্ষা করুন।</p><p><a class="btn" href="https://wa.me/8801845162664?text=আমি%20ফলাফল%20জানতে%20চাই">📱 WhatsApp এ জিজ্ঞাসা করুন</a></p></div>';
+      return;
+    }
+
+    area.innerHTML = results.map(r => `
+      <div class="result-card" style="max-width:600px;margin:12px auto">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div><strong>পরীক্ষা:</strong> ${r.exam || '-'} | <strong>সেশন:</strong> ${r.session || '-'}</div>
+          <span class="grade-badge">${r.grade || '-'}</span>
+        </div>
+        <p><strong>বিভাগ:</strong> ${r.className || '-'} | <strong>স্থান:</strong> ${r.position || '-'}</p>
+        ${(r.subjects || []).map(s => `
+          <div class="subject-row"><span>${s.name}</span><span><strong>${s.marks}</strong>/${s.total}</span></div>
+        `).join('')}
+        <div style="margin-top:12px;padding-top:12px;border-top:2px solid #0F5C4D;display:flex;justify-content:space-between;font-size:18px;font-weight:700">
+          <span>মোট:</span><span>${r.total}/${r.outOf}</span>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    area.innerHTML = '<div style="text-align:center;color:#DC2626;padding:30px"><p>❌ ফলাফল লোড করতে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।</p></div>';
+  }
+}
+</script>
+<script src="/assets/js/app.js"></script></body></html>

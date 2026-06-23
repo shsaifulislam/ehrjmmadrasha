@@ -1,0 +1,75 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>নোটিশ বোর্ড — Student Notices</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.notice-card{background:#fff;border:1px solid #D9E1DD;border-radius:14px;padding:20px;margin-bottom:16px}
+.notice-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.notice-date{color:#888;font-size:12px}
+.notice-title{color:#0A3F36;margin:0;font-size:18px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Student Portal</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/student/dashboard">Dashboard</a>
+    <a href="/student/profile">প্রোফাইল</a>
+    <a href="/student/fees">বেতন ও ফি</a>
+    <a href="/student/results">ফলাফল</a>
+    <a href="/student/notices" style="background:#0F5C4D;color:#fff;border-radius:10px">নোটিশ</a>
+    <a href="/student/id-card">আইডি কার্ড</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📌 নোটিশ বোর্ড</h1>
+    <p>মাদ্রাসার চলমান সকল নোটিশ ও ঘোষণা নিচে দেয়া হলো।</p>
+  </section>
+
+  <div id="noticesArea">
+    <div class="loader">📋 নোটিশ বোর্ড লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+async function loadNotices() {
+  try {
+    const notices = await API('/api/notices');
+    if (notices.error) {
+      document.getElementById('noticesArea').innerHTML = '<div class="error-state">❌ নোটিশ লোড করতে সমস্যা হয়েছে।</div>';
+      return;
+    }
+
+    if (notices.length === 0) {
+      document.getElementById('noticesArea').innerHTML = '<div style="text-align:center;padding:40px;color:#888;">আপাতত কোনো নোটিশ প্রকাশিত হয়নি।</div>';
+      return;
+    }
+
+    document.getElementById('noticesArea').innerHTML = notices.map(n => `
+      <div class="notice-card">
+        <div class="notice-header">
+          <h3 class="notice-title">${n.title}</h3>
+          <span class="notice-date">📅 ${n.date}</span>
+        </div>
+        <p style="margin:0;line-height:1.6;color:#333;">${n.body}</p>
+      </div>
+    `).reverse().join('');
+
+  } catch(e) {
+    document.getElementById('noticesArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+loadNotices();
+</script>
+</body></html>

@@ -1,0 +1,159 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>নম্বর এন্ট্রি — Teacher Marks Entry</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.marks-input {width:70px!important;padding:8px!important;min-height:36px!important;text-align:center}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Teacher Portal</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/teacher/dashboard">Dashboard</a>
+    <a href="/teacher/students">ছাত্র তালিকা</a>
+    <a href="/teacher/attendance-entry">হাজিরা এন্ট্রি</a>
+    <a href="/teacher/marks-entry" style="background:#0F5C4D;color:#fff;border-radius:10px">নম্বর এন্ট্রি</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📝 পরীক্ষার নম্বর এন্ট্রি (Marks Entry Board)</h1>
+    <p>শিক্ষার্থীদের বিষয়ভিত্তিক নম্বর এন্ট্রি করে ফলাফল ও গ্রেডশিট প্রস্তুত করুন।</p>
+  </section>
+
+  <!-- Class & Exam Selector -->
+  <section class="toolbar">
+    <select id="marksClass" onchange="loadStudents()">
+      <option value="C-001">নূরানী বিভাগ</option>
+      <option value="C-002" selected>হিফজ বিভাগ</option>
+      <option value="C-003">কিতাব বিভাগ</option>
+    </select>
+    <select id="marksExam">
+      <option value="অর্ধবার্ষিক">অর্ধবার্ষিক পরীক্ষা</option>
+      <option value="বার্ষিক">বার্ষিক পরীক্ষা</option>
+      <option value="মাসিক মূল্যায়ন">মাসিক মূল্যায়ন</option>
+    </select>
+  </section>
+
+  <!-- Students List for Marks Entry -->
+  <div id="marksEntryArea">
+    <div class="loader">📋 তথ্য লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let students = [];
+
+async function loadStudents() {
+  const classId = document.getElementById('marksClass').value;
+  if (!classId) return;
+
+  document.getElementById('marksEntryArea').innerHTML = '<div class="loader">📋 ছাত্র তালিকা লোড হচ্ছে...</div>';
+
+  try {
+    const list = await API('/api/teacher/students');
+    if (list.error) {
+      document.getElementById('marksEntryArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Teacher Login করুন।</div>';
+      return;
+    }
+
+    students = list.filter(s => s.classId === classId);
+
+    if (students.length === 0) {
+      document.getElementById('marksEntryArea').innerHTML = '<div style="text-align:center;padding:30px;color:#888;">এই বিভাগে কোনো শিক্ষার্থী বরাদ্দ নেই।</div>';
+      return;
+    }
+
+    document.getElementById('marksEntryArea').innerHTML = `
+      <div class="table-wrap"><table>
+        <thead><tr>
+          <th>রোল</th><th>নাম</th><th>আইডি</th><th>কুরআন (১০০)</th><th>আরবি (১০০)</th><th>বাংলা (১০০)</th>
+        </tr></thead>
+        <tbody>${students.map(s => `<tr>
+          <td>${s.roll}</td>
+          <td style="font-weight:bold">${s.name}</td>
+          <td>${s.id}</td>
+          <td><input type="number" class="marks-input" id="q_${s.id}" min="0" max="100" placeholder="0"></td>
+          <td><input type="number" class="marks-input" id="a_${s.id}" min="0" max="100" placeholder="0"></td>
+          <td><input type="number" class="marks-input" id="b_${s.id}" min="0" max="100" placeholder="0"></td>
+        </tr>`).join('')}</tbody>
+      </table></div>
+      <button class="btn primary" onclick="submitMarks()" id="btnSubmitMarks" style="width:100%;margin-top:20px;padding:14px;font-size:16px;">💾 ফলাফল সংরক্ষণ করুন</button>
+    `;
+
+  } catch(e) {
+    document.getElementById('marksEntryArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+async function submitMarks() {
+  const classSelect = document.getElementById('marksClass');
+  const className = classSelect.options[classSelect.selectedIndex].text;
+  const exam = document.getElementById('marksExam').value;
+
+  const promises = students.map(s => {
+    const qMarks = parseInt(document.getElementById('q_' + s.id).value) || 0;
+    const aMarks = parseInt(document.getElementById('a_' + s.id).value) || 0;
+    const bMarks = parseInt(document.getElementById('b_' + s.id).value) || 0;
+
+    const total = qMarks + aMarks + bMarks;
+    const outOf = 300;
+    const avg = total / 3;
+    
+    let grade = 'F';
+    if (avg >= 80) grade = 'A+';
+    else if (avg >= 70) grade = 'A';
+    else if (avg >= 60) grade = 'A-';
+    else if (avg >= 50) grade = 'B';
+    else if (avg >= 40) grade = 'C';
+    else if (avg >= 33) grade = 'D';
+
+    const payload = {
+      studentId: s.id,
+      className,
+      session: '২০২৬',
+      exam,
+      subjects: [
+        { name: 'কুরআন', marks: qMarks, total: 100 },
+        { name: 'আরবি', marks: aMarks, total: 100 },
+        { name: 'বাংলা', marks: bMarks, total: 100 }
+      ],
+      total,
+      outOf,
+      grade,
+      position: 1
+    };
+
+    return API('/api/results', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+  });
+
+  try {
+    const results = await Promise.all(promises);
+    const errors = results.filter(r => r.error);
+    if (errors.length > 0) {
+      alert('❌ কিছু ফলাফল সংরক্ষণ করা যায়নি।');
+      return;
+    }
+    alert('✅ সকল শিক্ষার্থীর পরীক্ষার নম্বর সফলভাবে সংরক্ষণ করা হয়েছে!');
+    loadStudents();
+  } catch(e) {
+    alert('❌ নম্বর সংরক্ষণ ব্যর্থ হয়েছে।');
+  }
+}
+
+loadStudents();
+</script>
+</body></html>

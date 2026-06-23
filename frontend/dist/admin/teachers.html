@@ -1,0 +1,175 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>শিক্ষক ব্যবস্থাপনা — Admin Teachers</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input,.modal select{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-success{background:#15803D;color:#fff;border:0}
+.loader{text-align:center;padding:40px;color:#667874}
+.empty-state{text-align:center;padding:40px;color:#667874;font-size:16px}
+.error-state{text-align:center;padding:40px;color:#DC2626;font-size:16px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانج حاجي رحمة الله زميرية</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/teachers" style="background:#0F5C4D;color:#fff;border-radius:10px">শিক্ষক</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>👨‍🏫 শিক্ষক ব্যবস্থাপনা</h1>
+    <p>শিক্ষকদের তালিকা প্রদর্শন, নতুন শিক্ষক নিয়োগ এবং পদবি/ফোন তথ্য পরিচালনা করুন।</p>
+  </section>
+
+  <!-- Toolbar: Search, Add New -->
+  <section class="toolbar">
+    <input id="searchBox" placeholder="🔍 শিক্ষকের নাম বা ফোন দিয়ে খুঁজুন..." oninput="filterTeachers()">
+    <button onclick="openAddModal()" id="btnAddTeacher">➕ নতুন শিক্ষক যোগ</button>
+  </section>
+
+  <!-- Teacher Table Area -->
+  <div id="teacherTableArea">
+    <div class="loader">📋 শিক্ষক তথ্য লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- ADD TEACHER MODAL -->
+<div class="modal-overlay" id="teacherModal">
+  <div class="modal">
+    <h2 id="modalTitle">➕ নতুন শিক্ষক যোগ</h2>
+    
+    <label>শিক্ষকের নাম</label>
+    <input id="tcName" placeholder="যেমন: হাফেজ মো. ইউসুফ">
+    
+    <label>পদবি/বিষয়</label>
+    <input id="tcSubject" placeholder="যেমন: হিফজ, নূরানী, আরবি">
+
+    <label>ফোন নম্বর</label>
+    <input id="tcPhone" placeholder="যেমন: 01949091911">
+
+    <label>রোল/অনুমতি</label>
+    <select id="tcRole">
+      <option value="teacher">শিক্ষক (Teacher)</option>
+      <option value="principal">প্রধান শিক্ষক (Principal)</option>
+    </select>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('teacherModal')">বাতিল</button>
+      <button class="btn-success" onclick="saveTeacher()" id="btnSaveTeacher">✅ সংরক্ষণ করুন</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let allTeachers = [];
+
+async function loadTeachers() {
+  try {
+    const data = await API('/api/teachers');
+    if (data.error) {
+      document.getElementById('teacherTableArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন। <a href="/admin/login.html">Login</a></div>';
+      return;
+    }
+    allTeachers = Array.isArray(data) ? data : [];
+    renderTeachersTable();
+  } catch(e) {
+    document.getElementById('teacherTableArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderTeachersTable() {
+  let rows = [...allTeachers];
+
+  const q = (document.getElementById('searchBox').value || '').toLowerCase();
+  if (q) {
+    rows = rows.filter(t => 
+      (t.name || '').toLowerCase().includes(q) || 
+      (t.phone || '').toLowerCase().includes(q) ||
+      (t.subject || '').toLowerCase().includes(q)
+    );
+  }
+
+  if (rows.length === 0) {
+    document.getElementById('teacherTableArea').innerHTML = '<div class="empty-state">📭 কোনো শিক্ষক পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('teacherTableArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>আইডি</th><th>নাম</th><th>পদবি/বিষয়</th><th>ফোন</th><th>রোল</th><th>Status</th>
+      </tr></thead>
+      <tbody>${rows.map(t => `<tr>
+        <td>${t.id}</td>
+        <td>${t.name}</td>
+        <td>${t.subject || '-'}</td>
+        <td>${t.phone || '-'}</td>
+        <td>${t.role === 'principal' ? 'প্রধান শিক্ষক' : 'শিক্ষক'}</td>
+        <td style="color:#15803D;font-weight:bold">${t.status === 'active' ? '✅ কর্মরত' : '❌ অব্যাহতি'}</td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+function filterTeachers() { renderTeachersTable(); }
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openAddModal() {
+  document.getElementById('tcName').value = '';
+  document.getElementById('tcSubject').value = '';
+  document.getElementById('tcPhone').value = '';
+  document.getElementById('tcRole').selectedIndex = 0;
+  openModal('teacherModal');
+}
+
+async function saveTeacher() {
+  const name = document.getElementById('tcName').value;
+  const subject = document.getElementById('tcSubject').value;
+  const phone = document.getElementById('tcPhone').value;
+  const role = document.getElementById('tcRole').value;
+
+  if (!name || !subject) { alert('নাম এবং পদবি দিতে হবে!'); return; }
+
+  try {
+    const result = await API('/api/teachers', {
+      method: 'POST',
+      body: JSON.stringify({ name, subject, phone, role })
+    });
+
+    if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+    alert('✅ নতুন শিক্ষক যোগ সফল!');
+    closeModal('teacherModal');
+    loadTeachers();
+  } catch(e) {
+    alert('❌ সংরক্ষণ ব্যর্থ হয়েছে।');
+  }
+}
+
+loadTeachers();
+</script>
+</body></html>

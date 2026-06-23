@@ -1,0 +1,130 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>আমার ক্লাস রুটিন — Student Routine</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.routine-table {width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border,#D9E1DD);border-radius:14px;overflow:hidden;margin-top:20px}
+.routine-table th, .routine-table td {padding:14px;border:1px solid var(--border,#D9E1DD);text-align:center}
+.routine-table th {background:var(--primary,#0F5C4D);color:#fff}
+.routine-table tr:nth-child(even) {background:#F9FAFB}
+.loader {text-align:center;padding:40px;color:#667874}
+.error-state {text-align:center;padding:40px;color:#DC2626}
+.routine-tag {background:var(--gold,#C79A2B);color:#fff;padding:6px 12px;border-radius:20px;font-size:14px;font-weight:bold;display:inline-block;margin-bottom:14px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/student/dashboard">Dashboard</a>
+    <a href="/student/profile">প্রোফাইল</a>
+    <a href="/student/fees">বেতন ও বকেয়া</a>
+    <a href="/student/results">ফলাফল</a>
+    <a href="/student/id-card">আইডি কার্ড</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📅 আমার সাপ্তাহিক ক্লাস রুটিন (Timetable)</h1>
+    <p>আপনার শ্রেণী বা বিভাগের জন্য নির্ধারিত ক্লাস ও সময়ের রুটিন।</p>
+  </section>
+
+  <div style="text-align:center">
+    <div class="routine-tag" id="routineTag">লোড হচ্ছে...</div>
+  </div>
+
+  <!-- Routine Timetable -->
+  <div id="routineArea">
+    <div class="loader">📋 রুটিন লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%Bাসার%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+async function loadRoutine() {
+  try {
+    const student = await API('/api/student/me');
+    if (student.error) {
+      document.getElementById('routineArea').innerHTML = '<div class="error-state">❌ তথ্য লোড করতে সমস্যা হয়েছে। অনুগ্রহ করে লগইন করুন।</div>';
+      return;
+    }
+
+    const className = student.className || 'হিফজ বিভাগ';
+    document.getElementById('routineTag').innerText = `বিভাগ: ${className}`;
+
+    let routineHtml = '';
+
+    if (className.includes('নূরানী')) {
+      routineHtml = `
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>বার (Day)</th><th>১ম পিরিয়ড (08:00 - 09:00 AM)</th><th>২য় পিরিয়ড (09:00 - 10:00 AM)</th><th>বিরতি (10:00 - 10:30 AM)</th><th>৩য় পিরিয়ড (10:30 - 11:30 AM)</th><th>৪র্থ পিরিয়ড (11:30 - 12:30 PM)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>শনিবার</td><td>আরবি তাজবীদ</td><td>আমপারা</td><td rowspan="6" style="background:#FEF3C7;font-weight:bold;color:#92400E">টিফিন ও বিশ্রাম</td><td>বাংলা ভাষা</td><td>গণিত শিক্ষা</td></tr>
+            <tr><td>রবিবার</td><td>আরবি তাজবীদ</td><td>আমপারা</td><td>বাংলা ভাষা</td><td>গণিত শিক্ষা</td></tr>
+            <tr><td>সোমবার</td><td>আরবি তাজবীদ</td><td>আমপারা</td><td>বাংলা ভাষা</td><td>ইংরেজি শিক্ষা</td></tr>
+            <tr><td>মঙ্গলবার</td><td>আরবি তাজবীদ</td><td>আমপারা</td><td>বাংলা ভাষা</td><td>সাধারণ জ্ঞান</td></tr>
+            <tr><td>বুধবার</td><td>আরবি তাজবীদ</td><td>আমপারা</td><td>বাংলা ভাষা</td><td>গণিত শিক্ষা</td></tr>
+            <tr><td>বৃহস্পতিবার</td><td>আরবি তাজবীদ</td><td>আমপারা</td><td>সাপ্তাহিক পরীক্ষা</td><td>দোয়া ও আখলাক</td></tr>
+          </tbody>
+        </table>
+      `;
+    } 
+    else if (className.includes('হিফজ')) {
+      routineHtml = `
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>বার (Day)</th><th>১ম সেশন (06:00 - 08:30 AM)</th><th>২য় সেশন (09:00 - 11:30 AM)</th><th>বিরতি ও জোহর (11:30 - 02:00 PM)</th><th>৩য় সেশন (02:00 - 05:00 PM)</th><th>৪র্থ সেশন (06:30 - 08:30 PM)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>শনিবার</td><td>নতুন সবক (কুরআন মুখস্থ)</td><td>সাবেক সবক (রিভিশন)</td><td rowspan="6" style="background:#FEF3C7;font-weight:bold;color:#92400E">খাবার ও বিশ্রাম</td><td>আমপারা ও তাজবীদ</td><td>হাদিস ও দোয়া শিক্ষা</td></tr>
+            <tr><td>রবিবার</td><td>নতুন সবক (কুরআন মুখস্থ)</td><td>সাবেক সবক (রিভিশন)</td><td>আমপারা ও তাজবীদ</td><td>হাদিস ও দোয়া শিক্ষা</td></tr>
+            <tr><td>সোমবার</td><td>নতুন সবক (কুরআন মুখস্থ)</td><td>সাবেক সবক (রিভিশন)</td><td>আমপারা ও তাজবীদ</td><td>আখলাক ও শিক্ষা</td></tr>
+            <tr><td>মঙ্গলবার</td><td>নতুন সবক (কুরআন মুখস্থ)</td><td>সাবেক সবক (রিভিশন)</td><td>আমপারা ও তাজবীদ</td><td>হাদিস ও দোয়া শিক্ষা</td></tr>
+            <tr><td>বুধবার</td><td>নতুন সবক (কুরআন মুখস্থ)</td><td>সাবেক সবক (রিভিশন)</td><td>আমপারা ও তাজবীদ</td><td>আখলাক ও শিক্ষা</td></tr>
+            <tr><td>বৃহস্পতিবার</td><td>সাপ্তাহিক রিভিশন পরীক্ষা</td><td>সাপ্তাহিক রিভিশন পরীক্ষা</td><td>নসিহত ও দোয়া</td><td>ছুটি</td></tr>
+          </tbody>
+        </table>
+      `;
+    } 
+    else {
+      // Kitab or General
+      routineHtml = `
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>বার (Day)</th><th>১ম পিরিয়ড (08:00 - 09:00 AM)</th><th>২য় পিরিয়ড (09:00 - 10:00 AM)</th><th>বিরতি (10:00 - 10:30 AM)</th><th>৩য় পিরিয়ড (10:30 - 11:30 AM)</th><th>৪র্থ পিরিয়ড (11:30 - 12:30 PM)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>শনিবার</td><td>নাহু-সরফ</td><td>আকাইদ ও ফেকাহ</td><td rowspan="6" style="background:#FEF3C7;font-weight:bold;color:#92400E">টিফিন ও বিশ্রাম</td><td>আরবি সাহিত্য</td><td>গণিত</td></tr>
+            <tr><td>রবিবার</td><td>নাহু-সরফ</td><td>আকাইদ ও ফেকাহ</td><td>আরবি সাহিত্য</td><td>গণিত</td></tr>
+            <tr><td>সোমবার</td><td>নাহু-সরফ</td><td>হাদিস শরিফ</td><td>আরবি সাহিত্য</td><td>বাংলা</td></tr>
+            <tr><td>মঙ্গলবার</td><td>নাহু-সরফ</td><td>হাদিস শরিফ</td><td>আরবি সাহিত্য</td><td>ইংরেজি</td></tr>
+            <tr><td>বুধবার</td><td>নাহু-সরফ</td><td>আকাইদ ও ফেকাহ</td><td>আরবি সাহিত্য</td><td>সাধারণ জ্ঞান</td></tr>
+            <tr><td>বৃহস্পতিবার</td><td>সাপ্তাহিক মুজাকারা</td><td>সাপ্তাহিক মুজাকারা</td><td>ইসলামী ইতিহাস</td><td>দোয়া ও আখলাক</td></tr>
+          </tbody>
+        </table>
+      `;
+    }
+
+    document.getElementById('routineArea').innerHTML = routineHtml;
+  } catch(e) {
+    document.getElementById('routineArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না।</div>';
+  }
+}
+
+loadRoutine();
+</script>
+</body></html>
