@@ -37,8 +37,12 @@ export default function VerifyAdmissionSlip() {
     );
   }
 
+  const verificationUrl = typeof window !== "undefined"
+    ? `${window.location.origin}/admission/verify/${admission.verificationToken || token}`
+    : `https://ehrjmadrasha.edu.bd/admission/verify/${admission.verificationToken || token}`;
+
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
-    `EHRJ-ADMISSION-${admission.id}`
+    verificationUrl
   )}`;
 
   return (

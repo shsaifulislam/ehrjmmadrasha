@@ -42,7 +42,7 @@ export class AdmissionService {
         postOffice: input.postOffice || null,
         upazila: input.upazila || null,
         district: input.district || null,
-        verificationToken: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+        verificationToken: (await import('crypto')).randomBytes(16).toString('hex'),
         classId: input.classId,
         photoUrl: input.photoUrl || null,
         birthCertUrl: input.birthCertUrl || null,
@@ -59,13 +59,46 @@ export class AdmissionService {
   }
 
   /**
-   * Fetch Admission by Verification Token
+   * Fetch Admission by Verification Token (Public Verification)
+   * Strictly excludes sensitive fields (religion, guardianNid, payment details)
    */
   async getAdmissionByToken(token: string) {
+    if (!token || typeof token !== 'string' || token.trim().length < 10) {
+      throw new AppError('আবেদনটি পাওয়া যায়নি বা টোকেন সঠিক নয়', 404);
+    }
+
     const admission = await prisma.admission.findFirst({
-      where: { verificationToken: token },
-      include: { class: true },
+      where: { verificationToken: token.trim() },
+      select: {
+        id: true,
+        applicantName: true,
+        applicantNameEn: true,
+        fatherName: true,
+        motherName: true,
+        phone: true,
+        dateOfBirth: true,
+        gender: true,
+        studentType: true,
+        brn: true,
+        bloodGroup: true,
+        previousInstitution: true,
+        lastClassResult: true,
+        quota: true,
+        village: true,
+        postOffice: true,
+        upazila: true,
+        district: true,
+        address: true,
+        verificationToken: true,
+        classId: true,
+        status: true,
+        applicationDate: true,
+        photoUrl: true,
+        createdAt: true,
+        class: { select: { id: true, name: true } },
+      },
     });
+
     if (!admission) {
       throw new AppError('আবেদনটি পাওয়া যায়নি বা টোকেন সঠিক নয়', 404);
     }
