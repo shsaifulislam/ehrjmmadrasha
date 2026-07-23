@@ -3,6 +3,7 @@
 import prisma from '../../config/prisma';
 import { AppError } from '../../utils/AppError';
 import { CreateNoticeInput, UpdateNoticeInput } from './notice.schema';
+import { cacheService } from '../../services/cache.service';
 
 export class NoticeService {
   async createNotice(input: CreateNoticeInput, userId: string) {
@@ -25,6 +26,7 @@ export class NoticeService {
       },
     });
 
+    await cacheService.invalidatePattern('cache:public:notices:*');
     return notice;
   }
 
@@ -52,6 +54,7 @@ export class NoticeService {
       },
     });
 
+    await cacheService.invalidatePattern('cache:public:notices:*');
     return updated;
   }
 
@@ -73,6 +76,7 @@ export class NoticeService {
       },
     });
 
+    await cacheService.invalidatePattern('cache:public:notices:*');
     return deleted;
   }
 
@@ -95,6 +99,10 @@ export class NoticeService {
   }
 
   async getPublicNotices(limit = 20, page = 1, type?: string) {
+    const cacheKey = `cache:public:notices:limit_${limit}:page_${page}:type_${type || 'all'}`;
+    const cachedData = await cacheService.get<any>(cacheKey);
+    if (cachedData) return cachedData;
+
     const skip = (page - 1) * limit;
     const whereCondition = {
       isDeleted: false,
@@ -112,10 +120,13 @@ export class NoticeService {
       prisma.notice.count({ where: whereCondition }),
     ]);
 
-    return {
+    const result = {
       notices,
       pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
     };
+
+    await cacheService.set(cacheKey, result, 900); // 15 minutes TTL
+    return result;
   }
 }
 

@@ -3,6 +3,7 @@
 import prisma from '../../config/prisma';
 import { AppError } from '../../utils/AppError';
 import { CreateGalleryInput } from './gallery.schema';
+import { cacheService } from '../../services/cache.service';
 
 export class GalleryService {
   async createGalleryItem(input: CreateGalleryInput, userId: string) {
@@ -27,6 +28,7 @@ export class GalleryService {
       },
     });
 
+    await cacheService.invalidatePattern('cache:public:gallery:*');
     return item;
   }
 
@@ -48,6 +50,7 @@ export class GalleryService {
       },
     });
 
+    await cacheService.invalidatePattern('cache:public:gallery:*');
     return deleted;
   }
 
@@ -70,6 +73,10 @@ export class GalleryService {
   }
 
   async getPublicGallery(category?: string, limit = 30, page = 1) {
+    const cacheKey = `cache:public:gallery:category_${category || 'all'}:limit_${limit}:page_${page}`;
+    const cached = await cacheService.get<any>(cacheKey);
+    if (cached) return cached;
+
     const skip = (page - 1) * limit;
     const whereCondition = {
       isDeleted: false,
@@ -86,10 +93,13 @@ export class GalleryService {
       prisma.gallery.count({ where: whereCondition }),
     ]);
 
-    return {
+    const result = {
       items,
       pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
     };
+
+    await cacheService.set(cacheKey, result, 1800); // 30 minutes TTL
+    return result;
   }
 }
 

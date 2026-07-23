@@ -3,6 +3,7 @@
 import prisma from '../../config/prisma';
 import { AppError } from '../../utils/AppError';
 import { CreateDownloadInput } from './download.schema';
+import { cacheService } from '../../services/cache.service';
 
 export class DownloadService {
   async createDownloadItem(input: CreateDownloadInput, userId: string) {
@@ -27,6 +28,7 @@ export class DownloadService {
       },
     });
 
+    await cacheService.invalidatePattern('cache:public:downloads:*');
     return item;
   }
 
@@ -48,6 +50,7 @@ export class DownloadService {
       },
     });
 
+    await cacheService.invalidatePattern('cache:public:downloads:*');
     return deleted;
   }
 
@@ -70,6 +73,10 @@ export class DownloadService {
   }
 
   async getPublicDownloads(category?: string, limit = 30, page = 1) {
+    const cacheKey = `cache:public:downloads:category_${category || 'all'}:limit_${limit}:page_${page}`;
+    const cached = await cacheService.get<any>(cacheKey);
+    if (cached) return cached;
+
     const skip = (page - 1) * limit;
     const whereCondition = {
       isDeleted: false,
@@ -86,10 +93,13 @@ export class DownloadService {
       prisma.download.count({ where: whereCondition }),
     ]);
 
-    return {
+    const result = {
       items,
       pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
     };
+
+    await cacheService.set(cacheKey, result, 1800); // 30 minutes TTL
+    return result;
   }
 }
 
