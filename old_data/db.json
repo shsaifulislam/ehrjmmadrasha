@@ -1,0 +1,46 @@
+{
+  "sessions": [
+    { "year": "2026", "isActive": true },
+    { "year": "2025", "isActive": false },
+    { "year": "abcd", "isActive": false }
+  ],
+  "classes": [
+    { "name": "Class 1", "numericValue": 1 },
+    { "name": "Class 2", "numericValue": 2 }
+  ],
+  "students": [
+    {
+      "student_id": "20260001",
+      "roll": 1,
+      "name_bn": "মো: আবদুর রহমান",
+      "name_en": "Abdur Rahman",
+      "class_name": "Class 1",
+      "session_year": "2026"
+    },
+    {
+      "student_id": "20260002",
+      "roll": 2,
+      "name_bn": "মো: আবদুল করিম",
+      "name_en": "Abdul Karim",
+      "class_name": "Class 1",
+      "session_year": "2026"
+    },
+    {
+      "student_id": "20260003",
+      "roll": 2,
+      "name_bn": "মো: ডুপ্লিকেট রোল",
+      "name_en": "Duplicate Roll",
+      "class_name": "Class 1",
+      "session_year": "2026"
+    }
+  ],
+  "teachers": [
+    {
+      "teacher_id": "T001",
+      "name_bn": "হাফেজ মাওলানা ওবায়দুল্লাহ",
+      "phone": "01700000000",
+      "designation": "প্রধান শিক্ষক",
+      "username": "obaydullah"
+    }
+  ]
+}

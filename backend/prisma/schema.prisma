@@ -1,0 +1,572 @@
+// backend/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------- ENUMS ----------------
+
+enum AdmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LEAVE
+}
+
+enum InvoiceStatus {
+  UNPAID
+  PARTIAL
+  PAID
+}
+
+enum PaymentMethod {
+  CASH
+  BKASH
+  NAGAD
+  BANK
+  OTHER
+}
+
+enum ReceiptType {
+  FEE
+  DONATION
+}
+
+enum NotificationEventType {
+  FEE_PAYMENT_SUCCESS
+  STUDENT_ABSENCE
+  ADMISSION_APPROVED
+  EMERGENCY_NOTICE
+  BULK_NOTICE
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+enum OnlineGateway {
+  BKASH
+  NAGAD
+  MOCK
+}
+
+enum OnlinePaymentStatus {
+  INITIATED
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+// ---------------- SYSTEM & RBAC ----------------
+
+model User {
+  id                  String    @id @default(uuid())
+  username            String    @unique
+  passwordHash        String
+  roleId              String
+  mustChangePassword  Boolean   @default(false)
+  isActive            Boolean   @default(true)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  isDeleted           Boolean   @default(false)
+
+  role                Role      @relation(fields: [roleId], references: [id])
+  student             Student?
+  teacher             Teacher?
+  staff               Staff?
+  
+  recordedAttendances Attendance[] @relation("RecordedBy")
+  receivedPayments    Payment[]    @relation("ReceivedBy")
+  loggedExpenses      Expense[]    @relation("LoggedBy")
+  auditLogs           AuditLog[]
+}
+
+model Role {
+  id          String    @id @default(uuid())
+  name        String    @unique 
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  users       User[]
+  permissions RolePermission[]
+}
+
+model Permission {
+  id          String    @id @default(uuid())
+  name        String    @unique 
+  module      String    
+  description String?
+  
+  roles       RolePermission[]
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  
+  role         Role       @relation(fields: [roleId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  
+  @@id([roleId, permissionId])
+}
+
+model Setting {
+  key           String    @id
+  value         String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model AuditLog {
+  id            String    @id @default(uuid())
+  userId        String?
+  action        String
+  resource      String
+  details       String?
+  ipAddress     String?
+  createdAt     DateTime  @default(now())
+  
+  user          User?     @relation(fields: [userId], references: [id])
+}
+
+// ---------------- ACADEMIC ----------------
+
+model Session {
+  id            String    @id @default(uuid())
+  year          String    
+  isActive      Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  exams         Exam[]
+  students      Student[]
+}
+
+model Student {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  studentId     String    @unique 
+  roll          Int
+  nameBn        String
+  nameEn        String?
+  dob           DateTime?
+  brn           String?
+  religion      String?
+  bloodGroup    String?
+  address       String?
+  previousInstitution String?
+  quota         String?
+  photoUrl      String?
+  classId       String
+  departmentId  String?
+  sessionId     String
+  guardianId    String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isDeleted     Boolean   @default(false)
+
+  user          User       @relation(fields: [userId], references: [id])
+  class         Class      @relation(fields: [classId], references: [id])
+  department    Department? @relation(fields: [departmentId], references: [id])
+  session       Session    @relation(fields: [sessionId], references: [id])
+  guardian      Guardian?  @relation(fields: [guardianId], references: [id])
+  attendances   Attendance[]
+  results       Result[]
+  invoices      Invoice[]
+
+  @@unique([roll, classId, sessionId])
+  @@index([studentId])
+  @@index([roll])
+  @@index([nameBn])
+  @@index([classId])
+}
+
+model Teacher {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  teacherId     String    @unique
+  nameBn        String
+  phone         String
+  designation   String?
+  joinDate      DateTime?
+  photoUrl      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isDeleted     Boolean   @default(false)
+
+  user          User       @relation(fields: [userId], references: [id])
+  classes       Class[]    @relation("TeacherClasses")
+  subjects      Subject[]
+
+  @@index([teacherId])
+  @@index([nameBn])
+  @@index([phone])
+}
+
+model Guardian {
+  id            String    @id @default(uuid())
+  name          String
+  phone         String
+  relation      String
+  address       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isDeleted     Boolean   @default(false)
+
+  students      Student[]
+  @@index([phone])
+}
+
+model Staff {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  name          String
+  phone         String
+  designation   String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isDeleted     Boolean   @default(false)
+  
+  user          User      @relation(fields: [userId], references: [id])
+}
+
+model Class {
+  id            String    @id @default(uuid())
+  name          String    
+  numericValue  Int
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isDeleted     Boolean   @default(false)
+  
+  students      Student[]
+  subjects      Subject[]
+  attendances   Attendance[]
+  teachers      Teacher[]  @relation("TeacherClasses")
+  admissions    Admission[]
+}
+
+model Department {
+  id            String    @id @default(uuid())
+  name          String    
+  type          String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isDeleted     Boolean   @default(false)
+  
+  students      Student[]
+}
+
+model Subject {
+  id            String    @id @default(uuid())
+  name          String
+  code          String?
+  fullMarks     Decimal   @default(100.00) @db.Decimal(5, 2)
+  passMarks     Decimal   @default(33.00) @db.Decimal(5, 2)
+  classId       String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isDeleted     Boolean   @default(false)
+  
+  class         Class      @relation(fields: [classId], references: [id])
+  teachers      Teacher[]
+  results       Result[]
+}
+
+model Exam {
+  id            String    @id @default(uuid())
+  name          String
+  sessionId     String
+  isPublished   Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  session       Session    @relation(fields: [sessionId], references: [id])
+  results       Result[]
+}
+
+model Admission {
+  id                  String          @id @default(uuid())
+  applicantName       String
+  applicantNameEn     String?
+  fatherName          String?
+  fatherNameEn        String?
+  fatherOccupation    String?
+  motherName          String?
+  motherNameEn        String?
+  motherPhone         String?
+  phone               String
+  emergencyPhone      String?
+  dateOfBirth         DateTime?
+  brn                 String?
+  religion            String?
+  bloodGroup          String?
+  gender              String          @default("MALE")
+  studentType         String?         @default("RESIDENTIAL")
+  guardianNid         String?
+  previousInstitution String?
+  lastClassResult     String?
+  quota               String?
+  address             String?
+  village             String?
+  postOffice          String?
+  upazila             String?
+  district            String?
+  permanentAddress    String?
+  verificationToken   String?         @unique
+  classId             String
+  status              AdmissionStatus @default(PENDING)
+  applicationDate     DateTime        @default(now())
+  photoUrl            String?
+  birthCertUrl        String?
+  guardianNidUrl      String?
+  testimonialUrl      String?
+  paymentMethod       String?
+  trxId               String?
+  paymentSenderPhone  String?
+  rejectionReason     String?
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  class               Class           @relation(fields: [classId], references: [id])
+
+  @@index([status])
+  @@index([phone])
+}
+
+model Attendance {
+  id            String           @id @default(uuid())
+  studentId     String
+  classId       String
+  date          DateTime         @db.Date
+  status        AttendanceStatus
+  recordedById  String           
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  
+  student       Student          @relation(fields: [studentId], references: [id])
+  class         Class            @relation(fields: [classId], references: [id])
+  recordedBy    User             @relation("RecordedBy", fields: [recordedById], references: [id])
+  
+  @@unique([studentId, date])
+}
+
+model Result {
+  id            String    @id @default(uuid())
+  studentId     String
+  examId        String
+  subjectId     String
+  marks         Decimal   @db.Decimal(5, 2)
+  grade         String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  student       Student    @relation(fields: [studentId], references: [id])
+  exam          Exam       @relation(fields: [examId], references: [id])
+  subject       Subject    @relation(fields: [subjectId], references: [id])
+
+  @@unique([studentId, examId, subjectId])
+}
+
+// ---------------- FINANCE ----------------
+
+model FeeType {
+  id            String    @id @default(uuid())
+  name          String
+  defaultAmount Decimal   @db.Decimal(10, 2)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isDeleted     Boolean   @default(false)
+  
+  invoiceItems  InvoiceItem[]
+}
+
+model Invoice {
+  id            String        @id @default(uuid())
+  studentId     String
+  type          String        @default("MONTHLY") // e.g., ADMISSION, MONTHLY, EXAM
+  month         Int?
+  year          Int
+  totalAmount   Decimal       @db.Decimal(10, 2)
+  status        InvoiceStatus @default(UNPAID)
+  dueDate       DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  student            Student                    @relation(fields: [studentId], references: [id])
+  items              InvoiceItem[]
+  payments           Payment[]
+  onlineTransactions OnlinePaymentTransaction[]
+
+  @@unique([studentId, type, month, year])
+  @@index([status])
+}
+
+model InvoiceItem {
+  id            String    @id @default(uuid())
+  invoiceId     String
+  feeTypeId     String
+  amount        Decimal   @db.Decimal(10, 2)
+  
+  invoice       Invoice   @relation(fields: [invoiceId], references: [id])
+  feeType       FeeType   @relation(fields: [feeTypeId], references: [id])
+}
+
+model Payment {
+  id            String        @id @default(uuid())
+  invoiceId     String
+  amountPaid    Decimal       @db.Decimal(10, 2)
+  paymentDate   DateTime      @default(now())
+  method        PaymentMethod @default(CASH)
+  receivedById  String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  invoice           Invoice                   @relation(fields: [invoiceId], references: [id])
+  receivedBy        User                      @relation("ReceivedBy", fields: [receivedById], references: [id])
+  receipt           Receipt?                  @relation("PaymentReceipt")
+  onlineTransaction OnlinePaymentTransaction?
+  
+  @@index([paymentDate])
+}
+
+model Expense {
+  id            String    @id @default(uuid())
+  category      String
+  amount        Decimal   @db.Decimal(10, 2)
+  date          DateTime  @default(now())
+  description   String?
+  voucherUrl    String?
+  loggedById    String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  loggedBy      User      @relation("LoggedBy", fields: [loggedById], references: [id])
+  
+  @@index([date])
+}
+
+model Donation {
+  id            String    @id @default(uuid())
+  donorName     String
+  amount        Decimal   @db.Decimal(10, 2)
+  date          DateTime  @default(now())
+  purpose       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  receipt       Receipt?  @relation("DonationReceipt")
+  
+  @@index([date])
+}
+
+model Receipt {
+  id            String      @id @default(uuid())
+  receiptNumber String      @unique
+  type          ReceiptType
+  paymentId     String?     @unique
+  donationId    String?     @unique
+  printedCount  Int         @default(0)
+  lastPrintedAt DateTime?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  
+  payment       Payment?    @relation("PaymentReceipt", fields: [paymentId], references: [id])
+  donation      Donation?   @relation("DonationReceipt", fields: [donationId], references: [id])
+
+  @@index([receiptNumber])
+}
+
+// ---------------- CONTENT & MEDIA ----------------
+
+model Notice {
+  id            String    @id @default(uuid())
+  title         String
+  content       String
+  type          String
+  attachmentUrl String?
+  isPublished   Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isDeleted     Boolean   @default(false)
+
+  @@index([isPublished])
+}
+
+model Gallery {
+  id            String    @id @default(uuid())
+  title         String
+  imageUrl      String
+  category      String
+  uploadedAt    DateTime  @default(now())
+  isDeleted     Boolean   @default(false)
+}
+
+model Download {
+  id            String    @id @default(uuid())
+  title         String
+  fileUrl       String
+  category      String
+  createdAt     DateTime  @default(now())
+  isDeleted     Boolean   @default(false)
+}
+
+model NotificationLog {
+  id               String                 @id @default(uuid())
+  eventType        NotificationEventType
+  recipientPhone   String
+  recipientName    String?
+  message          String
+  status           NotificationStatus     @default(PENDING)
+  provider         String                 @default("bulksmsbd")
+  providerMsgId    String?
+  failureReason    String?
+  retryCount       Int                    @default(0)
+  sentAt           DateTime?
+  referenceId      String?
+  campaignId       String?
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  @@unique([eventType, referenceId])
+  @@index([recipientPhone])
+  @@index([eventType])
+  @@index([status])
+  @@index([referenceId])
+  @@index([campaignId])
+}
+
+model OnlinePaymentTransaction {
+  id               String              @id @default(uuid())
+  invoiceId        String
+  gateway          OnlineGateway
+  amount           Decimal             @db.Decimal(10, 2)
+  paymentReference String              @unique
+  trxID            String?             @unique
+  gatewayPaymentID String?
+  status           OnlinePaymentStatus @default(INITIATED)
+  paymentId        String?             @unique
+  failureReason    String?
+  rawResponse      String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  invoice          Invoice             @relation(fields: [invoiceId], references: [id])
+  payment          Payment?            @relation(fields: [paymentId], references: [id])
+
+  @@index([gateway])
+  @@index([status])
+  @@index([invoiceId])
+}
