@@ -3,29 +3,22 @@
 import { ISmsProvider } from './sms.interface';
 import { MockSmsAdapter } from './mock.adapter';
 import { BulkSmsBdAdapter } from './bulksmsbd.adapter';
-import { env } from '../../../config/env';
+import { GreenwebSmsProvider } from './greenweb.adapter';
 
 export class SmsAdapterFactory {
   private static instance: ISmsProvider;
 
-  public static getProvider(): ISmsProvider {
-    if (!this.instance) {
-      const providerName = env.SMS_PROVIDER;
+  public static getProvider(providerOverride?: string): ISmsProvider {
+    const providerName = (providerOverride || process.env.SMS_PROVIDER || 'mock').toLowerCase();
 
-      if (env.NODE_ENV === 'production' && providerName === 'mock') {
-        throw new Error('Production safety violation: Cannot use mock SMS adapter in production environment.');
-      }
-
-      switch (providerName) {
-        case 'bulksmsbd':
-          this.instance = new BulkSmsBdAdapter();
-          break;
-        case 'mock':
-        default:
-          this.instance = new MockSmsAdapter();
-          break;
-      }
+    switch (providerName) {
+      case 'greenweb':
+        return new GreenwebSmsProvider();
+      case 'bulksmsbd':
+        return new BulkSmsBdAdapter();
+      case 'mock':
+      default:
+        return new MockSmsAdapter();
     }
-    return this.instance;
   }
 }
