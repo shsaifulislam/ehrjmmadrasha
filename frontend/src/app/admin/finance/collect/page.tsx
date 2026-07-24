@@ -39,7 +39,7 @@ export default function CollectFeePage() {
 
     try {
       const studentRes = await api.get(`/academic/students?search=${encodeURIComponent(searchId.trim())}`);
-      const fetched = studentRes.data.data.students || [];
+      const fetched = studentRes.data.data || [];
 
       if (!fetched.length) {
         toast.error("কোনো শিক্ষার্থী পাওয়া যায়নি");
@@ -66,7 +66,7 @@ export default function CollectFeePage() {
     setSelectedInvoice(null);
     try {
       const invoicesRes = await api.get(`/admin/finance/invoices?studentId=${student.id}`);
-      const allInvoices = invoicesRes.data.data.invoices || [];
+      const allInvoices = invoicesRes.data.data || [];
 
       // Filter UNPAID and PARTIAL invoices
       const pendingInvoices = allInvoices.filter(
@@ -123,7 +123,7 @@ export default function CollectFeePage() {
         method: paymentMethod,
       });
 
-      const receiptData = res.data.data.receipt || res.data.data;
+      const receiptData = res.data.data;
       toast.success("পেমেন্ট সফলভাবে গ্রহণ করা হয়েছে");
       setCreatedReceipt({
         id: receiptData.id || receiptData.receiptId,

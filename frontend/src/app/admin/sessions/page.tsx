@@ -24,7 +24,7 @@ export default function SessionsPage() {
     setLoading(true);
     try {
       const res = await api.get("/academic/sessions");
-      setSessions(res.data.data.sessions);
+      setSessions(res.data.data || []);
     } catch (err: any) {
       toast.error(err.message || "সেশন তালিকা লোড করা যায়নি");
     } finally {

@@ -19,7 +19,7 @@ export default function PrintReceiptPage({ params }: { params: { id: string } })
       try {
         setIsLoading(true);
         const res = await api.get(`/admin/finance/receipts/${params.id}`);
-        setReceipt(res.data.data.receipt);
+        setReceipt(res.data.data);
       } catch (error) {
         toast.error("রশিদ লোড করতে সমস্যা হয়েছে");
       } finally {
@@ -35,8 +35,8 @@ export default function PrintReceiptPage({ params }: { params: { id: string } })
       const res = await api.post(`/admin/finance/receipts/${params.id}/print`);
       setReceipt((prev: any) => ({
         ...prev,
-        printedCount: res.data.data.receipt.printedCount,
-        lastPrintedAt: res.data.data.receipt.lastPrintedAt,
+        printedCount: res.data.data.printedCount,
+        lastPrintedAt: res.data.data.lastPrintedAt,
       }));
 
       setTimeout(() => {

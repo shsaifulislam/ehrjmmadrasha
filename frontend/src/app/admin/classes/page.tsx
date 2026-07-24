@@ -24,7 +24,7 @@ export default function ClassesPage() {
     setLoading(true);
     try {
       const res = await api.get("/academic/classes");
-      setClasses(res.data.data.classes);
+      setClasses(res.data.data || []);
     } catch (err: any) {
       toast.error(err.message || "শ্রেণী তালিকা লোড করা যায়নি");
     } finally {

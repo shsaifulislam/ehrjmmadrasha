@@ -30,8 +30,8 @@ export default function TeachersPage() {
     setLoading(true);
     try {
       const res = await api.get("/admin/teachers", { params: { search, limit: 50 } });
-      setTeachers(res.data.data.teachers);
-      setTotal(res.data.data.total);
+      setTeachers(res.data.data || []);
+      setTotal(res.data.meta?.total || 0);
     } catch (err: any) {
       toast.error(err.message || "শিক্ষক তালিকা লোড করা যায়নি");
     } finally {

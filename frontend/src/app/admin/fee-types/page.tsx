@@ -24,7 +24,7 @@ export default function FeeTypesPage() {
     setLoading(true);
     try {
       const res = await api.get("/admin/fee-types");
-      setFeeTypes(res.data.data.feeTypes);
+      setFeeTypes(res.data.data || []);
     } catch (err: any) {
       toast.error(err.message || "ফি টাইপ তালিকা লোড করা যায়নি");
     } finally {
