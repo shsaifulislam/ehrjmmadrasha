@@ -92,6 +92,8 @@ model User {
   loggedExpenses      Expense[]    @relation("LoggedBy")
   journalEntries      JournalEntry[] @relation("JournalCreatedBy")
   closedCashbooks     DailyCashbook[] @relation("CashbookClosedBy")
+  salaryPayments      SalaryPayment[] @relation("SalaryPaidBy")
+  approvedLeaves      LeaveRequest[]  @relation("LeaveApprovedBy")
   auditLogs           AuditLog[]
 }
 
@@ -212,6 +214,10 @@ model Teacher {
   user          User       @relation(fields: [userId], references: [id])
   classes       Class[]    @relation("TeacherClasses")
   subjects      Subject[]
+  salaryStructure StaffSalaryStructure?
+  payrollRecords  PayrollRecord[]
+  advances        StaffAdvance[]
+  leaveRequests   LeaveRequest[]
 
   @@index([teacherId])
   @@index([nameBn])
@@ -234,15 +240,30 @@ model Guardian {
 
 model Staff {
   id            String    @id @default(uuid())
-  userId        String    @unique
+  userId        String?   @unique
+  employeeId    String    @unique
   name          String
   phone         String
   designation   String
+  department    String?
+  joinDate      DateTime?
+  address       String?
+  nid           String?
+  photoUrl      String?
+  paymentMethod String    @default("CASH")
+  isActive      Boolean   @default(true)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   isDeleted     Boolean   @default(false)
   
-  user          User      @relation(fields: [userId], references: [id])
+  user          User?     @relation(fields: [userId], references: [id])
+  salaryStructure StaffSalaryStructure?
+  payrollRecords  PayrollRecord[]
+  advances        StaffAdvance[]
+  leaveRequests   LeaveRequest[]
+
+  @@index([employeeId])
+  @@index([name])
 }
 
 model Class {
@@ -655,4 +676,144 @@ model DailyCashbook {
 
   @@index([date])
 }
+
+// ---------------- HR & PAYROLL ENGINE ----------------
+
+enum PayrollStatus {
+  DRAFT
+  GENERATED
+  APPROVED
+  PARTIALLY_PAID
+  PAID
+  LOCKED
+}
+
+enum PayrollRecordStatus {
+  UNPAID
+  PARTIAL
+  PAID
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model StaffSalaryStructure {
+  id                String    @id @default(uuid())
+  teacherId         String?   @unique
+  staffId           String?   @unique
+  basicSalary       Decimal   @db.Decimal(10, 2)
+  houseRent         Decimal   @default(0.00) @db.Decimal(10, 2)
+  medicalAllowance   Decimal   @default(0.00) @db.Decimal(10, 2)
+  foodAllowance     Decimal   @default(0.00) @db.Decimal(10, 2)
+  transportAllowance Decimal   @default(0.00) @db.Decimal(10, 2)
+  otherAllowance    Decimal   @default(0.00) @db.Decimal(10, 2)
+  grossSalary       Decimal   @db.Decimal(10, 2)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  teacher           Teacher?  @relation(fields: [teacherId], references: [id])
+  staff             Staff?    @relation(fields: [staffId], references: [id])
+}
+
+model PayrollMonth {
+  id              String        @id @default(uuid())
+  year            Int
+  month           Int           // 1 to 12
+  status          PayrollStatus @default(DRAFT)
+  totalGross      Decimal       @default(0.00) @db.Decimal(12, 2)
+  totalDeductions Decimal       @default(0.00) @db.Decimal(12, 2)
+  totalNetPayable Decimal       @default(0.00) @db.Decimal(12, 2)
+  totalPaid       Decimal       @default(0.00) @db.Decimal(12, 2)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  records         PayrollRecord[]
+
+  @@unique([year, month])
+}
+
+model PayrollRecord {
+  id              String              @id @default(uuid())
+  payrollMonthId String
+  teacherId       String?
+  staffId         String?
+  employeeType    String              // TEACHER or STAFF
+  basicSalary     Decimal             @db.Decimal(10, 2)
+  totalAllowances Decimal             @db.Decimal(10, 2)
+  absentDeduction Decimal             @default(0.00) @db.Decimal(10, 2)
+  advanceDeduction Decimal            @default(0.00) @db.Decimal(10, 2)
+  otherDeduction  Decimal             @default(0.00) @db.Decimal(10, 2)
+  grossSalary     Decimal             @db.Decimal(10, 2)
+  netPayable      Decimal             @db.Decimal(10, 2)
+  paidAmount      Decimal             @default(0.00) @db.Decimal(10, 2)
+  dueAmount       Decimal             @db.Decimal(10, 2)
+  status          PayrollRecordStatus @default(UNPAID)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  payrollMonth    PayrollMonth        @relation(fields: [payrollMonthId], references: [id], onDelete: Cascade)
+  teacher         Teacher?            @relation(fields: [teacherId], references: [id])
+  staff           Staff?              @relation(fields: [staffId], references: [id])
+  payments        SalaryPayment[]
+
+  @@index([payrollMonthId])
+}
+
+model SalaryPayment {
+  id              String        @id @default(uuid())
+  payrollRecordId String
+  amountPaid      Decimal       @db.Decimal(10, 2)
+  paymentDate     DateTime      @default(now())
+  paymentMethod   PaymentMethod @default(CASH)
+  voucherNumber   String        @unique
+  journalEntryId  String?
+  note            String?
+  paidById        String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  payrollRecord   PayrollRecord @relation(fields: [payrollRecordId], references: [id])
+  paidBy          User          @relation("SalaryPaidBy", fields: [paidById], references: [id])
+
+  @@index([paymentDate])
+}
+
+model StaffAdvance {
+  id              String    @id @default(uuid())
+  teacherId       String?
+  staffId         String?
+  amount          Decimal   @db.Decimal(10, 2)
+  requestDate     DateTime  @default(now())
+  reason          String?
+  deductedAmount  Decimal   @default(0.00) @db.Decimal(10, 2)
+  isFullyAdjusted Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  teacher         Teacher?  @relation(fields: [teacherId], references: [id])
+  staff           Staff?    @relation(fields: [staffId], references: [id])
+}
+
+model LeaveRequest {
+  id              String      @id @default(uuid())
+  teacherId       String?
+  staffId         String?
+  leaveType       String      // CASUAL, SICK, UNPAID, EMERGENCY
+  startDate       DateTime    @db.Date
+  endDate         DateTime    @db.Date
+  totalDays       Int
+  reason          String
+  status          LeaveStatus @default(PENDING)
+  approvedById    String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  teacher         Teacher?    @relation(fields: [teacherId], references: [id])
+  staff           Staff?      @relation(fields: [staffId], references: [id])
+  approvedBy      User?       @relation("LeaveApprovedBy", fields: [approvedById], references: [id])
+}
+
 

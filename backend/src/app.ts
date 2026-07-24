@@ -108,11 +108,15 @@ import teacherPortalRouter from './modules/teacherPortal/teacherPortal.routes';
 import studentPortalRouter from './modules/studentPortal/studentPortal.routes';
 
 import accountingRouter from './modules/accounting/accounting.router';
+import staffRouter from './modules/staff/staff.router';
+import payrollRouter from './modules/payroll/payroll.router';
 
 app.use('/api/auth', authRouter);
 app.use('/api/teacher', teacherPortalRouter);
 app.use('/api/student', studentPortalRouter);
 app.use('/api/admin/teachers', teacherRouter);
+app.use('/api/admin/staff', staffRouter);
+app.use('/api/admin/payroll', payrollRouter);
 app.use('/api/academic', academicRouter);
 app.use('/api/public/academic', academicPublicRouter);
 app.use('/api/admin/fee-types', feeTypeRouter);
