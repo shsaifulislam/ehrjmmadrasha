@@ -107,6 +107,8 @@ import { admissionAdminRouter, admissionPublicRouter } from './modules/admission
 import teacherPortalRouter from './modules/teacherPortal/teacherPortal.routes';
 import studentPortalRouter from './modules/studentPortal/studentPortal.routes';
 
+import accountingRouter from './modules/accounting/accounting.router';
+
 app.use('/api/auth', authRouter);
 app.use('/api/teacher', teacherPortalRouter);
 app.use('/api/student', studentPortalRouter);
@@ -115,6 +117,7 @@ app.use('/api/academic', academicRouter);
 app.use('/api/public/academic', academicPublicRouter);
 app.use('/api/admin/fee-types', feeTypeRouter);
 app.use('/api/admin/finance', financeRouter);
+app.use('/api/admin/accounting', accountingRouter);
 app.use('/api/admin/dashboard', dashboardRouter);
 app.use('/api/admin/attendance', attendanceRouter);
 app.use('/api/admin/results', examRouter);

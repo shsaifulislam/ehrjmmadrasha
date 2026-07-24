@@ -90,6 +90,8 @@ model User {
   recordedAttendances Attendance[] @relation("RecordedBy")
   receivedPayments    Payment[]    @relation("ReceivedBy")
   loggedExpenses      Expense[]    @relation("LoggedBy")
+  journalEntries      JournalEntry[] @relation("JournalCreatedBy")
+  closedCashbooks     DailyCashbook[] @relation("CashbookClosedBy")
   auditLogs           AuditLog[]
 }
 
@@ -570,3 +572,87 @@ model OnlinePaymentTransaction {
   @@index([status])
   @@index([invoiceId])
 }
+
+// ---------------- ACCOUNTING CORE & GENERAL LEDGER ----------------
+
+enum AccountType {
+  ASSET
+  LIABILITY
+  EQUITY
+  INCOME
+  EXPENSE
+}
+
+enum TransactionType {
+  DEBIT
+  CREDIT
+}
+
+model Account {
+  id            String       @id @default(uuid())
+  code          String       @unique
+  name          String
+  type          AccountType
+  description   String?
+  balance       Decimal      @default(0.00) @db.Decimal(12, 2)
+  isSystem      Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  journalLines  JournalTransactionLine[]
+  
+  @@index([code])
+  @@index([type])
+}
+
+model JournalEntry {
+  id            String       @id @default(uuid())
+  voucherNumber String       @unique
+  date          DateTime     @default(now())
+  description   String
+  reference     String?
+  createdById   String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  createdBy     User         @relation("JournalCreatedBy", fields: [createdById], references: [id])
+  lines         JournalTransactionLine[]
+
+  @@index([date])
+  @@index([voucherNumber])
+}
+
+model JournalTransactionLine {
+  id             String          @id @default(uuid())
+  journalEntryId String
+  accountId      String
+  type           TransactionType
+  amount         Decimal         @db.Decimal(12, 2)
+  description    String?
+
+  journalEntry   JournalEntry    @relation(fields: [journalEntryId], references: [id], onDelete: Cascade)
+  account        Account         @relation(fields: [accountId], references: [id])
+
+  @@index([journalEntryId])
+  @@index([accountId])
+}
+
+model DailyCashbook {
+  id                  String   @id @default(uuid())
+  date                DateTime @unique @db.Date
+  openingBalance      Decimal  @db.Decimal(12, 2)
+  totalCashIncome     Decimal  @db.Decimal(12, 2)
+  totalCashExpense    Decimal  @db.Decimal(12, 2)
+  expectedClosingCash Decimal  @db.Decimal(12, 2)
+  actualCountedCash   Decimal  @db.Decimal(12, 2)
+  shortageOrSurplus   Decimal  @db.Decimal(12, 2)
+  note                String?
+  closedById          String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  closedBy            User     @relation("CashbookClosedBy", fields: [closedById], references: [id])
+
+  @@index([date])
+}
+
