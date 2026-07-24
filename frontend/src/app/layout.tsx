@@ -10,6 +10,7 @@ const notoSansBengali = Noto_Sans_Bengali({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.FRONTEND_URL || 'https://ehrjmadrasha.edu.bd'),
   title: "EHRJ Madrasha ERP",
   description: "Eliotganj Hazi Rohmatollah Jamiria Madrasha Management System",
 };
