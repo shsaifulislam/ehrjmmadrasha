@@ -119,7 +119,7 @@ cd ../frontend && npm ci
 ```env
 NODE_ENV=production
 PORT=3001
-FRONTEND_URL=https://ehrjmadrasha.edu.bd
+FRONTEND_URL=https://ehrjmadrasha.com
 DATABASE_URL="postgresql://ehrj_user:SecureProductionPassword2026!@127.0.0.1:6432/ehrj_madrasha_db?pgbouncer=true"
 DIRECT_URL="postgresql://ehrj_user:SecureProductionPassword2026!@127.0.0.1:5432/ehrj_madrasha_db"
 
