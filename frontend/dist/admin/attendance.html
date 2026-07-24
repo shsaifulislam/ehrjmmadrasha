@@ -1,0 +1,107 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>হাজিরা রেজিস্টার — Admin Attendance</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.empty-state{text-align:center;padding:40px;color:#667874}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📅 হাজিরা রেজিস্টার (Attendance Board)</h1>
+    <p>শিক্ষার্থীদের প্রতিদিনের উপস্থিতি ও অনুপস্থিতির বিবরণ দেখুন।</p>
+  </section>
+
+  <!-- Toolbar: Date & Class Selector -->
+  <section class="toolbar">
+    <input type="date" id="attendanceDate" onchange="loadAttendance()">
+    <select id="attendanceClass" onchange="loadAttendance()">
+      <option value="C-001">নূরানী বিভাগ</option>
+      <option value="C-002" selected>হিফজ বিভাগ</option>
+      <option value="C-003">কিতাব বিভাগ</option>
+    </select>
+  </section>
+
+  <!-- Attendance Table Area -->
+  <div id="attendanceArea">
+    <div class="loader">📋 হাজিরা লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+// Set default date to today
+document.getElementById('attendanceDate').value = new Date().toISOString().slice(0,10);
+
+async function loadAttendance() {
+  const date = document.getElementById('attendanceDate').value;
+  const classId = document.getElementById('attendanceClass').value;
+  
+  if (!date || !classId) return;
+  document.getElementById('attendanceArea').innerHTML = '<div class="loader">📋 হাজিরা লোড হচ্ছে...</div>';
+
+  try {
+    const [records, students] = await Promise.all([
+      API(`/api/attendance?date=${date}&classId=${classId}`),
+      API('/api/students')
+    ]);
+
+    if (records.error) {
+      document.getElementById('attendanceArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন।</div>';
+      return;
+    }
+
+    if (records.length === 0) {
+      document.getElementById('attendanceArea').innerHTML = '<div class="empty-state">📭 এই তারিখ এবং বিভাগের জন্য কোনো হাজিরা রেকর্ড পাওয়া যায়নি।</div>';
+      return;
+    }
+
+    // Since our backend returns a list of attendance records, let's take the first matching one
+    const rec = records[0];
+    const studentRecords = rec.records || [];
+
+    document.getElementById('attendanceArea').innerHTML = `
+      <div class="table-wrap"><table>
+        <thead><tr>
+          <th>আইডি</th><th>নাম</th><th>রোল</th><th>হাজিরা স্ট্যাটাস</th>
+        </tr></thead>
+        <tbody>${studentRecords.map(r => {
+          const st = students.find(s => s.id === r.studentId) || { name: 'মুহাম্মদ আব্দুল্লাহ', roll: '01' };
+          return `<tr>
+            <td>${r.studentId}</td>
+            <td style="font-weight:bold">${st.name}</td>
+            <td>${st.roll}</td>
+            <td style="font-weight:bold;color:${r.status === 'present' ? '#15803D' : '#DC2626'}">${r.status === 'present' ? '✅ উপস্থিত (Present)' : '❌ অনুপস্থিত (Absent)'}</td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table></div>
+    `;
+
+  } catch(e) {
+    document.getElementById('attendanceArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+loadAttendance();
+</script>
+</body></html>

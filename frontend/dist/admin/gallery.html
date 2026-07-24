@@ -1,0 +1,175 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>গ্যালারি ব্যবস্থাপনা — Admin Gallery</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input,.modal select{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-danger{background:#DC2626;color:#fff;border:0}
+.btn-success{background:#15803D;color:#fff;border:0}
+.loader{text-align:center;padding:40px;color:#667874}
+.empty-state{text-align:center;padding:40px;color:#667874;font-size:16px}
+.error-state{text-align:center;padding:40px;color:#DC2626;font-size:16px}
+.gallery-admin-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:20px}
+.gallery-admin-card {background:#fff;border:1px solid #D9E1DD;border-radius:16px;overflow:hidden;box-shadow:0 6px 15px rgba(0,0,0,0.04);display:flex;flex-direction:column}
+.gallery-admin-card img {width:100%;height:160px;object-fit:cover;background:#f3f4f6}
+.gallery-admin-body {padding:14px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.gallery-admin-body h4 {margin:0 0 8px;font-size:16px;color:var(--deep,#0A3F36)}
+.gallery-admin-body span {font-size:12px;color:#667874;background:#F3F4F6;padding:4px 8px;border-radius:4px;align-self:flex-start;margin-bottom:12px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📸 গ্যালারি ফটো ব্যবস্থাপনা</h1>
+    <p>মাদ্রাসার অফিসিয়াল ওয়েবসাইটের গ্যালারি পেজে প্রদর্শনের জন্য সুন্দর সুন্দর ছবি আপলোড বা যোগ করুন এবং মুছুন।</p>
+  </section>
+
+  <!-- Toolbar -->
+  <section class="toolbar">
+    <button onclick="openAddModal()">➕ নতুন ছবি যোগ করুন</button>
+  </section>
+
+  <!-- Output Area -->
+  <div id="galleryArea">
+    <div class="loader">📋 ছবির তালিকা লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- ADD MODAL -->
+<div class="modal-overlay" id="galleryModal">
+  <div class="modal">
+    <h2>➕ নতুন গ্যালারি ছবি যোগ</h2>
+    
+    <label>ছবির শিরোনাম (Title)</label>
+    <input id="galTitle" placeholder="যেমন: মাদ্রাসা ভবন">
+    
+    <label>ছবির লিংক / URL (ImageUrl)</label>
+    <input id="galUrl" placeholder="যেমন: /assets/img/gallery-1.jpg">
+
+    <label>ক্যাটেগরি (Category)</label>
+    <select id="galCategory">
+      <option value="campus">ক্যাম্পাস (Campus)</option>
+      <option value="event">অনুষ্ঠান (Event)</option>
+      <option value="class">শ্রেণীকক্ষ (Classroom)</option>
+      <option value="other">অন্যান্য (Other)</option>
+    </select>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('galleryModal')">বাতিল</button>
+      <button class="btn-success" onclick="saveGalleryItem()">✅ সংরক্ষণ করুন</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let allGalleryItems = [];
+
+async function loadGallery() {
+  try {
+    const data = await API('/api/gallery');
+    if (data.error) {
+      document.getElementById('galleryArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। অনুগ্রহ করে আগে লগইন করুন।</div>';
+      return;
+    }
+    allGalleryItems = Array.isArray(data) ? data : [];
+    renderGallery();
+  } catch(e) {
+    document.getElementById('galleryArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderGallery() {
+  if (allGalleryItems.length === 0) {
+    document.getElementById('galleryArea').innerHTML = '<div class="empty-state">📭 গ্যালারিতে কোনো ছবি নেই।</div>';
+    return;
+  }
+
+  document.getElementById('galleryArea').innerHTML = `
+    <div class="gallery-admin-grid">${allGalleryItems.map(item => `
+      <div class="gallery-admin-card">
+        <img src="${item.url || item.imageUrl || '/assets/img/logo.png'}" onerror="this.src='/assets/img/logo.png'">
+        <div class="gallery-admin-body">
+          <div>
+            <h4>${item.title || 'শিরোনামহীন ছবি'}</h4>
+            <span>${item.category === 'campus' ? 'ক্যাম্পাস' : item.category === 'event' ? 'অনুষ্ঠান' : 'শ্রেণীকক্ষ'}</span>
+          </div>
+          <button onclick="deleteGalleryItem('${item.id}')" style="width:100%;background:#DC2626;margin-top:10px;font-size:13px;padding:8px 10px;min-height:36px">🗑️ ছবি মুছুন</button>
+        </div>
+      </div>
+    `).join('')}</div>
+  `;
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openAddModal() {
+  document.getElementById('galTitle').value = '';
+  document.getElementById('galUrl').value = '';
+  document.getElementById('galCategory').selectedIndex = 0;
+  openModal('galleryModal');
+}
+
+async function saveGalleryItem() {
+  const title = document.getElementById('galTitle').value.trim();
+  const url = document.getElementById('galUrl').value.trim();
+  const category = document.getElementById('galCategory').value;
+
+  if (!title || !url) { alert('ছবির শিরোনাম ও ইউআরএল (URL) দিতে হবে!'); return; }
+
+  try {
+    const res = await API('/api/gallery', {
+      method: 'POST',
+      body: JSON.stringify({ title, url, category })
+    });
+
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ গ্যালারিতে নতুন ছবি যোগ করা হয়েছে!');
+    closeModal('galleryModal');
+    loadGallery();
+  } catch(e) {
+    alert('❌ ছবি সংরক্ষণ করা সম্ভব হয়নি।');
+  }
+}
+
+async function deleteGalleryItem(id) {
+  if (!confirm('আপনি কি নিশ্চিতভাবে এই ছবিটি গ্যালারি থেকে মুছে ফেলতে চান?')) return;
+  try {
+    const res = await API('/api/gallery/' + id, { method: 'DELETE' });
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ ছবিটি মুছে ফেলা হয়েছে।');
+    loadGallery();
+  } catch(e) {
+    alert('❌ মুছতে সমস্যা হয়েছে।');
+  }
+}
+
+loadGallery();
+</script>
+</body></html>

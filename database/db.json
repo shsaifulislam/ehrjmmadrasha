@@ -1,0 +1,1855 @@
+{
+  "students": [
+    {
+      "id": "S-001",
+      "name": "মুহাম্মদ আব্দুল্লাহ",
+      "className": "হিফজ বিভাগ",
+      "classId": "C-002",
+      "roll": "01",
+      "guardian": "মো. রহিম",
+      "guardianId": "G-001",
+      "phone": "01845162664",
+      "fee": 800,
+      "due": 0,
+      "status": "active",
+      "photo": "/assets/img/student-001.jpg",
+      "admissionDate": "2024-01-15"
+    },
+    {
+      "id": "S-002",
+      "name": "মুহাম্মদ ইব্রাহিম",
+      "className": "নূরানী বিভাগ",
+      "classId": "C-001",
+      "roll": "02",
+      "guardian": "মো. করিম",
+      "guardianId": "G-002",
+      "phone": "01826416696",
+      "fee": 600,
+      "due": 0,
+      "status": "active",
+      "photo": "/assets/img/student-002.jpg",
+      "admissionDate": "2024-03-01",
+      "updatedAt": "2026-06-22T16:10:08.798Z"
+    },
+    {
+      "id": "S-003",
+      "name": "হাফেজ আহমদ",
+      "className": "কিতাব বিভাগ",
+      "classId": "C-003",
+      "roll": "03",
+      "guardian": "মো. আলী",
+      "guardianId": "G-003",
+      "phone": "01949091911",
+      "fee": 700,
+      "due": 0,
+      "status": "active",
+      "photo": "/assets/img/student-003.jpg",
+      "admissionDate": "2025-01-10",
+      "updatedAt": "2026-06-23T15:17:47.861Z"
+    },
+    {
+      "id": "S-612ead60",
+      "status": "active",
+      "name": "আব্দুর রহমান (পরিবর্তিত)",
+      "className": "হিফজ বিভাগ",
+      "classId": "C-002",
+      "roll": "05",
+      "guardian": "মো. হাবিব",
+      "phone": "01845162664",
+      "fee": 800,
+      "due": 0,
+      "createdAt": "2026-06-23T15:01:05.993Z",
+      "updatedAt": "2026-06-23T15:01:06.002Z"
+    },
+    {
+      "id": "S-b0a4e0b6",
+      "status": "active",
+      "name": "আব্দুর রহমান (পরিবর্তিত)",
+      "className": "হিফজ বিভাগ",
+      "classId": "C-002",
+      "roll": "05",
+      "guardian": "মো. হাবিব",
+      "phone": "01845162664",
+      "fee": 800,
+      "due": 0,
+      "createdAt": "2026-06-23T15:06:05.383Z",
+      "updatedAt": "2026-06-23T15:06:05.393Z"
+    },
+    {
+      "id": "S-462f48f2",
+      "status": "active",
+      "name": "আব্দুর রহমান (পরিবর্তিত)",
+      "className": "হিফজ বিভাগ",
+      "classId": "C-002",
+      "roll": "05",
+      "guardian": "মো. হাবিব",
+      "phone": "01845162664",
+      "fee": 800,
+      "due": 0,
+      "createdAt": "2026-06-23T15:15:27.692Z",
+      "updatedAt": "2026-06-23T15:15:27.702Z"
+    },
+    {
+      "id": "S-4773c35c",
+      "status": "active",
+      "name": "আব্দুর রহমান (পরিবর্তিত)",
+      "className": "হিফজ বিভাগ",
+      "classId": "C-002",
+      "roll": "05",
+      "guardian": "মো. হাবিব",
+      "phone": "01845162664",
+      "fee": 800,
+      "due": 0,
+      "createdAt": "2026-06-23T15:17:48.234Z",
+      "updatedAt": "2026-06-23T15:17:48.247Z"
+    }
+  ],
+  "guardians": [
+    {
+      "id": "G-001",
+      "name": "মো. রহিম",
+      "phone": "01845162664",
+      "relation": "পিতা",
+      "studentIds": [
+        "S-001"
+      ]
+    },
+    {
+      "id": "G-002",
+      "name": "মো. করিম",
+      "phone": "01826416696",
+      "relation": "পিতা",
+      "studentIds": [
+        "S-002"
+      ]
+    },
+    {
+      "id": "G-003",
+      "name": "মো. আলী",
+      "phone": "01949091911",
+      "relation": "পিতা",
+      "studentIds": [
+        "S-003"
+      ]
+    }
+  ],
+  "teachers": [
+    {
+      "id": "T-001",
+      "name": "মাওলানা মহা. আবুল কালাম সরকার",
+      "subject": "প্রধান শিক্ষক",
+      "phone": "01845162664",
+      "role": "principal",
+      "assignedClasses": [
+        "C-001",
+        "C-002",
+        "C-003"
+      ],
+      "photo": "/assets/img/principal.jpg",
+      "status": "active"
+    },
+    {
+      "id": "T-002",
+      "name": "হাফেজ মো. ইউসুফ",
+      "subject": "হিফজ",
+      "phone": "01949091911",
+      "role": "teacher",
+      "assignedClasses": [
+        "C-002"
+      ],
+      "photo": "/assets/img/teacher.jpg",
+      "status": "active"
+    },
+    {
+      "id": "T-a0bdc5df",
+      "status": "active",
+      "name": "মাওলানা মো. ইউনুস",
+      "subject": "আরবি সাহিত্য",
+      "phone": "01826416696",
+      "role": "teacher",
+      "assignedClasses": [
+        "C-003"
+      ],
+      "createdAt": "2026-06-23T15:01:06.019Z"
+    },
+    {
+      "id": "T-9228a7a6",
+      "status": "active",
+      "name": "মাওলানা মো. ইউনুস",
+      "subject": "আরবি সাহিত্য",
+      "phone": "01826416696",
+      "role": "teacher",
+      "assignedClasses": [
+        "C-003"
+      ],
+      "createdAt": "2026-06-23T15:06:05.413Z"
+    },
+    {
+      "id": "T-913b4455",
+      "status": "active",
+      "name": "মাওলানা মো. ইউনুস",
+      "subject": "আরবি সাহিত্য",
+      "phone": "01826416696",
+      "role": "teacher",
+      "assignedClasses": [
+        "C-003"
+      ],
+      "createdAt": "2026-06-23T15:15:27.720Z"
+    },
+    {
+      "id": "T-263cfc35",
+      "status": "active",
+      "name": "মাওলানা মো. ইউনুস",
+      "subject": "আরবি সাহিত্য",
+      "phone": "01826416696",
+      "role": "teacher",
+      "assignedClasses": [
+        "C-003"
+      ],
+      "createdAt": "2026-06-23T15:17:48.265Z"
+    }
+  ],
+  "staff": [
+    {
+      "id": "ST-001",
+      "name": "মো. সাইফুল",
+      "role": "অফিস সহকারী",
+      "phone": "01826416696",
+      "status": "active"
+    }
+  ],
+  "classes": [
+    {
+      "id": "C-001",
+      "name": "নূরানী বিভাগ",
+      "departmentId": "D-001",
+      "teacherId": "T-001",
+      "studentCount": 1,
+      "fee": 600
+    },
+    {
+      "id": "C-002",
+      "name": "হিফজ বিভাগ",
+      "departmentId": "D-002",
+      "teacherId": "T-002",
+      "studentCount": 1,
+      "fee": 800
+    },
+    {
+      "id": "C-003",
+      "name": "কিতাব বিভাগ",
+      "departmentId": "D-003",
+      "teacherId": "T-001",
+      "studentCount": 1,
+      "fee": 700
+    }
+  ],
+  "departments": [
+    {
+      "id": "D-001",
+      "name": "নূরানী বিভাগ",
+      "head": "মাওলানা মহা. আবুল কালাম সরকার",
+      "description": "প্রাথমিক ইসলামী শিক্ষা"
+    },
+    {
+      "id": "D-002",
+      "name": "হিফজ বিভাগ",
+      "head": "হাফেজ মো. ইউসুফ",
+      "description": "পবিত্র কুরআন মুখস্থকরণ"
+    },
+    {
+      "id": "D-003",
+      "name": "কিতাব বিভাগ",
+      "head": "মাওলানা মহা. আবুল কালাম সরকার",
+      "description": "উচ্চতর ইসলামী শিক্ষা ও আরবি সাহিত্য"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "SES-001",
+      "name": "২০২৬",
+      "year": 2026,
+      "startDate": "2026-01-01",
+      "endDate": "2026-12-31",
+      "active": true
+    }
+  ],
+  "admissions": [
+    {
+      "id": "ADM-001",
+      "studentId": "S-001",
+      "sessionId": "SES-001",
+      "classId": "C-002",
+      "date": "2024-01-15",
+      "feesPaid": 500,
+      "status": "confirmed"
+    }
+  ],
+  "attendance": [
+    {
+      "id": "ATT-001",
+      "date": "2026-06-22",
+      "classId": "C-002",
+      "records": [
+        {
+          "studentId": "S-001",
+          "status": "present"
+        },
+        {
+          "studentId": "S-002",
+          "status": "absent"
+        }
+      ],
+      "teacherId": "T-002"
+    }
+  ],
+  "results": [
+    {
+      "id": "R-001",
+      "studentId": "S-001",
+      "className": "হিফজ বিভাগ",
+      "session": "২০২৬",
+      "exam": "অর্ধবার্ষিক",
+      "subjects": [
+        {
+          "name": "কুরআন",
+          "marks": 85,
+          "total": 100
+        },
+        {
+          "name": "আরবি",
+          "marks": 70,
+          "total": 100
+        },
+        {
+          "name": "বাংলা",
+          "marks": 65,
+          "total": 100
+        }
+      ],
+      "total": 220,
+      "outOf": 300,
+      "grade": "A",
+      "position": 1
+    }
+  ],
+  "notices": [
+    {
+      "id": "N-001",
+      "title": "ভর্তি কার্যক্রম চলছে",
+      "date": "2026-01-01",
+      "body": "নতুন শিক্ষাবর্ষের ভর্তি কার্যক্রম চলছে। আগ্রহী অভিভাবকগণ যোগাযোগ করুন।",
+      "type": "admission",
+      "active": true
+    },
+    {
+      "id": "N-002",
+      "title": "অর্ধবার্ষিক পরীক্ষার সময়সূচী",
+      "date": "2026-06-01",
+      "body": "অর্ধবার্ষিক পরীক্ষা আগামী ১৫ জুন থেকে শুরু হবে। সকল ছাত্রকে প্রস্তুত থাকতে হবে।",
+      "type": "exam",
+      "active": true
+    },
+    {
+      "id": "N-003",
+      "title": "মাসিক অভিভাবক সভা",
+      "date": "2026-06-20",
+      "body": "আগামী শুক্রবার বাদ জুমা মাসিক অভিভাবক সভা অনুষ্ঠিত হবে।",
+      "type": "general",
+      "active": true
+    },
+    {
+      "id": "N-0cbdbb58",
+      "date": "2026-06-23",
+      "active": true,
+      "title": "রমজান মাস উপলক্ষে মাদ্রাসা বন্ধের নোটিশ",
+      "body": "১ রমজান থেকে ৩০ রমজান পর্যন্ত মাদ্রাসা বন্ধ থাকবে।",
+      "type": "holiday",
+      "createdAt": "2026-06-23T15:01:06.029Z"
+    },
+    {
+      "id": "N-c5bb79a5",
+      "date": "2026-06-23",
+      "active": true,
+      "title": "রমজান মাস উপলক্ষে মাদ্রাসা বন্ধের নোটিশ",
+      "body": "১ রমজান থেকে ৩০ রমজান পর্যন্ত মাদ্রাসা বন্ধ থাকবে।",
+      "type": "holiday",
+      "createdAt": "2026-06-23T15:06:05.422Z"
+    },
+    {
+      "id": "N-7d880b29",
+      "date": "2026-06-23",
+      "active": true,
+      "title": "রমজান মাস উপলক্ষে মাদ্রাসা বন্ধের নোটিশ",
+      "body": "১ রমজান থেকে ৩০ রমজান পর্যন্ত মাদ্রাসা বন্ধ থাকবে।",
+      "type": "holiday",
+      "createdAt": "2026-06-23T15:15:27.734Z"
+    },
+    {
+      "id": "N-4c3aa082",
+      "date": "2026-06-23",
+      "active": true,
+      "title": "রমজান মাস উপলক্ষে মাদ্রাসা বন্ধের নোটিশ",
+      "body": "১ রমজান থেকে ৩০ রমজান পর্যন্ত মাদ্রাসা বন্ধ থাকবে।",
+      "type": "holiday",
+      "createdAt": "2026-06-23T15:17:48.277Z"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "IMG-001",
+      "src": "/assets/img/student-001.jpg",
+      "caption": "মাদ্রাসার ছাত্র",
+      "category": "students"
+    },
+    {
+      "id": "IMG-002",
+      "src": "/assets/img/student-002.jpg",
+      "caption": "ক্লাসরুম কার্যক্রম",
+      "category": "classroom"
+    },
+    {
+      "id": "IMG-003",
+      "src": "/assets/img/student-003.jpg",
+      "caption": "ছাত্রদের দলীয় ছবি",
+      "category": "events"
+    }
+  ],
+  "downloads": [
+    {
+      "id": "DL-001",
+      "title": "ভর্তি ফরম",
+      "filename": "admission_form.pdf",
+      "category": "forms",
+      "size": "120KB"
+    },
+    {
+      "id": "DL-002",
+      "title": "পরীক্ষার সময়সূচী",
+      "filename": "exam_schedule.pdf",
+      "category": "schedule",
+      "size": "85KB"
+    },
+    {
+      "id": "DL-003",
+      "title": "মাদ্রাসা প্রসপেক্টাস",
+      "filename": "prospectus.pdf",
+      "category": "general",
+      "size": "2MB"
+    }
+  ],
+  "financeTransactions": [
+    {
+      "id": "TX-001",
+      "type": "fee",
+      "category": "monthly",
+      "title": "মাসিক ফি",
+      "amount": 800,
+      "studentId": "S-001",
+      "studentName": "মুহাম্মদ আব্দুল্লাহ",
+      "className": "হিফজ বিভাগ",
+      "date": "2026-01-15",
+      "month": "জানুয়ারি ২০২৬",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "receiptId": "RCP-001"
+    },
+    {
+      "id": "TX-002",
+      "type": "fee",
+      "category": "monthly",
+      "title": "মাসিক ফি",
+      "amount": 600,
+      "studentId": "S-002",
+      "studentName": "মুহাম্মদ ইব্রাহিম",
+      "className": "নূরানী বিভাগ",
+      "date": "2026-01-20",
+      "month": "জানুয়ারি ২০২৬",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "receiptId": "RCP-002"
+    },
+    {
+      "id": "TX-003",
+      "type": "donation",
+      "category": "general",
+      "title": "সাধারণ দান",
+      "amount": 5000,
+      "donorName": "একজন দানশীল ব্যক্তি",
+      "date": "2026-02-01",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "receiptId": "RCP-003"
+    },
+    {
+      "id": "TX-004",
+      "type": "expense",
+      "category": "maintenance",
+      "title": "বিদ্যুৎ বিল",
+      "amount": 2500,
+      "date": "2026-02-05",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "note": "ফেব্রুয়ারি মাসের বিল"
+    },
+    {
+      "id": "TX-1955bee3",
+      "type": "fee",
+      "category": "monthly",
+      "title": "মাসিক ফি",
+      "amount": 300,
+      "studentId": "S-002",
+      "studentName": "মুহাম্মদ ইব্রাহিম",
+      "className": "নূরানী বিভাগ",
+      "date": "2026-06-22",
+      "month": "June 2026",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "receiptId": "RCP-0180e116",
+      "createdAt": "2026-06-22T16:10:08.796Z"
+    },
+    {
+      "id": "TX-57cb8708",
+      "type": "donation",
+      "category": "general",
+      "title": "Test",
+      "amount": 1000,
+      "donorName": "Test Donor",
+      "date": "2026-06-22",
+      "status": "voided",
+      "recordedBy": "admin",
+      "receiptId": "RCP-534a8a78",
+      "createdAt": "2026-06-22T16:10:08.862Z",
+      "voidedAt": "2026-06-22T16:10:28.799Z",
+      "voidReason": "Test void"
+    },
+    {
+      "id": "TX-ba492746",
+      "type": "expense",
+      "category": "maintenance",
+      "title": "Test Expense",
+      "amount": 500,
+      "date": "2026-06-22",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "note": "",
+      "createdAt": "2026-06-22T16:10:08.872Z"
+    },
+    {
+      "id": "TX-fa34a367",
+      "type": "fee",
+      "category": "monthly",
+      "title": "মাসিক ফি - জুন ২০২৬",
+      "amount": 200,
+      "studentId": "S-003",
+      "studentName": "হাফেজ আহমদ",
+      "className": "কিতাব বিভাগ",
+      "date": "2026-06-23",
+      "month": "জুন ২০২৬",
+      "status": "voided",
+      "recordedBy": "admin",
+      "receiptId": "RCP-d3d50d93",
+      "createdAt": "2026-06-23T15:00:01.550Z",
+      "voidedAt": "2026-06-23T15:00:01.614Z",
+      "voidReason": "ভুল এন্ট্রি সংশোধন"
+    },
+    {
+      "id": "TX-245ad310",
+      "type": "donation",
+      "category": "general",
+      "title": "মসজিদ সংস্কার দান",
+      "amount": 1500,
+      "donorName": "হাজী মো. আলী",
+      "date": "2026-06-23",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "receiptId": "RCP-8791611d",
+      "createdAt": "2026-06-23T15:00:01.572Z"
+    },
+    {
+      "id": "TX-6f21831d",
+      "type": "expense",
+      "category": "stationery",
+      "title": "চক ও ডাস্টার ক্রয়",
+      "amount": 300,
+      "date": "2026-06-23",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "note": "টিচার রুমের জন্য",
+      "createdAt": "2026-06-23T15:00:01.588Z"
+    },
+    {
+      "id": "TX-9b29f90d",
+      "type": "fee",
+      "category": "monthly",
+      "title": "মাসিক ফি - জুন ২০২৬",
+      "amount": 200,
+      "studentId": "S-003",
+      "studentName": "হাফেজ আহমদ",
+      "className": "কিতাব বিভাগ",
+      "date": "2026-06-23",
+      "month": "জুন ২০২৬",
+      "status": "voided",
+      "recordedBy": "admin",
+      "receiptId": "RCP-28f0c20e",
+      "createdAt": "2026-06-23T15:00:38.105Z",
+      "voidedAt": "2026-06-23T15:00:38.214Z",
+      "voidReason": "ভুল এন্ট্রি সংশোধন"
+    },
+    {
+      "id": "TX-dcc7d440",
+      "type": "donation",
+      "category": "general",
+      "title": "মসজিদ সংস্কার দান",
+      "amount": 1500,
+      "donorName": "হাজী মো. আলী",
+      "date": "2026-06-23",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "receiptId": "RCP-2b68366b",
+      "createdAt": "2026-06-23T15:00:38.134Z"
+    },
+    {
+      "id": "TX-06c65cd1",
+      "type": "expense",
+      "category": "stationery",
+      "title": "চক ও ডাস্টার ক্রয়",
+      "amount": 300,
+      "date": "2026-06-23",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "note": "টিচার রুমের জন্য",
+      "createdAt": "2026-06-23T15:00:38.158Z"
+    },
+    {
+      "id": "TX-b4000978",
+      "type": "fee",
+      "category": "monthly",
+      "title": "মাসিক ফি - জুন ২০২৬",
+      "amount": 200,
+      "studentId": "S-003",
+      "studentName": "হাফেজ আহমদ",
+      "className": "কিতাব বিভাগ",
+      "date": "2026-06-23",
+      "month": "জুন ২০২৬",
+      "status": "voided",
+      "recordedBy": "admin",
+      "receiptId": "RCP-21e02521",
+      "createdAt": "2026-06-23T15:06:04.976Z",
+      "voidedAt": "2026-06-23T15:06:05.047Z",
+      "voidReason": "ভুল এন্ট্রি সংশোধন"
+    },
+    {
+      "id": "TX-c2616d0a",
+      "type": "donation",
+      "category": "general",
+      "title": "মসজিদ সংস্কার দান",
+      "amount": 1500,
+      "donorName": "হাজী মো. আলী",
+      "date": "2026-06-23",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "receiptId": "RCP-4c0e52d5",
+      "createdAt": "2026-06-23T15:06:04.995Z"
+    },
+    {
+      "id": "TX-983f1fb2",
+      "type": "expense",
+      "category": "stationery",
+      "title": "চক ও ডাস্টার ক্রয়",
+      "amount": 300,
+      "date": "2026-06-23",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "note": "টিচার রুমের জন্য",
+      "createdAt": "2026-06-23T15:06:05.011Z"
+    },
+    {
+      "id": "TX-2442c33d",
+      "type": "fee",
+      "category": "monthly",
+      "title": "মাসিক ফি - জুন ২০২৬",
+      "amount": 200,
+      "studentId": "S-003",
+      "studentName": "হাফেজ আহমদ",
+      "className": "কিতাব বিভাগ",
+      "date": "2026-06-23",
+      "month": "জুন ২০২৬",
+      "status": "voided",
+      "recordedBy": "admin",
+      "receiptId": "RCP-f0bbefaa",
+      "createdAt": "2026-06-23T15:15:27.312Z",
+      "voidedAt": "2026-06-23T15:15:27.386Z",
+      "voidReason": "ভুল এন্ট্রি সংশোধন"
+    },
+    {
+      "id": "TX-31c8870a",
+      "type": "donation",
+      "category": "general",
+      "title": "মসজিদ সংস্কার দান",
+      "amount": 1500,
+      "donorName": "হাজী মো. আলী",
+      "date": "2026-06-23",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "receiptId": "RCP-1e320d56",
+      "createdAt": "2026-06-23T15:15:27.328Z"
+    },
+    {
+      "id": "TX-0f485c0f",
+      "type": "expense",
+      "category": "stationery",
+      "title": "চক ও ডাস্টার ক্রয়",
+      "amount": 300,
+      "date": "2026-06-23",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "note": "টিচার রুমের জন্য",
+      "createdAt": "2026-06-23T15:15:27.345Z"
+    },
+    {
+      "id": "TX-52b410eb",
+      "type": "fee",
+      "category": "monthly",
+      "title": "মাসিক ফি - জুন ২০২৬",
+      "amount": 200,
+      "studentId": "S-003",
+      "studentName": "হাফেজ আহমদ",
+      "className": "কিতাব বিভাগ",
+      "date": "2026-06-23",
+      "month": "জুন ২০২৬",
+      "status": "voided",
+      "recordedBy": "admin",
+      "receiptId": "RCP-150fd670",
+      "createdAt": "2026-06-23T15:17:47.856Z",
+      "voidedAt": "2026-06-23T15:17:47.929Z",
+      "voidReason": "ভুল এন্ট্রি সংশোধন"
+    },
+    {
+      "id": "TX-46bfc226",
+      "type": "donation",
+      "category": "general",
+      "title": "মসজিদ সংস্কার দান",
+      "amount": 1500,
+      "donorName": "হাজী মো. আলী",
+      "date": "2026-06-23",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "receiptId": "RCP-794ac1f3",
+      "createdAt": "2026-06-23T15:17:47.873Z"
+    },
+    {
+      "id": "TX-487fd675",
+      "type": "expense",
+      "category": "stationery",
+      "title": "চক ও ডাস্টার ক্রয়",
+      "amount": 300,
+      "date": "2026-06-23",
+      "status": "offline-confirmed",
+      "recordedBy": "admin",
+      "note": "টিচার রুমের জন্য",
+      "createdAt": "2026-06-23T15:17:47.889Z"
+    }
+  ],
+  "receipts": [
+    {
+      "id": "RCP-001",
+      "transactionId": "TX-001",
+      "studentId": "S-001",
+      "studentName": "মুহাম্মদ আব্দুল্লাহ",
+      "amount": 800,
+      "type": "fee",
+      "title": "মাসিক ফি - জানুয়ারি ২০২৬",
+      "date": "2026-01-15",
+      "printCount": 5,
+      "updatedAt": "2026-06-23T14:54:55.997Z"
+    },
+    {
+      "id": "RCP-002",
+      "transactionId": "TX-002",
+      "studentId": "S-002",
+      "studentName": "মুহাম্মদ ইব্রাহিম",
+      "amount": 600,
+      "type": "fee",
+      "title": "মাসিক ফি - জানুয়ারি ২০২৬",
+      "date": "2026-01-20",
+      "printCount": 1
+    },
+    {
+      "id": "RCP-003",
+      "transactionId": "TX-003",
+      "donorName": "একজন দানশীল ব্যক্তি",
+      "amount": 5000,
+      "type": "donation",
+      "title": "সাধারণ দান",
+      "date": "2026-02-01",
+      "printCount": 0
+    },
+    {
+      "id": "RCP-0180e116",
+      "transactionId": "TX-1955bee3",
+      "studentId": "S-002",
+      "studentName": "মুহাম্মদ ইব্রাহিম",
+      "amount": 300,
+      "type": "fee",
+      "title": "মাসিক ফি - June 2026",
+      "date": "2026-06-22",
+      "printCount": 0,
+      "createdAt": "2026-06-22T16:10:08.797Z"
+    },
+    {
+      "id": "RCP-534a8a78",
+      "transactionId": "TX-57cb8708",
+      "donorName": "Test Donor",
+      "amount": 1000,
+      "type": "donation",
+      "title": "Test",
+      "date": "2026-06-22",
+      "printCount": 0,
+      "createdAt": "2026-06-22T16:10:08.863Z"
+    },
+    {
+      "id": "RCP-d3d50d93",
+      "transactionId": "TX-fa34a367",
+      "studentId": "S-003",
+      "studentName": "হাফেজ আহমদ",
+      "amount": 200,
+      "type": "fee",
+      "title": "মাসিক ফি - জুন ২০২৬",
+      "date": "2026-06-23",
+      "printCount": 0,
+      "createdAt": "2026-06-23T15:00:01.552Z"
+    },
+    {
+      "id": "RCP-8791611d",
+      "transactionId": "TX-245ad310",
+      "donorName": "হাজী মো. আলী",
+      "amount": 1500,
+      "type": "donation",
+      "title": "মসজিদ সংস্কার দান",
+      "date": "2026-06-23",
+      "printCount": 3,
+      "createdAt": "2026-06-23T15:00:01.576Z",
+      "updatedAt": "2026-06-23T15:00:01.609Z"
+    },
+    {
+      "id": "RCP-28f0c20e",
+      "transactionId": "TX-9b29f90d",
+      "studentId": "S-003",
+      "studentName": "হাফেজ আহমদ",
+      "amount": 200,
+      "type": "fee",
+      "title": "মাসিক ফি - জুন ২০২৬",
+      "date": "2026-06-23",
+      "printCount": 0,
+      "createdAt": "2026-06-23T15:00:38.109Z"
+    },
+    {
+      "id": "RCP-2b68366b",
+      "transactionId": "TX-dcc7d440",
+      "donorName": "হাজী মো. আলী",
+      "amount": 1500,
+      "type": "donation",
+      "title": "মসজিদ সংস্কার দান",
+      "date": "2026-06-23",
+      "printCount": 2,
+      "createdAt": "2026-06-23T15:00:38.138Z",
+      "updatedAt": "2026-06-23T15:00:38.207Z"
+    },
+    {
+      "id": "RCP-21e02521",
+      "transactionId": "TX-b4000978",
+      "studentId": "S-003",
+      "studentName": "হাফেজ আহমদ",
+      "amount": 200,
+      "type": "fee",
+      "title": "মাসিক ফি - জুন ২০২৬",
+      "date": "2026-06-23",
+      "printCount": 0,
+      "createdAt": "2026-06-23T15:06:04.979Z"
+    },
+    {
+      "id": "RCP-4c0e52d5",
+      "transactionId": "TX-c2616d0a",
+      "donorName": "হাজী মো. আলী",
+      "amount": 1500,
+      "type": "donation",
+      "title": "মসজিদ সংস্কার দান",
+      "date": "2026-06-23",
+      "printCount": 2,
+      "createdAt": "2026-06-23T15:06:04.997Z",
+      "updatedAt": "2026-06-23T15:06:05.039Z"
+    },
+    {
+      "id": "RCP-f0bbefaa",
+      "transactionId": "TX-2442c33d",
+      "studentId": "S-003",
+      "studentName": "হাফেজ আহমদ",
+      "amount": 200,
+      "type": "fee",
+      "title": "মাসিক ফি - জুন ২০২৬",
+      "date": "2026-06-23",
+      "printCount": 0,
+      "createdAt": "2026-06-23T15:15:27.316Z"
+    },
+    {
+      "id": "RCP-1e320d56",
+      "transactionId": "TX-31c8870a",
+      "donorName": "হাজী মো. আলী",
+      "amount": 1500,
+      "type": "donation",
+      "title": "মসজিদ সংস্কার দান",
+      "date": "2026-06-23",
+      "printCount": 2,
+      "createdAt": "2026-06-23T15:15:27.332Z",
+      "updatedAt": "2026-06-23T15:15:27.376Z"
+    },
+    {
+      "id": "RCP-150fd670",
+      "transactionId": "TX-52b410eb",
+      "studentId": "S-003",
+      "studentName": "হাফেজ আহমদ",
+      "amount": 200,
+      "type": "fee",
+      "title": "মাসিক ফি - জুন ২০২৬",
+      "date": "2026-06-23",
+      "printCount": 0,
+      "createdAt": "2026-06-23T15:17:47.859Z"
+    },
+    {
+      "id": "RCP-794ac1f3",
+      "transactionId": "TX-46bfc226",
+      "donorName": "হাজী মো. আলী",
+      "amount": 1500,
+      "type": "donation",
+      "title": "মসজিদ সংস্কার দান",
+      "date": "2026-06-23",
+      "printCount": 2,
+      "createdAt": "2026-06-23T15:17:47.876Z",
+      "updatedAt": "2026-06-23T15:17:47.921Z"
+    }
+  ],
+  "donations": [
+    {
+      "id": "DON-001",
+      "transactionId": "TX-003",
+      "donorName": "একজন দানশীল ব্যক্তি",
+      "amount": 5000,
+      "purpose": "সাধারণ দান",
+      "date": "2026-02-01",
+      "status": "offline-confirmed"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "EXP-001",
+      "transactionId": "TX-004",
+      "title": "বিদ্যুৎ বিল",
+      "category": "maintenance",
+      "amount": 2500,
+      "date": "2026-02-05",
+      "status": "offline-confirmed",
+      "approvedBy": "admin"
+    }
+  ],
+  "settings": {
+    "institutionNameBn": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা",
+    "institutionNameEn": "Eliotganj Hazi Rohmatollah Jamiria Madrasha",
+    "institutionNameAr": "مدرسة إليوتغانج حاجي رحمة الله زميرية",
+    "principal": "মাওলানা মহা. আবুল কালাম সরকার",
+    "established": "2021",
+    "address": "Eliotganj, Daudkandi, Comilla, Bangladesh (Updated)",
+    "phones": [
+      "01845-162664",
+      "01826-416696",
+      "01949-091911"
+    ],
+    "whatsappNumber": "8801845162664",
+    "whatsappDefaultMsg": "আমি মাদ্রাসার ওয়েবসাইট থেকে সহায়তা চাই",
+    "whatsappChannel": "https://whatsapp.com/channel/0029VbC30aF6buMF0LGPMp3F",
+    "facebook": "https://www.facebook.com/ehrjmadrasda",
+    "youtube": "https://www.youtube.com/@ehrjmadrasha",
+    "currentSession": "SES-001"
+  },
+  "activityLog": [
+    {
+      "id": "ACT-001",
+      "action": "System initialized",
+      "details": "ERP system started",
+      "user": "system",
+      "timestamp": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "ACT-002",
+      "action": "Fee collected",
+      "details": "TX-001: মুহাম্মদ আব্দুল্লাহ - ৮০০ টাকা",
+      "user": "admin",
+      "timestamp": "2026-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "ACT-1782144551512",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-22T16:09:11.512Z",
+      "createdAt": "2026-06-22T16:09:11.514Z"
+    },
+    {
+      "id": "ACT-1782144580919",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-22T16:09:40.919Z",
+      "createdAt": "2026-06-22T16:09:40.919Z"
+    },
+    {
+      "id": "ACT-1782144608694",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-22T16:10:08.695Z",
+      "createdAt": "2026-06-22T16:10:08.695Z"
+    },
+    {
+      "id": "ACT-1782144608798",
+      "action": "Fee collected",
+      "details": "মুহাম্মদ ইব্রাহিম - 300 টাকা (TX-1955bee3)",
+      "user": "admin",
+      "timestamp": "2026-06-22T16:10:08.798Z",
+      "createdAt": "2026-06-22T16:10:08.798Z"
+    },
+    {
+      "id": "ACT-1782144608864",
+      "action": "Donation recorded",
+      "details": "Test Donor - 1000 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-22T16:10:08.864Z",
+      "createdAt": "2026-06-22T16:10:08.864Z"
+    },
+    {
+      "id": "ACT-1782144608873",
+      "action": "Expense recorded",
+      "details": "Test Expense - 500 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-22T16:10:08.873Z",
+      "createdAt": "2026-06-22T16:10:08.873Z"
+    },
+    {
+      "id": "ACT-1782144628690",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-22T16:10:28.690Z",
+      "createdAt": "2026-06-22T16:10:28.690Z"
+    },
+    {
+      "id": "ACT-1782144628759",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-22T16:10:28.759Z",
+      "createdAt": "2026-06-22T16:10:28.759Z"
+    },
+    {
+      "id": "ACT-1782144628800",
+      "action": "Transaction voided",
+      "details": "TX-57cb8708 — Test void",
+      "user": "admin",
+      "timestamp": "2026-06-22T16:10:28.800Z",
+      "createdAt": "2026-06-22T16:10:28.801Z"
+    },
+    {
+      "id": "ACT-1782144769248",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-22T16:12:49.248Z",
+      "createdAt": "2026-06-22T16:12:49.254Z"
+    },
+    {
+      "id": "ACT-1782145728029",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-22T16:28:48.049Z",
+      "createdAt": "2026-06-22T16:28:48.111Z"
+    },
+    {
+      "id": "ACT-1782145754729",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-22T16:29:14.729Z",
+      "createdAt": "2026-06-22T16:29:14.733Z"
+    },
+    {
+      "id": "ACT-1782145787949",
+      "action": "Login",
+      "details": "teacher login",
+      "user": "teacher",
+      "timestamp": "2026-06-22T16:29:47.949Z",
+      "createdAt": "2026-06-22T16:29:47.950Z"
+    },
+    {
+      "id": "ACT-1782145853852",
+      "action": "Login",
+      "details": "teacher login",
+      "user": "teacher",
+      "timestamp": "2026-06-22T16:30:53.852Z",
+      "createdAt": "2026-06-22T16:30:53.854Z"
+    },
+    {
+      "id": "ACT-1782148847936",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-22T17:20:47.936Z",
+      "createdAt": "2026-06-22T17:20:47.937Z"
+    },
+    {
+      "id": "ACT-1782148847952",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-22T17:20:47.952Z",
+      "createdAt": "2026-06-22T17:20:47.952Z"
+    },
+    {
+      "id": "ACT-1782149265605",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-22T17:27:45.606Z",
+      "createdAt": "2026-06-22T17:27:45.606Z"
+    },
+    {
+      "id": "ACT-1782149265622",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-22T17:27:45.622Z",
+      "createdAt": "2026-06-22T17:27:45.623Z"
+    },
+    {
+      "id": "ACT-1782226467237",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T14:54:27.238Z",
+      "createdAt": "2026-06-23T14:54:27.239Z"
+    },
+    {
+      "id": "ACT-1782226467266",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T14:54:27.266Z",
+      "createdAt": "2026-06-23T14:54:27.267Z"
+    },
+    {
+      "id": "ACT-1782226495939",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T14:54:55.939Z",
+      "createdAt": "2026-06-23T14:54:55.941Z"
+    },
+    {
+      "id": "ACT-1782226495963",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T14:54:55.963Z",
+      "createdAt": "2026-06-23T14:54:55.964Z"
+    },
+    {
+      "id": "ACT-1782226782932",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T14:59:42.934Z",
+      "createdAt": "2026-06-23T14:59:42.937Z"
+    },
+    {
+      "id": "ACT-1782226782961",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T14:59:42.961Z",
+      "createdAt": "2026-06-23T14:59:42.962Z"
+    },
+    {
+      "id": "ACT-1782226801499",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:00:01.499Z",
+      "createdAt": "2026-06-23T15:00:01.500Z"
+    },
+    {
+      "id": "ACT-1782226801517",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:00:01.517Z",
+      "createdAt": "2026-06-23T15:00:01.518Z"
+    },
+    {
+      "id": "ACT-1782226801563",
+      "action": "Fee collected",
+      "details": "হাফেজ আহমদ - 200 টাকা (TX-fa34a367)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:00:01.563Z",
+      "createdAt": "2026-06-23T15:00:01.564Z"
+    },
+    {
+      "id": "ACT-1782226801577",
+      "action": "Donation recorded",
+      "details": "হাজী মো. আলী - 1500 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:00:01.577Z",
+      "createdAt": "2026-06-23T15:00:01.579Z"
+    },
+    {
+      "id": "ACT-1782226801589",
+      "action": "Expense recorded",
+      "details": "চক ও ডাস্টার ক্রয় - 300 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:00:01.589Z",
+      "createdAt": "2026-06-23T15:00:01.590Z"
+    },
+    {
+      "id": "ACT-1782226801615",
+      "action": "Transaction voided",
+      "details": "TX-fa34a367 — ভুল এন্ট্রি সংশোধন",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:00:01.615Z",
+      "createdAt": "2026-06-23T15:00:01.616Z"
+    },
+    {
+      "id": "ACT-1782226837540",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:00:37.592Z",
+      "createdAt": "2026-06-23T15:00:37.598Z"
+    },
+    {
+      "id": "ACT-1782226838016",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:00:38.016Z",
+      "createdAt": "2026-06-23T15:00:38.018Z"
+    },
+    {
+      "id": "ACT-1782226838116",
+      "action": "Fee collected",
+      "details": "হাফেজ আহমদ - 200 টাকা (TX-9b29f90d)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:00:38.116Z",
+      "createdAt": "2026-06-23T15:00:38.118Z"
+    },
+    {
+      "id": "ACT-1782226838140",
+      "action": "Donation recorded",
+      "details": "হাজী মো. আলী - 1500 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:00:38.140Z",
+      "createdAt": "2026-06-23T15:00:38.142Z"
+    },
+    {
+      "id": "ACT-1782226838161",
+      "action": "Expense recorded",
+      "details": "চক ও ডাস্টার ক্রয় - 300 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:00:38.161Z",
+      "createdAt": "2026-06-23T15:00:38.164Z"
+    },
+    {
+      "id": "ACT-1782226838216",
+      "action": "Transaction voided",
+      "details": "TX-9b29f90d — ভুল এন্ট্রি সংশোধন",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:00:38.216Z",
+      "createdAt": "2026-06-23T15:00:38.217Z"
+    },
+    {
+      "id": "ACT-1782226865970",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:01:05.970Z",
+      "createdAt": "2026-06-23T15:01:05.971Z"
+    },
+    {
+      "id": "ACT-1782226865986",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:01:05.986Z",
+      "createdAt": "2026-06-23T15:01:05.986Z"
+    },
+    {
+      "id": "ACT-1782226865994",
+      "action": "Student added",
+      "details": "আব্দুর রহমান (S-612ead60)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:01:05.994Z",
+      "createdAt": "2026-06-23T15:01:05.994Z"
+    },
+    {
+      "id": "ACT-1782226866003",
+      "action": "Student updated",
+      "details": "আব্দুর রহমান (পরিবর্তিত) (S-612ead60)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:01:06.003Z",
+      "createdAt": "2026-06-23T15:01:06.004Z"
+    },
+    {
+      "id": "ACT-1782226866021",
+      "action": "Teacher added",
+      "details": "মাওলানা মো. ইউনুস (T-a0bdc5df)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:01:06.021Z",
+      "createdAt": "2026-06-23T15:01:06.022Z"
+    },
+    {
+      "id": "ACT-1782226866030",
+      "action": "Notice added",
+      "details": "রমজান মাস উপলক্ষে মাদ্রাসা বন্ধের নোটিশ",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:01:06.030Z",
+      "createdAt": "2026-06-23T15:01:06.032Z"
+    },
+    {
+      "id": "ACT-1782226866040",
+      "action": "Settings updated",
+      "details": "[\"established\",\"address\"]",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:01:06.041Z",
+      "createdAt": "2026-06-23T15:01:06.041Z"
+    },
+    {
+      "id": "ACT-1782226866052",
+      "action": "Backup created",
+      "details": "Manual backup",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:01:06.052Z",
+      "createdAt": "2026-06-23T15:01:06.053Z"
+    },
+    {
+      "id": "ACT-1782226882351",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:01:22.351Z",
+      "createdAt": "2026-06-23T15:01:22.352Z"
+    },
+    {
+      "id": "ACT-1782226902560",
+      "action": "Login",
+      "details": "teacher login",
+      "user": "teacher",
+      "timestamp": "2026-06-23T15:01:42.561Z",
+      "createdAt": "2026-06-23T15:01:42.561Z"
+    },
+    {
+      "id": "ACT-1782226938872",
+      "action": "Login",
+      "details": "teacher login",
+      "user": "teacher",
+      "timestamp": "2026-06-23T15:02:18.873Z",
+      "createdAt": "2026-06-23T15:02:18.876Z"
+    },
+    {
+      "id": "ACT-1782227164574",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:04.575Z",
+      "createdAt": "2026-06-23T15:06:04.576Z"
+    },
+    {
+      "id": "ACT-1782227164603",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:06:04.603Z",
+      "createdAt": "2026-06-23T15:06:04.605Z"
+    },
+    {
+      "id": "ACT-1782227164930",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:04.930Z",
+      "createdAt": "2026-06-23T15:06:04.932Z"
+    },
+    {
+      "id": "ACT-1782227164950",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:06:04.950Z",
+      "createdAt": "2026-06-23T15:06:04.952Z"
+    },
+    {
+      "id": "ACT-1782227164984",
+      "action": "Fee collected",
+      "details": "হাফেজ আহমদ - 200 টাকা (TX-b4000978)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:04.984Z",
+      "createdAt": "2026-06-23T15:06:04.985Z"
+    },
+    {
+      "id": "ACT-1782227164998",
+      "action": "Donation recorded",
+      "details": "হাজী মো. আলী - 1500 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:04.998Z",
+      "createdAt": "2026-06-23T15:06:04.999Z"
+    },
+    {
+      "id": "ACT-1782227165013",
+      "action": "Expense recorded",
+      "details": "চক ও ডাস্টার ক্রয় - 300 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:05.013Z",
+      "createdAt": "2026-06-23T15:06:05.014Z"
+    },
+    {
+      "id": "ACT-1782227165048",
+      "action": "Transaction voided",
+      "details": "TX-b4000978 — ভুল এন্ট্রি সংশোধন",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:05.048Z",
+      "createdAt": "2026-06-23T15:06:05.049Z"
+    },
+    {
+      "id": "ACT-1782227165339",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:05.339Z",
+      "createdAt": "2026-06-23T15:06:05.340Z"
+    },
+    {
+      "id": "ACT-1782227165357",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:06:05.357Z",
+      "createdAt": "2026-06-23T15:06:05.359Z"
+    },
+    {
+      "id": "ACT-1782227165384",
+      "action": "Student added",
+      "details": "আব্দুর রহমান (S-b0a4e0b6)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:05.384Z",
+      "createdAt": "2026-06-23T15:06:05.385Z"
+    },
+    {
+      "id": "ACT-1782227165394",
+      "action": "Student updated",
+      "details": "আব্দুর রহমান (পরিবর্তিত) (S-b0a4e0b6)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:05.394Z",
+      "createdAt": "2026-06-23T15:06:05.395Z"
+    },
+    {
+      "id": "ACT-1782227165414",
+      "action": "Teacher added",
+      "details": "মাওলানা মো. ইউনুস (T-9228a7a6)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:05.414Z",
+      "createdAt": "2026-06-23T15:06:05.415Z"
+    },
+    {
+      "id": "ACT-1782227165423",
+      "action": "Notice added",
+      "details": "রমজান মাস উপলক্ষে মাদ্রাসা বন্ধের নোটিশ",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:05.424Z",
+      "createdAt": "2026-06-23T15:06:05.425Z"
+    },
+    {
+      "id": "ACT-1782227165432",
+      "action": "Settings updated",
+      "details": "[\"established\",\"address\"]",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:05.432Z",
+      "createdAt": "2026-06-23T15:06:05.433Z"
+    },
+    {
+      "id": "ACT-1782227165445",
+      "action": "Backup created",
+      "details": "Manual backup",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:06:05.445Z",
+      "createdAt": "2026-06-23T15:06:05.445Z"
+    },
+    {
+      "id": "ACT-1782227165709",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:06:05.709Z",
+      "createdAt": "2026-06-23T15:06:05.710Z"
+    },
+    {
+      "id": "ACT-1782227166037",
+      "action": "Login",
+      "details": "teacher login",
+      "user": "teacher",
+      "timestamp": "2026-06-23T15:06:06.037Z",
+      "createdAt": "2026-06-23T15:06:06.038Z"
+    },
+    {
+      "id": "ACT-1782227726898",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:26.898Z",
+      "createdAt": "2026-06-23T15:15:26.900Z"
+    },
+    {
+      "id": "ACT-1782227726941",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:15:26.941Z",
+      "createdAt": "2026-06-23T15:15:26.943Z"
+    },
+    {
+      "id": "ACT-1782227727264",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.264Z",
+      "createdAt": "2026-06-23T15:15:27.267Z"
+    },
+    {
+      "id": "ACT-1782227727291",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:15:27.291Z",
+      "createdAt": "2026-06-23T15:15:27.292Z"
+    },
+    {
+      "id": "ACT-1782227727319",
+      "action": "Fee collected",
+      "details": "হাফেজ আহমদ - 200 টাকা (TX-2442c33d)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.319Z",
+      "createdAt": "2026-06-23T15:15:27.320Z"
+    },
+    {
+      "id": "ACT-1782227727334",
+      "action": "Donation recorded",
+      "details": "হাজী মো. আলী - 1500 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.334Z",
+      "createdAt": "2026-06-23T15:15:27.335Z"
+    },
+    {
+      "id": "ACT-1782227727346",
+      "action": "Expense recorded",
+      "details": "চক ও ডাস্টার ক্রয় - 300 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.346Z",
+      "createdAt": "2026-06-23T15:15:27.348Z"
+    },
+    {
+      "id": "ACT-1782227727387",
+      "action": "Transaction voided",
+      "details": "TX-2442c33d — ভুল এন্ট্রি সংশোধন",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.387Z",
+      "createdAt": "2026-06-23T15:15:27.388Z"
+    },
+    {
+      "id": "ACT-1782227727669",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.669Z",
+      "createdAt": "2026-06-23T15:15:27.670Z"
+    },
+    {
+      "id": "ACT-1782227727683",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:15:27.683Z",
+      "createdAt": "2026-06-23T15:15:27.684Z"
+    },
+    {
+      "id": "ACT-1782227727693",
+      "action": "Student added",
+      "details": "আব্দুর রহমান (S-462f48f2)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.693Z",
+      "createdAt": "2026-06-23T15:15:27.694Z"
+    },
+    {
+      "id": "ACT-1782227727703",
+      "action": "Student updated",
+      "details": "আব্দুর রহমান (পরিবর্তিত) (S-462f48f2)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.703Z",
+      "createdAt": "2026-06-23T15:15:27.704Z"
+    },
+    {
+      "id": "ACT-1782227727722",
+      "action": "Teacher added",
+      "details": "মাওলানা মো. ইউনুস (T-913b4455)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.722Z",
+      "createdAt": "2026-06-23T15:15:27.723Z"
+    },
+    {
+      "id": "ACT-1782227727736",
+      "action": "Notice added",
+      "details": "রমজান মাস উপলক্ষে মাদ্রাসা বন্ধের নোটিশ",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.736Z",
+      "createdAt": "2026-06-23T15:15:27.737Z"
+    },
+    {
+      "id": "ACT-1782227727749",
+      "action": "Settings updated",
+      "details": "[\"established\",\"address\"]",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.749Z",
+      "createdAt": "2026-06-23T15:15:27.750Z"
+    },
+    {
+      "id": "ACT-1782227727764",
+      "action": "Backup created",
+      "details": "Manual backup",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:15:27.764Z",
+      "createdAt": "2026-06-23T15:15:27.765Z"
+    },
+    {
+      "id": "ACT-1782227728041",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:15:28.041Z",
+      "createdAt": "2026-06-23T15:15:28.043Z"
+    },
+    {
+      "id": "ACT-1782227728386",
+      "action": "Login",
+      "details": "teacher login",
+      "user": "teacher",
+      "timestamp": "2026-06-23T15:15:28.386Z",
+      "createdAt": "2026-06-23T15:15:28.387Z"
+    },
+    {
+      "id": "ACT-1782227867518",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:47.518Z",
+      "createdAt": "2026-06-23T15:17:47.520Z"
+    },
+    {
+      "id": "ACT-1782227867532",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:17:47.532Z",
+      "createdAt": "2026-06-23T15:17:47.533Z"
+    },
+    {
+      "id": "ACT-1782227867820",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:47.820Z",
+      "createdAt": "2026-06-23T15:17:47.822Z"
+    },
+    {
+      "id": "ACT-1782227867839",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:17:47.839Z",
+      "createdAt": "2026-06-23T15:17:47.840Z"
+    },
+    {
+      "id": "ACT-1782227867863",
+      "action": "Fee collected",
+      "details": "হাফেজ আহমদ - 200 টাকা (TX-52b410eb)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:47.863Z",
+      "createdAt": "2026-06-23T15:17:47.864Z"
+    },
+    {
+      "id": "ACT-1782227867878",
+      "action": "Donation recorded",
+      "details": "হাজী মো. আলী - 1500 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:47.878Z",
+      "createdAt": "2026-06-23T15:17:47.879Z"
+    },
+    {
+      "id": "ACT-1782227867891",
+      "action": "Expense recorded",
+      "details": "চক ও ডাস্টার ক্রয় - 300 টাকা",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:47.891Z",
+      "createdAt": "2026-06-23T15:17:47.892Z"
+    },
+    {
+      "id": "ACT-1782227867931",
+      "action": "Transaction voided",
+      "details": "TX-52b410eb — ভুল এন্ট্রি সংশোধন",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:47.931Z",
+      "createdAt": "2026-06-23T15:17:47.932Z"
+    },
+    {
+      "id": "ACT-1782227868211",
+      "action": "Login",
+      "details": "admin login",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:48.211Z",
+      "createdAt": "2026-06-23T15:17:48.212Z"
+    },
+    {
+      "id": "ACT-1782227868226",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:17:48.226Z",
+      "createdAt": "2026-06-23T15:17:48.227Z"
+    },
+    {
+      "id": "ACT-1782227868236",
+      "action": "Student added",
+      "details": "আব্দুর রহমান (S-4773c35c)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:48.236Z",
+      "createdAt": "2026-06-23T15:17:48.238Z"
+    },
+    {
+      "id": "ACT-1782227868249",
+      "action": "Student updated",
+      "details": "আব্দুর রহমান (পরিবর্তিত) (S-4773c35c)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:48.249Z",
+      "createdAt": "2026-06-23T15:17:48.250Z"
+    },
+    {
+      "id": "ACT-1782227868266",
+      "action": "Teacher added",
+      "details": "মাওলানা মো. ইউনুস (T-263cfc35)",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:48.266Z",
+      "createdAt": "2026-06-23T15:17:48.268Z"
+    },
+    {
+      "id": "ACT-1782227868278",
+      "action": "Notice added",
+      "details": "রমজান মাস উপলক্ষে মাদ্রাসা বন্ধের নোটিশ",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:48.278Z",
+      "createdAt": "2026-06-23T15:17:48.280Z"
+    },
+    {
+      "id": "ACT-1782227868289",
+      "action": "Settings updated",
+      "details": "[\"established\",\"address\"]",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:48.289Z",
+      "createdAt": "2026-06-23T15:17:48.290Z"
+    },
+    {
+      "id": "ACT-1782227868302",
+      "action": "Backup created",
+      "details": "Manual backup",
+      "user": "admin",
+      "timestamp": "2026-06-23T15:17:48.302Z",
+      "createdAt": "2026-06-23T15:17:48.304Z"
+    },
+    {
+      "id": "ACT-1782227868572",
+      "action": "Login",
+      "details": "student login",
+      "user": "student",
+      "timestamp": "2026-06-23T15:17:48.572Z",
+      "createdAt": "2026-06-23T15:17:48.574Z"
+    },
+    {
+      "id": "ACT-1782227868892",
+      "action": "Login",
+      "details": "teacher login",
+      "user": "teacher",
+      "timestamp": "2026-06-23T15:17:48.892Z",
+      "createdAt": "2026-06-23T15:17:48.893Z"
+    }
+  ],
+  "backupLog": [
+    {
+      "id": "BK-001",
+      "date": "2026-01-01",
+      "type": "manual",
+      "status": "success",
+      "file": "backup_20260101.json"
+    },
+    {
+      "id": "BK-5b89215c",
+      "date": "2026-06-23",
+      "type": "manual",
+      "status": "success",
+      "createdAt": "2026-06-23T15:01:06.056Z"
+    },
+    {
+      "id": "BK-a0ab9553",
+      "date": "2026-06-23",
+      "type": "manual",
+      "status": "success",
+      "createdAt": "2026-06-23T15:06:05.447Z"
+    },
+    {
+      "id": "BK-ae562709",
+      "date": "2026-06-23",
+      "type": "manual",
+      "status": "success",
+      "createdAt": "2026-06-23T15:15:27.768Z"
+    },
+    {
+      "id": "BK-917ef91f",
+      "date": "2026-06-23",
+      "type": "manual",
+      "status": "success",
+      "createdAt": "2026-06-23T15:17:48.307Z"
+    }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "passwordHash": "f0507da3e1e380f733abb7c6ad4c389b:83832ce9a8b04c222f5f164bfd326b96cd4d018fca42412bba8ecf5a8af8a082c121646ce8fec2df2ca1c3d9d366a02c120de5431f177e05311d16813d082fb7",
+      "role": "admin",
+      "userId": "admin"
+    },
+    {
+      "username": "teacher",
+      "passwordHash": "dac2ef054e29049ec7b51d5153fb892b:6501e9e39a24a68ea0a813b5c5bbfe0af51d736a947397bde33240d8790480ae5899a73ec8d632b3ba8bf053ab971a187a96b42aec853ea98fba56a82c179002",
+      "role": "teacher",
+      "userId": "T-001"
+    },
+    {
+      "username": "student",
+      "passwordHash": "a133c9be4a2d57cad35c75f82d51a568:f5c0cec1d544a902ab9ee8be0eb9e962dfc3c817fef195433b2b00afc26132d7d3c065d77557bed3a261c46955418a561b068de2a94f8cca6dc4a2bc34180d3f",
+      "role": "student",
+      "userId": "S-001"
+    }
+  ]
+}

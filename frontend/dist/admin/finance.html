@@ -1,0 +1,451 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>আর্থিক ব্যবস্থাপনা — Admin Finance</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input,.modal select,.modal textarea{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal textarea{min-height:70px;resize:vertical}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-danger{background:#DC2626;color:#fff;border:0}
+.btn-success{background:#15803D;color:#fff;border:0}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:16px 0}
+.summary-card{background:#fff;border:1px solid #D9E1DD;border-radius:14px;padding:18px;text-align:center}
+.summary-card h4{margin:0;color:#667874;font-size:13px}
+.summary-card .val{font-size:26px;font-weight:700;color:#0A3F36;margin:6px 0}
+.summary-card.income .val{color:#15803D}
+.summary-card.expense .val{color:#DC2626}
+.summary-card.due .val{color:#F59E0B}
+.status-voided{color:#DC2626;text-decoration:line-through}
+.status-confirmed{color:#15803D}
+.status-pending{color:#F59E0B}
+.loader{text-align:center;padding:40px;color:#667874}
+.empty-state{text-align:center;padding:40px;color:#667874;font-size:16px}
+.error-state{text-align:center;padding:40px;color:#DC2626;font-size:16px}
+.badge{display:inline-block;padding:3px 10px;border-radius:8px;font-size:12px;font-weight:600}
+.badge-fee{background:#e8f5e9;color:#15803D}
+.badge-donation{background:#fff3e0;color:#C79A2B}
+.badge-expense{background:#fce4ec;color:#DC2626}
+.receipt-print{display:none}
+@media print{body>*:not(.receipt-print){display:none!important}.receipt-print{display:block!important}}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانج حاجي رحمة الله زميرية</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance" style="background:#0F5C4D;color:#fff;border-radius:10px">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>💰 আর্থিক ব্যবস্থাপনা</h1>
+    <p>ফি আদায়, দান গ্রহণ, খরচ রেকর্ড, লেজার, রশিদ প্রিন্ট, Void/Reverse — সবকিছু এখান থেকে।</p>
+  </section>
+
+  <!-- Summary Cards -->
+  <div id="summaryArea"><div class="loader">📊 সারসংক্ষেপ লোড হচ্ছে...</div></div>
+
+  <!-- Action Buttons -->
+  <section class="toolbar" id="financeToolbar">
+    <button onclick="openModal('feeModal')" id="btnCollectFee">💵 ফি আদায়</button>
+    <button onclick="openModal('donationModal')" id="btnAddDonation" style="background:#C79A2B;border-color:#C79A2B">🤲 দান গ্রহণ</button>
+    <button onclick="openModal('expenseModal')" id="btnAddExpense" style="background:#DC2626;border-color:#DC2626">📤 খরচ যোগ</button>
+    <button onclick="refreshLedger()" id="btnRefreshLedger" style="background:#fff;color:#0F5C4D;border:1px solid #D9E1DD">🔄 রিফ্রেশ</button>
+    <button onclick="exportCSV()" id="btnExportCSV" style="background:#fff;color:#0F5C4D;border:1px solid #D9E1DD">📥 Export CSV</button>
+  </section>
+
+  <!-- Sub tabs -->
+  <section class="toolbar">
+    <button onclick="showTab('all')" class="tab-btn active" id="tabAll">সব লেনদেন</button>
+    <button onclick="showTab('fee')" class="tab-btn" id="tabFee">ফি</button>
+    <button onclick="showTab('donation')" class="tab-btn" id="tabDonation">দান</button>
+    <button onclick="showTab('expense')" class="tab-btn" id="tabExpense">খরচ</button>
+  </section>
+
+  <!-- Search/Filter -->
+  <section class="toolbar">
+    <input id="searchBox" placeholder="🔍 সার্চ করুন (নাম, আইডি, তারিখ...)" oninput="filterTable()">
+    <select id="statusFilter" onchange="filterTable()">
+      <option value="">সব Status</option>
+      <option value="offline-confirmed">✅ Confirmed</option>
+      <option value="pending">⏳ Pending</option>
+      <option value="voided">❌ Voided</option>
+    </select>
+  </section>
+
+  <!-- Ledger Table -->
+  <div id="ledgerArea"><div class="loader">📋 লেজার লোড হচ্ছে...</div></div>
+
+  <!-- Due Summary -->
+  <section id="dueArea" style="margin-top:20px"><div class="loader">বকেয়া তথ্য লোড হচ্ছে...</div></section>
+</main>
+
+<!-- COLLECT FEE MODAL -->
+<div class="modal-overlay" id="feeModal">
+  <div class="modal">
+    <h2>💵 ফি আদায়</h2>
+    <label>ছাত্র নির্বাচন করুন</label>
+    <select id="feeStudent"></select>
+    <label>ফি ক্যাটেগরি</label>
+    <select id="feeCategory">
+      <option value="monthly">মাসিক ফি</option>
+      <option value="admission">ভর্তি ফি</option>
+      <option value="exam">পরীক্ষার ফি</option>
+      <option value="custom">কাস্টম ফি</option>
+    </select>
+    <label>মাস/বিবরণ</label>
+    <input id="feeMonth" placeholder="যেমন: জানুয়ারি ২০২৬">
+    <label>পরিমাণ (টাকা)</label>
+    <input id="feeAmount" type="number" min="1" placeholder="টাকার পরিমাণ">
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('feeModal')">বাতিল</button>
+      <button class="btn-success" onclick="collectFee()" id="btnSubmitFee">✅ আদায় করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- DONATION MODAL -->
+<div class="modal-overlay" id="donationModal">
+  <div class="modal">
+    <h2>🤲 দান গ্রহণ</h2>
+    <label>দাতার নাম</label>
+    <input id="donorName" placeholder="দাতার নাম লিখুন">
+    <label>উদ্দেশ্য</label>
+    <input id="donPurpose" placeholder="যেমন: সাধারণ দান, মসজিদ নির্মাণ">
+    <label>পরিমাণ (টাকা)</label>
+    <input id="donAmount" type="number" min="1" placeholder="টাকার পরিমাণ">
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('donationModal')">বাতিল</button>
+      <button class="btn-success" onclick="addDonation()" id="btnSubmitDonation" style="background:#C79A2B">✅ গ্রহণ করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPENSE MODAL -->
+<div class="modal-overlay" id="expenseModal">
+  <div class="modal">
+    <h2>📤 খরচ যোগ</h2>
+    <label>খরচের শিরোনাম</label>
+    <input id="expTitle" placeholder="যেমন: বিদ্যুৎ বিল, আসবাবপত্র">
+    <label>ক্যাটেগরি</label>
+    <select id="expCategory">
+      <option value="maintenance">রক্ষণাবেক্ষণ</option>
+      <option value="salary">বেতন</option>
+      <option value="utilities">ইউটিলিটি</option>
+      <option value="supplies">সরবরাহ</option>
+      <option value="other">অন্যান্য</option>
+    </select>
+    <label>পরিমাণ (টাকা)</label>
+    <input id="expAmount" type="number" min="1" placeholder="টাকার পরিমাণ">
+    <label>নোট (ঐচ্ছিক)</label>
+    <textarea id="expNote" placeholder="অতিরিক্ত তথ্য..."></textarea>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('expenseModal')">বাতিল</button>
+      <button class="btn-danger" onclick="addExpense()" id="btnSubmitExpense">✅ খরচ যোগ করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- VOID MODAL -->
+<div class="modal-overlay" id="voidModal">
+  <div class="modal">
+    <h2>⚠️ লেনদেন Void/Reverse</h2>
+    <p>এই লেনদেনটি বাতিল করতে চান? <strong>এটি মুছে যাবে না, Void হিসেবে চিহ্নিত হবে।</strong></p>
+    <input id="voidTxnId" type="hidden">
+    <label>বাতিলের কারণ</label>
+    <textarea id="voidReason" placeholder="কেন বাতিল করছেন..."></textarea>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('voidModal')">না, রাখুন</button>
+      <button class="btn-danger" onclick="voidTransaction()" id="btnSubmitVoid">❌ Void করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- RECEIPT PRINT AREA (hidden until print) -->
+<div class="receipt-print" id="receiptPrint"></div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+const taka = n => new Intl.NumberFormat('bn-BD').format(n||0) + ' ৳';
+
+let allTxns = [];
+let allStudents = [];
+let currentTab = 'all';
+
+// --- LOAD DATA ---
+async function loadFinanceData() {
+  try {
+    const [summary, txns, students] = await Promise.all([
+      API('/api/finance/summary'),
+      API('/api/finance/transactions'),
+      API('/api/students')
+    ]);
+
+    if (summary.error || txns.error) {
+      document.getElementById('summaryArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন। <a href="/admin/login.html">Login</a></div>';
+      document.getElementById('ledgerArea').innerHTML = '';
+      return;
+    }
+
+    allTxns = Array.isArray(txns) ? txns : [];
+    allStudents = Array.isArray(students) ? students : [];
+
+    // Summary cards
+    document.getElementById('summaryArea').innerHTML = `
+      <div class="summary-grid">
+        <div class="summary-card income"><h4>মোট ফি আদায়</h4><div class="val">${taka(summary.totalFees)}</div></div>
+        <div class="summary-card income"><h4>মোট দান</h4><div class="val">${taka(summary.totalDonations)}</div></div>
+        <div class="summary-card expense"><h4>মোট খরচ</h4><div class="val">${taka(summary.totalExpenses)}</div></div>
+        <div class="summary-card"><h4>ব্যালেন্স</h4><div class="val">${taka(summary.balance)}</div></div>
+        <div class="summary-card due"><h4>মোট বকেয়া</h4><div class="val">${taka(summary.totalDue)}</div></div>
+        <div class="summary-card"><h4>মোট লেনদেন</h4><div class="val">${summary.transactionCount}</div></div>
+      </div>
+    `;
+
+    // Populate student dropdown in fee modal
+    const sel = document.getElementById('feeStudent');
+    sel.innerHTML = allStudents.map(s =>
+      `<option value="${s.id}">${s.name} — ${s.className} (বকেয়া: ${taka(s.due)})</option>`
+    ).join('');
+
+    // Due area
+    if (summary.classDue) {
+      document.getElementById('dueArea').innerHTML = `
+        <h3>📊 বিভাগ অনুযায়ী বকেয়া</h3>
+        <div class="summary-grid">
+          ${Object.entries(summary.classDue).map(([cls,due]) =>
+            `<div class="summary-card due"><h4>${cls}</h4><div class="val">${taka(due)}</div></div>`
+          ).join('')}
+        </div>
+        <h3>📋 ছাত্র অনুযায়ী বকেয়া</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>আইডি</th><th>নাম</th><th>বিভাগ</th><th>বকেয়া</th></tr></thead>
+          <tbody>${allStudents.filter(s=>s.due>0).map(s=>
+            `<tr><td>${s.id}</td><td>${s.name}</td><td>${s.className}</td><td style="color:#DC2626;font-weight:700">${taka(s.due)}</td></tr>`
+          ).join('') || '<tr><td colspan="4" style="text-align:center;color:#15803D">✅ কোনো বকেয়া নেই!</td></tr>'}</tbody>
+        </table></div>
+      `;
+    }
+
+    renderTable();
+  } catch(e) {
+    document.getElementById('summaryArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+// --- RENDER TABLE ---
+function renderTable() {
+  let rows = [...allTxns];
+
+  // Filter by tab
+  if (currentTab !== 'all') rows = rows.filter(t => t.type === currentTab);
+
+  // Filter by search
+  const q = (document.getElementById('searchBox').value || '').toLowerCase();
+  if (q) rows = rows.filter(t => JSON.stringify(t).toLowerCase().includes(q));
+
+  // Filter by status
+  const sf = document.getElementById('statusFilter').value;
+  if (sf) rows = rows.filter(t => t.status === sf);
+
+  if (rows.length === 0) {
+    document.getElementById('ledgerArea').innerHTML = '<div class="empty-state">📭 কোনো লেনদেন পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('ledgerArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>তারিখ</th><th>ধরন</th><th>বিবরণ</th><th>নাম</th><th>পরিমাণ</th><th>Status</th><th>Action</th>
+      </tr></thead>
+      <tbody>${rows.map(t => `<tr>
+        <td>${t.date || '-'}</td>
+        <td><span class="badge badge-${t.type}">${t.type === 'fee' ? 'ফি' : t.type === 'donation' ? 'দান' : 'খরচ'}</span></td>
+        <td>${t.title || '-'}</td>
+        <td>${t.studentName || t.donorName || '-'}</td>
+        <td style="font-weight:700">${taka(t.amount)}</td>
+        <td class="status-${t.status === 'voided' ? 'voided' : t.status === 'offline-confirmed' ? 'confirmed' : 'pending'}">${t.status === 'voided' ? '❌ বাতিল' : t.status === 'offline-confirmed' ? '✅ নিশ্চিত' : '⏳ পেন্ডিং'}</td>
+        <td>
+          ${t.receiptId ? `<button onclick="printReceipt('${t.receiptId}')" style="font-size:12px;padding:6px 10px" id="btnPrintReceipt_${t.id}">🖨️ রশিদ</button>` : ''}
+          ${t.status !== 'voided' ? `<button onclick="openVoid('${t.id}')" style="font-size:12px;padding:6px 10px;background:#DC2626" id="btnVoid_${t.id}">❌ Void</button>` : ''}
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+function filterTable() { renderTable(); }
+
+function showTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+  renderTable();
+}
+
+// --- MODALS ---
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+// --- COLLECT FEE ---
+async function collectFee() {
+  const studentId = document.getElementById('feeStudent').value;
+  const category = document.getElementById('feeCategory').value;
+  const month = document.getElementById('feeMonth').value;
+  const amount = parseInt(document.getElementById('feeAmount').value);
+  if (!studentId || !amount || amount <= 0) { alert('ছাত্র এবং পরিমাণ দিতে হবে!'); return; }
+
+  const catLabels = {monthly:'মাসিক ফি',admission:'ভর্তি ফি',exam:'পরীক্ষার ফি',custom:'কাস্টম ফি'};
+  const result = await API('/api/finance/collect-fee', {
+    method: 'POST',
+    body: JSON.stringify({ studentId, category, title: catLabels[category] || 'ফি', month, amount })
+  });
+
+  if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+  alert(`✅ ফি আদায় সফল!\n${result.studentName}\n${taka(amount)}\nরশিদ: ${result.receiptId}`);
+  closeModal('feeModal');
+  document.getElementById('feeAmount').value = '';
+  document.getElementById('feeMonth').value = '';
+  refreshLedger();
+}
+
+// --- ADD DONATION ---
+async function addDonation() {
+  const donorName = document.getElementById('donorName').value;
+  const purpose = document.getElementById('donPurpose').value;
+  const amount = parseInt(document.getElementById('donAmount').value);
+  if (!amount || amount <= 0) { alert('পরিমাণ দিতে হবে!'); return; }
+
+  const result = await API('/api/finance/donation', {
+    method: 'POST',
+    body: JSON.stringify({ donorName: donorName || 'অজ্ঞাত দাতা', purpose: purpose || 'সাধারণ দান', amount })
+  });
+
+  if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+  alert(`✅ দান গ্রহণ সফল!\n${donorName || 'অজ্ঞাত দাতা'}\n${taka(amount)}`);
+  closeModal('donationModal');
+  document.getElementById('donorName').value = '';
+  document.getElementById('donPurpose').value = '';
+  document.getElementById('donAmount').value = '';
+  refreshLedger();
+}
+
+// --- ADD EXPENSE ---
+async function addExpense() {
+  const title = document.getElementById('expTitle').value;
+  const category = document.getElementById('expCategory').value;
+  const amount = parseInt(document.getElementById('expAmount').value);
+  const note = document.getElementById('expNote').value;
+  if (!title || !amount || amount <= 0) { alert('শিরোনাম এবং পরিমাণ দিতে হবে!'); return; }
+
+  const result = await API('/api/finance/expense', {
+    method: 'POST',
+    body: JSON.stringify({ title, category, amount, note })
+  });
+
+  if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+  alert(`✅ খরচ যোগ সফল!\n${title}\n${taka(amount)}`);
+  closeModal('expenseModal');
+  document.getElementById('expTitle').value = '';
+  document.getElementById('expAmount').value = '';
+  document.getElementById('expNote').value = '';
+  refreshLedger();
+}
+
+// --- VOID ---
+function openVoid(txnId) {
+  document.getElementById('voidTxnId').value = txnId;
+  openModal('voidModal');
+}
+
+async function voidTransaction() {
+  const transactionId = document.getElementById('voidTxnId').value;
+  const reason = document.getElementById('voidReason').value;
+  const result = await API('/api/finance/void', {
+    method: 'POST',
+    body: JSON.stringify({ transactionId, reason })
+  });
+  if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+  alert('✅ লেনদেন Void হয়েছে।');
+  closeModal('voidModal');
+  document.getElementById('voidReason').value = '';
+  refreshLedger();
+}
+
+// --- PRINT RECEIPT ---
+async function printReceipt(receiptId) {
+  const r = await API(`/api/finance/receipt/${receiptId}`);
+  if (r.error) { alert('রশিদ পাওয়া যায়নি'); return; }
+  const inst = r.institution || {};
+  document.getElementById('receiptPrint').innerHTML = `
+    <div style="max-width:600px;margin:auto;padding:30px;border:3px solid #0F5C4D;font-family:'Hind Siliguri',sans-serif">
+      <div style="text-align:center;border-bottom:2px solid #0F5C4D;padding-bottom:12px;margin-bottom:16px">
+        <h2 style="margin:0;color:#0A3F36">${inst.nameBn || 'ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা'}</h2>
+        <p style="margin:4px 0;font-size:14px">${inst.nameEn || 'Eliotganj Hazi Rohmatollah Jamiria Madrasha'}</p>
+        <p style="margin:4px 0;font-family:Amiri,serif;font-size:18px;color:#C79A2B">${inst.nameAr || 'مدرسة إليوتغانج حاجي رحمة الله زميرية'}</p>
+        <p style="margin:4px 0;font-size:12px;color:#667874">${inst.address || 'Eliotganj, Daudkandi, Comilla'}</p>
+      </div>
+      <h3 style="text-align:center;color:#0F5C4D">🧾 অর্থ গ্রহণ রশিদ</h3>
+      <table style="width:100%;border-collapse:collapse;margin:12px 0">
+        <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">রশিদ নং</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.id}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">তারিখ</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.date}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">ধরন</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.type === 'fee' ? 'ফি' : r.type === 'donation' ? 'দান' : 'অন্যান্য'}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">বিবরণ</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.title}</td></tr>
+        ${r.studentName ? `<tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">ছাত্রের নাম</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.studentName}</td></tr>` : ''}
+        ${r.donorName ? `<tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">দাতার নাম</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.donorName}</td></tr>` : ''}
+        <tr><td style="padding:8px;font-weight:600;font-size:18px">পরিমাণ</td><td style="padding:8px;font-size:18px;font-weight:700;color:#0F5C4D">${taka(r.amount)}</td></tr>
+      </table>
+      <div style="display:flex;justify-content:space-between;margin-top:40px;font-size:13px;color:#667874">
+        <div style="text-align:center"><div style="border-top:1px solid #999;padding-top:6px;width:120px">গ্রহণকারীর স্বাক্ষর</div></div>
+        <div style="text-align:center"><div style="border-top:1px solid #999;padding-top:6px;width:120px">প্রধান শিক্ষকের সীল</div></div>
+      </div>
+      <p style="text-align:center;font-size:11px;color:#999;margin-top:20px">এটি কম্পিউটার জেনারেটেড রশিদ। প্রিন্ট: ${r.printCount || 1}</p>
+    </div>
+  `;
+  setTimeout(() => window.print(), 300);
+}
+
+// --- EXPORT CSV ---
+function exportCSV() {
+  if (!allTxns.length) { alert('কোনো ডাটা নেই'); return; }
+  const headers = ['তারিখ','ধরন','বিবরণ','নাম','পরিমাণ','Status'];
+  const rows = allTxns.map(t => [
+    t.date, t.type, t.title, t.studentName||t.donorName||'-', t.amount, t.status
+  ]);
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob = new Blob(['\ufeff'+csv], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'finance_ledger_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+
+// --- REFRESH ---
+function refreshLedger() {
+  document.getElementById('summaryArea').innerHTML = '<div class="loader">📊 রিফ্রেশ হচ্ছে...</div>';
+  document.getElementById('ledgerArea').innerHTML = '<div class="loader">📋 রিফ্রেশ হচ্ছে...</div>';
+  loadFinanceData();
+}
+
+// Init
+loadFinanceData();
+</script>
+</body></html>

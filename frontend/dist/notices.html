@@ -1,0 +1,18 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>নোটিশ — ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</title><link rel="stylesheet" href="/assets/css/app.css"></head><body>
+<div class="top"><span>📞 01845-162664</span><span>📍 Eliotganj, Daudkandi, Comilla</span></div>
+<nav class="nav"><a class="brand" href="/"><img src="/assets/img/logo.png"><div><b>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</b><span>Eliotganj Hazi Rohmatollah Jamiria Madrasha</span></div></a><button class="menu-toggle" onclick="toggleMenu()">☰</button><div class="menu" id="navMenu"><a href="/">Home</a><a href="/admission">ভর্তি</a><a href="/results">ফলাফল</a><a href="/donation">দান</a><a href="/contact">যোগাযোগ</a><a href="/admin/login.html">Admin</a></div></nav>
+<section class="hero" style="grid-template-columns:1fr"><div style="text-align:center"><h1>📢 নোটিশ বোর্ড</h1><p>মাদ্রাসার সর্বশেষ নোটিশ ও ঘোষণা।</p></div></section>
+<section class="section" id="noticeArea"><div style="text-align:center;padding:30px;color:#667874">🔄 নোটিশ লোড হচ্ছে...</div></section>
+<footer class="footer"><h3>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</h3><p>Established 2021 · Eliotganj, Daudkandi, Comilla, Bangladesh</p><p><a href="https://www.facebook.com/ehrjmadrasda" style="color:#C79A2B">Facebook</a> · <a href="https://www.youtube.com/@ehrjmadrasha" style="color:#C79A2B">YouTube</a> · <a href="https://whatsapp.com/channel/0029VbC30aF6buMF0LGPMp3F" style="color:#C79A2B">WhatsApp Channel</a></p></footer>
+<a class="whatsapp" href="https://wa.me/8801845162664?text=আমি%20মাদ্রাসার%20ওয়েবসাইট%20থেকে%20সহায়তা%20চাই">WhatsApp Help</a>
+<script>
+(async()=>{
+  const area=document.getElementById('noticeArea');
+  try{
+    const r=await fetch('/api/notices');const notices=await r.json();
+    if(!notices.length){area.innerHTML='<div style="text-align:center;padding:30px;color:#667874"><p style="font-size:48px">📭</p><p>এখন কোনো নোটিশ নেই।</p></div>';return;}
+    area.innerHTML=notices.map(n=>`<div class="card" style="margin:12px 0;max-width:700px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:#667874">📅 ${n.date}</span><span style="font-size:12px;background:#e8f5e9;color:#15803D;padding:2px 10px;border-radius:6px">${n.type||'general'}</span></div><h3 style="margin:0 0 8px">${n.title}</h3><p>${n.body}</p></div>`).join('');
+  }catch(e){area.innerHTML='<div style="text-align:center;color:#DC2626;padding:30px">❌ নোটিশ লোড করতে সমস্যা হয়েছে।</div>';}
+})();
+</script>
+<script src="/assets/js/app.js"></script></body></html>
