@@ -112,6 +112,7 @@ import staffRouter from './modules/staff/staff.router';
 import payrollRouter from './modules/payroll/payroll.router';
 import hostelRouter from './modules/hostel/hostel.router';
 import bazarRouter from './modules/bazar/bazar.router';
+import inventoryRouter from './modules/inventory/inventory.router';
 
 app.use('/api/auth', authRouter);
 app.use('/api/teacher', teacherPortalRouter);
@@ -121,6 +122,7 @@ app.use('/api/admin/staff', staffRouter);
 app.use('/api/admin/payroll', payrollRouter);
 app.use('/api/admin/hostel', hostelRouter);
 app.use('/api/admin/bazar', bazarRouter);
+app.use('/api/admin/inventory', inventoryRouter);
 app.use('/api/academic', academicRouter);
 app.use('/api/public/academic', academicPublicRouter);
 app.use('/api/admin/fee-types', feeTypeRouter);

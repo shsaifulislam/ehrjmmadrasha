@@ -97,6 +97,7 @@ model User {
   approvedLeaves      LeaveRequest[]  @relation("LeaveApprovedBy")
   vendorPayments      VendorPayment[] @relation("VendorPaidBy")
   recordedMeals       MealAttendance[] @relation("MealRecordedBy")
+  createdStockMovements StockMovement[] @relation("StockCreatedBy")
   auditLogs           AuditLog[]
 }
 
@@ -979,6 +980,98 @@ model MealAttendance {
 
   @@index([date, mealType])
 }
+
+// ---------------- PHASE 4: INVENTORY, PROCUREMENT & FIXED ASSETS ENGINE ----------------
+
+enum StockMovementType {
+  STOCK_IN
+  STOCK_OUT
+  DAMAGE
+  RETURN
+}
+
+enum AssetStatus {
+  ACTIVE
+  REPAIR
+  DISPOSED
+  LOST
+}
+
+model InventoryCategory {
+  id          String          @id @default(uuid())
+  name        String
+  code        String          @unique
+  description String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  items       InventoryItem[]
+}
+
+model InventoryItem {
+  id            String            @id @default(uuid())
+  categoryId    String
+  name          String
+  code          String            @unique
+  unit          String            @default("PIECE") // PIECE, KG, PACKET, LITER, BAG, SET
+  currentStock  Int               @default(0)
+  minStockAlert Int               @default(5)
+  unitPrice     Decimal           @default(0.00) @db.Decimal(10, 2)
+  reorderLevel  Int               @default(10)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  category      InventoryCategory @relation(fields: [categoryId], references: [id])
+  movements     StockMovement[]
+}
+
+model StockMovement {
+  id           String            @id @default(uuid())
+  itemId       String
+  movementType StockMovementType
+  quantity     Int
+  reference    String?
+  department   String?
+  note         String?
+  createdById  String
+  createdAt    DateTime          @default(now())
+
+  item         InventoryItem     @relation(fields: [itemId], references: [id])
+  createdBy    User              @relation("StockCreatedBy", fields: [createdById], references: [id])
+}
+
+model FixedAsset {
+  id             String             @id @default(uuid())
+  assetCode      String             @unique
+  name           String
+  category       String             // COMPUTER, FURNITURE, AC, FAN, GENERATOR, BUILDING
+  purchaseDate   DateTime           @default(now())
+  purchasePrice  Decimal            @db.Decimal(12, 2)
+  location       String?
+  assignedTo     String?
+  serialNumber   String?
+  warrantyEndDate DateTime?
+  status         AssetStatus        @default(ACTIVE)
+  journalEntryId String?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  maintenances   AssetMaintenance[]
+}
+
+model AssetMaintenance {
+  id              String      @id @default(uuid())
+  assetId         String
+  maintenanceDate DateTime    @default(now())
+  cost            Decimal     @db.Decimal(10, 2)
+  description     String
+  performedBy     String?
+  journalEntryId  String?
+  createdAt       DateTime    @default(now())
+
+  asset           FixedAsset  @relation(fields: [assetId], references: [id], onDelete: Cascade)
+}
+
 
 
 
