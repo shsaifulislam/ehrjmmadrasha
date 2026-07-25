@@ -14,8 +14,12 @@ export class PayrollController {
 
   static async createAdvance(req: Request, res: Response, next: NextFunction) {
     try {
-      const advance = await PayrollService.createStaffAdvance(req.body);
-      return sendSuccess(res, advance, 'এডভান্স সফলভাবে রিকোয়েস্ট করা হয়েছে', 201);
+      const user = (req as any).user;
+      const advance = await PayrollService.createStaffAdvance({
+        ...req.body,
+        disbursedById: user?.id,
+      });
+      return sendSuccess(res, advance, 'এডভান্স সফলভাবে রিকোয়েস্ট ও প্রসেস করা হয়েছে', 201);
     } catch (error) {
       next(error);
     }
@@ -26,6 +30,17 @@ export class PayrollController {
       const { year, month } = req.body;
       const batch = await PayrollService.generateMonthlyPayroll(Number(year), Number(month));
       return sendSuccess(res, batch, 'মাসিক পে-রোল সফলভাবে জেনারেট করা হয়েছে', 201);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async approvePayroll(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { year, month } = req.body;
+      const user = (req as any).user;
+      const batch = await PayrollService.approvePayrollMonth(Number(year), Number(month), user.id);
+      return sendSuccess(res, batch, 'পে-রোল সফলভাবে এপ্রুভ করা হয়েছে এবং স্যালারি অ্যাক্রুয়াল লেজার হিট করা হয়েছে');
     } catch (error) {
       next(error);
     }

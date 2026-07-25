@@ -2,7 +2,7 @@ import prisma from '../../config/prisma';
 import { AccountingService } from '../accounting/accounting.service';
 
 export class PayrollService {
-  // 1. Salary Structure Setup
+  // 1. Salary Structure Setup (With Immutability check if month is approved)
   static async setSalaryStructure(data: {
     teacherId?: string;
     staffId?: string;
@@ -81,22 +81,45 @@ export class PayrollService {
     staffId?: string;
     amount: number;
     reason?: string;
+    disbursedById?: string;
   }) {
-    return await prisma.staffAdvance.create({
+    const amount = Number(data.amount);
+    const advance = await prisma.staffAdvance.create({
       data: {
         teacherId: data.teacherId,
         staffId: data.staffId,
-        amount: data.amount,
+        amount,
         reason: data.reason,
         deductedAmount: 0,
         isFullyAdjusted: false,
       },
     });
+
+    // Accounting Journal Entry: Dr Staff Advance Receivable (1050), Cr Cash in Hand (1010)
+    if (data.disbursedById) {
+      const [advRecAcc, cashAcc] = await Promise.all([
+        prisma.account.findFirst({ where: { code: '1050' } }),
+        prisma.account.findFirst({ where: { code: '1010' } }),
+      ]);
+      if (advRecAcc && cashAcc) {
+        await AccountingService.createJournalEntry({
+          voucherNumber: `ADV-${Date.now().toString().slice(-6)}`,
+          description: `স্টাফ এডভান্স প্রদান (${data.reason || 'জরুরি প্রয়োজন'})`,
+          reference: `ADVANCE-${advance.id}`,
+          createdById: data.disbursedById,
+          lines: [
+            { accountId: advRecAcc.id, type: 'DEBIT', amount, description: 'এডভান্স রিসিভেবল ডেবিট' },
+            { accountId: cashAcc.id, type: 'CREDIT', amount, description: 'ক্যাশ ক্রেডিট' },
+          ],
+        });
+      }
+    }
+
+    return advance;
   }
 
-  // 3. Batch Monthly Payroll Generation
+  // 3. Batch Monthly Payroll Generation (With Duplicate Protection)
   static async generateMonthlyPayroll(year: number, month: number) {
-    // Rejection of duplicates
     const existingMonth = await prisma.payrollMonth.findUnique({
       where: { year_month: { year, month } },
     });
@@ -105,7 +128,6 @@ export class PayrollService {
       throw new Error(`${year} সালের ${month} মাসের পে-রোল ইতিমধ্যে জেনারেট করা হয়েছে`);
     }
 
-    // Fetch Teachers & Staff with Salary Structure
     const [teachers, staffList] = await Promise.all([
       prisma.teacher.findMany({
         where: { isDeleted: false },
@@ -123,7 +145,6 @@ export class PayrollService {
 
     const recordsToCreate: any[] = [];
 
-    // Process Teachers
     for (const t of teachers) {
       if (!t.salaryStructure) continue;
       const struct = t.salaryStructure;
@@ -131,12 +152,11 @@ export class PayrollService {
       const allowances = Number(struct.grossSalary) - basic;
       const gross = Number(struct.grossSalary);
 
-      // Check advances
       let advanceDeduction = 0;
       for (const adv of t.advances) {
         const remaining = Number(adv.amount) - Number(adv.deductedAmount);
         if (remaining > 0) {
-          advanceDeduction += remaining; // Deduct advance
+          advanceDeduction += remaining;
         }
       }
 
@@ -165,7 +185,6 @@ export class PayrollService {
       });
     }
 
-    // Process Staff
     for (const s of staffList) {
       if (!s.salaryStructure) continue;
       const struct = s.salaryStructure;
@@ -231,9 +250,71 @@ export class PayrollService {
     });
   }
 
-  // 4. Get Payroll Month Details
-  static async getPayrollMonth(year: number, month: number) {
+  // 4. Payroll Approval & Accrual Double-Entry Journal Posting
+  static async approvePayrollMonth(year: number, month: number, approvedById: string) {
     const pMonth = await prisma.payrollMonth.findUnique({
+      where: { year_month: { year, month } },
+      include: { records: true },
+    });
+
+    if (!pMonth) throw new Error('পে-রোল ব্যাচ পাওয়া যায়নি');
+    if (pMonth.status === 'APPROVED' || pMonth.status === 'LOCKED') {
+      throw new Error('এই পে-রোল ব্যাচ ইতিমধ্যে এপ্রুভড ও লকড করা হয়েছে। পরিবর্তন সম্ভব নয়।');
+    }
+
+    // Post Salary Accrual Entry:
+    // Dr Salary Expense (4010 Teacher / 4020 Staff) Total Gross
+    // Cr Salary Payable (2020) Total Net
+    // Cr Staff Advance Receivable (1050) Total Advance Adjusted
+    const teacherGross = pMonth.records
+      .filter((r) => r.employeeType === 'TEACHER')
+      .reduce((sum, r) => sum + Number(r.grossSalary), 0);
+    const staffGross = pMonth.records
+      .filter((r) => r.employeeType === 'STAFF')
+      .reduce((sum, r) => sum + Number(r.grossSalary), 0);
+
+    const totalNet = Number(pMonth.totalNetPayable);
+    const totalAdvance = Number(pMonth.totalDeductions);
+
+    const [tExpAcc, sExpAcc, payableAcc, advRecAcc] = await Promise.all([
+      prisma.account.findFirst({ where: { code: '4010' } }),
+      prisma.account.findFirst({ where: { code: '4020' } }),
+      prisma.account.findFirst({ where: { code: '2020' } }),
+      prisma.account.findFirst({ where: { code: '1050' } }),
+    ]);
+
+    if (payableAcc) {
+      const lines: any[] = [];
+      if (teacherGross > 0 && tExpAcc) {
+        lines.push({ accountId: tExpAcc.id, type: 'DEBIT', amount: teacherGross, description: 'শিক্ষক স্যালারি এক্সপেন্স (অ্যাক্রুয়াল)' });
+      }
+      if (staffGross > 0 && sExpAcc) {
+        lines.push({ accountId: sExpAcc.id, type: 'DEBIT', amount: staffGross, description: 'স্টাফ স্যালারি এক্সপেন্স (অ্যাক্রুয়াল)' });
+      }
+      lines.push({ accountId: payableAcc.id, type: 'CREDIT', amount: totalNet, description: 'স্যালারি পেয়েবল লায়াবিলিটি' });
+
+      if (totalAdvance > 0 && advRecAcc) {
+        lines.push({ accountId: advRecAcc.id, type: 'CREDIT', amount: totalAdvance, description: 'এডভান্স রিসিভেবল এডজাস্টমেন্ট' });
+      }
+
+      await AccountingService.createJournalEntry({
+        voucherNumber: `ACCRUAL-${year}${month}-${Date.now().toString().slice(-4)}`,
+        description: `${month}/${year} মাসের বেতন অ্যাক্রুয়াল ও পেয়েবল হিসাব`,
+        reference: `PAYROLL-MONTH-${pMonth.id}`,
+        createdById: approvedById,
+        lines,
+      });
+    }
+
+    return await prisma.payrollMonth.update({
+      where: { id: pMonth.id },
+      data: { status: 'APPROVED' },
+    });
+  }
+
+  // 5. Get Payroll Month Details
+  static async getPayrollMonth(year: number, month: number) {
+    return await prisma.payrollMonth.findUnique({
       where: { year_month: { year, month } },
       include: {
         records: {
@@ -245,10 +326,9 @@ export class PayrollService {
         },
       },
     });
-    return pMonth;
   }
 
-  // 5. Process Salary Payment with General Ledger Integration
+  // 6. Process Salary Payment with Accrual Payment Journal Entry (With Overpayment Validation)
   static async processSalaryPayment(data: {
     payrollRecordId: string;
     amountPaid: number;
@@ -273,6 +353,8 @@ export class PayrollService {
     if (amount <= 0) {
       throw new Error('টাকার পরিমাণ ০ এর বেশি হতে হবে');
     }
+
+    // OVERPAYMENT PROTECTION: Payment Amount <= Remaining Due
     if (amount > currentDue) {
       throw new Error(`প্রদেয় ব্যালেন্সের (৳${currentDue}) বেশি পেমেন্ট করা যাবে না`);
     }
@@ -280,34 +362,34 @@ export class PayrollService {
     const method = data.paymentMethod || 'CASH';
     const voucherNumber = `SAL-${record.payrollMonth.year}${record.payrollMonth.month}-${Date.now().toString().slice(-4)}`;
 
-    // Accounting Core Integration: Post Double-Entry Journal Entry
-    // Find accounts: Salary Expense (4010 for teacher, 4020 for staff) & Asset (1010 Cash, 1020 Bank, 1030 bKash)
-    const expenseCode = record.employeeType === 'TEACHER' ? '4010' : '4020';
+    // Accounting Accrual Payment Flow:
+    // Dr Salary Payables (2020)
+    // Cr Cash in Hand (1010) / Bank (1020) / bKash (1030)
+    const payableCode = '2020';
     const assetCode = method === 'CASH' ? '1010' : method === 'BANK' ? '1020' : '1030';
 
-    const [expenseAcc, assetAcc] = await Promise.all([
-      prisma.account.findFirst({ where: { code: expenseCode } }),
+    const [payableAcc, assetAcc] = await Promise.all([
+      prisma.account.findFirst({ where: { code: payableCode } }),
       prisma.account.findFirst({ where: { code: assetCode } }),
     ]);
 
     let journalEntryId: string | undefined;
 
-    if (expenseAcc && assetAcc) {
+    if (payableAcc && assetAcc) {
       const empName = record.teacher ? record.teacher.nameBn : record.staff?.name || 'কর্মচারী';
       const journal = await AccountingService.createJournalEntry({
         voucherNumber,
-        description: `বেতন প্রদান - ${empName} (${record.payrollMonth.month}/${record.payrollMonth.year})`,
+        description: `বেতন প্রদান (Salary Payable Settlement) - ${empName} (${record.payrollMonth.month}/${record.payrollMonth.year})`,
         reference: `PAYROLL-${record.id}`,
         createdById: data.paidById,
         lines: [
-          { accountId: expenseAcc.id, type: 'DEBIT', amount, description: 'স্যালারি এক্সপেন্স ডেবিট' },
-          { accountId: assetAcc.id, type: 'CREDIT', amount, description: 'ক্যাশ/ব্যাংক ক্রেডিট' },
+          { accountId: payableAcc.id, type: 'DEBIT', amount, description: 'স্যালারি পেয়েবল লায়াবিলিটি হ্রাস' },
+          { accountId: assetAcc.id, type: 'CREDIT', amount, description: 'ক্যাশ/ব্যাংক অ্যাসেট প্রদান' },
         ],
       });
       journalEntryId = journal.id;
     }
 
-    // Execute Payroll update in transaction
     return await prisma.$transaction(async (tx) => {
       const payment = await tx.salaryPayment.create({
         data: {
@@ -334,7 +416,6 @@ export class PayrollService {
         },
       });
 
-      // Update monthly totals
       await tx.payrollMonth.update({
         where: { id: record.payrollMonthId },
         data: {
@@ -346,7 +427,7 @@ export class PayrollService {
     });
   }
 
-  // 6. Get Payslip Voucher DTO
+  // 7. Get Payslip Voucher DTO
   static async getPayslip(payrollRecordId: string) {
     const record = await prisma.payrollRecord.findUnique({
       where: { id: payrollRecordId },

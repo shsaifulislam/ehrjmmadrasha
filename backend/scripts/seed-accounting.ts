@@ -9,6 +9,7 @@ async function seedChartOfAccounts() {
     { code: '1020', name: 'ব্যাংক অ্যাকাউন্ট (Main Bank Account)', type: 'ASSET', isSystem: true, description: 'মূল ব্যাংক অ্যাকাউন্ট' },
     { code: '1030', name: 'বিকাশ মার্চেন্ট (bKash Account)', type: 'ASSET', isSystem: true, description: 'বিকাশ মার্চেন্ট পেমেন্ট' },
     { code: '1040', name: 'নগদ মার্চেন্ট (Nagad Account)', type: 'ASSET', isSystem: true, description: 'নগদ মার্চেন্ট পেমেন্ট' },
+    { code: '1050', name: 'স্টাফ এডভান্স রিসিভেবল (Staff Advance Receivable)', type: 'ASSET', isSystem: true, description: 'শিক্ষক ও কর্মীদের প্রদত্ত অগ্রিম টাকা' },
 
     // Liabilities (2000)
     { code: '2010', name: 'ভেন্ডর পেয়েবল (Vendor Payables)', type: 'LIABILITY', isSystem: true, description: 'বাজার ও সাপ্লায়ারদের বকেয়া' },
