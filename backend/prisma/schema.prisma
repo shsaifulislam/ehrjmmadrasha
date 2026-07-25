@@ -33,6 +33,7 @@ enum PaymentMethod {
   BKASH
   NAGAD
   BANK
+  CREDIT
   OTHER
 }
 
@@ -94,6 +95,8 @@ model User {
   closedCashbooks     DailyCashbook[] @relation("CashbookClosedBy")
   salaryPayments      SalaryPayment[] @relation("SalaryPaidBy")
   approvedLeaves      LeaveRequest[]  @relation("LeaveApprovedBy")
+  vendorPayments      VendorPayment[] @relation("VendorPaidBy")
+  recordedMeals       MealAttendance[] @relation("MealRecordedBy")
   auditLogs           AuditLog[]
 }
 
@@ -190,6 +193,8 @@ model Student {
   attendances   Attendance[]
   results       Result[]
   invoices      Invoice[]
+  hostelAllocations HostelAllocation[]
+  mealAttendances   MealAttendance[]
 
   @@unique([roll, classId, sessionId])
   @@index([studentId])
@@ -218,6 +223,7 @@ model Teacher {
   payrollRecords  PayrollRecord[]
   advances        StaffAdvance[]
   leaveRequests   LeaveRequest[]
+  mealAttendances MealAttendance[]
 
   @@index([teacherId])
   @@index([nameBn])
@@ -261,6 +267,7 @@ model Staff {
   payrollRecords  PayrollRecord[]
   advances        StaffAdvance[]
   leaveRequests   LeaveRequest[]
+  mealAttendances MealAttendance[]
 
   @@index([employeeId])
   @@index([name])
@@ -815,5 +822,163 @@ model LeaveRequest {
   staff           Staff?      @relation(fields: [staffId], references: [id])
   approvedBy      User?       @relation("LeaveApprovedBy", fields: [approvedById], references: [id])
 }
+
+// ---------------- PHASE 3: RESIDENTIAL HOSTEL & BAZAR ENGINE ----------------
+
+enum BedStatus {
+  VACANT
+  OCCUPIED
+  MAINTENANCE
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+}
+
+model HostelBuilding {
+  id            String       @id @default(uuid())
+  name          String
+  code          String       @unique
+  address       String?
+  totalCapacity Int          @default(0)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  rooms         HostelRoom[]
+}
+
+model HostelRoom {
+  id            String       @id @default(uuid())
+  buildingId    String
+  roomNumber    String
+  floor         Int          @default(1)
+  totalBeds     Int          @default(4)
+  monthlyRent   Decimal      @default(0.00) @db.Decimal(10, 2)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  building      HostelBuilding @relation(fields: [buildingId], references: [id], onDelete: Cascade)
+  beds          HostelBed[]
+
+  @@unique([buildingId, roomNumber])
+}
+
+model HostelBed {
+  id            String           @id @default(uuid())
+  roomId        String
+  bedNumber     String
+  status        BedStatus        @default(VACANT)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  room          HostelRoom       @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  allocations   HostelAllocation[]
+
+  @@unique([roomId, bedNumber])
+}
+
+model HostelAllocation {
+  id            String    @id @default(uuid())
+  studentId     String
+  bedId         String
+  allocationDate DateTime @default(now())
+  vacateDate    DateTime?
+  monthlyFee    Decimal   @db.Decimal(10, 2)
+  status        String    @default("ACTIVE") // ACTIVE, VACATED
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  student       Student   @relation(fields: [studentId], references: [id])
+  bed           HostelBed @relation(fields: [bedId], references: [id])
+}
+
+model BazarVendor {
+  id            String          @id @default(uuid())
+  name          String
+  companyName   String?
+  phone         String
+  address       String?
+  currentBalance Decimal        @default(0.00) @db.Decimal(12, 2)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  purchases     BazarPurchase[]
+  payments      VendorPayment[]
+}
+
+model BazarPurchase {
+  id             String              @id @default(uuid())
+  date           DateTime            @default(now())
+  invoiceNumber  String
+  voucherNumber  String              @unique
+  vendorId       String?
+  totalAmount    Decimal             @db.Decimal(10, 2)
+  paymentMethod  String              @default("CASH") // CASH, BANK, CREDIT
+  isPaid         Boolean             @default(true)
+  journalEntryId String?
+  note           String?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+
+  vendor         BazarVendor?        @relation(fields: [vendorId], references: [id])
+  items          BazarPurchaseItem[]
+  vendorPayments VendorPayment[]
+
+  @@index([date])
+}
+
+model BazarPurchaseItem {
+  id            String        @id @default(uuid())
+  purchaseId    String
+  itemName      String
+  quantity      Decimal       @db.Decimal(10, 2)
+  unit          String        // KG, LITER, PIECE, BAG
+  unitPrice     Decimal       @db.Decimal(10, 2)
+  totalPrice    Decimal       @db.Decimal(10, 2)
+
+  purchase      BazarPurchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+}
+
+model VendorPayment {
+  id             String        @id @default(uuid())
+  vendorId       String
+  purchaseId     String?
+  amountPaid     Decimal       @db.Decimal(10, 2)
+  paymentDate    DateTime      @default(now())
+  paymentMethod  PaymentMethod @default(CASH)
+  voucherNumber  String        @unique
+  journalEntryId String?
+  note           String?
+  paidById       String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  vendor         BazarVendor    @relation(fields: [vendorId], references: [id])
+  purchase       BazarPurchase? @relation(fields: [purchaseId], references: [id])
+  paidBy         User           @relation("VendorPaidBy", fields: [paidById], references: [id])
+}
+
+model MealAttendance {
+  id            String    @id @default(uuid())
+  date          DateTime  @db.Date
+  mealType      MealType
+  studentId     String?
+  teacherId     String?
+  staffId       String?
+  guestName     String?
+  count         Int       @default(1)
+  recordedById  String
+  createdAt     DateTime  @default(now())
+
+  student       Student?  @relation(fields: [studentId], references: [id])
+  teacher       Teacher?  @relation(fields: [teacherId], references: [id])
+  staff         Staff?    @relation(fields: [staffId], references: [id])
+  recordedBy    User      @relation("MealRecordedBy", fields: [recordedById], references: [id])
+
+  @@index([date, mealType])
+}
+
 
 
