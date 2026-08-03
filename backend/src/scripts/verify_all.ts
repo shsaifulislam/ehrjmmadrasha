@@ -26,10 +26,14 @@ async function runMasterVerificationSuite() {
 
   const results: { name: string; status: "PASS ✅" | "FAIL ❌"; error?: string }[] = [];
 
+  const tsNodeBin = process.platform === "win32"
+    ? ".\\node_modules\\.bin\\ts-node.cmd"
+    : "./node_modules/.bin/ts-node";
+
   for (const s of scripts) {
     console.log(`⏳ Executing: ${s.name} (${s.file})...`);
     try {
-      execSync(`npx ts-node ${s.file}`, {
+      execSync(`${tsNodeBin} ${s.file}`, {
         cwd: process.cwd(),
         env: process.env,
         stdio: "inherit",
