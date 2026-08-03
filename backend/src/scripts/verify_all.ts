@@ -1,4 +1,6 @@
 import { execSync } from "child_process";
+import fs from "fs";
+import path from "path";
 
 async function runMasterVerificationSuite() {
   const startTime = Date.now();
@@ -42,8 +44,9 @@ async function runMasterVerificationSuite() {
       passedCount++;
       totalPassedAssertions += s.assertions;
     } catch (err: any) {
-      console.error(`❌ Verification Failed for ${s.name}:`, err.message);
-      results.push({ name: s.name, status: "FAIL ❌", error: err.message });
+      const errDetail = err.stderr ? err.stderr.toString() : (err.message || String(err));
+      console.error(`❌ Verification Failed for ${s.name}:`, errDetail);
+      results.push({ name: s.name, status: "FAIL ❌", error: errDetail });
       failedCount++;
     }
   }
@@ -66,6 +69,23 @@ async function runMasterVerificationSuite() {
   console.log(`Duration: 00:${minutes}:${seconds}`);
   console.log(`Exit Code: ${failedCount === 0 ? 0 : 1}`);
   console.log("====================================\n");
+
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    try {
+      const summaryText = [
+        `### 🧪 Master ERP Verification Suite Diagnostics Summary`,
+        `- **Assertions Passed:** ${totalPassedAssertions} / ${totalTargetAssertions}`,
+        `- **Failed Modules:** ${failedCount}`,
+        `- **Execution Duration:** 00:${minutes}:${seconds}`,
+        `\n| Module Name | Verification Status | Detailed Error Log |`,
+        `| --- | --- | --- |`,
+        ...results.map(r => `| **${r.name}** | ${r.status} | \`${(r.error || 'None').replace(/\n/g, ' ')}\` |`)
+      ].join('\n') + '\n';
+      fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summaryText);
+    } catch (summaryErr) {
+      console.error("Failed to write to GITHUB_STEP_SUMMARY:", summaryErr);
+    }
+  }
 
   if (failedCount > 0) {
     process.exit(1);
