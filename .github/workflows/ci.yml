@@ -61,7 +61,7 @@ jobs:
         working-directory: backend
         env:
           DATABASE_URL: "postgresql://postgres:postgrespassword@localhost:5432/ehrj_madrasha_test?schema=public"
-        run: npx prisma db push --skip-generate
+        run: npx prisma db push --accept-data-loss
 
       - name: Execute Master Verification Runner (verify_all.ts)
         working-directory: backend
