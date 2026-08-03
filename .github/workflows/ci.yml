@@ -42,19 +42,19 @@ jobs:
           cache-dependency-path: backend/package-lock.json
 
       - name: Install Backend Dependencies
-        cwd: backend
+        working-directory: backend
         run: npm ci
 
       - name: Verify Backend Static TypeScript Compilation
-        cwd: backend
+        working-directory: backend
         run: npx tsc --noEmit
 
       - name: Execute Backend Linter
-        cwd: backend
+        working-directory: backend
         run: npm run lint || echo "Backend Linting Completed"
 
       - name: Run Prisma Database Schema Sync
-        cwd: backend
+        working-directory: backend
         env:
           DATABASE_URL: "postgresql://postgres:postgrespassword@localhost:5432/ehrj_madrasha_test?schema=public"
         run: |
@@ -62,7 +62,7 @@ jobs:
           npx prisma db push --skip-generate
 
       - name: Execute Master Verification Runner (verify_all.ts)
-        cwd: backend
+        working-directory: backend
         env:
           DATABASE_URL: "postgresql://postgres:postgrespassword@localhost:5432/ehrj_madrasha_test?schema=public"
           JWT_SECRET: "ci_pipeline_super_secret_jwt_key_2026"
@@ -93,23 +93,23 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Install Frontend Dependencies
-        cwd: frontend
+        working-directory: frontend
         run: npm ci
 
       - name: Verify Frontend Static TypeScript Compilation
-        cwd: frontend
+        working-directory: frontend
         run: npx tsc --noEmit
 
       - name: Execute Frontend Linter
-        cwd: frontend
+        working-directory: frontend
         run: npm run lint
 
       - name: Install Playwright Browsers
-        cwd: frontend
+        working-directory: frontend
         run: npx playwright install --with-deps chromium
 
       - name: Execute Playwright E2E Test Suite
-        cwd: frontend
+        working-directory: frontend
         run: npx playwright test
 
       - name: Archive Playwright Report Artifacts
