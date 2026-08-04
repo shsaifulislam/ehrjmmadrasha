@@ -35,7 +35,8 @@ async function runMasterVerificationSuite() {
   for (const s of scripts) {
     console.log(`⏳ Executing: ${s.name} (${s.file})...`);
     try {
-      execSync(`${tsNodeBin} ${s.file}`, {
+      const absoluteScript = path.resolve(process.cwd(), s.file);
+      execSync(`${tsNodeBin} "${absoluteScript}"`, {
         cwd: process.cwd(),
         env: process.env,
         stdio: "inherit",
