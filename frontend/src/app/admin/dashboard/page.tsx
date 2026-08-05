@@ -108,12 +108,12 @@ export default function AdminDashboard() {
       href: "/admin/classes",
     },
     {
-      title: "সেশন",
-      value: stats?.totalSessions ?? 0,
-      icon: Calendar,
-      color: "text-cyan-600 dark:text-cyan-400",
-      bg: "bg-cyan-50 dark:bg-cyan-950/40",
-      href: "/admin/sessions",
+      title: "ভর্তি আবেদন",
+      value: stats?.totalAdmissions ?? 0,
+      icon: FileText,
+      color: "text-amber-600 dark:text-amber-400",
+      bg: "bg-amber-50 dark:bg-amber-950/40",
+      href: "/admin/admissions",
     },
     {
       title: "আজকের আয়",
@@ -276,6 +276,81 @@ export default function AdminDashboard() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Revenue vs Expense Visual & Attendance Overview */}
+      <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
+        {/* Income vs Expense Bar */}
+        <Card className="border-slate-200 dark:border-slate-800">
+          <CardHeader className="pb-3 border-b">
+            <CardTitle className="text-base font-bold flex items-center gap-2">
+              <TrendingUp className="h-4 w-4 text-emerald-600" /> আয় বনাম ব্যয় (এই মাস)
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-4 space-y-4">
+            <div className="space-y-3">
+              <div>
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="font-semibold text-emerald-700 dark:text-emerald-400">মোট আয়</span>
+                  <span className="font-mono font-bold text-emerald-700">৳ {(stats?.monthlyIncome ?? 0).toLocaleString("bn-BD")}</span>
+                </div>
+                <div className="h-5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full transition-all duration-700"
+                    style={{ width: `${Math.min(100, ((stats?.monthlyIncome ?? 0) / Math.max((stats?.monthlyIncome ?? 1), (stats?.monthlyExpense ?? 1))) * 100)}%` }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="font-semibold text-rose-700 dark:text-rose-400">মোট ব্যয়</span>
+                  <span className="font-mono font-bold text-rose-700">৳ {(stats?.monthlyExpense ?? 0).toLocaleString("bn-BD")}</span>
+                </div>
+                <div className="h-5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-rose-500 to-rose-600 rounded-full transition-all duration-700"
+                    style={{ width: `${Math.min(100, ((stats?.monthlyExpense ?? 0) / Math.max((stats?.monthlyIncome ?? 1), (stats?.monthlyExpense ?? 1))) * 100)}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="pt-2 border-t flex justify-between text-xs">
+              <span className="font-semibold text-slate-600">নিট ব্যালেন্স:</span>
+              <span className={`font-mono font-bold ${((stats?.monthlyIncome ?? 0) - (stats?.monthlyExpense ?? 0)) >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                ৳ {((stats?.monthlyIncome ?? 0) - (stats?.monthlyExpense ?? 0)).toLocaleString("bn-BD")}
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Attendance & Collection Summary */}
+        <Card className="border-slate-200 dark:border-slate-800">
+          <CardHeader className="pb-3 border-b">
+            <CardTitle className="text-base font-bold flex items-center gap-2">
+              <Calendar className="h-4 w-4 text-blue-600" /> আজকের কার্যক্রম সারাংশ
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-4">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 text-center">
+                <p className="text-lg font-black text-blue-700 dark:text-blue-300">{stats?.todayPresentCount ?? "-"}</p>
+                <span className="text-[10px] text-blue-600">আজ উপস্থিত</span>
+              </div>
+              <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 text-center">
+                <p className="text-lg font-black text-red-700 dark:text-red-300">{stats?.todayAbsentCount ?? "-"}</p>
+                <span className="text-[10px] text-red-600">আজ অনুপস্থিত</span>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-center">
+                <p className="text-lg font-black text-emerald-700 dark:text-emerald-300">৳ {(stats?.todayIncome ?? 0).toLocaleString("bn-BD")}</p>
+                <span className="text-[10px] text-emerald-600">আজকের আদায়</span>
+              </div>
+              <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 text-center">
+                <p className="text-lg font-black text-amber-700 dark:text-amber-300">{stats?.pendingAdmissions ?? 0}</p>
+                <span className="text-[10px] text-amber-600">অপেক্ষমাণ ভর্তি</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Financial Overview & Recent Transactions */}
       <div className="grid gap-6 grid-cols-1 lg:grid-cols-7">

@@ -51,11 +51,16 @@ export interface DashboardStats {
   totalClasses: number;
   totalSessions: number;
   totalFeeTypes: number;
+  totalAdmissions: number;
+  approvedAdmissions: number;
   pendingAdmissions: number;
   todayIncome: number;
   todayExpense: number;
   monthlyIncome: number;
+  monthlyExpense?: number;
   monthlyDue: number;
+  todayPresentCount?: number;
+  todayAbsentCount?: number;
   recentPayments: RecentPayment[];
   recentActivities: RecentActivity[];
 }
