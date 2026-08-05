@@ -1,14 +1,6 @@
+import { execSync } from "child_process";
 import fs from "fs";
 import path from "path";
-
-// Dynamic import wrapper for verification scripts
-async function runVerificationScript(scriptPath: string): Promise<void> {
-  // Use require() with absolute path to avoid module resolution issues
-  const absolutePath = path.resolve(scriptPath);
-  // Clear require cache to ensure fresh execution
-  delete require.cache[require.resolve(absolutePath)];
-  require(absolutePath);
-}
 
 async function runMasterVerificationSuite() {
   const startTime = Date.now();
@@ -36,21 +28,24 @@ async function runMasterVerificationSuite() {
 
   const results: { name: string; status: "PASS ✅" | "FAIL ❌"; error?: string }[] = [];
 
+  const tsNodeBin = process.platform === "win32"
+    ? ".\\node_modules\\.bin\\ts-node.cmd"
+    : "./node_modules/.bin/ts-node";
+
   for (const s of scripts) {
     console.log(`⏳ Executing: ${s.name} (${s.file})...`);
     try {
-      // Use require with absolute path instead of execSync
-      // This preserves module context and handles ts-node correctly
-      const scriptModule = require.resolve(path.join(process.cwd(), s.file));
-      require(scriptModule);
-      
+      const absoluteScript = path.resolve(process.cwd(), s.file);
+      execSync(`${tsNodeBin} "${absoluteScript}"`, {
+        cwd: process.cwd(),
+        env: process.env,
+        stdio: "inherit",
+      });
       results.push({ name: s.name, status: "PASS ✅" });
       passedCount++;
       totalPassedAssertions += s.assertions;
     } catch (err: any) {
-      const errDetail = err.stderr 
-        ? err.stderr.toString() 
-        : (err.message || String(err));
+      const errDetail = err.stderr ? err.stderr.toString() : (err.message || String(err));
       console.error(`❌ Verification Failed for ${s.name}:`, errDetail);
       results.push({ name: s.name, status: "FAIL ❌", error: errDetail });
       failedCount++;
