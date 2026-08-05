@@ -10,7 +10,15 @@
     "noImplicitAny": false,
     "types": ["node"],
     "resolveJsonModule": true,
-    "rootDir": "."
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "baseUrl": "."
   },
-  "include": ["src/**/*", "scripts/**/*"]
+  "include": ["src/**/*"],
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }
