@@ -51,8 +51,9 @@ export class FinanceService {
   }
 
   async findAllInvoices(query: PaginationQuery & { studentId?: string; status?: string; month?: number; year?: number; type?: string }) {
-    const { page = 1, limit = 20 } = query;
-    const skip = (page - 1) * limit;
+    const pageNum = Number(query.page) || 1;
+    const limitNum = Number(query.limit) || 20;
+    const skip = (pageNum - 1) * limitNum;
     const where: any = {};
     if (query.studentId) where.studentId = query.studentId;
     if (query.status) where.status = query.status;
@@ -61,10 +62,10 @@ export class FinanceService {
     if (query.type) where.type = query.type;
 
     const [invoices, total] = await Promise.all([
-      prisma.invoice.findMany({ where, skip, take: limit, include: invoiceInclude, orderBy: { createdAt: 'desc' } }),
+      prisma.invoice.findMany({ where, skip, take: limitNum, include: invoiceInclude, orderBy: { createdAt: 'desc' } }),
       prisma.invoice.count({ where }),
     ]);
-    return { invoices, meta: buildPaginationMeta(total, page, limit) };
+    return { invoices, meta: buildPaginationMeta(total, pageNum, limitNum) };
   }
 
   async findInvoiceById(id: string) {
@@ -154,13 +155,14 @@ export class FinanceService {
   // ─── EXPENSE ───────────────────────────────────────
 
   async findAllExpenses(query: PaginationQuery) {
-    const { page = 1, limit = 20 } = query;
-    const skip = (page - 1) * limit;
+    const pageNum = Number(query.page) || 1;
+    const limitNum = Number(query.limit) || 20;
+    const skip = (pageNum - 1) * limitNum;
     const [expenses, total] = await Promise.all([
-      prisma.expense.findMany({ skip, take: limit, orderBy: { date: 'desc' }, include: { loggedBy: { select: { id: true, username: true } } } }),
+      prisma.expense.findMany({ skip, take: limitNum, orderBy: { date: 'desc' }, include: { loggedBy: { select: { id: true, username: true } } } }),
       prisma.expense.count(),
     ]);
-    return { expenses, meta: buildPaginationMeta(total, page, limit) };
+    return { expenses, meta: buildPaginationMeta(total, pageNum, limitNum) };
   }
 
   async createExpense(input: CreateExpenseInput, actorId: string) {
@@ -175,13 +177,14 @@ export class FinanceService {
   // ─── DONATION ──────────────────────────────────────
 
   async findAllDonations(query: PaginationQuery) {
-    const { page = 1, limit = 20 } = query;
-    const skip = (page - 1) * limit;
+    const pageNum = Number(query.page) || 1;
+    const limitNum = Number(query.limit) || 20;
+    const skip = (pageNum - 1) * limitNum;
     const [donations, total] = await Promise.all([
-      prisma.donation.findMany({ skip, take: limit, orderBy: { date: 'desc' } }),
+      prisma.donation.findMany({ skip, take: limitNum, orderBy: { date: 'desc' } }),
       prisma.donation.count(),
     ]);
-    return { donations, meta: buildPaginationMeta(total, page, limit) };
+    return { donations, meta: buildPaginationMeta(total, pageNum, limitNum) };
   }
 
   async createDonation(input: CreateDonationInput, actorId: string) {

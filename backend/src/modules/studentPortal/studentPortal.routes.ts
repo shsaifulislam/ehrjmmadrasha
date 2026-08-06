@@ -1,12 +1,13 @@
 // backend/src/modules/studentPortal/studentPortal.routes.ts
 import { Router, Request, Response } from 'express';
-import { requireAuth } from '../../middlewares/auth.middleware';
+import { requireAuth, requireRole } from '../../middlewares/auth.middleware';
 import { asyncHandler } from '../../shared/utils/asyncHandler';
 import { sendSuccess } from '../../shared/utils/response';
 import prisma from '../../config/prisma';
 
 const router = Router();
 router.use(requireAuth);
+router.use(requireRole('STUDENT', 'ADMIN')); // Only students and admins can access
 
 // Student Dashboard Data
 router.get(

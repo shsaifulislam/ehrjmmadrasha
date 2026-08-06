@@ -1,10 +1,12 @@
 import prisma from '../../config/prisma';
 import { AccountingService } from '../accounting/accounting.service';
+import { AppError } from '../../utils/AppError';
+import { logAudit } from '../../utils/auditLogger';
 
 export class BazarService {
   // 1. Create Supplier / Vendor
-  static async createVendor(data: { name: string; companyName?: string; phone: string; address?: string }) {
-    return await prisma.bazarVendor.create({
+  static async createVendor(data: { name: string; companyName?: string; phone: string; address?: string; createdById?: string }) {
+    const vendor = await prisma.bazarVendor.create({
       data: {
         name: data.name,
         companyName: data.companyName,
@@ -13,6 +15,11 @@ export class BazarService {
         currentBalance: 0,
       },
     });
+
+    if (data.createdById) {
+      await logAudit(data.createdById, 'CREATE_BAZAR_VENDOR', 'bazar', `ভেন্ডর তৈরি: ${data.name}`);
+    }
+    return vendor;
   }
 
   // 2. Get All Vendors
@@ -36,7 +43,7 @@ export class BazarService {
     createdById: string;
   }) {
     if (!data.items || data.items.length === 0) {
-      throw new Error('অন্তত একটি বাজারের পণ্যের বিবরণ দিতে হবে');
+      throw new AppError('অন্তত একটি বাজারের পণ্যের বিবরণ দিতে হবে', 400);
     }
 
     let totalAmount = 0;
@@ -82,7 +89,7 @@ export class BazarService {
       journalEntryId = journal.id;
     }
 
-    return await prisma.$transaction(async (tx) => {
+    const res = await prisma.$transaction(async (tx) => {
       const purchase = await tx.bazarPurchase.create({
         data: {
           invoiceNumber: data.invoiceNumber,
@@ -110,6 +117,9 @@ export class BazarService {
 
       return purchase;
     });
+
+    await logAudit(data.createdById, 'RECORD_BAZAR_PURCHASE', 'bazar', `বাজার ক্রয় চালান #${data.invoiceNumber} (৳${totalAmount})`);
+    return res;
   }
 
   // 4. Pay Supplier / Vendor Payable (বাকির টাকা পরিশোধ)
@@ -122,10 +132,10 @@ export class BazarService {
     paidById: string;
   }) {
     const vendor = await prisma.bazarVendor.findUnique({ where: { id: data.vendorId } });
-    if (!vendor) throw new Error('সাপ্লায়ার / ভেন্ডর পাওয়া যায়নি');
+    if (!vendor) throw new AppError('সাপ্লায়ার / ভেন্ডর পাওয়া যায়নি', 404);
 
     const amount = Number(data.amountPaid);
-    if (amount <= 0) throw new Error('পেমেন্টের পরিমাণ ০ এর বেশি হতে হবে');
+    if (amount <= 0) throw new AppError('পেমেন্টের পরিমাণ ০ এর বেশি হতে হবে', 400);
 
     const method = data.paymentMethod || 'CASH';
     const voucherNumber = `VPAY-${Date.now().toString().slice(-6)}`;
@@ -157,7 +167,7 @@ export class BazarService {
       journalEntryId = journal.id;
     }
 
-    return await prisma.$transaction(async (tx) => {
+    const res = await prisma.$transaction(async (tx) => {
       const payment = await tx.vendorPayment.create({
         data: {
           vendorId: data.vendorId,
@@ -179,6 +189,9 @@ export class BazarService {
 
       return payment;
     });
+
+    await logAudit(data.paidById, 'PAY_VENDOR_BALANCE', 'bazar', `ভেন্ডর পেমেন্ট: ${vendor.name} (৳${amount})`);
+    return res;
   }
 
   // 5. Record Daily Meal Attendance
@@ -225,9 +238,12 @@ export class BazarService {
       });
     }
 
-    return await prisma.mealAttendance.createMany({
+    const res = await prisma.mealAttendance.createMany({
       data: recordsToCreate,
     });
+
+    await logAudit(data.recordedById, 'RECORD_MEAL_ATTENDANCE', 'bazar', `খাবারের হাজিরা লিপিবদ্ধ: ${data.date} (${data.mealType})`);
+    return res;
   }
 
   // 6. Cost Per Meal Analytics Calculator (Total Expense / Total Meals)

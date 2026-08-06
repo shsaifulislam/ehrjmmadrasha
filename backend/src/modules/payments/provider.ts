@@ -1,6 +1,7 @@
 import { PrismaClient, OnlinePaymentStatus } from '@prisma/client';
 import prisma from '../../config/prisma';
 import { logger } from "../../utils/logger";
+import { AppError } from "../../utils/AppError";
 
 export interface PaymentInitParams {
   invoiceId: string;
@@ -64,7 +65,7 @@ export abstract class PaymentProvider {
         });
 
         if (!invoice) {
-          throw new Error(`Invoice ${invoiceId} not found`);
+          throw new AppError(`Invoice ${invoiceId} not found`, 404);
         }
         if (invoice.status === 'PAID') {
           return { success: true, message: 'Invoice already paid (Idempotent)' };
@@ -72,7 +73,7 @@ export abstract class PaymentProvider {
 
         // b. Check amount match
         if (Number(invoice.totalAmount) !== verification.amount) {
-          throw new Error('Amount mismatch between gateway and invoice');
+          throw new AppError('Amount mismatch between gateway and invoice', 400);
         }
 
         // c. Update Invoice
@@ -98,6 +99,7 @@ export abstract class PaymentProvider {
 
       return result;
     } catch (error: any) {
+
       logger.error(`Error processing callback for invoice ${invoiceId}`, error);
       return { success: false, message: error.message || 'Internal Server Error' };
     }

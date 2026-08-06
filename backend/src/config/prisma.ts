@@ -6,6 +6,10 @@ const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:post
 
 const pool = new Pool({
   connectionString,
+  // Production-ready pool settings
+  max: 20,                    // Maximum 20 connections
+  idleTimeoutMillis: 30_000,  // Close idle connections after 30s
+  connectionTimeoutMillis: 30_000, // Robust pool connection timeout
 });
 
 const adapter = new PrismaPg(pool);

@@ -27,6 +27,11 @@ publicResultRouter.get(
   '/exams',
   asyncHandler(ctrl.getPublicExams.bind(ctrl))
 );
+publicResultRouter.get(
+  '/verify/:id',
+  asyncHandler(ctrl.verifyPublicResultCard.bind(ctrl))
+);
+
 
 // ─── ADMIN PROTECTED ROUTES ────────────────────────────
 router.use(requireAuth);

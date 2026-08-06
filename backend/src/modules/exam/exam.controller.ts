@@ -83,6 +83,13 @@ export class ExamController {
     });
     sendSuccess(res, result, 'ফলাফল পাওয়া গেছে');
   }
+
+  async verifyPublicResultCard(req: Request, res: Response): Promise<void> {
+    const { id } = req.params as { id: string };
+    const result = await examService.verifyPublicResultCard(id);
+    sendSuccess(res, result, 'অফিসিয়াল ফলাফল ভেরিফিকেশন');
+  }
 }
 
 export const examController = new ExamController();
+

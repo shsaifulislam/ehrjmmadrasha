@@ -230,12 +230,14 @@ export class NotificationService {
   /**
    * Fetch notification logs for Admin UI
    */
-  async getLogs(limit = 50, page = 1) {
-    const skip = (page - 1) * limit;
+  async getLogs(limit: any = 50, page: any = 1) {
+    const limitNum = Number(limit) || 50;
+    const pageNum = Number(page) || 1;
+    const skip = (pageNum - 1) * limitNum;
     const [logs, total] = await Promise.all([
       prisma.notificationLog.findMany({
         skip,
-        take: limit,
+        take: limitNum,
         orderBy: { createdAt: 'desc' },
       }),
       prisma.notificationLog.count(),
@@ -245,9 +247,9 @@ export class NotificationService {
       logs,
       pagination: {
         total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum),
       },
     };
   }

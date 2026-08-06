@@ -26,3 +26,50 @@ yarn-debug.log*
 # Database / Storage uploads
 /backend/uploads/*
 !/backend/uploads/.gitkeep
+
+# =========================
+# Professional Extensions
+# =========================
+
+# Testing & E2E Reports
+playwright-report/
+**/playwright-report/
+test-results/
+**/test-results/
+login-test.json
+
+# Screenshots & Media
+videos/
+scratch/
+artifacts/
+*.png
+
+# Evidence & Logs
+*.log
+*.txt
+backend/build_log.txt
+frontend/build_log.txt
+audit_*.txt
+sbom_*.txt
+health_check_log.txt
+migrate_status.txt
+pm2_list_log.txt
+
+# Database Backups & Dumps
+*.dump
+*.sql
+
+# Lighthouse & HTML Reports
+*.html
+
+# Scratch & Temporary Scripts
+scratch/
+*.py
+check-db.js
+get-class.js
+seed-finance.js
+seed-finance.ts
+test-*.ts
+test-*.js
+debug-*.py
+rcscriptsverify_student_flow.ts

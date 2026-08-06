@@ -63,6 +63,34 @@ export class AdmissionController {
     const result = await admissionService.rejectAdmission(id, reason, authReq.user.id);
     sendSuccess(res, result, 'ভর্তি আবেদন বাতিল করা হয়েছে');
   }
+
+  async trackApplication(req: Request, res: Response): Promise<void> {
+    const { query } = req.params as { query: string };
+    const result = await admissionService.trackApplication(query);
+    sendSuccess(res, result, 'ভর্তি আবেদনের স্ট্যাটাস ও ট্র্যাকিং তথ্য');
+  }
+
+  async checkDuplicate(req: Request, res: Response): Promise<void> {
+    const { phone, brn } = req.body as { phone: string; brn?: string };
+    const result = await admissionService.checkDuplicate(phone, brn);
+    sendSuccess(res, result, 'ডুপ্লিকেট চেক ফলাফল');
+  }
+
+  async getAdmissionById(req: Request, res: Response): Promise<void> {
+    const { id } = req.params as { id: string };
+    const result = await admissionService.getAdmissionById(id);
+    sendSuccess(res, result, 'ভর্তি আবেদনের বিস্তারিত তথ্য');
+  }
+
+  async exportAdmissions(req: Request, res: Response): Promise<void> {
+    const { status } = req.query as { status?: AdmissionStatus };
+    const csvData = await admissionService.exportAdmissions(status);
+    
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', `attachment; filename=admissions_${Date.now()}.csv`);
+    res.status(200).send(csvData);
+  }
 }
 
 export const admissionController = new AdmissionController();
+

@@ -1,14 +1,16 @@
 import prisma from '../../config/prisma';
 import { AccountingService } from '../accounting/accounting.service';
+import { AppError } from '../../utils/AppError';
+import { logAudit } from '../../utils/auditLogger';
 
 export class HostelService {
   // 1. Building Creation
-  static async createBuilding(data: { name: string; code: string; address?: string; totalCapacity?: number }) {
+  static async createBuilding(data: { name: string; code: string; address?: string; totalCapacity?: number; createdById?: string }) {
     const existing = await prisma.hostelBuilding.findUnique({ where: { code: data.code } });
     if (existing) {
-      throw new Error('এই বিল্ডিং কোডটি ইতিমধ্যে বিদ্যমান');
+      throw new AppError('এই বিল্ডিং কোডটি ইতিমধ্যে বিদ্যমান', 409);
     }
-    return await prisma.hostelBuilding.create({
+    const building = await prisma.hostelBuilding.create({
       data: {
         name: data.name,
         code: data.code,
@@ -16,6 +18,10 @@ export class HostelService {
         totalCapacity: data.totalCapacity || 0,
       },
     });
+    if (data.createdById) {
+      await logAudit(data.createdById, 'CREATE_HOSTEL_BUILDING', 'hostel', `বিল্ডিং তৈরি: ${data.code} - ${data.name}`);
+    }
+    return building;
   }
 
   // 2. Room & Beds Creation
@@ -25,6 +31,7 @@ export class HostelService {
     floor?: number;
     totalBeds?: number;
     monthlyRent?: number;
+    createdById?: string;
   }) {
     const totalBeds = data.totalBeds || 4;
     const room = await prisma.hostelRoom.create({
@@ -50,6 +57,9 @@ export class HostelService {
       data: { totalCapacity: { increment: totalBeds } },
     });
 
+    if (data.createdById) {
+      await logAudit(data.createdById, 'CREATE_HOSTEL_ROOM', 'hostel', `রুম তৈরি: ${data.roomNumber} (সিট: ${totalBeds})`);
+    }
     return room;
   }
 
@@ -75,18 +85,18 @@ export class HostelService {
   }
 
   // 4. Allocate Bed to Student (With Full Capacity Validation)
-  static async allocateBed(data: { studentId: string; bedId: string; monthlyFee: number }) {
+  static async allocateBed(data: { studentId: string; bedId: string; monthlyFee: number; createdById?: string }) {
     const bed = await prisma.hostelBed.findUnique({
       where: { id: data.bedId },
       include: { room: true },
     });
 
-    if (!bed) throw new Error('হোস্টেল সিট পাওয়া যায়নি');
+    if (!bed) throw new AppError('হোস্টেল সিট পাওয়া যায়নি', 404);
     if (bed.status !== 'VACANT') {
-      throw new Error('এই সিটে ইতিমধ্যেই অন্য ছাত্র বসবাস করছে বা সিটটি বুকড (Fully Occupied)');
+      throw new AppError('এই সিটে ইতিমধ্যেই অন্য ছাত্র বসবাস করছে বা সিটটি বুকড (Fully Occupied)', 400);
     }
 
-    return await prisma.$transaction(async (tx) => {
+    const allocation = await prisma.$transaction(async (tx) => {
       // Mark Bed as OCCUPIED
       await tx.hostelBed.update({
         where: { id: data.bedId },
@@ -104,6 +114,11 @@ export class HostelService {
         include: { student: true, bed: { include: { room: true } } },
       });
     });
+
+    if (data.createdById) {
+      await logAudit(data.createdById, 'ALLOCATE_HOSTEL_BED', 'hostel', `সিট অ্যালটমেন্ট: ${allocation.student.nameBn} - সিট ${bed.bedNumber}`);
+    }
+    return allocation;
   }
 
   // 5. Collect Hostel Monthly Fee with General Ledger Posting
@@ -119,7 +134,7 @@ export class HostelService {
       include: { student: true, bed: true },
     });
 
-    if (!alloc) throw new Error('হোস্টেল এলোকেশন ডাটা পাওয়া যায়নি');
+    if (!alloc) throw new AppError('হোস্টেল এলোকেশন ডাটা পাওয়া যায়নি', 404);
 
     const amount = Number(data.amount);
     const method = data.paymentMethod || 'CASH';
@@ -152,6 +167,8 @@ export class HostelService {
       journalEntryId = journal.id;
     }
 
+    await logAudit(data.paidById, 'COLLECT_HOSTEL_FEE', 'hostel', `হোস্টেল ফি গ্রহণ: ${alloc.student.nameBn} (৳${amount})`);
+
     return {
       voucherNumber,
       amount,
@@ -161,3 +178,4 @@ export class HostelService {
     };
   }
 }
+

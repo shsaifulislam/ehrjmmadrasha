@@ -1,12 +1,18 @@
 import prisma from '../../config/prisma';
 import { AccountingService } from '../accounting/accounting.service';
+import { AppError } from '../../utils/AppError';
+import { logAudit } from '../../utils/auditLogger';
 
 export class InventoryService {
   // 1. Create Category
-  static async createCategory(data: { name: string; code: string; description?: string }) {
+  static async createCategory(data: { name: string; code: string; description?: string; createdById?: string }) {
     const existing = await prisma.inventoryCategory.findUnique({ where: { code: data.code } });
-    if (existing) throw new Error('এই ক্যাটাগরি কোডটি ইতিমধ্যে বিদ্যমান');
-    return await prisma.inventoryCategory.create({ data });
+    if (existing) throw new AppError('এই ক্যাটাগরি কোডটি ইতিমধ্যে বিদ্যমান', 409);
+    const cat = await prisma.inventoryCategory.create({ data: { name: data.name, code: data.code, description: data.description } });
+    if (data.createdById) {
+      await logAudit(data.createdById, 'CREATE_INVENTORY_CATEGORY', 'inventory', `ক্যাটাগরি তৈরি: ${data.code} - ${data.name}`);
+    }
+    return cat;
   }
 
   static async getCategories() {
@@ -25,11 +31,12 @@ export class InventoryService {
     minStockAlert?: number;
     unitPrice?: number;
     reorderLevel?: number;
+    createdById?: string;
   }) {
     const existing = await prisma.inventoryItem.findUnique({ where: { code: data.code } });
-    if (existing) throw new Error('এই আইটেম কোডটি ইতিমধ্যে বিদ্যমান');
+    if (existing) throw new AppError('এই আইটেম কোডটি ইতিমধ্যে বিদ্যমান', 409);
 
-    return await prisma.inventoryItem.create({
+    const item = await prisma.inventoryItem.create({
       data: {
         categoryId: data.categoryId,
         name: data.name,
@@ -41,6 +48,11 @@ export class InventoryService {
         currentStock: 0,
       },
     });
+
+    if (data.createdById) {
+      await logAudit(data.createdById, 'CREATE_INVENTORY_ITEM', 'inventory', `আইটেম তৈরি: ${data.code} - ${data.name}`);
+    }
+    return item;
   }
 
   static async getItems() {
@@ -66,14 +78,14 @@ export class InventoryService {
     createdById: string;
   }) {
     const item = await prisma.inventoryItem.findUnique({ where: { id: data.itemId } });
-    if (!item) throw new Error('ইনভেন্টরি আইটেম পাওয়া যায়নি');
+    if (!item) throw new AppError('ইনভেন্টরি আইটেম পাওয়া যায়নি', 404);
 
     const qty = Number(data.quantity);
-    if (qty <= 0) throw new Error('পরিমাণ ০ এর বেশি হতে হবে');
+    if (qty <= 0) throw new AppError('পরিমাণ ০ এর বেশি হতে হবে', 400);
 
     // INVALID STOCK OUT PROTECTION
     if ((data.movementType === 'STOCK_OUT' || data.movementType === 'DAMAGE') && qty > item.currentStock) {
-      throw new Error(`স্টকে পর্যাপ্ত মালামাল নেই (বর্তমান স্টক: ${item.currentStock} ${item.unit}, ইসু চাওয়া হয়েছে: ${qty} ${item.unit})`);
+      throw new AppError(`স্টকে পর্যাপ্ত মালামাল নেই (বর্তমান স্টক: ${item.currentStock} ${item.unit}, ইসু চাওয়া হয়েছে: ${qty} ${item.unit})`, 400);
     }
 
     const voucherNumber = `STK-${Date.now().toString().slice(-6)}`;
@@ -104,7 +116,7 @@ export class InventoryService {
       }
     }
 
-    return await prisma.$transaction(async (tx) => {
+    const res = await prisma.$transaction(async (tx) => {
       const movement = await tx.stockMovement.create({
         data: {
           itemId: data.itemId,
@@ -126,6 +138,9 @@ export class InventoryService {
 
       return movement;
     });
+
+    await logAudit(data.createdById, 'RECORD_STOCK_MOVEMENT', 'inventory', `স্টক মুভমেন্ট: ${data.movementType} (${qty} ${item.unit} - ${item.name})`);
+    return res;
   }
 
   // 4. Fixed Asset Registration with Accounting Capitalization (Asset 1060 DEBIT)
@@ -141,7 +156,7 @@ export class InventoryService {
     createdById: string;
   }) {
     const existing = await prisma.fixedAsset.findUnique({ where: { assetCode: data.assetCode } });
-    if (existing) throw new Error('এই এসেট কোডটি ইতিমধ্যে বিদ্যমান');
+    if (existing) throw new AppError('এই এসেট কোডটি ইতিমধ্যে বিদ্যমান', 409);
 
     const price = Number(data.purchasePrice);
     const voucherNumber = `AST-${Date.now().toString().slice(-6)}`;
@@ -168,7 +183,7 @@ export class InventoryService {
       journalEntryId = journal.id;
     }
 
-    return await prisma.fixedAsset.create({
+    const asset = await prisma.fixedAsset.create({
       data: {
         assetCode: data.assetCode,
         name: data.name,
@@ -182,6 +197,9 @@ export class InventoryService {
         journalEntryId,
       },
     });
+
+    await logAudit(data.createdById, 'CREATE_FIXED_ASSET', 'inventory', `স্থায়ী সম্পদ তৈরি: ${data.assetCode} - ${data.name} (৳${price})`);
+    return asset;
   }
 
   static async getFixedAssets() {
@@ -201,7 +219,7 @@ export class InventoryService {
     createdById: string;
   }) {
     const asset = await prisma.fixedAsset.findUnique({ where: { id: data.assetId } });
-    if (!asset) throw new Error('স্থায়ী সম্পদ পাওয়া যায়নি');
+    if (!asset) throw new AppError('স্থায়ী সম্পদ পাওয়া যায়নি', 404);
 
     const cost = Number(data.cost);
     const voucherNumber = `MNT-${Date.now().toString().slice(-6)}`;
@@ -228,7 +246,7 @@ export class InventoryService {
       journalEntryId = journal.id;
     }
 
-    return await prisma.$transaction(async (tx) => {
+    const res = await prisma.$transaction(async (tx) => {
       const maintenance = await tx.assetMaintenance.create({
         data: {
           assetId: data.assetId,
@@ -248,5 +266,9 @@ export class InventoryService {
 
       return maintenance;
     });
+
+    await logAudit(data.createdById, 'RECORD_ASSET_MAINTENANCE', 'inventory', `সম্পদ মেন্টেন্যান্স: ${asset.name} (৳${cost})`);
+    return res;
   }
 }
+

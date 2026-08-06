@@ -14,6 +14,10 @@ import prisma from './config/prisma';
 
 const app = express();
 
+// ─── Trust Proxy (required behind Nginx/reverse proxy) ──
+// This ensures rate limiting sees real client IPs, not 127.0.0.1
+app.set('trust proxy', 1);
+
 // ─── Security ───────────────────────────────────────
 app.use(helmet());
 
@@ -113,17 +117,35 @@ import payrollRouter from './modules/payroll/payroll.router';
 import hostelRouter from './modules/hostel/hostel.router';
 import bazarRouter from './modules/bazar/bazar.router';
 import inventoryRouter from './modules/inventory/inventory.router';
+import libraryRouter from './modules/library/library.router';
+import certificateRouter from './modules/certificate/certificate.router';
+import { Student360Controller } from './modules/student/student360.controller';
+import { requireAuth } from './middlewares/auth.middleware';
+import studentRouter from './modules/student/routes/student.routes';
+import guardianRouter from './modules/guardian/routes/guardian.routes';
 
 app.use('/api/auth', authRouter);
 app.use('/api/teacher', teacherPortalRouter);
 app.use('/api/student', studentPortalRouter);
+import transportRouter from './modules/transport/transport.routes';
+
+app.use('/api/admin/students', studentRouter);
+app.use('/api/admin/guardians', guardianRouter);
 app.use('/api/admin/teachers', teacherRouter);
 app.use('/api/admin/staff', staffRouter);
 app.use('/api/admin/payroll', payrollRouter);
 app.use('/api/admin/hostel', hostelRouter);
 app.use('/api/admin/bazar', bazarRouter);
 app.use('/api/admin/inventory', inventoryRouter);
+app.use('/api/admin/library', libraryRouter);
+app.use('/api/certificate', certificateRouter);
+app.use('/api/admin/transport', transportRouter);
+import routineRouter from './modules/academic/routes/routine.routes';
+
+app.get('/api/admin/students/:id/360', requireAuth, Student360Controller.getStudent360);
 app.use('/api/academic', academicRouter);
+app.use('/api/admin', academicRouter);
+app.use('/api/admin/routines', routineRouter);
 app.use('/api/public/academic', academicPublicRouter);
 app.use('/api/admin/fee-types', feeTypeRouter);
 app.use('/api/admin/finance', financeRouter);

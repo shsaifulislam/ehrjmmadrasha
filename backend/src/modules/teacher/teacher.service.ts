@@ -20,8 +20,12 @@ export class TeacherService {
    * Get paginated list of teachers
    */
   async findAll(query: PaginationQuery) {
-    const { page = 1, limit = 20, search = '', sortBy = 'createdAt', sortOrder = 'desc' } = query;
-    const skip = (page - 1) * limit;
+    const pageNum = Number(query.page) || 1;
+    const limitNum = Number(query.limit) || 20;
+    const search = query.search || '';
+    const sortBy = query.sortBy || 'createdAt';
+    const sortOrder = query.sortOrder || 'desc';
+    const skip = (pageNum - 1) * limitNum;
 
     const where: any = { ...notDeleted };
     if (search) {
@@ -37,7 +41,7 @@ export class TeacherService {
         where,
         include: teacherInclude,
         skip,
-        take: limit,
+        take: limitNum,
         orderBy: { [sortBy]: sortOrder },
       }),
       prisma.teacher.count({ where }),
@@ -45,7 +49,7 @@ export class TeacherService {
 
     return {
       teachers,
-      meta: buildPaginationMeta(total, page, limit),
+      meta: buildPaginationMeta(total, pageNum, limitNum),
     };
   }
 

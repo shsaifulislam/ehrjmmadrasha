@@ -7,34 +7,17 @@ import { Button } from "@/components/ui/button";
 import { UserCheck, FileSpreadsheet, Users, CalendarDays, Bell, CheckCircle2, Clock } from "lucide-react";
 import api from "@/lib/axios";
 
-export default function TeacherDashboardPage() {
-  const [stats, setStats] = useState({
-    assignedClassesCount: 3,
-    assignedStudentsCount: 45,
-    todayAttendanceDone: false,
-    pendingMarksExams: 1,
-  });
-  const [isLoading, setIsLoading] = useState(true);
+import { useTeacherDashboard } from "@/hooks/useTeacherPortal";
 
-  useEffect(() => {
-    // Fetch teacher stats if API available
-    async function loadData() {
-      try {
-        const res = await api.get("/public/academic/classes");
-        if (res.data?.data) {
-          setStats(prev => ({
-            ...prev,
-            assignedClassesCount: res.data.data.length || 3
-          }));
-        }
-      } catch (err) {
-        // Fallback gracefully
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    loadData();
-  }, []);
+export default function TeacherDashboardPage() {
+  const { data: teacherData } = useTeacherDashboard();
+
+  const stats = {
+    assignedClassesCount: teacherData?.assignedClassesCount || 3,
+    assignedStudentsCount: teacherData?.assignedStudentsCount || 45,
+    todayAttendanceDone: teacherData?.todayAttendanceDone || false,
+    pendingMarksExams: teacherData?.pendingMarksExams || 1,
+  };
 
   return (
     <div className="space-y-6">

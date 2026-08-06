@@ -85,14 +85,73 @@ export function AdmissionClient() {
   const [confirmed, setConfirmed] = useState(false);
   const [submittedData, setSubmittedData] = useState<any>(null);
 
-  // Validation State
   const [phoneError, setPhoneError] = useState("");
+  const [hasSavedDraft, setHasSavedDraft] = useState(false);
+
+  // Check Local Storage for Saved Draft on Mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("ehrj_admission_draft");
+      if (saved) {
+        setHasSavedDraft(true);
+      }
+    } catch (e) {}
+  }, []);
+
+  // Restore Draft Function
+  const restoreDraft = () => {
+    try {
+      const saved = localStorage.getItem("ehrj_admission_draft");
+      if (saved) {
+        const data = JSON.parse(saved);
+        if (data.applicantName) setApplicantName(data.applicantName);
+        if (data.fatherName) setFatherName(data.fatherName);
+        if (data.motherName) setMotherName(data.motherName);
+        if (data.phone) setPhone(data.phone);
+        if (data.dateOfBirth) setDateOfBirth(data.dateOfBirth);
+        if (data.gender) setGender(data.gender);
+        if (data.address) setAddress(data.address);
+        if (data.classId) setClassId(data.classId);
+        toast.success("অসমাপ্ত ভর্তি ড্রাফট পুনরুদ্ধার করা হয়েছে!");
+        setHasSavedDraft(false);
+      }
+    } catch (e) {
+      toast.error("ড্রাফট লোড করতে ব্যর্থ হয়েছে");
+    }
+  };
+
+  const clearDraft = () => {
+    localStorage.removeItem("ehrj_admission_draft");
+    setHasSavedDraft(false);
+    toast.info("ড্রাফট মুছে ফেলা হয়েছে");
+  };
+
+  // Auto-Save Draft to LocalStorage when fields change
+  useEffect(() => {
+    if (applicantName || phone || fatherName) {
+      try {
+        const draft = {
+          applicantName,
+          fatherName,
+          motherName,
+          phone,
+          dateOfBirth,
+          gender,
+          address,
+          classId,
+          savedAt: new Date().toISOString(),
+        };
+        localStorage.setItem("ehrj_admission_draft", JSON.stringify(draft));
+      } catch (e) {}
+    }
+  }, [applicantName, phone, fatherName, motherName, dateOfBirth, gender, address, classId]);
 
   useEffect(() => {
     if (initialDept && DEPARTMENTS_LIST.some((d) => d.id === initialDept)) {
       setSelectedDept(initialDept);
     }
   }, [initialDept]);
+
 
   // Handle Photo Preview
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,7 +179,7 @@ export function AdmissionClient() {
 
   // Step Navigation Validators
   const canGoToStep2 = () => applicantName.trim().length >= 2;
-  const canGoToStep3 = () => phone.trim().length >= 11 && !phoneError;
+  const canGoToStep3 = () => phone.trim().length >= 11 && !phoneError && emergencyPhone.trim().length >= 11 && guardianNid.trim().length >= 10 && village.trim() !== "" && district.trim() !== "";
   const canGoToStep4 = () => Boolean(classId);
 
   const handleNext = () => {
@@ -129,7 +188,7 @@ export function AdmissionClient() {
       return;
     }
     if (step === 2 && !canGoToStep3()) {
-      toast.error("সঠিক ১১ ডিজিটের মোবাইল নম্বর প্রদান করুন");
+      toast.error("সঠিক মোবাইল নম্বর, অভিভাবকের NID এবং বর্তমান ঠিকানা (গ্রাম, জেলা) প্রদান করুন");
       return;
     }
     if (step === 3 && !canGoToStep4()) {
@@ -267,7 +326,27 @@ export function AdmissionClient() {
         </div>
       </header>
 
+      {hasSavedDraft && (
+        <div className="bg-amber-50 dark:bg-amber-950/60 border-b border-amber-200 dark:border-amber-800 px-4 py-3 no-print">
+          <div className="max-w-4xl mx-auto flex items-center justify-between flex-wrap gap-2 text-xs sm:text-sm">
+            <div className="flex items-center gap-2 text-amber-800 dark:text-amber-200 font-medium">
+              <AlertCircle className="h-4 w-4 shrink-0 text-amber-600" />
+              <span>আপনার একটি সংরক্ষণ করা অসমাপ্ত ভর্তি ড্রাফট পাওয়া গেছে।</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button size="sm" onClick={restoreDraft} className="bg-amber-600 hover:bg-amber-700 text-white h-7 text-xs px-3">
+                পুনরুদ্ধার করুন
+              </Button>
+              <Button size="sm" variant="ghost" onClick={clearDraft} className="text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900 h-7 text-xs px-2">
+                বাতিল
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Main Container */}
+
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-1 w-full space-y-8">
         {/* Page Title Header */}
         <div className="text-center space-y-2 no-print">

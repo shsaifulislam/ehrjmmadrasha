@@ -4,6 +4,8 @@ import prisma from '../../config/prisma';
 import { AppError } from '../../utils/AppError';
 import { BulkAttendanceInput } from './attendance.schema';
 import { AttendanceStatus } from '@prisma/client';
+import { AttendanceLockService } from './services/AttendanceLockService';
+import { AttendanceNotificationService } from './services/AttendanceNotificationService';
 
 export class AttendanceService {
   /**
@@ -88,6 +90,9 @@ export class AttendanceService {
    * Bulk save/update attendance using transaction
    */
   async bulkSaveAttendance(input: BulkAttendanceInput, recordedById: string) {
+    // 1. Check Date Lock Policy
+    AttendanceLockService.checkDateLock(input.date);
+
     const targetDate = this.parseDate(input.date);
 
     const targetClass = await prisma.class.findFirst({
@@ -114,9 +119,14 @@ export class AttendanceService {
       throw new AppError(`কিছু ছাত্র উক্ত শ্রেণীতে অন্তর্ভুক্ত নয় অথবা নিষ্ক্রিয়`, 400);
     }
 
+    const absentStudentIds: string[] = [];
+
     const result = await prisma.$transaction(async (tx) => {
       const saved: any[] = [];
       for (const item of input.attendances) {
+        if (item.status === 'ABSENT') {
+          absentStudentIds.push(item.studentId);
+        }
         const att = await tx.attendance.upsert({
           where: {
             studentId_date: {

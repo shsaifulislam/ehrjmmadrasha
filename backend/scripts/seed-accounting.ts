@@ -21,6 +21,7 @@ async function seedChartOfAccounts() {
     { code: '3020', name: 'ভর্তি ফি আয় (Admission Fee Income)', type: 'INCOME', isSystem: true, description: 'অনলাইন ও অফলাইন ভর্তি ফি' },
     { code: '3030', name: 'আবাসিক ও খাবার ফি (Hostel & Food Fee)', type: 'INCOME', isSystem: true, description: 'আবাসিক ছাত্র ফি' },
     { code: '3040', name: 'দান ও অনুদান (Donation Income)', type: 'INCOME', isSystem: true, description: 'সাধারণ ও বিশেষ দান' },
+    { code: '3050', name: 'লাইব্রেরি জরিমানা আয় (Library Fine Income)', type: 'INCOME', isSystem: true, description: 'বই দেরিতে ফেরত বা হারানোর জরিমানা' },
 
     // Expenses (4000)
     { code: '4010', name: 'শিক্ষকদের বেতন (Teacher Salary Expense)', type: 'EXPENSE', isSystem: true, description: 'শিক্ষকদের মাসিক বেতন' },
