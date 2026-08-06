@@ -10,6 +10,8 @@
     "noImplicitAny": false,
     "types": ["node"],
     "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
     "rootDir": "."
   },
   "include": ["src/**/*", "scripts/**/*"]
