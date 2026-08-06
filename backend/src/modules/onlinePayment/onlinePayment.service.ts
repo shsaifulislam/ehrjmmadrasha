@@ -279,12 +279,14 @@ export class OnlinePaymentService {
   /**
    * Get Online Payment Transactions History for Admin UI
    */
-  async getTransactions(limit = 50, page = 1) {
-    const skip = (page - 1) * limit;
+  async getTransactions(limit: any = 50, page: any = 1) {
+    const limitNum = Number(limit) || 50;
+    const pageNum = Number(page) || 1;
+    const skip = (pageNum - 1) * limitNum;
     const [transactions, total] = await Promise.all([
       prisma.onlinePaymentTransaction.findMany({
         skip,
-        take: limit,
+        take: limitNum,
         orderBy: { createdAt: 'desc' },
         include: {
           invoice: { include: { student: { select: { id: true, studentId: true, nameBn: true } } } },
@@ -298,9 +300,9 @@ export class OnlinePaymentService {
       transactions,
       pagination: {
         total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum),
       },
     };
   }

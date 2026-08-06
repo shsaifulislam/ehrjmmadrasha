@@ -1,5 +1,6 @@
 import { PaymentProvider, PaymentInitParams, PaymentVerifyParams, PaymentVerificationResult } from './provider';
 import { logger } from '../../utils/logger';
+import { AppError } from '../../utils/AppError';
 
 export class BkashProvider extends PaymentProvider {
   private appKey: string;
@@ -34,9 +35,10 @@ export class BkashProvider extends PaymentProvider {
       };
     } catch (error) {
       logger.error('[bKash Provider] Error creating payment session', error);
-      throw new Error('bKash payment initialization failed');
+      throw new AppError('bKash payment initialization failed', 502);
     }
   }
+
 
   async verifyCallback(params: PaymentVerifyParams): Promise<PaymentVerificationResult> {
     const { transactionId, gatewayStatus, gatewayAmount } = params;

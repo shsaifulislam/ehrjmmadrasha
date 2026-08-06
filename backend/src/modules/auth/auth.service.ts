@@ -53,14 +53,27 @@ export class AuthService {
    * Login — validate credentials and return tokens + user
    */
   async login(input: LoginInput, ipAddress?: string) {
-    const user = await prisma.user.findUnique({
-      where: { username: input.username },
+    const identifier = input.username.trim();
+    const user = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { username: identifier },
+          { student: { studentId: identifier } },
+          { student: { guardian: { phone: identifier } } },
+          { teacher: { phone: identifier } },
+          { teacher: { teacherId: identifier } },
+          { staff: { phone: identifier } },
+          { staff: { employeeId: identifier } },
+        ],
+      },
       include: userInclude,
     });
 
+
     if (!user || !(await bcrypt.compare(input.password, user.passwordHash))) {
-      throw new AppError('ইউজারনেম বা পাসওয়ার্ড সঠিক নয়', 401);
+      throw new AppError('ইউজারনেম, ফোন নম্বর বা পাসওয়ার্ড সঠিক নয়', 401);
     }
+
 
     if (!user.isActive) {
       throw new AppError('এই অ্যাকাউন্টটি নিষ্ক্রিয় করা হয়েছে', 401);

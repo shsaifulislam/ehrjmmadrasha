@@ -1,12 +1,13 @@
 // backend/src/modules/teacherPortal/teacherPortal.routes.ts
 import { Router, Request, Response } from 'express';
-import { requireAuth } from '../../middlewares/auth.middleware';
+import { requireAuth, requireRole } from '../../middlewares/auth.middleware';
 import { asyncHandler } from '../../shared/utils/asyncHandler';
 import { sendSuccess } from '../../shared/utils/response';
 import prisma from '../../config/prisma';
 
 const router = Router();
 router.use(requireAuth);
+router.use(requireRole('TEACHER', 'ADMIN')); // Only teachers and admins can access
 
 // Teacher Dashboard Data
 router.get(

@@ -316,10 +316,23 @@ export function ResultsClient() {
                     <strong className="text-slate-800 dark:text-slate-200 font-bold">{resultCard.student.roll}</strong>
                   </div>
                   <div>
-                    <span className="text-slate-500 dark:text-slate-400 block text-xs">স্টুডент আইডি</span>
+                    <span className="text-slate-500 dark:text-slate-400 block text-xs">স্টুডেন্ট আইডি</span>
                     <strong className="text-slate-800 dark:text-slate-200 font-mono">{resultCard.student.studentId}</strong>
                   </div>
                 </div>
+
+                {/* Digital Verification Box */}
+                <div className="flex items-center justify-between gap-2 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs no-print">
+                  <span className="text-emerald-800 dark:text-emerald-300 font-medium">অফিশিয়াল ডিজিটাল ভেরিফিকেশন রেকর্ড:</span>
+                  <Link
+                    href={`/verify/result/${resultCard.student.id}`}
+                    target="_blank"
+                    className="font-mono text-emerald-700 dark:text-emerald-400 underline hover:text-emerald-900 font-bold"
+                  >
+                    ভেরিফিকেশন বিবরণী দেখুন &rarr;
+                  </Link>
+                </div>
+
 
                 {/* Subject Mark Breakdown Table */}
                 <div className="border rounded-xl overflow-hidden shadow-2xs">

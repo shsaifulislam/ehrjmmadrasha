@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { UserCheck, PlusCircle, Search, RefreshCw, Briefcase, Phone } from 'lucide-react';
+import { UserCheck, PlusCircle, Search, RefreshCw, Briefcase, Phone, Download } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface Staff {
   id: string;
@@ -53,6 +54,29 @@ export default function StaffDirectoryPage() {
     fetchStaff();
   }, []);
 
+  const handleExportCSV = () => {
+    if (staffList.length === 0) {
+      toast.error('এক্সপোর্ট করার মতো কোনো কর্মচারী রেকর্ড পাওয়া যায়নি');
+      return;
+    }
+    const headers = 'Employee ID,Name,Phone,Designation,Department,Payment Method\n';
+    const rows = staffList
+      .map(
+        (s) =>
+          `"${s.employeeId || ''}","${s.name || ''}","${s.phone || ''}","${s.designation || ''}","${s.department || ''}","${s.paymentMethod || ''}"`
+      )
+      .join('\n');
+    const blob = new Blob([headers + rows], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `staff_directory_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success('কর্মচারী তালিকা CSV ফাইল আকারে ডাউনলোড হয়েছে!');
+  };
+
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -68,9 +92,10 @@ export default function StaffDirectoryPage() {
         nid: '',
         paymentMethod: 'CASH',
       });
+      toast.success('নতুন কর্মচারী সফলভাবে যুক্ত হয়েছেন');
       fetchStaff();
     } catch (err: any) {
-      alert(err.response?.data?.message || 'কর্মচারী যুক্ত করতে সমস্যা হয়েছে');
+      toast.error(err.response?.data?.message || 'কর্মচারী যুক্ত করতে সমস্যা হয়েছে');
     } finally {
       setSubmitting(false);
     }
@@ -88,14 +113,18 @@ export default function StaffDirectoryPage() {
           <p className="text-sm text-slate-500">মাদ্রাসার অশিক্ষক কর্মচারী (অফিস সহকারী, হিসাবরক্ষক, ড্রাইভার, বাবুর্চি, সিকিউরিটি গার্ড) ব্যবস্থাপনা</p>
         </div>
         <div className="flex gap-2">
+          <Button variant="outline" onClick={handleExportCSV} className="border-emerald-600 text-emerald-800 dark:text-emerald-300 font-medium text-xs">
+            <Download className="w-4 h-4 mr-1.5" /> এক্সপোর্ট (CSV)
+          </Button>
           <Button variant="outline" onClick={fetchStaff} disabled={loading}>
             <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} /> রিফ্রেশ
           </Button>
-          <Button onClick={() => setShowModal(true)} className="bg-emerald-600 hover:bg-emerald-700 text-white">
-            <PlusCircle className="w-4 h-4 mr-2" /> নতুন কর্মচারী যুক্ত করুন
+          <Button onClick={() => setShowModal(true)} className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">
+            <PlusCircle className="w-4 h-4 mr-1.5" /> নতুন কর্মচারী যুক্ত করুন
           </Button>
         </div>
       </div>
+
 
       <Card>
         <CardHeader className="pb-3">

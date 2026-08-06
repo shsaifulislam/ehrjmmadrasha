@@ -1,4 +1,6 @@
 import prisma from '../../config/prisma';
+import { AppError } from '../../utils/AppError';
+import { logAudit } from '../../utils/auditLogger';
 
 export class StaffService {
   static async getStaffList(query?: { search?: string; designation?: string }) {
@@ -33,15 +35,16 @@ export class StaffService {
     address?: string;
     nid?: string;
     paymentMethod?: string;
+    actorId?: string;
   }) {
     const empId = data.employeeId || `STF${Math.floor(1000 + Math.random() * 9000)}`;
 
     const existing = await prisma.staff.findUnique({ where: { employeeId: empId } });
     if (existing) {
-      throw new Error('এই এমপ্লয়ি আইডি ইতিমধ্যে বিদ্যমান');
+      throw new AppError('এই এমপ্লয়ি আইডি ইতিমধ্যে বিদ্যমান', 409);
     }
 
-    return await prisma.staff.create({
+    const staff = await prisma.staff.create({
       data: {
         employeeId: empId,
         name: data.name,
@@ -55,6 +58,11 @@ export class StaffService {
         isActive: true,
       },
     });
+
+    if (data.actorId) {
+      await logAudit(data.actorId, 'CREATE_STAFF', 'staff', `কর্মচারী তৈরি: ${empId} - ${data.name}`);
+    }
+    return staff;
   }
 
   static async getStaffById(id: string) {
@@ -70,7 +78,8 @@ export class StaffService {
         },
       },
     });
-    if (!staff) throw new Error('কর্মচারী পাওয়া যায়নি');
+    if (!staff) throw new AppError('কর্মচারী পাওয়া যায়নি', 404);
     return staff;
   }
 }
+

@@ -54,13 +54,15 @@ export class DownloadService {
     return deleted;
   }
 
-  async getAdminDownloads(limit = 50, page = 1) {
-    const skip = (page - 1) * limit;
+  async getAdminDownloads(limit: any = 50, page: any = 1) {
+    const limitNum = Number(limit) || 50;
+    const pageNum = Number(page) || 1;
+    const skip = (pageNum - 1) * limitNum;
     const [items, total] = await Promise.all([
       prisma.download.findMany({
         where: { isDeleted: false },
         skip,
-        take: limit,
+        take: limitNum,
         orderBy: { createdAt: 'desc' },
       }),
       prisma.download.count({ where: { isDeleted: false } }),
@@ -68,16 +70,18 @@ export class DownloadService {
 
     return {
       items,
-      pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
+      pagination: { total, page: pageNum, limit: limitNum, totalPages: Math.ceil(total / limitNum) },
     };
   }
 
-  async getPublicDownloads(category?: string, limit = 30, page = 1) {
-    const cacheKey = `cache:public:downloads:category_${category || 'all'}:limit_${limit}:page_${page}`;
+  async getPublicDownloads(category?: string, limit: any = 30, page: any = 1) {
+    const limitNum = Number(limit) || 30;
+    const pageNum = Number(page) || 1;
+    const cacheKey = `cache:public:downloads:category_${category || 'all'}:limit_${limitNum}:page_${pageNum}`;
     const cached = await cacheService.get<any>(cacheKey);
     if (cached) return cached;
 
-    const skip = (page - 1) * limit;
+    const skip = (pageNum - 1) * limitNum;
     const whereCondition = {
       isDeleted: false,
       ...(category ? { category } : {}),
@@ -87,7 +91,7 @@ export class DownloadService {
       prisma.download.findMany({
         where: whereCondition,
         skip,
-        take: limit,
+        take: limitNum,
         orderBy: { createdAt: 'desc' },
       }),
       prisma.download.count({ where: whereCondition }),
@@ -95,7 +99,7 @@ export class DownloadService {
 
     const result = {
       items,
-      pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
+      pagination: { total, page: pageNum, limit: limitNum, totalPages: Math.ceil(total / limitNum) },
     };
 
     await cacheService.set(cacheKey, result, 1800); // 30 minutes TTL

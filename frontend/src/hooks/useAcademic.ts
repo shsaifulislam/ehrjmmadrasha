@@ -168,3 +168,57 @@ export function useDeleteStudent() {
     onSuccess: () => qc.invalidateQueries({ queryKey: ["students"] }),
   });
 }
+
+export function useStudent360(id: string) {
+  return useQuery({
+    queryKey: ["student360", id],
+    queryFn: async () => {
+      const { data } = await api.get(`/academic/students/${id}/360`);
+      return data.data;
+    },
+    enabled: !!id,
+  });
+}
+
+export function usePromoteStudent() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, nextClassId, nextSessionId, nextRoll }: { id: string; nextClassId: string; nextSessionId?: string; nextRoll: number }) =>
+      api.post(`/academic/students/${id}/promote`, { nextClassId, nextSessionId, nextRoll }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["students"] }),
+  });
+}
+
+export function useTransferStudent() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, remarks }: { id: string; remarks: string }) =>
+      api.post(`/academic/students/${id}/transfer`, { remarks }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["students"] }),
+  });
+}
+
+export function useAddStudentDocument() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ studentId, body }: { studentId: string; body: any }) =>
+      api.post(`/academic/students/${studentId}/documents`, body),
+    onSuccess: (_, { studentId }) => {
+      qc.invalidateQueries({ queryKey: ["students"] });
+      qc.invalidateQueries({ queryKey: ["student360", studentId] });
+    },
+  });
+}
+
+export function useDeleteStudentDocument() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ studentId, docId }: { studentId: string; docId: string }) =>
+      api.delete(`/academic/students/documents/${docId}`),
+    onSuccess: (_, { studentId }) => {
+      qc.invalidateQueries({ queryKey: ["students"] });
+      qc.invalidateQueries({ queryKey: ["student360", studentId] });
+    },
+  });
+}
+

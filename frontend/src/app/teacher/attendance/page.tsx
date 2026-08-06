@@ -8,50 +8,35 @@ import { UserCheck, Save, Check, X, Clock, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import api from "@/lib/axios";
 
+import { useTeacherClasses, useTeacherStudents, useSubmitClassAttendance } from "@/hooks/useTeacherPortal";
+
 export default function TeacherAttendancePage() {
-  const [classes, setClasses] = useState<any[]>([]);
   const [selectedClassId, setSelectedClassId] = useState("");
-  const [students, setStudents] = useState<any[]>([]);
   const [attendanceMap, setAttendanceMap] = useState<Record<string, "PRESENT" | "ABSENT" | "LATE">>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const { data: classesData, isLoading: loadingClasses } = useTeacherClasses();
+  const classes = Array.isArray(classesData) ? classesData : (classesData as any)?.data || [];
 
   useEffect(() => {
-    async function loadClasses() {
-      try {
-        const res = await api.get("/public/academic/classes");
-        if (res.data?.data) {
-          setClasses(res.data.data);
-          if (res.data.data.length > 0) {
-            setSelectedClassId(res.data.data[0].id);
-          }
-        }
-      } catch (err) {
-        toast.error("ক্লাস তালিকা লোড করতে ব্যর্থ হয়েছে");
-      } finally {
-        setIsLoading(false);
-      }
+    if (classes.length > 0 && !selectedClassId) {
+      setSelectedClassId(classes[0].id);
     }
-    loadClasses();
-  }, []);
+  }, [classes, selectedClassId]);
+
+  const { data: studentsData, isLoading: loadingStudents } = useTeacherStudents(selectedClassId || undefined);
+  const students = Array.isArray(studentsData) ? studentsData : (studentsData as any)?.data || [];
+
+  const submitAttendance = useSubmitClassAttendance();
 
   useEffect(() => {
-    if (!selectedClassId) return;
-    // Mock or fetch class students
-    const mockStudents = [
-      { id: "s1", roll: 1, nameBn: "মুহাম্মদ আব্দুল্লাহ", status: "PRESENT" },
-      { id: "s2", roll: 2, nameBn: "উমর ফারুক", status: "PRESENT" },
-      { id: "s3", roll: 3, nameBn: "আবু বকর সিদ্দীক", status: "PRESENT" },
-      { id: "s4", roll: 4, nameBn: "উসমান গনি", status: "PRESENT" },
-      { id: "s5", roll: 5, nameBn: "আলী ইবনে আবী তালিব", status: "PRESENT" },
-    ];
-    setStudents(mockStudents);
-    const initialMap: Record<string, "PRESENT" | "ABSENT" | "LATE"> = {};
-    mockStudents.forEach(s => {
-      initialMap[s.id] = "PRESENT";
-    });
-    setAttendanceMap(initialMap);
-  }, [selectedClassId]);
+    if (students.length > 0) {
+      const initialMap: Record<string, "PRESENT" | "ABSENT" | "LATE"> = {};
+      students.forEach((s: any) => {
+        initialMap[s.id] = "PRESENT";
+      });
+      setAttendanceMap(initialMap);
+    }
+  }, [students]);
 
   const handleStatusChange = (studentId: string, status: "PRESENT" | "ABSENT" | "LATE") => {
     setAttendanceMap(prev => ({ ...prev, [studentId]: status }));
@@ -59,22 +44,30 @@ export default function TeacherAttendancePage() {
 
   const handleMarkAll = (status: "PRESENT" | "ABSENT") => {
     const updated: Record<string, "PRESENT" | "ABSENT" | "LATE"> = {};
-    students.forEach(s => {
+    students.forEach((s: any) => {
       updated[s.id] = status;
     });
     setAttendanceMap(updated);
   };
 
   const handleSaveAttendance = async () => {
-    setIsSubmitting(true);
+    if (!selectedClassId || students.length === 0) {
+      toast.error("শ্রেণী ও শিক্ষার্থী নির্বাচন করুন");
+      return;
+    }
     try {
-      // Send to backend API
-      await new Promise(r => setTimeout(r, 600));
-      toast.success("আজকের হাজিরা সফলভাবে সংরক্ষিত হয়েছে!");
-    } catch (err) {
-      toast.error("হাজিরা সংরক্ষণে ব্যর্থ হয়েছে");
-    } finally {
-      setIsSubmitting(false);
+      const records = Object.entries(attendanceMap).map(([studentId, status]) => ({
+        studentId,
+        status: status === "LATE" ? "ABSENT" : status,
+      }));
+      await submitAttendance.mutateAsync({
+        classId: selectedClassId,
+        date: new Date().toISOString(),
+        records,
+      });
+      toast.success("আজকের হাজিরা ডাটাবেসে সফলভাবে সংরক্ষিত হয়েছে!");
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || "হাজিরা সংরক্ষণে ব্যর্থ হয়েছে");
     }
   };
 
@@ -94,7 +87,7 @@ export default function TeacherAttendancePage() {
             onChange={(e) => setSelectedClassId(e.target.value)}
             className="border rounded-md px-3 py-2 text-sm bg-white font-medium focus:ring-2 focus:ring-emerald-600 outline-none w-full sm:w-auto"
           >
-            {classes.map((cls) => (
+            {classes.map((cls: any) => (
               <option key={cls.id} value={cls.id}>
                 {cls.name}
               </option>
@@ -129,7 +122,7 @@ export default function TeacherAttendancePage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {students.map((student) => {
+                {students.map((student: any) => {
                   const currentStatus = attendanceMap[student.id] || "PRESENT";
                   return (
                     <TableRow key={student.id} className="hover:bg-slate-50">
@@ -185,10 +178,10 @@ export default function TeacherAttendancePage() {
             <Button
               className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold"
               onClick={handleSaveAttendance}
-              disabled={isSubmitting}
+              disabled={submitAttendance.isPending}
             >
               <Save className="mr-2 h-4 w-4" />
-              {isSubmitting ? "সংরক্ষণ করা হচ্ছে..." : "হাজিরা সংরক্ষণ করুন"}
+              {submitAttendance.isPending ? "সংরক্ষণ করা হচ্ছে..." : "হাজিরা সংরক্ষণ করুন"}
             </Button>
           </div>
         </CardContent>

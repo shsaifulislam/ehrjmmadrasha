@@ -1,5 +1,7 @@
 import prisma from '../../config/prisma';
 import { AccountingService } from '../accounting/accounting.service';
+import { AppError } from '../../utils/AppError';
+import { logAudit } from '../../utils/auditLogger';
 
 export class PayrollService {
   // 1. Salary Structure Setup (With Immutability check if month is approved)
@@ -12,9 +14,10 @@ export class PayrollService {
     foodAllowance?: number;
     transportAllowance?: number;
     otherAllowance?: number;
+    actorId?: string;
   }) {
     if (!data.teacherId && !data.staffId) {
-      throw new Error('শিক্ষক অথবা কর্মচারীর আইডি প্রদান করতে হবে');
+      throw new AppError('শিক্ষক অথবা কর্মচারীর আইডি প্রদান করতে হবে', 400);
     }
 
     const basic = Number(data.basicSalary);
@@ -26,8 +29,9 @@ export class PayrollService {
 
     const grossSalary = basic + house + medical + food + transport + other;
 
+    let res;
     if (data.teacherId) {
-      return await prisma.staffSalaryStructure.upsert({
+      res = await prisma.staffSalaryStructure.upsert({
         where: { teacherId: data.teacherId },
         update: {
           basicSalary: basic,
@@ -50,7 +54,7 @@ export class PayrollService {
         },
       });
     } else {
-      return await prisma.staffSalaryStructure.upsert({
+      res = await prisma.staffSalaryStructure.upsert({
         where: { staffId: data.staffId },
         update: {
           basicSalary: basic,
@@ -73,6 +77,11 @@ export class PayrollService {
         },
       });
     }
+
+    if (data.actorId) {
+      await logAudit(data.actorId, 'SET_SALARY_STRUCTURE', 'payroll', `স্যালারি স্ট্রাকচার সেট: ৳${grossSalary}`);
+    }
+    return res;
   }
 
   // 2. Staff Advance Request
@@ -113,19 +122,20 @@ export class PayrollService {
           ],
         });
       }
+      await logAudit(data.disbursedById, 'CREATE_STAFF_ADVANCE', 'payroll', `স্টাফ এডভান্স প্রদান: ৳${amount}`);
     }
 
     return advance;
   }
 
   // 3. Batch Monthly Payroll Generation (With Duplicate Protection)
-  static async generateMonthlyPayroll(year: number, month: number) {
+  static async generateMonthlyPayroll(year: number, month: number, actorId?: string) {
     const existingMonth = await prisma.payrollMonth.findUnique({
       where: { year_month: { year, month } },
     });
 
     if (existingMonth) {
-      throw new Error(`${year} সালের ${month} মাসের পে-রোল ইতিমধ্যে জেনারেট করা হয়েছে`);
+      throw new AppError(`${year} সালের ${month} মাসের পে-রোল ইতিমধ্যে জেনারেট করা হয়েছে`, 400);
     }
 
     const [teachers, staffList] = await Promise.all([
@@ -226,10 +236,10 @@ export class PayrollService {
     }
 
     if (recordsToCreate.length === 0) {
-      throw new Error('কোনো শিক্ষক বা কর্মচারীর সেলারি স্ট্রাকচার সেট করা নেই। আগে স্যালারি স্ট্রাকচার সেট করুন।');
+      throw new AppError('কোনো শিক্ষক বা কর্মচারীর সেলারি স্ট্রাকচার সেট করা নেই। আগে স্যালারি স্ট্রাকচার সেট করুন।', 400);
     }
 
-    return await prisma.payrollMonth.create({
+    const createdPayrollMonth = await prisma.payrollMonth.create({
       data: {
         year,
         month,
@@ -248,6 +258,12 @@ export class PayrollService {
         },
       },
     });
+
+    if (actorId) {
+      await logAudit(actorId, 'GENERATE_PAYROLL', 'payroll', `পে-রোল জেনারেট: ${month}/${year} (মোট: ৳${totalNetBatch})`);
+    }
+
+    return createdPayrollMonth;
   }
 
   // 4. Payroll Approval & Accrual Double-Entry Journal Posting
@@ -257,9 +273,9 @@ export class PayrollService {
       include: { records: true },
     });
 
-    if (!pMonth) throw new Error('পে-রোল ব্যাচ পাওয়া যায়নি');
+    if (!pMonth) throw new AppError('পে-রোল ব্যাচ পাওয়া যায়নি', 404);
     if (pMonth.status === 'APPROVED' || pMonth.status === 'LOCKED') {
-      throw new Error('এই পে-রোল ব্যাচ ইতিমধ্যে এপ্রুভড ও লকড করা হয়েছে। পরিবর্তন সম্ভব নয়।');
+      throw new AppError('এই পে-রোল ব্যাচ ইতিমধ্যে এপ্রুভড ও লকড করা হয়েছে। পরিবর্তন সম্ভব নয়।', 400);
     }
 
     // Post Salary Accrual Entry:
@@ -306,10 +322,13 @@ export class PayrollService {
       });
     }
 
-    return await prisma.payrollMonth.update({
+    const updatedMonth = await prisma.payrollMonth.update({
       where: { id: pMonth.id },
       data: { status: 'APPROVED' },
     });
+
+    await logAudit(approvedById, 'APPROVE_PAYROLL', 'payroll', `পে-রোল অনুমোদন: ${month}/${year}`);
+    return updatedMonth;
   }
 
   // 5. Get Payroll Month Details
@@ -345,18 +364,18 @@ export class PayrollService {
       },
     });
 
-    if (!record) throw new Error('পে-রোল রেকর্ড পাওয়া যায়নি');
+    if (!record) throw new AppError('পে-রোল রেকর্ড পাওয়া যায়নি', 404);
 
     const amount = Number(data.amountPaid);
     const currentDue = Number(record.dueAmount);
 
     if (amount <= 0) {
-      throw new Error('টাকার পরিমাণ ০ এর বেশি হতে হবে');
+      throw new AppError('টাকার পরিমাণ ০ এর বেশি হতে হবে', 400);
     }
 
     // OVERPAYMENT PROTECTION: Payment Amount <= Remaining Due
     if (amount > currentDue) {
-      throw new Error(`প্রদেয় ব্যালেন্সের (৳${currentDue}) বেশি পেমেন্ট করা যাবে না`);
+      throw new AppError(`প্রদেয় ব্যালেন্সের (৳${currentDue}) বেশি পেমেন্ট করা যাবে না`, 400);
     }
 
     const method = data.paymentMethod || 'CASH';
@@ -390,7 +409,7 @@ export class PayrollService {
       journalEntryId = journal.id;
     }
 
-    return await prisma.$transaction(async (tx) => {
+    const res = await prisma.$transaction(async (tx) => {
       const payment = await tx.salaryPayment.create({
         data: {
           payrollRecordId: data.payrollRecordId,
@@ -425,6 +444,9 @@ export class PayrollService {
 
       return payment;
     });
+
+    await logAudit(data.paidById, 'PROCESS_SALARY_PAYMENT', 'payroll', `বেতন পেমেন্ট প্রদান: ৳${amount} (ভাউচার: ${voucherNumber})`);
+    return res;
   }
 
   // 7. Get Payslip Voucher DTO
@@ -442,7 +464,8 @@ export class PayrollService {
       },
     });
 
-    if (!record) throw new Error('পে-রোল রেকর্ড পাওয়া যায়নি');
+    if (!record) throw new AppError('পে-রোল রেকর্ড পাওয়া যায়নি', 404);
     return record;
   }
 }
+

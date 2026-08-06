@@ -9,6 +9,7 @@ import {
 } from './gateway.interface';
 import { env } from '../../../config/env';
 import { logger } from '../../../utils/logger';
+import { AppError } from '../../../utils/AppError';
 
 export class BkashAdapter implements IPaymentGateway {
   readonly name = 'BKASH';
@@ -27,8 +28,9 @@ export class BkashAdapter implements IPaymentGateway {
     const password = env.BKASH_PASSWORD;
 
     if (!appKey || !appSecret || !username || !password) {
-      throw new Error('bKash API Credentials are incomplete in environment variables');
+      throw new AppError('bKash API Credentials are incomplete in environment variables', 500);
     }
+
 
     const response = await fetch(`${apiUrl}/checkout/token/grant`, {
       method: 'POST',
@@ -43,8 +45,9 @@ export class BkashAdapter implements IPaymentGateway {
     const data = (await response.json()) as { id_token?: string; expires_in?: number; statusMessage?: string };
 
     if (!response.ok || !data.id_token) {
-      throw new Error(`bKash Token Grant Failed: ${data.statusMessage || response.statusText}`);
+      throw new AppError(`bKash Token Grant Failed: ${data.statusMessage || response.statusText}`, 502);
     }
+
 
     this.idToken = data.id_token;
     // Set expiry 5 mins before actual expiry

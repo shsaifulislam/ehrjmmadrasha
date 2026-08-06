@@ -64,4 +64,31 @@ export class AccountingController {
       next(error);
     }
   }
+
+  static async getTrialBalance(req: Request, res: Response, next: NextFunction) {
+    try {
+      const report = await AccountingService.getTrialBalance(req.query as any);
+      return sendSuccess(res, report, 'রেওয়ামিল (Trial Balance) রিপোর্ট তৈরি হয়েছে');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getIncomeStatement(req: Request, res: Response, next: NextFunction) {
+    try {
+      const report = await AccountingService.getIncomeStatement(req.query as any);
+      return sendSuccess(res, report, 'আয়-ব্যয় বিবরণী (Income Statement) তৈরি হয়েছে');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getBalanceSheet(req: Request, res: Response, next: NextFunction) {
+    try {
+      const report = await AccountingService.getBalanceSheet(req.query as any);
+      return sendSuccess(res, report, 'উদ্বৃত্তপত্র (Balance Sheet) তৈরি হয়েছে');
+    } catch (error) {
+      next(error);
+    }
+  }
 }

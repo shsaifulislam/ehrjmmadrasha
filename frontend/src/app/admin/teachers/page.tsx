@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose, DialogFooter } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { UserCog, Plus, Search, Trash2, Pencil, Loader2 } from "lucide-react";
+import { UserCog, Plus, Search, Trash2, Pencil, Loader2, Download } from "lucide-react";
 import api from "@/lib/axios";
 import { toast } from "sonner";
 import type { Teacher } from "@/lib/types";
@@ -40,6 +40,26 @@ export default function TeachersPage() {
   };
 
   useEffect(() => { fetchTeachers(); }, [search]);
+
+  const handleExportCSV = () => {
+    if (teachers.length === 0) {
+      toast.error("এক্সপোর্ট করার মতো কোনো শিক্ষক তথ্য পাওয়া যায়নি");
+      return;
+    }
+    const headers = "Teacher ID,Name,Phone,Designation\n";
+    const rows = teachers
+      .map((t) => `"${t.teacherId || ''}","${t.nameBn || ''}","${t.phone || ''}","${t.designation || ''}"`)
+      .join("\n");
+    const blob = new Blob([headers + rows], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `teachers_list_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success("শিক্ষকদের তালিকা CSV ফরম্যাটে ডাউনলোড হয়েছে!");
+  };
 
   const handleCreate = async () => {
     setSaving(true);
@@ -74,10 +94,15 @@ export default function TeachersPage() {
           <h1 className="text-2xl font-bold tracking-tight">শিক্ষক তালিকা</h1>
           <p className="text-muted-foreground">সকল শিক্ষকের তথ্য পরিচালনা করুন</p>
         </div>
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogTrigger render={
-            <Button><Plus className="mr-2 h-4 w-4" /> নতুন শিক্ষক</Button>
-          } />
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" onClick={handleExportCSV} className="border-emerald-600 text-emerald-800 dark:text-emerald-300 font-medium text-xs">
+            <Download className="mr-1.5 h-4 w-4" /> এক্সপোর্ট (CSV)
+          </Button>
+          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogTrigger render={
+              <Button className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs"><Plus className="mr-1.5 h-4 w-4" /> নতুন শিক্ষক</Button>
+            } />
+
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>নতুন শিক্ষক যোগ করুন</DialogTitle>
@@ -117,6 +142,7 @@ export default function TeachersPage() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
+        </div>
       </div>
 
       {/* Search */}

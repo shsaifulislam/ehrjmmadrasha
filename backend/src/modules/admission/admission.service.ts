@@ -128,7 +128,7 @@ export class AdmissionService {
 
     // Get active academic session
     const activeSession = await prisma.session.findFirst({
-      where: { isActive: true, isDeleted: false },
+      where: { isActive: true },
     });
     if (!activeSession) {
       throw new AppError('কোনো সক্রিয় শিক্ষাবর্ষ পাওয়া যায়নি', 400);
@@ -209,7 +209,87 @@ export class AdmissionService {
         data: { status: AdmissionStatus.APPROVED },
       });
 
-      // 5. Audit Log
+      // 5. Generate Admission Fee Invoice
+      let admissionFeeType = await tx.feeType.findFirst({
+        where: { name: 'Admission Fee' },
+      });
+      if (!admissionFeeType) {
+        admissionFeeType = await tx.feeType.create({
+          data: { name: 'Admission Fee', defaultAmount: 1500.00 },
+        });
+      }
+
+      const isPaid = !!admission.trxId;
+      const invoice = await tx.invoice.create({
+        data: {
+          studentId: student.id,
+          type: 'ADMISSION',
+          month: new Date().getMonth() + 1,
+          year: Number(activeSession.year),
+          totalAmount: admissionFeeType.defaultAmount,
+          status: isPaid ? 'PAID' : 'UNPAID',
+          items: {
+            create: [
+              {
+                feeTypeId: admissionFeeType.id,
+                amount: admissionFeeType.defaultAmount,
+              },
+            ],
+          },
+        },
+      });
+
+      if (isPaid) {
+        let pMethod: any = 'CASH';
+        const methodStr = (admission.paymentMethod || '').toUpperCase();
+        if (methodStr.includes('BKASH')) pMethod = 'BKASH';
+        else if (methodStr.includes('NAGAD')) pMethod = 'NAGAD';
+        else if (methodStr.includes('BANK')) pMethod = 'BANK';
+
+        const payment = await tx.payment.create({
+          data: {
+            invoiceId: invoice.id,
+            amountPaid: invoice.totalAmount,
+            method: pMethod,
+            receivedById: adminUserId,
+          },
+        });
+
+        const voucherNumber = `RCV-ADM-${Date.now()}`;
+        const cashCode = pMethod === 'BKASH' ? '1030' : pMethod === 'NAGAD' ? '1040' : pMethod === 'BANK' ? '1020' : '1010';
+        
+        const cashAcc = await tx.account.findUnique({ where: { code: cashCode } });
+        const incomeAcc = await tx.account.findUnique({ where: { code: '3020' } }); // Admission Fee Income
+
+        if (cashAcc && incomeAcc) {
+          await tx.journalEntry.create({
+            data: {
+              voucherNumber,
+              description: `Admission fee for ${student.studentId}`,
+              reference: `PAY-${payment.id}`,
+              createdById: adminUserId,
+              lines: {
+                create: [
+                  { accountId: cashAcc.id, type: 'DEBIT', amount: invoice.totalAmount },
+                  { accountId: incomeAcc.id, type: 'CREDIT', amount: invoice.totalAmount },
+                ],
+              },
+            },
+          });
+
+          await tx.account.update({
+            where: { id: cashAcc.id },
+            data: { balance: { increment: invoice.totalAmount } },
+          });
+
+          await tx.account.update({
+            where: { id: incomeAcc.id },
+            data: { balance: { increment: invoice.totalAmount } },
+          });
+        }
+      }
+
+      // 6. Audit Log
       await tx.auditLog.create({
         data: {
           userId: adminUserId,
@@ -278,8 +358,10 @@ export class AdmissionService {
    * Get Admissions Queue for Admin UI
    * Hides sensitive data (religion, guardianNid) unless hasSensitiveAccess is true
    */
-  async getAdmissionsQueue(status?: AdmissionStatus, limit = 50, page = 1, hasSensitiveAccess = false) {
-    const skip = (page - 1) * limit;
+  async getAdmissionsQueue(status?: AdmissionStatus, limit: any = 50, page: any = 1, hasSensitiveAccess = false) {
+    const limitNum = Number(limit) || 50;
+    const pageNum = Number(page) || 1;
+    const skip = (pageNum - 1) * limitNum;
     const whereCondition = status ? { status } : {};
 
     const selectFields = {
@@ -315,7 +397,7 @@ export class AdmissionService {
       prisma.admission.findMany({
         where: whereCondition,
         skip,
-        take: limit,
+        take: limitNum,
         orderBy: { createdAt: 'desc' },
         select: selectFields as any, // Cast required due to dynamic select
       }),
@@ -324,9 +406,136 @@ export class AdmissionService {
 
     return {
       admissions,
-      pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
+      pagination: { total, page: pageNum, limit: limitNum, totalPages: Math.ceil(total / limitNum) },
     };
+  }
+
+  /**
+   * Track application by Token, ID, BRN, or Phone number
+   */
+  async trackApplication(query: string) {
+    if (!query || typeof query !== 'string' || query.trim().length < 3) {
+      throw new AppError('অনুগ্রহ করে সঠিক আবেদন আইডি, টোকেন বা ফোন নম্বর দিন', 400);
+    }
+
+    const cleanedQuery = query.trim();
+
+    const admission = await prisma.admission.findFirst({
+      where: {
+        OR: [
+          { verificationToken: cleanedQuery },
+          { id: cleanedQuery },
+          { phone: cleanedQuery },
+          { brn: cleanedQuery },
+        ],
+      },
+      select: {
+        id: true,
+        applicantName: true,
+        applicantNameEn: true,
+        fatherName: true,
+        motherName: true,
+        phone: true,
+        dateOfBirth: true,
+        gender: true,
+        studentType: true,
+        brn: true,
+        bloodGroup: true,
+        address: true,
+        verificationToken: true,
+        status: true,
+        applicationDate: true,
+        photoUrl: true,
+        rejectionReason: true,
+        createdAt: true,
+        class: { select: { id: true, name: true } },
+      },
+    });
+
+    if (!admission) {
+      throw new AppError('প্র প্রদত্ত তথ্যের সাথে কোনো ভর্তি আবেদন পাওয়া যায়নি', 404);
+    }
+
+    return admission;
+  }
+
+  /**
+   * Check Duplicate Applicant
+   */
+  async checkDuplicate(phone: string, brn?: string) {
+    if (!phone) return { isDuplicate: false, existing: null };
+
+    const existing = await prisma.admission.findFirst({
+      where: {
+        OR: [
+          { phone },
+          ...(brn ? [{ brn }] : []),
+        ],
+      },
+      select: {
+        id: true,
+        applicantName: true,
+        status: true,
+        applicationDate: true,
+      },
+    });
+
+    return { isDuplicate: !!existing, existing: existing || null };
+  }
+
+  /**
+   * Get single admission for Admin
+   */
+  async getAdmissionById(admissionId: string) {
+    const admission = await prisma.admission.findUnique({
+      where: { id: admissionId },
+      include: { class: true },
+    });
+    if (!admission) throw new AppError('ভর্তি আবেদন পাওয়া যায়নি', 404);
+    return admission;
+  }
+
+  /**
+   * Export Admissions to CSV
+   */
+  async exportAdmissions(status?: AdmissionStatus) {
+    const whereCondition = status ? { status } : {};
+    const admissions = await prisma.admission.findMany({
+      where: whereCondition,
+      include: { class: true },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    if (!admissions.length) return '';
+
+    const headers = [
+      'ID', 'Applicant Name', 'Phone', 'Class', 'Status', 'Date',
+      'Father Name', 'Mother Name', 'DOB', 'Gender', 'Student Type',
+      'Address', 'Payment Method', 'TRX ID'
+    ].join(',');
+
+    const rows = admissions.map(a => {
+      return [
+        a.id,
+        `"${a.applicantName}"`,
+        a.phone,
+        `"${a.class?.name || ''}"`,
+        a.status,
+        a.applicationDate.toISOString(),
+        `"${a.fatherName || ''}"`,
+        `"${a.motherName || ''}"`,
+        a.dateOfBirth ? a.dateOfBirth.toISOString().split('T')[0] : '',
+        a.gender,
+        a.studentType || '',
+        `"${(a.address || '').replace(/"/g, '""')}"`,
+        a.paymentMethod || '',
+        a.trxId || ''
+      ].join(',');
+    });
+
+    return [headers, ...rows].join('\n');
   }
 }
 
 export const admissionService = new AdmissionService();
+

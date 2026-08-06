@@ -151,8 +151,12 @@ export class AcademicService {
   // ─── STUDENT ────────────────────────────────────────
 
   async findAllStudents(query: PaginationQuery & { classId?: string; sessionId?: string }) {
-    const { page = 1, limit = 20, search = '', sortBy = 'roll', sortOrder = 'asc' } = query;
-    const skip = (page - 1) * limit;
+    const pageNum = Number(query.page) || 1;
+    const limitNum = Number(query.limit) || 20;
+    const search = query.search || '';
+    const sortBy = query.sortBy || 'roll';
+    const sortOrder = query.sortOrder || 'asc';
+    const skip = (pageNum - 1) * limitNum;
 
     const where: any = { ...notDeleted };
     if (query.classId) where.classId = query.classId;
@@ -169,13 +173,13 @@ export class AcademicService {
         where,
         include: studentInclude,
         skip,
-        take: limit,
+        take: limitNum,
         orderBy: { [sortBy]: sortOrder },
       }),
       prisma.student.count({ where }),
     ]);
 
-    return { students, meta: buildPaginationMeta(total, page, limit) };
+    return { students, meta: buildPaginationMeta(total, pageNum, limitNum) };
   }
 
   async findStudentById(id: string) {

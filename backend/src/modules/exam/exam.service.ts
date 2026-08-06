@@ -451,6 +451,31 @@ export class ExamService {
 
     return this.getStudentResultCard(exam.id, student.id);
   }
+
+  async verifyPublicResultCard(resultId: string) {
+    if (!resultId) throw new AppError('ফলাফল আইডি আবশ্যক', 400);
+
+    const student = await prisma.student.findUnique({
+      where: { id: resultId },
+      include: { class: true, session: true },
+    });
+
+    if (!student) {
+      throw new AppError('ফলাফল ভেরিফিকেশন রেকর্ড পাওয়া যায়নি', 404);
+    }
+
+    const latestExam = await prisma.exam.findFirst({
+      where: { isPublished: true, sessionId: student.sessionId },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    if (!latestExam) {
+      throw new AppError('উক্ত শিক্ষার্থীর কোনো প্রকাশিত ফলাফল পাওয়া যায়নি', 404);
+    }
+
+    return this.getStudentResultCard(latestExam.id, student.id);
+  }
 }
 
 export const examService = new ExamService();
+

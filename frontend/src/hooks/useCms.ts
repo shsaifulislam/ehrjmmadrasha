@@ -248,6 +248,32 @@ export function useRejectAdmission() {
   });
 }
 
+export function useAdmissionById(id: string) {
+  return useQuery({
+    queryKey: ["admissionById", id],
+    queryFn: async () => {
+      if (!id) return null;
+      const { data } = await api.get(`/admin/admissions/${id}`);
+      return data.data;
+    },
+    enabled: !!id,
+  });
+}
+
+export function useExportAdmissions() {
+  return async (status?: string) => {
+    const url = status ? `/admin/admissions/export?status=${status}` : '/admin/admissions/export';
+    const response = await api.get(url, { responseType: 'blob' });
+    const urlBlob = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = urlBlob;
+    link.setAttribute('download', `admissions_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+}
+
 export function useVerifyAdmission(token: string) {
   return useQuery<{ 
     id: string; applicantName: string; fatherName: string; motherName: string; phone: string; 
