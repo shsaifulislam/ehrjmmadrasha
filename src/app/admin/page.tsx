@@ -35,6 +35,7 @@ import { INSTITUTION_INFO } from "@/lib/constants";
 import AdminAttendanceCockpit from "@/components/attendance/AdminAttendanceCockpit";
 import AdminExamHub from "@/components/exams/AdminExamHub";
 import AdminFinanceHub from "@/components/finance/AdminFinanceHub";
+import AdminDocumentHub from "@/components/documents/AdminDocumentHub";
 
 interface AdminStats {
   totalStudents: number;
@@ -795,25 +796,8 @@ export default function AdminDashboardPage() {
             {activeTab === "FINANCE" && <AdminFinanceHub />}
 
             {/* 8. DOCUMENTS */}
-            {activeTab === "DOCUMENTS" && (
-              <div className="bg-white rounded-lg border border-[#E2E8F0] p-6 shadow-sm space-y-4">
-                <h2 className="text-base font-bold text-[#0B1914] border-b pb-2">ডিজিটাল নথিপত্র ও সনদ ইস্যু</h2>
-                <div className="space-y-3 text-xs">
-                  <div className="p-3 border rounded-lg flex items-center justify-between">
-                    <span>ছাত্র আইডি কার্ড প্রিন্ট জেনারেটর (ID Card Bulk Generator)</span>
-                    <button onClick={() => alert("আইডি কার্ড প্রস্তুত হচ্ছে...")} className="text-[#0D5C3A] font-bold">
-                      জেনারেট করুন
-                    </button>
-                  </div>
-                  <div className="p-3 border rounded-lg flex items-center justify-between">
-                    <span>হিফজ সমাপন সনদপত্র ও চারিত্রিক প্রশংসাপত্র ইস্যু</span>
-                    <Link href="/verify" className="text-[#0D5C3A] font-bold">
-                      যাচাই পেজে যান →
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            )}
+            {activeTab === "DOCUMENTS" && <AdminDocumentHub />}
+
 
             {/* 9. COMMUNICATION */}
             {activeTab === "COMMUNICATION" && (

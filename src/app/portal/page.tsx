@@ -24,6 +24,7 @@ import {
 import GuardianAttendanceViewer from "@/components/attendance/GuardianAttendanceViewer";
 import GuardianResultsViewer from "@/components/exams/GuardianResultsViewer";
 import GuardianFinanceViewer from "@/components/finance/GuardianFinanceViewer";
+import GuardianDocumentsViewer from "@/components/documents/GuardianDocumentsViewer";
 
 export default function StudentGuardianPortalPage() {
   const [classes, setClasses] = useState<any[]>([]);
@@ -351,40 +352,11 @@ export default function StudentGuardianPortalPage() {
             {/* 6. FINANCE */}
             {activeTab === "FINANCE" && <GuardianFinanceViewer />}
 
-            {/* 7. DOCUMENTS */}
-            {activeTab === "DOCUMENTS" && (
-              <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-3">
-                <h2 className="text-base font-bold text-[#083B25] border-b pb-2">ডিজিটাল নথিপত্র ও কার্ড</h2>
-                <div className="p-3 border rounded-lg flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-[#0D5C3A]" />
-                    <span>শিক্ষার্থী ডিজিটাল আইডি কার্ড ({student.studentIdNumber})</span>
-                  </div>
-                  <button
-                    onClick={() => alert("আইডি কার্ড ডাউনলোড হচ্ছে...")}
-                    className="text-[#0D5C3A] font-bold hover:underline"
-                  >
-                    ডাউনলোড
-                  </button>
-                </div>
-              </div>
+            {/* 7 & 8. DOCUMENTS & CERTIFICATES */}
+            {(activeTab === "DOCUMENTS" || activeTab === "CERTIFICATES") && (
+              <GuardianDocumentsViewer />
             )}
 
-            {/* 8. CERTIFICATES */}
-            {activeTab === "CERTIFICATES" && (
-              <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-3">
-                <h2 className="text-base font-bold text-[#083B25] border-b pb-2">সনদপত্র ও প্রত্যয়ন</h2>
-                <div className="p-3 border rounded-lg flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                    <span>হিফজ সমাপন প্রত্যয়নপত্র (ইস্যুকৃত)</span>
-                  </div>
-                  <Link href="/verify" className="text-[#0D5C3A] font-bold hover:underline">
-                    অনলাইনে যাচাই করুন
-                  </Link>
-                </div>
-              </div>
-            )}
 
             {/* 9. REQUESTS */}
             {activeTab === "REQUESTS" && (

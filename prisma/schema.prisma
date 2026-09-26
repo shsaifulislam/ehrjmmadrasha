@@ -31,6 +31,9 @@ model User {
   markedAttendances Attendance[]
   auditLogs         AuditLog[]
   payrollRecords    PayrollRecord[]
+  reviewedDocRequests DocumentRequest[] @relation("ReviewedDocumentRequests")
+  issuedCertificates Certificate[] @relation("IssuedCertificates")
+  revokedCertificates Certificate[] @relation("RevokedCertificates")
 }
 
 model Session {
@@ -88,6 +91,8 @@ model AcademicSession {
   financialAssistance FinancialAssistance[]
   teacherAssignments TeacherAssignment[]
   attendanceLocks    AttendanceLock[]
+  certificates       Certificate[]
+  documentRequests   DocumentRequest[]
 }
 
 model JamatClass {
@@ -209,6 +214,7 @@ model Student {
   scholarships         StudentScholarship[]
   certificates         Certificate[]
   documents            StudentDocument[]
+  documentRequests     DocumentRequest[]
 }
 
 model Guardian {
@@ -226,6 +232,7 @@ model Guardian {
 
   user        User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
   students    GuardianStudent[]
+  documentRequests DocumentRequest[]
 }
 
 model GuardianStudent {
@@ -582,6 +589,7 @@ model FeeInvoice {
   items         InvoiceItem[]
   receipts      PaymentReceipt[]
   refunds       Refund[]
+  documentRequests DocumentRequest[]
 
   @@index([studentId, sessionId, status])
 }
@@ -779,24 +787,103 @@ model FinancialAccount {
 }
 
 // -------------------------------------------------------------
-// 8. CERTIFICATES & PUBLIC VERIFICATION
+// 8. CERTIFICATES, DOCUMENT FACTORY & PUBLIC VERIFICATION
 // -------------------------------------------------------------
+model DocumentTemplate {
+  id               String        @id @default(uuid())
+  code             String        @unique // e.g. "STUDENT_ID", "STUDY_CERTIFICATE", "CHARACTER_CERTIFICATE", "TRANSFER_CERTIFICATE", "TESTIMONIAL", "ADMISSION_CONFIRMATION"
+  nameBn           String
+  nameEn           String?
+  documentType     String        // STUDENT_ID, STUDY_CERTIFICATE, CHARACTER_CERTIFICATE, TRANSFER_CERTIFICATE, TESTIMONIAL, ADMISSION_CONFIRMATION, OTHER
+  titleBn          String
+  titleEn          String?
+  bodyBn           String
+  bodyEn           String?
+  bodyAr           String?
+  headerBn         String?
+  footerBn         String?
+  version          Int           @default(1)
+  feeAmount        Float         @default(0)
+  requiresFee      Boolean       @default(false)
+  signatoryTitleBn String        @default("মুহতামিম ও অধ্যক্ষ")
+  isActive         Boolean       @default(true)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  certificates     Certificate[]
+}
+
+model DocumentRequest {
+  id               String           @id @default(uuid())
+  requestNumber    String           @unique // e.g. "EHRJ-REQ-2026-00001"
+  studentId        String
+  guardianId       String?
+  sessionId        String?
+  documentType     String           // STUDENT_ID, STUDY_CERTIFICATE, CHARACTER_CERTIFICATE, TRANSFER_CERTIFICATE, TESTIMONIAL, ADMISSION_CONFIRMATION, OTHER
+  purpose          String
+  requiredDate     DateTime?
+  notes            String?
+  attachmentUrl    String?
+  status           String           @default("SUBMITTED") // SUBMITTED, UNDER_REVIEW, APPROVED, REJECTED, GENERATED, ISSUED, CANCELLED
+  reviewedByUserId String?
+  reviewedAt       DateTime?
+  rejectionReason  String?
+  feeInvoiceId     String?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  student          Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  guardian         Guardian?        @relation(fields: [guardianId], references: [id], onDelete: SetNull)
+  session          AcademicSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+  reviewedByUser   User?            @relation("ReviewedDocumentRequests", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
+  feeInvoice       FeeInvoice?      @relation(fields: [feeInvoiceId], references: [id], onDelete: SetNull)
+  certificates     Certificate[]
+
+  @@index([studentId, status])
+  @@index([guardianId, status])
+}
+
 model Certificate {
-  id                String        @id @default(uuid())
-  certificateNumber String        @unique // e.g. "EHRJ-CERT-2026-0001"
-  verificationCode  String        @unique
+  id                String            @id @default(uuid())
+  certificateNumber String            @unique // e.g. "EHRJ-DOC-2026-00001"
+  verificationCode  String            @unique
   studentId         String
-  certificateType   String        // CHARACTER, TESTIMONIAL, STUDY, TC, MARKSHEET, COMPLETION
-  issueDate         DateTime      @default(now())
-  isRevoked         Boolean       @default(false)
+  sessionId         String?
+  requestId         String?
+  templateId        String?
+  certificateType   String            // STUDENT_ID, STUDY_CERTIFICATE, CHARACTER_CERTIFICATE, TRANSFER_CERTIFICATE, TESTIMONIAL, ADMISSION_CONFIRMATION, MARKSHEET, OTHER
+  titleBn           String?
+  titleEn           String?
+  version           Int               @default(1)
+  reissuedFromId    String?
+  status            String            @default("ISSUED") // DRAFT, ISSUED, REVOKED, REISSUED
+  issueDate         DateTime          @default(now())
+  issuedByUserId    String?
+  isRevoked         Boolean           @default(false)
+  revokedAt         DateTime?
+  revokedByUserId   String?
   revokeReason      String?
   qrCodeUrl         String?
+  snapshotJson      String?
   metadataJson      String?
-  issuedByUserId    String?
-  createdAt         DateTime      @default(now())
+  pdfUrl            String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @default(now()) @updatedAt
 
-  student           Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  student           Student           @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session           AcademicSession?  @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+  request           DocumentRequest?  @relation(fields: [requestId], references: [id], onDelete: SetNull)
+  template          DocumentTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+  issuedByUser      User?             @relation("IssuedCertificates", fields: [issuedByUserId], references: [id], onDelete: SetNull)
+  revokedByUser     User?             @relation("RevokedCertificates", fields: [revokedByUserId], references: [id], onDelete: SetNull)
+  reissuedFrom      Certificate?      @relation("CertificateReissueHistory", fields: [reissuedFromId], references: [id], onDelete: SetNull)
+  reissues          Certificate[]     @relation("CertificateReissueHistory")
+
+  @@index([studentId, certificateType])
+  @@index([verificationCode])
+  @@index([status])
 }
+
 
 // -------------------------------------------------------------
 // 9. CMS, NOTICES & PRINCIPAL PROFILE

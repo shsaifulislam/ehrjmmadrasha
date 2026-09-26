@@ -28,7 +28,7 @@ let testStructureId = "";
 function makeRequest(path, options = {}) {
   return new Promise((resolve, reject) => {
     const url = new URL(path, BASE_URL);
-    const headers = options.headers || {};
+    const headers = { "x-test-suite": "ehrj-finance-suite", ...(options.headers || {}) };
 
     const reqOptions = {
       hostname: url.hostname,
