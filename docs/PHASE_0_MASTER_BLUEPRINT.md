@@ -471,7 +471,7 @@ In accordance with Islamic Shariah and professional accounting standards, the in
 
 ### DOCUMENT 13: Notification & Institutional Gmail Architecture
 
-* **Zero-Cost Email SMTP Service:** Operates using institutional Gmail SMTP credentials configured in `.env` (`SMTP_USER="ehrjmadrasha@gmail.com"` and App Password `SMTP_PASS="mepz imnw lfly lxvo"`).
+* **Zero-Cost Email SMTP Service:** Operates using institutional Gmail SMTP credentials configured in `.env` (`SMTP_USER="ehrjmadrasha@gmail.com"` and App Password `SMTP_PASS="[CONFIGURED_IN_ENV]"`).
 * **Delivery Engine:** Managed via `src/lib/mail.ts` with custom branded HTML templates.
 * **Automated Email Triggers:**
   1. *Admission Submitted Confirmation:* Sent to guardian with tracking number `EHRJ-ADM-YYYY-XXXX`.
@@ -505,7 +505,7 @@ JWT_SECRET="ehrj-madrasa-digital-campus-secure-production-jwt-secret-key-2026"
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 NODE_ENV="production"
 SMTP_USER="ehrjmadrasha@gmail.com"
-SMTP_PASS="mepz imnw lfly lxvo"
+SMTP_PASS="[YOUR_APP_PASSWORD]"
 ADMIN_EMAIL="adminehrjmadrasha@gmail.com"
 ```
 
