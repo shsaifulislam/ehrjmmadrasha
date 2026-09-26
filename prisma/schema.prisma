@@ -1,0 +1,568 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// -------------------------------------------------------------
+// 1. IDENTITY & AUTHENTICATION
+// -------------------------------------------------------------
+model User {
+  id                String         @id @default(uuid())
+  name              String
+  username          String         @unique
+  email             String         @unique
+  phone             String?        @unique
+  passwordHash      String
+  role              String         // ADMIN, PRINCIPAL, TEACHER, GUARDIAN
+  status            String         @default("ACTIVE") // ACTIVE, INACTIVE, SUSPENDED
+  twoFactorEnabled  Boolean        @default(false)
+  photoUrl          String?
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  sessions          Session[]
+  loginHistories    LoginHistory[]
+  guardians         Guardian[]
+  teacherAssignments TeacherAssignment[]
+  markedAttendances Attendance[]
+  auditLogs         AuditLog[]
+}
+
+model Session {
+  id          String   @id @default(uuid())
+  userId      String
+  token       String   @unique
+  ipAddress   String?
+  userAgent   String?
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model LoginHistory {
+  id          String   @id @default(uuid())
+  userId      String
+  ipAddress   String?
+  userAgent   String?
+  status      String   // SUCCESS, FAILED
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model OtpCode {
+  id          String    @id @default(uuid())
+  email       String?
+  phone       String?
+  code        String
+  purpose     String    // LOGIN, PASSWORD_RESET, 2FA
+  expiresAt   DateTime
+  usedAt      DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+// -------------------------------------------------------------
+// 2. ACADEMIC STRUCTURE & SESSION
+// -------------------------------------------------------------
+model AcademicSession {
+  id          String        @id @default(uuid())
+  name        String        @unique // e.g. "২০২৫-২০২৬"
+  startDate   DateTime
+  endDate     DateTime
+  isCurrent   Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+
+  enrollments        Enrollment[]
+  attendances        Attendance[]
+  exams              Exam[]
+  feeInvoices        FeeInvoice[]
+  financialAssistance FinancialAssistance[]
+  teacherAssignments TeacherAssignment[]
+}
+
+model JamatClass {
+  id          String        @id @default(uuid())
+  nameBn      String        // e.g. "মিযান", "নাহবেমীর", "শিশু শ্রেণি"
+  nameEn      String
+  nameAr      String?
+  code        String        @unique
+  genderType  String        @default("COMBINED") // COMBINED, BOYS, GIRLS
+  sortOrder   Int           @default(0)
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+
+  sections    Section[]
+  subjects    Subject[]
+  enrollments Enrollment[]
+  attendances Attendance[]
+  examSubjects ExamSubject[]
+}
+
+model Section {
+  id          String        @id @default(uuid())
+  classId     String
+  nameBn      String        // e.g. "ক শাখা", "শাখা-১"
+  nameEn      String
+  roomNo      String?
+  maxCapacity Int           @default(50)
+  createdAt   DateTime      @default(now())
+
+  jamatClass  JamatClass    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  enrollments Enrollment[]
+  attendances Attendance[]
+  teacherAssignments TeacherAssignment[]
+}
+
+model Subject {
+  id          String        @id @default(uuid())
+  classId     String
+  nameBn      String        // e.g. "কুরআন মাজীদ", "ফিক্বহ", "নাহব", "বাংলা"
+  nameEn      String
+  nameAr      String?
+  code        String
+  fullMarks   Float         @default(100)
+  passMarks   Float         @default(33)
+  isOptional  Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+
+  jamatClass  JamatClass    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  examMarks   ExamMark[]
+  examSubjects ExamSubject[]
+  teacherAssignments TeacherAssignment[]
+}
+
+model TeacherAssignment {
+  id          String          @id @default(uuid())
+  teacherId   String
+  classId     String
+  sectionId   String?
+  subjectId   String?
+  sessionId   String
+  createdAt   DateTime        @default(now())
+
+  teacher     User            @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  session     AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  section     Section?        @relation(fields: [sectionId], references: [id], onDelete: SetNull)
+  subject     Subject?        @relation(fields: [subjectId], references: [id], onDelete: SetNull)
+}
+
+// -------------------------------------------------------------
+// 3. STUDENT & GUARDIAN LIFECYCLE
+// -------------------------------------------------------------
+model Student {
+  id                   String        @id @default(uuid())
+  studentIdNumber      String        @unique // e.g. "EHRJ-000001"
+  fullNameBn           String
+  fullNameEn           String
+  fullNameAr           String?
+  dateOfBirth          DateTime
+  gender               String        // MALE, FEMALE
+  bloodGroup           String?
+  nationality          String        @default("Bangladeshi")
+  photoUrl             String?
+  birthCertificateNo   String?       @unique
+  nidNo                String?
+  fatherNameBn         String
+  fatherNameEn         String?
+  fatherPhone          String?
+  fatherOccupation     String?
+  motherNameBn         String
+  motherNameEn         String?
+  motherPhone          String?
+  presentAddress       String
+  permanentAddress     String
+  residentialStatus    String        @default("NON_RESIDENTIAL") // RESIDENTIAL, NON_RESIDENTIAL, DAY_CARE
+  isOrphan             Boolean       @default(false)
+  isFinanciallyWeak    Boolean       @default(false)
+  status               String        @default("ACTIVE") // ACTIVE, INACTIVE, SUSPENDED, TRANSFERRED, COMPLETED, WITHDRAWN
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  guardianLinks        GuardianStudent[]
+  enrollments          Enrollment[]
+  attendances          Attendance[]
+  examMarks            ExamMark[]
+  results              Result[]
+  admitCards           AdmitCard[]
+  feeInvoices          FeeInvoice[]
+  paymentReceipts      PaymentReceipt[]
+  financialAssistances FinancialAssistance[]
+  certificates         Certificate[]
+}
+
+model Guardian {
+  id          String        @id @default(uuid())
+  userId      String?       // Linked User account for portal login
+  fullNameBn  String
+  fullNameEn  String?
+  relation    String        // FATHER, MOTHER, BROTHER, UNCLE, OTHER
+  phone       String        @unique
+  email       String?
+  nidNo       String?
+  occupation  String?
+  address     String?
+  createdAt   DateTime      @default(now())
+
+  user        User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  students    GuardianStudent[]
+}
+
+model GuardianStudent {
+  id          String        @id @default(uuid())
+  guardianId  String
+  studentId   String
+  isPrimary   Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+
+  guardian    Guardian      @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+  student     Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([guardianId, studentId])
+}
+
+model Enrollment {
+  id          String          @id @default(uuid())
+  studentId   String
+  sessionId   String
+  classId     String
+  sectionId   String?
+  rollNumber  Int
+  status      String          @default("ACTIVE") // ACTIVE, PROMOTED, TRANSFERRED, DROPPED
+  enrolledAt  DateTime        @default(now())
+
+  student     Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session     AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  jamatClass  JamatClass      @relation(fields: [classId], references: [id], onDelete: Cascade)
+  section     Section?        @relation(fields: [sectionId], references: [id], onDelete: SetNull)
+
+  @@unique([sessionId, classId, sectionId, rollNumber])
+}
+
+// -------------------------------------------------------------
+// 4. ADMISSIONS
+// -------------------------------------------------------------
+model Application {
+  id                          String    @id @default(uuid())
+  applicationNumber           String    @unique // e.g. "EHRJ-ADM-2026-0001"
+  studentNameBn               String
+  studentNameEn               String
+  dateOfBirth                 DateTime
+  gender                      String
+  desiredClassId              String
+  desiredResidentialStatus    String    @default("NON_RESIDENTIAL")
+  guardianName                String
+  guardianPhone               String
+  guardianEmail               String?
+  address                     String
+  isOrphan                    Boolean   @default(false)
+  financialAssistanceRequested Boolean  @default(false)
+  documentsJson               String?   // JSON list of uploaded doc URLs
+  status                      String    @default("PENDING") // PENDING, APPROVED, REJECTED
+  remarks                     String?
+  createdAt                   DateTime  @default(now())
+  updatedAt                   DateTime  @updatedAt
+}
+
+// -------------------------------------------------------------
+// 5. ATTENDANCE
+// -------------------------------------------------------------
+model Attendance {
+  id              String          @id @default(uuid())
+  studentId       String
+  sessionId       String
+  classId         String
+  sectionId       String?
+  date            DateTime
+  status          String          // PRESENT, ABSENT, LATE, LEAVE
+  remarks         String?
+  markedByUserId  String?
+  createdAt       DateTime        @default(now())
+
+  student         Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session         AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  jamatClass      JamatClass      @relation(fields: [classId], references: [id], onDelete: Cascade)
+  section         Section?        @relation(fields: [sectionId], references: [id], onDelete: SetNull)
+  markedByUser    User?           @relation(fields: [markedByUserId], references: [id], onDelete: SetNull)
+
+  @@unique([studentId, date])
+}
+
+// -------------------------------------------------------------
+// 6. EXAMINATION & RESULTS
+// -------------------------------------------------------------
+model Exam {
+  id          String          @id @default(uuid())
+  sessionId   String
+  nameBn      String          // e.g. "প্রথম সাময়িক পরীক্ষা ২০২৬"
+  nameEn      String
+  examType    String          // FIRST_TERM, MID_TERM, ANNUAL, MONTHLY
+  startDate   DateTime
+  endDate     DateTime
+  isPublished Boolean         @default(false)
+  createdAt   DateTime        @default(now())
+
+  session     AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  examSubjects ExamSubject[]
+  examMarks   ExamMark[]
+  results     Result[]
+  admitCards  AdmitCard[]
+}
+
+model ExamSubject {
+  id          String        @id @default(uuid())
+  examId      String
+  classId     String
+  subjectId   String
+  examDate    DateTime
+  startTime   String        // e.g. "09:30 AM"
+  endTime     String        // e.g. "12:30 PM"
+  fullMarks   Float         @default(100)
+  passMarks   Float         @default(33)
+
+  exam        Exam          @relation(fields: [examId], references: [id], onDelete: Cascade)
+  jamatClass  JamatClass    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  subject     Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+}
+
+model AdmitCard {
+  id          String        @id @default(uuid())
+  examId      String
+  studentId   String
+  rollNumber  Int
+  qrCodeToken String        @unique
+  issuedAt    DateTime      @default(now())
+
+  exam        Exam          @relation(fields: [examId], references: [id], onDelete: Cascade)
+  student     Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, studentId])
+}
+
+model ExamMark {
+  id              String        @id @default(uuid())
+  examId          String
+  studentId       String
+  subjectId       String
+  marksObtained   Float
+  letterGrade     String?       // Mumtaz, Jayyid Jiddan, Jayyid, Maqbool, Rasib
+  gradeRemarks    String?
+  recordedByUserId String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  exam            Exam          @relation(fields: [examId], references: [id], onDelete: Cascade)
+  student         Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subject         Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, studentId, subjectId])
+}
+
+model Result {
+  id              String        @id @default(uuid())
+  examId          String
+  studentId       String
+  totalMarks      Float
+  percentage      Float
+  finalGradeBn    String        // মুমতাজ, জায়্যিদ জিদ্দান, জায়্যিদ, মাকবুল, রাসিব
+  rankInClass     Int?
+  status          String        @default("DRAFT") // DRAFT, SUBMITTED, PUBLISHED
+  publishedAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  exam            Exam          @relation(fields: [examId], references: [id], onDelete: Cascade)
+  student         Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, studentId])
+}
+
+// -------------------------------------------------------------
+// 7. FINANCE & ACCOUNTS
+// -------------------------------------------------------------
+model FeeCategory {
+  id            String        @id @default(uuid())
+  nameBn        String        // e.g. "মাসিক বেতন", "ভর্তি ফি", "পরীক্ষার ফি", "বোর্ডিং ফি"
+  nameEn        String
+  code          String        @unique
+  defaultAmount Float         @default(0)
+  isRecurring   Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+
+  invoiceItems  InvoiceItem[]
+}
+
+model FeeInvoice {
+  id            String          @id @default(uuid())
+  invoiceNumber String          @unique // e.g. "INV-2026-00001"
+  studentId     String
+  sessionId     String
+  title         String          // e.g. "মার্চ ২০২৬ বেতন ও পরীক্ষার ফি"
+  dueDate       DateTime
+  totalAmount   Float
+  discountAmount Float          @default(0)
+  waiverAmount  Float           @default(0)
+  netAmount     Float
+  paidAmount    Float           @default(0)
+  dueAmount     Float
+  status        String          @default("UNPAID") // UNPAID, PARTIALLY_PAID, PAID, WAIVED
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  student       Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session       AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  items         InvoiceItem[]
+  receipts      PaymentReceipt[]
+}
+
+model InvoiceItem {
+  id            String        @id @default(uuid())
+  invoiceId     String
+  feeCategoryId String
+  description   String
+  amount        Float
+
+  invoice       FeeInvoice    @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  feeCategory   FeeCategory   @relation(fields: [feeCategoryId], references: [id], onDelete: Cascade)
+}
+
+model PaymentReceipt {
+  id              String        @id @default(uuid())
+  receiptNumber   String        @unique // e.g. "REC-2026-00001"
+  invoiceId       String
+  studentId       String
+  amount          Float
+  paymentMethod   String        // CASH, BKASH, NAGAD, ROCKET, BANK
+  transactionId   String?
+  receivedByUserId String?
+  receiptDate     DateTime      @default(now())
+  qrCodeToken     String        @unique
+  notes           String?
+  createdAt       DateTime      @default(now())
+
+  invoice         FeeInvoice    @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  student         Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+model FinancialAssistance {
+  id              String          @id @default(uuid())
+  studentId       String
+  sessionId       String
+  reason          String
+  isOrphan        Boolean         @default(false)
+  familyCondition String?
+  waiverPercentage Float          @default(0) // e.g. 100% for full free-ship
+  waiverAmount    Float           @default(0)
+  feeCategoryTarget String?       // "FOOD", "TUITION", "ALL"
+  status          String          @default("PENDING") // PENDING, APPROVED, REJECTED
+  approvedByUserId String?
+  validFrom       DateTime
+  validTo         DateTime
+  createdAt       DateTime        @default(now())
+
+  student         Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session         AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model CashFund {
+  id              String            @id @default(uuid())
+  nameBn          String            // e.g. "সাধারণ তহবিল", "লিল্লাহ ফান্ড", "যাকাত তহবিল", "নির্মাণ ফান্ড"
+  nameEn          String
+  code            String            @unique // GENERAL, LILLAH, ZAKAT, CONSTRUCTION, ORPHAN_SUPPORT
+  currentBalance  Float             @default(0)
+  createdAt       DateTime          @default(now())
+
+  transactions    CashTransaction[]
+}
+
+model CashTransaction {
+  id              String        @id @default(uuid())
+  fundId          String
+  type            String        // INCOME, EXPENSE
+  category        String        // e.g. "দান/অনুদান", "লিল্লাহ খাবার ব্যয়", "শিক্ষক বেতন"
+  amount          Float
+  payeeOrPayer    String
+  paymentMethod   String        // CASH, BKASH, NAGAD, BANK
+  referenceNo     String?
+  receiptOrVoucherNo String     @unique
+  attachmentUrl   String?
+  approvedByUserId String?
+  transactionDate DateTime      @default(now())
+  notes           String?
+  createdAt       DateTime      @default(now())
+
+  fund            CashFund      @relation(fields: [fundId], references: [id], onDelete: Cascade)
+}
+
+// -------------------------------------------------------------
+// 8. CERTIFICATES & PUBLIC VERIFICATION
+// -------------------------------------------------------------
+model Certificate {
+  id                String        @id @default(uuid())
+  certificateNumber String        @unique // e.g. "EHRJ-CERT-2026-0001"
+  verificationCode  String        @unique
+  studentId         String
+  certificateType   String        // CHARACTER, TESTIMONIAL, STUDY, TC, MARKSHEET, COMPLETION
+  issueDate         DateTime      @default(now())
+  isRevoked         Boolean       @default(false)
+  revokeReason      String?
+  qrCodeUrl         String?
+  metadataJson      String?
+  issuedByUserId    String?
+  createdAt         DateTime      @default(now())
+
+  student           Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+// -------------------------------------------------------------
+// 9. CMS, NOTICES & PRINCIPAL PROFILE
+// -------------------------------------------------------------
+model Notice {
+  id              String        @id @default(uuid())
+  titleBn         String
+  titleEn         String?
+  contentBn       String
+  contentEn       String?
+  category        String        @default("GENERAL") // GENERAL, ACADEMIC, ADMISSION, EXAM, HOLIDAY, EMERGENCY
+  targetAudience  String        @default("ALL") // ALL, TEACHER, GUARDIAN
+  isUrgent        Boolean       @default(false)
+  isPublished     Boolean       @default(true)
+  attachmentUrl   String?
+  publishedAt     DateTime      @default(now())
+  createdAt       DateTime      @default(now())
+}
+
+model PrincipalProfile {
+  id                  String        @id @default(uuid())
+  fullNameBn          String        // e.g. "মুফতি ও মাওলানা মোহাম্মাদুল্লাহ (হাফিজাহুল্লাহ)"
+  fullNameEn          String
+  designationBn       String        @default("মুহতামিম ও শায়খুল হাদিস")
+  designationEn       String        @default("Principal & Shaykhul Hadith")
+  bioBn               String?
+  bioEn               String?
+  photoUrl            String?
+  signatureUrl        String?
+  officialMessageBn   String
+  officialMessageEn   String?
+  updatedAt           DateTime      @updatedAt
+}
+
+// -------------------------------------------------------------
+// 10. AUDIT & SYSTEM INTEGRITY
+// -------------------------------------------------------------
+model AuditLog {
+  id          String        @id @default(uuid())
+  userId      String?
+  action      String        // CREATE, UPDATE, DELETE, LOGIN, APPROVE, REJECT, ROLL_CHANGE
+  entityType  String        // Student, FeeInvoice, Result, Payment, Admission
+  entityId    String?
+  detailsJson String?
+  ipAddress   String?
+  createdAt   DateTime      @default(now())
+
+  user        User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+}

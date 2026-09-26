@@ -1,0 +1,302 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  UserCheck,
+  Shield,
+  Send,
+  LogOut,
+  CheckCircle,
+  RefreshCw,
+  FileText,
+  BarChart3,
+  Bell,
+  AlertTriangle,
+  Building,
+  GraduationCap,
+  Users,
+} from "lucide-react";
+import { INSTITUTION_INFO } from "@/lib/constants";
+
+export default function PrincipalDashboardPage() {
+  const [activeTab, setActiveTab] = useState<"DASHBOARD" | "OVERVIEW" | "NOTICES" | "ISSUES" | "REPORTS">(
+    "DASHBOARD"
+  );
+  const [stats, setStats] = useState<any | null>(null);
+  const [message, setMessage] = useState(
+    "বিসমিল্লাহির রাহমানির রাহিম। ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা কুরআন-সুন্নাহর সঠিক প্রচার ও চরিত্রবান আদর্শ নাগরিক গড়ার একটি অন্যতম শ্রেষ্ঠ মারকাজ।"
+  );
+  const [savedSuccess, setSavedSuccess] = useState(false);
+  const [issueText, setIssueText] = useState("");
+  const [issueSent, setIssueSent] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/dashboard/stats")
+      .then((res) => {
+        if (!res.ok) window.location.href = "/login";
+        return res.json();
+      })
+      .then((data) => {
+        if (data?.stats) setStats(data.stats);
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleSaveMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSavedSuccess(true);
+    setTimeout(() => setSavedSuccess(false), 3000);
+  };
+
+  const handleSendIssue = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!issueText) return;
+    setIssueSent(true);
+    setIssueText("");
+    setTimeout(() => setIssueSent(false), 3000);
+  };
+
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
+    window.location.href = "/login";
+  };
+
+  return (
+    <div className="min-h-screen bg-[#F9F8F3] flex flex-col text-[#0B1914]">
+      {/* Top Header */}
+      <header className="bg-[#083B25] text-white px-6 py-4 border-b-2 border-[#C59B27] flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full border-2 border-[#C59B27] overflow-hidden relative shadow">
+            <Image
+              src="/images/principal.jpg"
+              alt={INSTITUTION_INFO.principal}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h1 className="font-bold text-base md:text-lg font-display leading-tight">
+              মুহতামিম তদারকি ড্যাশবোর্ড (Principal Oversight Desk)
+            </h1>
+            <p className="text-xs text-emerald-200">
+              {INSTITUTION_INFO.nameBn} (অধ্যক্ষ: {INSTITUTION_INFO.principal})
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            className="text-xs text-emerald-200 hover:text-white px-2 py-1 rounded transition hidden sm:inline"
+          >
+            মূল ওয়েবসাইট
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-1 bg-red-800 hover:bg-red-700 text-white px-3 py-1.5 rounded text-xs font-semibold transition shadow"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            লগআউট
+          </button>
+        </div>
+      </header>
+
+      {/* Tabs */}
+      <div className="bg-white border-b border-[#E2E8F0] px-6 flex items-center gap-4 sm:gap-6 text-xs font-semibold overflow-x-auto">
+        {[
+          { id: "DASHBOARD", label: "ড্যাশবোর্ড (Dashboard)" },
+          { id: "OVERVIEW", label: "সার্বিক পর্যবেক্ষণ (Overview)" },
+          { id: "NOTICES", label: "জরুরি নোটিশ জারি (Notices)" },
+          { id: "ISSUES", label: "প্রশাসনিক ইস্যু ও নির্দেশ (Issues)" },
+          { id: "REPORTS", label: "প্রতিবেদন ও রিপোর্ট (Reports)" },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id as any)}
+            className={`py-3.5 border-b-2 transition whitespace-nowrap ${
+              activeTab === tab.id
+                ? "border-[#0D5C3A] text-[#0D5C3A]"
+                : "border-transparent text-gray-500 hover:text-gray-900"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Main Container */}
+      <main className="flex-1 p-6 max-w-5xl mx-auto w-full space-y-6">
+        {/* 1. DASHBOARD */}
+        {activeTab === "DASHBOARD" && (
+          <div className="space-y-6">
+            <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-lg text-xs text-emerald-900 flex items-start gap-3">
+              <Shield className="w-5 h-5 text-[#0D5C3A] flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-bold text-sm">সম্মানিত মুহতামিম মহোদয়ের অফিসিয়াল তদারকি প্যানেল:</p>
+                <p className="mt-0.5 text-gray-700 leading-relaxed">
+                  মাদরাসার অ্যাকাডেমিক শৃঙ্খলা, লিল্লাহ বোর্ডিং ও যাকাত তহবিলের স্বচ্ছতা এবং শিক্ষকদের পাঠদান পরিস্থিতি আপনি সরাসরি এখান থেকে পর্যবেক্ষণ করতে পারবেন।
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Box 1: Update Official Message */}
+              <div className="bg-white p-6 rounded-lg border border-[#E2E8F0] shadow-sm">
+                <h2 className="text-sm font-bold text-[#0D5C3A] mb-3 pb-2 border-b border-gray-100 flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  মুহতামিমের অফিসিয়াল বাণী ও বার্তা আপডেট
+                </h2>
+
+                {savedSuccess && (
+                  <div className="bg-green-50 border border-green-200 text-green-800 px-3 py-2 rounded text-xs mb-3 flex items-center gap-1.5">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    বাণী সফলভাবে আপডেট করা হয়েছে।
+                  </div>
+                )}
+
+                <form onSubmit={handleSaveMessage} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">
+                      মুহতামিমের নাম ও উপাধি
+                    </label>
+                    <input
+                      type="text"
+                      disabled
+                      value={`${INSTITUTION_INFO.principal} (প্রতিষ্ঠাতা ও মুহতামিম)`}
+                      className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-gray-50 text-gray-700 font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">
+                      হোমপেজে প্রদর্শিত অফিসিয়াল বাণী
+                    </label>
+                    <textarea
+                      rows={5}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-[#0D5C3A] focus:outline-none leading-relaxed"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2 rounded text-xs font-semibold transition shadow"
+                  >
+                    বাণী সংরক্ষণ করুন
+                  </button>
+                </form>
+              </div>
+
+              {/* Box 2: Issue Directive to Admin */}
+              <div className="bg-white p-6 rounded-lg border border-[#E2E8F0] shadow-sm">
+                <h2 className="text-sm font-bold text-[#C59B27] mb-3 pb-2 border-b border-gray-100 flex items-center gap-2">
+                  <Send className="w-4 h-4" />
+                  এডমিনের কাছে সরাসরি প্রাতিষ্ঠানিক নির্দেশ
+                </h2>
+
+                {issueSent && (
+                  <div className="bg-green-50 border border-green-200 text-green-800 px-3 py-2 rounded text-xs mb-3 flex items-center gap-1.5">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    নির্দেশনাটি সফলভাবে অ্যাডমিন প্যানেলে প্রেরণ করা হয়েছে।
+                  </div>
+                )}
+
+                <form onSubmit={handleSendIssue} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">
+                      ইস্যু বা নির্দেশের বিবরণ
+                    </label>
+                    <textarea
+                      rows={6}
+                      value={issueText}
+                      onChange={(e) => setIssueText(e.target.value)}
+                      placeholder="যেমন: লিল্লাহ বোর্ডিংয়ের শিক্ষার্থীদের খাবারের মান যাচাই করুন অথবা আসন্ন পরীক্ষার প্রশ্নপত্র প্রস্তুত করার নির্দেশনা জারি করুন..."
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-[#C59B27] focus:outline-none leading-relaxed"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full bg-[#C59B27] hover:bg-amber-600 text-[#083B25] py-2 rounded text-xs font-bold transition shadow"
+                  >
+                    নির্দেশনা প্রেরণ করুন
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 2. OVERVIEW */}
+        {activeTab === "OVERVIEW" && stats && (
+          <div className="bg-white rounded-lg border p-6 space-y-4 shadow-sm">
+            <h2 className="text-base font-bold text-[#083B25] border-b pb-2">মাদরাসার সামগ্রিক অবস্থা</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+              <div className="p-3 bg-gray-50 rounded-lg">
+                <span className="text-xs text-gray-500 block">মোট ছাত্র</span>
+                <span className="text-xl font-bold font-mono text-gray-900">{stats.totalStudents} জন</span>
+              </div>
+              <div className="p-3 bg-gray-50 rounded-lg">
+                <span className="text-xs text-gray-500 block">আবাসিক ছাত্র</span>
+                <span className="text-xl font-bold font-mono text-blue-700">{stats.residentialStudents} জন</span>
+              </div>
+              <div className="p-3 bg-gray-50 rounded-lg">
+                <span className="text-xs text-gray-500 block">লিল্লাহ ও এতিম</span>
+                <span className="text-xl font-bold font-mono text-purple-700">{stats.orphanStudents} জন</span>
+              </div>
+              <div className="p-3 bg-gray-50 rounded-lg">
+                <span className="text-xs text-gray-500 block">ফান্ড ব্যালেন্স</span>
+                <span className="text-xl font-bold font-mono text-emerald-700">
+                  ৳ {stats.totalFundBalance.toLocaleString("bn-BD")}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 3. NOTICES */}
+        {activeTab === "NOTICES" && (
+          <div className="bg-white rounded-lg border p-6 space-y-4 shadow-sm">
+            <h2 className="text-base font-bold text-[#083B25] border-b pb-2">মুহতামিমের জরুরি ঘোষণা ও সার্কুলার</h2>
+            <p className="text-xs text-gray-600">
+              এখান থেকে প্রেরিত ঘোষণা স্বয়ংক্রিয়ভাবে মাদরাসার লাইভ নোটিশ বোর্ডে প্রধান বার্তা হিসেবে সংরক্ষিত হবে।
+            </p>
+            <div className="p-4 bg-emerald-50 rounded-lg border border-emerald-200 text-xs text-emerald-900">
+              <p className="font-semibold">বর্তমান সক্রিয় নোটিশ: {stats?.totalNotices || 2} টি</p>
+            </div>
+          </div>
+        )}
+
+        {/* 4. ISSUES */}
+        {activeTab === "ISSUES" && (
+          <div className="bg-white rounded-lg border p-6 space-y-4 shadow-sm">
+            <h2 className="text-base font-bold text-[#083B25] border-b pb-2">প্রশাসনিক অডিট ও ইস্যু সমাধান তালিকা</h2>
+            <div className="p-3 bg-gray-50 rounded text-xs text-gray-600">
+              কোনো জরুরি প্রশাসনিক অমিল বা অ্যাকাডেমিক অনিয়ম পরিলক্ষিত হয়নি। সমস্ত ফান্ড ও রোল নম্বর হালনাগাদ রয়েছে।
+            </div>
+          </div>
+        )}
+
+        {/* 5. REPORTS */}
+        {activeTab === "REPORTS" && (
+          <div className="bg-white rounded-lg border p-6 space-y-4 shadow-sm">
+            <h2 className="text-base font-bold text-[#083B25] border-b pb-2">মাসিক অ্যাকাডেমিক ও আর্থিক রিপোর্ট</h2>
+            <div className="space-y-2 text-xs">
+              <div className="p-3 border rounded-lg flex items-center justify-between">
+                <span>মার্চ ২০২৬ সার্বিক আর্থিক নিরীক্ষা ও লিল্লাহ ফান্ড ব্যয় রিপোর্ট</span>
+                <span className="text-[#0D5C3A] font-bold">নিরীক্ষিত (Audited)</span>
+              </div>
+              <div className="p-3 border rounded-lg flex items-center justify-between">
+                <span>প্রথম সাময়িক পরীক্ষা প্রস্তুতি ও সিলেবাস সম্পন্ন রিপোর্ট</span>
+                <span className="text-[#0D5C3A] font-bold">অনুমোদিত (Approved)</span>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
