@@ -180,6 +180,31 @@ export default function AdminDashboardPage() {
 
   useEffect(() => {
     fetchStats();
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      if (tabParam) {
+        const upper = tabParam.toUpperCase();
+        const validTabs = [
+          "DASHBOARD",
+          "STUDENTS",
+          "ADMISSION",
+          "ACADEMIC",
+          "ATTENDANCE",
+          "EXAMINATION",
+          "FINANCE",
+          "DOCUMENTS",
+          "COMMUNICATION",
+          "CMS",
+          "REPORTS",
+          "USERS",
+          "SETTINGS",
+        ];
+        if (validTabs.includes(upper)) {
+          setActiveTab(upper as any);
+        }
+      }
+    }
   }, []);
 
   useEffect(() => {

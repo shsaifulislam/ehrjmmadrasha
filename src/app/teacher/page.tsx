@@ -51,6 +51,31 @@ export default function TeacherPanelPage() {
   const [resultsSuccess, setResultsSuccess] = useState(false);
   const [leaveSubmitted, setLeaveSubmitted] = useState(false);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      if (tabParam) {
+        const upper = tabParam.toUpperCase();
+        const validTabs = [
+          "DASHBOARD",
+          "CLASSES",
+          "ATTENDANCE",
+          "RESULTS",
+          "ROUTINE",
+          "EXAM",
+          "NOTES",
+          "NOTICES",
+          "PROFILE",
+          "LEAVE",
+        ];
+        if (validTabs.includes(upper)) {
+          setActiveTab(upper as any);
+        }
+      }
+    }
+  }, []);
+
   // Student Attendance & Marks state
   const [students, setStudents] = useState<StudentAttendanceItem[]>([
     { id: "1", roll: 1, name: "মুহাম্মদ আব্দুল্লাহ আল মামুন", status: "PRESENT", marks: 95 },

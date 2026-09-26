@@ -48,6 +48,29 @@ export default function StudentGuardianPortalPage() {
   const [leaveSuccess, setLeaveSuccess] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      if (tabParam) {
+        const upper = tabParam.toUpperCase();
+        const validTabs = [
+          "DASHBOARD",
+          "CHILDREN",
+          "ACADEMIC",
+          "ATTENDANCE",
+          "RESULTS",
+          "FINANCE",
+          "DOCUMENTS",
+          "CERTIFICATES",
+          "REQUESTS",
+          "NOTIFICATIONS",
+        ];
+        if (validTabs.includes(upper)) {
+          setActiveTab(upper as any);
+        }
+      }
+    }
+
     fetch("/api/academic/classes")
       .then((res) => res.json())
       .then((data) => {

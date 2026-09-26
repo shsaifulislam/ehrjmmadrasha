@@ -33,6 +33,17 @@ export default function PrincipalDashboardPage() {
   const [issueSent, setIssueSent] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      if (tabParam) {
+        const upper = tabParam.toUpperCase();
+        if (["DASHBOARD", "OVERVIEW", "NOTICES", "ISSUES", "REPORTS"].includes(upper)) {
+          setActiveTab(upper as any);
+        }
+      }
+    }
+
     fetch("/api/dashboard/stats")
       .then((res) => {
         if (!res.ok) window.location.href = "/login";

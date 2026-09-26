@@ -20,6 +20,14 @@ export function checkRateLimit(key: string, limit: number = 5, windowMs: number 
   return { allowed: true, remaining: limit - record.count };
 }
 
+export function resetRateLimit(key?: string) {
+  if (key) {
+    rateLimitMap.delete(key);
+  } else {
+    rateLimitMap.clear();
+  }
+}
+
 export async function recordAuditLog({
   userId,
   action,
