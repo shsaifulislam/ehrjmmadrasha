@@ -75,7 +75,9 @@ model AcademicSession {
   startDate   DateTime
   endDate     DateTime
   isCurrent   Boolean       @default(false)
+  status      String        @default("ACTIVE") // DRAFT, ACTIVE, CLOSED
   createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now()) @updatedAt
 
   enrollments        Enrollment[]
   attendances        Attendance[]
@@ -193,6 +195,7 @@ model Student {
   paymentReceipts      PaymentReceipt[]
   financialAssistances FinancialAssistance[]
   certificates         Certificate[]
+  documents            StudentDocument[]
 }
 
 model Guardian {
@@ -241,6 +244,24 @@ model Enrollment {
   section     Section?        @relation(fields: [sectionId], references: [id], onDelete: SetNull)
 
   @@unique([sessionId, classId, sectionId, rollNumber])
+}
+
+model StudentDocument {
+  id                 String    @id @default(uuid())
+  studentId          String
+  documentType       String    // PHOTO, BIRTH_CERTIFICATE, NID, PREVIOUS_CERTIFICATE, PREVIOUS_MARKSHEET, GUARDIAN_DOCUMENT, OTHER
+  fileUrl            String
+  fileName           String
+  fileSize           Int?
+  mimeType           String?
+  uploadedByUserId   String?
+  verificationStatus String    @default("PENDING") // PENDING, VERIFIED, REJECTED
+  verificationReason String?
+  verifiedAt         DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  student            Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
 }
 
 // -------------------------------------------------------------
