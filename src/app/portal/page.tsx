@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 import GuardianAttendanceViewer from "@/components/attendance/GuardianAttendanceViewer";
+import GuardianResultsViewer from "@/components/exams/GuardianResultsViewer";
 
 export default function StudentGuardianPortalPage() {
   const [classes, setClasses] = useState<any[]>([]);
@@ -345,42 +346,7 @@ export default function StudentGuardianPortalPage() {
             {activeTab === "ATTENDANCE" && <GuardianAttendanceViewer initialStudentId={student?.id} />}
 
             {/* 5. RESULTS */}
-            {activeTab === "RESULTS" && (
-              <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-4">
-                <div className="flex items-center justify-between border-b pb-2">
-                  <h2 className="text-base font-bold text-[#083B25]">সাময়িক পরীক্ষার মার্কশিট</h2>
-                  <button
-                    onClick={() => window.print()}
-                    className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-xs font-semibold flex items-center gap-1 print:hidden"
-                  >
-                    <Printer className="w-3.5 h-3.5" />
-                    প্রিন্ট করুন
-                  </button>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs border border-gray-200">
-                    <thead className="bg-[#F9F8F3] border-b border-gray-200 text-gray-700 font-semibold">
-                      <tr>
-                        <th className="p-2.5">বিষয়</th>
-                        <th className="p-2.5">পূর্ণমান</th>
-                        <th className="p-2.5">প্রাপ্ত নম্বর</th>
-                        <th className="p-2.5">গ্রেড</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-100">
-                      {student.examMarks.map((m: any, idx: number) => (
-                        <tr key={idx} className="hover:bg-gray-50">
-                          <td className="p-2.5 font-semibold text-gray-900">{m.subjectName}</td>
-                          <td className="p-2.5 font-mono">১০০</td>
-                          <td className="p-2.5 font-mono font-bold text-[#0D5C3A]">{m.marks}</td>
-                          <td className="p-2.5 font-semibold text-emerald-800">{m.grade}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
+            {activeTab === "RESULTS" && <GuardianResultsViewer initialStudentId={student?.id} />}
 
             {/* 6. FINANCE */}
             {activeTab === "FINANCE" && (

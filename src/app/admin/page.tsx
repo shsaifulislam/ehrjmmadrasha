@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 import AdminAttendanceCockpit from "@/components/attendance/AdminAttendanceCockpit";
+import AdminExamHub from "@/components/exams/AdminExamHub";
 
 interface AdminStats {
   totalStudents: number;
@@ -787,20 +788,7 @@ export default function AdminDashboardPage() {
             {activeTab === "ATTENDANCE" && <AdminAttendanceCockpit />}
 
             {/* 6. EXAMINATION */}
-            {activeTab === "EXAMINATION" && (
-              <div className="bg-white rounded-lg border border-[#E2E8F0] p-6 shadow-sm space-y-4">
-                <h2 className="text-base font-bold text-[#0B1914] border-b pb-2">পরীক্ষা ও ফলাফল নিয়ন্ত্রণ</h2>
-                <div className="space-y-3 text-xs">
-                  <div className="p-3 border rounded-lg flex items-center justify-between">
-                    <div>
-                      <span className="font-bold text-gray-900 block">প্রথম সাময়িক পরীক্ষা ২০২৬</span>
-                      <span className="text-gray-500">তারিখ: ১ এপ্রিল - ১২ এপ্রিল ২০২৬</span>
-                    </div>
-                    <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">আসন্ন</span>
-                  </div>
-                </div>
-              </div>
-            )}
+            {activeTab === "EXAMINATION" && <AdminExamHub />}
 
             {/* 7. FINANCE */}
             {activeTab === "FINANCE" && (

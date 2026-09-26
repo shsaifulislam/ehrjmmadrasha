@@ -104,6 +104,7 @@ model JamatClass {
   enrollments Enrollment[]
   attendances Attendance[]
   examSubjects ExamSubject[]
+  examRoutines ExamRoutine[]
   attendanceLocks AttendanceLock[]
 }
 
@@ -119,6 +120,7 @@ model Section {
   jamatClass  JamatClass    @relation(fields: [classId], references: [id], onDelete: Cascade)
   enrollments Enrollment[]
   attendances Attendance[]
+  examRoutines ExamRoutine[]
   teacherAssignments TeacherAssignment[]
   attendanceLocks    AttendanceLock[]
 }
@@ -133,11 +135,15 @@ model Subject {
   fullMarks   Float         @default(100)
   passMarks   Float         @default(33)
   isOptional  Boolean       @default(false)
+  sortOrder   Int           @default(0)
+  isActive    Boolean       @default(true)
   createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now()) @updatedAt
 
   jamatClass  JamatClass    @relation(fields: [classId], references: [id], onDelete: Cascade)
   examMarks   ExamMark[]
   examSubjects ExamSubject[]
+  examRoutines ExamRoutine[]
   teacherAssignments TeacherAssignment[]
 }
 
@@ -384,19 +390,39 @@ model AttendanceLock {
 // -------------------------------------------------------------
 // 6. EXAMINATION & RESULTS
 // -------------------------------------------------------------
+model ExamType {
+  id          String        @id @default(uuid())
+  code        String        @unique // e.g. "MONTHLY", "FIRST_TERM", "MID_TERM", "ANNUAL", "FINAL", "MODEL_TEST", "CUSTOM_QAWMI"
+  nameBn      String        // e.g. "মাসিক পরীক্ষা", "প্রথম সাময়িক পরীক্ষা", "বার্ষিক পরীক্ষা"
+  nameEn      String
+  sortOrder   Int           @default(0)
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now()) @updatedAt
+
+  exams       Exam[]
+}
+
 model Exam {
   id          String          @id @default(uuid())
   sessionId   String
+  examTypeId  String?
   nameBn      String          // e.g. "প্রথম সাময়িক পরীক্ষা ২০২৬"
   nameEn      String
-  examType    String          // FIRST_TERM, MID_TERM, ANNUAL, MONTHLY
+  examType    String          @default("GENERAL") // Legacy compatibility string
   startDate   DateTime
   endDate     DateTime
+  status      String          @default("DRAFT") // DRAFT, SCHEDULED, MARKS_ENTRY, REVIEW, PUBLISHED, CLOSED
+  instructions String?
   isPublished Boolean         @default(false)
+  publishedAt DateTime?
   createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @default(now()) @updatedAt
 
   session     AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  examTypeRef ExamType?       @relation(fields: [examTypeId], references: [id], onDelete: SetNull)
   examSubjects ExamSubject[]
+  examRoutines ExamRoutine[]
   examMarks   ExamMark[]
   results     Result[]
   admitCards  AdmitCard[]
@@ -418,6 +444,29 @@ model ExamSubject {
   subject     Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 }
 
+model ExamRoutine {
+  id          String        @id @default(uuid())
+  examId      String
+  classId     String
+  sectionId   String?
+  subjectId   String
+  examDate    DateTime
+  startTime   String        // e.g. "09:30 AM"
+  endTime     String        // e.g. "12:30 PM"
+  roomNo      String?
+  instructions String?
+  status      String        @default("PUBLISHED") // DRAFT, PUBLISHED, CANCELLED
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now()) @updatedAt
+
+  exam        Exam          @relation(fields: [examId], references: [id], onDelete: Cascade)
+  jamatClass  JamatClass    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  section     Section?      @relation(fields: [sectionId], references: [id], onDelete: SetNull)
+  subject     Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@index([examId, classId, examDate])
+}
+
 model AdmitCard {
   id          String        @id @default(uuid())
   examId      String
@@ -437,9 +486,15 @@ model ExamMark {
   examId          String
   studentId       String
   subjectId       String
-  marksObtained   Float
+  classId         String?
+  sectionId       String?
+  marksObtained   Float?
+  isAbsent        Boolean       @default(false)
+  isExempt        Boolean       @default(false)
   letterGrade     String?       // Mumtaz, Jayyid Jiddan, Jayyid, Maqbool, Rasib
   gradeRemarks    String?
+  status          String        @default("DRAFT") // DRAFT, SUBMITTED
+  submittedAt     DateTime?
   recordedByUserId String?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
@@ -455,11 +510,21 @@ model Result {
   id              String        @id @default(uuid())
   examId          String
   studentId       String
-  totalMarks      Float
-  percentage      Float
+  sessionId       String?
+  classId         String?
+  rollNumber      Int?
+  totalMarks      Float         @default(0)
+  totalObtained   Float         @default(0)
+  totalFullMarks  Float         @default(0)
+  percentage      Float         @default(0)
   finalGradeBn    String        // মুমতাজ, জায়্যিদ জিদ্দান, জায়্যিদ, মাকবুল, রাসিব
+  finalGradeEn    String?
+  isPassed        Boolean       @default(true)
   rankInClass     Int?
-  status          String        @default("DRAFT") // DRAFT, SUBMITTED, PUBLISHED
+  status          String        @default("DRAFT") // DRAFT, SUBMITTED, REVIEW, PUBLISHED, LOCKED
+  verificationCode String?      @unique
+  snapshotJson    String?
+  correctionReason String?
   publishedAt     DateTime?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
@@ -468,6 +533,7 @@ model Result {
   student         Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@unique([examId, studentId])
+  @@index([verificationCode])
 }
 
 // -------------------------------------------------------------

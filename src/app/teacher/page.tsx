@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 import TeacherAttendanceManager from "@/components/attendance/TeacherAttendanceManager";
+import TeacherMarksEntry from "@/components/exams/TeacherMarksEntry";
 
 interface StudentAttendanceItem {
   id: string;
@@ -260,41 +261,7 @@ export default function TeacherPanelPage() {
         {activeTab === "ATTENDANCE" && <TeacherAttendanceManager />}
 
         {/* 4. RESULTS */}
-        {activeTab === "RESULTS" && (
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-4">
-            <h2 className="text-base font-bold text-[#083B25] border-b pb-2">পরীক্ষার নম্বর ইনপুট</h2>
-            {resultsSuccess && (
-              <div className="p-3 bg-green-50 text-green-800 text-xs rounded border border-green-200">
-                সকল নম্বর সফলভাবে হালনাগাদ হয়েছে এবং অভিভাবক পোর্টালে সিঙ্ক করা হয়েছে।
-              </div>
-            )}
-            <form onSubmit={handleSaveResults} className="space-y-4 text-xs">
-              <div className="divide-y divide-gray-100">
-                {students.map((st) => (
-                  <div key={st.id} className="py-2 flex items-center justify-between">
-                    <span>
-                      রোল {st.roll}: <strong>{st.name}</strong>
-                    </span>
-                    <input
-                      type="number"
-                      max="100"
-                      min="0"
-                      value={st.marks || ""}
-                      onChange={(e) => handleMarksChange(st.id, Number(e.target.value))}
-                      className="w-20 p-1.5 border rounded text-center font-mono font-bold"
-                    />
-                  </div>
-                ))}
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded font-bold shadow"
-              >
-                নম্বর সংরক্ষণ ও প্রকাশ করুন
-              </button>
-            </form>
-          </div>
-        )}
+        {activeTab === "RESULTS" && <TeacherMarksEntry />}
 
         {/* 5. ROUTINE */}
         {activeTab === "ROUTINE" && (

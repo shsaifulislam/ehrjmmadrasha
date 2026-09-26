@@ -1,18 +1,25 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Search, Award, CheckCircle, AlertCircle, Printer, QrCode } from "lucide-react";
+import { Search, Award, CheckCircle, AlertCircle, Printer, QrCode, ShieldCheck, ArrowRight } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 
 export default function ResultsPage() {
+  const [searchMode, setSearchMode] = useState<"ROLL" | "CODE">("ROLL");
+
+  // Roll search state
   const [classes, setClasses] = useState<any[]>([]);
   const [selectedClassId, setSelectedClassId] = useState("");
   const [rollNumber, setRollNumber] = useState("");
   const [searching, setSearching] = useState(false);
   const [studentResult, setStudentResult] = useState<any | null>(null);
   const [searchError, setSearchError] = useState("");
+
+  // Code verify state
+  const [verificationCodeInput, setVerificationCodeInput] = useState("");
 
   useEffect(() => {
     fetch("/api/academic/classes")
@@ -55,6 +62,12 @@ export default function ResultsPage() {
     }
   };
 
+  const handleCodeVerify = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!verificationCodeInput.trim()) return;
+    window.location.href = `/verify/result/${encodeURIComponent(verificationCodeInput.trim().toUpperCase())}`;
+  };
+
   return (
     <div className="min-h-screen bg-[#F9F8F3] flex flex-col font-sans text-[#0B1914]">
       <Navbar />
@@ -62,72 +75,134 @@ export default function ResultsPage() {
       <section className="bg-gradient-to-b from-[#083B25] to-[#0D5C3A] text-white py-14 px-4 border-b-4 border-[#C59B27] text-center">
         <div className="max-w-6xl mx-auto">
           <span className="bg-[#C59B27]/20 text-amber-200 border border-[#C59B27]/40 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider inline-block mb-3">
-            অনলাইন রেজাল্ট ও মার্কশিট
+            অনলাইন রেজাল্ট ও মার্কশিট ভেরিফিকেশন
           </span>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-3">
-            শিক্ষার্থীর ফলাফল ও প্রগ্রেসিভ রিপোর্ট
+            শিক্ষার্থীর ফলাফল ও ডিজিটাল সত্যতা যাচাই
           </h1>
           <p className="text-sm sm:text-base text-emerald-100 max-w-2xl mx-auto font-light leading-relaxed">
-            কোনো পাসওয়ার্ডের প্রয়োজন নেই। জামাত নির্বাচন করে শিক্ষার্থীর ক্লাস রোল লিখুন।
+            কোনো পাসওয়ার্ডের প্রয়োজন নেই। জামাত ও রোল অথবা অফিশিয়াল ভেরিফিকেশন কোড দিয়ে ফলাফল দেখুন।
           </p>
         </div>
       </section>
 
       <main className="max-w-4xl mx-auto px-4 py-12 space-y-8 flex-1 w-full">
-        {/* Search Box */}
-        <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-          <form onSubmit={handleSearch} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-                  জামাত / শ্রেণি নির্বাচন করুন *
-                </label>
-                <select
-                  value={selectedClassId}
-                  onChange={(e) => setSelectedClassId(e.target.value)}
-                  className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none bg-white focus:ring-1 focus:ring-[#0D5C3A]"
-                >
-                  {classes.map((cls) => (
-                    <option key={cls.id} value={cls.id}>
-                      {cls.nameBn} ({cls.nameEn})
-                    </option>
-                  ))}
-                </select>
+        {/* Toggle Mode */}
+        <div className="flex justify-center">
+          <div className="bg-gray-200 p-1 rounded-xl flex items-center gap-1 text-xs font-semibold">
+            <button
+              onClick={() => setSearchMode("ROLL")}
+              className={`px-4 py-2 rounded-lg transition ${
+                searchMode === "ROLL"
+                  ? "bg-white text-[#083B25] shadow-sm font-bold"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              জামাত ও রোল নম্বর দিয়ে অনুসন্ধান
+            </button>
+            <button
+              onClick={() => setSearchMode("CODE")}
+              className={`px-4 py-2 rounded-lg transition flex items-center gap-1.5 ${
+                searchMode === "CODE"
+                  ? "bg-white text-[#083B25] shadow-sm font-bold"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              <QrCode className="w-3.5 h-3.5 text-[#C59B27]" />
+              ভেরিফিকেশন কোড দিয়ে যাচাই
+            </button>
+          </div>
+        </div>
+
+        {/* 1. ROLL SEARCH FORM */}
+        {searchMode === "ROLL" && (
+          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+            <form onSubmit={handleSearch} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                    জামাত / শ্রেণি নির্বাচন করুন *
+                  </label>
+                  <select
+                    value={selectedClassId}
+                    onChange={(e) => setSelectedClassId(e.target.value)}
+                    className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none bg-white focus:ring-1 focus:ring-[#0D5C3A]"
+                  >
+                    {classes.map((cls) => (
+                      <option key={cls.id} value={cls.id}>
+                        {cls.nameBn} ({cls.nameEn})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                    ক্লাস রোল নম্বর লিখুন *
+                  </label>
+                  <input
+                    type="number"
+                    required
+                    min="1"
+                    value={rollNumber}
+                    onChange={(e) => setRollNumber(e.target.value)}
+                    placeholder="যেমন: ১"
+                    className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none focus:ring-1 focus:ring-[#0D5C3A]"
+                  />
+                </div>
               </div>
 
+              <button
+                type="submit"
+                disabled={searching}
+                className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-lg text-xs font-bold transition shadow flex items-center justify-center gap-2"
+              >
+                <Search className="w-4 h-4" />
+                {searching ? "ফলাফল খোঁজা হচ্ছে..." : "ফলাফল অনুসন্ধান করুন"}
+              </button>
+            </form>
+
+            {searchError && (
+              <div className="mt-4 p-3.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-800 flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+                {searchError}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* 2. CODE VERIFICATION FORM */}
+        {searchMode === "CODE" && (
+          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+            <div>
+              <h3 className="font-bold text-sm text-[#083B25]">মার্কশিট ভেরিফিকেশন কোড</h3>
+              <p className="text-xs text-gray-500">
+                মুদ্রিত মার্কশিট বা সার্টিফিকেটের নিচে থাকা ভেরিফিকেশন কোডটি হুবহু লিখুন (যেমন: EHRJ-RES-2026-XXXX)
+              </p>
+            </div>
+
+            <form onSubmit={handleCodeVerify} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-                  ক্লাস রোল নম্বর লিখুন *
-                </label>
                 <input
-                  type="number"
+                  type="text"
                   required
-                  min="1"
-                  value={rollNumber}
-                  onChange={(e) => setRollNumber(e.target.value)}
-                  placeholder="যেমন: ১"
-                  className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none focus:ring-1 focus:ring-[#0D5C3A]"
+                  placeholder="যেমন: EHRJ-RES-2026-AB12CD34"
+                  value={verificationCodeInput}
+                  onChange={(e) => setVerificationCodeInput(e.target.value)}
+                  className="w-full p-3 border-2 border-emerald-200 rounded-xl text-sm font-mono font-bold uppercase tracking-wider outline-none focus:border-[#0D5C3A]"
                 />
               </div>
-            </div>
 
-            <button
-              type="submit"
-              disabled={searching}
-              className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-lg text-xs font-bold transition shadow flex items-center justify-center gap-2"
-            >
-              <Search className="w-4 h-4" />
-              {searching ? "ফলাফল খোঁজা হচ্ছে..." : "ফলাফল অনুসন্ধান করুন"}
-            </button>
-          </form>
-
-          {searchError && (
-            <div className="mt-4 p-3.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-800 flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
-              {searchError}
-            </div>
-          )}
-        </div>
+              <button
+                type="submit"
+                className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-lg text-xs font-bold transition shadow flex items-center justify-center gap-2"
+              >
+                <ShieldCheck className="w-4 h-4 text-amber-300" />
+                সত্যতা ও ডিজিটাল মার্কশিট যাচাই করুন
+              </button>
+            </form>
+          </div>
+        )}
 
         {/* Result & Marksheet Card */}
         {studentResult && (
@@ -154,7 +229,7 @@ export default function ResultsPage() {
               </button>
             </div>
 
-            {/* Attendance & Fee summary */}
+            {/* Attendance & Summary */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="bg-[#F9F8F3] p-3 rounded-lg border border-gray-100 text-center">
                 <span className="text-[10px] text-gray-500 block">উপস্থিতি হার</span>
@@ -169,16 +244,14 @@ export default function ResultsPage() {
                 </span>
               </div>
               <div className="bg-[#F9F8F3] p-3 rounded-lg border border-gray-100 text-center">
-                <span className="text-[10px] text-gray-500 block">মোট ফি বকেয়া</span>
-                <span className="font-bold text-sm text-red-700 font-mono">
-                  ৳ {studentResult.feeSummary.totalDue}
-                </span>
-              </div>
-              <div className="bg-[#F9F8F3] p-3 rounded-lg border border-gray-100 text-center">
                 <span className="text-[10px] text-gray-500 block">আবাসিক অবস্থা</span>
                 <span className="font-bold text-xs text-gray-800">
                   {studentResult.residentialStatus === "RESIDENTIAL" ? "আবাসিক" : "অনাবাসিক"}
                 </span>
+              </div>
+              <div className="bg-[#F9F8F3] p-3 rounded-lg border border-gray-100 text-center">
+                <span className="text-[10px] text-gray-500 block">ফলাফল স্থিতি</span>
+                <span className="font-bold text-xs text-emerald-800">অফিসিয়াল রেকর্ড</span>
               </div>
             </div>
 
