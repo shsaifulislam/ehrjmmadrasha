@@ -270,21 +270,58 @@ model StudentDocument {
 model Application {
   id                          String    @id @default(uuid())
   applicationNumber           String    @unique // e.g. "EHRJ-ADM-2026-0001"
+  source                      String    @default("ONLINE") // ONLINE, OFFICE
+  sessionId                   String?
+  desiredClassId              String
+  desiredSectionId            String?
   studentNameBn               String
   studentNameEn               String
+  studentNameAr               String?
   dateOfBirth                 DateTime
   gender                      String
-  desiredClassId              String
-  desiredResidentialStatus    String    @default("NON_RESIDENTIAL")
+  bloodGroup                  String?
+  birthCertificateNo          String?
+  nidNo                       String?
+  nationality                 String    @default("Bangladeshi")
+  desiredResidentialStatus    String    @default("NON_RESIDENTIAL") // RESIDENTIAL, NON_RESIDENTIAL, DAY_CARE
+  fatherNameBn                String?
+  fatherPhone                 String?
+  fatherOccupation            String?
+  motherNameBn                String?
+  motherPhone                 String?
   guardianName                String
   guardianPhone               String
   guardianEmail               String?
+  guardianRelation            String?   @default("FATHER")
+  guardianAddress             String?
   address                     String
+  presentAddress              String?
+  permanentAddress            String?
+  previousInstitute           String?
+  previousClass               String?
   isOrphan                    Boolean   @default(false)
+  isFinanciallyWeak           Boolean   @default(false)
   financialAssistanceRequested Boolean  @default(false)
-  documentsJson               String?   // JSON list of uploaded doc URLs
-  status                      String    @default("PENDING") // PENDING, APPROVED, REJECTED
+  specialAssistanceDetails    String?
+  documentsJson               String?   // JSON list of uploaded doc objects {type, name, url, verificationStatus}
+  submissionToken             String?   @unique
+  status                      String    @default("SUBMITTED") // SUBMITTED, UNDER_REVIEW, VERIFICATION, EXAM_INTERVIEW, CORRECTION_REQUESTED, APPROVED, REJECTED
   remarks                     String?
+  reviewNotes                 String?
+  verificationStatus          String?   @default("PENDING") // PENDING, VERIFIED, REJECTED
+  verificationNotes           String?
+  verifiedByUserId            String?
+  examInterviewScheduledAt    DateTime?
+  examInterviewResult         String?   // PASS, FAIL
+  correctionReason            String?
+  rejectionReason             String?
+  rejectedByUserId            String?
+  approvedByUserId            String?
+  createdStudentId            String?
+  submittedAt                 DateTime  @default(now())
+  reviewedAt                  DateTime?
+  approvedAt                  DateTime?
+  rejectedAt                  DateTime?
   createdAt                   DateTime  @default(now())
   updatedAt                   DateTime  @updatedAt
 }

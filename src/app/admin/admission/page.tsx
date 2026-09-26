@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function AdminAdmissionPage() {
-  redirect("/admin?tab=ADMISSION");
+  redirect("/admin/admissions");
 }

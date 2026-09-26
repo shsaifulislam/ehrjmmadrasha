@@ -676,14 +676,22 @@ export default function AdminDashboardPage() {
                     <h2 className="text-base font-bold text-[#0B1914]">ভর্তি আবেদন ও শিক্ষার্থী তালিকাভুক্তি</h2>
                     <p className="text-xs text-gray-500">অনলাইন বা সরাসরি আসা আবেদন যাচাই করে এক ক্লিকে স্থায়ী শিক্ষার্থী হিসাবে অনুমোদন করুন।</p>
                   </div>
-                  <Link
-                    href="/admission"
-                    target="_blank"
-                    className="bg-[#0D5C3A] hover:bg-[#158052] text-white px-3.5 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 shadow w-fit"
-                  >
-                    <PlusCircle className="w-4 h-4" />
-                    নতুন ভর্তি ফরম পূরণ করুন
-                  </Link>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      href="/admin/admissions"
+                      className="bg-[#0D5C3A] hover:bg-[#158052] text-white px-3.5 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 shadow"
+                    >
+                      সম্পূর্ণ ভর্তি ড্যাশবোর্ড খুলুন →
+                    </Link>
+                    <Link
+                      href="/admission"
+                      target="_blank"
+                      className="border border-[#0D5C3A] text-[#0D5C3A] hover:bg-emerald-50 px-3.5 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5"
+                    >
+                      <PlusCircle className="w-4 h-4" />
+                      অনলাইন ফরম
+                    </Link>
+                  </div>
                 </div>
 
                 {stats.recentApplications.length === 0 ? (
@@ -720,7 +728,13 @@ export default function AdminDashboardPage() {
                               </span>
                             </td>
                             <td className="p-3 text-right space-x-2">
-                              {app.status === "PENDING" ? (
+                              <Link
+                                href={`/admin/admissions/${app.id}`}
+                                className="text-[11px] text-[#0D5C3A] hover:underline font-semibold"
+                              >
+                                রিভিউ / বিস্তারিত →
+                              </Link>
+                              {app.status === "PENDING" || app.status === "SUBMITTED" ? (
                                 <button
                                   onClick={() => handleApproveAdmission(app.id)}
                                   disabled={approvingId === app.id}
@@ -729,8 +743,10 @@ export default function AdminDashboardPage() {
                                   <Check className="w-3 h-3" />
                                   {approvingId === app.id ? "অনুমোদন হচ্ছে..." : "অনুমোদন করুন"}
                                 </button>
-                              ) : (
+                              ) : app.status === "APPROVED" ? (
                                 <span className="text-[11px] text-green-700 font-semibold">স্থায়ী ছাত্র তালিকাভুক্ত</span>
+                              ) : (
+                                <span className="text-[11px] text-stone-500 font-semibold">{app.status}</span>
                               )}
                             </td>
                           </tr>
