@@ -85,6 +85,7 @@ model AcademicSession {
   feeInvoices        FeeInvoice[]
   financialAssistance FinancialAssistance[]
   teacherAssignments TeacherAssignment[]
+  attendanceLocks    AttendanceLock[]
 }
 
 model JamatClass {
@@ -103,6 +104,7 @@ model JamatClass {
   enrollments Enrollment[]
   attendances Attendance[]
   examSubjects ExamSubject[]
+  attendanceLocks AttendanceLock[]
 }
 
 model Section {
@@ -118,6 +120,7 @@ model Section {
   enrollments Enrollment[]
   attendances Attendance[]
   teacherAssignments TeacherAssignment[]
+  attendanceLocks    AttendanceLock[]
 }
 
 model Subject {
@@ -330,24 +333,52 @@ model Application {
 // 5. ATTENDANCE
 // -------------------------------------------------------------
 model Attendance {
-  id              String          @id @default(uuid())
-  studentId       String
-  sessionId       String
-  classId         String
-  sectionId       String?
-  date            DateTime
-  status          String          // PRESENT, ABSENT, LATE, LEAVE
-  remarks         String?
-  markedByUserId  String?
-  createdAt       DateTime        @default(now())
+  id               String          @id @default(uuid())
+  studentId        String
+  sessionId        String
+  classId          String
+  sectionId        String?
+  date             DateTime
+  status           String          // PRESENT, ABSENT, LATE, LEAVE
+  remarks          String?
+  leaveReason      String?
+  markedByUserId   String?
+  updatedByUserId  String?
+  correctionReason String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @default(now()) @updatedAt
 
-  student         Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  session         AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  jamatClass      JamatClass      @relation(fields: [classId], references: [id], onDelete: Cascade)
-  section         Section?        @relation(fields: [sectionId], references: [id], onDelete: SetNull)
-  markedByUser    User?           @relation(fields: [markedByUserId], references: [id], onDelete: SetNull)
+  student          Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session          AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  jamatClass       JamatClass      @relation(fields: [classId], references: [id], onDelete: Cascade)
+  section          Section?        @relation(fields: [sectionId], references: [id], onDelete: SetNull)
+  markedByUser     User?           @relation(fields: [markedByUserId], references: [id], onDelete: SetNull)
 
   @@unique([studentId, date])
+  @@index([sessionId, classId, sectionId, date])
+  @@index([studentId, date])
+  @@index([date, status])
+}
+
+model AttendanceLock {
+  id               String          @id @default(uuid())
+  sessionId        String
+  classId          String
+  sectionId        String?
+  date             DateTime
+  isLocked         Boolean         @default(true)
+  lockedAt         DateTime?       @default(now())
+  lockedByUserId   String?
+  unlockedAt       DateTime?
+  unlockedByUserId String?
+  reason           String?
+
+  session          AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  jamatClass       JamatClass      @relation(fields: [classId], references: [id], onDelete: Cascade)
+  section          Section?        @relation(fields: [sectionId], references: [id], onDelete: SetNull)
+
+  @@unique([sessionId, classId, sectionId, date])
+  @@index([sessionId, classId, date])
 }
 
 // -------------------------------------------------------------

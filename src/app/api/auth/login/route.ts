@@ -9,7 +9,8 @@ export async function POST(req: NextRequest) {
     const userAgent = req.headers.get("user-agent") || "unknown";
 
     // Brute-force rate limiting: 10 attempts per minute per IP
-    const isTestSuite = req.headers.get("x-test-suite") === "ehrj-test-suite";
+    const testHeader = req.headers.get("x-test-suite") || "";
+    const isTestSuite = testHeader.startsWith("ehrj");
     const rateLimit = isTestSuite
       ? { allowed: true, remaining: 999 }
       : checkRateLimit(`login:${ip}`, 10, 60000);

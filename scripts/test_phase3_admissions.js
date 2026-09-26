@@ -286,9 +286,10 @@ async function runPhase3Tests() {
     assert(examRes.json?.application?.examInterviewResult === "PASS", "Exam result set to PASS");
 
     // Correction Request on a test application
+    const uniqueSuffix1 = Date.now().toString().slice(-4);
     const appToCorrect = await prisma.application.create({
       data: {
-        applicationNumber: `EHRJ-ADM-${new Date().getFullYear()}-9901`,
+        applicationNumber: `EHRJ-ADM-${new Date().getFullYear()}-${uniqueSuffix1}`,
         studentNameBn: "সংশোধন পরীক্ষার্থী",
         studentNameEn: "CORRECTION CANDIDATE",
         dateOfBirth: new Date("2016-02-02"),
@@ -313,9 +314,10 @@ async function runPhase3Tests() {
     );
 
     // Rejection on another test application (with mandatory reason)
+    const uniqueSuffix2 = (parseInt(uniqueSuffix1, 10) + 1).toString();
     const appToReject = await prisma.application.create({
       data: {
-        applicationNumber: `EHRJ-ADM-${new Date().getFullYear()}-9902`,
+        applicationNumber: `EHRJ-ADM-${new Date().getFullYear()}-${uniqueSuffix2}`,
         studentNameBn: "বাতিল পরীক্ষার্থী",
         studentNameEn: "REJECTED CANDIDATE",
         dateOfBirth: new Date("2016-03-03"),

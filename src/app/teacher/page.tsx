@@ -19,9 +19,9 @@ import {
   Bell,
   User,
   Send,
-  Check,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
+import TeacherAttendanceManager from "@/components/attendance/TeacherAttendanceManager";
 
 interface StudentAttendanceItem {
   id: string;
@@ -257,91 +257,7 @@ export default function TeacherPanelPage() {
         )}
 
         {/* 3. ATTENDANCE */}
-        {activeTab === "ATTENDANCE" && (
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-4">
-              <div>
-                <h2 className="text-base font-bold text-[#083B25]">দৈনিক রোলভিত্তিক ডিজিটাল হাজিরা</h2>
-                <p className="text-xs text-gray-500">তারিখ: {date} | মোট ছাত্র: {students.length} জন</p>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleAllPresent}
-                  className="bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100 px-3 py-1.5 rounded text-xs font-semibold transition"
-                >
-                  সবাই উপস্থিত
-                </button>
-              </div>
-            </div>
-
-            {savedSuccess && (
-              <div className="bg-green-50 border border-green-200 text-green-800 p-3 rounded text-xs flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-600" />
-                আজকের হাজিরা ডাটাবেজে সফলভাবে সংরক্ষিত হয়েছে।
-              </div>
-            )}
-
-            <form onSubmit={handleSaveAttendance} className="space-y-4">
-              <div className="divide-y divide-gray-100">
-                {students.map((st) => (
-                  <div key={st.id} className="py-2.5 flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-3">
-                      <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center font-mono font-bold text-[#0D5C3A]">
-                        {st.roll}
-                      </span>
-                      <span className="font-semibold text-gray-900">{st.name}</span>
-                    </div>
-
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => handleStatusChange(st.id, "PRESENT")}
-                        className={`px-2.5 py-1 rounded font-bold text-[11px] transition ${
-                          st.status === "PRESENT"
-                            ? "bg-green-600 text-white"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                        }`}
-                      >
-                        উপস্থিত
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleStatusChange(st.id, "ABSENT")}
-                        className={`px-2.5 py-1 rounded font-bold text-[11px] transition ${
-                          st.status === "ABSENT"
-                            ? "bg-red-600 text-white"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                        }`}
-                      >
-                        অনুপস্থিত
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleStatusChange(st.id, "LATE")}
-                        className={`px-2.5 py-1 rounded font-bold text-[11px] transition ${
-                          st.status === "LATE"
-                            ? "bg-amber-600 text-white"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                        }`}
-                      >
-                        দেরি
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-lg text-xs font-bold shadow"
-              >
-                হাজিরা সংরক্ষণ করুন
-              </button>
-            </form>
-          </div>
-        )}
+        {activeTab === "ATTENDANCE" && <TeacherAttendanceManager />}
 
         {/* 4. RESULTS */}
         {activeTab === "RESULTS" && (

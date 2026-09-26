@@ -32,6 +32,7 @@ import {
   Printer,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
+import AdminAttendanceCockpit from "@/components/attendance/AdminAttendanceCockpit";
 
 interface AdminStats {
   totalStudents: number;
@@ -783,26 +784,7 @@ export default function AdminDashboardPage() {
             )}
 
             {/* 5. ATTENDANCE */}
-            {activeTab === "ATTENDANCE" && (
-              <div className="bg-white rounded-lg border border-[#E2E8F0] p-6 shadow-sm space-y-4">
-                <h2 className="text-base font-bold text-[#0B1914] border-b pb-2">সার্বিক হাজিরা নিরীক্ষা</h2>
-                <p className="text-xs text-gray-600">শিক্ষকগণ কর্তৃক গৃহীত দৈনিক উপস্থিতির সার্বিক শতকরা হার ও বিশ্লেষণ।</p>
-                <div className="grid grid-cols-3 gap-4 text-center text-xs">
-                  <div className="p-3 bg-emerald-50 rounded border border-emerald-100">
-                    <span className="text-gray-500 block">গড় উপস্থিতি</span>
-                    <span className="text-xl font-bold font-mono text-[#0D5C3A]">৯৩.৪%</span>
-                  </div>
-                  <div className="p-3 bg-blue-50 rounded border border-blue-100">
-                    <span className="text-gray-500 block">আবাসিক উপস্থিতি</span>
-                    <span className="text-xl font-bold font-mono text-blue-800">৯৮.১%</span>
-                  </div>
-                  <div className="p-3 bg-amber-50 rounded border border-amber-100">
-                    <span className="text-gray-500 block">ছুটিপ্রাপ্ত</span>
-                    <span className="text-xl font-bold font-mono text-amber-800">২ জন</span>
-                  </div>
-                </div>
-              </div>
-            )}
+            {activeTab === "ATTENDANCE" && <AdminAttendanceCockpit />}
 
             {/* 6. EXAMINATION */}
             {activeTab === "EXAMINATION" && (

@@ -22,6 +22,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
+import GuardianAttendanceViewer from "@/components/attendance/GuardianAttendanceViewer";
 
 export default function StudentGuardianPortalPage() {
   const [classes, setClasses] = useState<any[]>([]);
@@ -341,31 +342,7 @@ export default function StudentGuardianPortalPage() {
             )}
 
             {/* 4. ATTENDANCE */}
-            {activeTab === "ATTENDANCE" && (
-              <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-4">
-                <h2 className="text-base font-bold text-[#083B25] border-b pb-2">হাজিরা রিপোর্ট</h2>
-                <div className="grid grid-cols-3 gap-3 text-center">
-                  <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
-                    <span className="text-xs text-emerald-800 block">উপস্থিত</span>
-                    <span className="text-xl font-bold font-mono text-[#0D5C3A]">
-                      {student.attendanceStats.present} দিন
-                    </span>
-                  </div>
-                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
-                    <span className="text-xs text-red-800 block">অনুপস্থিত</span>
-                    <span className="text-xl font-bold font-mono text-red-700">
-                      {student.attendanceStats.absent} দিন
-                    </span>
-                  </div>
-                  <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
-                    <span className="text-xs text-gray-600 block">হাজিরার শতাংশ</span>
-                    <span className="text-xl font-bold font-mono text-gray-800">
-                      {student.attendanceStats.percentage}%
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
+            {activeTab === "ATTENDANCE" && <GuardianAttendanceViewer initialStudentId={student?.id} />}
 
             {/* 5. RESULTS */}
             {activeTab === "RESULTS" && (
