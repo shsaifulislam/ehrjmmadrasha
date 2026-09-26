@@ -34,6 +34,7 @@ import {
 import { INSTITUTION_INFO } from "@/lib/constants";
 import AdminAttendanceCockpit from "@/components/attendance/AdminAttendanceCockpit";
 import AdminExamHub from "@/components/exams/AdminExamHub";
+import AdminFinanceHub from "@/components/finance/AdminFinanceHub";
 
 interface AdminStats {
   totalStudents: number;
@@ -791,124 +792,7 @@ export default function AdminDashboardPage() {
             {activeTab === "EXAMINATION" && <AdminExamHub />}
 
             {/* 7. FINANCE */}
-            {activeTab === "FINANCE" && (
-              <div className="space-y-6">
-                <div className="bg-white rounded-lg border border-[#E2E8F0] p-6 shadow-sm">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-100 gap-4 mb-6">
-                    <div>
-                      <h2 className="text-base font-bold text-[#0B1914]">ক্যাশ ফান্ড ও স্বচ্ছ তহবিল ব্যবস্থাপনা</h2>
-                      <p className="text-xs text-gray-500">লিল্লাহ বোর্ডিং ও যাকাত তহবিল সাধারণ মাদ্রাসার তহবিলের সাথে কখনো মিশ্রিত হয় না।</p>
-                    </div>
-                    <button
-                      onClick={() => setShowAddTx(!showAddTx)}
-                      className="bg-[#0D5C3A] hover:bg-[#158052] text-white px-3.5 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 shadow w-fit"
-                    >
-                      <PlusCircle className="w-4 h-4" />
-                      নতুন আয় / ব্যয় ভাউচার
-                    </button>
-                  </div>
-
-                  {txMsg && (
-                    <div className="mb-4 p-3 rounded bg-emerald-50 text-emerald-800 text-xs border border-emerald-200">
-                      {txMsg}
-                    </div>
-                  )}
-
-                  {showAddTx && (
-                    <form onSubmit={handleRecordTransaction} className="mb-6 p-4 rounded-lg bg-gray-50 border border-gray-200 space-y-3">
-                      <h3 className="font-bold text-xs text-[#0B1914]">ক্যাশ রসিদ / পেমেন্ট ভাউচার এন্ট্রি</h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div>
-                          <label className="block text-[11px] font-semibold text-gray-700 mb-1">তহবিল নির্বাচন করুন *</label>
-                          <select
-                            value={selectedFundId}
-                            onChange={(e) => setSelectedFundId(e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded text-xs outline-none bg-white"
-                          >
-                            {stats.funds.map((f) => (
-                              <option key={f.id} value={f.id}>
-                                {f.nameBn} (বর্তমান: ৳ {f.currentBalance})
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                        <div>
-                          <label className="block text-[11px] font-semibold text-gray-700 mb-1">লেনদেনের ধরন *</label>
-                          <select
-                            value={txType}
-                            onChange={(e: any) => setTxType(e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded text-xs outline-none bg-white"
-                          >
-                            <option value="INCOME">জমা / আয় (Income)</option>
-                            <option value="EXPENSE">খরচ / ব্যয় (Expense)</option>
-                          </select>
-                        </div>
-                        <div>
-                          <label className="block text-[11px] font-semibold text-gray-700 mb-1">টাকার পরিমাণ (৳) *</label>
-                          <input
-                            type="number"
-                            required
-                            min="1"
-                            value={txAmount}
-                            onChange={(e) => setTxAmount(e.target.value)}
-                            placeholder="যেমন: 5000"
-                            className="w-full p-2 border border-gray-300 rounded text-xs outline-none"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[11px] font-semibold text-gray-700 mb-1">দাতা / গ্রহীতার নাম *</label>
-                          <input
-                            type="text"
-                            required
-                            value={txPayee}
-                            onChange={(e) => setTxPayee(e.target.value)}
-                            placeholder="হাজী মুহাম্মদ..."
-                            className="w-full p-2 border border-gray-300 rounded text-xs outline-none"
-                          />
-                        </div>
-                        <div className="sm:col-span-2">
-                          <label className="block text-[11px] font-semibold text-gray-700 mb-1">খাত / বিবরণ</label>
-                          <input
-                            type="text"
-                            value={txCategory}
-                            onChange={(e) => setTxCategory(e.target.value)}
-                            placeholder="যেমন: এককালীন লিল্লাহ অনুদান / চাল ক্রয়"
-                            className="w-full p-2 border border-gray-300 rounded text-xs outline-none"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex justify-end gap-2 pt-2">
-                        <button
-                          type="button"
-                          onClick={() => setShowAddTx(false)}
-                          className="px-3 py-1.5 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-100"
-                        >
-                          বাতিল
-                        </button>
-                        <button
-                          type="submit"
-                          className="bg-[#0D5C3A] hover:bg-[#158052] text-white px-4 py-1.5 rounded text-xs font-semibold shadow"
-                        >
-                          ভাউচার সংরক্ষণ করুন
-                        </button>
-                      </div>
-                    </form>
-                  )}
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {stats.funds.map((f, idx) => (
-                      <div key={idx} className="p-4 rounded-lg border border-gray-200 bg-gray-50">
-                        <span className="text-xs font-semibold text-gray-600 block">{f.nameBn}</span>
-                        <div className="text-xl font-bold font-mono text-[#0D5C3A] mt-2">
-                          ৳ {f.currentBalance.toLocaleString("bn-BD")}
-                        </div>
-                        <span className="text-[10px] text-gray-400 font-mono mt-1 block">CODE: {f.code}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
+            {activeTab === "FINANCE" && <AdminFinanceHub />}
 
             {/* 8. DOCUMENTS */}
             {activeTab === "DOCUMENTS" && (

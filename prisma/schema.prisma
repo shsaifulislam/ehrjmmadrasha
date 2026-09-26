@@ -30,6 +30,7 @@ model User {
   teacherAssignments TeacherAssignment[]
   markedAttendances Attendance[]
   auditLogs         AuditLog[]
+  payrollRecords    PayrollRecord[]
 }
 
 model Session {
@@ -83,6 +84,7 @@ model AcademicSession {
   attendances        Attendance[]
   exams              Exam[]
   feeInvoices        FeeInvoice[]
+  feeStructures      FeeStructure[]
   financialAssistance FinancialAssistance[]
   teacherAssignments TeacherAssignment[]
   attendanceLocks    AttendanceLock[]
@@ -105,6 +107,7 @@ model JamatClass {
   attendances Attendance[]
   examSubjects ExamSubject[]
   examRoutines ExamRoutine[]
+  feeStructures FeeStructure[]
   attendanceLocks AttendanceLock[]
 }
 
@@ -203,6 +206,7 @@ model Student {
   feeInvoices          FeeInvoice[]
   paymentReceipts      PaymentReceipt[]
   financialAssistances FinancialAssistance[]
+  scholarships         StudentScholarship[]
   certificates         Certificate[]
   documents            StudentDocument[]
 }
@@ -556,15 +560,20 @@ model FeeInvoice {
   invoiceNumber String          @unique // e.g. "INV-2026-00001"
   studentId     String
   sessionId     String
+  feeType       String          @default("OTHER") // ADMISSION, MONTHLY, TUITION, HOSTEL, FOOD, EXAM, CERTIFICATE, DOCUMENT, OTHER
+  billingMonth  String?         // e.g. "2026-03"
   title         String          // e.g. "মার্চ ২০২৬ বেতন ও পরীক্ষার ফি"
   dueDate       DateTime
   totalAmount   Float
   discountAmount Float          @default(0)
   waiverAmount  Float           @default(0)
+  lateFeeAmount Float           @default(0)
   netAmount     Float
   paidAmount    Float           @default(0)
   dueAmount     Float
-  status        String          @default("UNPAID") // UNPAID, PARTIALLY_PAID, PAID, WAIVED
+  fundCode      String          @default("GENERAL") // GENERAL, LILLAH, ZAKAT, CONSTRUCTION, ORPHAN_SUPPORT
+  idempotencyKey String?        @unique
+  status        String          @default("UNPAID") // UNPAID, PARTIALLY_PAID, PAID, WAIVED, OVERDUE, CANCELLED, REFUNDED
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 
@@ -572,6 +581,9 @@ model FeeInvoice {
   session       AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   items         InvoiceItem[]
   receipts      PaymentReceipt[]
+  refunds       Refund[]
+
+  @@index([studentId, sessionId, status])
 }
 
 model InvoiceItem {
@@ -593,6 +605,9 @@ model PaymentReceipt {
   amount          Float
   paymentMethod   String        // CASH, BKASH, NAGAD, ROCKET, BANK
   transactionId   String?
+  paymentStatus   String        @default("SUCCESSFUL") // PENDING, SUCCESSFUL, FAILED, CANCELLED, REFUNDED
+  idempotencyKey  String?       @unique
+  fundCode        String        @default("GENERAL") // GENERAL, LILLAH, ZAKAT, CONSTRUCTION, ORPHAN_SUPPORT
   receivedByUserId String?
   receiptDate     DateTime      @default(now())
   qrCodeToken     String        @unique
@@ -601,6 +616,7 @@ model PaymentReceipt {
 
   invoice         FeeInvoice    @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   student         Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  refunds         Refund[]
 }
 
 model FinancialAssistance {
@@ -651,6 +667,115 @@ model CashTransaction {
   createdAt       DateTime      @default(now())
 
   fund            CashFund      @relation(fields: [fundId], references: [id], onDelete: Cascade)
+}
+
+model FeeStructure {
+  id                String          @id @default(uuid())
+  sessionId         String
+  classId           String?
+  residentialStatus String          @default("ALL") // ALL, RESIDENTIAL, NON_RESIDENTIAL, DAY_CARE
+  feeType           String          // ADMISSION, MONTHLY, TUITION, HOSTEL, FOOD, EXAM, CERTIFICATE, DOCUMENT, OTHER
+  nameBn            String
+  amount            Float
+  isRecurring       Boolean         @default(false)
+  billingMonth      String?
+  dueDay            Int             @default(10)
+  lateFeeAmount     Float           @default(0)
+  lateFeeGraceDays  Int             @default(5)
+  fundCode          String          @default("GENERAL") // GENERAL, LILLAH, ZAKAT, CONSTRUCTION, ORPHAN_SUPPORT
+  isActive          Boolean         @default(true)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  session           AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  jamatClass        JamatClass?     @relation(fields: [classId], references: [id], onDelete: SetNull)
+
+  @@index([sessionId, classId, feeType])
+}
+
+model Refund {
+  id               String          @id @default(uuid())
+  refundNumber     String          @unique // e.g. "EHRJ-RFD-2026-00001"
+  paymentId        String
+  invoiceId        String
+  amount           Float
+  reason           String
+  approvedByUserId String?
+  refundMethod     String          @default("CASH")
+  refundDate       DateTime        @default(now())
+  fundCode         String          @default("GENERAL")
+  createdAt        DateTime        @default(now())
+
+  payment          PaymentReceipt  @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  invoice          FeeInvoice      @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+model Scholarship {
+  id                String               @id @default(uuid())
+  nameBn            String
+  code              String               @unique
+  discountType      String               @default("PERCENTAGE") // PERCENTAGE, FIXED
+  discountValue     Float
+  applicableFeeType String               @default("ALL")
+  isActive          Boolean              @default(true)
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+
+  allocations       StudentScholarship[]
+}
+
+model StudentScholarship {
+  id               String          @id @default(uuid())
+  scholarshipId    String
+  studentId        String
+  sessionId        String
+  effectiveFrom    DateTime
+  effectiveTo      DateTime
+  approvedByUserId String?
+  createdAt        DateTime        @default(now())
+
+  scholarship      Scholarship     @relation(fields: [scholarshipId], references: [id], onDelete: Cascade)
+  student          Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([scholarshipId, studentId, sessionId])
+}
+
+model PayrollRecord {
+  id               String          @id @default(uuid())
+  voucherNumber    String          @unique // e.g. "EHRJ-PAY-2026-00001"
+  userId           String
+  month            String          // e.g. "2026-03"
+  baseSalary       Float
+  allowances       Float           @default(0)
+  deductions       Float           @default(0)
+  advanceDeduction Float           @default(0)
+  netSalary        Float
+  status           String          @default("DRAFT") // DRAFT, APPROVED, PAID
+  paymentMethod    String          @default("CASH")
+  paymentDate      DateTime?
+  fundCode         String          @default("GENERAL")
+  notes            String?
+  approvedByUserId String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, month])
+}
+
+model FinancialAccount {
+  id             String          @id @default(uuid())
+  nameBn         String          // e.g. "প্রধান ক্যাশ ড্রয়ার", "ইসলামী ব্যাংক সঞ্চয়ী হিসাব"
+  nameEn         String
+  type           String          // CASH, BANK, BKASH_MERCHANT, NAGAD_MERCHANT, ROCKET_MERCHANT
+  accountNumber  String?
+  bankName       String?
+  branchName     String?
+  currentBalance Float           @default(0)
+  isActive       Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
 }
 
 // -------------------------------------------------------------

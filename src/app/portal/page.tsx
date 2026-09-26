@@ -21,9 +21,9 @@ import {
   Printer,
   ChevronRight,
 } from "lucide-react";
-import { INSTITUTION_INFO } from "@/lib/constants";
 import GuardianAttendanceViewer from "@/components/attendance/GuardianAttendanceViewer";
 import GuardianResultsViewer from "@/components/exams/GuardianResultsViewer";
+import GuardianFinanceViewer from "@/components/finance/GuardianFinanceViewer";
 
 export default function StudentGuardianPortalPage() {
   const [classes, setClasses] = useState<any[]>([]);
@@ -349,26 +349,7 @@ export default function StudentGuardianPortalPage() {
             {activeTab === "RESULTS" && <GuardianResultsViewer initialStudentId={student?.id} />}
 
             {/* 6. FINANCE */}
-            {activeTab === "FINANCE" && (
-              <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-4">
-                <h2 className="text-base font-bold text-[#083B25] border-b pb-2">বেতন ও ফি বিবরণী</h2>
-                <div className="p-4 bg-gray-50 rounded-lg flex items-center justify-between text-xs">
-                  <div>
-                    <span className="font-semibold block text-gray-900">মাসিক সেশন ও টিউশন ফি</span>
-                    <span className="text-gray-500 font-mono">সর্বমোট বকেয়া: ৳ {student.feeSummary.totalDue}</span>
-                  </div>
-                  <span
-                    className={`font-bold px-2 py-0.5 rounded text-[11px] ${
-                      student.feeSummary.totalDue === 0
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
-                  >
-                    {student.feeSummary.totalDue === 0 ? "পরিশোধিত" : "বকেয়া আছে"}
-                  </span>
-                </div>
-              </div>
-            )}
+            {activeTab === "FINANCE" && <GuardianFinanceViewer />}
 
             {/* 7. DOCUMENTS */}
             {activeTab === "DOCUMENTS" && (

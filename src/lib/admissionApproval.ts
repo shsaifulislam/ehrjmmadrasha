@@ -207,11 +207,24 @@ export async function approveAdmissionTransaction(
     });
 
     // E. Initial Admission Fee Invoice Generation
+    // Query FeeStructure if configured for ADMISSION
+    let baseFee = customAdmissionFee !== undefined ? customAdmissionFee : 1500;
+    const admissionStructure = await tx.feeStructure.findFirst({
+      where: {
+        sessionId,
+        feeType: "ADMISSION",
+        isActive: true,
+        OR: [{ classId }, { classId: null }],
+      },
+      orderBy: [{ classId: "desc" }, { createdAt: "desc" }],
+    });
+    if (admissionStructure && customAdmissionFee === undefined) {
+      baseFee = admissionStructure.amount;
+    }
+
     const feeCount = await tx.feeInvoice.count();
     const invoiceNumber = `INV-${currentYear}-${String(feeCount + 1).padStart(5, "0")}`;
 
-    // Base fee is 1500 unless custom provided
-    const baseFee = customAdmissionFee !== undefined ? customAdmissionFee : 1500;
     const isOrphan = application.isOrphan;
     const totalAmount = baseFee;
     const discountAmount = isOrphan ? baseFee : 0;
@@ -222,6 +235,7 @@ export async function approveAdmissionTransaction(
         invoiceNumber,
         studentId: student.id,
         sessionId,
+        feeType: "ADMISSION",
         title: "প্রাথমিক ভর্তি ও সেশন ফি",
         dueDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
         totalAmount,
@@ -230,6 +244,7 @@ export async function approveAdmissionTransaction(
         netAmount: payableAmount,
         paidAmount: 0,
         dueAmount: payableAmount,
+        fundCode: "GENERAL",
         status: payableAmount === 0 ? "WAIVED" : "UNPAID",
       },
     });
