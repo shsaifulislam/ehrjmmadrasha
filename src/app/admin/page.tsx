@@ -37,6 +37,7 @@ import AdminExamHub from "@/components/exams/AdminExamHub";
 import AdminFinanceHub from "@/components/finance/AdminFinanceHub";
 import AdminDocumentHub from "@/components/documents/AdminDocumentHub";
 import AdminCommunicationHub from "@/components/communication/AdminCommunicationHub";
+import AdminLibraryHub from "@/components/library/AdminLibraryHub";
 
 interface AdminStats {
   totalStudents: number;
@@ -84,6 +85,7 @@ export default function AdminDashboardPage() {
     | "FINANCE"
     | "DOCUMENTS"
     | "COMMUNICATION"
+    | "LIBRARY"
     | "CMS"
     | "REPORTS"
     | "USERS"
@@ -200,6 +202,7 @@ export default function AdminDashboardPage() {
           "FINANCE",
           "DOCUMENTS",
           "COMMUNICATION",
+          "LIBRARY",
           "CMS",
           "REPORTS",
           "USERS",
@@ -459,6 +462,7 @@ export default function AdminDashboardPage() {
             { id: "FINANCE", label: "হিসাব ও ফান্ড (Finance)" },
             { id: "DOCUMENTS", label: "নথিপত্র (Documents)" },
             { id: "COMMUNICATION", label: "বার্তা ও ইমেইল (Communication)" },
+            { id: "LIBRARY", label: "লাইব্রেরি (Library)" },
             { id: "CMS", label: "ওয়েবসাইট CMS" },
             { id: "REPORTS", label: "রিপোর্ট (Reports)" },
             { id: "USERS", label: "ইউজার ও শিক্ষক (Users)" },
@@ -804,6 +808,9 @@ export default function AdminDashboardPage() {
             {(activeTab === "COMMUNICATION" || activeTab === "CMS") && (
               <AdminCommunicationHub />
             )}
+
+            {/* 10. LIBRARY */}
+            {activeTab === "LIBRARY" && <AdminLibraryHub />}
 
             {/* 11. REPORTS */}
             {activeTab === "REPORTS" && (

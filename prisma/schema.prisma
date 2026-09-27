@@ -38,6 +38,10 @@ model User {
   createdNotices    Notice[]       @relation("CreatedNotices")
   publishedNotices  Notice[]       @relation("PublishedNotices")
   notificationPreferences NotificationPreference[]
+  issuedLibraryIssues LibraryIssue[] @relation("IssuedLibraryIssues")
+  renewedLibraryIssues LibraryRenewal[] @relation("RenewedLibraryIssues")
+  recordedConditionHistories LibraryConditionHistory[] @relation("RecordedConditionHistories")
+  libraryMembers    LibraryMember[]
 }
 
 model Session {
@@ -222,6 +226,7 @@ model Student {
   certificates         Certificate[]
   documents            StudentDocument[]
   documentRequests     DocumentRequest[]
+  libraryMembers       LibraryMember[]
 }
 
 model Guardian {
@@ -597,6 +602,7 @@ model FeeInvoice {
   receipts      PaymentReceipt[]
   refunds       Refund[]
   documentRequests DocumentRequest[]
+  libraryIssues    LibraryIssue[]
 
   @@index([studentId, sessionId, status])
 }
@@ -1066,3 +1072,229 @@ model AuditLog {
 
   user        User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
 }
+
+// -------------------------------------------------------------
+// 11. LIBRARY MANAGEMENT & E-LIBRARY ENGINE
+// -------------------------------------------------------------
+
+model LibraryCategory {
+  id          String        @id @default(uuid())
+  nameBn      String
+  nameEn      String
+  description String?
+  sortOrder   Int           @default(0)
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  books       LibraryBook[]
+}
+
+model LibraryAuthor {
+  id          String        @id @default(uuid())
+  nameBn      String
+  nameEn      String
+  nameAr      String?
+  bio         String?
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  books       LibraryBook[]
+}
+
+model LibraryPublisher {
+  id          String        @id @default(uuid())
+  name        String
+  contactInfo String?
+  address     String?
+  website     String?
+  notes       String?
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  books       LibraryBook[]
+}
+
+model LibraryBook {
+  id               String            @id @default(uuid())
+  titleBn          String
+  titleEn          String
+  subtitle         String?
+  categoryId       String
+  authorId         String
+  publisherId      String?
+  edition          String?
+  publicationYear  Int?
+  isbn             String?
+  language         String            @default("BANGLA") // BANGLA, ARABIC, ENGLISH, URDU, OTHER
+  subject          String?
+  shelfLocation    String?
+  description      String?
+  coverImage       String?
+  acquisitionInfo  String?
+  notes            String?
+  isDigital        Boolean           @default(false)
+  digitalUrl       String?
+  digitalType      String?           // PDF, EPUB, AUDIO
+  accessRestricted Boolean           @default(false)
+  copyrightInfo    String?
+  status           String            @default("ACTIVE") // ACTIVE, ARCHIVED
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  category         LibraryCategory   @relation(fields: [categoryId], references: [id])
+  author           LibraryAuthor     @relation(fields: [authorId], references: [id])
+  publisher        LibraryPublisher? @relation(fields: [publisherId], references: [id])
+  copies           LibraryBookCopy[]
+  issues           LibraryIssue[]
+
+  @@index([titleBn])
+  @@index([titleEn])
+  @@index([isbn])
+  @@index([categoryId])
+  @@index([authorId])
+}
+
+model LibraryBookCopy {
+  id                 String                   @id @default(uuid())
+  bookId             String
+  accessionNo        String                   @unique // e.g. "EHRJ-LIB-2026-000001"
+  barcode            String                   @unique
+  qrToken            String                   @unique
+  condition          String                   @default("GOOD") // NEW, GOOD, FAIR, DAMAGED, REPAIR_REQUIRED
+  status             String                   @default("AVAILABLE") // AVAILABLE, ISSUED, LOST, DAMAGED, REPAIR, REMOVED
+  purchasePrice      Float                    @default(0)
+  source             String?                  // PURCHASE, DONATION, GIFT
+  acquisitionDate    DateTime                 @default(now())
+  shelfLocation      String?
+  notes              String?
+  createdAt          DateTime                 @default(now())
+  updatedAt          DateTime                 @updatedAt
+
+  book               LibraryBook              @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  issues             LibraryIssue[]
+  conditionHistories LibraryConditionHistory[]
+
+  @@index([bookId, status])
+  @@index([accessionNo])
+  @@index([barcode])
+  @@index([qrToken])
+}
+
+model LibraryMember {
+  id           String         @id @default(uuid())
+  memberNumber String         @unique // e.g. "EHRJ-LIB-M-2026-0001"
+  memberType   String         // STUDENT, TEACHER
+  studentId    String?
+  userId       String?
+  status       String         @default("ACTIVE") // ACTIVE, SUSPENDED, EXPIRED
+  maxBooks     Int?
+  startDate    DateTime       @default(now())
+  endDate      DateTime?
+  notes        String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  student      Student?       @relation(fields: [studentId], references: [id], onDelete: SetNull)
+  user         User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+  issues       LibraryIssue[]
+
+  @@unique([memberType, studentId])
+  @@unique([memberType, userId])
+  @@index([memberNumber])
+  @@index([status])
+}
+
+model LibraryRule {
+  id                    String   @id @default(uuid())
+  memberType            String   @unique // STUDENT, TEACHER
+  maxBooks              Int      @default(2)
+  loanDays              Int      @default(14)
+  renewalLimit          Int      @default(1)
+  finePerDay            Float    @default(5.0)
+  graceDays             Int      @default(0)
+  lostChargeMultiplier  Float    @default(1.5)
+  damagedChargeDefault  Float    @default(50.0)
+  isActive              Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model LibraryIssue {
+  id              String            @id @default(uuid())
+  issueNumber     String            @unique // e.g. "EHRJ-ISS-2026-000001"
+  bookId          String
+  copyId          String
+  memberId        String
+  issuedByUserId  String
+  issueDate       DateTime          @default(now())
+  dueDate         DateTime
+  returnDate      DateTime?
+  renewCount      Int               @default(0)
+  status          String            @default("ISSUED") // ISSUED, RETURNED, OVERDUE, LOST, DAMAGED
+  overdueDays     Int               @default(0)
+  fineAmount      Float             @default(0)
+  invoiceId       String?
+  notes           String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  book            LibraryBook       @relation(fields: [bookId], references: [id])
+  copy            LibraryBookCopy   @relation(fields: [copyId], references: [id])
+  member          LibraryMember     @relation(fields: [memberId], references: [id])
+  issuedByUser    User              @relation("IssuedLibraryIssues", fields: [issuedByUserId], references: [id])
+  invoice         FeeInvoice?       @relation(fields: [invoiceId], references: [id], onDelete: SetNull)
+  renewals        LibraryRenewal[]
+
+  @@index([memberId, status])
+  @@index([copyId, status])
+  @@index([status, dueDate])
+}
+
+model LibraryRenewal {
+  id              String       @id @default(uuid())
+  issueId         String
+  renewedByUserId String
+  prevDueDate     DateTime
+  newDueDate      DateTime
+  renewDate       DateTime     @default(now())
+  notes           String?
+
+  issue           LibraryIssue @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  renewedByUser   User         @relation("RenewedLibraryIssues", fields: [renewedByUserId], references: [id])
+
+  @@index([issueId])
+}
+
+model LibraryConditionHistory {
+  id                String          @id @default(uuid())
+  copyId            String
+  recordedByUserId  String
+  oldCondition      String
+  newCondition      String
+  reason            String?
+  chargeAmount      Float?
+  createdAt         DateTime        @default(now())
+
+  copy              LibraryBookCopy @relation(fields: [copyId], references: [id], onDelete: Cascade)
+  recordedByUser    User            @relation("RecordedConditionHistories", fields: [recordedByUserId], references: [id])
+
+  @@index([copyId])
+}
+
+model LibraryAccessionSequence {
+  id        String   @id @default(uuid())
+  year      Int      @unique
+  lastSeq   Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model LibraryMemberSequence {
+  id        String   @id @default(uuid())
+  year      Int      @unique
+  lastSeq   Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+

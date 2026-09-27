@@ -26,6 +26,7 @@ import GuardianResultsViewer from "@/components/exams/GuardianResultsViewer";
 import GuardianFinanceViewer from "@/components/finance/GuardianFinanceViewer";
 import GuardianDocumentsViewer from "@/components/documents/GuardianDocumentsViewer";
 import PortalNotificationsViewer from "@/components/communication/PortalNotificationsViewer";
+import GuardianLibraryViewer from "@/components/library/GuardianLibraryViewer";
 
 export default function StudentGuardianPortalPage() {
   const [classes, setClasses] = useState<any[]>([]);
@@ -44,6 +45,7 @@ export default function StudentGuardianPortalPage() {
     | "CERTIFICATES"
     | "REQUESTS"
     | "NOTIFICATIONS"
+    | "LIBRARY"
   >("DASHBOARD");
 
   // Leave request state
@@ -68,6 +70,7 @@ export default function StudentGuardianPortalPage() {
           "CERTIFICATES",
           "REQUESTS",
           "NOTIFICATIONS",
+          "LIBRARY",
         ];
         if (validTabs.includes(upper)) {
           setActiveTab(upper as any);
@@ -183,6 +186,7 @@ export default function StudentGuardianPortalPage() {
             { id: "FINANCE", label: "ফি ও হিসাব", icon: DollarSign },
             { id: "DOCUMENTS", label: "নথিপত্র", icon: FileText },
             { id: "CERTIFICATES", label: "সনদপত্র", icon: ShieldCheck },
+            { id: "LIBRARY", label: "লাইব্রেরি", icon: BookOpen },
             { id: "REQUESTS", label: "ছুটির আবেদন", icon: Send },
             { id: "NOTIFICATIONS", label: "নোটিফিকেশন", icon: Bell },
           ].map((tab) => {
@@ -407,6 +411,9 @@ export default function StudentGuardianPortalPage() {
 
             {/* 10. NOTIFICATIONS */}
             {activeTab === "NOTIFICATIONS" && <PortalNotificationsViewer />}
+
+            {/* 11. LIBRARY */}
+            {activeTab === "LIBRARY" && <GuardianLibraryViewer defaultStudentId={student?.id} />}
           </div>
         )}
       </main>

@@ -13,32 +13,30 @@ export async function generateStudentIdNumber(targetYear?: number): Promise<stri
   const year = targetYear || new Date().getFullYear();
   const prefix = `EHRJ-${year}-`;
 
-  // Find the highest existing ID with this year's prefix
-  const latestStudent = await prisma.student.findFirst({
+  // Find all existing IDs with this year's prefix
+  const students = await prisma.student.findMany({
     where: {
       studentIdNumber: {
         startsWith: prefix,
       },
-    },
-    orderBy: {
-      studentIdNumber: "desc",
     },
     select: {
       studentIdNumber: true,
     },
   });
 
-  let nextSequence = 1;
-  if (latestStudent && latestStudent.studentIdNumber) {
-    const parts = latestStudent.studentIdNumber.split("-");
-    if (parts.length === 3) {
-      const currentSeq = parseInt(parts[2], 10);
-      if (!isNaN(currentSeq)) {
-        nextSequence = currentSeq + 1;
+  let maxSeq = 0;
+  for (const s of students) {
+    const rest = s.studentIdNumber.slice(prefix.length);
+    if (/^\d+$/.test(rest)) {
+      const num = parseInt(rest, 10);
+      if (num > maxSeq) {
+        maxSeq = num;
       }
     }
   }
 
+  const nextSequence = maxSeq + 1;
   const paddedSeq = String(nextSequence).padStart(4, "0");
   return `${prefix}${paddedSeq}`;
 }

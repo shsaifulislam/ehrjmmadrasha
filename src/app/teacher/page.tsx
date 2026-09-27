@@ -24,6 +24,7 @@ import { INSTITUTION_INFO } from "@/lib/constants";
 import TeacherAttendanceManager from "@/components/attendance/TeacherAttendanceManager";
 import TeacherMarksEntry from "@/components/exams/TeacherMarksEntry";
 import PortalNotificationsViewer from "@/components/communication/PortalNotificationsViewer";
+import TeacherLibraryViewer from "@/components/library/TeacherLibraryViewer";
 
 interface StudentAttendanceItem {
   id: string;
@@ -45,6 +46,7 @@ export default function TeacherPanelPage() {
     | "NOTICES"
     | "PROFILE"
     | "LEAVE"
+    | "LIBRARY"
   >("DASHBOARD");
 
   const [selectedClass, setSelectedClass] = useState("নূরানী ও নাযেরা বিভাগ");
@@ -70,6 +72,7 @@ export default function TeacherPanelPage() {
           "NOTICES",
           "PROFILE",
           "LEAVE",
+          "LIBRARY",
         ];
         if (validTabs.includes(upper)) {
           setActiveTab(upper as any);
@@ -169,6 +172,7 @@ export default function TeacherPanelPage() {
             { id: "NOTES", label: "অ্যাকাডেমিক নোট (Notes)", icon: FileText },
             { id: "NOTICES", label: "নোটিশ (Notices)", icon: Bell },
             { id: "PROFILE", label: "প্রোফাইল (My Profile)", icon: User },
+            { id: "LIBRARY", label: "লাইব্রেরি (Library)", icon: BookOpen },
             { id: "LEAVE", label: "ছুটির আবেদন (Leave)", icon: Send },
           ].map((tab) => {
             const Icon = tab.icon;
@@ -341,6 +345,9 @@ export default function TeacherPanelPage() {
             </form>
           </div>
         )}
+
+        {/* 11. LIBRARY */}
+        {activeTab === "LIBRARY" && <TeacherLibraryViewer />}
       </main>
     </div>
   );

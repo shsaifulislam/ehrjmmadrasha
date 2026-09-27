@@ -157,6 +157,18 @@ async function runPhase7TestSuite() {
       update: {},
     });
 
+    // Resolve an actual unlinked student for strict IDOR assertion
+    const trulyUnlinked = await prisma.student.findFirst({
+      where: {
+        guardianLinks: { none: { guardianId: guardianRecord.id } },
+      },
+    });
+    if (trulyUnlinked) {
+      otherStudentId = trulyUnlinked.id;
+    } else {
+      otherStudentId = "00000000-0000-0000-0000-000000000000";
+    }
+
     // Clean up any test document requests for idempotency
     await prisma.documentRequest.deleteMany({ where: { studentId: testStudentId } });
 
