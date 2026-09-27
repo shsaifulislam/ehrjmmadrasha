@@ -38,6 +38,7 @@ import AdminFinanceHub from "@/components/finance/AdminFinanceHub";
 import AdminDocumentHub from "@/components/documents/AdminDocumentHub";
 import AdminCommunicationHub from "@/components/communication/AdminCommunicationHub";
 import AdminLibraryHub from "@/components/library/AdminLibraryHub";
+import AdminHostelHub from "@/components/hostel/AdminHostelHub";
 
 interface AdminStats {
   totalStudents: number;
@@ -86,6 +87,7 @@ export default function AdminDashboardPage() {
     | "DOCUMENTS"
     | "COMMUNICATION"
     | "LIBRARY"
+    | "HOSTEL"
     | "CMS"
     | "REPORTS"
     | "USERS"
@@ -463,6 +465,7 @@ export default function AdminDashboardPage() {
             { id: "DOCUMENTS", label: "নথিপত্র (Documents)" },
             { id: "COMMUNICATION", label: "বার্তা ও ইমেইল (Communication)" },
             { id: "LIBRARY", label: "লাইব্রেরি (Library)" },
+            { id: "HOSTEL", label: "হোস্টেল ও আবাসন (Hostel)" },
             { id: "CMS", label: "ওয়েবসাইট CMS" },
             { id: "REPORTS", label: "রিপোর্ট (Reports)" },
             { id: "USERS", label: "ইউজার ও শিক্ষক (Users)" },
@@ -811,6 +814,9 @@ export default function AdminDashboardPage() {
 
             {/* 10. LIBRARY */}
             {activeTab === "LIBRARY" && <AdminLibraryHub />}
+
+            {/* 11. HOSTEL */}
+            {activeTab === "HOSTEL" && <AdminHostelHub />}
 
             {/* 11. REPORTS */}
             {activeTab === "REPORTS" && (

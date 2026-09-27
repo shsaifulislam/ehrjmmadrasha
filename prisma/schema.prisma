@@ -42,6 +42,9 @@ model User {
   renewedLibraryIssues LibraryRenewal[] @relation("RenewedLibraryIssues")
   recordedConditionHistories LibraryConditionHistory[] @relation("RecordedConditionHistories")
   libraryMembers    LibraryMember[]
+  createdResidentialEnrollments ResidentialEnrollment[] @relation("ResidentialEnrollmentCreatedBy")
+  recordedResidentialHistories ResidentialHistory[] @relation("ResidentialHistoryRecordedBy")
+  reviewedResidentialRequests ResidentialRequest[] @relation("ResidentialRequestReviewedBy")
 }
 
 model Session {
@@ -102,6 +105,10 @@ model AcademicSession {
   certificates       Certificate[]
   documentRequests   DocumentRequest[]
   notices            Notice[]
+  residentialEnrollments ResidentialEnrollment[]
+  residentialHistories   ResidentialHistory[]
+  residentialRequests    ResidentialRequest[]
+  residentialRules       ResidentialRule[]
 }
 
 model JamatClass {
@@ -227,6 +234,9 @@ model Student {
   documents            StudentDocument[]
   documentRequests     DocumentRequest[]
   libraryMembers       LibraryMember[]
+  residentialEnrollments ResidentialEnrollment[]
+  residentialHistories   ResidentialHistory[]
+  residentialRequests    ResidentialRequest[]
 }
 
 model Guardian {
@@ -245,6 +255,7 @@ model Guardian {
   user        User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
   students    GuardianStudent[]
   documentRequests DocumentRequest[]
+  residentialRequests ResidentialRequest[]
 }
 
 model GuardianStudent {
@@ -1297,4 +1308,112 @@ model LibraryMemberSequence {
   lastSeq   Int      @default(0)
   updatedAt DateTime @updatedAt
 }
+
+// =============================================================
+// 12. HOSTEL & RESIDENTIAL MANAGEMENT ENGINE (PHASE 10)
+// =============================================================
+
+model ResidentialEnrollment {
+  id                String          @id @default(uuid())
+  studentId         String
+  sessionId         String
+  residentialStatus String          // RESIDENTIAL, DAY_CARE, NON_RESIDENTIAL
+  status            String          @default("ACTIVE") // PENDING, APPROVED, CHECKED_IN, ACTIVE, CHECKED_OUT, CANCELLED
+  admissionDate     DateTime        @default(now())
+  checkInDate       DateTime?
+  checkOutDate      DateTime?
+  expectedEndDate   DateTime?
+  roomOrWardLabel   String?         // Simple reference note without complex room models
+  bedOrSeatLabel    String?         // Simple reference seat note
+  guardianConfirmed Boolean         @default(false)
+  notes             String?
+  createdById       String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  student           Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session           AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  createdBy         User?           @relation("ResidentialEnrollmentCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  histories         ResidentialHistory[]
+
+  @@unique([studentId, sessionId])
+  @@index([status])
+  @@index([residentialStatus])
+  @@index([sessionId])
+}
+
+model ResidentialHistory {
+  id               String                 @id @default(uuid())
+  studentId        String
+  enrollmentId     String?
+  sessionId        String
+  previousStatus   String                 // NON_RESIDENTIAL, RESIDENTIAL, DAY_CARE
+  newStatus        String                 // RESIDENTIAL, NON_RESIDENTIAL, DAY_CARE
+  effectiveDate    DateTime               @default(now())
+  reason           String                 // ADMISSION, CHECK_IN, CHECK_OUT, STATUS_CHANGE, GUARDIAN_REQUEST, DISCIPLINARY, HEALTH, OTHER
+  notes            String?
+  recordedByUserId String
+  createdAt        DateTime               @default(now())
+
+  student          Student                @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  enrollment       ResidentialEnrollment? @relation(fields: [enrollmentId], references: [id], onDelete: SetNull)
+  session          AcademicSession        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  recordedByUser   User                   @relation("ResidentialHistoryRecordedBy", fields: [recordedByUserId], references: [id])
+
+  @@index([studentId])
+  @@index([sessionId])
+  @@index([effectiveDate])
+}
+
+model ResidentialRequest {
+  id               String          @id @default(uuid())
+  requestNumber    String          @unique // e.g. "EHRJ-HRQ-2026-000001"
+  studentId        String
+  guardianId       String
+  sessionId        String
+  requestType      String          // ADMISSION, STATUS_CHANGE, CHECKOUT, LEAVE
+  currentStatus    String          // Current residentialStatus
+  requestedStatus  String          // Target residentialStatus
+  reason           String
+  status           String          @default("SUBMITTED") // SUBMITTED, UNDER_REVIEW, APPROVED, REJECTED, CANCELLED
+  adminNotes       String?
+  reviewedByUserId String?
+  reviewedAt       DateTime?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  student          Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  guardian         Guardian        @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+  session          AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  reviewedByUser   User?           @relation("ResidentialRequestReviewedBy", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([studentId])
+  @@index([guardianId])
+  @@index([status])
+  @@index([requestNumber])
+}
+
+model ResidentialRule {
+  id                   String          @id @default(uuid())
+  sessionId            String          @unique
+  monthlyHostelFee     Float           @default(1500)
+  monthlyFoodFee       Float           @default(2000)
+  admissionHostelFee   Float           @default(1000)
+  dayCareFoodExempt    Boolean         @default(true)
+  allowGuardianRequest Boolean         @default(true)
+  checkInNoticeDays    Int             @default(3)
+  rulesNotesBn         String?
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+
+  session              AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model ResidentialRequestSequence {
+  id        String   @id @default(uuid())
+  year      Int      @unique
+  lastSeq   Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
 

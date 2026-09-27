@@ -20,6 +20,7 @@ import {
   CheckCircle,
   Printer,
   ChevronRight,
+  Building,
 } from "lucide-react";
 import GuardianAttendanceViewer from "@/components/attendance/GuardianAttendanceViewer";
 import GuardianResultsViewer from "@/components/exams/GuardianResultsViewer";
@@ -27,6 +28,7 @@ import GuardianFinanceViewer from "@/components/finance/GuardianFinanceViewer";
 import GuardianDocumentsViewer from "@/components/documents/GuardianDocumentsViewer";
 import PortalNotificationsViewer from "@/components/communication/PortalNotificationsViewer";
 import GuardianLibraryViewer from "@/components/library/GuardianLibraryViewer";
+import GuardianHostelViewer from "@/components/hostel/GuardianHostelViewer";
 
 export default function StudentGuardianPortalPage() {
   const [classes, setClasses] = useState<any[]>([]);
@@ -46,6 +48,7 @@ export default function StudentGuardianPortalPage() {
     | "REQUESTS"
     | "NOTIFICATIONS"
     | "LIBRARY"
+    | "HOSTEL"
   >("DASHBOARD");
 
   // Leave request state
@@ -71,6 +74,7 @@ export default function StudentGuardianPortalPage() {
           "REQUESTS",
           "NOTIFICATIONS",
           "LIBRARY",
+          "HOSTEL",
         ];
         if (validTabs.includes(upper)) {
           setActiveTab(upper as any);
@@ -187,6 +191,7 @@ export default function StudentGuardianPortalPage() {
             { id: "DOCUMENTS", label: "নথিপত্র", icon: FileText },
             { id: "CERTIFICATES", label: "সনদপত্র", icon: ShieldCheck },
             { id: "LIBRARY", label: "লাইব্রেরি", icon: BookOpen },
+            { id: "HOSTEL", label: "হোস্টেল ও আবাসন", icon: Building },
             { id: "REQUESTS", label: "ছুটির আবেদন", icon: Send },
             { id: "NOTIFICATIONS", label: "নোটিফিকেশন", icon: Bell },
           ].map((tab) => {
@@ -414,6 +419,9 @@ export default function StudentGuardianPortalPage() {
 
             {/* 11. LIBRARY */}
             {activeTab === "LIBRARY" && <GuardianLibraryViewer defaultStudentId={student?.id} />}
+
+            {/* 12. HOSTEL */}
+            {activeTab === "HOSTEL" && <GuardianHostelViewer defaultStudentId={student?.id} />}
           </div>
         )}
       </main>

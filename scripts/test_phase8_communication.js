@@ -60,7 +60,10 @@ function makeRequest(path, options = {}) {
       hostname: url.hostname,
       port: url.port,
       path: url.pathname + url.search,
-      headers: options.headers || {},
+      headers: {
+        "x-test-suite": "ehrj-test-suite",
+        ...(options.headers || {}),
+      },
     };
 
     const req = http.request(reqOptions, (res) => {
