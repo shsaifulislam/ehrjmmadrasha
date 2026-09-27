@@ -36,6 +36,7 @@ import AdminAttendanceCockpit from "@/components/attendance/AdminAttendanceCockp
 import AdminExamHub from "@/components/exams/AdminExamHub";
 import AdminFinanceHub from "@/components/finance/AdminFinanceHub";
 import AdminDocumentHub from "@/components/documents/AdminDocumentHub";
+import AdminCommunicationHub from "@/components/communication/AdminCommunicationHub";
 
 interface AdminStats {
   totalStudents: number;
@@ -799,168 +800,9 @@ export default function AdminDashboardPage() {
             {activeTab === "DOCUMENTS" && <AdminDocumentHub />}
 
 
-            {/* 9. COMMUNICATION */}
-            {activeTab === "COMMUNICATION" && (
-              <div className="bg-white rounded-lg border border-[#E2E8F0] p-6 shadow-sm space-y-4">
-                <h2 className="text-base font-bold text-[#0B1914] border-b pb-2">প্রাতিষ্ঠানিক ইমেইল ও নোটিফিকেশন যোগাযোগ</h2>
-                <p className="text-xs text-gray-600">
-                  অফিসিয়াল জিমেইল (ehrjmadrasha@gmail.com) সার্ভিস ব্যবহার করে অভিভাবক বা শিক্ষকের কাছে নোটিফিকেশন পাঠান।
-                </p>
-
-                {commSent && (
-                  <div className="p-3 rounded bg-emerald-50 text-emerald-800 text-xs border border-emerald-200">
-                    বার্তাটি সফলভাবে প্রেরিত হয়েছে!
-                  </div>
-                )}
-
-                <form onSubmit={handleSendComm} className="space-y-3 text-xs">
-                  <div>
-                    <label className="block font-semibold mb-1">প্রাপকের ইমেইল *</label>
-                    <input
-                      type="email"
-                      required
-                      value={commRecipient}
-                      onChange={(e) => setCommRecipient(e.target.value)}
-                      placeholder="guardian@example.com"
-                      className="w-full p-2 border rounded"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-semibold mb-1">বিষয় (Subject) *</label>
-                    <input
-                      type="text"
-                      required
-                      value={commSubject}
-                      onChange={(e) => setCommSubject(e.target.value)}
-                      placeholder="যেমন: ছুটির বিজ্ঞপ্তি ও আসন্ন পরীক্ষার তারিখ"
-                      className="w-full p-2 border rounded"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-semibold mb-1">বার্তার বিবরণ *</label>
-                    <textarea
-                      required
-                      rows={4}
-                      value={commBody}
-                      onChange={(e) => setCommBody(e.target.value)}
-                      placeholder="বিস্তারিত বার্তা লিখুন..."
-                      className="w-full p-2 border rounded"
-                    ></textarea>
-                  </div>
-                  <button type="submit" className="bg-[#0D5C3A] hover:bg-[#158052] text-white px-4 py-2 rounded font-semibold">
-                    ইমেইল নোটিফিকেশন পাঠান
-                  </button>
-                </form>
-              </div>
-            )}
-
-            {/* 10. CMS */}
-            {activeTab === "CMS" && (
-              <div className="bg-white rounded-lg border border-[#E2E8F0] p-6 shadow-sm space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-100 gap-4">
-                  <div>
-                    <h2 className="text-base font-bold text-[#0B1914]">ওয়েবসাইট নোটিশ ও সার্কুলার পরিচালনা</h2>
-                    <p className="text-xs text-gray-500">ওয়েবসাইটের হোমপেজে প্রদর্শিত নোটিশ ও সার্কুলার পরিবর্তন বা তৈরি করুন।</p>
-                  </div>
-                  <button
-                    onClick={() => setShowAddNotice(!showAddNotice)}
-                    className="bg-[#0D5C3A] hover:bg-[#158052] text-white px-3.5 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 shadow w-fit"
-                  >
-                    <PlusCircle className="w-4 h-4" />
-                    নতুন নোটিশ প্রকাশ করুন
-                  </button>
-                </div>
-
-                {noticeMsg && (
-                  <div className="p-3 rounded bg-emerald-50 text-emerald-800 text-xs border border-emerald-200">
-                    {noticeMsg}
-                  </div>
-                )}
-
-                {showAddNotice && (
-                  <form onSubmit={handleCreateNotice} className="p-4 rounded-lg bg-gray-50 border border-gray-200 space-y-3">
-                    <h3 className="font-bold text-xs text-[#0B1914]">হোমপেজ লাইভ নোটিশ ফর্ম</h3>
-                    <div className="space-y-3">
-                      <div>
-                        <label className="block text-[11px] font-semibold text-gray-700 mb-1">নোটিশের শিরোনাম *</label>
-                        <input
-                          type="text"
-                          required
-                          value={noticeTitle}
-                          onChange={(e) => setNoticeTitle(e.target.value)}
-                          placeholder="যেমন: পবিত্র রমজানের ক্লাস সময়সূচি ও ছুটি সংক্রান্ত বিজ্ঞপ্তি"
-                          className="w-full p-2 border border-gray-300 rounded text-xs outline-none"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[11px] font-semibold text-gray-700 mb-1">বিস্তারিত বিবরণ *</label>
-                        <textarea
-                          required
-                          rows={3}
-                          value={noticeContent}
-                          onChange={(e) => setNoticeContent(e.target.value)}
-                          placeholder="বিজ্ঞপ্তির পূর্ণ বিবরণ লিখুন..."
-                          className="w-full p-2 border border-gray-300 rounded text-xs outline-none"
-                        ></textarea>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <label className="flex items-center gap-1.5 text-xs text-red-700 font-semibold cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={noticeUrgent}
-                            onChange={(e) => setNoticeUrgent(e.target.checked)}
-                            className="rounded"
-                          />
-                          জরুরি নোটিশ (লাল ব্যাজ সহ প্রদর্শিত হবে)
-                        </label>
-                      </div>
-                    </div>
-                    <div className="flex justify-end gap-2 pt-2">
-                      <button
-                        type="button"
-                        onClick={() => setShowAddNotice(false)}
-                        className="px-3 py-1.5 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-100"
-                      >
-                        বাতিল
-                      </button>
-                      <button
-                        type="submit"
-                        className="bg-[#0D5C3A] hover:bg-[#158052] text-white px-4 py-1.5 rounded text-xs font-semibold shadow"
-                      >
-                        সাইটে প্রকাশ করুন
-                      </button>
-                    </div>
-                  </form>
-                )}
-
-                <div className="space-y-3">
-                  {noticesList.map((n) => (
-                    <div key={n.id} className="p-4 rounded border border-gray-200 bg-gray-50 flex items-start justify-between">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-gray-900 text-sm">{n.titleBn}</span>
-                          {n.isUrgent && (
-                            <span className="bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.2 rounded">
-                              জরুরি
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-xs text-gray-600 mt-1">{n.contentBn}</p>
-                        <span className="text-[10px] text-gray-400 mt-2 block">
-                          প্রকাশিত: {new Date(n.publishedAt).toLocaleDateString("bn-BD")}
-                        </span>
-                      </div>
-                      <button
-                        onClick={() => handleDeleteNotice(n.id)}
-                        className="text-red-600 hover:text-red-800 p-1.5 rounded hover:bg-red-50 transition"
-                        title="নোটিশ মুছে ফেলুন"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {/* 9 & 10. COMMUNICATION & CMS */}
+            {(activeTab === "COMMUNICATION" || activeTab === "CMS") && (
+              <AdminCommunicationHub />
             )}
 
             {/* 11. REPORTS */}

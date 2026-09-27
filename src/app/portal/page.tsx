@@ -25,6 +25,7 @@ import GuardianAttendanceViewer from "@/components/attendance/GuardianAttendance
 import GuardianResultsViewer from "@/components/exams/GuardianResultsViewer";
 import GuardianFinanceViewer from "@/components/finance/GuardianFinanceViewer";
 import GuardianDocumentsViewer from "@/components/documents/GuardianDocumentsViewer";
+import PortalNotificationsViewer from "@/components/communication/PortalNotificationsViewer";
 
 export default function StudentGuardianPortalPage() {
   const [classes, setClasses] = useState<any[]>([]);
@@ -405,18 +406,7 @@ export default function StudentGuardianPortalPage() {
             )}
 
             {/* 10. NOTIFICATIONS */}
-            {activeTab === "NOTIFICATIONS" && (
-              <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-3">
-                <h2 className="text-base font-bold text-[#083B25] border-b pb-2">অভিভাবক নোটিফিকেশন হিস্ট্রি</h2>
-                <div className="space-y-2 text-xs">
-                  <div className="p-3 rounded bg-emerald-50 border border-emerald-100">
-                    <p className="font-semibold text-emerald-900">ভর্তি আবেদন ও সেশন ফি হালনাগাদ</p>
-                    <p className="text-gray-600 mt-1">শিক্ষার্থীর তথ্য সফলভাবে সংরক্ষিত রয়েছে।</p>
-                    <span className="text-[10px] text-gray-400 block mt-1">তারিখ: ২০২৬-০৩-২৬</span>
-                  </div>
-                </div>
-              </div>
-            )}
+            {activeTab === "NOTIFICATIONS" && <PortalNotificationsViewer />}
           </div>
         )}
       </main>

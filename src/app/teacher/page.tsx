@@ -23,6 +23,7 @@ import {
 import { INSTITUTION_INFO } from "@/lib/constants";
 import TeacherAttendanceManager from "@/components/attendance/TeacherAttendanceManager";
 import TeacherMarksEntry from "@/components/exams/TeacherMarksEntry";
+import PortalNotificationsViewer from "@/components/communication/PortalNotificationsViewer";
 
 interface StudentAttendanceItem {
   id: string;
@@ -300,12 +301,7 @@ export default function TeacherPanelPage() {
         )}
 
         {/* 8. NOTICES */}
-        {activeTab === "NOTICES" && (
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-3 text-xs">
-            <h2 className="text-base font-bold text-[#083B25] border-b pb-2">শিক্ষক নোটিশ বোর্ড</h2>
-            <p className="text-gray-600">মাদরাসা প্রশাসন কর্তৃক শিক্ষকদের জন্য জারিকৃত নোটিশসমূহ এখানে দেখা যাবে।</p>
-          </div>
-        )}
+        {activeTab === "NOTICES" && <PortalNotificationsViewer />}
 
         {/* 9. MY PROFILE */}
         {activeTab === "PROFILE" && (

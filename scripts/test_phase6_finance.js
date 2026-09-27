@@ -190,6 +190,10 @@ async function runTests() {
     // Clean up any existing assistance/scholarships for testStudentId to ensure test idempotency
     await prisma.financialAssistance.deleteMany({ where: { studentId: testStudentId } });
     await prisma.studentScholarship.deleteMany({ where: { studentId: testStudentId } });
+    // Guarantee otherStudentId is strictly unlinked from guardianRecord for IDOR test
+    await prisma.guardianStudent.deleteMany({
+      where: { guardianId: guardianRecord.id, studentId: otherStudentId },
+    });
 
     const guardianLoginRes = await makeRequest("/api/auth/login", {
       method: "POST",
