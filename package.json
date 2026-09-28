@@ -23,7 +23,8 @@
     "test:phase21": "npx tsx scratch/test_phase21_ai_intelligence.ts",
     "test:phase22": "npx tsx scratch/test_phase22_knowledge_rag.ts",
     "test:phase23": "npx tsx scratch/test_phase23_pwa_mobile.ts",
-    "test:phase24": "npx tsx scratch/test_phase24_security_operations.ts"
+    "test:phase24": "npx tsx scratch/test_phase24_security_operations.ts",
+    "test:phase25": "npx tsx scratch/test_phase25_data_governance.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

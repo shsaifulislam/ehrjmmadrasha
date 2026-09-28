@@ -1,0 +1,1254 @@
+[
+  {
+    "id": "EHRJ-DQ-2026-756925",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "d3c8c804-0251-4179-b249-d2d4be4d3c47",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ আবু বকর [টেস্ট])",
+    "titleEn": "Active student lacks active enrollment (EHRJ-2026-LIB-ST01)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ আবু বকর [টেস্ট] (EHRJ-2026-LIB-ST01) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "RESOLVED",
+    "detectedAt": "2026-09-28T18:45:51.188Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "d3c8c804-0251-4179-b249-d2d4be4d3c47",
+      "studentIdNumber": "EHRJ-2026-LIB-ST01",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    },
+    "resolutionNotes": "সমাধান নিশ্চিত করা হয়েছে।",
+    "resolvedAt": "2026-09-28T18:48:08.807Z",
+    "resolvedBy": "Admin Super Lead"
+  },
+  {
+    "id": "EHRJ-DQ-2026-980548",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "be8163e6-5853-4d59-ad45-cb0f8a3a6d90",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ আব্দুল্লাহ [টেস্ট ২])",
+    "titleEn": "Active student lacks active enrollment (EHRJ-2026-LIB-ST02)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ আব্দুল্লাহ [টেস্ট ২] (EHRJ-2026-LIB-ST02) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.189Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "be8163e6-5853-4d59-ad45-cb0f8a3a6d90",
+      "studentIdNumber": "EHRJ-2026-LIB-ST02",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-706427",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "257dcaf5-bd90-4b5b-b564-e15d78b256fa",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ তাহমিদ করিম)",
+    "titleEn": "Active student lacks active enrollment (EHRJ-TEST-P14-01)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ তাহমিদ করিম (EHRJ-TEST-P14-01) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.189Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "257dcaf5-bd90-4b5b-b564-e15d78b256fa",
+      "studentIdNumber": "EHRJ-TEST-P14-01",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-566785",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "dea50be5-68fa-4f5e-a285-88aee5a6929d",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ সালমান ইসলাম)",
+    "titleEn": "Active student lacks active enrollment (EHRJ-TEST-P14-02)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ইসলাম (EHRJ-TEST-P14-02) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.189Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "dea50be5-68fa-4f5e-a285-88aee5a6929d",
+      "studentIdNumber": "EHRJ-TEST-P14-02",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-399095",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "d08419c9-6dc5-4690-8f23-ce3a2936980d",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ সাকিব করিম)",
+    "titleEn": "Active student lacks active enrollment (EHRJ-HTTP-ST1)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সাকিব করিম (EHRJ-HTTP-ST1) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.189Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "d08419c9-6dc5-4690-8f23-ce3a2936980d",
+      "studentIdNumber": "EHRJ-HTTP-ST1",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-744561",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "3cce6df3-6be9-4981-bea6-6bc52308d0db",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ আব্দুল্লাহ (P15))",
+    "titleEn": "Active student lacks active enrollment (EHRJ-P15-ST1)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ আব্দুল্লাহ (P15) (EHRJ-P15-ST1) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.189Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "3cce6df3-6be9-4981-bea6-6bc52308d0db",
+      "studentIdNumber": "EHRJ-P15-ST1",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-778711",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "562e1347-9784-47b2-9c8b-4ec8bb1b163c",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ আব্দুর রহমান (P15))",
+    "titleEn": "Active student lacks active enrollment (EHRJ-P15-ST2)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ আব্দুর রহমান (P15) (EHRJ-P15-ST2) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.189Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "562e1347-9784-47b2-9c8b-4ec8bb1b163c",
+      "studentIdNumber": "EHRJ-P15-ST2",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-727350",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "685a0ace-d64e-41fb-9b4e-ed9392253438",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ জামিল করিম (P15))",
+    "titleEn": "Active student lacks active enrollment (EHRJ-HTTP15-ST1)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ জামিল করিম (P15) (EHRJ-HTTP15-ST1) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.189Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "685a0ace-d64e-41fb-9b4e-ed9392253438",
+      "studentIdNumber": "EHRJ-HTTP15-ST1",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-417352",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "bbeb9f67-f2f3-40fa-a1da-606ace7a6b99",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ হাসান মাহমুদ (P15))",
+    "titleEn": "Active student lacks active enrollment (EHRJ-HTTP15-ST2)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ হাসান মাহমুদ (P15) (EHRJ-HTTP15-ST2) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.189Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "bbeb9f67-f2f3-40fa-a1da-606ace7a6b99",
+      "studentIdNumber": "EHRJ-HTTP15-ST2",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-174608",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "46db54c7-e039-4a51-b326-7c850d402d80",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ আব্দুল্লাহ আল মামুন)",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-2026-0001)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ আব্দুল্লাহ আল মামুন (EHRJ-2026-0001) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.192Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "46db54c7-e039-4a51-b326-7c850d402d80",
+      "studentIdNumber": "EHRJ-2026-0001"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-710841",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "f3822b9d-0bf2-4584-9b8f-06a5c609b9ca",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ আব্দুর রহমান)",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-2026-0002)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "f3822b9d-0bf2-4584-9b8f-06a5c609b9ca",
+      "studentIdNumber": "EHRJ-2026-0002"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-232904",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "753d57b9-e598-439c-920b-de8a2eaf4256",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (পরীক্ষামূলক শিক্ষার্থী ০2)",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-TEST-4794-2)",
+    "descriptionBn": "শিক্ষার্থী পরীক্ষামূলক শিক্ষার্থী ০2 (EHRJ-TEST-4794-2) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "753d57b9-e598-439c-920b-de8a2eaf4256",
+      "studentIdNumber": "EHRJ-TEST-4794-2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-182087",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "be8163e6-5853-4d59-ad45-cb0f8a3a6d90",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ আব্দুল্লাহ [টেস্ট ২])",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-2026-LIB-ST02)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ আব্দুল্লাহ [টেস্ট ২] (EHRJ-2026-LIB-ST02) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "be8163e6-5853-4d59-ad45-cb0f8a3a6d90",
+      "studentIdNumber": "EHRJ-2026-LIB-ST02"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-670721",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "95516071-e393-49b8-aaf5-0e74ae73d66c",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HC4cb78e)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HC4cb78e) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "95516071-e393-49b8-aaf5-0e74ae73d66c",
+      "studentIdNumber": "EHRJ-26-HC4cb78e"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-782246",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "edbc3055-db77-4156-82de-6da52ea93580",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HC7f203d)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HC7f203d) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "edbc3055-db77-4156-82de-6da52ea93580",
+      "studentIdNumber": "EHRJ-26-HC7f203d"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-376005",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "67ded2cc-567e-4779-ae86-5678e3c2c4d5",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HC1935c7)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HC1935c7) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "67ded2cc-567e-4779-ae86-5678e3c2c4d5",
+      "studentIdNumber": "EHRJ-26-HC1935c7"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-716858",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "113294ec-11db-4160-8247-dae10e5f7b7c",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HC38302c)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HC38302c) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "113294ec-11db-4160-8247-dae10e5f7b7c",
+      "studentIdNumber": "EHRJ-26-HC38302c"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-686886",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "35f20d7c-d02c-4117-99b0-b2a20f9e331f",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HC4a8deb)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HC4a8deb) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "35f20d7c-d02c-4117-99b0-b2a20f9e331f",
+      "studentIdNumber": "EHRJ-26-HC4a8deb"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-728856",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "ea3ecac7-e057-40a9-86b4-d4f29df9a253",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HC8cd211)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HC8cd211) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "ea3ecac7-e057-40a9-86b4-d4f29df9a253",
+      "studentIdNumber": "EHRJ-26-HC8cd211"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-583640",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "d48fef41-cf39-4c09-8648-35c4c1dd834f",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HC09128c)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HC09128c) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "d48fef41-cf39-4c09-8648-35c4c1dd834f",
+      "studentIdNumber": "EHRJ-26-HC09128c"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-250807",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "62da12cf-0a6a-4b46-a96d-2dc6d9257a16",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HCd35ac0)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HCd35ac0) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "62da12cf-0a6a-4b46-a96d-2dc6d9257a16",
+      "studentIdNumber": "EHRJ-26-HCd35ac0"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-571916",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "b0c3622d-36f2-4b44-a76a-084f23ab22d6",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HC76a348)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HC76a348) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "b0c3622d-36f2-4b44-a76a-084f23ab22d6",
+      "studentIdNumber": "EHRJ-26-HC76a348"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-645738",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "aa532899-5692-470e-be37-d0c2810624a6",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ ইয়াসিন (Unlinked Child))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-API-U-1790494295879)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ ইয়াসিন (Unlinked Child) (EHRJ-API-U-1790494295879) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "aa532899-5692-470e-be37-d0c2810624a6",
+      "studentIdNumber": "EHRJ-API-U-1790494295879"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-177319",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "383e2d7e-de3e-45f9-8e0b-776943961342",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ ইয়াসিন (Unlinked Child))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-API-U-1790494830718)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ ইয়াসিন (Unlinked Child) (EHRJ-API-U-1790494830718) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "383e2d7e-de3e-45f9-8e0b-776943961342",
+      "studentIdNumber": "EHRJ-API-U-1790494830718"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-382919",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "5801a466-f9a7-49c3-a2e4-eea1563c1ed1",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HCd8efba)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HCd8efba) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "5801a466-f9a7-49c3-a2e4-eea1563c1ed1",
+      "studentIdNumber": "EHRJ-26-HCd8efba"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-171268",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "15e8c39c-598e-4246-86d3-0be7e75592a9",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HC0d2a4c)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HC0d2a4c) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "15e8c39c-598e-4246-86d3-0be7e75592a9",
+      "studentIdNumber": "EHRJ-26-HC0d2a4c"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-939583",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "2da0282c-e4e5-46f0-b877-964f1cfe1335",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HCde4551)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HCde4551) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "2da0282c-e4e5-46f0-b877-964f1cfe1335",
+      "studentIdNumber": "EHRJ-26-HCde4551"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-328875",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "1d61bf1a-f241-48f2-a0c6-4748c4c4acaf",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ সালমান ফারসি (Student C - Day Care))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-26-HCfd72d3)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ সালমান ফারসি (Student C - Day Care) (EHRJ-26-HCfd72d3) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "1d61bf1a-f241-48f2-a0c6-4748c4c4acaf",
+      "studentIdNumber": "EHRJ-26-HCfd72d3"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-764940",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "562e1347-9784-47b2-9c8b-4ec8bb1b163c",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ আব্দুর রহমান (P15))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-P15-ST2)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ আব্দুর রহমান (P15) (EHRJ-P15-ST2) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.193Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "562e1347-9784-47b2-9c8b-4ec8bb1b163c",
+      "studentIdNumber": "EHRJ-P15-ST2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-710049",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_1",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (1)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 10 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_1",
+      "studentIds": [
+        "e5cf21b2-db9a-4484-9c86-9f564ee39c14",
+        "77f79292-0550-490d-bbb6-81a5cf304985",
+        "bb47403b-d1fd-4e65-b421-d87835e69287",
+        "64976f34-c369-4f59-8a12-9d77f8bdc4de",
+        "ae321c98-0156-49b5-8e45-26f44a0b6337",
+        "a63bbceb-9eee-4f77-afa1-efa4d5fc0a93",
+        "701aaf9d-acf3-4578-a140-b78f1a6c5676",
+        "9fe6275e-3454-4a39-86ad-79d1805d83ac",
+        "3e63ff4e-c193-4ada-ba6b-21128aa23218",
+        "ffc1cbc2-6436-409c-960b-a3082c497a21"
+      ],
+      "rollNumber": "1"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-399249",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_101",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (101)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 13 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_101",
+      "studentIds": [
+        "23fdf7fa-a7be-4d57-904d-fad66d880e2c",
+        "5bb1b9ec-a5cc-4023-9293-30a68af58e5b",
+        "aa07ba7f-799e-468e-bbd8-31799c9c896e",
+        "744236ad-d1fb-43f2-9606-39d657a2e34e",
+        "33ecf342-54d5-4697-8f41-93e36111d20b",
+        "2dfb7174-e91a-4e05-b3d4-6e25ea2712c3",
+        "4dbff4cd-4c8d-4b1b-bb5f-a1900a5c573f",
+        "9e1a3db1-9ac6-4264-b587-2167c5c97fc2",
+        "17d620f3-a589-4714-a8a0-bbebfc65f9c4",
+        "07af51b9-6026-439b-bd0b-670b973452b7",
+        "71ef4736-a263-4c8d-b307-41d3ea089889",
+        "11c1102c-325a-4427-97a1-a73f54984894",
+        "968dd75a-d784-40d2-86f6-32b31a9775d7"
+      ],
+      "rollNumber": "101"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-157637",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_102",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (102)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 13 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_102",
+      "studentIds": [
+        "b7a0777c-6085-452e-a774-4f332d0b121a",
+        "c5aca073-3c00-4f33-99e4-210b6385ca7b",
+        "72c60660-ab61-4967-b5c8-b449b099ff9a",
+        "efcf8c1a-9c20-466b-bc55-c71b7a5a9197",
+        "8c052764-224d-40d6-8ed5-5d7dd874b67a",
+        "0de8587a-c239-495b-a5e4-ac8b30d7d14e",
+        "c8da2361-e9ed-4c20-98cc-d17b8d5c9236",
+        "515968d9-feb1-43a3-aa54-7bcd5c1cf721",
+        "528b0e1e-61a6-4058-b860-1d049268f872",
+        "fe25c251-4ab1-49a6-8aa6-4adceca48d34",
+        "b9c74f44-c4e2-4bce-a4ac-d07bbe4d516f",
+        "0978c3cf-4f62-4d07-99ab-3d060e395b32",
+        "e6f76866-8e46-4c95-8b9e-81cfe792f342"
+      ],
+      "rollNumber": "102"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-240940",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_103",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (103)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 13 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_103",
+      "studentIds": [
+        "95516071-e393-49b8-aaf5-0e74ae73d66c",
+        "edbc3055-db77-4156-82de-6da52ea93580",
+        "67ded2cc-567e-4779-ae86-5678e3c2c4d5",
+        "113294ec-11db-4160-8247-dae10e5f7b7c",
+        "35f20d7c-d02c-4117-99b0-b2a20f9e331f",
+        "ea3ecac7-e057-40a9-86b4-d4f29df9a253",
+        "d48fef41-cf39-4c09-8648-35c4c1dd834f",
+        "62da12cf-0a6a-4b46-a96d-2dc6d9257a16",
+        "b0c3622d-36f2-4b44-a76a-084f23ab22d6",
+        "5801a466-f9a7-49c3-a2e4-eea1563c1ed1",
+        "15e8c39c-598e-4246-86d3-0be7e75592a9",
+        "2da0282c-e4e5-46f0-b877-964f1cfe1335",
+        "1d61bf1a-f241-48f2-a0c6-4748c4c4acaf"
+      ],
+      "rollNumber": "103"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-888766",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_501",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (501)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 2 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_501",
+      "studentIds": [
+        "634d2666-c068-4adc-b4dc-14f33eb0ef1b",
+        "c31139ec-9db8-4833-a129-a2c1a1a278ec"
+      ],
+      "rollNumber": "501"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-381915",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_502",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (502)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 2 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_502",
+      "studentIds": [
+        "aa532899-5692-470e-be37-d0c2810624a6",
+        "383e2d7e-de3e-45f9-8e0b-776943961342"
+      ],
+      "rollNumber": "502"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-125931",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_513",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (513)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 2 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_513",
+      "studentIds": [
+        "3bb118d9-195e-4998-adb2-efac78f08360",
+        "da92162c-5d06-42cc-b61a-c5496014394e"
+      ],
+      "rollNumber": "513"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-972978",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_514",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (514)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 2 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_514",
+      "studentIds": [
+        "bb09ab66-33b7-43b9-9d13-861ee06d4b8f",
+        "43652c10-ea16-4de5-975c-066803246a33"
+      ],
+      "rollNumber": "514"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-736196",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_515",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (515)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 2 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_515",
+      "studentIds": [
+        "e33d547f-6536-4ffe-bbc9-a17ae7212b2d",
+        "41f6a14a-7bf5-47b8-a98a-1fc727162e63"
+      ],
+      "rollNumber": "515"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-992047",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_517",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (517)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 2 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_517",
+      "studentIds": [
+        "a90b501d-5e20-4c1b-afdc-6874be113504",
+        "821f4a95-35bf-44b3-87f6-21fb81583bb5"
+      ],
+      "rollNumber": "517"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-955956",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_518",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (518)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 2 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_518",
+      "studentIds": [
+        "a781b774-34e0-44af-937a-a522b4413576",
+        "0c6c70fd-7f79-4164-b020-1a8af1b88b43"
+      ],
+      "rollNumber": "518"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-471957",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_519",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (519)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 2 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_519",
+      "studentIds": [
+        "715ad753-2a81-416a-8ca7-5e1b92c1cde2",
+        "70a35467-4388-478c-a4bd-149f7bda136a"
+      ],
+      "rollNumber": "519"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-432062",
+    "domain": "ACADEMIC_STRUCTURE",
+    "entityType": "EnrollmentScope",
+    "entityId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_520",
+    "ruleCode": "DQ-ACAD-001",
+    "titleBn": "একই জামাত/শাখায় একাধিক শিক্ষার্থীর একই রোল (520)",
+    "titleEn": "Duplicate roll number in academic scope",
+    "descriptionBn": "উক্ত শিক্ষাবর্ষ ও জামাত স্কোপে 2 জন শিক্ষার্থীর একই রোল নম্বর রয়েছে।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.195Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "scopeKey": "65d0fd60-a730-4c52-8f6b-bfe968709bb2_b7160dec-f1ef-4dcc-b038-696b1b1292b2_NO_SEC_520",
+      "studentIds": [
+        "c6112b6e-1dcc-47e7-91e7-444bb31dbf99",
+        "04d64448-8598-42b3-b9d8-08a7a8302863"
+      ],
+      "rollNumber": "520"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-216518",
+    "domain": "FINANCE_PAYMENT",
+    "entityType": "FeeInvoice",
+    "entityId": "23800dc3-cdbc-40d6-92a5-6347f6152062",
+    "ruleCode": "DQ-FIN-002",
+    "titleBn": "ইনভয়েসে পরিশোধিত অর্থের সাথে রশিদের অমিল (INV-2026-0001)",
+    "titleEn": "Invoice paid amount does not match receipts (INV-2026-0001)",
+    "descriptionBn": "ইনভয়েস অনুযায়ী পরিশোধিত ৳1200, কিন্তু সফল রশিদের যোগফল ৳0 (রিফান্ড ৳0)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.207Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "invoiceNumber": "INV-2026-0001",
+      "recordedPaid": 1200,
+      "receiptsTotal": 0,
+      "refundsTotal": 0
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-106288",
+    "domain": "FINANCE_PAYMENT",
+    "entityType": "FeeInvoice",
+    "entityId": "fbb622e6-147e-4ba5-b3c4-6f1c724d63cd",
+    "ruleCode": "DQ-FIN-002",
+    "titleBn": "ইনভয়েসে পরিশোধিত অর্থের সাথে রশিদের অমিল (EHRJ-INV-TEST-1790494031929)",
+    "titleEn": "Invoice paid amount does not match receipts (EHRJ-INV-TEST-1790494031929)",
+    "descriptionBn": "ইনভয়েস অনুযায়ী পরিশোধিত ৳5000, কিন্তু সফল রশিদের যোগফল ৳0 (রিফান্ড ৳0)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.207Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "invoiceNumber": "EHRJ-INV-TEST-1790494031929",
+      "recordedPaid": 5000,
+      "receiptsTotal": 0,
+      "refundsTotal": 0
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-363574",
+    "domain": "FINANCE_PAYMENT",
+    "entityType": "FeeInvoice",
+    "entityId": "f733437d-3618-4c4c-a6bc-6b61898e059f",
+    "ruleCode": "DQ-FIN-002",
+    "titleBn": "ইনভয়েসে পরিশোধিত অর্থের সাথে রশিদের অমিল (EHRJ-INV-TEST-1790494063187)",
+    "titleEn": "Invoice paid amount does not match receipts (EHRJ-INV-TEST-1790494063187)",
+    "descriptionBn": "ইনভয়েস অনুযায়ী পরিশোধিত ৳5000, কিন্তু সফল রশিদের যোগফল ৳0 (রিফান্ড ৳0)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.207Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "invoiceNumber": "EHRJ-INV-TEST-1790494063187",
+      "recordedPaid": 5000,
+      "receiptsTotal": 0,
+      "refundsTotal": 0
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-620719",
+    "domain": "FINANCE_PAYMENT",
+    "entityType": "FeeInvoice",
+    "entityId": "5d0b2c8e-7d2a-4c4a-bd9c-c7bae9f2e40c",
+    "ruleCode": "DQ-FIN-002",
+    "titleBn": "ইনভয়েসে পরিশোধিত অর্থের সাথে রশিদের অমিল (EHRJ-INV-TEST-1790494121390)",
+    "titleEn": "Invoice paid amount does not match receipts (EHRJ-INV-TEST-1790494121390)",
+    "descriptionBn": "ইনভয়েস অনুযায়ী পরিশোধিত ৳5000, কিন্তু সফল রশিদের যোগফল ৳0 (রিফান্ড ৳0)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.207Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "invoiceNumber": "EHRJ-INV-TEST-1790494121390",
+      "recordedPaid": 5000,
+      "receiptsTotal": 0,
+      "refundsTotal": 0
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-844789",
+    "domain": "FINANCE_PAYMENT",
+    "entityType": "FeeInvoice",
+    "entityId": "7de71db7-a972-49f9-89d9-391259a3746c",
+    "ruleCode": "DQ-FIN-002",
+    "titleBn": "ইনভয়েসে পরিশোধিত অর্থের সাথে রশিদের অমিল (EHRJ-INV-TEST-1790494224622)",
+    "titleEn": "Invoice paid amount does not match receipts (EHRJ-INV-TEST-1790494224622)",
+    "descriptionBn": "ইনভয়েস অনুযায়ী পরিশোধিত ৳5000, কিন্তু সফল রশিদের যোগফল ৳0 (রিফান্ড ৳0)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.207Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "invoiceNumber": "EHRJ-INV-TEST-1790494224622",
+      "recordedPaid": 5000,
+      "receiptsTotal": 0,
+      "refundsTotal": 0
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-540572",
+    "domain": "FINANCE_PAYMENT",
+    "entityType": "FeeInvoice",
+    "entityId": "f09f0fef-3375-4966-8890-0f6818ce7bed",
+    "ruleCode": "DQ-FIN-002",
+    "titleBn": "ইনভয়েসে পরিশোধিত অর্থের সাথে রশিদের অমিল (EHRJ-INV-TEST-1790494837880)",
+    "titleEn": "Invoice paid amount does not match receipts (EHRJ-INV-TEST-1790494837880)",
+    "descriptionBn": "ইনভয়েস অনুযায়ী পরিশোধিত ৳5000, কিন্তু সফল রশিদের যোগফল ৳0 (রিফান্ড ৳0)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.207Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "invoiceNumber": "EHRJ-INV-TEST-1790494837880",
+      "recordedPaid": 5000,
+      "receiptsTotal": 0,
+      "refundsTotal": 0
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-493049",
+    "domain": "FINANCE_PAYMENT",
+    "entityType": "FeeInvoice",
+    "entityId": "8fe698a0-ecd5-43ca-bb1c-f3b6928893cc",
+    "ruleCode": "DQ-FIN-002",
+    "titleBn": "ইনভয়েসে পরিশোধিত অর্থের সাথে রশিদের অমিল (EHRJ-INV-TEST-1790529689279)",
+    "titleEn": "Invoice paid amount does not match receipts (EHRJ-INV-TEST-1790529689279)",
+    "descriptionBn": "ইনভয়েস অনুযায়ী পরিশোধিত ৳5000, কিন্তু সফল রশিদের যোগফল ৳0 (রিফান্ড ৳0)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.207Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "invoiceNumber": "EHRJ-INV-TEST-1790529689279",
+      "recordedPaid": 5000,
+      "receiptsTotal": 0,
+      "refundsTotal": 0
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-725502",
+    "domain": "FINANCE_PAYMENT",
+    "entityType": "FeeInvoice",
+    "entityId": "b7cec066-6638-419c-97e7-77208f62985f",
+    "ruleCode": "DQ-FIN-002",
+    "titleBn": "ইনভয়েসে পরিশোধিত অর্থের সাথে রশিদের অমিল (EHRJ-INV-TEST-1790547798296)",
+    "titleEn": "Invoice paid amount does not match receipts (EHRJ-INV-TEST-1790547798296)",
+    "descriptionBn": "ইনভয়েস অনুযায়ী পরিশোধিত ৳5000, কিন্তু সফল রশিদের যোগফল ৳0 (রিফান্ড ৳0)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.207Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "invoiceNumber": "EHRJ-INV-TEST-1790547798296",
+      "recordedPaid": 5000,
+      "receiptsTotal": 0,
+      "refundsTotal": 0
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-152389",
+    "domain": "FINANCE_PAYMENT",
+    "entityType": "FeeInvoice",
+    "entityId": "996e2fda-b000-47d2-af26-72a56e998815",
+    "ruleCode": "DQ-FIN-002",
+    "titleBn": "ইনভয়েসে পরিশোধিত অর্থের সাথে রশিদের অমিল (EHRJ-INV-TEST-1790575135591)",
+    "titleEn": "Invoice paid amount does not match receipts (EHRJ-INV-TEST-1790575135591)",
+    "descriptionBn": "ইনভয়েস অনুযায়ী পরিশোধিত ৳5000, কিন্তু সফল রশিদের যোগফল ৳0 (রিফান্ড ৳0)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.207Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "invoiceNumber": "EHRJ-INV-TEST-1790575135591",
+      "recordedPaid": 5000,
+      "receiptsTotal": 0,
+      "refundsTotal": 0
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-552979",
+    "domain": "CASH_FUNDS",
+    "entityType": "CashFund",
+    "entityId": "70a117bf-6d6a-46d2-a0c8-38f44eb24408",
+    "ruleCode": "DQ-FIN-003",
+    "titleBn": "ফান্ড ব্যালেন্স ও লেনদেন ভাউচারের ব্যবধান (সাধারণ প্রশাসনিক তহবিল)",
+    "titleEn": "Cash fund balance discrepancy against transactions (GENERAL)",
+    "descriptionBn": "ফান্ডে সংরক্ষিত ব্যালেন্স ৳121600, কিন্তু ক্যাশ ট্রানজেকশন বইয়ের যোগফল ৳-128400 (পার্থক্য ৳250000)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.212Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "fundCode": "GENERAL",
+      "currentBalance": 121600,
+      "calculatedLedger": -128400,
+      "difference": 250000
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-655071",
+    "domain": "CASH_FUNDS",
+    "entityType": "CashFund",
+    "entityId": "bd5c4ac5-a37a-420c-bb7f-38237ea491cd",
+    "ruleCode": "DQ-FIN-003",
+    "titleBn": "ফান্ড ব্যালেন্স ও লেনদেন ভাউচারের ব্যবধান (লিল্লাহ বোর্ডিং ও খাদ্য তহবিল)",
+    "titleEn": "Cash fund balance discrepancy against transactions (LILLAH)",
+    "descriptionBn": "ফান্ডে সংরক্ষিত ব্যালেন্স ৳380000, কিন্তু ক্যাশ ট্রানজেকশন বইয়ের যোগফল ৳0 (পার্থক্য ৳380000)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.212Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "fundCode": "LILLAH",
+      "currentBalance": 380000,
+      "calculatedLedger": 0,
+      "difference": 380000
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-157318",
+    "domain": "CASH_FUNDS",
+    "entityType": "CashFund",
+    "entityId": "0ac2351d-6ff8-4161-9e88-8941d31f274d",
+    "ruleCode": "DQ-FIN-003",
+    "titleBn": "ফান্ড ব্যালেন্স ও লেনদেন ভাউচারের ব্যবধান (যাকাত ও দরিদ্র কল্যাণ তহবিল)",
+    "titleEn": "Cash fund balance discrepancy against transactions (ZAKAT)",
+    "descriptionBn": "ফান্ডে সংরক্ষিত ব্যালেন্স ৳508000, কিন্তু ক্যাশ ট্রানজেকশন বইয়ের যোগফল ৳-12000 (পার্থক্য ৳520000)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.212Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "fundCode": "ZAKAT",
+      "currentBalance": 508000,
+      "calculatedLedger": -12000,
+      "difference": 520000
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-790863",
+    "domain": "CASH_FUNDS",
+    "entityType": "CashFund",
+    "entityId": "ab2fa5b4-7b84-45c2-adf2-f2051b899755",
+    "ruleCode": "DQ-FIN-003",
+    "titleBn": "ফান্ড ব্যালেন্স ও লেনদেন ভাউচারের ব্যবধান (মাদ্রাসা ও মসজিদ নির্মাণ তহবিল)",
+    "titleEn": "Cash fund balance discrepancy against transactions (CONSTRUCTION)",
+    "descriptionBn": "ফান্ডে সংরক্ষিত ব্যালেন্স ৳450000, কিন্তু ক্যাশ ট্রানজেকশন বইয়ের যোগফল ৳0 (পার্থক্য ৳450000)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.212Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "fundCode": "CONSTRUCTION",
+      "currentBalance": 450000,
+      "calculatedLedger": 0,
+      "difference": 450000
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-248137",
+    "domain": "CASH_FUNDS",
+    "entityType": "CashFund",
+    "entityId": "09edb514-473d-4f8b-ae31-a870ec20553a",
+    "ruleCode": "DQ-FIN-003",
+    "titleBn": "ফান্ড ব্যালেন্স ও লেনদেন ভাউচারের ব্যবধান (এতিম ছাত্র স্পন্সরশিপ ফান্ড)",
+    "titleEn": "Cash fund balance discrepancy against transactions (ORPHAN_SUPPORT)",
+    "descriptionBn": "ফান্ডে সংরক্ষিত ব্যালেন্স ৳190000, কিন্তু ক্যাশ ট্রানজেকশন বইয়ের যোগফল ৳0 (পার্থক্য ৳190000)।",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:45:51.212Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "fundCode": "ORPHAN_SUPPORT",
+      "currentBalance": 190000,
+      "calculatedLedger": 0,
+      "difference": 190000
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-989177",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "d8338613-80eb-4c21-80f7-d1e4c01cfc53",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার))",
+    "titleEn": "Active student lacks active enrollment (EHRJ-TEST-SURV-1790621178505)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার) (EHRJ-TEST-SURV-1790621178505) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:47:38.088Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "d8338613-80eb-4c21-80f7-d1e4c01cfc53",
+      "studentIdNumber": "EHRJ-TEST-SURV-1790621178505",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-119308",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "28c58fe2-5f1d-48c0-9f49-a834337d560e",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ উমর ফারুক (টেস্ট ডুপ্লিকেট))",
+    "titleEn": "Active student lacks active enrollment (EHRJ-TEST-DUPL-1790621178523)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ উমর ফারুক (টেস্ট ডুপ্লিকেট) (EHRJ-TEST-DUPL-1790621178523) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:47:38.088Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "28c58fe2-5f1d-48c0-9f49-a834337d560e",
+      "studentIdNumber": "EHRJ-TEST-DUPL-1790621178523",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-168071",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "d8338613-80eb-4c21-80f7-d1e4c01cfc53",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-TEST-SURV-1790621178505)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার) (EHRJ-TEST-SURV-1790621178505) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:47:38.091Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "d8338613-80eb-4c21-80f7-d1e4c01cfc53",
+      "studentIdNumber": "EHRJ-TEST-SURV-1790621178505"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-451186",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "28c58fe2-5f1d-48c0-9f49-a834337d560e",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ উমর ফারুক (টেস্ট ডুপ্লিকেট))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-TEST-DUPL-1790621178523)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ উমর ফারুক (টেস্ট ডুপ্লিকেট) (EHRJ-TEST-DUPL-1790621178523) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:47:38.091Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "28c58fe2-5f1d-48c0-9f49-a834337d560e",
+      "studentIdNumber": "EHRJ-TEST-DUPL-1790621178523"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-177201",
+    "domain": "STUDENT_IDENTITY",
+    "entityType": "Student",
+    "entityId": "6c48c2f4-058c-4802-ae60-437d64f82fb4",
+    "ruleCode": "DQ-STU-001",
+    "titleBn": "শিক্ষার্থীর সক্রিয় শিক্ষাবর্ষে এনরোলমেন্ট নেই (মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার))",
+    "titleEn": "Active student lacks active enrollment (EHRJ-TEST-SURV-1790621258178)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার) (EHRJ-TEST-SURV-1790621258178) সক্রিয় থাকা সত্ত্বেও বর্তমান শিক্ষাবর্ষে (২০২৫-২০২৬) তার কোনো এনরোলমেন্ট নেই।",
+    "severity": "HIGH",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:48:08.781Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "6c48c2f4-058c-4802-ae60-437d64f82fb4",
+      "studentIdNumber": "EHRJ-TEST-SURV-1790621258178",
+      "sessionId": "65d0fd60-a730-4c52-8f6b-bfe968709bb2"
+    }
+  },
+  {
+    "id": "EHRJ-DQ-2026-854018",
+    "domain": "GUARDIAN_IDENTITY",
+    "entityType": "Student",
+    "entityId": "6c48c2f4-058c-4802-ae60-437d64f82fb4",
+    "ruleCode": "DQ-GUA-001",
+    "titleBn": "শিক্ষার্থীর প্রধান অভিভাবক নির্ধারিত নেই (মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার))",
+    "titleEn": "Student has no primary guardian assigned (EHRJ-TEST-SURV-1790621258178)",
+    "descriptionBn": "শিক্ষার্থী মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার) (EHRJ-TEST-SURV-1790621258178) এর কোনো অভিভাবককে প্রাথমিক (Primary) হিসেবে চিহ্নিত করা হয়নি।",
+    "severity": "MEDIUM",
+    "status": "OPEN",
+    "detectedAt": "2026-09-28T18:48:08.783Z",
+    "detectedBy": "SYSTEM_SCANNER",
+    "evidence": {
+      "studentId": "6c48c2f4-058c-4802-ae60-437d64f82fb4",
+      "studentIdNumber": "EHRJ-TEST-SURV-1790621258178"
+    }
+  }
+]

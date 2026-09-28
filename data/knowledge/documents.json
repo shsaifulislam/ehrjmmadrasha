@@ -357,5 +357,33 @@
     "approver": "প্রধান অ্যাডমিন (অপারেশনাল)",
     "approvalTimestamp": "2026-09-28T18:24:51.202Z",
     "publicationTimestamp": "2026-09-28T18:24:51.204Z"
+  },
+  {
+    "documentCode": "EHRJ-TEST-POL-7536",
+    "titleBn": "পরীক্ষামূলক পাঠাগার নীতিমালা ২০২৬",
+    "titleEn": "Experimental Library Policy 2026",
+    "category": "LIBRARY",
+    "documentType": "POLICY",
+    "version": "1.0",
+    "status": "PUBLISHED",
+    "effectiveDate": "2026-09-28T18:48:47.536Z",
+    "author": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "securityClassification": "PUBLIC",
+    "roleScope": "ALL",
+    "language": "bn",
+    "contentText": "১. পাঠাগারের প্রতিটি কিতাব সর্বোচ্চ ১৪ দিনের জন্য ইস্যু করা যাবে।\n২. কিতাব নষ্ট করলে সমপরিমাণ জরিমানা প্রযোজ্য।",
+    "contentMarkdown": "### পাঠাগার নীতিমালা\n- সর্বোচ্চ ১৪ দিন।",
+    "tags": [
+      "লাইব্রেরি",
+      "কিতাব",
+      "পাঠাগার"
+    ],
+    "id": "doc-1790621327538-2w1rp",
+    "checksum": "70d1f196e999828601d2cf3887c21ced02160639bdb8c6a42dd74099ded7209c",
+    "createdAt": "2026-09-28T18:48:47.538Z",
+    "updatedAt": "2026-09-28T18:48:47.547Z",
+    "approver": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "approvalTimestamp": "2026-09-28T18:48:47.543Z",
+    "publicationTimestamp": "2026-09-28T18:48:47.546Z"
   }
 ]
