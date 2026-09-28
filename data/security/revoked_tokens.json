@@ -53,5 +53,10 @@
     "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjI0MjQyLCJleHAiOjE3OTEyMjkwNDJ9.hTzQ5yymoHGR_FTTkrFbFRvQ0Xq3wABd83PFGIy-Y8Q",
     "revokedAt": "2026-09-28T19:37:22.933Z",
     "reason": "Test Remote Session Revocation"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjI1Nzc5LCJleHAiOjE3OTEyMzA1Nzl9.zAbO69XLVLuf6vk3EDBq_IR_bjchSFEWmiLECcDpIMU",
+    "revokedAt": "2026-09-28T20:02:59.651Z",
+    "reason": "Test Remote Session Revocation"
   }
 ]

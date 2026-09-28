@@ -44,13 +44,28 @@ export async function recordAuditLog({
   ipAddress?: string;
 }) {
   try {
+    let validUserId: string | null = null;
+    let auditDetails = details ? { ...details } : {};
+
+    if (userId) {
+      const user = await prisma.user.findFirst({
+        where: { OR: [{ id: userId }, { username: userId }] },
+        select: { id: true },
+      });
+      if (user) {
+        validUserId = user.id;
+      } else {
+        auditDetails = { ...auditDetails, actor: userId };
+      }
+    }
+
     await prisma.auditLog.create({
       data: {
-        userId: userId || null,
+        userId: validUserId,
         action,
         entityType,
         entityId: entityId || null,
-        detailsJson: details ? JSON.stringify(details) : null,
+        detailsJson: Object.keys(auditDetails).length > 0 ? JSON.stringify(auditDetails) : null,
         ipAddress: ipAddress || null,
       },
     });

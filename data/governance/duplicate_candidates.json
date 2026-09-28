@@ -11985,6 +11985,21 @@
     "status": "REVIEW_REQUIRED"
   },
   {
+    "id": "DUP-055351-1052",
+    "survivorId": "516b7409-b48d-44b6-af22-55d3825332a3",
+    "duplicateId": "a69af28d-6610-4a0c-ad10-6a93fb196755",
+    "survivorStudentId": "EHRJ-2026-6939",
+    "duplicateStudentId": "EHRJ-2026-4979",
+    "survivorNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "duplicateNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "survivorPhone": "01811223344",
+    "duplicatePhone": "01811223344",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T19:34:15.351Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
     "id": "DUP-055351-7349",
     "survivorId": "c83f03ee-f972-4492-a821-09f7241c4539",
     "duplicateId": "a69af28d-6610-4a0c-ad10-6a93fb196755",
@@ -11997,6 +12012,66 @@
     "confidence": "HIGH",
     "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
     "detectedAt": "2026-09-28T19:34:15.351Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "DUP-055351-7349",
+    "survivorId": "c83f03ee-f972-4492-a821-09f7241c4539",
+    "duplicateId": "a69af28d-6610-4a0c-ad10-6a93fb196755",
+    "survivorStudentId": "EHRJ-2026-9660",
+    "duplicateStudentId": "EHRJ-2026-4979",
+    "survivorNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "duplicateNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "survivorPhone": "01811223344",
+    "duplicatePhone": "01811223344",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T19:34:15.351Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "DUP-786017-3565",
+    "survivorId": "516b7409-b48d-44b6-af22-55d3825332a3",
+    "duplicateId": "70731b8f-68b9-40d1-b42e-33276f145791",
+    "survivorStudentId": "EHRJ-2026-6939",
+    "duplicateStudentId": "EHRJ-2026-1573",
+    "survivorNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "duplicateNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "survivorPhone": "01811223344",
+    "duplicatePhone": "01811223344",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T20:03:06.017Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "DUP-786017-3311",
+    "survivorId": "c83f03ee-f972-4492-a821-09f7241c4539",
+    "duplicateId": "70731b8f-68b9-40d1-b42e-33276f145791",
+    "survivorStudentId": "EHRJ-2026-9660",
+    "duplicateStudentId": "EHRJ-2026-1573",
+    "survivorNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "duplicateNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "survivorPhone": "01811223344",
+    "duplicatePhone": "01811223344",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T20:03:06.017Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "DUP-786017-1452",
+    "survivorId": "a69af28d-6610-4a0c-ad10-6a93fb196755",
+    "duplicateId": "70731b8f-68b9-40d1-b42e-33276f145791",
+    "survivorStudentId": "EHRJ-2026-4979",
+    "duplicateStudentId": "EHRJ-2026-1573",
+    "survivorNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "duplicateNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "survivorPhone": "01811223344",
+    "duplicatePhone": "01811223344",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T20:03:06.017Z",
     "status": "REVIEW_REQUIRED"
   }
 ]

@@ -1,0 +1,211 @@
+[
+  {
+    "id": "INT-GMAIL-SMTP-01",
+    "integrationCode": "GMAIL_SMTP",
+    "name": "Institutional Gmail SMTP",
+    "nameBn": "প্রাতিষ্ঠানিক জিমেইল এসএমটিপি",
+    "description": "Phase 8 authoritative email delivery for admissions, password resets, and critical alerts.",
+    "provider": "Google Workspace / Nodemailer",
+    "category": "EMAIL",
+    "environment": "PRODUCTION",
+    "status": "ACTIVE",
+    "healthStatus": "HEALTHY",
+    "version": "v1.0",
+    "baseUrl": "smtp://smtp.gmail.com:465",
+    "authenticationType": "BASIC_AUTH",
+    "configuration": {
+      "smtpHost": "smtp.gmail.com",
+      "smtpPort": 465,
+      "smtpUser": "ehrjmadrasha@gmail.com",
+      "smtpPass": "**************** (Encrypted in env)",
+      "fromName": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা"
+    },
+    "enabledAt": "2026-01-01T00:00:00.000Z",
+    "lastHealthCheck": "2026-09-28T20:03:53.492Z",
+    "lastSuccessfulSync": "2026-09-28T20:00:14.152Z",
+    "metrics": {
+      "totalRequests": 146,
+      "successRequests": 145,
+      "failedRequests": 1,
+      "averageLatencyMs": 258
+    },
+    "createdBy": "SYSTEM_INIT",
+    "updatedBy": "SYSTEM_INIT",
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-09-28T20:00:14.152Z"
+  },
+  {
+    "id": "INT-BKASH-PGW-01",
+    "integrationCode": "BKASH_PGW",
+    "name": "bKash Payment Gateway (PGW)",
+    "nameBn": "বিকাশ পেমেন্ট গেটওয়ে",
+    "description": "Online fee payment collection via bKash Merchant API with signature verification and auto-reconciliation.",
+    "provider": "bKash Limited",
+    "category": "PAYMENT",
+    "environment": "SANDBOX",
+    "status": "CONFIGURED",
+    "healthStatus": "HEALTHY",
+    "version": "v1.2.0-beta",
+    "baseUrl": "https://tokenized.sandbox.bka.sh/v1.2.0-beta",
+    "authenticationType": "BEARER_TOKEN",
+    "configuration": {
+      "merchantShortCode": "01845162664",
+      "appKey": "bkash_sandbox_key_****************",
+      "appSecret": "**************** (Masked)",
+      "webhookUrl": "/api/v1/webhooks/inbound/bkash",
+      "idempotencyEnabled": true
+    },
+    "enabledAt": "2026-02-15T00:00:00.000Z",
+    "lastHealthCheck": "2026-09-28T20:03:53.642Z",
+    "lastSuccessfulSync": "2026-09-28T20:00:14.152Z",
+    "metrics": {
+      "totalRequests": 93,
+      "successRequests": 91,
+      "failedRequests": 2,
+      "averageLatencyMs": 284
+    },
+    "createdBy": "SYSTEM_INIT",
+    "updatedBy": "SYSTEM_TEST",
+    "createdAt": "2026-02-15T00:00:00.000Z",
+    "updatedAt": "2026-09-28T20:03:53.713Z",
+    "disabledAt": "2026-09-28T20:03:53.677Z"
+  },
+  {
+    "id": "INT-NAGAD-PGW-01",
+    "integrationCode": "NAGAD_PGW",
+    "name": "Nagad Online Payment Gateway",
+    "nameBn": "নগদ পেমেন্ট গেটওয়ে",
+    "description": "Nagad merchant payment collection with cryptographic public-key validation.",
+    "provider": "Nagad Limited",
+    "category": "PAYMENT",
+    "environment": "SANDBOX",
+    "status": "CONFIGURED",
+    "healthStatus": "HEALTHY",
+    "version": "v1.0",
+    "baseUrl": "https://api.sandbox.nagad.com.bd",
+    "authenticationType": "HMAC_SIGNATURE",
+    "configuration": {
+      "merchantId": "EHRJ_NAGAD_01",
+      "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA... (Masked)",
+      "webhookUrl": "/api/v1/webhooks/inbound/nagad"
+    },
+    "enabledAt": "2026-03-01T00:00:00.000Z",
+    "lastHealthCheck": "2026-09-28T20:00:14.152Z",
+    "metrics": {
+      "totalRequests": 34,
+      "successRequests": 33,
+      "failedRequests": 1,
+      "averageLatencyMs": 310
+    },
+    "createdBy": "SYSTEM_INIT",
+    "updatedBy": "SYSTEM_INIT",
+    "createdAt": "2026-03-01T00:00:00.000Z",
+    "updatedAt": "2026-09-28T20:00:14.152Z"
+  },
+  {
+    "id": "INT-WEBHOOK-DISPATCH-01",
+    "integrationCode": "EHRJ_WEBHOOKS",
+    "name": "Institutional Webhook Engine",
+    "nameBn": "ওয়েবহুক ইঞ্জিন ও সাবস্ক্রিপশন",
+    "description": "Phase 27 event-driven webhook dispatcher with exponential backoff and dead-letter queue.",
+    "provider": "EHRJ Interoperability Subsystem",
+    "category": "WEBHOOK",
+    "environment": "PRODUCTION",
+    "status": "ACTIVE",
+    "healthStatus": "HEALTHY",
+    "version": "v1.0",
+    "baseUrl": "internal://events.ehrj.local",
+    "authenticationType": "HMAC_SIGNATURE",
+    "configuration": {
+      "signatureHeader": "x-ehrj-signature",
+      "replayToleranceSec": 300,
+      "maxRetries": 3,
+      "deadLetterQueueEnabled": true
+    },
+    "enabledAt": "2026-01-01T00:00:00.000Z",
+    "lastHealthCheck": "2026-09-28T20:00:14.152Z",
+    "lastSuccessfulSync": "2026-09-28T20:00:14.152Z",
+    "metrics": {
+      "totalRequests": 215,
+      "successRequests": 212,
+      "failedRequests": 3,
+      "averageLatencyMs": 145
+    },
+    "createdBy": "SYSTEM_INIT",
+    "updatedBy": "SYSTEM_INIT",
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-09-28T20:00:14.152Z"
+  },
+  {
+    "id": "INT-BANK-RECON-01",
+    "integrationCode": "EXTERNAL_BANK_RECON",
+    "name": "Bank Statement Auto-Reconciliation",
+    "nameBn": "ব্যাংক স্টেটমেন্ট স্বয়ংক্রিয় রিকনসিলিয়েশন",
+    "description": "Institutional bank statement parser (MT940/CSV) with financial ledger matching rules.",
+    "provider": "Sonali Bank / Islami Bank Bangladesh",
+    "category": "BANK",
+    "environment": "PRODUCTION",
+    "status": "ACTIVE",
+    "healthStatus": "HEALTHY",
+    "version": "v1.0",
+    "authenticationType": "NONE",
+    "configuration": {
+      "supportedBanks": [
+        "Sonali Bank PLC",
+        "Islami Bank Bangladesh PLC",
+        "Al-Arafah Islami Bank"
+      ],
+      "toleranceWindowDays": 3,
+      "conflictAction": "HUMAN_REVIEW_REQUIRED"
+    },
+    "enabledAt": "2026-02-01T00:00:00.000Z",
+    "lastHealthCheck": "2026-09-28T20:00:14.152Z",
+    "lastSuccessfulSync": "2026-09-28T20:00:14.152Z",
+    "metrics": {
+      "totalRequests": 18,
+      "successRequests": 18,
+      "failedRequests": 0,
+      "averageLatencyMs": 95
+    },
+    "createdBy": "SYSTEM_INIT",
+    "updatedBy": "SYSTEM_INIT",
+    "createdAt": "2026-02-01T00:00:00.000Z",
+    "updatedAt": "2026-09-28T20:00:14.152Z"
+  },
+  {
+    "id": "INT-IMPORT-EXPORT-01",
+    "integrationCode": "DATA_IMPORT_EXPORT",
+    "name": "Institutional Data Exchange & SIS Hub",
+    "nameBn": "ডাটা ইমপোর্ট-এক্সপোর্ট ও শিক্ষাবোর্ড বিনিময় হাব",
+    "description": "Madrasah Education Board (Bise/BMEB) and SIS compatible student & academic data sync with RBAC.",
+    "provider": "EHRJ Interoperability Subsystem",
+    "category": "IMPORT_EXPORT",
+    "environment": "PRODUCTION",
+    "status": "ACTIVE",
+    "healthStatus": "HEALTHY",
+    "version": "v1.0",
+    "authenticationType": "API_KEY",
+    "configuration": {
+      "allowedFormats": [
+        "CSV",
+        "JSON"
+      ],
+      "maxBatchSize": 500,
+      "fieldLevelMinimization": true,
+      "previewBeforeCommit": true
+    },
+    "enabledAt": "2026-01-10T00:00:00.000Z",
+    "lastHealthCheck": "2026-09-28T20:00:14.152Z",
+    "lastSuccessfulSync": "2026-09-28T20:00:14.152Z",
+    "metrics": {
+      "totalRequests": 62,
+      "successRequests": 62,
+      "failedRequests": 0,
+      "averageLatencyMs": 210
+    },
+    "createdBy": "SYSTEM_INIT",
+    "updatedBy": "SYSTEM_INIT",
+    "createdAt": "2026-01-10T00:00:00.000Z",
+    "updatedAt": "2026-09-28T20:00:14.152Z"
+  }
+]

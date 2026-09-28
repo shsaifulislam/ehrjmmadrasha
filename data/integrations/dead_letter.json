@@ -1,0 +1,132 @@
+[
+  {
+    "source": "OUTBOUND_DELIVERY",
+    "integrationCode": "DATA_IMPORT_EXPORT",
+    "referenceId": "DEL-1790625833921-FBCC6C",
+    "eventType": "STUDENT_CREATED",
+    "requestPayload": {
+      "id": "DEL-1790625833921-FBCC6C",
+      "eventId": "EVT-2026-000009",
+      "eventType": "STUDENT_CREATED",
+      "sourceModule": "ADMISSION",
+      "occurredAt": "2026-09-28T20:03:53.919Z",
+      "correlationId": "EVT-2026-000009",
+      "data": {
+        "studentName": "টেস্ট শিক্ষার্থী",
+        "classCode": "CLASS_1"
+      }
+    },
+    "lastError": "fetch failed",
+    "attempts": 3,
+    "correlationId": "EVT-2026-000009",
+    "id": "DLQ-MULOE14Q-984BB6",
+    "quarantinedAt": "2026-09-28T20:03:55.322Z",
+    "resolutionStatus": "PENDING"
+  },
+  {
+    "source": "INBOUND_WEBHOOK",
+    "integrationCode": "BKASH_PGW",
+    "referenceId": "WH-IN-1790625833874-0603E9",
+    "eventType": "PAYMENT_COMPLETED",
+    "requestPayload": {
+      "paymentId": "STALE-TXN-1790625833862",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790625833854
+    },
+    "lastError": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "attempts": 2,
+    "correlationId": "corr_63f39218408c0592",
+    "id": "DLQ-MULOE00N-3C9263",
+    "quarantinedAt": "2026-09-28T20:03:53.879Z",
+    "resolutionStatus": "REPLAYED",
+    "resolvedAt": "2026-09-28T20:03:53.882Z"
+  },
+  {
+    "source": "OUTBOUND_DELIVERY",
+    "integrationCode": "DATA_IMPORT_EXPORT",
+    "referenceId": "DEL-1790625661933-F77AB6",
+    "eventType": "STUDENT_CREATED",
+    "requestPayload": {
+      "id": "DEL-1790625661933-F77AB6",
+      "eventId": "EVT-2026-000007",
+      "eventType": "STUDENT_CREATED",
+      "sourceModule": "ADMISSION",
+      "occurredAt": "2026-09-28T20:01:01.932Z",
+      "correlationId": "EVT-2026-000007",
+      "data": {
+        "studentName": "টেস্ট শিক্ষার্থী",
+        "classCode": "CLASS_1"
+      }
+    },
+    "lastError": "fetch failed",
+    "attempts": 3,
+    "correlationId": "EVT-2026-000007",
+    "id": "DLQ-MULOACE3-82DAD7",
+    "quarantinedAt": "2026-09-28T20:01:03.291Z",
+    "resolutionStatus": "PENDING"
+  },
+  {
+    "source": "INBOUND_WEBHOOK",
+    "integrationCode": "BKASH_PGW",
+    "referenceId": "WH-IN-1790625661896-EC80E0",
+    "eventType": "PAYMENT_COMPLETED",
+    "requestPayload": {
+      "paymentId": "STALE-TXN-1790625661892",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790625661891
+    },
+    "lastError": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "attempts": 2,
+    "correlationId": "corr_a1922b5d602d54af",
+    "id": "DLQ-MULOABBD-9526E2",
+    "quarantinedAt": "2026-09-28T20:01:01.897Z",
+    "resolutionStatus": "REPLAYED",
+    "resolvedAt": "2026-09-28T20:01:01.899Z"
+  },
+  {
+    "source": "OUTBOUND_DELIVERY",
+    "integrationCode": "DATA_IMPORT_EXPORT",
+    "referenceId": "DEL-1790625614427-4DC6F9",
+    "eventType": "STUDENT_CREATED",
+    "requestPayload": {
+      "id": "DEL-1790625614427-4DC6F9",
+      "eventId": "EVT-2026-000005",
+      "eventType": "STUDENT_CREATED",
+      "sourceModule": "ADMISSION",
+      "occurredAt": "2026-09-28T20:00:14.426Z",
+      "correlationId": "EVT-2026-000005",
+      "data": {
+        "studentName": "টেস্ট শিক্ষার্থী",
+        "classCode": "CLASS_1"
+      }
+    },
+    "lastError": "fetch failed",
+    "attempts": 4,
+    "correlationId": "EVT-2026-000005",
+    "id": "DLQ-MULO9BQD-74A774",
+    "quarantinedAt": "2026-09-28T20:00:15.781Z",
+    "resolutionStatus": "REPLAYED",
+    "resolvedAt": "2026-09-28T20:00:42.096Z"
+  },
+  {
+    "source": "INBOUND_WEBHOOK",
+    "integrationCode": "BKASH_PGW",
+    "referenceId": "WH-IN-1790625614413-31CA68",
+    "eventType": "PAYMENT_COMPLETED",
+    "requestPayload": {
+      "paymentId": "STALE-TXN-123",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790625614408
+    },
+    "lastError": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "attempts": 2,
+    "correlationId": "corr_0ca0d9026adf5d2c",
+    "id": "DLQ-MULO9AOE-409F74",
+    "quarantinedAt": "2026-09-28T20:00:14.414Z",
+    "resolutionStatus": "REPLAYED",
+    "resolvedAt": "2026-09-28T20:00:14.416Z"
+  }
+]

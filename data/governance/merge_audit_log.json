@@ -1,5 +1,29 @@
 [
   {
+    "id": "MRG-2026-561050",
+    "survivorStudentId": "EHRJ-TEST-SURV-1790625786061",
+    "duplicateStudentId": "EHRJ-TEST-DUPL-1790625786098",
+    "survivorId": "629a203c-5233-423d-8d9d-fdd9dda979b8",
+    "duplicateId": "c4e3236e-138d-4a85-94d2-3c6b55891c25",
+    "actor": "Admin Operator",
+    "reason": "পরীক্ষামূলক মার্জ সফলকরণ",
+    "timestamp": "2026-09-28T20:03:06.340Z",
+    "recordsMoved": {
+      "enrollmentsCount": 0,
+      "invoicesCount": 1,
+      "receiptsCount": 0,
+      "attendancesCount": 0,
+      "examMarksCount": 0,
+      "resultsCount": 0,
+      "documentsCount": 0,
+      "certificatesCount": 0,
+      "guardiansCount": 0,
+      "libraryCount": 0,
+      "residentialCount": 0,
+      "transportCount": 0
+    }
+  },
+  {
     "id": "MRG-2026-905838",
     "survivorStudentId": "EHRJ-TEST-SURV-1790624055366",
     "duplicateStudentId": "EHRJ-TEST-DUPL-1790624055385",

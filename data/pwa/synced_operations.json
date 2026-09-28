@@ -28,5 +28,11 @@
     "savedRecords": 1,
     "serverTimestamp": "2026-09-28T19:37:39.643Z",
     "syncedAt": "2026-09-28T19:37:39.643Z"
+  },
+  "EHRJ-SYNC-20260928-TEA-GPF8KT": {
+    "operationType": "TEACHER_ATTENDANCE",
+    "savedRecords": 1,
+    "serverTimestamp": "2026-09-28T20:02:55.289Z",
+    "syncedAt": "2026-09-28T20:02:55.290Z"
   }
 }

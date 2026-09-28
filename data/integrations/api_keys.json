@@ -1,0 +1,90 @@
+[
+  {
+    "id": "KEY-MULO9ANS-BFC4B1",
+    "name": "BISE Madrasah Board Sync Partner",
+    "keyPrefix": "ehrj_live_2e4389...",
+    "keyHash": "4159162cd704a94885068fdcef60e27b0bfdd0816ec0045d4e94c0c82e58f37d",
+    "owner": "Bangladesh Madrasah Education Board",
+    "ownerType": "EXTERNAL_INSTITUTION",
+    "scopes": [
+      "students:read",
+      "attendance:read"
+    ],
+    "environment": "PRODUCTION",
+    "rateLimitPerMin": 120,
+    "status": "REVOKED",
+    "expiresAt": "2026-12-27T20:00:14.391Z",
+    "createdBy": "SYSTEM_TEST",
+    "createdAt": "2026-09-28T20:00:14.392Z",
+    "updatedAt": "2026-09-28T20:00:14.399Z",
+    "lastUsedAt": "2026-09-28T20:00:14.397Z",
+    "revokedAt": "2026-09-28T20:00:14.399Z",
+    "revokedReason": "Security audit test revocation"
+  },
+  {
+    "id": "KEY-MULO9VYG-C7B76D",
+    "name": "BISE Madrasah Board Sync Partner",
+    "keyPrefix": "ehrj_live_9e05a5...",
+    "keyHash": "7a8f3e931e3560f1dcd4fbd86ce2f9a28746f698ea8e983a77ed5de2daa5a386",
+    "owner": "Bangladesh Madrasah Education Board",
+    "ownerType": "EXTERNAL_INSTITUTION",
+    "scopes": [
+      "students:read",
+      "attendance:read"
+    ],
+    "environment": "PRODUCTION",
+    "rateLimitPerMin": 120,
+    "status": "REVOKED",
+    "expiresAt": "2026-12-27T20:00:41.991Z",
+    "createdBy": "SYSTEM_TEST",
+    "createdAt": "2026-09-28T20:00:41.992Z",
+    "updatedAt": "2026-09-28T20:00:42.056Z",
+    "lastUsedAt": "2026-09-28T20:00:42.053Z",
+    "revokedAt": "2026-09-28T20:00:42.056Z",
+    "revokedReason": "Security audit test revocation"
+  },
+  {
+    "id": "KEY-MULOAB9R-96EB37",
+    "name": "BISE Madrasah Board Sync Partner",
+    "keyPrefix": "ehrj_live_c8fa26...",
+    "keyHash": "93dd1972d0f203a8dbd5244839d6c4b0a676a72e538629acce45b03384c8c9b3",
+    "owner": "Bangladesh Madrasah Education Board",
+    "ownerType": "EXTERNAL_INSTITUTION",
+    "scopes": [
+      "students:read",
+      "attendance:read"
+    ],
+    "environment": "PRODUCTION",
+    "rateLimitPerMin": 120,
+    "status": "REVOKED",
+    "expiresAt": "2026-12-27T20:01:01.839Z",
+    "createdBy": "SYSTEM_TEST",
+    "createdAt": "2026-09-28T20:01:01.839Z",
+    "updatedAt": "2026-09-28T20:01:01.867Z",
+    "lastUsedAt": "2026-09-28T20:01:01.866Z",
+    "revokedAt": "2026-09-28T20:01:01.867Z",
+    "revokedReason": "Security audit test revocation"
+  },
+  {
+    "id": "KEY-MULODZX7-097DA8",
+    "name": "BISE Madrasah Board Sync Partner",
+    "keyPrefix": "ehrj_live_7d61ac...",
+    "keyHash": "a84d8ded1b1cb3cf890a1604094a1c0205816aed77c9f0b75bbaf69261ff01a8",
+    "owner": "Bangladesh Madrasah Education Board",
+    "ownerType": "EXTERNAL_INSTITUTION",
+    "scopes": [
+      "students:read",
+      "attendance:read"
+    ],
+    "environment": "PRODUCTION",
+    "rateLimitPerMin": 120,
+    "status": "REVOKED",
+    "expiresAt": "2026-12-27T20:03:53.754Z",
+    "createdBy": "SYSTEM_TEST",
+    "createdAt": "2026-09-28T20:03:53.755Z",
+    "updatedAt": "2026-09-28T20:03:53.778Z",
+    "lastUsedAt": "2026-09-28T20:03:53.775Z",
+    "revokedAt": "2026-09-28T20:03:53.778Z",
+    "revokedReason": "Security audit test revocation"
+  }
+]

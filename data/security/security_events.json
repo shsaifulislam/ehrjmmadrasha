@@ -789,5 +789,84 @@
       "incidentCode": "EHRJ-INC-2026-243032",
       "title": "টেস্ট নিরাপত্তা ইনসিডেন্ট - 1790624243032"
     }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-E4902F",
+    "timestamp": "2026-09-28T20:02:59.673Z",
+    "eventType": "SUSPICIOUS_LOGIN_ATTEMPTS",
+    "severity": "CRITICAL",
+    "username": "test_account_1790625779671",
+    "ipAddress": "192.168.1.200",
+    "userAgent": "Mozilla/5.0 TestAgent",
+    "details": {
+      "failedCount": 5,
+      "lockoutDurationMinutes": 15
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-962966",
+    "timestamp": "2026-09-28T20:02:59.696Z",
+    "eventType": "PERMISSION_DENIED",
+    "severity": "MEDIUM",
+    "userId": "04982453-c078-4b9f-8301-e81267b5bcbd",
+    "username": "teacher",
+    "resource": "OperationsBackup",
+    "details": {
+      "requiredRole": "ADMIN",
+      "actualRole": "TEACHER"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-B973F5",
+    "timestamp": "2026-09-28T20:02:59.703Z",
+    "eventType": "IDOR_ATTEMPT",
+    "severity": "HIGH",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "username": "guardian",
+    "resource": "Student:fake-student-id-99999",
+    "details": {
+      "attemptedStudentId": "fake-student-id-99999",
+      "authorizedStudentIds": [
+        "10a3f744-3eeb-47c2-a221-0e4dc5c9f807"
+      ]
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-2579D4",
+    "timestamp": "2026-09-28T20:02:59.716Z",
+    "eventType": "AI_INJECTION_DETECTED",
+    "severity": "CRITICAL",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "username": "admin",
+    "ipAddress": "10.0.0.99",
+    "resource": "PromptFirewall",
+    "details": {
+      "attackVector": "ignore_previous_rules_test"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-908F40",
+    "timestamp": "2026-09-28T20:02:59.756Z",
+    "eventType": "HIGH_RISK_ACTION",
+    "severity": "HIGH",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "resource": "Incident:EHRJ-INC-2026-779733",
+    "details": {
+      "incidentCode": "EHRJ-INC-2026-779733",
+      "title": "টেস্ট নিরাপত্তা ইনসিডেন্ট - 1790625779733"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-BE024D",
+    "timestamp": "2026-09-28T20:03:06.436Z",
+    "eventType": "HIGH_RISK_ACTION",
+    "severity": "HIGH",
+    "userId": "Admin Operator",
+    "details": {
+      "action": "STUDENT_MERGE",
+      "survivorStudentId": "EHRJ-TEST-SURV-1790625786061",
+      "duplicateStudentId": "EHRJ-TEST-DUPL-1790625786098",
+      "reason": "পরীক্ষামূলক মার্জ সফলকরণ"
+    }
   }
 ]

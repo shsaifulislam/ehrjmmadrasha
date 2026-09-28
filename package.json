@@ -26,7 +26,8 @@
     "test:phase24": "npx tsx scratch/test_phase24_security_operations.ts",
     "test:phase25": "npx tsx scratch/test_phase25_data_governance.ts",
     "test:phase26": "npx tsx scratch/test_phase26_bi_engine.ts",
-    "test:phase27": "npx tsx scratch/test_phase27_workflow_engine.ts"
+    "test:phase27": "npx tsx scratch/test_phase27_workflow_engine.ts",
+    "test:phase28": "npx tsx scratch/test_phase28_integration_hub.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

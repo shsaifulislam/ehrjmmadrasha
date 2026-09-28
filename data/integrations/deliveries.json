@@ -1,0 +1,47 @@
+[
+  {
+    "deliveryId": "DEL-1790625614427-4DC6F9",
+    "eventId": "EVT-2026-000005",
+    "subscriptionId": "SUB-SIS-BOARD-01",
+    "targetUrl": "https://mock-bmeb-board.gov.bd/api/v1/sync",
+    "attempt": 3,
+    "maxAttempts": 3,
+    "timestamp": "2026-09-28T20:00:15.780Z",
+    "httpStatus": 500,
+    "latencyMs": 1352,
+    "signature": "t=1790625614428,v1=f25eee7931dd27c35b192c2b1d1133fd4f404ed9c981b2b8572632142658951e",
+    "deliveryStatus": "DEAD_LETTER",
+    "error": "fetch failed",
+    "correlationId": "EVT-2026-000005"
+  },
+  {
+    "deliveryId": "DEL-1790625661933-F77AB6",
+    "eventId": "EVT-2026-000007",
+    "subscriptionId": "SUB-SIS-BOARD-01",
+    "targetUrl": "https://mock-bmeb-board.gov.bd/api/v1/sync",
+    "attempt": 3,
+    "maxAttempts": 3,
+    "timestamp": "2026-09-28T20:01:03.289Z",
+    "httpStatus": 500,
+    "latencyMs": 1353,
+    "signature": "t=1790625661933,v1=fb48e3d218817ef1e915cbca1bd28abc007c87bda3ef2b7a9f46be5bb8dc5731",
+    "deliveryStatus": "DEAD_LETTER",
+    "error": "fetch failed",
+    "correlationId": "EVT-2026-000007"
+  },
+  {
+    "deliveryId": "DEL-1790625833921-FBCC6C",
+    "eventId": "EVT-2026-000009",
+    "subscriptionId": "SUB-SIS-BOARD-01",
+    "targetUrl": "https://mock-bmeb-board.gov.bd/api/v1/sync",
+    "attempt": 3,
+    "maxAttempts": 3,
+    "timestamp": "2026-09-28T20:03:55.321Z",
+    "httpStatus": 500,
+    "latencyMs": 1399,
+    "signature": "t=1790625833921,v1=8f14449c60db12db2a4bf36206d6b5b68275493237b0a268a4cd0fc26b3623e5",
+    "deliveryStatus": "DEAD_LETTER",
+    "error": "fetch failed",
+    "correlationId": "EVT-2026-000009"
+  }
+]

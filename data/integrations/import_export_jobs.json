@@ -1,0 +1,50 @@
+[
+  {
+    "id": "EHRJ-EXP-2026-000004",
+    "jobType": "EXPORT",
+    "entityType": "STUDENT",
+    "status": "COMPLETED",
+    "totalCount": 116,
+    "successCount": 116,
+    "failureCount": 0,
+    "initiatedBy": "ADMIN_USER_001",
+    "createdAt": "2026-09-28T20:03:54.143Z",
+    "completedAt": "2026-09-28T20:03:54.143Z"
+  },
+  {
+    "id": "EHRJ-EXP-2026-000003",
+    "jobType": "EXPORT",
+    "entityType": "STUDENT",
+    "status": "COMPLETED",
+    "totalCount": 115,
+    "successCount": 115,
+    "failureCount": 0,
+    "initiatedBy": "ADMIN_USER_001",
+    "createdAt": "2026-09-28T20:01:02.052Z",
+    "completedAt": "2026-09-28T20:01:02.052Z"
+  },
+  {
+    "id": "EHRJ-EXP-2026-000002",
+    "jobType": "EXPORT",
+    "entityType": "STUDENT",
+    "status": "COMPLETED",
+    "totalCount": 115,
+    "successCount": 115,
+    "failureCount": 0,
+    "initiatedBy": "ADMIN_USER_001",
+    "createdAt": "2026-09-28T20:00:42.348Z",
+    "completedAt": "2026-09-28T20:00:42.348Z"
+  },
+  {
+    "id": "EHRJ-EXP-2026-000001",
+    "jobType": "EXPORT",
+    "entityType": "STUDENT",
+    "status": "COMPLETED",
+    "totalCount": 115,
+    "successCount": 115,
+    "failureCount": 0,
+    "initiatedBy": "ADMIN_USER_001",
+    "createdAt": "2026-09-28T20:00:14.540Z",
+    "completedAt": "2026-09-28T20:00:14.540Z"
+  }
+]

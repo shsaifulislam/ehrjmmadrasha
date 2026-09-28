@@ -69,5 +69,91 @@
     "correlationId": "EVT-2026-000004",
     "schemaVersion": "1.0",
     "idempotencyKey": "evt_TEST_EVENT_PING_SYS-TEST-1790624016918_b462cc7f2987"
+  },
+  {
+    "eventId": "EVT-2026-000005",
+    "eventType": "STUDENT_CREATED",
+    "occurredAt": "2026-09-28T20:00:14.426Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "ADMISSION",
+    "entityType": "Student",
+    "entityId": "STU-TEST-9999",
+    "payload": {
+      "studentName": "টেস্ট শিক্ষার্থী",
+      "classCode": "CLASS_1"
+    },
+    "correlationId": "EVT-2026-000005",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "test_evt_phase28_1790625614424"
+  },
+  {
+    "eventId": "EVT-2026-000006",
+    "eventType": "STUDENT_CREATED",
+    "occurredAt": "2026-09-28T20:00:42.131Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "ADMISSION",
+    "entityType": "Student",
+    "entityId": "STU-TEST-9999",
+    "payload": {
+      "studentName": "টেস্ট শিক্ষার্থী",
+      "classCode": "CLASS_1"
+    },
+    "correlationId": "EVT-2026-000006",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "test_evt_phase28_1790625642130"
+  },
+  {
+    "eventId": "EVT-2026-000007",
+    "eventType": "STUDENT_CREATED",
+    "occurredAt": "2026-09-28T20:01:01.932Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "ADMISSION",
+    "entityType": "Student",
+    "entityId": "STU-TEST-9999",
+    "payload": {
+      "studentName": "টেস্ট শিক্ষার্থী",
+      "classCode": "CLASS_1"
+    },
+    "correlationId": "EVT-2026-000007",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "test_evt_phase28_1790625661931"
+  },
+  {
+    "eventId": "EVT-2026-000008",
+    "eventType": "TEST_EVENT_PING",
+    "occurredAt": "2026-09-28T20:03:39.024Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "OPERATIONS",
+    "entityType": "SystemTest",
+    "entityId": "SYS-TEST-1790625819023",
+    "payload": {
+      "message": "Hello EHRJ Event Bus",
+      "testValue": 42,
+      "timestamp": 1790625819023
+    },
+    "correlationId": "EVT-2026-000008",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "evt_TEST_EVENT_PING_SYS-TEST-1790625819023_3434c4adb9c3"
+  },
+  {
+    "eventId": "EVT-2026-000009",
+    "eventType": "STUDENT_CREATED",
+    "occurredAt": "2026-09-28T20:03:53.919Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "ADMISSION",
+    "entityType": "Student",
+    "entityId": "STU-TEST-9999",
+    "payload": {
+      "studentName": "টেস্ট শিক্ষার্থী",
+      "classCode": "CLASS_1"
+    },
+    "correlationId": "EVT-2026-000009",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "test_evt_phase28_1790625833917"
   }
 ]

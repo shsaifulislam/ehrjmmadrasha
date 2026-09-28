@@ -1,0 +1,41 @@
+[
+  {
+    "id": "SUB-SIS-BOARD-01",
+    "name": "Madrasah Board Sync Bridge",
+    "integrationCode": "DATA_IMPORT_EXPORT",
+    "targetUrl": "https://mock-bmeb-board.gov.bd/api/v1/sync",
+    "eventTypes": [
+      "ADMISSION_APPROVED",
+      "STUDENT_CREATED"
+    ],
+    "secretMasked": "whsec_live_****************",
+    "secretHash": "1b65cd54c258f96e791fe9782f56076d07fb86960dea1c082a0e4da753a3e071",
+    "status": "ACTIVE",
+    "retryPolicy": {
+      "maxAttempts": 3,
+      "initialBackoffSec": 2,
+      "backoffMultiplier": 2
+    },
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "SUB-FINANCE-RECON-01",
+    "name": "Bank & Ledger Webhook Receiver",
+    "integrationCode": "EXTERNAL_BANK_RECON",
+    "targetUrl": "https://mock-bank-recon.islami-bank.bd/notifications",
+    "eventTypes": [
+      "PAYMENT_SUCCESSFUL"
+    ],
+    "secretMasked": "whsec_live_****************",
+    "secretHash": "716e2ce1f24fbb3debd62e4104086f623c2344a4e379f73a984bba3d9fb4fb42",
+    "status": "ACTIVE",
+    "retryPolicy": {
+      "maxAttempts": 3,
+      "initialBackoffSec": 5,
+      "backoffMultiplier": 2
+    },
+    "createdAt": "2026-02-01T00:00:00.000Z",
+    "updatedAt": "2026-02-01T00:00:00.000Z"
+  }
+]

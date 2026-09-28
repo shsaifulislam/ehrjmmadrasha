@@ -1,0 +1,125 @@
+[
+  {
+    "webhookId": "WH-IN-1790625614410-D22D06",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-09-28T20:00:14.410Z",
+    "payloadHash": "aeb1e415c3da5f7c8bf041540ca9f8303e399b17c0e8ac1ce433eae731a61ab5",
+    "signatureStatus": "VERIFIED",
+    "processingStatus": "PROCESSED",
+    "attemptCount": 1,
+    "processedAt": "2026-09-28T20:00:14.410Z",
+    "correlationId": "corr_78e0961c08a9a230",
+    "idempotencyKey": "test_inbound_idemp_001",
+    "sanitizedPayload": {
+      "paymentId": "BKASH-TXN-998877",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790625614408
+    }
+  },
+  {
+    "webhookId": "WH-IN-1790625614413-31CA68",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-09-28T20:00:14.413Z",
+    "payloadHash": "7bd762c2faf5a88b2ce73cf241208ab8d341af33dd3a460725c70a70642a421f",
+    "signatureStatus": "INVALID",
+    "processingStatus": "DEAD_LETTER",
+    "attemptCount": 1,
+    "errorCode": "REPLAY_PROTECTION_FAILED",
+    "errorMessage": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "correlationId": "corr_0ca0d9026adf5d2c",
+    "idempotencyKey": "stale_attack_key_001",
+    "sanitizedPayload": {
+      "paymentId": "STALE-TXN-123",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790625614408
+    }
+  },
+  {
+    "webhookId": "WH-IN-1790625661894-CBA105",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-09-28T20:01:01.894Z",
+    "payloadHash": "73c766947c3e7bc60baf28ad673d15092ed0c3bed8230cdc1649e086f9d09dda",
+    "signatureStatus": "VERIFIED",
+    "processingStatus": "PROCESSED",
+    "attemptCount": 1,
+    "processedAt": "2026-09-28T20:01:01.894Z",
+    "correlationId": "corr_6ae6e08035a9e9cf",
+    "idempotencyKey": "test_inbound_idemp_1790625661892",
+    "sanitizedPayload": {
+      "paymentId": "BKASH-TXN-998877",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790625661891
+    }
+  },
+  {
+    "webhookId": "WH-IN-1790625661896-EC80E0",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-09-28T20:01:01.896Z",
+    "payloadHash": "46c5904f46a421eae76f94cd61d899587efc373ae30f7ba4ca97be8eea1d6103",
+    "signatureStatus": "INVALID",
+    "processingStatus": "DEAD_LETTER",
+    "attemptCount": 1,
+    "errorCode": "REPLAY_PROTECTION_FAILED",
+    "errorMessage": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "correlationId": "corr_a1922b5d602d54af",
+    "idempotencyKey": "stale_attack_key_1790625661892",
+    "sanitizedPayload": {
+      "paymentId": "STALE-TXN-1790625661892",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790625661891
+    }
+  },
+  {
+    "webhookId": "WH-IN-1790625833866-6046D2",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-09-28T20:03:53.867Z",
+    "payloadHash": "61ca0906dc9b3f5d79eaa15d8b3b88929f954f42f90a50de67efa9f1b2c64448",
+    "signatureStatus": "VERIFIED",
+    "processingStatus": "PROCESSED",
+    "attemptCount": 1,
+    "processedAt": "2026-09-28T20:03:53.867Z",
+    "correlationId": "corr_53435b4ac6380346",
+    "idempotencyKey": "test_inbound_idemp_1790625833862",
+    "sanitizedPayload": {
+      "paymentId": "BKASH-TXN-998877",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790625833854
+    }
+  },
+  {
+    "webhookId": "WH-IN-1790625833874-0603E9",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-09-28T20:03:53.874Z",
+    "payloadHash": "67d299abe0da667d66f7af3c3f03fe2ee8687651d0597a664412514429b9b3e6",
+    "signatureStatus": "INVALID",
+    "processingStatus": "DEAD_LETTER",
+    "attemptCount": 1,
+    "errorCode": "REPLAY_PROTECTION_FAILED",
+    "errorMessage": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "correlationId": "corr_63f39218408c0592",
+    "idempotencyKey": "stale_attack_key_1790625833862",
+    "sanitizedPayload": {
+      "paymentId": "STALE-TXN-1790625833862",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790625833854
+    }
+  }
+]
