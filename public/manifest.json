@@ -1,0 +1,58 @@
+{
+  "name": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা",
+  "short_name": "EHRJ Madrasha",
+  "description": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসার অফিসিয়াল ডিজিটাল ক্যাম্পাস ও ইআরপি প্ল্যাটফর্ম",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0D5C3A",
+  "background_color": "#F9F8F3",
+  "scope": "/",
+  "lang": "bn",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/images/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ছাত্র ও অভিভাবক পোর্টাল",
+      "short_name": "পোর্টাল",
+      "description": "শিক্ষার্থীর হাজিরা, ফলাফল ও ফি বিবরণী",
+      "url": "/portal",
+      "icons": [{ "src": "/images/logo.jpg", "sizes": "96x96" }]
+    },
+    {
+      "name": "শিক্ষক প্যানেল ও হাজিরা",
+      "short_name": "শিক্ষক",
+      "description": "ক্লাস হাজিরা ও মার্কস এন্ট্রি",
+      "url": "/teacher",
+      "icons": [{ "src": "/images/logo.jpg", "sizes": "96x96" }]
+    },
+    {
+      "name": "অফিসিয়াল নোটিশ",
+      "short_name": "নোটিশ",
+      "description": "মাদরাসার সর্বশেষ বিজ্ঞপ্তি ও সার্কুলার",
+      "url": "/notices",
+      "icons": [{ "src": "/images/logo.jpg", "sizes": "96x96" }]
+    },
+    {
+      "name": "তথ্য ও নীতিমালা অনুসন্ধান",
+      "short_name": "সার্চ",
+      "description": "ভর্তি ও ফি সংক্রান্ত তথ্য সার্চ",
+      "url": "/search",
+      "icons": [{ "src": "/images/logo.jpg", "sizes": "96x96" }]
+    }
+  ],
+  "categories": ["education", "productivity"]
+}

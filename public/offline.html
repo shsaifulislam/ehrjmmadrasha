@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অফলাইন মোড | ইলিয়টগঞ্জ মাদরাসা ইআরপি</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #F9F8F3;
+      color: #0B1914;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+      text-align: center;
+    }
+    .card {
+      background: #FFFFFF;
+      max-width: 440px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 32px 24px;
+      box-shadow: 0 10px 25px -5px rgba(13, 92, 58, 0.1), 0 8px 10px -6px rgba(13, 92, 58, 0.05);
+      border: 1px solid #E2E8F0;
+    }
+    .icon {
+      width: 64px;
+      height: 64px;
+      background: #FEF3C7;
+      border: 2px solid #F59E0B;
+      color: #B45309;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+    }
+    h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0D5C3A;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 14px;
+      color: #4A5568;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      background: #0D5C3A;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #158052;
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #718096;
+      background: #EDF2F7;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">📡</div>
+    <h1>ইন্টারনেট সংযোগ নেই</h1>
+    <p>আপনার ডিভাইসে এই মুহূর্তে ইন্টারনেট সংযোগ বিচ্ছিন্ন রয়েছে। পূর্বে লোডকৃত পেজসমূহ অফলাইনে ব্রাউজ করা যাবে। শিক্ষক হাজিরা ড্রাফট স্বয়ংক্রিয়ভাবে সংরক্ষিত রয়েছে।</p>
+    <button class="btn" onclick="window.location.reload()">পুনরায় চেষ্টা করুন</button>
+    <div class="badge">EHRJ Madrasha PWA Offline Engine</div>
+  </div>
+</body>
+</html>

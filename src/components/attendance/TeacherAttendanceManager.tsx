@@ -197,21 +197,39 @@ export default function TeacherAttendanceManager() {
       if (!confirmSave) return;
     }
 
+    const recordsToSave = students
+      .filter((s) => s.status !== "UNMARKED")
+      .map((s) => ({
+        studentId: s.studentId,
+        status: s.status,
+        leaveReason: s.status === "LEAVE" ? s.leaveReason || "ছুটি মঞ্জুর" : null,
+        remarks: s.remarks || null,
+      }));
+
+    if (recordsToSave.length === 0) {
+      setStatusMessage({ type: "error", text: "অন্তত একজন শিক্ষার্থীর হাজিরা নির্বাচন করুন।" });
+      return;
+    }
+
     try {
       setSaving(true);
       setStatusMessage(null);
 
-      const recordsToSave = students
-        .filter((s) => s.status !== "UNMARKED")
-        .map((s) => ({
-          studentId: s.studentId,
-          status: s.status,
-          leaveReason: s.status === "LEAVE" ? s.leaveReason || "ছুটি মঞ্জুর" : null,
-          remarks: s.remarks || null,
-        }));
-
-      if (recordsToSave.length === 0) {
-        setStatusMessage({ type: "error", text: "অন্তত একজন শিক্ষার্থীর হাজিরা নির্বাচন করুন।" });
+      // Offline Draft Check
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const { enqueueOfflineOperation } = await import("@/lib/pwa/syncQueue");
+        enqueueOfflineOperation("TEACHER_ATTENDANCE", {
+          sessionId: currentAssignment.sessionId,
+          classId: currentAssignment.classId,
+          sectionId: currentAssignment.sectionId || null,
+          date,
+          records: recordsToSave,
+        });
+        setStatusMessage({
+          type: "success",
+          text: "ইন্টারনেট সংযোগ নেই — হাজিরা ডিভাইসে অফলাইন ড্রাফট হিসেবে সংরক্ষিত হয়েছে (Pending Sync)।",
+        });
+        setHasUnsavedChanges(false);
         setSaving(false);
         return;
       }
@@ -241,7 +259,23 @@ export default function TeacherAttendanceManager() {
         setStatusMessage({ type: "error", text: data.error || "সংরক্ষণ ব্যর্থ হয়েছে।" });
       }
     } catch (err: any) {
-      setStatusMessage({ type: "error", text: "সার্ভারে হাজিরা সংরক্ষণের অনুরোধ ব্যর্থ হয়েছে।" });
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const { enqueueOfflineOperation } = await import("@/lib/pwa/syncQueue");
+        enqueueOfflineOperation("TEACHER_ATTENDANCE", {
+          sessionId: currentAssignment.sessionId,
+          classId: currentAssignment.classId,
+          sectionId: currentAssignment.sectionId || null,
+          date,
+          records: recordsToSave,
+        });
+        setStatusMessage({
+          type: "success",
+          text: "ইন্টারনেট সংযোগ বিচ্ছিন্ন — হাজিরা অফলাইন ড্রাফট হিসেবে সংরক্ষিত হয়েছে (Pending Sync)।",
+        });
+        setHasUnsavedChanges(false);
+      } else {
+        setStatusMessage({ type: "error", text: "সার্ভারে হাজিরা সংরক্ষণের অনুরোধ ব্যর্থ হয়েছে।" });
+      }
     } finally {
       setSaving(false);
     }
