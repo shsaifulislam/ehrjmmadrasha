@@ -1,0 +1,112 @@
+[
+  {
+    "workflowCode": "WF-ADM-001",
+    "version": "1.0",
+    "nameBn": "ভর্তি অনুমোদন পরবর্তী ক্রস-মডিউল অর্কেস্ট্রেশন",
+    "nameEn": "Post-Admission Cross-Module Orchestration",
+    "domain": "ADMISSION",
+    "descriptionBn": "ভর্তি অনুমোদনের পর স্বয়ংক্রিয়ভাবে সেশন এনরোলমেন্ট নিশ্চিতকরণ, লাইব্রেরি মেম্বারশিপ প্রস্তুতকরণ এবং অভিভাবক নোটিফিকেশন প্রদান।",
+    "status": "ACTIVE",
+    "triggerEvents": [
+      "ADMISSION_APPROVED"
+    ],
+    "steps": [
+      {
+        "stepId": "STEP_ENROLL_VERIFY",
+        "nameBn": "এনরোলমেন্ট স্ট্যাটাস যাচাই",
+        "actionType": "VERIFY_ENROLLMENT",
+        "isHighRisk": false
+      },
+      {
+        "stepId": "STEP_LIBRARY_MEMBER",
+        "nameBn": "লাইব্রেরি মেম্বার প্রোফাইল সিঙ্ক",
+        "actionType": "SYNC_LIBRARY_MEMBER",
+        "isHighRisk": false,
+        "compensationAction": "FLAG_LIBRARY_SYNC_ERROR"
+      },
+      {
+        "stepId": "STEP_GUARDIAN_NOTIFY",
+        "nameBn": "অভিভাবক নোটিফিকেশন প্রেরণ",
+        "actionType": "DISPATCH_NOTIFICATION",
+        "isHighRisk": false,
+        "compensationAction": "RETRY_NOTIFICATION"
+      }
+    ],
+    "createdAt": "2026-09-29T00:00:00.000Z",
+    "updatedAt": "2026-09-29T00:00:00.000Z"
+  },
+  {
+    "workflowCode": "WF-ATT-001",
+    "version": "1.0",
+    "nameBn": "টানা অনুপস্থিতি উপস্থিতি আর্লি-ওয়ার্নিং অর্কেস্ট্রেশন",
+    "nameEn": "Absence Early Warning Orchestration",
+    "domain": "ATTENDANCE",
+    "descriptionBn": "শিক্ষার্থী টানা ৩ দিন অনুপস্থিত থাকলে আর্লি-ওয়ার্নিং সৃষ্টি এবং অভিভাবককে সতর্কবার্তা প্রদান।",
+    "status": "ACTIVE",
+    "triggerEvents": [
+      "ATTENDANCE_THRESHOLD_REACHED",
+      "ATTENDANCE_SAVED"
+    ],
+    "steps": [
+      {
+        "stepId": "STEP_EARLY_WARNING",
+        "nameBn": "আর্লি-ওয়ার্নিং ইভেন্ট রেজিস্ট্রি",
+        "actionType": "CREATE_EARLY_WARNING",
+        "isHighRisk": false
+      },
+      {
+        "stepId": "STEP_THROTTLED_NOTIFY",
+        "nameBn": "থ্রোটলড অভিভাবক নোটিশ",
+        "actionType": "DISPATCH_NOTIFICATION",
+        "isHighRisk": false
+      }
+    ],
+    "createdAt": "2026-09-29T00:00:00.000Z",
+    "updatedAt": "2026-09-29T00:00:00.000Z"
+  },
+  {
+    "workflowCode": "WF-INV-001",
+    "version": "1.0",
+    "nameBn": "মজুদ নিম্নসীমা ক্রয়র অনুমোদন গেটওয়ে",
+    "nameEn": "Low-Stock Purchase Approval Gateway",
+    "domain": "INVENTORY",
+    "descriptionBn": "স্টক রিঅর্ডার লেভেলে পৌঁছালে স্বয়ংক্রিয়ভাবে সরাসরি না কিনে প্রিন্সিপাল/অ্যাডমিন অনুমোদনের জন্য গেটওয়েতে রিকুয়েস্ট প্রেরণ।",
+    "status": "ACTIVE",
+    "triggerEvents": [
+      "STOCK_LOW"
+    ],
+    "steps": [
+      {
+        "stepId": "STEP_PURCHASE_APPROVAL_GATE",
+        "nameBn": "ক্রয় রিকুয়েস্ট মানবীয় অনুমোদন গেটওয়ে",
+        "actionType": "CREATE_APPROVAL_REQUEST",
+        "isHighRisk": true,
+        "requiresApproval": true
+      }
+    ],
+    "createdAt": "2026-09-29T00:00:00.000Z",
+    "updatedAt": "2026-09-29T00:00:00.000Z"
+  },
+  {
+    "workflowCode": "WF-OPS-001",
+    "version": "1.0",
+    "nameBn": "সিস্টেম ব্যাকআপ ব্যর্থতা ইনসিডেন্ট অর্কেস্ট্রেশন",
+    "nameEn": "System Backup Failure Incident Workflow",
+    "domain": "OPERATIONS",
+    "descriptionBn": "ব্যাকআপ ব্যর্থ হলে ক্রিটিক্যাল অপারেশনাল সতর্কতা রেজিস্ট্রি এবং আইটি অ্যাডমিনদের কাছে সতর্কতা প্রেরণ।",
+    "status": "ACTIVE",
+    "triggerEvents": [
+      "BACKUP_FAILED"
+    ],
+    "steps": [
+      {
+        "stepId": "STEP_REGISTER_INCIDENT",
+        "nameBn": "অপারেশনাল ইনসিডেন্ট তৈরি",
+        "actionType": "CREATE_OPERATIONAL_ALERT",
+        "isHighRisk": false
+      }
+    ],
+    "createdAt": "2026-09-29T00:00:00.000Z",
+    "updatedAt": "2026-09-29T00:00:00.000Z"
+  }
+]

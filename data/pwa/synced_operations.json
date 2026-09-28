@@ -22,5 +22,11 @@
     "savedRecords": 1,
     "serverTimestamp": "2026-09-28T19:14:05.058Z",
     "syncedAt": "2026-09-28T19:14:05.059Z"
+  },
+  "EHRJ-SYNC-20260928-TEA-TEWURK": {
+    "operationType": "TEACHER_ATTENDANCE",
+    "savedRecords": 1,
+    "serverTimestamp": "2026-09-28T19:37:39.643Z",
+    "syncedAt": "2026-09-28T19:37:39.643Z"
   }
 }

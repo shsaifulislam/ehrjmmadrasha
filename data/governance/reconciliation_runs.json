@@ -1,5 +1,3119 @@
 [
   {
+    "id": "REC-20260929-8688",
+    "timestamp": "2026-09-28T19:34:15.736Z",
+    "totalChecks": 178,
+    "matchedCount": 123,
+    "mismatchCount": 55,
+    "reviewRequiredCount": 0,
+    "domainSummaries": {
+      "finance": {
+        "total": 120,
+        "matched": 106,
+        "mismatches": 14
+      },
+      "library": {
+        "total": 9,
+        "matched": 9,
+        "mismatches": 0
+      },
+      "inventory": {
+        "total": 41,
+        "matched": 0,
+        "mismatches": 41
+      },
+      "payroll": {
+        "total": 8,
+        "matched": 8,
+        "mismatches": 0
+      }
+    },
+    "items": [
+      {
+        "id": "FIN-INV-INV-2026-0001",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-0001",
+        "titleBn": "ইনভয়েস পরিশোধিত অর্থ ও পেমেন্ট রসিদ গরমিল (INV-2026-0001)",
+        "status": "MISMATCH",
+        "difference": 1200,
+        "detailsA": {
+          "invoiceNumber": "INV-2026-0001",
+          "paidAmount": 1200
+        },
+        "detailsB": {
+          "totalReceipts": 0,
+          "totalRefunds": 0,
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েসে ৳1200 পরিশোধিত দেখানো হয়েছে, কিন্তু রসিদ বইয়ে ৳0 জমা রয়েছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-0002",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-0002",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-0002)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-0002",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00003",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00003",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00003)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00003",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00004",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00004",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00004)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00004",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00005",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00005",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00005)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00005",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00006",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00006",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00006)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00006",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00007",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00007",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00007)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00007",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00008",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00008",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00008)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00008",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00009",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00009",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00009)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00009",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00010",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00010",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00010)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00010",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00011",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00011",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00011)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00011",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00012",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00012",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00012)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00012",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00013",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00013",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00013)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00013",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00014",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00014",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00014)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00014",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790451938374",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790451938374",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790451938374)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790451938374",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00016",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00016",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00016)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00016",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00017",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00017",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00017)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00017",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00018",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00018",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00018)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00018",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00019",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00019",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00019)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00019",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00020",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00020",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00020)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00020",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00021",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00021",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00021)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00021",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00022",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00022",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00022)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00022",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00023",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00023",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00023)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00023",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790452067801",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790452067801",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790452067801)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790452067801",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00025",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00025",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00025)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00025",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00026",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00026",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00026)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00026",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00027",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00027",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00027)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00027",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790452097221",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790452097221",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790452097221)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790452097221",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00029",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00029",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00029)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00029",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00030",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00030",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00030)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00030",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00031",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00031",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00031)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00031",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790452134452",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790452134452",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790452134452)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790452134452",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00033",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00033",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00033)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00033",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00034",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00034",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00034)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00034",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00035",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00035",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00035)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00035",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790452250685",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790452250685",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790452250685)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790452250685",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00037",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00037",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00037)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00037",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00038",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00038",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00038)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00038",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00039",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00039",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00039)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00039",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00040",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00040",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00040)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00040",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00041",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00041",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00041)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00041",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790452316628",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790452316628",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790452316628)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790452316628",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00043",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00043",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00043)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00043",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00044",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00044",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00044)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00044",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00045",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00045",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00045)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00045",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00046",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00046",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00046)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00046",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00047",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00047",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00047)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00047",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790453527107",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790453527107",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790453527107)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790453527107",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00049",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00049",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00049)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00049",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00050",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00050",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00050)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00050",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00051",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00051",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00051)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00051",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00052",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00052",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00052)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00052",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00053",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00053",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00053)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00053",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790489170238",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790489170238",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790489170238)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790489170238",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00055",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00055",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00055)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00055",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00056",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00056",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00056)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00056",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00057",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00057",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00057)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00057",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790489359678",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790489359678",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790489359678)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790489359678",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00059",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00059",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00059)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00059",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00060",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00060",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00060)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00060",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00061",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00061",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00061)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00061",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00062",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00062",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00062)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00062",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00063",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00063",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00063)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00063",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790491984474",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790491984474",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790491984474)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790491984474",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00065",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00065",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00065)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00065",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00066",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00066",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00066)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00066",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-TEST-1790494031929",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-TEST-1790494031929",
+        "titleBn": "ইনভয়েস পরিশোধিত অর্থ ও পেমেন্ট রসিদ গরমিল (EHRJ-INV-TEST-1790494031929)",
+        "status": "MISMATCH",
+        "difference": 5000,
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-TEST-1790494031929",
+          "paidAmount": 5000
+        },
+        "detailsB": {
+          "totalReceipts": 0,
+          "totalRefunds": 0,
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েসে ৳5000 পরিশোধিত দেখানো হয়েছে, কিন্তু রসিদ বইয়ে ৳0 জমা রয়েছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-TEST-1790494063187",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-TEST-1790494063187",
+        "titleBn": "ইনভয়েস পরিশোধিত অর্থ ও পেমেন্ট রসিদ গরমিল (EHRJ-INV-TEST-1790494063187)",
+        "status": "MISMATCH",
+        "difference": 5000,
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-TEST-1790494063187",
+          "paidAmount": 5000
+        },
+        "detailsB": {
+          "totalReceipts": 0,
+          "totalRefunds": 0,
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েসে ৳5000 পরিশোধিত দেখানো হয়েছে, কিন্তু রসিদ বইয়ে ৳0 জমা রয়েছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-TEST-1790494121390",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-TEST-1790494121390",
+        "titleBn": "ইনভয়েস পরিশোধিত অর্থ ও পেমেন্ট রসিদ গরমিল (EHRJ-INV-TEST-1790494121390)",
+        "status": "MISMATCH",
+        "difference": 5000,
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-TEST-1790494121390",
+          "paidAmount": 5000
+        },
+        "detailsB": {
+          "totalReceipts": 0,
+          "totalRefunds": 0,
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েসে ৳5000 পরিশোধিত দেখানো হয়েছে, কিন্তু রসিদ বইয়ে ৳0 জমা রয়েছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-TEST-1790494224622",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-TEST-1790494224622",
+        "titleBn": "ইনভয়েস পরিশোধিত অর্থ ও পেমেন্ট রসিদ গরমিল (EHRJ-INV-TEST-1790494224622)",
+        "status": "MISMATCH",
+        "difference": 5000,
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-TEST-1790494224622",
+          "paidAmount": 5000
+        },
+        "detailsB": {
+          "totalReceipts": 0,
+          "totalRefunds": 0,
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েসে ৳5000 পরিশোধিত দেখানো হয়েছে, কিন্তু রসিদ বইয়ে ৳0 জমা রয়েছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-TEST-1790494837880",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-TEST-1790494837880",
+        "titleBn": "ইনভয়েস পরিশোধিত অর্থ ও পেমেন্ট রসিদ গরমিল (EHRJ-INV-TEST-1790494837880)",
+        "status": "MISMATCH",
+        "difference": 5000,
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-TEST-1790494837880",
+          "paidAmount": 5000
+        },
+        "detailsB": {
+          "totalReceipts": 0,
+          "totalRefunds": 0,
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েসে ৳5000 পরিশোধিত দেখানো হয়েছে, কিন্তু রসিদ বইয়ে ৳0 জমা রয়েছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00072",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00072",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00072)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00072",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00073",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00073",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00073)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00073",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00074",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00074",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00074)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00074",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790494857298",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790494857298",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790494857298)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790494857298",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-TR-202611-07AF51B9",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-TR-202611-07AF51B9",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-TR-202611-07AF51B9)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-TR-202611-07AF51B9",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-TR-202611-0C16522F",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-TR-202611-0C16522F",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-TR-202611-0C16522F)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-TR-202611-0C16522F",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-TR-202611-0DE8587A",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-TR-202611-0DE8587A",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-TR-202611-0DE8587A)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-TR-202611-0DE8587A",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-TEST-1790529689279",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-TEST-1790529689279",
+        "titleBn": "ইনভয়েস পরিশোধিত অর্থ ও পেমেন্ট রসিদ গরমিল (EHRJ-INV-TEST-1790529689279)",
+        "status": "MISMATCH",
+        "difference": 5000,
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-TEST-1790529689279",
+          "paidAmount": 5000
+        },
+        "detailsB": {
+          "totalReceipts": 0,
+          "totalRefunds": 0,
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েসে ৳5000 পরিশোধিত দেখানো হয়েছে, কিন্তু রসিদ বইয়ে ৳0 জমা রয়েছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-TEST-1790547798296",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-TEST-1790547798296",
+        "titleBn": "ইনভয়েস পরিশোধিত অর্থ ও পেমেন্ট রসিদ গরমিল (EHRJ-INV-TEST-1790547798296)",
+        "status": "MISMATCH",
+        "difference": 5000,
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-TEST-1790547798296",
+          "paidAmount": 5000
+        },
+        "detailsB": {
+          "totalReceipts": 0,
+          "totalRefunds": 0,
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েসে ৳5000 পরিশোধিত দেখানো হয়েছে, কিন্তু রসিদ বইয়ে ৳0 জমা রয়েছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00081",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00081",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00081)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00081",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00082",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00082",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00082)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00082",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-2026-00083",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-00083",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-2026-00083)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-2026-00083",
+          "paidAmount": 1000
+        },
+        "detailsB": {
+          "netCalculated": 1000
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-IDEM-1790547841752",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-IDEM-1790547841752",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-IDEM-1790547841752)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-IDEM-1790547841752",
+          "paidAmount": 300
+        },
+        "detailsB": {
+          "netCalculated": 300
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-TEST-1790575135591",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-TEST-1790575135591",
+        "titleBn": "ইনভয়েস পরিশোধিত অর্থ ও পেমেন্ট রসিদ গরমিল (EHRJ-INV-TEST-1790575135591)",
+        "status": "MISMATCH",
+        "difference": 5000,
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-TEST-1790575135591",
+          "paidAmount": 5000
+        },
+        "detailsB": {
+          "totalReceipts": 0,
+          "totalRefunds": 0,
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েসে ৳5000 পরিশোধিত দেখানো হয়েছে, কিন্তু রসিদ বইয়ে ৳0 জমা রয়েছে।"
+      },
+      {
+        "id": "FIN-INV-INV-P14-ST1-001",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-P14-ST1-001",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-P14-ST1-001)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-P14-ST1-001",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-P14-ST2-001",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-P14-ST2-001",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-P14-ST2-001)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-P14-ST2-001",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00088",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00088",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00088)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00088",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00089",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00089",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00089)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00089",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00090",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00090",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00090)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00090",
+          "paidAmount": 500
+        },
+        "detailsB": {
+          "netCalculated": 500
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00091",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00091",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00091)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00091",
+          "paidAmount": 500
+        },
+        "detailsB": {
+          "netCalculated": 500
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00092",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00092",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00092)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00092",
+          "paidAmount": 500
+        },
+        "detailsB": {
+          "netCalculated": 500
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00093",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00093",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00093)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00093",
+          "paidAmount": 500
+        },
+        "detailsB": {
+          "netCalculated": 500
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00094",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00094",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00094)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00094",
+          "paidAmount": 500
+        },
+        "detailsB": {
+          "netCalculated": 500
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00095",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00095",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00095)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00095",
+          "paidAmount": 500
+        },
+        "detailsB": {
+          "netCalculated": 500
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00096",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00096",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00096)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00096",
+          "paidAmount": 500
+        },
+        "detailsB": {
+          "netCalculated": 500
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00097",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00097",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00097)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00097",
+          "paidAmount": 500
+        },
+        "detailsB": {
+          "netCalculated": 500
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0039-5285",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0039-5285",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0039-5285)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0039-5285",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0040-5297",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0040-5297",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0040-5297)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0040-5297",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0041-0696",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0041-0696",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0041-0696)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0041-0696",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0042-0704",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0042-0704",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0042-0704)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0042-0704",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0043-6584",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0043-6584",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0043-6584)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0043-6584",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0044-6590",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0044-6590",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0044-6590)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0044-6590",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-2026-00104",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-2026-00104",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-2026-00104)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-2026-00104",
+          "paidAmount": 500
+        },
+        "detailsB": {
+          "netCalculated": 500
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0046-0998",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0046-0998",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0046-0998)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0046-0998",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0047-1003",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0047-1003",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0047-1003)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0047-1003",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0048-5597",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0048-5597",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0048-5597)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0048-5597",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0049-5622",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0049-5622",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0049-5622)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0049-5622",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0050-7259",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0050-7259",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0050-7259)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0050-7259",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0051-7267",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0051-7267",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0051-7267)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0051-7267",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0052-0726",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0052-0726",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0052-0726)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0052-0726",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-EHRJ-INV-OPN-0053-0742",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "EHRJ-INV-OPN-0053-0742",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (EHRJ-INV-OPN-0053-0742)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "EHRJ-INV-OPN-0053-0742",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-MERGE-TEST-1790621178534",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-MERGE-TEST-1790621178534",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-MERGE-TEST-1790621178534)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-MERGE-TEST-1790621178534",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-MERGE-TEST-1790621258211",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-MERGE-TEST-1790621258211",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-MERGE-TEST-1790621258211)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-MERGE-TEST-1790621258211",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-INV-INV-MERGE-TEST-1790624055430",
+        "domain": "FINANCE",
+        "subsystemA": "FeeInvoice.paidAmount",
+        "subsystemB": "PaymentReceipt.amount (Sum)",
+        "recordIdentifier": "INV-MERGE-TEST-1790624055430",
+        "titleBn": "ইনভয়েস ও রসিদ সামঞ্জস্যপূর্ণ (INV-MERGE-TEST-1790624055430)",
+        "status": "MATCHED",
+        "detailsA": {
+          "invoiceNumber": "INV-MERGE-TEST-1790624055430",
+          "paidAmount": 0
+        },
+        "detailsB": {
+          "netCalculated": 0
+        },
+        "notesBn": "ইনভয়েস ও রসিদের অংক সম্পূর্ণ মিলে গেছে।"
+      },
+      {
+        "id": "FIN-FUND-GENERAL",
+        "domain": "FINANCE",
+        "subsystemA": "CashFund.currentBalance",
+        "subsystemB": "CashTransaction (Ledger Sum)",
+        "recordIdentifier": "GENERAL",
+        "titleBn": "ফান্ড ব্যালেন্স ও ক্যাশ লেনদেন ব্যবধান (সাধারণ প্রশাসনিক তহবিল)",
+        "status": "MISMATCH",
+        "difference": 250000,
+        "detailsA": {
+          "fundCode": "GENERAL",
+          "currentBalance": 121600
+        },
+        "detailsB": {
+          "ledgerSum": -128400
+        },
+        "notesBn": "ফান্ড ব্যালেন্স ৳121600, তবে ক্যাশ লেনদেনের যোগফল ৳-128400 (ব্যবধান: ৳250000)। প্রারম্ভিক জের সমন্বয় প্রয়োজন।"
+      },
+      {
+        "id": "FIN-FUND-LILLAH",
+        "domain": "FINANCE",
+        "subsystemA": "CashFund.currentBalance",
+        "subsystemB": "CashTransaction (Ledger Sum)",
+        "recordIdentifier": "LILLAH",
+        "titleBn": "ফান্ড ব্যালেন্স ও ক্যাশ লেনদেন ব্যবধান (লিল্লাহ বোর্ডিং ও খাদ্য তহবিল)",
+        "status": "MISMATCH",
+        "difference": 380000,
+        "detailsA": {
+          "fundCode": "LILLAH",
+          "currentBalance": 380000
+        },
+        "detailsB": {
+          "ledgerSum": 0
+        },
+        "notesBn": "ফান্ড ব্যালেন্স ৳380000, তবে ক্যাশ লেনদেনের যোগফল ৳0 (ব্যবধান: ৳380000)। প্রারম্ভিক জের সমন্বয় প্রয়োজন।"
+      },
+      {
+        "id": "FIN-FUND-ZAKAT",
+        "domain": "FINANCE",
+        "subsystemA": "CashFund.currentBalance",
+        "subsystemB": "CashTransaction (Ledger Sum)",
+        "recordIdentifier": "ZAKAT",
+        "titleBn": "ফান্ড ব্যালেন্স ও ক্যাশ লেনদেন ব্যবধান (যাকাত ও দরিদ্র কল্যাণ তহবিল)",
+        "status": "MISMATCH",
+        "difference": 520000,
+        "detailsA": {
+          "fundCode": "ZAKAT",
+          "currentBalance": 508000
+        },
+        "detailsB": {
+          "ledgerSum": -12000
+        },
+        "notesBn": "ফান্ড ব্যালেন্স ৳508000, তবে ক্যাশ লেনদেনের যোগফল ৳-12000 (ব্যবধান: ৳520000)। প্রারম্ভিক জের সমন্বয় প্রয়োজন।"
+      },
+      {
+        "id": "FIN-FUND-CONSTRUCTION",
+        "domain": "FINANCE",
+        "subsystemA": "CashFund.currentBalance",
+        "subsystemB": "CashTransaction (Ledger Sum)",
+        "recordIdentifier": "CONSTRUCTION",
+        "titleBn": "ফান্ড ব্যালেন্স ও ক্যাশ লেনদেন ব্যবধান (মাদ্রাসা ও মসজিদ নির্মাণ তহবিল)",
+        "status": "MISMATCH",
+        "difference": 450000,
+        "detailsA": {
+          "fundCode": "CONSTRUCTION",
+          "currentBalance": 450000
+        },
+        "detailsB": {
+          "ledgerSum": 0
+        },
+        "notesBn": "ফান্ড ব্যালেন্স ৳450000, তবে ক্যাশ লেনদেনের যোগফল ৳0 (ব্যবধান: ৳450000)। প্রারম্ভিক জের সমন্বয় প্রয়োজন।"
+      },
+      {
+        "id": "FIN-FUND-ORPHAN_SUPPORT",
+        "domain": "FINANCE",
+        "subsystemA": "CashFund.currentBalance",
+        "subsystemB": "CashTransaction (Ledger Sum)",
+        "recordIdentifier": "ORPHAN_SUPPORT",
+        "titleBn": "ফান্ড ব্যালেন্স ও ক্যাশ লেনদেন ব্যবধান (এতিম ছাত্র স্পন্সরশিপ ফান্ড)",
+        "status": "MISMATCH",
+        "difference": 190000,
+        "detailsA": {
+          "fundCode": "ORPHAN_SUPPORT",
+          "currentBalance": 190000
+        },
+        "detailsB": {
+          "ledgerSum": 0
+        },
+        "notesBn": "ফান্ড ব্যালেন্স ৳190000, তবে ক্যাশ লেনদেনের যোগফল ৳0 (ব্যবধান: ৳190000)। প্রারম্ভিক জের সমন্বয় প্রয়োজন।"
+      },
+      {
+        "id": "LIB-COPY-EHRJ-LIB-2026-000001",
+        "domain": "LIBRARY",
+        "subsystemA": "LibraryBookCopy.status",
+        "subsystemB": "LibraryIssue (Active Record)",
+        "recordIdentifier": "EHRJ-LIB-2026-000001",
+        "titleBn": "কিতাব সার্কুলেশন সমতা (আল-হিদায়া শরহে বিদায়াতুল মুবতাদী (১ম খণ্ড))",
+        "status": "MATCHED",
+        "detailsA": {
+          "status": "AVAILABLE"
+        },
+        "detailsB": {
+          "activeIssues": 0
+        },
+        "notesBn": "কপি ও সার্কুলেশন খতিয়ান সম্পূর্ণ সামঞ্জস্যপূর্ণ।"
+      },
+      {
+        "id": "LIB-COPY-EHRJ-LIB-2026-000002",
+        "domain": "LIBRARY",
+        "subsystemA": "LibraryBookCopy.status",
+        "subsystemB": "LibraryIssue (Active Record)",
+        "recordIdentifier": "EHRJ-LIB-2026-000002",
+        "titleBn": "কিতাব সার্কুলেশন সমতা (আল-হিদায়া শরহে বিদায়াতুল মুবতাদী (১ম খণ্ড))",
+        "status": "MATCHED",
+        "detailsA": {
+          "status": "AVAILABLE"
+        },
+        "detailsB": {
+          "activeIssues": 0
+        },
+        "notesBn": "কপি ও সার্কুলেশন খতিয়ান সম্পূর্ণ সামঞ্জস্যপূর্ণ।"
+      },
+      {
+        "id": "LIB-COPY-EHRJ-LIB-2026-000003",
+        "domain": "LIBRARY",
+        "subsystemA": "LibraryBookCopy.status",
+        "subsystemB": "LibraryIssue (Active Record)",
+        "recordIdentifier": "EHRJ-LIB-2026-000003",
+        "titleBn": "কিতাব সার্কুলেশন সমতা (আল-হিদায়া শরহে বিদায়াতুল মুবতাদী (১ম খণ্ড))",
+        "status": "MATCHED",
+        "detailsA": {
+          "status": "AVAILABLE"
+        },
+        "detailsB": {
+          "activeIssues": 0
+        },
+        "notesBn": "কপি ও সার্কুলেশন খতিয়ান সম্পূর্ণ সামঞ্জস্যপূর্ণ।"
+      },
+      {
+        "id": "LIB-COPY-EHRJ-LIB-2026-000004",
+        "domain": "LIBRARY",
+        "subsystemA": "LibraryBookCopy.status",
+        "subsystemB": "LibraryIssue (Active Record)",
+        "recordIdentifier": "EHRJ-LIB-2026-000004",
+        "titleBn": "কিতাব সার্কুলেশন সমতা (আল-হিদায়া শরহে বিদায়াতুল মুবতাদী (১ম খণ্ড))",
+        "status": "MATCHED",
+        "detailsA": {
+          "status": "AVAILABLE"
+        },
+        "detailsB": {
+          "activeIssues": 0
+        },
+        "notesBn": "কপি ও সার্কুলেশন খতিয়ান সম্পূর্ণ সামঞ্জস্যপূর্ণ।"
+      },
+      {
+        "id": "LIB-COPY-EHRJ-LIB-2026-000005",
+        "domain": "LIBRARY",
+        "subsystemA": "LibraryBookCopy.status",
+        "subsystemB": "LibraryIssue (Active Record)",
+        "recordIdentifier": "EHRJ-LIB-2026-000005",
+        "titleBn": "কিতাব সার্কুলেশন সমতা (আল-হিদায়া শরহে বিদায়াতুল মুবতাদী (১ম খণ্ড))",
+        "status": "MATCHED",
+        "detailsA": {
+          "status": "LOST"
+        },
+        "detailsB": {
+          "activeIssues": 0
+        },
+        "notesBn": "কপি ও সার্কুলেশন খতিয়ান সম্পূর্ণ সামঞ্জস্যপূর্ণ।"
+      },
+      {
+        "id": "LIB-COPY-EHRJ-LIB-2026-000006",
+        "domain": "LIBRARY",
+        "subsystemA": "LibraryBookCopy.status",
+        "subsystemB": "LibraryIssue (Active Record)",
+        "recordIdentifier": "EHRJ-LIB-2026-000006",
+        "titleBn": "কিতাব সার্কুলেশন সমতা (আল-হিদায়া শরহে বিদায়াতুল মুবতাদী (১ম খণ্ড))",
+        "status": "MATCHED",
+        "detailsA": {
+          "status": "REPAIR"
+        },
+        "detailsB": {
+          "activeIssues": 0
+        },
+        "notesBn": "কপি ও সার্কুলেশন খতিয়ান সম্পূর্ণ সামঞ্জস্যপূর্ণ।"
+      },
+      {
+        "id": "LIB-COPY-EHRJ-LIB-2026-000007",
+        "domain": "LIBRARY",
+        "subsystemA": "LibraryBookCopy.status",
+        "subsystemB": "LibraryIssue (Active Record)",
+        "recordIdentifier": "EHRJ-LIB-2026-000007",
+        "titleBn": "কিতাব সার্কুলেশন সমতা (আল-হিদায়া শরহে বিদায়াতুল মুবতাদী (১ম খণ্ড))",
+        "status": "MATCHED",
+        "detailsA": {
+          "status": "AVAILABLE"
+        },
+        "detailsB": {
+          "activeIssues": 0
+        },
+        "notesBn": "কপি ও সার্কুলেশন খতিয়ান সম্পূর্ণ সামঞ্জস্যপূর্ণ।"
+      },
+      {
+        "id": "LIB-COPY-EHRJ-LIB-2026-000008",
+        "domain": "LIBRARY",
+        "subsystemA": "LibraryBookCopy.status",
+        "subsystemB": "LibraryIssue (Active Record)",
+        "recordIdentifier": "EHRJ-LIB-2026-000008",
+        "titleBn": "কিতাব সার্কুলেশন সমতা (আল-হিদায়া শরহে বিদায়াতুল মুবতাদী (১ম খণ্ড))",
+        "status": "MATCHED",
+        "detailsA": {
+          "status": "AVAILABLE"
+        },
+        "detailsB": {
+          "activeIssues": 0
+        },
+        "notesBn": "কপি ও সার্কুলেশন খতিয়ান সম্পূর্ণ সামঞ্জস্যপূর্ণ।"
+      },
+      {
+        "id": "LIB-COPY-EHRJ-LIB-2026-000009",
+        "domain": "LIBRARY",
+        "subsystemA": "LibraryBookCopy.status",
+        "subsystemB": "LibraryIssue (Active Record)",
+        "recordIdentifier": "EHRJ-LIB-2026-000009",
+        "titleBn": "কিতাব সার্কুলেশন সমতা (আল-হিদায়া শরহে বিদায়াতুল মুবতাদী (১ম খণ্ড))",
+        "status": "MATCHED",
+        "detailsA": {
+          "status": "AVAILABLE"
+        },
+        "detailsB": {
+          "activeIssues": 0
+        },
+        "notesBn": "কপি ও সার্কুলেশন খতিয়ান সম্পূর্ণ সামঞ্জস্যপূর্ণ।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0006",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0006",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 55,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0006",
+          "recordedBalance": 105
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 105, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 55)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0009",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0009",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": -12,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0009",
+          "recordedBalance": 38
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 38, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: -12)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0009",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0009",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0009",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0012",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0012",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0012",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0012",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0012",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0012",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0016",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0016",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0016",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0016",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0016",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0016",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0020",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0020",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0020",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0020",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0020",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0020",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0024",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0024",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (অফিস কলম বক্স)",
+        "status": "MISMATCH",
+        "difference": 23,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0024",
+          "recordedBalance": 63
+        },
+        "detailsB": {
+          "calculatedFromLedger": 40
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 63, তবে ট্রানজেকশন বই অনুযায়ী 40 (ব্যবধান: 23)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0024",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0024",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (অফিস কলম বক্স)",
+        "status": "MISMATCH",
+        "difference": 15,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0024",
+          "recordedBalance": 15
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 15, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 15)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0028",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0028",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0028",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0028",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0028",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0028",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0032",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0032",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (অফিস কলম বক্স)",
+        "status": "MISMATCH",
+        "difference": 23,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0032",
+          "recordedBalance": 63
+        },
+        "detailsB": {
+          "calculatedFromLedger": 40
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 63, তবে ট্রানজেকশন বই অনুযায়ী 40 (ব্যবধান: 23)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0032",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0032",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (অফিস কলম বক্স)",
+        "status": "MISMATCH",
+        "difference": 15,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0032",
+          "recordedBalance": 15
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 15, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 15)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0034",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0034",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (হোয়াইটবোর্ড মার্কার বক্স)",
+        "status": "MISMATCH",
+        "difference": -5,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0034",
+          "recordedBalance": 45
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 45, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: -5)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0034",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0034",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (হোয়াইটবোর্ড মার্কার বক্স)",
+        "status": "MISMATCH",
+        "difference": 10,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0034",
+          "recordedBalance": 10
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 10, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 10)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0035",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0035",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (হোয়াইটবোর্ড মার্কার বক্স)",
+        "status": "MISMATCH",
+        "difference": -6,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0035",
+          "recordedBalance": 44
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 44, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: -6)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0035",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0035",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (হোয়াইটবোর্ড মার্কার বক্স)",
+        "status": "MISMATCH",
+        "difference": 10,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0035",
+          "recordedBalance": 10
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 10, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 10)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0036",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0036",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (হোয়াইটবোর্ড মার্কার বক্স)",
+        "status": "MISMATCH",
+        "difference": 22,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0036",
+          "recordedBalance": 72
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 72, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 22)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0036",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0036",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (হোয়াইটবোর্ড মার্কার বক্স)",
+        "status": "MISMATCH",
+        "difference": 10,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0036",
+          "recordedBalance": 10
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 10, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 10)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0037",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0037",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (হোয়াইটবোর্ড মার্কার বক্স)",
+        "status": "MISMATCH",
+        "difference": 22,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0037",
+          "recordedBalance": 72
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 72, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 22)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0037",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0037",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (হোয়াইটবোর্ড মার্কার বক্স)",
+        "status": "MISMATCH",
+        "difference": 10,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0037",
+          "recordedBalance": 10
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 10, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 10)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0038",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0038",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (হোয়াইটবোর্ড মার্কার বক্স)",
+        "status": "MISMATCH",
+        "difference": 22,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0038",
+          "recordedBalance": 72
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 72, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 22)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0038",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0038",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (হোয়াইটবোর্ড মার্কার বক্স)",
+        "status": "MISMATCH",
+        "difference": 10,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0038",
+          "recordedBalance": 10
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 10, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 10)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0041",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0041",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (অফিস কলম বক্স)",
+        "status": "MISMATCH",
+        "difference": 23,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0041",
+          "recordedBalance": 63
+        },
+        "detailsB": {
+          "calculatedFromLedger": 40
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 63, তবে ট্রানজেকশন বই অনুযায়ী 40 (ব্যবধান: 23)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0041",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0041",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (অফিস কলম বক্স)",
+        "status": "MISMATCH",
+        "difference": 15,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0041",
+          "recordedBalance": 15
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 15, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 15)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0045",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0045",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0045",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0045",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0045",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0045",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0049",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0049",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0049",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0049",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0049",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0049",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0053",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0053",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0053",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0053",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0053",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0053",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0057",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0057",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0057",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0057",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0057",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0057",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0061",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0061",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0061",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0061",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0061",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0061",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0065",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0065",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0065",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0065",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0065",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0065",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0069",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0069",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 36,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0069",
+          "recordedBalance": 86
+        },
+        "detailsB": {
+          "calculatedFromLedger": 50
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 86, তবে ট্রানজেকশন বই অনুযায়ী 50 (ব্যবধান: 36)।"
+      },
+      {
+        "id": "INV-STOCK-EHRJ-INV-2026-0069",
+        "domain": "INVENTORY",
+        "subsystemA": "InventoryStockBalance.currentBalance",
+        "subsystemB": "InventoryTransaction (Sum)",
+        "recordIdentifier": "EHRJ-INV-2026-0069",
+        "titleBn": "মালামাল স্টক ব্যালেন্স ব্যবধান (সাদা খাতা রিম (A4))",
+        "status": "MISMATCH",
+        "difference": 20,
+        "detailsA": {
+          "itemCode": "EHRJ-INV-2026-0069",
+          "recordedBalance": 20
+        },
+        "detailsB": {
+          "calculatedFromLedger": 0
+        },
+        "notesBn": "সংরক্ষিত স্টক ব্যালেন্স 20, তবে ট্রানজেকশন বই অনুযায়ী 0 (ব্যবধান: 20)।"
+      },
+      {
+        "id": "PAY-REC-EHRJ-PAY-2026-00009",
+        "domain": "PAYROLL",
+        "subsystemA": "PayrollRecord.netSalary",
+        "subsystemB": "Calculated Formula",
+        "recordIdentifier": "EHRJ-PAY-2026-00009",
+        "titleBn": "বেতন ভাউচার গাণিতিক নির্ভুলতা (EHRJ-PAY-2026-00009)",
+        "status": "MATCHED",
+        "detailsA": {
+          "recordedNet": 16500
+        },
+        "detailsB": {
+          "calculatedNet": 16500
+        },
+        "notesBn": "বেতন ভাউচারের নিট বেতন সম্পূর্ণ নির্ভুল।"
+      },
+      {
+        "id": "PAY-REC-EHRJ-PAY-2026-09-EHRJ-EMP-2026-0006",
+        "domain": "PAYROLL",
+        "subsystemA": "PayrollRecord.netSalary",
+        "subsystemB": "Calculated Formula",
+        "recordIdentifier": "EHRJ-PAY-2026-09-EHRJ-EMP-2026-0006",
+        "titleBn": "বেতন ভাউচার গাণিতিক নির্ভুলতা (EHRJ-PAY-2026-09-EHRJ-EMP-2026-0006)",
+        "status": "MATCHED",
+        "detailsA": {
+          "recordedNet": 25000
+        },
+        "detailsB": {
+          "calculatedNet": 25000
+        },
+        "notesBn": "বেতন ভাউচারের নিট বেতন সম্পূর্ণ নির্ভুল।"
+      },
+      {
+        "id": "PAY-REC-EHRJ-PAY-2026-09-EHRJ-EMP-2026-0009",
+        "domain": "PAYROLL",
+        "subsystemA": "PayrollRecord.netSalary",
+        "subsystemB": "Calculated Formula",
+        "recordIdentifier": "EHRJ-PAY-2026-09-EHRJ-EMP-2026-0009",
+        "titleBn": "বেতন ভাউচার গাণিতিক নির্ভুলতা (EHRJ-PAY-2026-09-EHRJ-EMP-2026-0009)",
+        "status": "MATCHED",
+        "detailsA": {
+          "recordedNet": 25000
+        },
+        "detailsB": {
+          "calculatedNet": 25000
+        },
+        "notesBn": "বেতন ভাউচারের নিট বেতন সম্পূর্ণ নির্ভুল।"
+      },
+      {
+        "id": "PAY-REC-EHRJ-PAY-2026-09-EHRJ-EMP-2026-0012",
+        "domain": "PAYROLL",
+        "subsystemA": "PayrollRecord.netSalary",
+        "subsystemB": "Calculated Formula",
+        "recordIdentifier": "EHRJ-PAY-2026-09-EHRJ-EMP-2026-0012",
+        "titleBn": "বেতন ভাউচার গাণিতিক নির্ভুলতা (EHRJ-PAY-2026-09-EHRJ-EMP-2026-0012)",
+        "status": "MATCHED",
+        "detailsA": {
+          "recordedNet": 25000
+        },
+        "detailsB": {
+          "calculatedNet": 25000
+        },
+        "notesBn": "বেতন ভাউচারের নিট বেতন সম্পূর্ণ নির্ভুল।"
+      },
+      {
+        "id": "PAY-REC-EHRJ-PAY-2026-09-EHRJ-EMP-2026-0015",
+        "domain": "PAYROLL",
+        "subsystemA": "PayrollRecord.netSalary",
+        "subsystemB": "Calculated Formula",
+        "recordIdentifier": "EHRJ-PAY-2026-09-EHRJ-EMP-2026-0015",
+        "titleBn": "বেতন ভাউচার গাণিতিক নির্ভুলতা (EHRJ-PAY-2026-09-EHRJ-EMP-2026-0015)",
+        "status": "MATCHED",
+        "detailsA": {
+          "recordedNet": 25000
+        },
+        "detailsB": {
+          "calculatedNet": 25000
+        },
+        "notesBn": "বেতন ভাউচারের নিট বেতন সম্পূর্ণ নির্ভুল।"
+      },
+      {
+        "id": "PAY-REC-EHRJ-PAY-2026-09-EHRJ-EMP-2026-0018",
+        "domain": "PAYROLL",
+        "subsystemA": "PayrollRecord.netSalary",
+        "subsystemB": "Calculated Formula",
+        "recordIdentifier": "EHRJ-PAY-2026-09-EHRJ-EMP-2026-0018",
+        "titleBn": "বেতন ভাউচার গাণিতিক নির্ভুলতা (EHRJ-PAY-2026-09-EHRJ-EMP-2026-0018)",
+        "status": "MATCHED",
+        "detailsA": {
+          "recordedNet": 25000
+        },
+        "detailsB": {
+          "calculatedNet": 25000
+        },
+        "notesBn": "বেতন ভাউচারের নিট বেতন সম্পূর্ণ নির্ভুল।"
+      },
+      {
+        "id": "PAY-REC-EHRJ-PAY-2026-09-EHRJ-EMP-2026-0021",
+        "domain": "PAYROLL",
+        "subsystemA": "PayrollRecord.netSalary",
+        "subsystemB": "Calculated Formula",
+        "recordIdentifier": "EHRJ-PAY-2026-09-EHRJ-EMP-2026-0021",
+        "titleBn": "বেতন ভাউচার গাণিতিক নির্ভুলতা (EHRJ-PAY-2026-09-EHRJ-EMP-2026-0021)",
+        "status": "MATCHED",
+        "detailsA": {
+          "recordedNet": 25000
+        },
+        "detailsB": {
+          "calculatedNet": 25000
+        },
+        "notesBn": "বেতন ভাউচারের নিট বেতন সম্পূর্ণ নির্ভুল।"
+      },
+      {
+        "id": "PAY-REC-EHRJ-PAY-2026-09-EHRJ-EMP-2026-0024",
+        "domain": "PAYROLL",
+        "subsystemA": "PayrollRecord.netSalary",
+        "subsystemB": "Calculated Formula",
+        "recordIdentifier": "EHRJ-PAY-2026-09-EHRJ-EMP-2026-0024",
+        "titleBn": "বেতন ভাউচার গাণিতিক নির্ভুলতা (EHRJ-PAY-2026-09-EHRJ-EMP-2026-0024)",
+        "status": "MATCHED",
+        "detailsA": {
+          "recordedNet": 25000
+        },
+        "detailsB": {
+          "calculatedNet": 25000
+        },
+        "notesBn": "বেতন ভাউচারের নিট বেতন সম্পূর্ণ নির্ভুল।"
+      }
+    ]
+  },
+  {
     "id": "REC-20260929-1517",
     "timestamp": "2026-09-28T19:12:37.855Z",
     "totalChecks": 178,

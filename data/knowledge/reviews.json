@@ -214,5 +214,32 @@
     "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
     "actorRole": "ADMIN",
     "timestamp": "2026-09-28T19:14:14.300Z"
+  },
+  {
+    "id": "rev-1790624268782",
+    "documentId": "doc-1790624268777-qx5zy",
+    "action": "SUBMITTED",
+    "status": "UNDER_REVIEW",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T19:37:48.779Z"
+  },
+  {
+    "id": "rev-1790624268785",
+    "documentId": "doc-1790624268777-qx5zy",
+    "action": "APPROVED",
+    "status": "APPROVED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T19:37:48.783Z"
+  },
+  {
+    "id": "rev-1790624268788",
+    "documentId": "doc-1790624268777-qx5zy",
+    "action": "PUBLISHED",
+    "status": "PUBLISHED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T19:37:48.786Z"
   }
 ]

@@ -1,0 +1,73 @@
+[
+  {
+    "eventId": "EVT-2026-000001",
+    "eventType": "TEST_EVENT_PING",
+    "occurredAt": "2026-09-28T19:30:50.212Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "OPERATIONS",
+    "entityType": "SystemTest",
+    "entityId": "SYS-TEST-001",
+    "payload": {
+      "message": "Hello EHRJ Event Bus",
+      "testValue": 42
+    },
+    "correlationId": "EVT-2026-000001",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "evt_TEST_EVENT_PING_SYS-TEST-001_3d7972095d6b"
+  },
+  {
+    "eventId": "EVT-2026-000002",
+    "eventType": "TEST_EVENT_PING",
+    "occurredAt": "2026-09-28T19:32:27.824Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "OPERATIONS",
+    "entityType": "SystemTest",
+    "entityId": "SYS-TEST-1790623947823",
+    "payload": {
+      "message": "Hello EHRJ Event Bus",
+      "testValue": 42,
+      "timestamp": 1790623947823
+    },
+    "correlationId": "EVT-2026-000002",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "evt_TEST_EVENT_PING_SYS-TEST-1790623947823_ca724decfbc5"
+  },
+  {
+    "eventId": "EVT-2026-000003",
+    "eventType": "TEST_EVENT_PING",
+    "occurredAt": "2026-09-28T19:33:09.531Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "OPERATIONS",
+    "entityType": "SystemTest",
+    "entityId": "SYS-TEST-1790623989528",
+    "payload": {
+      "message": "Hello EHRJ Event Bus",
+      "testValue": 42,
+      "timestamp": 1790623989528
+    },
+    "correlationId": "EVT-2026-000003",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "evt_TEST_EVENT_PING_SYS-TEST-1790623989528_895d439b0d17"
+  },
+  {
+    "eventId": "EVT-2026-000004",
+    "eventType": "TEST_EVENT_PING",
+    "occurredAt": "2026-09-28T19:33:36.919Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "OPERATIONS",
+    "entityType": "SystemTest",
+    "entityId": "SYS-TEST-1790624016918",
+    "payload": {
+      "message": "Hello EHRJ Event Bus",
+      "testValue": 42,
+      "timestamp": 1790624016918
+    },
+    "correlationId": "EVT-2026-000004",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "evt_TEST_EVENT_PING_SYS-TEST-1790624016918_b462cc7f2987"
+  }
+]

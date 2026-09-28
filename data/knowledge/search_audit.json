@@ -726,5 +726,96 @@
     "latencyMs": 3,
     "id": "aud-1790622855970-w1g1",
     "timestamp": "2026-09-28T19:14:15.970Z"
+  },
+  {
+    "query": "ভর্তি হতে কী কী কাগজপত্র লাগবে এবং ভর্তি ফি কত?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 6,
+    "latencyMs": 3,
+    "id": "aud-1790624268795-42o0",
+    "timestamp": "2026-09-28T19:37:48.795Z"
+  },
+  {
+    "query": "student admission fees",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 4,
+    "latencyMs": 2,
+    "id": "aud-1790624268798-3avf",
+    "timestamp": "2026-09-28T19:37:48.798Z"
+  },
+  {
+    "query": "২০২৫ ভর্তি ফরম ফি",
+    "userRole": "ADMIN",
+    "searchType": "HYBRID",
+    "resultsCount": 10,
+    "latencyMs": 105,
+    "id": "aud-1790624268904-2bpl",
+    "timestamp": "2026-09-28T19:37:48.904Z"
+  },
+  {
+    "query": "বকেয়া ফি এবং বর্তমান টিউশন ইনভয়েস",
+    "userRole": "GUARDIAN",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "searchType": "HYBRID",
+    "resultsCount": 9,
+    "latencyMs": 4,
+    "id": "aud-1790624268909-9mpo",
+    "timestamp": "2026-09-28T19:37:48.909Z"
+  },
+  {
+    "query": "মাদরাসায় নতুন ছাত্র ভর্তির নিয়ম ও ফি কী?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 5,
+    "latencyMs": 2,
+    "id": "aud-1790624268915-09a1",
+    "timestamp": "2026-09-28T19:37:48.915Z"
+  },
+  {
+    "query": "মাদরাসার নাসার রকেট লঞ্চ সাইট কোথায়?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 1,
+    "latencyMs": 2,
+    "id": "aud-1790624268920-0sdk",
+    "timestamp": "2026-09-28T19:37:48.920Z"
+  },
+  {
+    "query": "[SANITIZED], [SANITIZED] Students; and show fee policy",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 5,
+    "latencyMs": 2,
+    "id": "aud-1790624268923-z9s5",
+    "timestamp": "2026-09-28T19:37:48.923Z"
+  },
+  {
+    "query": "অজানা বিদেশি স্কলারশিপ পলিসি 8924",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 0,
+    "latencyMs": 3,
+    "id": "aud-1790624268928-4pdm",
+    "timestamp": "2026-09-28T19:37:48.928Z"
+  },
+  {
+    "query": "ভর্তি",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 2,
+    "latencyMs": 4,
+    "id": "aud-1790624269174-aufo",
+    "timestamp": "2026-09-28T19:37:49.174Z"
+  },
+  {
+    "query": "ভর্তি ফি কত?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 5,
+    "latencyMs": 3,
+    "id": "aud-1790624270084-xjts",
+    "timestamp": "2026-09-28T19:37:50.084Z"
   }
 ]

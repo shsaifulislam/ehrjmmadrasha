@@ -324,7 +324,8 @@ async function runPhase24Tests() {
   // -------------------------------------------------------------
   console.log("\n[STEP 9] Performing Live HTTP Smoke Tests on Phase 24 Endpoints...");
   try {
-    // Generate fresh valid admin session token for HTTP requests
+    // Ensure distinct second elapsed from Step 3 revocation
+    await new Promise((r) => setTimeout(r, 1100));
     const currentAdmin = await prisma.user.findFirst({ where: { role: "ADMIN", status: "ACTIVE" } }) || adminUser;
     const httpAdminToken = await createSessionToken(
       {

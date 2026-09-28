@@ -382,3 +382,46 @@ export function transitionWarningStatus(
   saveEarlyWarnings(warnings);
   return item;
 }
+
+/**
+ * Programmatically records an early warning event from workflows or external monitors.
+ */
+export function recordEarlyWarningEvent(params: {
+  ruleCode: string;
+  domain: string;
+  severity: WarningSeverity;
+  titleBn: string;
+  messageBn: string;
+  observableMetric: string;
+  observedValue: number | string;
+  thresholdValue: number | string;
+  entityId?: string;
+  targetEntity?: string;
+  evidence?: Record<string, any>;
+}): EarlyWarningEvent {
+  const warnings = loadEarlyWarnings();
+  const counter = (warnings.length + 1).toString().padStart(6, "0");
+  const warningId = `EHRJ-EW-2026-${counter}`;
+
+  const event: EarlyWarningEvent = {
+    warningId,
+    ruleCode: params.ruleCode,
+    domain: params.domain,
+    severity: params.severity,
+    status: "DETECTED",
+    titleBn: params.titleBn,
+    messageBn: params.messageBn,
+    observableMetric: params.observableMetric,
+    observedValue: params.observedValue,
+    thresholdValue: params.thresholdValue,
+    entityId: params.entityId,
+    targetEntity: params.targetEntity,
+    evidence: params.evidence || {},
+    detectedAt: new Date().toISOString(),
+  };
+
+  warnings.unshift(event);
+  saveEarlyWarnings(warnings);
+  return event;
+}
+
