@@ -51,6 +51,7 @@ import AdminTransportHub from "@/components/transport/AdminTransportHub";
 import AdminInventoryHub from "@/components/inventory/AdminInventoryHub";
 import AdminHrHub from "@/components/hr/AdminHrHub";
 import AdminHelpdeskHub from "@/components/helpdesk/AdminHelpdeskHub";
+import AdminAnalyticsHub from "@/components/analytics/AdminAnalyticsHub";
 
 interface AdminStats {
   totalStudents: number;
@@ -1130,7 +1131,10 @@ export default function AdminDashboardPage() {
               </div>
             )}
 
-            {/* 13. SETTINGS */}
+            {/* 13. REPORTS & ANALYTICS */}
+            {activeTab === "REPORTS" && <AdminAnalyticsHub />}
+
+            {/* 14. SETTINGS */}
             {activeTab === "SETTINGS" && (
               <div className="bg-white rounded-lg border border-[#E2E8F0] p-6 shadow-sm space-y-4">
                 <h2 className="text-base font-bold text-[#0B1914] border-b pb-2">সেন্ট্রাল প্রাতিষ্ঠানিক সেটিংস</h2>

@@ -60,6 +60,16 @@ export default function TeacherPanelPage() {
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [resultsSuccess, setResultsSuccess] = useState(false);
   const [leaveSubmitted, setLeaveSubmitted] = useState(false);
+  const [teacherAnalytics, setTeacherAnalytics] = useState<any | null>(null);
+
+  useEffect(() => {
+    fetch("/api/teacher/analytics")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.data) setTeacherAnalytics(data.data);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -211,14 +221,24 @@ export default function TeacherPanelPage() {
           <div className="space-y-6">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm border-l-4 border-l-[#0D5C3A]">
-                <span className="text-xs text-gray-500 font-semibold block">অ্যাসাইনকৃত ক্লাস</span>
-                <span className="text-xl font-bold text-gray-900 block mt-1">২ টি</span>
-                <span className="text-[11px] text-emerald-700">নূরানী ও নাযেরা অনুষদ</span>
+                <span className="text-xs text-gray-500 font-semibold block">অ্যাসাইনকৃত ক্লাস ও শাখা</span>
+                <span className="text-xl font-bold text-gray-900 block mt-1">
+                  {teacherAnalytics ? `${teacherAnalytics.totalAssignments} টি` : "২ টি"}
+                </span>
+                <span className="text-[11px] text-emerald-700">
+                  {teacherAnalytics ? `মোট ছাত্র: ${teacherAnalytics.assignedStudentsCount} জন` : "নূরানী ও নাযেরা অনুষদ"}
+                </span>
               </div>
               <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm border-l-4 border-l-blue-600">
-                <span className="text-xs text-gray-500 font-semibold block">আজকের উপস্থিতি</span>
-                <span className="text-xl font-bold text-blue-700 block mt-1">{presentCount} জন</span>
-                <span className="text-[11px] text-gray-500">অনুপস্থিত: {absentCount} জন</span>
+                <span className="text-xs text-gray-500 font-semibold block">আজকের উপস্থিতি হার</span>
+                <span className="text-xl font-bold text-blue-700 block mt-1">
+                  {teacherAnalytics ? `${teacherAnalytics.todayAttendance.rate}%` : `${presentCount} জন`}
+                </span>
+                <span className="text-[11px] text-gray-500">
+                  {teacherAnalytics
+                    ? `উপস্থিত: ${teacherAnalytics.todayAttendance.present}, অনুপস্থিত: ${teacherAnalytics.todayAttendance.absent}`
+                    : `অনুপস্থিত: ${absentCount} জন`}
+                </span>
               </div>
               <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm border-l-4 border-l-[#C59B27]">
                 <span className="text-xs text-gray-500 font-semibold block">পরীক্ষার বিষয়</span>

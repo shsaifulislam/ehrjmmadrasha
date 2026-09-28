@@ -66,6 +66,7 @@ model User {
   resolvedSupportRequests       SupportRequest[]           @relation("SupportRequestResolvedBy")
   authoredSupportMessages       SupportRequestMessage[]    @relation("SupportMessageAuthor")
   recordedSupportHistories      SupportRequestStatusHistory[] @relation("SupportHistoryRecordedBy")
+  savedReports                  SavedReport[]
 }
 
 model Session {
@@ -2404,4 +2405,42 @@ model SupportRequestSequence {
   updatedAt DateTime @updatedAt
 
   @@unique([prefix, year])
+}
+
+// -------------------------------------------------------------
+// 15. ANALYTICS & REPORTING ENGINE
+// -------------------------------------------------------------
+model SavedReport {
+  id               String   @id @default(uuid())
+  title            String
+  description      String?
+  module           String   // ALL, STUDENTS, ADMISSIONS, ATTENDANCE, ACADEMIC, FINANCE, OPERATIONS, LIBRARY, HOSTEL, TRANSPORT, INVENTORY, HR, HELPDESK
+  reportType       String   // SUMMARY, TREND, COMPARISON, DETAIL
+  filtersJson      String   // JSON formatted filter configuration
+  isPublic         Boolean  @default(false)
+  createdById      String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  createdBy        User     @relation(fields: [createdById], references: [id], onDelete: Cascade)
+
+  @@index([module])
+  @@index([createdById])
+  @@index([createdAt])
+}
+
+model ReportSchedule {
+  id               String    @id @default(uuid())
+  title            String
+  frequency        String    // DAILY, WEEKLY, MONTHLY
+  recipientEmails  String    // comma separated or JSON string
+  reportConfigJson String    // JSON options
+  isActive         Boolean   @default(true)
+  lastRunAt        DateTime?
+  nextRunAt        DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@index([frequency])
+  @@index([isActive])
 }

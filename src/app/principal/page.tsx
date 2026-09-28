@@ -25,6 +25,7 @@ export default function PrincipalDashboardPage() {
     "DASHBOARD"
   );
   const [stats, setStats] = useState<any | null>(null);
+  const [analyticsOverview, setAnalyticsOverview] = useState<any | null>(null);
   const [message, setMessage] = useState(
     "বিসমিল্লাহির রাহমানির রাহিম। ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা কুরআন-সুন্নাহর সঠিক প্রচার ও চরিত্রবান আদর্শ নাগরিক গড়ার একটি অন্যতম শ্রেষ্ঠ মারকাজ।"
   );
@@ -51,6 +52,13 @@ export default function PrincipalDashboardPage() {
       })
       .then((data) => {
         if (data?.stats) setStats(data.stats);
+      })
+      .catch(() => {});
+
+    fetch("/api/admin/analytics/overview")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.data) setAnalyticsOverview(data.data);
       })
       .catch(() => {});
   }, []);
@@ -242,27 +250,86 @@ export default function PrincipalDashboardPage() {
         )}
 
         {/* 2. OVERVIEW */}
-        {activeTab === "OVERVIEW" && stats && (
-          <div className="bg-white rounded-lg border p-6 space-y-4 shadow-sm">
-            <h2 className="text-base font-bold text-[#083B25] border-b pb-2">মাদরাসার সামগ্রিক অবস্থা</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <span className="text-xs text-gray-500 block">মোট ছাত্র</span>
-                <span className="text-xl font-bold font-mono text-gray-900">{stats.totalStudents} জন</span>
-              </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <span className="text-xs text-gray-500 block">আবাসিক ছাত্র</span>
-                <span className="text-xl font-bold font-mono text-blue-700">{stats.residentialStudents} জন</span>
-              </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <span className="text-xs text-gray-500 block">লিল্লাহ ও এতিম</span>
-                <span className="text-xl font-bold font-mono text-purple-700">{stats.orphanStudents} জন</span>
-              </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
-                <span className="text-xs text-gray-500 block">ফান্ড ব্যালেন্স</span>
-                <span className="text-xl font-bold font-mono text-emerald-700">
-                  ৳ {stats.totalFundBalance.toLocaleString("bn-BD")}
+        {activeTab === "OVERVIEW" && (
+          <div className="space-y-6">
+            {/* Executive Narrative */}
+            {analyticsOverview?.executiveSummary && (
+              <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-4 text-xs leading-relaxed text-gray-800">
+                <span className="font-bold text-emerald-900 block mb-1 text-sm">
+                  মুহতামিম তদারকি নির্বাহী সারসংক্ষেপ:
                 </span>
+                {analyticsOverview.executiveSummary.bn}
+              </div>
+            )}
+
+            {/* Actionable Alerts */}
+            {analyticsOverview?.alerts && analyticsOverview.alerts.length > 0 && (
+              <div className="space-y-2">
+                <span className="text-xs font-bold text-gray-500 uppercase">জরুরি তদারকি অ্যালার্ট ({analyticsOverview.alerts.length})</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {analyticsOverview.alerts.map((al: any) => (
+                    <div
+                      key={al.id}
+                      className={`p-3 rounded-xl border text-xs ${
+                        al.severity === "URGENT"
+                          ? "bg-rose-50 border-rose-200 text-rose-900"
+                          : "bg-amber-50 border-amber-200 text-amber-900"
+                      }`}
+                    >
+                      <div className="font-bold">{al.title}</div>
+                      <div className="mt-0.5 text-gray-700">{al.description}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Core Oversight Metrics */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+              <div className="p-4 bg-white rounded-xl border shadow-sm">
+                <span className="text-xs text-gray-500 block">মোট সক্রিয় শিক্ষার্থী</span>
+                <span className="text-2xl font-bold font-serif text-gray-900">
+                  {analyticsOverview?.students?.active || stats?.totalStudents || 0} জন
+                </span>
+              </div>
+              <div className="p-4 bg-white rounded-xl border shadow-sm">
+                <span className="text-xs text-gray-500 block">আজকের উপস্থিতি হার</span>
+                <span className="text-2xl font-bold font-serif text-teal-700">
+                  {analyticsOverview?.attendance?.rateToday !== undefined ? `${analyticsOverview.attendance.rateToday}%` : "—"}
+                </span>
+              </div>
+              <div className="p-4 bg-white rounded-xl border shadow-sm">
+                <span className="text-xs text-gray-500 block">আবাসিক ও ডে-কেয়ার</span>
+                <span className="text-2xl font-bold font-serif text-blue-700">
+                  {analyticsOverview?.students?.residential || 0} / {analyticsOverview?.students?.dayCare || 0}
+                </span>
+              </div>
+              <div className="p-4 bg-white rounded-xl border shadow-sm">
+                <span className="text-xs text-gray-500 block">৫ তহবিলের সর্বমোট</span>
+                <span className="text-2xl font-bold font-serif text-emerald-700">
+                  ৳ {(analyticsOverview?.finance?.fundsTotal || stats?.totalFundBalance || 0).toLocaleString("bn-BD")}
+                </span>
+              </div>
+            </div>
+
+            {/* Departmental Oversight Indicators */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+              <div className="bg-white p-4 rounded-xl border shadow-sm space-y-1.5">
+                <div className="font-bold text-gray-900 text-sm border-b pb-1">লাইব্রেরি ও পরিবহন</div>
+                <div className="flex justify-between"><span>চলমান ঋণ বই:</span><b>{analyticsOverview?.operations?.library?.activeLoans || 0} টি</b></div>
+                <div className="flex justify-between"><span>বিলম্বিত বই:</span><b className="text-rose-600">{analyticsOverview?.operations?.library?.overdueLoans || 0} টি</b></div>
+                <div className="flex justify-between"><span>পরিবহন ছাত্র:</span><b>{analyticsOverview?.operations?.transport?.students || 0} জন</b></div>
+              </div>
+              <div className="bg-white p-4 rounded-xl border shadow-sm space-y-1.5">
+                <div className="font-bold text-gray-900 text-sm border-b pb-1">ইনভেন্টরি ও সম্পদ</div>
+                <div className="flex justify-between"><span>মোট আইটেম:</span><b>{analyticsOverview?.operations?.inventory?.totalItems || 0} টি</b></div>
+                <div className="flex justify-between"><span>স্বল্প স্টক সতর্কতা:</span><b className="text-amber-600">{analyticsOverview?.operations?.inventory?.lowStockItems || 0} টি</b></div>
+              </div>
+              <div className="bg-white p-4 rounded-xl border shadow-sm space-y-1.5">
+                <div className="font-bold text-gray-900 text-sm border-b pb-1">এইচআর ও হেল্পডেস্ক</div>
+                <div className="flex justify-between"><span>সক্রিয় জনবল:</span><b>{analyticsOverview?.operations?.hr?.activeEmployees || 0} জন</b></div>
+                <div className="flex justify-between"><span>ছুটিতে আছেন:</span><b>{analyticsOverview?.operations?.hr?.employeesOnLeave || 0} জন</b></div>
+                <div className="flex justify-between"><span>জরুরি হেল্পডেস্ক:</span><b className="text-rose-600">{analyticsOverview?.operations?.helpdesk?.urgentTickets || 0} টি</b></div>
               </div>
             </div>
           </div>
@@ -294,7 +361,15 @@ export default function PrincipalDashboardPage() {
         {/* 5. REPORTS */}
         {activeTab === "REPORTS" && (
           <div className="bg-white rounded-lg border p-6 space-y-4 shadow-sm">
-            <h2 className="text-base font-bold text-[#083B25] border-b pb-2">মাসিক অ্যাকাডেমিক ও আর্থিক রিপোর্ট</h2>
+            <div className="flex items-center justify-between border-b pb-2">
+              <h2 className="text-base font-bold text-[#083B25]">মাসিক অ্যাকাডেমিক ও আর্থিক রিপোর্ট</h2>
+              <button
+                onClick={() => window.print()}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-800 text-white rounded text-xs font-semibold hover:bg-emerald-900 transition"
+              >
+                প্রিন্ট / PDF ডাউনলোড
+              </button>
+            </div>
             <div className="space-y-2 text-xs">
               <div className="p-3 border rounded-lg flex items-center justify-between">
                 <span>মার্চ ২০২৬ সার্বিক আর্থিক নিরীক্ষা ও লিল্লাহ ফান্ড ব্যয় রিপোর্ট</span>
