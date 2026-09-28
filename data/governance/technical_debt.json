@@ -63,5 +63,18 @@
     "debtId": "EHRJ-DEBT-005",
     "createdAt": "2026-09-28T15:29:33.138Z",
     "updatedAt": "2026-09-28T15:29:33.138Z"
+  },
+  {
+    "module": "REPORTS",
+    "title": "Excel Generation Memory Optimization for Large Batches",
+    "risk": "LOW",
+    "impact": "Large batch downloads of 1000+ rows consume temporary heap memory.",
+    "workaround": "Paginated export chunks of 200 rows.",
+    "priority": "LOW",
+    "plannedResolution": "Phase 22 streaming CSV/Excel worker.",
+    "status": "OPEN",
+    "debtId": "EHRJ-DEBT-006",
+    "createdAt": "2026-09-28T15:40:55.405Z",
+    "updatedAt": "2026-09-28T15:40:55.405Z"
   }
 ]

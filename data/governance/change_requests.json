@@ -157,5 +157,57 @@
     "verifiedBy": "Senior QA Architect",
     "verificationEvidence": "All 5 automated exam publication tests passed cleanly. SMS payload validated.",
     "verifiedAt": "2026-09-28T15:29:32.998Z"
+  },
+  {
+    "changeId": "EHRJ-CHG-2026-000004",
+    "title": "স্বয়ংক্রিয় পরীক্ষার ফলাফল এসএমএস বিজ্ঞপ্তি সিস্টেম (5240)",
+    "requesterName": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "requesterRole": "ADMIN",
+    "requestDate": "2026-09-28T15:40:55.242Z",
+    "objective": "পরীক্ষার চূড়ান্ত ফলাফল প্রকাশের সাথে সাথে অভিভাবকদের মোবাইলে এসএমএস প্রেরণ।",
+    "businessJustification": "অভিভাবকদের রিয়েল-টাইম তথ্যপ্রাপ্তি নিশ্চিতকরণ।",
+    "affectedModules": [
+      "EXAMS",
+      "NOTIFICATIONS"
+    ],
+    "changeType": "FEATURE",
+    "priority": "HIGH",
+    "risk": "MEDIUM",
+    "status": "VERIFIED",
+    "dependencies": {
+      "direct": [
+        "RESULTS",
+        "DOCUMENTS",
+        "CERTIFICATES"
+      ],
+      "indirect": [
+        "GUARDIANS",
+        "PUBLIC_VERIFICATION",
+        "ANALYTICS"
+      ]
+    },
+    "impactAnalysis": {
+      "databaseImpact": false,
+      "financialImpact": false,
+      "securityImpact": false,
+      "notificationImpact": true,
+      "reportingImpact": false,
+      "summary": "Impact Analysis: 2 core module(s) evaluated. Risk Tier: MEDIUM. Direct dependencies: RESULTS, DOCUMENTS, CERTIFICATES. Database modification: NO."
+    },
+    "testScope": [
+      "npm run test:phase19",
+      "npx tsc --noEmit"
+    ],
+    "rollbackPlan": "রিলিজ ট্যাগ রোলব্যাক এবং এসএমএস কিউ নিষ্ক্রিয়করণ।",
+    "updatedAt": "2026-09-28T15:40:55.276Z",
+    "reviewedBy": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "reviewedAt": "2026-09-28T15:40:55.257Z",
+    "reviewNotes": "আর্কিটেকচারাল ইমপ্যাক্ট বিশ্লেষণ সন্তোষজনক। রিলিজ অনুমোদন করা হলো।",
+    "commitHash": "c0ffee1",
+    "implementationDetails": "Notification outbox listener bound to exam publication event.",
+    "implementedAt": "2026-09-28T15:40:55.273Z",
+    "verifiedBy": "Senior QA Architect",
+    "verificationEvidence": "All 5 automated exam publication tests passed cleanly. SMS payload validated.",
+    "verifiedAt": "2026-09-28T15:40:55.276Z"
   }
 ]

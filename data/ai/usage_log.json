@@ -1,0 +1,44 @@
+[
+  {
+    "requestId": "EHRJ-AIQ-040408",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "userRole": "ADMIN",
+    "module": "FINANCE",
+    "queryIntent": "ADMIN_INSTITUTIONAL_QUERY",
+    "model": "LocalFallback-Deterministic",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 12,
+    "latencyMs": 127,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-28T15:40:40.408Z"
+  },
+  {
+    "requestId": "EHRJ-AIQ-040424",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "userRole": "GUARDIAN",
+    "module": "ACADEMIC",
+    "queryIntent": "GUARDIAN_CHILD_SUMMARY",
+    "model": "LocalFallback-Deterministic",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 45,
+    "latencyMs": 15,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-28T15:40:40.424Z"
+  },
+  {
+    "requestId": "EHRJ-AIQ-041664",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "userRole": "ADMIN",
+    "module": "GENERAL",
+    "queryIntent": "ADMIN_INSTITUTIONAL_QUERY",
+    "model": "LocalFallback-Deterministic",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 8,
+    "latencyMs": 3,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-28T15:40:41.664Z"
+  }
+]
