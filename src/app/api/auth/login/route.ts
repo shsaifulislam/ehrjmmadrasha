@@ -77,6 +77,18 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Account lockout check (brute force protection)
+    const { checkAccountLockout, handleFailedLoginAttempt, clearFailedLoginAttempts, recordSecurityEvent } = await import("@/lib/securityEngine");
+    const lockout = checkAccountLockout(identifier, ip);
+    if (lockout.isLocked) {
+      return NextResponse.json(
+        {
+          error: `অতিরিক্ত ভুল চেষ্টার কারণে অ্যাকাউন্টটি সাময়িকভাবে লক করা হয়েছে। অনুগ্রহ করে ${lockout.remainingMinutes || 15} মিনিট পর চেষ্টা করুন।`,
+        },
+        { status: 423 }
+      );
+    }
+
     // Password verification
     const isValid = await verifyPassword(password, user.passwordHash);
     if (!isValid) {
@@ -89,24 +101,49 @@ export async function POST(req: NextRequest) {
         },
       });
 
+      const failedResult = await handleFailedLoginAttempt(identifier, ip, userAgent);
+
+      await recordSecurityEvent({
+        eventType: "LOGIN_FAILURE",
+        severity: failedResult.isLocked ? "CRITICAL" : "MEDIUM",
+        userId: user.id,
+        username: user.username,
+        ipAddress: ip,
+        userAgent,
+        details: { attemptsRemaining: failedResult.remainingAttempts },
+      });
+
+      if (failedResult.isLocked) {
+        return NextResponse.json(
+          { error: "অতিরিক্ত ভুল চেষ্টার কারণে অ্যাকাউন্টটি সাময়িকভাবে লক করা হয়েছে। অনুগ্রহ করে ১৫ মিনিট পর চেষ্টা করুন।" },
+          { status: 423 }
+        );
+      }
+
       return NextResponse.json(
         { error: "ভুল ইউজারনেম/ইমেইল অথবা পাসওয়ার্ড! অনুগ্রহ করে সঠিক তথ্য প্রদান করুন।" },
         { status: 401 }
       );
     }
 
-    // Create session token and set secure HttpOnly cookie
-    const token = await createSessionToken({
-      userId: user.id,
-      username: user.username,
-      role: user.role,
-      email: user.email,
-      name: user.name,
-    });
+    // Successful login: clear failed attempts
+    clearFailedLoginAttempts(identifier);
+
+    // Create session token and set secure HttpOnly cookie (persisting session in DB)
+    const token = await createSessionToken(
+      {
+        userId: user.id,
+        username: user.username,
+        role: user.role,
+        email: user.email,
+        name: user.name,
+      },
+      { ipAddress: ip, userAgent }
+    );
 
     await setAuthCookie(token);
 
-    // Record login history and audit log
+    // Record login history, security event, and audit log
     await prisma.loginHistory.create({
       data: {
         userId: user.id,
@@ -114,6 +151,16 @@ export async function POST(req: NextRequest) {
         userAgent,
         status: "SUCCESS",
       },
+    });
+
+    await recordSecurityEvent({
+      eventType: "LOGIN_SUCCESS",
+      severity: "INFO",
+      userId: user.id,
+      username: user.username,
+      ipAddress: ip,
+      userAgent,
+      details: { role: user.role },
     });
 
     await recordAuditLog({

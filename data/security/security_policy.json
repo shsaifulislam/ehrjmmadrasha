@@ -1,0 +1,29 @@
+{
+  "session": {
+    "lifetimeDays": 7,
+    "idleTimeoutMinutes": 120,
+    "maxConcurrentSessions": 5
+  },
+  "bruteForce": {
+    "maxFailedAttempts": 5,
+    "lockoutDurationMinutes": 15,
+    "windowMinutes": 10
+  },
+  "rateLimit": {
+    "loginPerMinute": 10,
+    "passwordResetPerHour": 3,
+    "publicVerificationPerMinute": 30
+  },
+  "highRiskStepUp": {
+    "requiredPhrases": {
+      "DATABASE_RESTORE": "RESTORE-DATABASE-CONFIRM",
+      "ACCOUNT_SUSPEND": "CONFIRM-ACCOUNT-SUSPEND",
+      "BULK_RESULT_PUBLISH": "CONFIRM-PUBLISH-RESULTS"
+    }
+  },
+  "retentionDays": {
+    "securityEvents": 90,
+    "auditLogs": 365,
+    "loginHistories": 60
+  }
+}

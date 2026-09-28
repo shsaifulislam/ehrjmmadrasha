@@ -441,6 +441,7 @@ export default function AdminDashboardPage() {
       groupTitle: "প্রশাসন ও অডিট (Admin System)",
       items: [
         { id: "HR", label: "এইচআর ও শিক্ষক স্টাফ", subLabel: "HR, Teachers & Staff", icon: Briefcase },
+        { id: "SECURITY", label: "নিরাপত্তা ও সেশন গভর্ন্যান্স", subLabel: "Zero-Trust & Sessions", icon: ShieldCheck, href: "/admin/security" },
         { id: "REPORTS", label: "রিপোর্ট ও অ্যানালিটিক্স", subLabel: "Reports & Logs", icon: BarChart3 },
         { id: "OPERATIONS", label: "সিস্টেম অপারেশন ও ব্যাকআপ", subLabel: "Health & Disaster Recovery", icon: Activity },
         { id: "USERS", label: "ইউজার ও শিক্ষক", subLabel: "Staff & RBAC Accounts", icon: ShieldCheck },
@@ -584,6 +585,10 @@ export default function AdminDashboardPage() {
                       key={tab.id}
                       type="button"
                       onClick={() => {
+                        if ((tab as any).href) {
+                          window.location.href = (tab as any).href;
+                          return;
+                        }
                         setActiveTab(tab.id as any);
                         setSidebarOpen(false);
                       }}
@@ -613,9 +618,9 @@ export default function AdminDashboardPage() {
                         </div>
                       </div>
 
-                      {tab.badge && tab.badge > 0 ? (
+                      {(tab as any).badge && (tab as any).badge > 0 ? (
                         <span className="bg-red-500 text-white font-mono text-[10px] px-1.5 py-0.2 rounded-full font-bold shadow-sm ml-1 flex-shrink-0">
-                          {tab.badge}
+                          {(tab as any).badge}
                         </span>
                       ) : isActive ? (
                         <ChevronRight className="w-3.5 h-3.5 text-[#fef08a] flex-shrink-0 ml-1" />

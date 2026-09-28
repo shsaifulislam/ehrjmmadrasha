@@ -133,5 +133,32 @@
     "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
     "actorRole": "ADMIN",
     "timestamp": "2026-09-28T16:09:13.364Z"
+  },
+  {
+    "id": "rev-1790619891201",
+    "documentId": "doc-1790619891197-biv9z",
+    "action": "SUBMITTED",
+    "status": "UNDER_REVIEW",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T18:24:51.199Z"
+  },
+  {
+    "id": "rev-1790619891203",
+    "documentId": "doc-1790619891197-biv9z",
+    "action": "APPROVED",
+    "status": "APPROVED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T18:24:51.202Z"
+  },
+  {
+    "id": "rev-1790619891205",
+    "documentId": "doc-1790619891197-biv9z",
+    "action": "PUBLISHED",
+    "status": "PUBLISHED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T18:24:51.204Z"
   }
 ]

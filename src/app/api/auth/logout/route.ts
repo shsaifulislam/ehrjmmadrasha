@@ -11,6 +11,15 @@ export async function POST() {
       entityType: "User",
       entityId: user.userId,
     });
+
+    const { recordSecurityEvent } = await import("@/lib/securityEngine");
+    await recordSecurityEvent({
+      eventType: "LOGOUT",
+      severity: "INFO",
+      userId: user.userId,
+      username: user.username,
+      details: { role: user.role },
+    });
   }
 
   await clearAuthCookie();

@@ -26,10 +26,11 @@ export async function POST(req: NextRequest) {
     });
 
     if (!user) {
-      return NextResponse.json(
-        { error: "এই ইমেইল ঠিকানার সাথে নিবন্ধিত কোনো অ্যাকাউন্ট পাওয়া যায়নি।" },
-        { status: 404 }
-      );
+      // Account enumeration protection: Return generic success without revealing non-existence
+      return NextResponse.json({
+        success: true,
+        message: "যদি এই ইমেইল ঠিকানায় কোনো সক্রিয় অ্যাকাউন্ট থাকে, তবে ভেরিফিকেশন কোড পাঠানো হয়েছে।",
+      });
     }
 
     if (user.status !== "ACTIVE") {
