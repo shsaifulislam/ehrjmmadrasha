@@ -325,13 +325,14 @@ async function runPhase24Tests() {
   console.log("\n[STEP 9] Performing Live HTTP Smoke Tests on Phase 24 Endpoints...");
   try {
     // Generate fresh valid admin session token for HTTP requests
+    const currentAdmin = await prisma.user.findFirst({ where: { role: "ADMIN", status: "ACTIVE" } }) || adminUser;
     const httpAdminToken = await createSessionToken(
       {
-        userId: adminUser.id,
-        username: adminUser.username,
+        userId: currentAdmin.id,
+        username: currentAdmin.username,
         role: "ADMIN",
-        email: adminUser.email,
-        name: adminUser.name,
+        email: currentAdmin.email,
+        name: currentAdmin.name,
       },
       { persist: true }
     );
@@ -358,8 +359,11 @@ async function runPhase24Tests() {
         Authorization: `Bearer ${httpAdminToken}`,
       },
     });
+    if (authOvRes.status !== 200) {
+      console.log("DEBUG authOvRes:", authOvRes.status, await authOvRes.text());
+    }
     assert(authOvRes.status === 200, `Admin /api/admin/security/overview returned HTTP 200 OK (${authOvRes.status})`);
-    const ovData = await authOvRes.json();
+    const ovData = await authOvRes.json().catch(() => ({}));
     assert(ovData.success === true, "Overview API returned success: true");
     assert(typeof ovData?.data?.stats?.activeSessions === "number", "Active sessions count present in stats");
 

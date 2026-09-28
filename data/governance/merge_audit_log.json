@@ -1,5 +1,53 @@
 [
   {
+    "id": "MRG-2026-825603",
+    "survivorStudentId": "EHRJ-TEST-SURV-1790622757679",
+    "duplicateStudentId": "EHRJ-TEST-DUPL-1790622757697",
+    "survivorId": "653ed243-e7de-4900-affc-74a55d212e8d",
+    "duplicateId": "40795082-e77b-4820-bb88-7d7c4b935302",
+    "actor": "Admin Operator",
+    "reason": "পরীক্ষামূলক মার্জ সফলকরণ",
+    "timestamp": "2026-09-28T19:12:37.765Z",
+    "recordsMoved": {
+      "enrollmentsCount": 0,
+      "invoicesCount": 1,
+      "receiptsCount": 0,
+      "attendancesCount": 0,
+      "examMarksCount": 0,
+      "resultsCount": 0,
+      "documentsCount": 0,
+      "certificatesCount": 0,
+      "guardiansCount": 0,
+      "libraryCount": 0,
+      "residentialCount": 0,
+      "transportCount": 0
+    }
+  },
+  {
+    "id": "MRG-2026-239089",
+    "survivorStudentId": "EHRJ-TEST-SURV-1790622373918",
+    "duplicateStudentId": "EHRJ-TEST-DUPL-1790622373964",
+    "survivorId": "6b88e5b8-9d83-48f1-b1ce-81e18269b653",
+    "duplicateId": "3e17ec65-260d-427b-94b3-510742c1f22f",
+    "actor": "Admin Operator",
+    "reason": "পরীক্ষামূলক মার্জ সফলকরণ",
+    "timestamp": "2026-09-28T19:06:14.096Z",
+    "recordsMoved": {
+      "enrollmentsCount": 0,
+      "invoicesCount": 1,
+      "receiptsCount": 0,
+      "attendancesCount": 0,
+      "examMarksCount": 0,
+      "resultsCount": 0,
+      "documentsCount": 0,
+      "certificatesCount": 0,
+      "guardiansCount": 0,
+      "libraryCount": 0,
+      "residentialCount": 0,
+      "transportCount": 0
+    }
+  },
+  {
     "id": "MRG-2026-651525",
     "survivorStudentId": "EHRJ-TEST-SURV-1790621288852",
     "duplicateStudentId": "EHRJ-TEST-DUPL-1790621288891",

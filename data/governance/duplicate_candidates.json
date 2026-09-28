@@ -11805,6 +11805,21 @@
     "status": "REVIEW_REQUIRED"
   },
   {
+    "id": "DUP-288837-4957",
+    "survivorId": "d8338613-80eb-4c21-80f7-d1e4c01cfc53",
+    "duplicateId": "6c48c2f4-058c-4802-ae60-437d64f82fb4",
+    "survivorStudentId": "EHRJ-TEST-SURV-1790621178505",
+    "duplicateStudentId": "EHRJ-TEST-SURV-1790621258178",
+    "survivorNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার)",
+    "duplicateNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার)",
+    "survivorPhone": "01799887766",
+    "duplicatePhone": "01799887766",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T18:48:08.837Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
     "id": "DUP-288837-6223",
     "survivorId": "d8338613-80eb-4c21-80f7-d1e4c01cfc53",
     "duplicateId": "0e10ebe5-1a19-4275-be31-fdff006f1430",
@@ -11812,6 +11827,36 @@
     "duplicateStudentId": "EHRJ-TEST-DUPL-1790621258199",
     "survivorNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার)",
     "duplicateNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট ডুপ্লিকেট)",
+    "survivorPhone": "01799887766",
+    "duplicatePhone": "01799887766",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T18:48:08.837Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "DUP-288837-6223",
+    "survivorId": "d8338613-80eb-4c21-80f7-d1e4c01cfc53",
+    "duplicateId": "0e10ebe5-1a19-4275-be31-fdff006f1430",
+    "survivorStudentId": "EHRJ-TEST-SURV-1790621178505",
+    "duplicateStudentId": "EHRJ-TEST-DUPL-1790621258199",
+    "survivorNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার)",
+    "duplicateNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট ডুপ্লিকেট)",
+    "survivorPhone": "01799887766",
+    "duplicatePhone": "01799887766",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T18:48:08.837Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "DUP-288837-2964",
+    "survivorId": "28c58fe2-5f1d-48c0-9f49-a834337d560e",
+    "duplicateId": "6c48c2f4-058c-4802-ae60-437d64f82fb4",
+    "survivorStudentId": "EHRJ-TEST-DUPL-1790621178523",
+    "duplicateStudentId": "EHRJ-TEST-SURV-1790621258178",
+    "survivorNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট ডুপ্লিকেট)",
+    "duplicateNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার)",
     "survivorPhone": "01799887766",
     "duplicatePhone": "01799887766",
     "confidence": "HIGH",
@@ -11850,6 +11895,21 @@
     "status": "REVIEW_REQUIRED"
   },
   {
+    "id": "DUP-288837-3702",
+    "survivorId": "28c58fe2-5f1d-48c0-9f49-a834337d560e",
+    "duplicateId": "0e10ebe5-1a19-4275-be31-fdff006f1430",
+    "survivorStudentId": "EHRJ-TEST-DUPL-1790621178523",
+    "duplicateStudentId": "EHRJ-TEST-DUPL-1790621258199",
+    "survivorNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট ডুপ্লিকেট)",
+    "duplicateNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট ডুপ্লিকেট)",
+    "survivorPhone": "01799887766",
+    "duplicatePhone": "01799887766",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T18:48:08.838Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
     "id": "DUP-288838-2921",
     "survivorId": "6c48c2f4-058c-4802-ae60-437d64f82fb4",
     "duplicateId": "0e10ebe5-1a19-4275-be31-fdff006f1430",
@@ -11862,6 +11922,36 @@
     "confidence": "HIGH",
     "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
     "detectedAt": "2026-09-28T18:48:08.838Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "DUP-288838-2921",
+    "survivorId": "6c48c2f4-058c-4802-ae60-437d64f82fb4",
+    "duplicateId": "0e10ebe5-1a19-4275-be31-fdff006f1430",
+    "survivorStudentId": "EHRJ-TEST-SURV-1790621258178",
+    "duplicateStudentId": "EHRJ-TEST-DUPL-1790621258199",
+    "survivorNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট সারভাইভার)",
+    "duplicateNameBn": "মুহাম্মদ উমর ফারুক (টেস্ট ডুপ্লিকেট)",
+    "survivorPhone": "01799887766",
+    "duplicatePhone": "01799887766",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T18:48:08.838Z",
+    "status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "DUP-757663-9853",
+    "survivorId": "516b7409-b48d-44b6-af22-55d3825332a3",
+    "duplicateId": "c83f03ee-f972-4492-a821-09f7241c4539",
+    "survivorStudentId": "EHRJ-2026-6939",
+    "duplicateStudentId": "EHRJ-2026-9660",
+    "survivorNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "duplicateNameBn": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "survivorPhone": "01811223344",
+    "duplicatePhone": "01811223344",
+    "confidence": "HIGH",
+    "matchReason": "অভিভাবকের ফোন নম্বর এবং শিক্ষার্থীর জন্ম তারিখ হুবহু মিলে গেছে",
+    "detectedAt": "2026-09-28T19:12:37.663Z",
     "status": "REVIEW_REQUIRED"
   }
 ]

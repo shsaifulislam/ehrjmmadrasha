@@ -222,5 +222,427 @@
       "incidentCode": "EHRJ-INC-2026-306062",
       "title": "টেস্ট নিরাপত্তা ইনসিডেন্ট - 1790621306061"
     }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-908197",
+    "timestamp": "2026-09-28T19:06:14.145Z",
+    "eventType": "HIGH_RISK_ACTION",
+    "severity": "HIGH",
+    "userId": "Admin Operator",
+    "details": {
+      "action": "STUDENT_MERGE",
+      "survivorStudentId": "EHRJ-TEST-SURV-1790622373918",
+      "duplicateStudentId": "EHRJ-TEST-DUPL-1790622373964",
+      "reason": "পরীক্ষামূলক মার্জ সফলকরণ"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-48D1DA",
+    "timestamp": "2026-09-28T19:06:40.221Z",
+    "eventType": "SUSPICIOUS_LOGIN_ATTEMPTS",
+    "severity": "CRITICAL",
+    "username": "test_account_1790622400219",
+    "ipAddress": "192.168.1.200",
+    "userAgent": "Mozilla/5.0 TestAgent",
+    "details": {
+      "failedCount": 5,
+      "lockoutDurationMinutes": 15
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-D9BDD4",
+    "timestamp": "2026-09-28T19:06:40.282Z",
+    "eventType": "PERMISSION_DENIED",
+    "severity": "MEDIUM",
+    "userId": "04982453-c078-4b9f-8301-e81267b5bcbd",
+    "username": "teacher",
+    "resource": "OperationsBackup",
+    "details": {
+      "requiredRole": "ADMIN",
+      "actualRole": "TEACHER"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-534708",
+    "timestamp": "2026-09-28T19:06:40.287Z",
+    "eventType": "IDOR_ATTEMPT",
+    "severity": "HIGH",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "username": "guardian",
+    "resource": "Student:fake-student-id-99999",
+    "details": {
+      "attemptedStudentId": "fake-student-id-99999",
+      "authorizedStudentIds": [
+        "10a3f744-3eeb-47c2-a221-0e4dc5c9f807"
+      ]
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-2CAFC2",
+    "timestamp": "2026-09-28T19:06:40.353Z",
+    "eventType": "AI_INJECTION_DETECTED",
+    "severity": "CRITICAL",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "username": "admin",
+    "ipAddress": "10.0.0.99",
+    "resource": "PromptFirewall",
+    "details": {
+      "attackVector": "ignore_previous_rules_test"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-ED7143",
+    "timestamp": "2026-09-28T19:06:40.466Z",
+    "eventType": "HIGH_RISK_ACTION",
+    "severity": "HIGH",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "resource": "Incident:EHRJ-INC-2026-400406",
+    "details": {
+      "incidentCode": "EHRJ-INC-2026-400406",
+      "title": "টেস্ট নিরাপত্তা ইনসিডেন্ট - 1790622400406"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-088722",
+    "timestamp": "2026-09-28T19:09:53.057Z",
+    "eventType": "SUSPICIOUS_LOGIN_ATTEMPTS",
+    "severity": "CRITICAL",
+    "username": "test_account_1790622593056",
+    "ipAddress": "192.168.1.200",
+    "userAgent": "Mozilla/5.0 TestAgent",
+    "details": {
+      "failedCount": 5,
+      "lockoutDurationMinutes": 15
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-4B3877",
+    "timestamp": "2026-09-28T19:09:53.078Z",
+    "eventType": "PERMISSION_DENIED",
+    "severity": "MEDIUM",
+    "userId": "04982453-c078-4b9f-8301-e81267b5bcbd",
+    "username": "teacher",
+    "resource": "OperationsBackup",
+    "details": {
+      "requiredRole": "ADMIN",
+      "actualRole": "TEACHER"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-D29ADA",
+    "timestamp": "2026-09-28T19:09:53.084Z",
+    "eventType": "IDOR_ATTEMPT",
+    "severity": "HIGH",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "username": "guardian",
+    "resource": "Student:fake-student-id-99999",
+    "details": {
+      "attemptedStudentId": "fake-student-id-99999",
+      "authorizedStudentIds": [
+        "10a3f744-3eeb-47c2-a221-0e4dc5c9f807"
+      ]
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-1F2CF9",
+    "timestamp": "2026-09-28T19:09:53.109Z",
+    "eventType": "AI_INJECTION_DETECTED",
+    "severity": "CRITICAL",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "username": "admin",
+    "ipAddress": "10.0.0.99",
+    "resource": "PromptFirewall",
+    "details": {
+      "attackVector": "ignore_previous_rules_test"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-6B2CFB",
+    "timestamp": "2026-09-28T19:09:53.142Z",
+    "eventType": "HIGH_RISK_ACTION",
+    "severity": "HIGH",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "resource": "Incident:EHRJ-INC-2026-593125",
+    "details": {
+      "incidentCode": "EHRJ-INC-2026-593125",
+      "title": "টেস্ট নিরাপত্তা ইনসিডেন্ট - 1790622593125"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-6BF7A6",
+    "timestamp": "2026-09-28T19:10:26.304Z",
+    "eventType": "SUSPICIOUS_LOGIN_ATTEMPTS",
+    "severity": "CRITICAL",
+    "username": "test_account_1790622626303",
+    "ipAddress": "192.168.1.200",
+    "userAgent": "Mozilla/5.0 TestAgent",
+    "details": {
+      "failedCount": 5,
+      "lockoutDurationMinutes": 15
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-BF774E",
+    "timestamp": "2026-09-28T19:10:26.330Z",
+    "eventType": "PERMISSION_DENIED",
+    "severity": "MEDIUM",
+    "userId": "04982453-c078-4b9f-8301-e81267b5bcbd",
+    "username": "teacher",
+    "resource": "OperationsBackup",
+    "details": {
+      "requiredRole": "ADMIN",
+      "actualRole": "TEACHER"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-25B010",
+    "timestamp": "2026-09-28T19:10:26.335Z",
+    "eventType": "IDOR_ATTEMPT",
+    "severity": "HIGH",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "username": "guardian",
+    "resource": "Student:fake-student-id-99999",
+    "details": {
+      "attemptedStudentId": "fake-student-id-99999",
+      "authorizedStudentIds": [
+        "10a3f744-3eeb-47c2-a221-0e4dc5c9f807"
+      ]
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-1DA304",
+    "timestamp": "2026-09-28T19:10:26.358Z",
+    "eventType": "AI_INJECTION_DETECTED",
+    "severity": "CRITICAL",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "username": "admin",
+    "ipAddress": "10.0.0.99",
+    "resource": "PromptFirewall",
+    "details": {
+      "attackVector": "ignore_previous_rules_test"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-89D69D",
+    "timestamp": "2026-09-28T19:10:26.427Z",
+    "eventType": "HIGH_RISK_ACTION",
+    "severity": "HIGH",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "resource": "Incident:EHRJ-INC-2026-626383",
+    "details": {
+      "incidentCode": "EHRJ-INC-2026-626383",
+      "title": "টেস্ট নিরাপত্তা ইনসিডেন্ট - 1790622626383"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-538187",
+    "timestamp": "2026-09-28T19:10:46.034Z",
+    "eventType": "SUSPICIOUS_LOGIN_ATTEMPTS",
+    "severity": "CRITICAL",
+    "username": "test_account_1790622646031",
+    "ipAddress": "192.168.1.200",
+    "userAgent": "Mozilla/5.0 TestAgent",
+    "details": {
+      "failedCount": 5,
+      "lockoutDurationMinutes": 15
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-8545A7",
+    "timestamp": "2026-09-28T19:10:46.061Z",
+    "eventType": "PERMISSION_DENIED",
+    "severity": "MEDIUM",
+    "userId": "04982453-c078-4b9f-8301-e81267b5bcbd",
+    "username": "teacher",
+    "resource": "OperationsBackup",
+    "details": {
+      "requiredRole": "ADMIN",
+      "actualRole": "TEACHER"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-3ED3A9",
+    "timestamp": "2026-09-28T19:10:46.064Z",
+    "eventType": "IDOR_ATTEMPT",
+    "severity": "HIGH",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "username": "guardian",
+    "resource": "Student:fake-student-id-99999",
+    "details": {
+      "attemptedStudentId": "fake-student-id-99999",
+      "authorizedStudentIds": [
+        "10a3f744-3eeb-47c2-a221-0e4dc5c9f807"
+      ]
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-E2BC76",
+    "timestamp": "2026-09-28T19:10:46.092Z",
+    "eventType": "AI_INJECTION_DETECTED",
+    "severity": "CRITICAL",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "username": "admin",
+    "ipAddress": "10.0.0.99",
+    "resource": "PromptFirewall",
+    "details": {
+      "attackVector": "ignore_previous_rules_test"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-A77F21",
+    "timestamp": "2026-09-28T19:10:46.133Z",
+    "eventType": "HIGH_RISK_ACTION",
+    "severity": "HIGH",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "resource": "Incident:EHRJ-INC-2026-646114",
+    "details": {
+      "incidentCode": "EHRJ-INC-2026-646114",
+      "title": "টেস্ট নিরাপত্তা ইনসিডেন্ট - 1790622646114"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-93B87C",
+    "timestamp": "2026-09-28T19:12:37.796Z",
+    "eventType": "HIGH_RISK_ACTION",
+    "severity": "HIGH",
+    "userId": "Admin Operator",
+    "details": {
+      "action": "STUDENT_MERGE",
+      "survivorStudentId": "EHRJ-TEST-SURV-1790622757679",
+      "duplicateStudentId": "EHRJ-TEST-DUPL-1790622757697",
+      "reason": "পরীক্ষামূলক মার্জ সফলকরণ"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-89B89F",
+    "timestamp": "2026-09-28T19:12:51.200Z",
+    "eventType": "SUSPICIOUS_LOGIN_ATTEMPTS",
+    "severity": "CRITICAL",
+    "username": "test_account_1790622771198",
+    "ipAddress": "192.168.1.200",
+    "userAgent": "Mozilla/5.0 TestAgent",
+    "details": {
+      "failedCount": 5,
+      "lockoutDurationMinutes": 15
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-FFECEF",
+    "timestamp": "2026-09-28T19:12:51.220Z",
+    "eventType": "PERMISSION_DENIED",
+    "severity": "MEDIUM",
+    "userId": "04982453-c078-4b9f-8301-e81267b5bcbd",
+    "username": "teacher",
+    "resource": "OperationsBackup",
+    "details": {
+      "requiredRole": "ADMIN",
+      "actualRole": "TEACHER"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-AFD693",
+    "timestamp": "2026-09-28T19:12:51.225Z",
+    "eventType": "IDOR_ATTEMPT",
+    "severity": "HIGH",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "username": "guardian",
+    "resource": "Student:fake-student-id-99999",
+    "details": {
+      "attemptedStudentId": "fake-student-id-99999",
+      "authorizedStudentIds": [
+        "10a3f744-3eeb-47c2-a221-0e4dc5c9f807"
+      ]
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-0857AB",
+    "timestamp": "2026-09-28T19:12:51.238Z",
+    "eventType": "AI_INJECTION_DETECTED",
+    "severity": "CRITICAL",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "username": "admin",
+    "ipAddress": "10.0.0.99",
+    "resource": "PromptFirewall",
+    "details": {
+      "attackVector": "ignore_previous_rules_test"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-B2BFDD",
+    "timestamp": "2026-09-28T19:12:51.277Z",
+    "eventType": "HIGH_RISK_ACTION",
+    "severity": "HIGH",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "resource": "Incident:EHRJ-INC-2026-771256",
+    "details": {
+      "incidentCode": "EHRJ-INC-2026-771256",
+      "title": "টেস্ট নিরাপত্তা ইনসিডেন্ট - 1790622771256"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-45D8F2",
+    "timestamp": "2026-09-28T19:13:51.944Z",
+    "eventType": "SUSPICIOUS_LOGIN_ATTEMPTS",
+    "severity": "CRITICAL",
+    "username": "test_account_1790622831942",
+    "ipAddress": "192.168.1.200",
+    "userAgent": "Mozilla/5.0 TestAgent",
+    "details": {
+      "failedCount": 5,
+      "lockoutDurationMinutes": 15
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-6C5CD3",
+    "timestamp": "2026-09-28T19:13:51.965Z",
+    "eventType": "PERMISSION_DENIED",
+    "severity": "MEDIUM",
+    "userId": "04982453-c078-4b9f-8301-e81267b5bcbd",
+    "username": "teacher",
+    "resource": "OperationsBackup",
+    "details": {
+      "requiredRole": "ADMIN",
+      "actualRole": "TEACHER"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-045B51",
+    "timestamp": "2026-09-28T19:13:51.969Z",
+    "eventType": "IDOR_ATTEMPT",
+    "severity": "HIGH",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "username": "guardian",
+    "resource": "Student:fake-student-id-99999",
+    "details": {
+      "attemptedStudentId": "fake-student-id-99999",
+      "authorizedStudentIds": [
+        "10a3f744-3eeb-47c2-a221-0e4dc5c9f807"
+      ]
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-71441F",
+    "timestamp": "2026-09-28T19:13:51.983Z",
+    "eventType": "AI_INJECTION_DETECTED",
+    "severity": "CRITICAL",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "username": "admin",
+    "ipAddress": "10.0.0.99",
+    "resource": "PromptFirewall",
+    "details": {
+      "attackVector": "ignore_previous_rules_test"
+    }
+  },
+  {
+    "id": "EHRJ-SEC-20260928-1ECB88",
+    "timestamp": "2026-09-28T19:13:52.014Z",
+    "eventType": "HIGH_RISK_ACTION",
+    "severity": "HIGH",
+    "userId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "resource": "Incident:EHRJ-INC-2026-831997",
+    "details": {
+      "incidentCode": "EHRJ-INC-2026-831997",
+      "title": "টেস্ট নিরাপত্তা ইনসিডেন্ট - 1790622831997"
+    }
   }
 ]

@@ -16,5 +16,11 @@
     "savedRecords": 1,
     "serverTimestamp": "2026-09-28T18:48:38.997Z",
     "syncedAt": "2026-09-28T18:48:38.998Z"
+  },
+  "EHRJ-SYNC-20260928-TEA-87QIQL": {
+    "operationType": "TEACHER_ATTENDANCE",
+    "savedRecords": 1,
+    "serverTimestamp": "2026-09-28T19:14:05.058Z",
+    "syncedAt": "2026-09-28T19:14:05.059Z"
   }
 }

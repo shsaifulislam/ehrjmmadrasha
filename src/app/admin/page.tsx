@@ -40,6 +40,7 @@ import {
   LifeBuoy,
   Activity,
   Database,
+  TrendingUp,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 import AdminAttendanceCockpit from "@/components/attendance/AdminAttendanceCockpit";
@@ -444,6 +445,7 @@ export default function AdminDashboardPage() {
         { id: "HR", label: "এইচআর ও শিক্ষক স্টাফ", subLabel: "HR, Teachers & Staff", icon: Briefcase },
         { id: "SECURITY", label: "নিরাপত্তা ও সেশন গভর্ন্যান্স", subLabel: "Zero-Trust & Sessions", icon: ShieldCheck, href: "/admin/security" },
         { id: "DATA_QUALITY", label: "ডেটা কোয়ালিটি ও গভর্ন্যান্স", subLabel: "Data Governance & MDM", icon: Database, href: "/admin/data-quality" },
+        { id: "BI", label: "বিজনেস ইন্টেলিজেন্স ও ফোরকাস্টিং", subLabel: "BI, Forecasting & Early Warning", icon: TrendingUp, href: "/admin/business-intelligence" },
         { id: "REPORTS", label: "রিপোর্ট ও অ্যানালিটিক্স", subLabel: "Reports & Logs", icon: BarChart3 },
         { id: "OPERATIONS", label: "সিস্টেম অপারেশন ও ব্যাকআপ", subLabel: "Health & Disaster Recovery", icon: Activity },
         { id: "USERS", label: "ইউজার ও শিক্ষক", subLabel: "Staff & RBAC Accounts", icon: ShieldCheck },

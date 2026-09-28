@@ -78,5 +78,21 @@
     "reviewedBy": "প্রধান অ্যাডমিন (অপারেশনাল)",
     "reviewedAt": "2026-09-28T18:49:12.286Z",
     "decisionNotes": "ব্যাংক ভাউচার মিলিয়ে দেখা হয়েছে। অনুমোদন করা হলো।"
+  },
+  {
+    "requestId": "TEST-AI-REQ-001",
+    "module": "FINANCE",
+    "proposedAction": "বকেয়া ফি সমন্বয় ও যাচাই প্রস্তাবনা",
+    "entityType": "FeeInvoice",
+    "entityId": "inv-test-123",
+    "recommendationSummary": "পেমেন্ট রিসিট ও ব্যাংক স্টেটমেন্ট পর্যালোচনার পর ৳২০০ ছাড়ের প্রস্তাব।",
+    "supportingEvidence": "ব্যাংক রেফারেন্স TRX998877",
+    "riskTier": "MEDIUM",
+    "reviewId": "EHRJ-AIR-866161-625",
+    "status": "APPROVED",
+    "createdAt": "2026-09-28T19:14:26.161Z",
+    "reviewedBy": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "reviewedAt": "2026-09-28T19:14:26.162Z",
+    "decisionNotes": "ব্যাংক ভাউচার মিলিয়ে দেখা হয়েছে। অনুমোদন করা হলো।"
   }
 ]

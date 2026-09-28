@@ -1,0 +1,69 @@
+[
+  {
+    "warningId": "EHRJ-EW-2026-748008",
+    "ruleCode": "EW-FIN-002",
+    "domain": "FINANCE",
+    "severity": "CRITICAL",
+    "status": "DETECTED",
+    "titleBn": "সাধারণ তহবিল পরিচালনা ঝুঁকি",
+    "messageBn": "সাধারণ তহবিলের বর্তমান নগদ স্থিতি (৳১,২১,৬০০) পরবর্তী এক মাসের আনুমানিক বেতন ব্যয়ের (৳১,৯১,৫০০) নিচে রয়েছে।",
+    "targetEntity": "CashFund:GENERAL",
+    "entityId": "FUND-GENERAL",
+    "observableMetric": "GeneralFundBalance vs MonthlyPayroll",
+    "observedValue": "৳121600",
+    "thresholdValue": "৳191500",
+    "evidence": {
+      "currentBalance": 121600,
+      "monthlyPayroll": 191500
+    },
+    "detectedAt": "2026-09-28T19:12:28.278Z"
+  },
+  {
+    "warningId": "EHRJ-EW-2026-358980",
+    "ruleCode": "EW-FIN-002",
+    "domain": "FINANCE",
+    "severity": "CRITICAL",
+    "status": "RESOLVED",
+    "titleBn": "সাধারণ তহবিল পরিচালনা ঝুঁকি",
+    "messageBn": "সাধারণ তহবিলের বর্তমান নগদ স্থিতি (৳১,২১,৬০০) পরবর্তী এক মাসের আনুমানিক বেতন ব্যয়ের (৳১,৯১,৫০০) নিচে রয়েছে।",
+    "targetEntity": "CashFund:GENERAL",
+    "entityId": "FUND-GENERAL",
+    "observableMetric": "GeneralFundBalance vs MonthlyPayroll",
+    "observedValue": "৳121600",
+    "thresholdValue": "৳191500",
+    "evidence": {
+      "currentBalance": 121600,
+      "monthlyPayroll": 191500
+    },
+    "detectedAt": "2026-09-28T19:05:58.981Z",
+    "acknowledgedBy": "Admin Test",
+    "acknowledgedAt": "2026-09-28T19:12:27.940Z",
+    "resolvedBy": "Admin Test",
+    "resolvedAt": "2026-09-28T19:12:27.941Z",
+    "resolutionNotes": "Issue addressed"
+  },
+  {
+    "warningId": "EHRJ-EW-2026-358831",
+    "ruleCode": "EW-FIN-002",
+    "domain": "FINANCE",
+    "severity": "CRITICAL",
+    "status": "RESOLVED",
+    "titleBn": "সাধারণ তহবিল পরিচালনা ঝুঁকি",
+    "messageBn": "সাধারণ তহবিলের বর্তমান নগদ স্থিতি (৳১,২১,৬০০) পরবর্তী এক মাসের আনুমানিক বেতন ব্যয়ের (৳১,৯১,৫০০) নিচে রয়েছে।",
+    "targetEntity": "CashFund:GENERAL",
+    "entityId": "FUND-GENERAL",
+    "observableMetric": "GeneralFundBalance vs MonthlyPayroll",
+    "observedValue": "৳121600",
+    "thresholdValue": "৳191500",
+    "evidence": {
+      "currentBalance": 121600,
+      "monthlyPayroll": 191500
+    },
+    "detectedAt": "2026-09-28T19:05:58.917Z",
+    "acknowledgedBy": "Admin Test",
+    "acknowledgedAt": "2026-09-28T19:05:58.927Z",
+    "resolvedBy": "Admin Test",
+    "resolvedAt": "2026-09-28T19:05:58.928Z",
+    "resolutionNotes": "Issue addressed"
+  }
+]
