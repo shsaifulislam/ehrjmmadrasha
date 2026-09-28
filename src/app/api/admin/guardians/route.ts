@@ -11,6 +11,13 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 401 });
     }
 
+    if (user.role !== "ADMIN" && user.role !== "PRINCIPAL") {
+      return NextResponse.json(
+        { error: "অননুমোদিত অ্যাক্সেস: কেবলমাত্র অ্যাডমিন ও মুহতামিম অভিভাবক তালিকা দেখতে পারেন।" },
+        { status: 403 }
+      );
+    }
+
     const { searchParams } = new URL(req.url);
     const query = searchParams.get("q")?.trim();
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));

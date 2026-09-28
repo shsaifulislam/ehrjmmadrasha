@@ -12,6 +12,13 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 401 });
     }
 
+    if (user.role === "GUARDIAN") {
+      return NextResponse.json(
+        { error: "অননুমোদিত অ্যাক্সেস: অভিভাবকগণের জন্য প্রশাসনিক শিক্ষার্থী তালিকা নিষিদ্ধ।" },
+        { status: 403 }
+      );
+    }
+
     const { searchParams } = new URL(req.url);
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
     const limit = Math.max(1, Math.min(100, parseInt(searchParams.get("limit") || "20", 10)));

@@ -14,6 +14,26 @@ export async function GET(
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 401 });
     }
 
+    // RBAC & IDOR check: ADMIN and PRINCIPAL permitted; GUARDIAN must be linked; others forbidden
+    if (user.role !== "ADMIN" && user.role !== "PRINCIPAL") {
+      if (user.role === "GUARDIAN") {
+        const isLinked = await prisma.guardianStudent.findFirst({
+          where: {
+            studentId: params.id,
+            guardian: { OR: [{ userId: user.userId }, { phone: user.username }] },
+          },
+        });
+        if (!isLinked) {
+          return NextResponse.json(
+            { error: "নিরাপত্তা সতর্কতা: অননুমোদিত ছাত্রের ডকুমেন্ট দেখার অনুমতি নেই।" },
+            { status: 403 }
+          );
+        }
+      } else {
+        return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
+      }
+    }
+
     const documents = await prisma.studentDocument.findMany({
       where: { studentId: params.id },
       orderBy: { createdAt: "desc" },

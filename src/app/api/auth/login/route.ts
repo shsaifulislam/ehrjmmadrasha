@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
 
     if (!user) {
       return NextResponse.json(
-        { error: "প্রদত্ত তথ্যের সাথে কোনো অ্যাকাউন্ট পাওয়া যায়নি।" },
+        { error: "ভুল ইউজারনেম/ইমেইল অথবা পাসওয়ার্ড! অনুগ্রহ করে সঠিক তথ্য প্রদান করুন।" },
         { status: 401 }
       );
     }
@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
       });
 
       return NextResponse.json(
-        { error: "ভুল পাসওয়ার্ড! অনুগ্রহ করে সঠিক পাসওয়ার্ড দিন।" },
+        { error: "ভুল ইউজারনেম/ইমেইল অথবা পাসওয়ার্ড! অনুগ্রহ করে সঠিক তথ্য প্রদান করুন।" },
         { status: 401 }
       );
     }

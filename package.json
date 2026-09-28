@@ -15,7 +15,8 @@
     "test:phase13": "npx tsx scratch/test_phase13_api.ts && npx tsx scratch/test_phase13_http_api.ts",
     "test:phase14": "npx tsx scratch/test_phase14_api.ts && npx tsx scratch/test_phase14_http_api.ts",
     "test:phase15": "npx tsx scratch/test_phase15_api.ts && npx tsx scratch/test_phase15_http_api.ts",
-    "test:phase16": "npx tsx scratch/test_phase16_api.ts && npx tsx scratch/test_phase16_http_api.ts"
+    "test:phase16": "npx tsx scratch/test_phase16_api.ts && npx tsx scratch/test_phase16_http_api.ts",
+    "test:phase17": "npx tsx scratch/test_phase17_security.ts && npx tsx scratch/test_phase17_http_security.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

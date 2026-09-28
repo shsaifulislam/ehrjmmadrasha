@@ -29,6 +29,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "কমপক্ষে একটি ইনভয়েস নির্বাচন করুন।" }, { status: 400 });
     }
 
+    // Idempotency / Duplicate transaction verification
+    const effectiveTxnRef = (transactionId || idempotencyKey)?.toString()?.trim();
+    if (effectiveTxnRef) {
+      const existingReceipt = await prisma.paymentReceipt.findFirst({
+        where: { transactionId: effectiveTxnRef },
+      });
+      if (existingReceipt) {
+        return NextResponse.json(
+          { error: "এই ট্রানজেকশন রেফারেন্স/আইডি দিয়ে ইতিমধ্যে পেমেন্ট সম্পন্ন হয়েছে।" },
+          { status: 409 }
+        );
+      }
+    }
+
     // 1. Fetch Guardian record to verify relationship
     let linkedStudentIds: string[] = [];
     if (user.role === "GUARDIAN") {

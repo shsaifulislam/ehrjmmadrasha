@@ -41,6 +41,21 @@ export async function GET(
       return NextResponse.json({ error: "অভিভাবকের তথ্য পাওয়া যায়নি।" }, { status: 404 });
     }
 
+    // RBAC & IDOR check: ADMIN and PRINCIPAL can view; GUARDIAN can only view their own record
+    if (user.role !== "ADMIN" && user.role !== "PRINCIPAL") {
+      if (user.role === "GUARDIAN") {
+        const isSelf = guardian.userId === user.userId || guardian.phone === user.username;
+        if (!isSelf) {
+          return NextResponse.json(
+            { error: "নিরাপত্তা সতর্কতা: অননুমোদিত অভিভাবকের প্রোফাইল দেখার অনুমতি নেই।" },
+            { status: 403 }
+          );
+        }
+      } else {
+        return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
+      }
+    }
+
     return NextResponse.json({ success: true, guardian });
   } catch (error: any) {
     return NextResponse.json({ error: "Failed to fetch guardian" }, { status: 500 });

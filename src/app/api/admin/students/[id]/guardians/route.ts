@@ -14,6 +14,13 @@ export async function GET(
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 401 });
     }
 
+    if (user.role !== "ADMIN" && user.role !== "PRINCIPAL") {
+      return NextResponse.json(
+        { error: "অননুমোদিত অ্যাক্সেস: কেবলমাত্র অ্যাডমিন ও মুহতামিম অভিভাবক তালিকা দেখতে পারেন।" },
+        { status: 403 }
+      );
+    }
+
     const links = await prisma.guardianStudent.findMany({
       where: { studentId: params.id },
       include: { guardian: true },
