@@ -163,3 +163,102 @@ export async function sendAdmissionApprovalEmail({
     html,
   });
 }
+
+/**
+ * Password Reset OTP Email
+ */
+export async function sendPasswordResetOtpEmail({
+  to,
+  userName,
+  otpCode,
+  validMinutes = 10,
+}: {
+  to: string;
+  userName: string;
+  otpCode: string;
+  validMinutes?: number;
+}) {
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; background-color: #ffffff;">
+      <div style="background-color: #0D5C3A; color: #ffffff; padding: 24px; text-align: center; border-bottom: 4px solid #C59B27;">
+        <h2 style="margin: 0; font-size: 20px;">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা</h2>
+        <p style="margin: 4px 0 0; font-size: 13px; color: #fef08a;">পাসওয়ার্ড রিসেট ওটিপি (OTP Verification)</p>
+        <p style="margin: 4px 0 0; font-size: 11px; color: #a7f3d0;">প্রতিষ্ঠাতা ও অধ্যক্ষ: মাওলানা মহা. আবুল কালাম সরকার</p>
+      </div>
+      <div style="padding: 24px; color: #1e293b; line-height: 1.6;">
+        <p style="font-size: 15px; margin-top: 0;">মুহতারাম <strong>${userName}</strong>, আসসালামু আলাইকুম।</p>
+        <p>আপনার ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা অ্যাকাউন্টের পাসওয়ার্ড পরিবর্তন করার জন্য একটি অনুরোধ পাওয়া গেছে। নিচে আপনার ৬-সংখ্যার ওটিপি কোডটি প্রদান করা হলো:</p>
+        
+        <div style="background-color: #f0fdf4; border: 2px dashed #0D5C3A; border-radius: 8px; padding: 20px; text-align: center; margin: 24px 0;">
+          <span style="font-size: 13px; color: #475569; display: block; margin-bottom: 6px;">আপনার ওটিপি ভেরিফিকেশন কোড</span>
+          <div style="font-size: 36px; font-weight: 800; letter-spacing: 8px; color: #0D5C3A; font-family: monospace;">
+            ${otpCode}
+          </div>
+          <span style="font-size: 12px; color: #b91c1c; display: block; margin-top: 8px; font-weight: 600;">
+            ⏳ এই কোডটি আগামী ${validMinutes} মিনিট কার্যকর থাকবে
+          </span>
+        </div>
+
+        <div style="background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 4px; margin: 16px 0; font-size: 13px; color: #92400e;">
+          <strong>সতর্কতা:</strong> এই ওটিপি কোডটি অত্যন্ত গোপনীয়। মাদরাসার কোনো প্রতিনিধি বা অন্য কারো সাথে এই কোড শেয়ার করবেন না। আপনি যদি পাসওয়ার্ড রিসেটের অনুরোধ না করে থাকেন, তবে অবিলম্বে মাদরাসা প্রশাসনকে অবহিত করুন।
+        </div>
+
+        <p style="font-size: 13px; color: #475569; margin-top: 20px;">
+          জরুরি যোগাযোগ: <strong>01845-162664</strong> | ইমেইল: <strong>adminehrjmadrasha@gmail.com</strong>
+        </p>
+      </div>
+      <div style="background-color: #f1f5f9; padding: 12px 24px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;">
+        ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা ডিজিটাল ক্যাম্পাস ও ইনফরমেশন সিস্টেম
+      </div>
+    </div>
+  `;
+
+  return sendInstitutionalEmail({
+    to,
+    subject: `[EHRJ] পাসওয়ার্ড রিসেট ভেরিফিকেশন ওটিপি: ${otpCode} | ইলিয়টগঞ্জ মাদরাসা`,
+    html,
+  });
+}
+
+/**
+ * Password Reset Success Confirmation Email
+ */
+export async function sendPasswordResetSuccessEmail({
+  to,
+  userName,
+}: {
+  to: string;
+  userName: string;
+}) {
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; background-color: #ffffff;">
+      <div style="background-color: #0D5C3A; color: #ffffff; padding: 24px; text-align: center; border-bottom: 4px solid #C59B27;">
+        <h2 style="margin: 0; font-size: 20px;">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা</h2>
+        <p style="margin: 4px 0 0; font-size: 13px; color: #fef08a;">পাসওয়ার্ড পরিবর্তন সফল হয়েছে</p>
+      </div>
+      <div style="padding: 24px; color: #1e293b; line-height: 1.6;">
+        <p style="font-size: 15px; margin-top: 0;">মুহতারাম <strong>${userName}</strong>,</p>
+        <p>আপনার অ্যাকাউন্টের পাসওয়ার্ড সফলভাবে পরিবর্তিত হয়েছে। আপনি এখন আপনার নতুন পাসওয়ার্ড দিয়ে লগইন করতে পারবেন।</p>
+        
+        <div style="background-color: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 16px; margin: 16px 0; font-size: 13px; color: #065f46;">
+          ✓ নতুন পাসওয়ার্ড সফলভাবে সক্রিয় হয়েছে।<br/>
+          ✓ নিরাপত্তার স্বার্থে আপনার পূর্ববর্তী সকল লগইন সেশন বন্ধ করে দেওয়া হয়েছে।
+        </div>
+
+        <p style="font-size: 13px; color: #475569;">
+          যদি আপনি এই পরিবর্তন না করে থাকেন, অনুগ্রহ করে অতি দ্রুত মাদরাসা প্রশাসনের সাথে যোগাযোগ করে অ্যাকাউন্ট সুরক্ষিত করুন।
+        </p>
+      </div>
+      <div style="background-color: #f1f5f9; padding: 12px 24px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;">
+        ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | সাপোর্ট: adminehrjmadrasha@gmail.com
+      </div>
+    </div>
+  `;
+
+  return sendInstitutionalEmail({
+    to,
+    subject: `পাসওয়ার্ড সফলভাবে পরিবর্তিত হয়েছে | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা`,
+    html,
+  });
+}
+

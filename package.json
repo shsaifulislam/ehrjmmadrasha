@@ -10,7 +10,10 @@
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "prisma:seed": "node prisma/seed.js",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "test:phase12": "npx tsx scratch/test_phase12_api.mjs && node scratch/test_phase12_endpoints.mjs",
+    "test:phase13": "npx tsx scratch/test_phase13_api.ts && npx tsx scratch/test_phase13_http_api.ts",
+    "test:phase14": "npx tsx scratch/test_phase14_api.ts && npx tsx scratch/test_phase14_http_api.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

@@ -30,6 +30,14 @@ import {
   BarChart3,
   Mail,
   Printer,
+  Menu,
+  X,
+  LayoutDashboard,
+  ChevronRight,
+  Bus,
+  Boxes,
+  Briefcase,
+  LifeBuoy,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 import AdminAttendanceCockpit from "@/components/attendance/AdminAttendanceCockpit";
@@ -39,6 +47,10 @@ import AdminDocumentHub from "@/components/documents/AdminDocumentHub";
 import AdminCommunicationHub from "@/components/communication/AdminCommunicationHub";
 import AdminLibraryHub from "@/components/library/AdminLibraryHub";
 import AdminHostelHub from "@/components/hostel/AdminHostelHub";
+import AdminTransportHub from "@/components/transport/AdminTransportHub";
+import AdminInventoryHub from "@/components/inventory/AdminInventoryHub";
+import AdminHrHub from "@/components/hr/AdminHrHub";
+import AdminHelpdeskHub from "@/components/helpdesk/AdminHelpdeskHub";
 
 interface AdminStats {
   totalStudents: number;
@@ -74,8 +86,9 @@ interface AdminStats {
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState<AdminStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // 13 Modules
+  // 15 Modules
   const [activeTab, setActiveTab] = useState<
     | "DASHBOARD"
     | "STUDENTS"
@@ -88,6 +101,10 @@ export default function AdminDashboardPage() {
     | "COMMUNICATION"
     | "LIBRARY"
     | "HOSTEL"
+    | "TRANSPORT"
+    | "INVENTORY"
+    | "HR"
+    | "HELPDESK"
     | "CMS"
     | "REPORTS"
     | "USERS"
@@ -379,12 +396,70 @@ export default function AdminDashboardPage() {
     }, 4000);
   };
 
+  const navGroups = [
+    {
+      groupTitle: "মূল ব্যবস্থাপনা (Core Operations)",
+      items: [
+        { id: "DASHBOARD", label: "ড্যাশবোর্ড", subLabel: "Dashboard Overview", icon: LayoutDashboard },
+        { id: "STUDENTS", label: "শিক্ষার্থী তালিকা", subLabel: "Student Directory", icon: Users },
+        {
+          id: "ADMISSION",
+          label: "ভর্তি আবেদন",
+          subLabel: "Admission Desk",
+          icon: UserPlus,
+          badge: stats?.pendingApplications,
+        },
+        { id: "ACADEMIC", label: "একাডেমিক ও জামাত", subLabel: "Classes & Curriculum", icon: GraduationCap },
+      ],
+    },
+    {
+      groupTitle: "দৈনন্দিন কার্যাবলি (Daily Campus)",
+      items: [
+        { id: "ATTENDANCE", label: "হাজিরা ককপিট", subLabel: "Student Attendance", icon: Calendar },
+        { id: "EXAMINATION", label: "পরীক্ষা ও ফলাফল", subLabel: "Exams & Results", icon: Award },
+        { id: "FINANCE", label: "হিসাব ও ফান্ড", subLabel: "Accounts & Collections", icon: DollarSign },
+        { id: "DOCUMENTS", label: "সনদ ও নথিপত্র", subLabel: "Certificates & Letters", icon: FileText },
+      ],
+    },
+    {
+      groupTitle: "যোগাযোগ ও ক্যাম্পাস রিসোর্স",
+      items: [
+        { id: "COMMUNICATION", label: "বার্তা ও নোটিফিকেশন", subLabel: "SMS & Gmail SMTP", icon: Send },
+        { id: "LIBRARY", label: "কিতাবখানা ও লাইব্রেরি", subLabel: "Library Hub", icon: BookOpen },
+        { id: "HOSTEL", label: "হোস্টেল ও আবাসন", subLabel: "Residential Boarding", icon: Building },
+        { id: "TRANSPORT", label: "পরিবহন ব্যবস্থাপনা", subLabel: "Fleet & Routes", icon: Bus },
+        { id: "INVENTORY", label: "ইনভেন্টরি ও সম্পদ", subLabel: "Assets & Procurement", icon: Boxes },
+        { id: "HELPDESK", label: "হেল্পডেস্ক ও অভিযোগ", subLabel: "Complaints & Service Desk", icon: LifeBuoy },
+        { id: "CMS", label: "ওয়েবসাইট CMS ও নোটিশ", subLabel: "Portal CMS", icon: Sliders },
+      ],
+    },
+    {
+      groupTitle: "প্রশাসন ও অডিট (Admin System)",
+      items: [
+        { id: "HR", label: "এইচআর ও শিক্ষক স্টাফ", subLabel: "HR, Teachers & Staff", icon: Briefcase },
+        { id: "REPORTS", label: "রিপোর্ট ও অ্যানালিটিক্স", subLabel: "Reports & Logs", icon: BarChart3 },
+        { id: "USERS", label: "ইউজার ও শিক্ষক", subLabel: "Staff & RBAC Accounts", icon: ShieldCheck },
+        { id: "SETTINGS", label: "প্রতিষ্ঠান সেটিংস", subLabel: "System Config", icon: Clock },
+      ],
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-[#F9F8F3] flex flex-col text-[#0B1914]">
-      {/* Top Admin Header */}
-      <header className="bg-[#083B25] text-white px-6 py-3.5 border-b-2 border-[#C59B27] flex items-center justify-between sticky top-0 z-40 shadow-md">
+      {/* Top Admin Header - Clean, No tabs here */}
+      <header className="bg-[#083B25] text-white px-4 sm:px-6 py-3 border-b-2 border-[#C59B27] flex items-center justify-between sticky top-0 z-40 shadow-md">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-white border border-[#C59B27] overflow-hidden flex items-center justify-center flex-shrink-0 shadow">
+          {/* Mobile Sidebar Hamburger Toggle */}
+          <button
+            type="button"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="lg:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition focus:outline-none"
+            title="মেনু খুলুন"
+          >
+            {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-[#C59B27] overflow-hidden flex items-center justify-center flex-shrink-0 shadow">
             <Image
               src="/images/logo.jpg"
               alt="লোগো"
@@ -394,16 +469,19 @@ export default function AdminDashboardPage() {
             />
           </div>
           <div>
-            <h1 className="font-bold text-sm sm:text-base md:text-lg font-display leading-tight">
-              একক সেন্ট্রালাইজড এডমিন ইআরপি (Unified Institutional ERP)
+            <h1 className="font-bold text-sm sm:text-base font-display leading-tight flex items-center gap-2">
+              <span>একক সেন্ট্রালাইজড এডমিন ইআরপি</span>
+              <span className="hidden md:inline-block bg-[#0D5C3A] text-[#fef08a] border border-[#C59B27] text-[10px] px-2 py-0.5 rounded-full font-sans font-semibold">
+                ERP v2.5
+              </span>
             </h1>
-            <p className="text-xs text-emerald-200">
+            <p className="text-xs text-emerald-200 truncate max-w-xs sm:max-w-md">
               {INSTITUTION_INFO.nameBn} (অধ্যক্ষ: {INSTITUTION_INFO.principal})
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={() => {
               fetchStats();
@@ -411,8 +489,8 @@ export default function AdminDashboardPage() {
               if (activeTab === "USERS") loadTeachers();
               if (activeTab === "CMS") loadNotices();
             }}
-            className="p-1.5 rounded bg-[#0D5C3A] hover:bg-[#158052] text-white text-xs flex items-center gap-1 transition shadow"
-            title="রিফ্রেশ করুন"
+            className="p-1.5 sm:px-2.5 sm:py-1.5 rounded bg-[#0D5C3A] hover:bg-[#158052] text-white text-xs flex items-center gap-1.5 transition shadow"
+            title="তথ্য রিফ্রেশ করুন"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">রিফ্রেশ</span>
@@ -425,12 +503,17 @@ export default function AdminDashboardPage() {
             মূল সাইট
           </Link>
 
+          <div className="hidden md:flex items-center gap-1.5 bg-black/20 border border-white/10 px-2.5 py-1 rounded-full text-xs text-emerald-100">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-medium">অ্যাডমিন অনলাইন</span>
+          </div>
+
           <button
             onClick={handleLogout}
             className="flex items-center gap-1 bg-red-800 hover:bg-red-700 text-white px-3 py-1.5 rounded text-xs font-semibold transition shadow"
           >
             <LogOut className="w-3.5 h-3.5" />
-            লগআউট
+            <span className="hidden sm:inline">লগআউট</span>
           </button>
         </div>
       </header>
@@ -451,48 +534,115 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
-      {/* Navigation Sub-Tabs (The 13 Modules requested in user architecture) */}
-      <div className="bg-white border-b border-[#E2E8F0] px-6 overflow-x-auto sticky top-[69px] z-30 shadow-sm">
-        <div className="flex items-center gap-4 text-xs font-semibold whitespace-nowrap">
-          {[
-            { id: "DASHBOARD", label: "ড্যাশবোর্ড (Dashboard)" },
-            { id: "STUDENTS", label: "শিক্ষার্থী (Students)" },
-            { id: "ADMISSION", label: "ভর্তি আবেদন (Admission)" },
-            { id: "ACADEMIC", label: "একাডেমিক (Academic)" },
-            { id: "ATTENDANCE", label: "হাজিরা (Attendance)" },
-            { id: "EXAMINATION", label: "পরীক্ষা (Examination)" },
-            { id: "FINANCE", label: "হিসাব ও ফান্ড (Finance)" },
-            { id: "DOCUMENTS", label: "নথিপত্র (Documents)" },
-            { id: "COMMUNICATION", label: "বার্তা ও ইমেইল (Communication)" },
-            { id: "LIBRARY", label: "লাইব্রেরি (Library)" },
-            { id: "HOSTEL", label: "হোস্টেল ও আবাসন (Hostel)" },
-            { id: "CMS", label: "ওয়েবসাইট CMS" },
-            { id: "REPORTS", label: "রিপোর্ট (Reports)" },
-            { id: "USERS", label: "ইউজার ও শিক্ষক (Users)" },
-            { id: "SETTINGS", label: "সেটিংস (Settings)" },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              className={`py-3.5 border-b-2 transition ${
-                activeTab === tab.id
-                  ? "border-[#0D5C3A] text-[#0D5C3A]"
-                  : "border-transparent text-gray-500 hover:text-gray-900"
-              }`}
-            >
-              {tab.label}
-              {tab.id === "ADMISSION" && stats && stats.pendingApplications > 0 && (
-                <span className="bg-red-100 text-red-700 ml-1 px-1.5 py-0.2 rounded-full text-[10px]">
-                  {stats.pendingApplications}
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
+      {/* Admin Workspace Layout: Left Sidebar + Main Content */}
+      <div className="flex-1 flex overflow-hidden relative">
+        {/* Mobile Backdrop Overlay */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
 
-      {/* Main Content Area */}
-      <main className="flex-1 p-6 max-w-7xl mx-auto w-full">
+        {/* Left Sidebar Navigation */}
+        <aside
+          className={`fixed lg:sticky top-[57px] bottom-0 left-0 z-40 w-64 sm:w-72 bg-white border-r border-[#E2E8F0] shadow-sm flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+            sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } h-[calc(100vh-57px)] flex-shrink-0`}
+        >
+          {/* Scrollable Navigation Groups */}
+          <div className="flex-1 overflow-y-auto p-3 space-y-4">
+            {/* Mobile Header Inside Sidebar */}
+            <div className="lg:hidden flex items-center justify-between pb-2 border-b border-gray-100 px-1">
+              <span className="text-xs font-bold text-[#0D5C3A] uppercase tracking-wider">
+                মডিউল তালিকা (Menu)
+              </span>
+              <button
+                type="button"
+                onClick={() => setSidebarOpen(false)}
+                className="p-1 rounded text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {navGroups.map((group, gIdx) => (
+              <div key={gIdx} className="space-y-1">
+                <div className="px-3 py-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                  {group.groupTitle}
+                </div>
+                {group.items.map((tab) => {
+                  const Icon = tab.icon;
+                  const isActive = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => {
+                        setActiveTab(tab.id as any);
+                        setSidebarOpen(false);
+                      }}
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                        isActive
+                          ? "bg-[#0D5C3A] text-white shadow-sm font-semibold"
+                          : "text-gray-700 hover:bg-emerald-50/70 hover:text-[#0D5C3A]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <Icon
+                          className={`w-4 h-4 flex-shrink-0 ${
+                            isActive ? "text-[#fef08a]" : "text-gray-400"
+                          }`}
+                        />
+                        <div className="text-left truncate">
+                          <div className="leading-snug truncate">{tab.label}</div>
+                          {tab.subLabel && (
+                            <div
+                              className={`text-[10px] leading-tight truncate ${
+                                isActive ? "text-emerald-100" : "text-gray-400"
+                              }`}
+                            >
+                              {tab.subLabel}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {tab.badge && tab.badge > 0 ? (
+                        <span className="bg-red-500 text-white font-mono text-[10px] px-1.5 py-0.2 rounded-full font-bold shadow-sm ml-1 flex-shrink-0">
+                          {tab.badge}
+                        </span>
+                      ) : isActive ? (
+                        <ChevronRight className="w-3.5 h-3.5 text-[#fef08a] flex-shrink-0 ml-1" />
+                      ) : null}
+                    </button>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+
+          {/* Sidebar Footer: Logged in Administrator Profile */}
+          <div className="p-3 bg-[#F8FAF9] border-t border-[#E2E8F0] text-xs">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-[#0D5C3A] text-[#fef08a] flex items-center justify-center font-bold text-xs shadow-inner border border-[#C59B27]">
+                এ
+              </div>
+              <div className="overflow-hidden flex-1">
+                <p className="font-bold text-gray-800 truncate text-xs leading-tight">
+                  অ্যাডমিন সুপারভাইজার
+                </p>
+                <p className="text-[10px] text-gray-500 truncate font-mono">
+                  adminehrjmadrasha@gmail.com
+                </p>
+              </div>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" title="অনলাইন" />
+            </div>
+          </div>
+        </aside>
+
+        {/* Main Content Area */}
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
         {loading ? (
           <div className="py-20 text-center text-xs text-gray-500">ডেটা লোড হচ্ছে...</div>
         ) : !stats ? (
@@ -818,6 +968,18 @@ export default function AdminDashboardPage() {
             {/* 11. HOSTEL */}
             {activeTab === "HOSTEL" && <AdminHostelHub />}
 
+            {/* 12. TRANSPORT */}
+            {activeTab === "TRANSPORT" && <AdminTransportHub />}
+
+            {/* 13. INVENTORY */}
+            {activeTab === "INVENTORY" && <AdminInventoryHub />}
+
+            {/* 14. HR & TEACHER ENGINE */}
+            {activeTab === "HR" && <AdminHrHub />}
+
+            {/* 15. HELPDESK & COMPLAINT ENGINE */}
+            {activeTab === "HELPDESK" && <AdminHelpdeskHub />}
+
             {/* 11. REPORTS */}
             {activeTab === "REPORTS" && (
               <div className="bg-white rounded-lg border border-[#E2E8F0] p-6 shadow-sm space-y-4">
@@ -996,7 +1158,8 @@ export default function AdminDashboardPage() {
             )}
           </div>
         )}
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

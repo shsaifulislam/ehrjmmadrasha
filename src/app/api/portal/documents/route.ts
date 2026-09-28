@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { getSessionUser } from "@/lib/auth";
 import { DOCUMENT_TYPES } from "@/lib/documentFactory";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/portal/documents
  * Guardian fetches issued certificates and document requests for linked child

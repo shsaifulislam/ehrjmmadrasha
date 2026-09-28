@@ -21,6 +21,8 @@ import {
   Printer,
   ChevronRight,
   Building,
+  Bus,
+  LifeBuoy,
 } from "lucide-react";
 import GuardianAttendanceViewer from "@/components/attendance/GuardianAttendanceViewer";
 import GuardianResultsViewer from "@/components/exams/GuardianResultsViewer";
@@ -29,6 +31,8 @@ import GuardianDocumentsViewer from "@/components/documents/GuardianDocumentsVie
 import PortalNotificationsViewer from "@/components/communication/PortalNotificationsViewer";
 import GuardianLibraryViewer from "@/components/library/GuardianLibraryViewer";
 import GuardianHostelViewer from "@/components/hostel/GuardianHostelViewer";
+import GuardianTransportViewer from "@/components/transport/GuardianTransportViewer";
+import GuardianHelpdeskHub from "@/components/helpdesk/GuardianHelpdeskHub";
 
 export default function StudentGuardianPortalPage() {
   const [classes, setClasses] = useState<any[]>([]);
@@ -49,6 +53,8 @@ export default function StudentGuardianPortalPage() {
     | "NOTIFICATIONS"
     | "LIBRARY"
     | "HOSTEL"
+    | "TRANSPORT"
+    | "HELPDESK"
   >("DASHBOARD");
 
   // Leave request state
@@ -75,6 +81,8 @@ export default function StudentGuardianPortalPage() {
           "NOTIFICATIONS",
           "LIBRARY",
           "HOSTEL",
+          "TRANSPORT",
+          "HELPDESK",
         ];
         if (validTabs.includes(upper)) {
           setActiveTab(upper as any);
@@ -192,6 +200,8 @@ export default function StudentGuardianPortalPage() {
             { id: "CERTIFICATES", label: "সনদপত্র", icon: ShieldCheck },
             { id: "LIBRARY", label: "লাইব্রেরি", icon: BookOpen },
             { id: "HOSTEL", label: "হোস্টেল ও আবাসন", icon: Building },
+            { id: "TRANSPORT", label: "পরিবহন সেবা", icon: Bus },
+            { id: "HELPDESK", label: "হেল্পডেস্ক ও অভিযোগ", icon: LifeBuoy },
             { id: "REQUESTS", label: "ছুটির আবেদন", icon: Send },
             { id: "NOTIFICATIONS", label: "নোটিফিকেশন", icon: Bell },
           ].map((tab) => {
@@ -422,6 +432,12 @@ export default function StudentGuardianPortalPage() {
 
             {/* 12. HOSTEL */}
             {activeTab === "HOSTEL" && <GuardianHostelViewer defaultStudentId={student?.id} />}
+
+            {/* 13. TRANSPORT */}
+            {activeTab === "TRANSPORT" && <GuardianTransportViewer />}
+
+            {/* 14. HELPDESK & COMPLAINTS */}
+            {activeTab === "HELPDESK" && <GuardianHelpdeskHub studentId={student?.id} />}
           </div>
         )}
       </main>

@@ -21,6 +21,10 @@ import {
   Award,
   BookOpen,
   ArrowRight,
+  X,
+  KeyRound,
+  RotateCcw,
+  CheckCircle,
 } from "lucide-react";
 
 interface JamatClass {
@@ -65,12 +69,52 @@ interface StudentSearchResult {
 export default function UnifiedPortalPage() {
   const [activeTab, setActiveTab] = useState<"STAFF_LOGIN" | "STUDENT_PORTAL">("STAFF_LOGIN");
 
-  // Tab 1: Staff / Admin Login state
-  const [email, setEmail] = useState("adminehrjmadrasha@gmail.com");
-  const [password, setPassword] = useState("AdminEhrj@2026!");
+  // Tab 1: Staff / Admin Login state (Empty by default per requirements)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
+
+  // Forgot Password / OTP Reset state
+  const [forgotModalOpen, setForgotModalOpen] = useState(false);
+  const [forgotStep, setForgotStep] = useState<1 | 2 | 3 | 4>(1); // 1: Email, 2: OTP, 3: New Pass, 4: Success
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotOtp, setForgotOtp] = useState("");
+  const [forgotResetToken, setForgotResetToken] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [forgotLoading, setForgotLoading] = useState(false);
+  const [forgotError, setForgotError] = useState<string | null>(null);
+  const [forgotSuccess, setForgotSuccess] = useState<string | null>(null);
+  const [resendTimer, setResendTimer] = useState(0);
+  const [otpExpiryTimer, setOtpExpiryTimer] = useState(600); // 10 minutes
+
+  // Timer countdowns for OTP
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (resendTimer > 0) {
+      interval = setInterval(() => {
+        setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [resendTimer]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (forgotModalOpen && forgotStep === 2 && otpExpiryTimer > 0) {
+      interval = setInterval(() => {
+        setOtpExpiryTimer((prev) => (prev > 0 ? prev - 1 : 0));
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [forgotModalOpen, forgotStep, otpExpiryTimer]);
 
   // Tab 2: Zero-Friction Student / Guardian Search state
   const [classes, setClasses] = useState<JamatClass[]>([]);
@@ -130,6 +174,140 @@ export default function UnifiedPortalPage() {
       setLoginError("সার্ভারের সাথে সংযোগ স্থাপন করা সম্ভব হয়নি।");
       setLoginLoading(false);
     }
+  };
+
+  // Forgot Password: Step 1 - Send OTP
+  const handleSendOtp = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!forgotEmail || !forgotEmail.includes("@")) {
+      setForgotError("অনুগ্রহ করে একটি সঠিক ইমেইল ঠিকানা দিন।");
+      return;
+    }
+
+    setForgotLoading(true);
+    setForgotError(null);
+
+    try {
+      const res = await fetch("/api/auth/forgot-password/send-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: forgotEmail }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setForgotError(data.error || "ওটিপি পাঠাতে ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।");
+        setForgotLoading(false);
+        return;
+      }
+
+      setForgotSuccess(data.message);
+      setForgotStep(2);
+      setResendTimer(60);
+      setOtpExpiryTimer(600); // 10 minutes
+      setForgotLoading(false);
+    } catch {
+      setForgotError("সার্ভারে সংযোগে সমস্যা হয়েছে। ইন্টারনেট সংযোগ পরীক্ষা করুন।");
+      setForgotLoading(false);
+    }
+  };
+
+  // Forgot Password: Step 2 - Verify OTP
+  const handleVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!forgotOtp || forgotOtp.trim().length !== 6) {
+      setForgotError("অনুগ্রহ করে আপনার ইমেইলে প্রাপ্ত ৬-সংখ্যার ওটিপি কোডটি লিখুন।");
+      return;
+    }
+
+    setForgotLoading(true);
+    setForgotError(null);
+
+    try {
+      const res = await fetch("/api/auth/forgot-password/verify-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: forgotEmail, otp: forgotOtp.trim() }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setForgotError(data.error || "ওটিপি যাচাই করা সম্ভব হয়নি।");
+        setForgotLoading(false);
+        return;
+      }
+
+      setForgotResetToken(data.resetToken);
+      setForgotSuccess(data.message);
+      setForgotStep(3);
+      setForgotLoading(false);
+    } catch {
+      setForgotError("সার্ভারে ত্রুটি হয়েছে। অনুগ্রহ করে পুনরায় চেষ্টা করুন।");
+      setForgotLoading(false);
+    }
+  };
+
+  // Forgot Password: Step 3 - Reset Password
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newPassword || newPassword.length < 6) {
+      setForgotError("পাসওয়ার্ড ন্যূনতম ৬ অক্ষরের হতে হবে।");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setForgotError("উভয় পাসওয়ার্ড হুবহু এক হতে হবে।");
+      return;
+    }
+
+    setForgotLoading(true);
+    setForgotError(null);
+
+    try {
+      const res = await fetch("/api/auth/forgot-password/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: forgotEmail,
+          resetToken: forgotResetToken,
+          newPassword,
+          confirmPassword,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setForgotError(data.error || "পাসওয়ার্ড পরিবর্তন ব্যর্থ হয়েছে।");
+        setForgotLoading(false);
+        return;
+      }
+
+      setForgotSuccess(data.message);
+      setForgotStep(4);
+      setEmail(forgotEmail); // automatically populate email in login input
+      setPassword("");
+      setForgotLoading(false);
+    } catch {
+      setForgotError("সার্ভার ত্রুটি। অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন।");
+      setForgotLoading(false);
+    }
+  };
+
+  const openForgotModal = () => {
+    setForgotEmail(email || "");
+    setForgotOtp("");
+    setNewPassword("");
+    setConfirmPassword("");
+    setForgotError(null);
+    setForgotSuccess(null);
+    setForgotStep(1);
+    setForgotModalOpen(true);
+  };
+
+  const closeForgotModal = () => {
+    setForgotModalOpen(false);
+    setForgotError(null);
+    setForgotSuccess(null);
   };
 
   // Handle Zero-Friction Student Search
@@ -280,22 +458,26 @@ export default function UnifiedPortalPage() {
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
                   </div>
+                  <div className="flex justify-end mt-1">
+                    <button
+                      type="button"
+                      onClick={openForgotModal}
+                      className="text-xs font-semibold text-[#0D5C3A] hover:text-[#083B25] hover:underline flex items-center gap-1 transition"
+                    >
+                      <KeyRound className="w-3.5 h-3.5" />
+                      পাসওয়ার্ড ভুলে গেছেন? (Forgot Password?)
+                    </button>
+                  </div>
                 </div>
 
                 <button
                   type="submit"
                   disabled={loginLoading}
-                  className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-md font-bold text-sm transition flex items-center justify-center gap-2 shadow disabled:opacity-50"
+                  className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-md font-bold text-sm transition flex items-center justify-center gap-2 shadow disabled:opacity-50 mt-2"
                 >
                   {loginLoading ? "যাচাই করা হচ্ছে..." : "লগইন করুন (Login)"}
                   {!loginLoading && <ArrowRight className="w-4 h-4" />}
                 </button>
-
-                <div className="bg-emerald-50/60 border border-emerald-100 p-3 rounded text-xs text-emerald-950 space-y-1 mt-4">
-                  <p className="font-semibold text-[#0D5C3A]">ডিফল্ট লগইন ক্রেডেনশিয়ালস:</p>
-                  <p>• অ্যাডমিন: <span className="font-mono font-bold">adminehrjmadrasha@gmail.com</span> / <span className="font-mono">AdminEhrj@2026!</span></p>
-                  <p>• উস্তাদ: <span className="font-mono font-bold">teacherehrjmadrasha@gmail.com</span> / <span className="font-mono">Teacher@2026!</span></p>
-                </div>
               </form>
             </div>
           )}
@@ -456,6 +638,314 @@ export default function UnifiedPortalPage() {
             <p className="text-[11px] text-gray-400">পূর্ব লক্ষ্মীপুর, ইলিয়টগঞ্জ, দাউদকান্দি, কুমিল্লা</p>
           </div>
         </div>
+
+        {/* ======================================================== */}
+        {/* FORGOT PASSWORD & GMAIL OTP RESET MODAL */}
+        {/* ======================================================== */}
+        {forgotModalOpen && (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+            <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all my-8">
+              {/* Modal Header */}
+              <div className="bg-[#083B25] text-white p-5 border-b-4 border-[#C59B27] flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-lg bg-[#0D5C3A] border border-[#C59B27] flex items-center justify-center text-[#fef08a] shadow-inner">
+                    <KeyRound className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-sm sm:text-base leading-tight">
+                      পাসওয়ার্ড রিসেট (Password Reset)
+                    </h3>
+                    <p className="text-[11px] text-emerald-200">
+                      Gmail OTP ভেরিফিকেশন ও নতুন পাসওয়ার্ড সেট
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={closeForgotModal}
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
+                  title="বন্ধ করুন"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Step Progress Indicators */}
+              <div className="bg-[#F8FAF9] px-6 py-3 border-b border-gray-200">
+                <div className="flex items-center justify-between text-xs">
+                  <div className={`flex items-center gap-1.5 ${forgotStep >= 1 ? "text-[#0D5C3A] font-bold" : "text-gray-400"}`}>
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono ${forgotStep >= 1 ? "bg-[#0D5C3A] text-white" : "bg-gray-200 text-gray-600"}`}>
+                      1
+                    </span>
+                    <span>ইমেইল</span>
+                  </div>
+                  <span className="text-gray-300">──</span>
+                  <div className={`flex items-center gap-1.5 ${forgotStep >= 2 ? "text-[#0D5C3A] font-bold" : "text-gray-400"}`}>
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono ${forgotStep >= 2 ? "bg-[#0D5C3A] text-white" : "bg-gray-200 text-gray-600"}`}>
+                      2
+                    </span>
+                    <span>ওটিপি</span>
+                  </div>
+                  <span className="text-gray-300">──</span>
+                  <div className={`flex items-center gap-1.5 ${forgotStep >= 3 ? "text-[#0D5C3A] font-bold" : "text-gray-400"}`}>
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono ${forgotStep >= 3 ? "bg-[#0D5C3A] text-white" : "bg-gray-200 text-gray-600"}`}>
+                      3
+                    </span>
+                    <span>নতুন পাসওয়ার্ড</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal Body */}
+              <div className="p-6">
+                {/* Alert Messages */}
+                {forgotError && (
+                  <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-3.5 py-2.5 rounded-lg text-xs flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                    <span>{forgotError}</span>
+                  </div>
+                )}
+
+                {forgotSuccess && forgotStep !== 4 && (
+                  <div className="mb-4 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3.5 py-2.5 rounded-lg text-xs flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 flex-shrink-0 text-[#0D5C3A]" />
+                    <span>{forgotSuccess}</span>
+                  </div>
+                )}
+
+                {/* STEP 1: Enter Email */}
+                {forgotStep === 1 && (
+                  <form onSubmit={handleSendOtp} className="space-y-4">
+                    <div className="text-center mb-4">
+                      <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 mx-auto flex items-center justify-center text-[#0D5C3A] mb-2">
+                        <Mail className="w-6 h-6" />
+                      </div>
+                      <h4 className="font-bold text-sm text-gray-800">
+                        আপনার নিবন্ধিত ইমেইল ঠিকানা দিন
+                      </h4>
+                      <p className="text-xs text-gray-500 mt-1">
+                        আপনার অ্যাকাউন্টে যুক্ত ইমেইলে একটি ৬-সংখ্যার ওটিপি কোড পাঠানো হবে।
+                      </p>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        ইমেইল এড্রেস (Registered Email)
+                      </label>
+                      <div className="relative">
+                        <Mail className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+                        <input
+                          type="email"
+                          required
+                          value={forgotEmail}
+                          onChange={(e) => setForgotEmail(e.target.value)}
+                          placeholder="আপনার ইমেইল (যেমন: adminehrjmadrasha@gmail.com)"
+                          className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D5C3A]"
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={forgotLoading}
+                      className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow disabled:opacity-50"
+                    >
+                      {forgotLoading ? (
+                        <>
+                          <RotateCcw className="w-4 h-4 animate-spin" />
+                          ওটিপি পাঠানো হচ্ছে...
+                        </>
+                      ) : (
+                        <>
+                          ওটিপি পাঠান (Send OTP)
+                          <ArrowRight className="w-4 h-4" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+
+                {/* STEP 2: Enter & Verify OTP */}
+                {forgotStep === 2 && (
+                  <form onSubmit={handleVerifyOtp} className="space-y-4">
+                    <div className="text-center mb-3">
+                      <div className="w-12 h-12 rounded-full bg-amber-50 border border-amber-200 mx-auto flex items-center justify-center text-[#C59B27] mb-2">
+                        <KeyRound className="w-6 h-6" />
+                      </div>
+                      <h4 className="font-bold text-sm text-gray-800">
+                        ইমেইল চেক করে ওটিপি লিখুন
+                      </h4>
+                      <p className="text-xs text-gray-600 mt-1">
+                        <strong className="text-[#0D5C3A] font-mono">{forgotEmail}</strong> ঠিকানায় পাঠানো ৬-সংখ্যার কোডটি প্রবেশ করান।
+                      </p>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center justify-between text-xs text-gray-500 mb-1">
+                        <span className="font-semibold text-gray-700">৬-সংখ্যার ওটিপি কোড:</span>
+                        <span className="font-mono text-amber-700 font-semibold">
+                          ⏳ মেয়াদ: {Math.floor(otpExpiryTimer / 60)}:{(otpExpiryTimer % 60).toString().padStart(2, "0")}
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        maxLength={6}
+                        required
+                        autoFocus
+                        value={forgotOtp}
+                        onChange={(e) => setForgotOtp(e.target.value.replace(/\D/g, ""))}
+                        placeholder="123456"
+                        className="w-full text-center tracking-[12px] text-2xl font-bold font-mono py-2.5 border-2 border-emerald-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D5C3A] bg-emerald-50/30"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={forgotLoading || forgotOtp.length !== 6}
+                      className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow disabled:opacity-50"
+                    >
+                      {forgotLoading ? (
+                        <>
+                          <RotateCcw className="w-4 h-4 animate-spin" />
+                          যাচাই করা হচ্ছে...
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle2 className="w-4 h-4" />
+                          ওটিপি যাচাই করুন (Verify OTP)
+                        </>
+                      )}
+                    </button>
+
+                    <div className="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setForgotStep(1);
+                          setForgotError(null);
+                        }}
+                        className="text-gray-500 hover:text-gray-800 underline"
+                      >
+                        ইমেইল পরিবর্তন করুন
+                      </button>
+
+                      <button
+                        type="button"
+                        disabled={resendTimer > 0 || forgotLoading}
+                        onClick={() => handleSendOtp()}
+                        className="text-[#0D5C3A] hover:underline font-semibold disabled:text-gray-400 disabled:no-underline"
+                      >
+                        {resendTimer > 0 ? `পুনরায় পাঠান (${resendTimer}s)` : "পুনরায় ওটিপি পাঠান"}
+                      </button>
+                    </div>
+                  </form>
+                )}
+
+                {/* STEP 3: Set New Password */}
+                {forgotStep === 3 && (
+                  <form onSubmit={handleResetPassword} className="space-y-4">
+                    <div className="text-center mb-3">
+                      <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 mx-auto flex items-center justify-center text-[#0D5C3A] mb-2">
+                        <Lock className="w-6 h-6" />
+                      </div>
+                      <h4 className="font-bold text-sm text-gray-800">
+                        নতুন পাসওয়ার্ড সেট করুন
+                      </h4>
+                      <p className="text-xs text-gray-500 mt-1">
+                        নিরাপদ ও শক্তিশালী পাসওয়ার্ড প্রদান করুন (ন্যূনতম ৬ অক্ষর)।
+                      </p>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        নতুন গোপন পাসওয়ার্ড *
+                      </label>
+                      <div className="relative">
+                        <Lock className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+                        <input
+                          type={showNewPassword ? "text" : "password"}
+                          required
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          placeholder="নতুন পাসওয়ার্ড দিন"
+                          className="w-full pl-9 pr-10 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D5C3A]"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowNewPassword(!showNewPassword)}
+                          className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 focus:outline-none"
+                        >
+                          {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        নতুন পাসওয়ার্ড নিশ্চিতকরণ (Confirm Password) *
+                      </label>
+                      <div className="relative">
+                        <Lock className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+                        <input
+                          type={showNewPassword ? "text" : "password"}
+                          required
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          placeholder="পাসওয়ার্ড পুনরায় লিখুন"
+                          className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D5C3A]"
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={forgotLoading || !newPassword || !confirmPassword}
+                      className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow disabled:opacity-50"
+                    >
+                      {forgotLoading ? (
+                        <>
+                          <RotateCcw className="w-4 h-4 animate-spin" />
+                          সংরক্ষণ করা হচ্ছে...
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle2 className="w-4 h-4" />
+                          পাসওয়ার্ড পরিবর্তন করুন
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+
+                {/* STEP 4: Reset Success */}
+                {forgotStep === 4 && (
+                  <div className="text-center py-4 space-y-4">
+                    <div className="w-16 h-16 rounded-full bg-emerald-100 border-2 border-emerald-500 mx-auto flex items-center justify-center text-emerald-600 shadow-md">
+                      <CheckCircle className="w-10 h-10" />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-emerald-900">
+                        আলহামদুলিল্লাহ, পাসওয়ার্ড পরিবর্তন সফল হয়েছে!
+                      </h4>
+                      <p className="text-xs text-gray-600 mt-1 max-w-xs mx-auto">
+                        আপনার নতুন পাসওয়ার্ড ডাটাবেজে সক্রিয় হয়েছে। নিরাপত্তার স্বার্থে আপনার অ্যাকাউন্টের পূর্বের সকল সেশন বন্ধ করা হয়েছে।
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={closeForgotModal}
+                      className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow"
+                    >
+                      এখনই নতুন পাসওয়ার্ড দিয়ে লগইন করুন
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </main>
 
       <Footer />

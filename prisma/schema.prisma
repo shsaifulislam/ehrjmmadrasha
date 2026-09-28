@@ -45,6 +45,27 @@ model User {
   createdResidentialEnrollments ResidentialEnrollment[] @relation("ResidentialEnrollmentCreatedBy")
   recordedResidentialHistories ResidentialHistory[] @relation("ResidentialHistoryRecordedBy")
   reviewedResidentialRequests ResidentialRequest[] @relation("ResidentialRequestReviewedBy")
+  reviewedTransportRequests TransportRequest[] @relation("TransportRequestReviewedBy")
+  recordedTransportHistories TransportAssignmentHistory[] @relation("TransportHistoryRecordedBy")
+  recordedInventoryTransactions InventoryTransaction[] @relation("InventoryTxRecordedBy")
+  requestedPurchaseRequests     PurchaseRequest[]      @relation("PurchaseRequestRequestedBy")
+  reviewedPurchaseRequests      PurchaseRequest[]      @relation("PurchaseRequestReviewedBy")
+  approvedPurchaseOrders        PurchaseOrder[]        @relation("POApprovedBy")
+  createdPurchaseOrders         PurchaseOrder[]        @relation("POCreatedBy")
+  receivedGoodsReceipts         GoodsReceipt[]         @relation("GRNReceivedBy")
+  assignedAssets                InventoryAsset[]       @relation("AssetAssignedUser")
+  recordedAssetAssignments      AssetAssignmentHistory[] @relation("AssetAssignedByUser")
+  recordedAssetConditions       AssetConditionHistory[]  @relation("AssetConditionRecordedBy")
+  employee                      Employee?              @relation("UserEmployee")
+  recordedEmployeeHistories     EmployeeEmploymentHistory[] @relation("EmpHistoryRecordedBy")
+  uploadedEmployeeDocuments     EmployeeDocument[]     @relation("EmpDocUploadedBy")
+  reviewedEmployeeLeaveRequests EmployeeLeaveRequest[] @relation("EmpLeaveReviewedBy")
+  recordedEmployeeAttendances   EmployeeAttendanceRecord[] @relation("EmpAttendanceRecordedBy")
+  submittedSupportRequests      SupportRequest[]           @relation("SupportRequestSubmittedBy")
+  assignedSupportRequests       SupportRequest[]           @relation("SupportRequestAssignedTo")
+  resolvedSupportRequests       SupportRequest[]           @relation("SupportRequestResolvedBy")
+  authoredSupportMessages       SupportRequestMessage[]    @relation("SupportMessageAuthor")
+  recordedSupportHistories      SupportRequestStatusHistory[] @relation("SupportHistoryRecordedBy")
 }
 
 model Session {
@@ -109,6 +130,10 @@ model AcademicSession {
   residentialHistories   ResidentialHistory[]
   residentialRequests    ResidentialRequest[]
   residentialRules       ResidentialRule[]
+  transportEnrollments   TransportEnrollment[]
+  transportRequests      TransportRequest[]
+  transportHistories     TransportAssignmentHistory[]
+  transportRules         TransportRule[]
 }
 
 model JamatClass {
@@ -237,6 +262,10 @@ model Student {
   residentialEnrollments ResidentialEnrollment[]
   residentialHistories   ResidentialHistory[]
   residentialRequests    ResidentialRequest[]
+  transportEnrollments   TransportEnrollment[]
+  transportRequests      TransportRequest[]
+  transportHistories     TransportAssignmentHistory[]
+  supportRequests        SupportRequest[]
 }
 
 model Guardian {
@@ -256,6 +285,8 @@ model Guardian {
   students    GuardianStudent[]
   documentRequests DocumentRequest[]
   residentialRequests ResidentialRequest[]
+  transportRequests   TransportRequest[]
+  supportRequests     SupportRequest[]
 }
 
 model GuardianStudent {
@@ -788,12 +819,15 @@ model PayrollRecord {
   fundCode         String          @default("GENERAL")
   notes            String?
   approvedByUserId String?
+  employeeId       String?
   createdAt        DateTime        @default(now())
   updatedAt        DateTime        @updatedAt
 
   user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  employee         Employee?       @relation(fields: [employeeId], references: [id], onDelete: SetNull)
 
   @@unique([userId, month])
+  @@index([employeeId])
 }
 
 model FinancialAccount {
@@ -1416,4 +1450,958 @@ model ResidentialRequestSequence {
   updatedAt DateTime @updatedAt
 }
 
+model PasswordResetOtp {
+  id          String   @id @default(uuid())
+  email       String
+  otpHash     String
+  resetToken  String?  @unique
+  attempts    Int      @default(0)
+  isUsed      Boolean  @default(false)
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
 
+  @@index([email, isUsed])
+}
+
+// -------------------------------------------------------------
+// 12. PHASE 11: TRANSPORT MANAGEMENT ENGINE
+// -------------------------------------------------------------
+
+model TransportDriver {
+  id               String             @id @default(uuid())
+  employeeId       String?
+  name             String
+  phone            String             @unique
+  address          String?
+  licenseNumber    String             @unique
+  licenseExpiry    DateTime
+  emergencyContact String?
+  status           String             @default("ACTIVE") // ACTIVE, INACTIVE, SUSPENDED
+  notes            String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  employee         Employee?          @relation(fields: [employeeId], references: [id], onDelete: SetNull)
+  vehicles         TransportVehicle[]
+
+  @@index([status])
+  @@index([employeeId])
+}
+
+model TransportVehicle {
+  id            String            @id @default(uuid())
+  vehicleNumber String            @unique // e.g. "ঢাকা মেট্রো-চ ১১-২২৩৩"
+  vehicleType   String            @default("BUS") // BUS, MICROBUS, VAN, OTHER
+  model         String?
+  capacity      Int               // Maximum passenger seats
+  driverId      String?
+  status        String            @default("ACTIVE") // ACTIVE, INACTIVE, MAINTENANCE, RETIRED
+  notes         String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  driver        TransportDriver?  @relation(fields: [driverId], references: [id], onDelete: SetNull)
+  routes        TransportRoute[]
+
+  @@index([status])
+}
+
+model TransportRoute {
+  id            String                       @id @default(uuid())
+  routeName     String                       // e.g. "ইলিয়টগঞ্জ বাজার - মাদরাসা"
+  routeCode     String                       @unique // e.g. "ROUTE-A"
+  description   String?
+  direction     String                       @default("BOTH") // TO_MADRASHA, FROM_MADRASHA, BOTH
+  startPoint    String                       // e.g. "ইলিয়টগঞ্জ বাজার"
+  endPoint      String                       // e.g. "মাদরাসা ক্যাম্পাস"
+  vehicleId     String?
+  monthlyFee    Float                        @default(800)
+  status        String                       @default("ACTIVE") // ACTIVE, INACTIVE, ARCHIVED
+  effectiveDate DateTime                     @default(now())
+  notes         String?
+  createdAt     DateTime                     @default(now())
+  updatedAt     DateTime                     @updatedAt
+
+  vehicle       TransportVehicle?            @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  stops         TransportStop[]
+  enrollments   TransportEnrollment[]
+  requests      TransportRequest[]
+  histories     TransportAssignmentHistory[]
+
+  @@index([status])
+}
+
+model TransportStop {
+  id               String                @id @default(uuid())
+  routeId          String
+  stopName         String                // e.g. "স্টেশন রোড"
+  address          String?
+  sequenceOrder    Int
+  pickupTime       String?               // e.g. "07:30 AM"
+  dropTime         String?               // e.g. "04:30 PM"
+  status           String                @default("ACTIVE") // ACTIVE, INACTIVE, ARCHIVED
+  notes            String?
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
+
+  route            TransportRoute        @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  pickupEnrollments TransportEnrollment[] @relation("PickupStop")
+  dropEnrollments   TransportEnrollment[] @relation("DropStop")
+  pickupRequests    TransportRequest[]    @relation("RequestPickupStop")
+  dropRequests      TransportRequest[]    @relation("RequestDropStop")
+
+  @@unique([routeId, sequenceOrder])
+  @@index([routeId, status])
+}
+
+model TransportEnrollment {
+  id           String                       @id @default(uuid())
+  studentId    String
+  sessionId    String
+  routeId      String
+  pickupStopId String
+  dropStopId   String?
+  startDate    DateTime                     @default(now())
+  endDate      DateTime?
+  status       String                       @default("ACTIVE") // ACTIVE, PENDING, SUSPENDED, CANCELLED, COMPLETED
+  monthlyFee   Float
+  notes        String?
+  createdById  String?
+  createdAt    DateTime                     @default(now())
+  updatedAt    DateTime                     @updatedAt
+
+  student      Student                      @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session      AcademicSession              @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  route        TransportRoute               @relation(fields: [routeId], references: [id], onDelete: Restrict)
+  pickupStop   TransportStop                @relation("PickupStop", fields: [pickupStopId], references: [id], onDelete: Restrict)
+  dropStop     TransportStop?               @relation("DropStop", fields: [dropStopId], references: [id], onDelete: SetNull)
+  histories    TransportAssignmentHistory[]
+
+  @@index([studentId, sessionId, status])
+  @@index([routeId, status])
+}
+
+model TransportRequest {
+  id                 String          @id @default(uuid())
+  requestNumber      String          @unique // e.g. "EHRJ-TRQ-2026-000001"
+  studentId          String
+  guardianId         String
+  sessionId          String
+  routeId            String
+  pickupStopId       String
+  dropStopId         String?
+  preferredStartDate DateTime
+  status             String          @default("SUBMITTED") // SUBMITTED, UNDER_REVIEW, APPROVED, REJECTED, CANCELLED
+  reason             String?
+  adminNotes         String?
+  rejectionReason    String?
+  reviewedByUserId   String?
+  reviewedAt         DateTime?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  student            Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  guardian           Guardian        @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+  session            AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  route              TransportRoute  @relation(fields: [routeId], references: [id], onDelete: Restrict)
+  pickupStop         TransportStop   @relation("RequestPickupStop", fields: [pickupStopId], references: [id], onDelete: Restrict)
+  dropStop           TransportStop?  @relation("RequestDropStop", fields: [dropStopId], references: [id], onDelete: SetNull)
+  reviewedByUser     User?           @relation("TransportRequestReviewedBy", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([studentId])
+  @@index([guardianId])
+  @@index([status])
+  @@index([requestNumber])
+}
+
+model TransportAssignmentHistory {
+  id                   String               @id @default(uuid())
+  studentId            String
+  sessionId            String
+  enrollmentId         String?
+  routeId              String
+  action               String               // ENROLLED, ROUTE_CHANGED, STOP_CHANGED, SUSPENDED, CANCELLED, REACTIVATED
+  previousRouteId      String?
+  previousPickupStopId String?
+  newPickupStopId      String?
+  effectiveDate        DateTime             @default(now())
+  reason               String?
+  notes                String?
+  recordedByUserId     String
+  createdAt            DateTime             @default(now())
+
+  student              Student              @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session              AcademicSession      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  enrollment           TransportEnrollment? @relation(fields: [enrollmentId], references: [id], onDelete: SetNull)
+  route                TransportRoute       @relation(fields: [routeId], references: [id], onDelete: Restrict)
+  recordedByUser       User                 @relation("TransportHistoryRecordedBy", fields: [recordedByUserId], references: [id])
+
+  @@index([studentId])
+  @@index([routeId])
+  @@index([effectiveDate])
+}
+
+model TransportRequestSequence {
+  id        String   @id @default(uuid())
+  year      Int      @unique
+  lastSeq   Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model TransportRule {
+  id                   String          @id @default(uuid())
+  sessionId            String          @unique
+  defaultMonthlyFee    Float           @default(800)
+  allowGuardianRequest Boolean         @default(true)
+  maxAdvanceDays       Int             @default(30)
+  notesBn              String?
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+
+  session              AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+// -------------------------------------------------------------
+// 12. PHASE 12: INVENTORY, ASSET & PROCUREMENT MANAGEMENT ENGINE
+// -------------------------------------------------------------
+
+model InventoryCategory {
+  id          String          @id @default(uuid())
+  code        String          @unique // e.g. "STATIONERY", "CLEANING", "KITCHEN", "ELECTRICAL", "IT", "FURNITURE", "ACADEMIC", "MAINTENANCE", "FOOD", "OTHER"
+  nameBn      String
+  nameEn      String?
+  description String?
+  sortOrder   Int             @default(0)
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  items       InventoryItem[]
+
+  @@index([isActive])
+}
+
+model InventoryLocation {
+  id                 String                 @id @default(uuid())
+  code               String                 @unique // e.g. "MAIN_STORE", "OFFICE", "LIBRARY", "KITCHEN", "COMPUTER_LAB", "ACADEMIC_BUILDING", "MAINTENANCE_STORE"
+  nameBn             String
+  nameEn             String?
+  description        String?
+  isActive           Boolean                @default(true)
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+
+  stockBalances      InventoryStockBalance[]
+  sourceTransactions InventoryTransaction[] @relation("SourceLocation")
+  destTransactions   InventoryTransaction[] @relation("DestLocation")
+  assets             InventoryAsset[]
+
+  @@index([isActive])
+}
+
+model InventoryItem {
+  id                   String                 @id @default(uuid())
+  itemCode             String                 @unique // Format: EHRJ-INV-YYYY-XXXX
+  nameBn               String
+  nameEn               String?
+  categoryId           String
+  unit                 String                 // PCS, REAM, KG, LTR, BOX, PACKET, ROLL, DOZEN, SET, METER, OTHER
+  description          String?
+  isConsumable         Boolean                @default(true) // true: consumable, false: durable asset
+  minStock             Float                  @default(5)
+  reorderLevel         Float                  @default(10)
+  maxStock             Float?
+  defaultUnitCost      Float                  @default(0)
+  isActive             Boolean                @default(true)
+  notes                String?
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+
+  category             InventoryCategory      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  stockBalances        InventoryStockBalance[]
+  transactions         InventoryTransaction[]
+  purchaseRequestItems PurchaseRequestItem[]
+  purchaseOrderItems   PurchaseOrderItem[]
+  goodsReceiptItems    GoodsReceiptItem[]
+  assets               InventoryAsset[]
+
+  @@index([categoryId])
+  @@index([isActive])
+  @@index([itemCode])
+}
+
+model InventoryStockBalance {
+  id             String            @id @default(uuid())
+  itemId         String
+  locationId     String
+  openingBalance Float             @default(0)
+  totalIn        Float             @default(0)
+  totalOut       Float             @default(0)
+  currentBalance Float             @default(0)
+  lastAdjustedAt DateTime?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  item           InventoryItem     @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  location       InventoryLocation @relation(fields: [locationId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, locationId])
+  @@index([itemId])
+  @@index([locationId])
+}
+
+model InventoryTransaction {
+  id                 String             @id @default(uuid())
+  transactionNumber  String             @unique // EHRJ-STX-YYYY-XXXXXX
+  itemId             String
+  sourceLocationId   String?
+  destLocationId     String?
+  transactionType    String             // OPENING, PURCHASE_IN, TRANSFER_IN, TRANSFER_OUT, ISSUE_OUT, ADJUSTMENT_IN, ADJUSTMENT_OUT, RETURN_IN, DAMAGE_OUT, LOSS_OUT, DISPOSAL_OUT
+  quantity           Float
+  unitCost           Float?
+  totalCost          Float?
+  reference          String?            // PO number, Requisition ID, or Challan
+  purpose            String?            // Classroom, Kitchen, Office, Maintenance, Student Welfare
+  recipient          String?            // Department, Teacher or Staff
+  systemStockBefore  Float?
+  systemStockAfter   Float?
+  notes              String?
+  recordedByUserId   String
+  createdAt          DateTime           @default(now())
+
+  item               InventoryItem      @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  sourceLocation     InventoryLocation? @relation("SourceLocation", fields: [sourceLocationId], references: [id], onDelete: SetNull)
+  destLocation       InventoryLocation? @relation("DestLocation", fields: [destLocationId], references: [id], onDelete: SetNull)
+  recordedByUser     User               @relation("InventoryTxRecordedBy", fields: [recordedByUserId], references: [id])
+
+  @@index([itemId])
+  @@index([transactionType])
+  @@index([createdAt])
+  @@index([sourceLocationId])
+  @@index([destLocationId])
+}
+
+model Supplier {
+  id             String           @id @default(uuid())
+  supplierCode   String           @unique // EHRJ-SUP-YYYY-XXXX
+  name           String
+  contactPerson  String?
+  phone          String
+  altPhone       String?
+  email          String?
+  address        String?
+  taxNumber      String?
+  notes          String?
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  purchaseOrders PurchaseOrder[]
+  assets         InventoryAsset[]
+
+  @@index([isActive])
+}
+
+model PurchaseRequest {
+  id                 String                @id @default(uuid())
+  requestNumber      String                @unique // EHRJ-PRQ-YYYY-XXXX
+  title              String
+  purpose            String
+  priority           String                @default("NORMAL") // LOW, NORMAL, HIGH, URGENT
+  status             String                @default("DRAFT") // DRAFT, SUBMITTED, APPROVED, REJECTED, ORDERED, RECEIVED
+  requestedDate      DateTime              @default(now())
+  requiredDate       DateTime?
+  totalEstimatedCost Float                 @default(0)
+  adminNotes         String?
+  requestedByUserId  String
+  reviewedByUserId   String?
+  reviewedAt         DateTime?
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+
+  requestedByUser    User                  @relation("PurchaseRequestRequestedBy", fields: [requestedByUserId], references: [id])
+  reviewedByUser     User?                 @relation("PurchaseRequestReviewedBy", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
+  items              PurchaseRequestItem[]
+  purchaseOrders     PurchaseOrder[]
+
+  @@index([status])
+  @@index([priority])
+  @@index([requestedByUserId])
+}
+
+model PurchaseRequestItem {
+  id                 String          @id @default(uuid())
+  requestId          String
+  itemId             String
+  quantity           Float
+  estimatedUnitCost  Float           @default(0)
+  totalEstimated     Float           @default(0)
+  notes              String?
+
+  request            PurchaseRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  item               InventoryItem   @relation(fields: [itemId], references: [id], onDelete: Restrict)
+
+  @@index([requestId])
+  @@index([itemId])
+}
+
+model PurchaseOrder {
+  id                   String              @id @default(uuid())
+  poNumber             String              @unique // EHRJ-PO-YYYY-XXXX
+  supplierId           String
+  purchaseRequestId    String?
+  orderDate            DateTime            @default(now())
+  expectedDeliveryDate DateTime?
+  subtotal             Float
+  discount             Float               @default(0)
+  tax                  Float               @default(0)
+  totalAmount          Float
+  status               String              @default("DRAFT") // DRAFT, APPROVED, ORDERED, PARTIALLY_RECEIVED, RECEIVED, CANCELLED
+  notes                String?
+  approvedByUserId     String?
+  approvedAt           DateTime?
+  createdById          String
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+
+  supplier             Supplier            @relation(fields: [supplierId], references: [id], onDelete: Restrict)
+  purchaseRequest      PurchaseRequest?    @relation(fields: [purchaseRequestId], references: [id], onDelete: SetNull)
+  approvedByUser       User?               @relation("POApprovedBy", fields: [approvedByUserId], references: [id], onDelete: SetNull)
+  createdByUser        User                @relation("POCreatedBy", fields: [createdById], references: [id])
+  items                PurchaseOrderItem[]
+  goodsReceipts        GoodsReceipt[]
+
+  @@index([supplierId])
+  @@index([status])
+  @@index([orderDate])
+}
+
+model PurchaseOrderItem {
+  id                String             @id @default(uuid())
+  purchaseOrderId   String
+  itemId            String
+  quantityOrdered   Float
+  quantityReceived  Float              @default(0)
+  unitPrice         Float
+  totalPrice        Float
+  notes             String?
+
+  purchaseOrder     PurchaseOrder      @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  item              InventoryItem      @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  goodsReceiptItems GoodsReceiptItem[]
+
+  @@index([purchaseOrderId])
+  @@index([itemId])
+}
+
+model GoodsReceipt {
+  id                    String             @id @default(uuid())
+  receiptNumber         String             @unique // EHRJ-GRN-YYYY-XXXX
+  purchaseOrderId       String
+  receivedDate          DateTime           @default(now())
+  locationId            String
+  deliveryChallanNumber String?
+  notes                 String?
+  financeExpenseId      String?
+  receivedByUserId      String
+  createdAt             DateTime           @default(now())
+
+  purchaseOrder         PurchaseOrder      @relation(fields: [purchaseOrderId], references: [id], onDelete: Restrict)
+  receivedByUser        User               @relation("GRNReceivedBy", fields: [receivedByUserId], references: [id])
+  items                 GoodsReceiptItem[]
+
+  @@index([purchaseOrderId])
+  @@index([receivedDate])
+}
+
+model GoodsReceiptItem {
+  id                  String             @id @default(uuid())
+  goodsReceiptId      String
+  purchaseOrderItemId String?
+  itemId              String
+  quantityReceived    Float
+  quantityDamaged     Float              @default(0)
+  quantityAccepted    Float
+  unitCost            Float
+  totalCost           Float
+
+  goodsReceipt        GoodsReceipt       @relation(fields: [goodsReceiptId], references: [id], onDelete: Cascade)
+  purchaseOrderItem   PurchaseOrderItem? @relation(fields: [purchaseOrderItemId], references: [id], onDelete: SetNull)
+  item                InventoryItem      @relation(fields: [itemId], references: [id], onDelete: Restrict)
+
+  @@index([goodsReceiptId])
+  @@index([itemId])
+}
+
+model InventoryAsset {
+  id                 String                   @id @default(uuid())
+  assetCode          String                   @unique // EHRJ-AST-YYYY-XXXX
+  itemId             String
+  serialNumber       String?
+  purchaseCost       Float?
+  purchaseDate       DateTime?
+  warrantyExpiry     DateTime?
+  supplierId         String?
+  locationId         String
+  assignedUserId     String?
+  assignedEmployeeId String?
+  assignedDepartment String?
+  condition          String                   @default("NEW") // NEW, GOOD, FAIR, DAMAGED, REPAIR_REQUIRED
+  status             String                   @default("AVAILABLE") // ACTIVE, IN_USE, AVAILABLE, REPAIR, LOST, DAMAGED, DISPOSED, RETIRED
+  disposalDate       DateTime?
+  disposalValue      Float?
+  disposalReason     String?
+  notes              String?
+  qrToken            String                   @unique @default(uuid())
+  createdAt          DateTime                 @default(now())
+  updatedAt          DateTime                 @updatedAt
+
+  item               InventoryItem            @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  location           InventoryLocation        @relation(fields: [locationId], references: [id], onDelete: Restrict)
+  supplier           Supplier?                @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+  assignedUser       User?                    @relation("AssetAssignedUser", fields: [assignedUserId], references: [id], onDelete: SetNull)
+  assignedEmployee   Employee?                @relation("AssetAssignedEmployee", fields: [assignedEmployeeId], references: [id], onDelete: SetNull)
+  assignments        AssetAssignmentHistory[]
+  conditions         AssetConditionHistory[]
+
+  @@index([itemId])
+  @@index([locationId])
+  @@index([status])
+  @@index([condition])
+  @@index([assignedUserId])
+  @@index([assignedEmployeeId])
+  @@index([assetCode])
+}
+
+model AssetAssignmentHistory {
+  id                  String            @id @default(uuid())
+  assetId             String
+  assignedUserId      String?
+  assignedEmployeeId  String?
+  assignedDepartment  String?
+  locationId          String?
+  previousUserId      String?
+  previousLocationId  String?
+  assignmentDate      DateTime          @default(now())
+  returnDate          DateTime?
+  reason              String?
+  notes               String?
+  assignedByUserId    String
+  createdAt           DateTime          @default(now())
+
+  asset               InventoryAsset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assignedByUser      User              @relation("AssetAssignedByUser", fields: [assignedByUserId], references: [id])
+  assignedEmployee    Employee?         @relation("AssetAssignedEmployeeHistory", fields: [assignedEmployeeId], references: [id], onDelete: SetNull)
+
+  @@index([assetId])
+  @@index([assignedUserId])
+  @@index([assignedEmployeeId])
+  @@index([assignmentDate])
+}
+
+model AssetConditionHistory {
+  id                 String         @id @default(uuid())
+  assetId            String
+  previousCondition  String
+  newCondition       String         // NEW, GOOD, FAIR, DAMAGED, REPAIR_REQUIRED
+  previousStatus     String?
+  newStatus          String?        // ACTIVE, IN_USE, AVAILABLE, REPAIR, LOST, DAMAGED, DISPOSED, RETIRED
+  event              String         // INSPECTION, REPAIR_START, REPAIR_COMPLETE, DAMAGE_REPORT, LOSS_REPORT, DISPOSAL
+  cost               Float?
+  reason             String?
+  notes              String?
+  recordedByUserId   String
+  createdAt          DateTime       @default(now())
+
+  asset              InventoryAsset @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  recordedByUser     User           @relation("AssetConditionRecordedBy", fields: [recordedByUserId], references: [id])
+
+  @@index([assetId])
+  @@index([event])
+  @@index([createdAt])
+}
+
+model InventorySequence {
+  id        String   @id @default(uuid())
+  prefix    String   // "INV", "AST", "STX", "SUP", "PRQ", "PO", "GRN"
+  year      Int
+  lastSeq   Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@unique([prefix, year])
+}
+
+// -------------------------------------------------------------
+// 13. PHASE 13: HR, TEACHER & STAFF MANAGEMENT ENGINE
+// -------------------------------------------------------------
+
+model Employee {
+  id                 String                      @id @default(uuid())
+  employeeId         String                      @unique // e.g. EHRJ-EMP-YYYY-XXXX
+  userId             String?                     @unique // Optional link to User with login account
+  departmentId       String?
+  designationId      String?
+  nameBn             String
+  nameEn             String
+  nameAr             String?
+  employeeType       String                      @default("TEACHER") // TEACHER, ACCOUNTANT, OFFICE, DRIVER, COOK, SECURITY, CLEANER, SUPPORT, OTHER
+  gender             String                      @default("MALE")    // MALE, FEMALE
+  dateOfBirth        DateTime?
+  bloodGroup         String?
+  mobile             String
+  email              String?
+  nidNumber          String?
+  presentAddress     String?
+  permanentAddress   String?
+  emergencyContact   String?
+  joiningDate        DateTime                    @default(now())
+  baseSalary         Float                       @default(0)
+  status             String                      @default("ACTIVE")  // ACTIVE, ON_LEAVE, SUSPENDED, RESIGNED, TERMINATED, RETIRED, INACTIVE
+  exitDate           DateTime?
+  exitReason         String?
+  photoUrl           String?
+  qrToken            String                      @unique @default(uuid())
+  notes              String?
+  createdAt          DateTime                    @default(now())
+  updatedAt          DateTime                    @updatedAt
+
+  user               User?                       @relation("UserEmployee", fields: [userId], references: [id], onDelete: SetNull)
+  department         EmployeeDepartment?         @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  designation        EmployeeDesignation?        @relation(fields: [designationId], references: [id], onDelete: SetNull)
+  qualifications     EmployeeQualification[]
+  documents          EmployeeDocument[]
+  employmentHistories EmployeeEmploymentHistory[]
+  leaveRequests      EmployeeLeaveRequest[]
+  leaveBalances      EmployeeLeaveBalance[]
+  attendanceRecords  EmployeeAttendanceRecord[]
+  payrollRecords     PayrollRecord[]
+  assignedAssets     InventoryAsset[]            @relation("AssetAssignedEmployee")
+  assignedAssetHistories AssetAssignmentHistory[] @relation("AssetAssignedEmployeeHistory")
+  transportDrivers   TransportDriver[]
+
+  @@index([status])
+  @@index([departmentId])
+  @@index([designationId])
+  @@index([employeeType])
+  @@index([mobile])
+}
+
+model EmployeeDepartment {
+  id          String     @id @default(uuid())
+  nameBn      String     // e.g. "শিক্ষা ও হিফজ বিভাগ", "প্রশাসন", "হিসাব বিভাগ"
+  nameEn      String     @unique // e.g. "Academic", "Administration", "Accounts"
+  description String?
+  sortOrder   Int        @default(0)
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  employees   Employee[]
+
+  @@index([isActive])
+}
+
+model EmployeeDesignation {
+  id          String     @id @default(uuid())
+  nameBn      String     // e.g. "মুহতামিম", "মুহাদ্দিস", "সহকারী শিক্ষক", "ড্রাইভার", "বাবুর্চি"
+  nameEn      String     @unique // e.g. "Principal", "Teacher", "Assistant Teacher", "Driver"
+  departmentId String?
+  description String?
+  sortOrder   Int        @default(0)
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  employees   Employee[]
+
+  @@index([isActive])
+}
+
+model EmployeeEmploymentHistory {
+  id                String    @id @default(uuid())
+  employeeId        String
+  changeType        String    // JOINING, DESIGNATION_CHANGE, DEPARTMENT_CHANGE, SALARY_CHANGE, STATUS_CHANGE, RESIGNATION, TERMINATION, RETIREMENT, OTHER
+  previousValue     String?
+  newValue          String?
+  effectiveDate     DateTime  @default(now())
+  reason            String?
+  remarks           String?
+  recordedByUserId  String
+  createdAt         DateTime  @default(now())
+
+  employee          Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  recordedByUser    User      @relation("EmpHistoryRecordedBy", fields: [recordedByUserId], references: [id])
+
+  @@index([employeeId])
+  @@index([changeType])
+  @@index([effectiveDate])
+}
+
+model EmployeeQualification {
+  id                 String    @id @default(uuid())
+  employeeId         String
+  degreeTitle        String    // e.g. "দাওরায়ে হাদীস", "কামিল", "বিএ অনার্স"
+  institution        String    // e.g. "দারুল উলুম দেওবন্দ", "ঢাকা আলিয়া"
+  boardOrUniversity  String?
+  majorOrSubject     String?
+  passingYear        Int?
+  resultOrGrade      String?
+  certificateUrl     String?
+  verificationStatus String    @default("VERIFIED") // PENDING, VERIFIED, REJECTED
+  notes              String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  employee           Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+}
+
+model EmployeeDocument {
+  id                 String    @id @default(uuid())
+  employeeId         String
+  documentType       String    // APPOINTMENT_LETTER, JOINING_CONFIRMATION, NID, PASSPORT, CERTIFICATE, CONTRACT, EXPERIENCE_CERTIFICATE, RELEASE_CLEARANCE, OTHER
+  title              String
+  fileUrl            String
+  issueDate          DateTime?
+  expiryDate         DateTime?
+  verificationStatus String    @default("VERIFIED") // PENDING, VERIFIED, REJECTED
+  verificationToken  String    @unique @default(uuid())
+  notes              String?
+  uploadedByUserId   String
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  employee           Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  uploadedByUser     User      @relation("EmpDocUploadedBy", fields: [uploadedByUserId], references: [id])
+
+  @@index([employeeId])
+  @@index([documentType])
+  @@index([expiryDate])
+}
+
+model EmployeeLeaveType {
+  id                 String                 @id @default(uuid())
+  code               String                 @unique // CASUAL, SICK, EMERGENCY, ANNUAL, MATERNITY, OFFICIAL, UNPAID, OTHER
+  nameBn             String                 // e.g. "নৈমিত্তিক ছুটি (ক্যাজুয়াল)"
+  nameEn             String
+  defaultDaysPerYear Int                    @default(10)
+  isPaid             Boolean                @default(true)
+  requiresDocument   Boolean                @default(false)
+  isActive           Boolean                @default(true)
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+
+  leaveBalances      EmployeeLeaveBalance[]
+  leaveRequests      EmployeeLeaveRequest[]
+
+  @@index([isActive])
+}
+
+model EmployeeLeaveBalance {
+  id            String            @id @default(uuid())
+  employeeId    String
+  leaveTypeId   String
+  year          Int               // e.g. 2026
+  allocatedDays Float
+  usedDays      Float             @default(0)
+  pendingDays   Float             @default(0)
+  remainingDays Float
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  employee      Employee          @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  leaveType     EmployeeLeaveType @relation(fields: [leaveTypeId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, leaveTypeId, year])
+  @@index([employeeId, year])
+}
+
+model EmployeeLeaveRequest {
+  id               String            @id @default(uuid())
+  requestCode      String            @unique // e.g. EHRJ-LRQ-YYYY-XXXX
+  employeeId       String
+  leaveTypeId      String
+  startDate        DateTime
+  endDate          DateTime
+  totalDays        Float
+  reason           String
+  emergencyContact String?
+  attachmentUrl    String?
+  status           String            @default("SUBMITTED") // DRAFT, SUBMITTED, APPROVED, REJECTED, CANCELLED
+  reviewedByUserId String?
+  reviewedAt       DateTime?
+  decisionReason   String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  employee         Employee          @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  leaveType        EmployeeLeaveType @relation(fields: [leaveTypeId], references: [id], onDelete: Restrict)
+  reviewedByUser   User?             @relation("EmpLeaveReviewedBy", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([employeeId])
+  @@index([status])
+  @@index([startDate, endDate])
+}
+
+model EmployeeAttendanceRecord {
+  id               String    @id @default(uuid())
+  employeeId       String
+  date             DateTime  // Start of day
+  status           String    @default("PRESENT") // PRESENT, ABSENT, LATE, LEAVE, HALF_DAY, HOLIDAY
+  checkInTime      String?   // e.g. "08:15 AM"
+  checkOutTime     String?   // e.g. "04:30 PM"
+  remarks          String?
+  recordedByUserId String
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  employee         Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  recordedByUser   User      @relation("EmpAttendanceRecordedBy", fields: [recordedByUserId], references: [id])
+
+  @@unique([employeeId, date])
+  @@index([date, status])
+}
+
+model HrSequence {
+  id        String   @id @default(uuid())
+  prefix    String   // "EMP", "LRQ", "DOC"
+  year      Int
+  lastSeq   Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@unique([prefix, year])
+}
+
+// -------------------------------------------------------------
+// 14. PHASE 14: HELP DESK, COMPLAINT & SERVICE REQUEST MANAGEMENT
+// -------------------------------------------------------------
+
+model SupportRequestCategory {
+  id          String           @id @default(uuid())
+  code        String           @unique // ADMISSION, FEE_PAYMENT, ATTENDANCE, RESULT, CERTIFICATE_DOCUMENT, STUDENT_INFORMATION, LIBRARY, HOSTEL_RESIDENTIAL, TRANSPORT, TECHNICAL, INVENTORY, GENERAL
+  nameBn      String           // e.g. "ফি ও লেনদেন সংক্রান্ত অভিযোগ/অনুরোধ"
+  nameEn      String           // e.g. "Fee & Payment Issues"
+  description String?
+  icon        String?          @default("HelpCircle")
+  sortOrder   Int              @default(0)
+  isActive    Boolean          @default(true)
+  slaHours    Int              @default(48) // Target resolution in hours
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  requests    SupportRequest[]
+
+  @@index([isActive])
+}
+
+model SupportRequest {
+  id                  String                        @id @default(uuid())
+  ticketNumber        String                        @unique // e.g. EHRJ-REQ-YYYY-XXXXXX
+  categoryId          String
+  studentId           String?
+  guardianId          String?
+  submittedByUserId   String
+  assignedToUserId    String?
+  resolvedByUserId    String?
+  requestType         String                        @default("SERVICE_REQUEST") // COMPLAINT, SERVICE_REQUEST, CORRECTION_REQUEST, SUPPORT_REQUEST, FEEDBACK
+  priority            String                        @default("NORMAL")          // NORMAL, IMPORTANT, URGENT
+  status              String                        @default("SUBMITTED")       // SUBMITTED, UNDER_REVIEW, IN_PROGRESS, WAITING_FOR_INFORMATION, RESOLVED, CLOSED, REJECTED
+  subject             String
+  description         String
+  relatedEntityType   String?                       // INVOICE, PAYMENT, RESULT, CERTIFICATE_REQUEST, ADMISSION_APP, ATTENDANCE, LIBRARY_ISSUE, RESIDENTIAL_ENROLLMENT, TRANSPORT_REQUEST, INVENTORY_ASSET, OTHER
+  relatedEntityId     String?
+  resolutionSummary   String?
+  resolutionDate      DateTime?
+  reopenReason        String?
+  isEscalated         Boolean                       @default(false)
+  escalationReason    String?
+  firstResponseAt     DateTime?
+  slaTargetAt         DateTime?
+  closedAt            DateTime?
+  createdAt           DateTime                      @default(now())
+  updatedAt           DateTime                      @updatedAt
+
+  category            SupportRequestCategory        @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  student             Student?                      @relation(fields: [studentId], references: [id], onDelete: SetNull)
+  guardian            Guardian?                     @relation(fields: [guardianId], references: [id], onDelete: SetNull)
+  submittedByUser     User                          @relation("SupportRequestSubmittedBy", fields: [submittedByUserId], references: [id], onDelete: Restrict)
+  assignedToUser      User?                         @relation("SupportRequestAssignedTo", fields: [assignedToUserId], references: [id], onDelete: SetNull)
+  resolvedByUser      User?                         @relation("SupportRequestResolvedBy", fields: [resolvedByUserId], references: [id], onDelete: SetNull)
+  messages            SupportRequestMessage[]
+  statusHistories     SupportRequestStatusHistory[]
+  attachments         SupportRequestAttachment[]
+
+  @@index([status])
+  @@index([categoryId])
+  @@index([studentId])
+  @@index([guardianId])
+  @@index([submittedByUserId])
+  @@index([priority])
+  @@index([createdAt])
+}
+
+model SupportRequestMessage {
+  id               String                     @id @default(uuid())
+  requestId        String
+  authorUserId     String
+  messageType      String                     @default("USER_RESPONSE") // USER_RESPONSE, ADMIN_RESPONSE, INTERNAL_NOTE
+  content          String
+  isInternal       Boolean                    @default(false)           // If true, invisible to Guardian
+  createdAt        DateTime                   @default(now())
+  updatedAt        DateTime                   @updatedAt
+
+  request          SupportRequest             @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  authorUser       User                       @relation("SupportMessageAuthor", fields: [authorUserId], references: [id], onDelete: Restrict)
+  attachments      SupportRequestAttachment[]
+
+  @@index([requestId])
+  @@index([isInternal])
+  @@index([createdAt])
+}
+
+model SupportRequestStatusHistory {
+  id               String         @id @default(uuid())
+  requestId        String
+  previousStatus   String?
+  newStatus        String
+  reason           String?
+  remarks          String?
+  recordedByUserId String
+  createdAt        DateTime       @default(now())
+
+  request          SupportRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  recordedByUser   User           @relation("SupportHistoryRecordedBy", fields: [recordedByUserId], references: [id], onDelete: Restrict)
+
+  @@index([requestId])
+  @@index([createdAt])
+}
+
+model SupportRequestAttachment {
+  id               String                 @id @default(uuid())
+  requestId        String
+  messageId        String?
+  fileName         String
+  fileUrl          String
+  fileSize         Int                    @default(0) // bytes
+  mimeType         String                 @default("application/octet-stream")
+  isInternal       Boolean                @default(false)
+  uploadedByUserId String
+  createdAt        DateTime               @default(now())
+
+  request          SupportRequest         @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  message          SupportRequestMessage? @relation(fields: [messageId], references: [id], onDelete: SetNull)
+
+  @@index([requestId])
+  @@index([messageId])
+}
+
+model SupportRequestSequence {
+  id        String   @id @default(uuid())
+  prefix    String   // "REQ"
+  year      Int
+  lastSeq   Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@unique([prefix, year])
+}

@@ -20,6 +20,7 @@ import {
   User,
   Send,
   Building,
+  Boxes,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 import TeacherAttendanceManager from "@/components/attendance/TeacherAttendanceManager";
@@ -27,6 +28,7 @@ import TeacherMarksEntry from "@/components/exams/TeacherMarksEntry";
 import PortalNotificationsViewer from "@/components/communication/PortalNotificationsViewer";
 import TeacherLibraryViewer from "@/components/library/TeacherLibraryViewer";
 import TeacherHostelViewer from "@/components/hostel/TeacherHostelViewer";
+import TeacherInventoryViewer from "@/components/inventory/TeacherInventoryViewer";
 
 interface StudentAttendanceItem {
   id: string;
@@ -50,6 +52,7 @@ export default function TeacherPanelPage() {
     | "LEAVE"
     | "LIBRARY"
     | "HOSTEL"
+    | "INVENTORY"
   >("DASHBOARD");
 
   const [selectedClass, setSelectedClass] = useState("নূরানী ও নাযেরা বিভাগ");
@@ -77,6 +80,7 @@ export default function TeacherPanelPage() {
           "LEAVE",
           "LIBRARY",
           "HOSTEL",
+          "INVENTORY",
         ];
         if (validTabs.includes(upper)) {
           setActiveTab(upper as any);
@@ -178,6 +182,7 @@ export default function TeacherPanelPage() {
             { id: "PROFILE", label: "প্রোফাইল (My Profile)", icon: User },
             { id: "LIBRARY", label: "লাইব্রেরি (Library)", icon: BookOpen },
             { id: "HOSTEL", label: "হোস্টেল ও আবাসন (Hostel)", icon: Building },
+            { id: "INVENTORY", label: "সরঞ্জাম ও সম্পদ (Assets)", icon: Boxes },
             { id: "LEAVE", label: "ছুটির আবেদন (Leave)", icon: Send },
           ].map((tab) => {
             const Icon = tab.icon;
@@ -356,6 +361,9 @@ export default function TeacherPanelPage() {
 
         {/* 12. HOSTEL */}
         {activeTab === "HOSTEL" && <TeacherHostelViewer />}
+
+        {/* 13. INVENTORY */}
+        {activeTab === "INVENTORY" && <TeacherInventoryViewer />}
       </main>
     </div>
   );
