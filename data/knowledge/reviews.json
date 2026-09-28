@@ -1,0 +1,110 @@
+[
+  {
+    "id": "rev-1790610810722",
+    "documentId": "doc-1790610810717-543pk",
+    "action": "SUBMITTED",
+    "status": "UNDER_REVIEW",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:53:30.720Z"
+  },
+  {
+    "id": "rev-1790610810724",
+    "documentId": "doc-1790610810717-543pk",
+    "action": "APPROVED",
+    "status": "APPROVED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:53:30.722Z"
+  },
+  {
+    "id": "rev-1790610810726",
+    "documentId": "doc-1790610810717-543pk",
+    "action": "PUBLISHED",
+    "status": "PUBLISHED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:53:30.725Z"
+  },
+  {
+    "id": "rev-1790610896190",
+    "documentId": "doc-1790610896184-omwap",
+    "action": "SUBMITTED",
+    "status": "UNDER_REVIEW",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:54:56.187Z"
+  },
+  {
+    "id": "rev-1790610896194",
+    "documentId": "doc-1790610896184-omwap",
+    "action": "APPROVED",
+    "status": "APPROVED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:54:56.192Z"
+  },
+  {
+    "id": "rev-1790610896196",
+    "documentId": "doc-1790610896184-omwap",
+    "action": "PUBLISHED",
+    "status": "PUBLISHED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:54:56.195Z"
+  },
+  {
+    "id": "rev-1790610942913",
+    "documentId": "doc-1790610942908-2u61q",
+    "action": "SUBMITTED",
+    "status": "UNDER_REVIEW",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:55:42.911Z"
+  },
+  {
+    "id": "rev-1790610942919",
+    "documentId": "doc-1790610942908-2u61q",
+    "action": "APPROVED",
+    "status": "APPROVED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:55:42.914Z"
+  },
+  {
+    "id": "rev-1790610942927",
+    "documentId": "doc-1790610942908-2u61q",
+    "action": "PUBLISHED",
+    "status": "PUBLISHED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:55:42.923Z"
+  },
+  {
+    "id": "rev-1790610987127",
+    "documentId": "doc-1790610987117-a6hnn",
+    "action": "SUBMITTED",
+    "status": "UNDER_REVIEW",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:56:27.123Z"
+  },
+  {
+    "id": "rev-1790610987133",
+    "documentId": "doc-1790610987117-a6hnn",
+    "action": "APPROVED",
+    "status": "APPROVED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:56:27.130Z"
+  },
+  {
+    "id": "rev-1790610987165",
+    "documentId": "doc-1790610987117-a6hnn",
+    "action": "PUBLISHED",
+    "status": "PUBLISHED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T15:56:27.144Z"
+  }
+]

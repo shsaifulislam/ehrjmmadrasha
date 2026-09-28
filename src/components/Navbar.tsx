@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, Mail, MapPin, Menu, X, User, Heart, GraduationCap, FileText, Home, LogOut } from "lucide-react";
+import { Phone, Mail, MapPin, Menu, X, User, Heart, GraduationCap, FileText, Home, LogOut, Search } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 
 interface UserProfile {
@@ -66,7 +66,10 @@ export default function Navbar() {
               <span className="text-gray-600">|</span>
               <span className="hover:text-white cursor-pointer transition">English</span>
               <span className="text-gray-600">|</span>
-              <span className="hover:text-white cursor-pointer font-arabic transition">العربية</span>
+              <Link href="/search" className="text-gray-300 hover:text-white flex items-center gap-1 cursor-pointer transition">
+                <Search className="w-3.5 h-3.5 text-[#C59B27]" />
+                সার্চ
+              </Link>
             </div>
 
             {user ? (
@@ -140,6 +143,10 @@ export default function Navbar() {
             <Link href="/admission" className="text-emerald-100 hover:text-[#C59B27] transition">
               ভর্তি
             </Link>
+            <Link href="/search" className="text-emerald-100 hover:text-[#C59B27] flex items-center gap-1 transition">
+              <Search className="w-3.5 h-3.5 text-amber-300" />
+              অনুসন্ধান
+            </Link>
             <Link href="/notices" className="text-emerald-100 hover:text-[#C59B27] transition">
               নোটিশ
             </Link>
@@ -212,6 +219,14 @@ export default function Navbar() {
               className="py-1.5 px-3 rounded hover:bg-[#158052] transition"
             >
               ভর্তি আবেদন
+            </Link>
+            <Link
+              href="/search"
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-1.5 px-3 rounded hover:bg-[#158052] flex items-center gap-2 transition"
+            >
+              <Search className="w-4 h-4 text-amber-300" />
+              তথ্য ও নীতিমালা অনুসন্ধান
             </Link>
             <Link
               href="/notices"

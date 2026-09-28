@@ -1,0 +1,38 @@
+[
+  {
+    "id": "faq-001",
+    "questionBn": "মাদরাসায় নতুন ভর্তির জন্য কীভাবে আবেদন করতে হয়?",
+    "questionEn": "How to apply for new student admission?",
+    "answerBn": "মাদরাসার অফিসিয়াল ওয়েবসাইটের ভর্তি পেজে গিয়ে অনলাইন ফর্ম পূরণ করতে হবে। কোনো ফরম ফি নেই। ফর্ম পূরণ শেষে তাৎক্ষণিক ট্র্যাকিং কোড ও অ্যাডমিট স্লিপ পাওয়া যাবে।",
+    "answerEn": "Fill in the online form via the Admission portal on the official website. There is no application fee. An instant tracking token is generated.",
+    "category": "ADMISSION",
+    "audience": "ALL",
+    "status": "PUBLISHED",
+    "sortOrder": 1,
+    "effectiveDate": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "faq-002",
+    "questionBn": "মাসিক বেতন ও ফি কীভাবে প্রদান করা যায়?",
+    "questionEn": "How to pay monthly tuition and fees?",
+    "answerBn": "অভিভাবক পোর্টাল থেকে সরাসরি বিকাশ, নগদ বা রকেটের মাধ্যমে ফি পরিশোধ করা যায়। এছাড়াও মাদরাসার অফিসে নগদ জমা দিয়ে ডিজিটাল প্রিন্টেড মানি রিসিট গ্রহণ করা যায়।",
+    "answerEn": "Pay online via bKash, Nagad, or Rocket directly from the Guardian Portal, or at the institution counter for a digital printed receipt.",
+    "category": "FINANCE",
+    "audience": "ALL",
+    "status": "PUBLISHED",
+    "sortOrder": 2,
+    "effectiveDate": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "faq-003",
+    "questionBn": "এতিম ও দুস্থ শিক্ষার্থীদের জন্য কোনো ফি মওকুফের সুযোগ আছে কি?",
+    "questionEn": "Is there any fee waiver available for orphans and needy students?",
+    "answerBn": "হ্যাঁ, ইলিয়টগঞ্জ মাদরাসায় লিল্লাহ বোর্ডিং ও যাকাত তহবিল হতে এতিম ও অসচ্ছল পরিবারের শিক্ষার্থীদের জন্য ৫০% হতে ১০০% পর্যন্ত ফি মওকুফের প্রাতিষ্ঠানিক সুযোগ রয়েছে।",
+    "answerEn": "Yes, 50% to 100% financial assistance and fee waivers are provided through our Lillah Boarding & Zakat funds for orphans and eligible families.",
+    "category": "FINANCE",
+    "audience": "ALL",
+    "status": "PUBLISHED",
+    "sortOrder": 3,
+    "effectiveDate": "2026-01-01T00:00:00.000Z"
+  }
+]

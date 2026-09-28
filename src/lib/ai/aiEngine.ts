@@ -260,7 +260,30 @@ export async function askAIAssistant(params: {
     };
   }
 
-  // 3. Administrative Institutional Queries (ADMIN / PRINCIPAL)
+  // 3. Institutional Policy & Knowledge Queries (RAG-grounded)
+  if (cleanQuery.includes("নীতিমালা") || cleanQuery.includes("নিয়ম") || cleanQuery.includes("policy") || cleanQuery.includes("rule") || cleanQuery.includes("ভর্তি ফি") || cleanQuery.includes("আবাসিক")) {
+    const { generateGroundedRAGAnswer } = await import("@/lib/knowledge/ragEngine");
+    const rag = await generateGroundedRAGAnswer({
+      query: cleanQuery,
+      user: {
+        userId: params.userId,
+        role: params.userRole as any,
+        studentId: params.childContextId,
+      },
+    });
+    if (rag.isGrounded) {
+      return {
+        answer: rag.answer,
+        evidence: rag.citations,
+        module: "GENERAL",
+        provider: "EHRJ_RAG_ENGINE",
+        latencyMs: Date.now() - startTime,
+        tokens: 120,
+      };
+    }
+  }
+
+  // 4. Administrative Institutional Queries (ADMIN / PRINCIPAL)
   const provider = getActiveAIProvider();
   let module: "ACADEMIC" | "FINANCE" | "ADMISSION" | "HELPDESK" | "OPERATIONS" | "GENERAL" = "GENERAL";
   let contextData: any = {};

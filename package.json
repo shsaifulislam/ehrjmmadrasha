@@ -20,7 +20,8 @@
     "test:phase18": "npx tsx scratch/test_phase18_e2e_integration.ts && npx tsx scratch/test_phase18_uat_matrix.ts",
     "test:phase19": "npx tsx scratch/test_phase19_golive_migration.ts",
     "test:phase20": "npx tsx scratch/test_phase20_governance_evolution.ts",
-    "test:phase21": "npx tsx scratch/test_phase21_ai_intelligence.ts"
+    "test:phase21": "npx tsx scratch/test_phase21_ai_intelligence.ts",
+    "test:phase22": "npx tsx scratch/test_phase22_knowledge_rag.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
