@@ -18,7 +18,8 @@
     "test:phase16": "npx tsx scratch/test_phase16_api.ts && npx tsx scratch/test_phase16_http_api.ts",
     "test:phase17": "npx tsx scratch/test_phase17_security.ts && npx tsx scratch/test_phase17_http_security.ts",
     "test:phase18": "npx tsx scratch/test_phase18_e2e_integration.ts && npx tsx scratch/test_phase18_uat_matrix.ts",
-    "test:phase19": "npx tsx scratch/test_phase19_golive_migration.ts"
+    "test:phase19": "npx tsx scratch/test_phase19_golive_migration.ts",
+    "test:phase20": "npx tsx scratch/test_phase20_governance_evolution.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

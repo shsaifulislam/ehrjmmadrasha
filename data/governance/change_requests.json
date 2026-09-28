@@ -1,0 +1,161 @@
+[
+  {
+    "changeId": "EHRJ-CHG-2026-000001",
+    "title": "Phase 19 Production Launch & Data Migration Ingestion",
+    "requesterName": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "requesterRole": "ADMIN",
+    "requestDate": "2026-09-28T14:00:00.000Z",
+    "objective": "Safe real-world production launch, student/guardian migration, and hypercare engine activation.",
+    "businessJustification": "Transition Eliotganj Madrasha to authoritative digital campus operations.",
+    "affectedModules": [
+      "OPERATIONS",
+      "STUDENTS",
+      "GUARDIANS",
+      "FINANCE",
+      "SCHEDULER"
+    ],
+    "changeType": "INFRASTRUCTURE",
+    "priority": "CRITICAL",
+    "risk": "CRITICAL",
+    "status": "VERIFIED",
+    "dependencies": {
+      "direct": [
+        "DATABASE",
+        "BACKUPS",
+        "INVOICES"
+      ],
+      "indirect": [
+        "ANALYTICS",
+        "NOTIFICATIONS"
+      ]
+    },
+    "impactAnalysis": {
+      "databaseImpact": true,
+      "financialImpact": true,
+      "securityImpact": true,
+      "notificationImpact": true,
+      "reportingImpact": true,
+      "summary": "Full platform launch across all 4 personas with zero data corruption."
+    },
+    "testScope": [
+      "npm run test:phase18",
+      "npm run test:phase19",
+      "npx tsc --noEmit"
+    ],
+    "rollbackPlan": "Hot-swap restore from EHRJ-BKP-*-PRE_MIGRATION with automated pre-restore snapshot guarantee.",
+    "reviewedBy": "Senior Product Architect & Release Manager",
+    "reviewedAt": "2026-09-28T14:15:00.000Z",
+    "reviewNotes": "All Phase 18 and Phase 19 pre-launch criteria fully satisfied.",
+    "commitHash": "b4e0bd9",
+    "implementedAt": "2026-09-28T14:35:00.000Z",
+    "implementationDetails": "Data migration engine, scheduler engine, and production configs deployed.",
+    "verifiedBy": "Senior QA Architect",
+    "verifiedAt": "2026-09-28T15:15:00.000Z",
+    "verificationEvidence": "31/31 Phase 19 tests passed; 0 TS errors; 109 routes compiled.",
+    "updatedAt": "2026-09-28T15:15:00.000Z"
+  },
+  {
+    "changeId": "EHRJ-CHG-2026-000002",
+    "title": "স্বয়ংক্রিয় পরীক্ষার ফলাফল এসএমএস বিজ্ঞপ্তি সিস্টেম (1210)",
+    "requesterName": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "requesterRole": "ADMIN",
+    "requestDate": "2026-09-28T15:28:41.215Z",
+    "objective": "পরীক্ষার চূড়ান্ত ফলাফল প্রকাশের সাথে সাথে অভিভাবকদের মোবাইলে এসএমএস প্রেরণ।",
+    "businessJustification": "অভিভাবকদের রিয়েল-টাইম তথ্যপ্রাপ্তি নিশ্চিতকরণ।",
+    "affectedModules": [
+      "EXAMS",
+      "NOTIFICATIONS"
+    ],
+    "changeType": "FEATURE",
+    "priority": "HIGH",
+    "risk": "MEDIUM",
+    "status": "VERIFIED",
+    "dependencies": {
+      "direct": [
+        "RESULTS",
+        "DOCUMENTS",
+        "CERTIFICATES"
+      ],
+      "indirect": [
+        "GUARDIANS",
+        "PUBLIC_VERIFICATION",
+        "ANALYTICS"
+      ]
+    },
+    "impactAnalysis": {
+      "databaseImpact": false,
+      "financialImpact": false,
+      "securityImpact": false,
+      "notificationImpact": true,
+      "reportingImpact": false,
+      "summary": "Impact Analysis: 2 core module(s) evaluated. Risk Tier: MEDIUM. Direct dependencies: RESULTS, DOCUMENTS, CERTIFICATES. Database modification: NO."
+    },
+    "testScope": [
+      "npm run test:phase19",
+      "npx tsc --noEmit"
+    ],
+    "rollbackPlan": "রিলিজ ট্যাগ রোলব্যাক এবং এসএমএস কিউ নিষ্ক্রিয়করণ।",
+    "updatedAt": "2026-09-28T15:28:41.256Z",
+    "reviewedBy": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "reviewedAt": "2026-09-28T15:28:41.239Z",
+    "reviewNotes": "আর্কিটেকচারাল ইমপ্যাক্ট বিশ্লেষণ সন্তোষজনক। রিলিজ অনুমোদন করা হলো।",
+    "commitHash": "c0ffee1",
+    "implementationDetails": "Notification outbox listener bound to exam publication event.",
+    "implementedAt": "2026-09-28T15:28:41.254Z",
+    "verifiedBy": "Senior QA Architect",
+    "verificationEvidence": "All 5 automated exam publication tests passed cleanly. SMS payload validated.",
+    "verifiedAt": "2026-09-28T15:28:41.256Z"
+  },
+  {
+    "changeId": "EHRJ-CHG-2026-000003",
+    "title": "স্বয়ংক্রিয় পরীক্ষার ফলাফল এসএমএস বিজ্ঞপ্তি সিস্টেম (2936)",
+    "requesterName": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "requesterRole": "ADMIN",
+    "requestDate": "2026-09-28T15:29:32.939Z",
+    "objective": "পরীক্ষার চূড়ান্ত ফলাফল প্রকাশের সাথে সাথে অভিভাবকদের মোবাইলে এসএমএস প্রেরণ।",
+    "businessJustification": "অভিভাবকদের রিয়েল-টাইম তথ্যপ্রাপ্তি নিশ্চিতকরণ।",
+    "affectedModules": [
+      "EXAMS",
+      "NOTIFICATIONS"
+    ],
+    "changeType": "FEATURE",
+    "priority": "HIGH",
+    "risk": "MEDIUM",
+    "status": "VERIFIED",
+    "dependencies": {
+      "direct": [
+        "RESULTS",
+        "DOCUMENTS",
+        "CERTIFICATES"
+      ],
+      "indirect": [
+        "GUARDIANS",
+        "PUBLIC_VERIFICATION",
+        "ANALYTICS"
+      ]
+    },
+    "impactAnalysis": {
+      "databaseImpact": false,
+      "financialImpact": false,
+      "securityImpact": false,
+      "notificationImpact": true,
+      "reportingImpact": false,
+      "summary": "Impact Analysis: 2 core module(s) evaluated. Risk Tier: MEDIUM. Direct dependencies: RESULTS, DOCUMENTS, CERTIFICATES. Database modification: NO."
+    },
+    "testScope": [
+      "npm run test:phase19",
+      "npx tsc --noEmit"
+    ],
+    "rollbackPlan": "রিলিজ ট্যাগ রোলব্যাক এবং এসএমএস কিউ নিষ্ক্রিয়করণ।",
+    "updatedAt": "2026-09-28T15:29:32.999Z",
+    "reviewedBy": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "reviewedAt": "2026-09-28T15:29:32.984Z",
+    "reviewNotes": "আর্কিটেকচারাল ইমপ্যাক্ট বিশ্লেষণ সন্তোষজনক। রিলিজ অনুমোদন করা হলো।",
+    "commitHash": "c0ffee1",
+    "implementationDetails": "Notification outbox listener bound to exam publication event.",
+    "implementedAt": "2026-09-28T15:29:32.995Z",
+    "verifiedBy": "Senior QA Architect",
+    "verificationEvidence": "All 5 automated exam publication tests passed cleanly. SMS payload validated.",
+    "verifiedAt": "2026-09-28T15:29:32.998Z"
+  }
+]

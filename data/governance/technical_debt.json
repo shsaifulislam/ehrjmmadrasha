@@ -1,0 +1,67 @@
+[
+  {
+    "debtId": "EHRJ-DEBT-001",
+    "module": "ATTENDANCE",
+    "title": "Hardware Biometric Device Direct TCP Push Integration",
+    "risk": "MEDIUM",
+    "impact": "Biometric attendance currently requires manual teacher confirmation or spreadsheet sync.",
+    "workaround": "Teachers submit class attendance via portal with one-click bulk status.",
+    "priority": "MEDIUM",
+    "plannedResolution": "Phase 21 hardware socket gateway integration.",
+    "status": "OPEN",
+    "createdAt": "2026-09-28T16:00:00.000Z",
+    "updatedAt": "2026-09-28T16:00:00.000Z"
+  },
+  {
+    "debtId": "EHRJ-DEBT-002",
+    "module": "NOTIFICATIONS",
+    "title": "Native Push Notifications via Firebase FCM",
+    "risk": "LOW",
+    "impact": "Mobile web push notifications rely on SMS relay and portal in-app notifications.",
+    "workaround": "SMS relay queue + in-app notification center.",
+    "priority": "LOW",
+    "plannedResolution": "Phase 22 Service Worker Web Push.",
+    "status": "OPEN",
+    "createdAt": "2026-09-28T16:00:00.000Z",
+    "updatedAt": "2026-09-28T16:00:00.000Z"
+  },
+  {
+    "debtId": "EHRJ-DEBT-003",
+    "module": "DOCUMENTS",
+    "title": "Distributed PDF Watermarking Background Worker",
+    "risk": "LOW",
+    "impact": "High-resolution PDF generation runs on the main Next.js node process.",
+    "workaround": "Server-side SVG/Canvas rendering with client-side print stylesheets.",
+    "priority": "LOW",
+    "plannedResolution": "Phase 23 Dedicated headless Chromium render worker.",
+    "status": "OPEN",
+    "createdAt": "2026-09-28T16:00:00.000Z",
+    "updatedAt": "2026-09-28T16:00:00.000Z"
+  },
+  {
+    "module": "REPORTS",
+    "title": "Excel Generation Memory Optimization for Large Batches",
+    "risk": "LOW",
+    "impact": "Large batch downloads of 1000+ rows consume temporary heap memory.",
+    "workaround": "Paginated export chunks of 200 rows.",
+    "priority": "LOW",
+    "plannedResolution": "Phase 22 streaming CSV/Excel worker.",
+    "status": "OPEN",
+    "debtId": "EHRJ-DEBT-004",
+    "createdAt": "2026-09-28T15:28:41.768Z",
+    "updatedAt": "2026-09-28T15:28:41.768Z"
+  },
+  {
+    "module": "REPORTS",
+    "title": "Excel Generation Memory Optimization for Large Batches",
+    "risk": "LOW",
+    "impact": "Large batch downloads of 1000+ rows consume temporary heap memory.",
+    "workaround": "Paginated export chunks of 200 rows.",
+    "priority": "LOW",
+    "plannedResolution": "Phase 22 streaming CSV/Excel worker.",
+    "status": "OPEN",
+    "debtId": "EHRJ-DEBT-005",
+    "createdAt": "2026-09-28T15:29:33.138Z",
+    "updatedAt": "2026-09-28T15:29:33.138Z"
+  }
+]
