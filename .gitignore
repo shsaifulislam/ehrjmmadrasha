@@ -38,3 +38,5 @@ prisma/*.db
 prisma/*.db-journal
 dev.db
 dev.db-journal
+backups/*.db
+backups/*.db-journal

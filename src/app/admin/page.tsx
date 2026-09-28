@@ -38,6 +38,7 @@ import {
   Boxes,
   Briefcase,
   LifeBuoy,
+  Activity,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 import AdminAttendanceCockpit from "@/components/attendance/AdminAttendanceCockpit";
@@ -52,6 +53,7 @@ import AdminInventoryHub from "@/components/inventory/AdminInventoryHub";
 import AdminHrHub from "@/components/hr/AdminHrHub";
 import AdminHelpdeskHub from "@/components/helpdesk/AdminHelpdeskHub";
 import AdminAnalyticsHub from "@/components/analytics/AdminAnalyticsHub";
+import AdminOperationsHub from "@/components/operations/AdminOperationsHub";
 
 interface AdminStats {
   totalStudents: number;
@@ -108,6 +110,7 @@ export default function AdminDashboardPage() {
     | "HELPDESK"
     | "CMS"
     | "REPORTS"
+    | "OPERATIONS"
     | "USERS"
     | "SETTINGS"
   >("DASHBOARD");
@@ -439,6 +442,7 @@ export default function AdminDashboardPage() {
       items: [
         { id: "HR", label: "এইচআর ও শিক্ষক স্টাফ", subLabel: "HR, Teachers & Staff", icon: Briefcase },
         { id: "REPORTS", label: "রিপোর্ট ও অ্যানালিটিক্স", subLabel: "Reports & Logs", icon: BarChart3 },
+        { id: "OPERATIONS", label: "সিস্টেম অপারেশন ও ব্যাকআপ", subLabel: "Health & Disaster Recovery", icon: Activity },
         { id: "USERS", label: "ইউজার ও শিক্ষক", subLabel: "Staff & RBAC Accounts", icon: ShieldCheck },
         { id: "SETTINGS", label: "প্রতিষ্ঠান সেটিংস", subLabel: "System Config", icon: Clock },
       ],
@@ -1134,7 +1138,10 @@ export default function AdminDashboardPage() {
             {/* 13. REPORTS & ANALYTICS */}
             {activeTab === "REPORTS" && <AdminAnalyticsHub />}
 
-            {/* 14. SETTINGS */}
+            {/* 14. OPERATIONS & DISASTER RECOVERY */}
+            {activeTab === "OPERATIONS" && <AdminOperationsHub />}
+
+            {/* 15. SETTINGS */}
             {activeTab === "SETTINGS" && (
               <div className="bg-white rounded-lg border border-[#E2E8F0] p-6 shadow-sm space-y-4">
                 <h2 className="text-base font-bold text-[#0B1914] border-b pb-2">সেন্ট্রাল প্রাতিষ্ঠানিক সেটিংস</h2>

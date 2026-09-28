@@ -67,6 +67,11 @@ model User {
   authoredSupportMessages       SupportRequestMessage[]    @relation("SupportMessageAuthor")
   recordedSupportHistories      SupportRequestStatusHistory[] @relation("SupportHistoryRecordedBy")
   savedReports                  SavedReport[]
+  initiatedBackups              SystemBackup[]                @relation("BackupInitiator")
+  initiatedRestores             RestoreOperation[]            @relation("RestoreInitiator")
+  detectedIncidents             SystemIncident[]              @relation("IncidentDetector")
+  assignedIncidents             SystemIncident[]              @relation("IncidentAssignee")
+  enabledMaintenance            MaintenanceWindow[]           @relation("MaintenanceEnabler")
 }
 
 model Session {
@@ -2444,3 +2449,155 @@ model ReportSchedule {
   @@index([frequency])
   @@index([isActive])
 }
+
+// -------------------------------------------------------------
+// 16. PRODUCTION OPERATIONS, HEALTH, BACKUP & DISASTER RECOVERY
+// -------------------------------------------------------------
+model SystemBackup {
+  id                  String             @id @default(uuid())
+  backupCode          String             @unique // Format: EHRJ-BKP-YYYYMMDD-XXXX
+  type                String             @default("MANUAL") // MANUAL, AUTOMATIC, PRE_RESTORE, PRE_MIGRATION
+  status              String             @default("COMPLETED") // REQUESTED, RUNNING, COMPLETED, FAILED, DELETED
+  startedAt           DateTime           @default(now())
+  completedAt         DateTime?
+  sizeBytes           Float?             // File size in bytes
+  storagePath         String             // Relative file path on storage
+  checksum            String?            // SHA-256 integrity hash
+  databaseVersion     String             @default("SQLite 3")
+  applicationVersion  String             @default("1.0.0")
+  schemaVersion       String             @default("2026-PHASE16")
+  initiatedById       String?
+  retentionUntil      DateTime?
+  verificationStatus  String             @default("PENDING") // PENDING, VERIFIED, FAILED
+  verifiedAt          DateTime?
+  verificationDetails String?
+  failureReason       String?
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+
+  initiatedBy         User?              @relation("BackupInitiator", fields: [initiatedById], references: [id], onDelete: SetNull)
+  restores            RestoreOperation[]
+
+  @@index([type])
+  @@index([status])
+  @@index([verificationStatus])
+  @@index([createdAt])
+}
+
+model RestoreOperation {
+  id                      String       @id @default(uuid())
+  restoreCode             String       @unique // Format: EHRJ-RST-YYYY-XXXX
+  backupId                String
+  reason                  String
+  initiatedById           String
+  startedAt               DateTime     @default(now())
+  completedAt             DateTime?
+  status                  String       @default("COMPLETED") // REQUESTED, IN_PROGRESS, COMPLETED, FAILED
+  preRestoreBackupId      String?
+  postRestoreHealthStatus String       @default("HEALTHY") // HEALTHY, DEGRADED, FAILED
+  failureReason           String?
+  detailsJson             String?
+  createdAt               DateTime     @default(now())
+
+  backup                  SystemBackup @relation(fields: [backupId], references: [id], onDelete: Cascade)
+  initiatedBy             User         @relation("RestoreInitiator", fields: [initiatedById], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model SystemIncident {
+  id               String          @id @default(uuid())
+  incidentCode     String          @unique // Format: EHRJ-INC-YYYY-XXXXXX
+  title            String
+  description      String
+  severity         String          @default("MEDIUM") // LOW, MEDIUM, HIGH, CRITICAL
+  status           String          @default("OPEN") // OPEN, ACKNOWLEDGED, INVESTIGATING, MITIGATING, RESOLVED, CLOSED
+  affectedService  String          @default("APPLICATION") // DATABASE, APPLICATION, STORAGE, PAYMENTS, NOTIFICATIONS, AUTHENTICATION, JOBS, OTHER
+  detectedAt       DateTime        @default(now())
+  acknowledgedAt   DateTime?
+  resolvedAt       DateTime?
+  detectedById     String?
+  assignedToId     String?
+  rootCause        String?
+  impact           String?
+  resolution       String?
+  preventiveAction String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  detectedBy       User?           @relation("IncidentDetector", fields: [detectedById], references: [id], onDelete: SetNull)
+  assignedTo       User?           @relation("IncidentAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+  events           IncidentEvent[]
+
+  @@index([status])
+  @@index([severity])
+  @@index([affectedService])
+  @@index([createdAt])
+}
+
+model IncidentEvent {
+  id              String         @id @default(uuid())
+  incidentId      String
+  eventType       String         // DETECTED, ACKNOWLEDGED, DIAGNOSIS, MITIGATION, RECOVERY, VERIFICATION, NOTE, CLOSED
+  description     String
+  performedByName String?
+  timestamp       DateTime       @default(now())
+
+  incident        SystemIncident @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+
+  @@index([incidentId])
+  @@index([timestamp])
+}
+
+model OperationalAlert {
+  id              String    @id @default(uuid())
+  alertKey        String    @unique // Deduplication key (e.g. "BACKUP_FAILED_DAILY")
+  title           String
+  description     String
+  severity        String    @default("WARNING") // INFO, WARNING, URGENT, CRITICAL
+  source          String    // BACKUP, DATABASE, STORAGE, PAYMENT, NOTIFICATIONS, HEALTH, JOBS, SECURITY
+  status          String    @default("ACTIVE") // ACTIVE, ACKNOWLEDGED, RESOLVED
+  occurrenceCount Int       @default(1)
+  lastTriggeredAt DateTime  @default(now())
+  acknowledgedById String?
+  acknowledgedAt  DateTime?
+  resolvedAt      DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([status])
+  @@index([severity])
+  @@index([source])
+}
+
+model MaintenanceWindow {
+  id             String    @id @default(uuid())
+  isActive       Boolean   @default(false)
+  reason         String
+  messageBn      String    @default("সিস্টেম রক্ষণাবেক্ষণ কাজ চলছে। অতিসত্বর স্বাভাবিক কার্যক্রমে ফিরবে ইনশাআল্লাহ।")
+  messageEn      String    @default("System maintenance in progress. Normal operations will resume shortly inshaAllah.")
+  startedAt      DateTime  @default(now())
+  expectedEndAt  DateTime?
+  enabledById    String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  enabledBy      User?     @relation("MaintenanceEnabler", fields: [enabledById], references: [id], onDelete: SetNull)
+
+  @@index([isActive])
+}
+
+model RecoveryDrill {
+  id             String   @id @default(uuid())
+  drillCode      String   @unique // Format: EHRJ-DRL-YYYY-XXXX
+  backupId       String
+  status         String   // PASSED, FAILED
+  rpoHours       Float    @default(0)
+  rtoSeconds     Float    @default(0)
+  detailsJson    String
+  testedAt       DateTime @default(now())
+
+  @@index([status])
+}
+

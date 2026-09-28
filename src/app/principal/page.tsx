@@ -17,15 +17,33 @@ import {
   Building,
   GraduationCap,
   Users,
+  Server,
+  Activity,
+  Database,
+  HardDrive,
+  CheckCircle2,
+  XCircle,
+  Clock,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 
 export default function PrincipalDashboardPage() {
-  const [activeTab, setActiveTab] = useState<"DASHBOARD" | "OVERVIEW" | "NOTICES" | "ISSUES" | "REPORTS">(
-    "DASHBOARD"
-  );
+  const [activeTab, setActiveTab] = useState<
+    "DASHBOARD" | "OVERVIEW" | "NOTICES" | "ISSUES" | "REPORTS" | "OPERATIONS"
+  >("DASHBOARD");
   const [stats, setStats] = useState<any | null>(null);
   const [analyticsOverview, setAnalyticsOverview] = useState<any | null>(null);
+  const [operationsData, setOperationsData] = useState<{
+    health: any | null;
+    backups: any[];
+    incidents: any[];
+    loading: boolean;
+  }>({
+    health: null,
+    backups: [],
+    incidents: [],
+    loading: false,
+  });
   const [message, setMessage] = useState(
     "বিসমিল্লাহির রাহমানির রাহিম। ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা কুরআন-সুন্নাহর সঠিক প্রচার ও চরিত্রবান আদর্শ নাগরিক গড়ার একটি অন্যতম শ্রেষ্ঠ মারকাজ।"
   );
@@ -39,7 +57,7 @@ export default function PrincipalDashboardPage() {
       const tabParam = params.get("tab");
       if (tabParam) {
         const upper = tabParam.toUpperCase();
-        if (["DASHBOARD", "OVERVIEW", "NOTICES", "ISSUES", "REPORTS"].includes(upper)) {
+        if (["DASHBOARD", "OVERVIEW", "NOTICES", "ISSUES", "REPORTS", "OPERATIONS"].includes(upper)) {
           setActiveTab(upper as any);
         }
       }
@@ -62,6 +80,32 @@ export default function PrincipalDashboardPage() {
       })
       .catch(() => {});
   }, []);
+
+  const loadOperationsOverview = () => {
+    setOperationsData((prev) => ({ ...prev, loading: true }));
+    Promise.all([
+      fetch("/api/admin/operations/health").then((r) => (r.ok ? r.json() : null)),
+      fetch("/api/admin/operations/backups?limit=5").then((r) => (r.ok ? r.json() : null)),
+      fetch("/api/admin/operations/incidents?limit=5").then((r) => (r.ok ? r.json() : null)),
+    ])
+      .then(([healthRes, backupsRes, incidentsRes]) => {
+        setOperationsData({
+          health: healthRes?.health || null,
+          backups: backupsRes?.backups || [],
+          incidents: incidentsRes?.incidents || [],
+          loading: false,
+        });
+      })
+      .catch(() => {
+        setOperationsData((prev) => ({ ...prev, loading: false }));
+      });
+  };
+
+  useEffect(() => {
+    if (activeTab === "OPERATIONS" && !operationsData.health) {
+      loadOperationsOverview();
+    }
+  }, [activeTab]);
 
   const handleSaveMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -130,6 +174,7 @@ export default function PrincipalDashboardPage() {
           { id: "NOTICES", label: "জরুরি নোটিশ জারি (Notices)" },
           { id: "ISSUES", label: "প্রশাসনিক ইস্যু ও নির্দেশ (Issues)" },
           { id: "REPORTS", label: "প্রতিবেদন ও রিপোর্ট (Reports)" },
+          { id: "OPERATIONS", label: "সিস্টেম অপারেশন ও স্বাস্থ্য (Operations)" },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -379,6 +424,167 @@ export default function PrincipalDashboardPage() {
                 <span>প্রথম সাময়িক পরীক্ষা প্রস্তুতি ও সিলেবাস সম্পন্ন রিপোর্ট</span>
                 <span className="text-[#0D5C3A] font-bold">অনুমোদিত (Approved)</span>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* 6. OPERATIONS (Read-Only Oversight) */}
+        {activeTab === "OPERATIONS" && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between bg-white p-4 rounded-xl border shadow-sm">
+              <div>
+                <h2 className="text-base font-bold text-[#083B25] flex items-center gap-2">
+                  <Server className="w-5 h-5 text-emerald-600" />
+                  সিস্টেম অপারেশন, স্বাস্থ্য ও নির্ভরযোগ্যতা তদারকি
+                </h2>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  মুহতামিম ডেস্কে শুধুমাত্র পর্যবেক্ষণ ও অডিট সুবিধা সংরক্ষিত। ব্যাকআপ প্রণয়ন ও রিস্টোর কেবলমাত্র অ্যাডমিন দ্বারা নিয়ন্ত্রিত।
+                </p>
+              </div>
+              <button
+                onClick={loadOperationsOverview}
+                disabled={operationsData.loading}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded text-xs font-semibold hover:bg-emerald-100 transition"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${operationsData.loading ? "animate-spin" : ""}`} />
+                রিফ্রেশ
+              </button>
+            </div>
+
+            {/* Overall Health Status Card */}
+            {operationsData.health && (
+              <div
+                className={`p-4 rounded-xl border flex items-center justify-between ${
+                  operationsData.health.overallStatus === "HEALTHY"
+                    ? "bg-emerald-50 border-emerald-200 text-emerald-950"
+                    : operationsData.health.overallStatus === "DEGRADED"
+                    ? "bg-amber-50 border-amber-200 text-amber-950"
+                    : "bg-rose-50 border-rose-200 text-rose-950"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Activity
+                    className={`w-6 h-6 ${
+                      operationsData.health.overallStatus === "HEALTHY"
+                        ? "text-emerald-600"
+                        : operationsData.health.overallStatus === "DEGRADED"
+                        ? "text-amber-600"
+                        : "text-rose-600"
+                    }`}
+                  />
+                  <div>
+                    <div className="text-xs font-semibold text-gray-600">সার্বিক সিস্টেম স্থিতি</div>
+                    <div className="text-lg font-bold">
+                      {operationsData.health.overallStatus === "HEALTHY"
+                        ? "সিস্টেম সম্পূর্ণ সক্রিয় ও স্বাভাবিক (HEALTHY)"
+                        : operationsData.health.overallStatus === "DEGRADED"
+                        ? "সিস্টেম আংশিক ধীরগতির বা সতর্কাবস্থায় (DEGRADED)"
+                        : "সিস্টেমে ত্রুটি পরিলক্ষিত (DOWN)"}
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right text-xs">
+                  <div className="text-gray-500">সর্বশেষ নিরীক্ষা</div>
+                  <div className="font-mono text-gray-700">
+                    {new Date(operationsData.health.checkedAt).toLocaleTimeString("bn-BD")}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Component Status Grid */}
+            {operationsData.health?.components && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {Object.entries(operationsData.health.components).map(([key, comp]: [string, any]) => (
+                  <div key={key} className="bg-white p-4 rounded-xl border shadow-sm space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-gray-900 capitalize">{key}</span>
+                      <span
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                          comp.status === "HEALTHY"
+                            ? "bg-emerald-100 text-emerald-800"
+                            : comp.status === "DEGRADED"
+                            ? "bg-amber-100 text-amber-800"
+                            : "bg-rose-100 text-rose-800"
+                        }`}
+                      >
+                        {comp.status}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-600 leading-tight">{comp.message}</p>
+                    {comp.latencyMs !== undefined && (
+                      <div className="text-[11px] text-gray-400 font-mono">লেটেন্সি: {comp.latencyMs}ms</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Recent Backups Oversight */}
+            <div className="bg-white rounded-xl border p-5 shadow-sm space-y-3">
+              <h3 className="text-xs font-bold uppercase text-gray-500 flex items-center gap-1.5">
+                <Database className="w-4 h-4 text-emerald-700" />
+                সর্বশেষ সিস্টেম ও ডেটাবেজ ব্যাকআপ রেকর্ড
+              </h3>
+              {operationsData.backups.length === 0 ? (
+                <div className="p-3 bg-gray-50 rounded text-xs text-gray-500">কোনো ব্যাকআপ পাওয়া যায়নি।</div>
+              ) : (
+                <div className="divide-y divide-gray-100 text-xs">
+                  {operationsData.backups.map((b: any) => (
+                    <div key={b.id} className="py-2.5 flex items-center justify-between">
+                      <div>
+                        <div className="font-mono font-medium text-gray-900">{b.filename}</div>
+                        <div className="text-[11px] text-gray-500 flex items-center gap-2">
+                          <span>ধরন: {b.type}</span>
+                          <span>আকার: {(b.fileSizeBytes / (1024 * 1024)).toFixed(2)} MB</span>
+                          <span>তারিখ: {new Date(b.createdAt).toLocaleString("bn-BD")}</span>
+                        </div>
+                      </div>
+                      <span
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                          b.verifiedStatus === "VERIFIED"
+                            ? "bg-emerald-100 text-emerald-800"
+                            : b.verifiedStatus === "FAILED"
+                            ? "bg-rose-100 text-rose-800"
+                            : "bg-gray-100 text-gray-700"
+                        }`}
+                      >
+                        {b.verifiedStatus}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Incidents Oversight */}
+            <div className="bg-white rounded-xl border p-5 shadow-sm space-y-3">
+              <h3 className="text-xs font-bold uppercase text-gray-500 flex items-center gap-1.5">
+                <AlertTriangle className="w-4 h-4 text-amber-600" />
+                সক্রিয় ইনসিডেন্ট ও প্রযুক্তিগত ঘটনা
+              </h3>
+              {operationsData.incidents.length === 0 ? (
+                <div className="p-3 bg-emerald-50 border border-emerald-100 rounded text-xs text-emerald-800 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  বর্তমানে কোনো অমীমাংসিত সিস্টেম ইনসিডেন্ট নেই। সিস্টেম সম্পূর্ণ নিরাপদ।
+                </div>
+              ) : (
+                <div className="divide-y divide-gray-100 text-xs">
+                  {operationsData.incidents.map((inc: any) => (
+                    <div key={inc.id} className="py-2.5 flex items-center justify-between">
+                      <div>
+                        <div className="font-bold text-gray-900">{inc.incidentCode}: {inc.title}</div>
+                        <div className="text-[11px] text-gray-500">
+                          গুরুত্ব: {inc.severity} | স্থিতি: {inc.status} | উপাদান: {inc.component}
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-semibold bg-gray-100 px-2 py-1 rounded">
+                        {new Date(inc.createdAt).toLocaleDateString("bn-BD")}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
