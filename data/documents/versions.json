@@ -1,0 +1,53 @@
+[
+  {
+    "versionNumber": 1,
+    "fileHash": "09727c649f421d60248f27668f4c91ce5619756a053fa0b8e84e41321c35b1d4",
+    "algorithm": "SHA-256",
+    "filePath": "data\\documents\\storage\\DOC-1790626915723-WMZV5_v1_food_supplier_invoice.txt",
+    "fileSize": 66,
+    "mimeType": "text/plain",
+    "originalFileName": "food_supplier_invoice.txt",
+    "reason": "Initial Upload & Digital Archive Ingestion",
+    "uploadedBy": {
+      "userId": "ADMIN-001",
+      "name": "Mawlana Principal",
+      "role": "PRINCIPAL"
+    },
+    "createdAt": "2026-09-28T20:21:55.723Z",
+    "isCurrent": true
+  },
+  {
+    "versionNumber": 2,
+    "fileHash": "1ffb5ab7a910fb8cac5fc112b27b551b19d0178ad641837bf932a6d76005e158",
+    "algorithm": "SHA-256",
+    "filePath": "data\\documents\\storage\\DOC-1790626915685-EE44M_v2_zubair_birth_cert_revised.txt",
+    "fileSize": 331,
+    "mimeType": "text/plain",
+    "originalFileName": "zubair_birth_cert_revised.txt",
+    "reason": "আইনি সংশোধিত নাম হালনাগাদ",
+    "uploadedBy": {
+      "userId": "ADMIN-001",
+      "name": "Mawlana Principal",
+      "role": "PRINCIPAL"
+    },
+    "createdAt": "2026-09-28T20:21:55.695Z",
+    "isCurrent": true
+  },
+  {
+    "versionNumber": 1,
+    "fileHash": "5e194b48df2811e822231bd780d058871976b119440aebd4e2afec5dc7ecae3b",
+    "algorithm": "SHA-256",
+    "filePath": "data\\documents\\storage\\DOC-1790626915685-EE44M_v1_zubair_birth_cert.txt",
+    "fileSize": 419,
+    "mimeType": "text/plain",
+    "originalFileName": "zubair_birth_cert.txt",
+    "reason": "Initial Upload & Digital Archive Ingestion",
+    "uploadedBy": {
+      "userId": "ADMIN-001",
+      "name": "Mawlana Principal",
+      "role": "PRINCIPAL"
+    },
+    "createdAt": "2026-09-28T20:21:55.687Z",
+    "isCurrent": false
+  }
+]

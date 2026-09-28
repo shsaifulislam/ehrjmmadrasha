@@ -120,6 +120,16 @@ export async function GET(req: NextRequest) {
       requests,
       availableDocumentTypes: DOCUMENT_TYPES,
       availableTemplates,
+      archiveDocuments: (await import("@/lib/document")).filterPermittedDocuments(
+        (await import("@/lib/document")).getAllArchiveDocuments(),
+        {
+          userId: user.userId,
+          role: "GUARDIAN",
+          guardianId: guardian.id,
+          studentId: targetStudentId,
+          linkedStudentIds,
+        }
+      ).filter((d) => d.entityId === targetStudentId),
     });
   } catch (error: any) {
     console.error("Portal Documents GET error:", error);

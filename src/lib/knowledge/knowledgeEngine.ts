@@ -407,8 +407,38 @@ export async function executeInstitutionalSearch(req: SearchQueryRequest): Promi
     }
   }
 
+  // 3. Digital Archive & OCR Extracted Documents (Phase 29 Tier 2 Evidence)
+  const archiveResults: SearchResultItem[] = [];
+  try {
+    const { searchArchiveDocuments } = await import("@/lib/document");
+    const arcHits = searchArchiveDocuments(
+      { term: activeSearchTokens.join(" "), limit: 3 },
+      {
+        userId: req.user?.userId || "public",
+        role: (userRole as any) || "PUBLIC",
+        guardianId: req.user?.guardianId,
+        studentId: req.user?.studentId,
+      }
+    );
+    for (const h of arcHits) {
+      archiveResults.push({
+        id: `arc-${h.document.id}`,
+        title: `[দলিল আর্কাইভ] ${h.document.title}`,
+        snippet: `স্মারক: ${h.document.id} | প্রকার: ${h.document.documentType} | মালিকানা: ${h.document.entityName || h.document.entityId} | অবস্থা: ${h.document.status}`,
+        sourceType: "INSTITUTIONAL_POLICY",
+        sourceTier: 2,
+        category: "ACADEMIC",
+        version: `v${h.document.currentVersion}`,
+        score: h.relevanceScore,
+        citation: h.citation,
+      });
+    }
+  } catch (e) {
+    // Graceful fallback if archive is uninitialized
+  }
+
   // Combine and Rerank according to Source-of-Truth Hierarchy (Tier 1 > Tier 2 > Tier 3)
-  const combined = [...liveResults, ...docResults, ...faqResults];
+  const combined = [...liveResults, ...docResults, ...archiveResults, ...faqResults];
   combined.sort((a, b) => {
     if (a.sourceTier !== b.sourceTier) {
       return a.sourceTier - b.sourceTier; // Lower tier number = higher authority

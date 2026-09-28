@@ -1,0 +1,19 @@
+[
+  {
+    "id": "OCR-JOB-1790626915702-GG4A",
+    "documentId": "DOC-1790626915685-EE44M",
+    "versionNumber": 2,
+    "provider": "EHRJ_OCR_ENGINE",
+    "status": "COMPLETED",
+    "languageDetected": "bn",
+    "rawText": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা\nনাম: মুহাম্মদ জুবায়ের আহমেদ (সংশোধিত নাম)\nআইডি: STU-ALPHA-101\nস্মারক নং: EHRJ/2026/0892-REV\nতারিখ: 2026-09-29",
+    "normalizedText": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা\nনাম: মুহাম্মদ জুবায়ের আহমেদ (সংশোধিত নাম)\nআইডি: STU-ALPHA-101\nস্মারক নং: EHRJ/2026/0892-REV\nতারিখ: 2026-09-29",
+    "pageCount": 1,
+    "confidenceScore": 0.86,
+    "processingTimeMs": 2,
+    "attemptCount": 1,
+    "maxAttempts": 3,
+    "startedAt": "2026-09-28T20:21:55.700Z",
+    "completedAt": "2026-09-28T20:21:55.702Z"
+  }
+]

@@ -22,8 +22,10 @@ import {
 import { DOCUMENT_TYPES } from "@/lib/documentFactory";
 import { INSTITUTION_INFO } from "@/lib/constants";
 
+import DocumentIntelligenceTab from "./intelligence/DocumentIntelligenceTab";
+
 export default function AdminDocumentHub() {
-  const [activeSubTab, setActiveSubTab] = useState<"OVERVIEW" | "GENERATE" | "REQUESTS" | "DOCUMENTS" | "TEMPLATES">("OVERVIEW");
+  const [activeSubTab, setActiveSubTab] = useState<"OVERVIEW" | "INTELLIGENCE" | "GENERATE" | "REQUESTS" | "DOCUMENTS" | "TEMPLATES">("OVERVIEW");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
@@ -312,6 +314,12 @@ export default function AdminDocumentHub() {
             ওভারভিউ
           </button>
           <button
+            onClick={() => setActiveSubTab("INTELLIGENCE")}
+            className={`px-3 py-1.5 rounded-md transition ${activeSubTab === "INTELLIGENCE" ? "bg-white text-[#0D5C3A] shadow font-bold" : "text-gray-600 hover:text-gray-900"}`}
+          >
+            ডিজিটাল আর্কাইভ ও OCR
+          </button>
+          <button
             onClick={() => setActiveSubTab("GENERATE")}
             className={`px-3 py-1.5 rounded-md transition ${activeSubTab === "GENERATE" ? "bg-white text-[#0D5C3A] shadow font-bold" : "text-gray-600 hover:text-gray-900"}`}
           >
@@ -429,6 +437,11 @@ export default function AdminDocumentHub() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* 2. INTELLIGENCE & DIGITAL ARCHIVE SUB-TAB */}
+      {activeSubTab === "INTELLIGENCE" && (
+        <DocumentIntelligenceTab />
       )}
 
       {/* 2. GENERATE SUB-TAB */}

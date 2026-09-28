@@ -1,0 +1,22 @@
+[
+  {
+    "id": "HOLD-1790626915717-13WO",
+    "documentId": "DOC-1790626915685-EE44M",
+    "reason": "সরকারি নিরীক্ষা এবং বোর্ড যাচাইয়ের জন্য সংরক্ষিত",
+    "caseReference": "AUDIT-2026-GOV-09",
+    "placedBy": {
+      "userId": "ADMIN-001",
+      "name": "Mawlana Principal",
+      "role": "PRINCIPAL"
+    },
+    "placedAt": "2026-09-28T20:21:55.717Z",
+    "isActive": false,
+    "releasedBy": {
+      "userId": "ADMIN-001",
+      "name": "Mawlana Principal",
+      "role": "PRINCIPAL"
+    },
+    "releasedAt": "2026-09-28T20:21:55.720Z",
+    "releaseReason": "অডিট সফলভাবে নিষ্পত্তি"
+  }
+]
