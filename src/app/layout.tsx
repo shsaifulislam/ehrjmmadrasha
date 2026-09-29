@@ -31,6 +31,8 @@ export const metadata: Metadata = {
   ],
 };
 
+import CommandPalette from "@/components/search/CommandPalette";
+
 export default function RootLayout({
   children,
 }: {
@@ -41,6 +43,7 @@ export default function RootLayout({
       <body className="antialiased min-h-screen flex flex-col bg-[#F9F8F3] text-[#0B1914] pb-14 md:pb-0">
         <PwaProvider>
           {children}
+          <CommandPalette />
           <MobileBottomNav />
         </PwaProvider>
       </body>

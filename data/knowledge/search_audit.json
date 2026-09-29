@@ -908,5 +908,187 @@
     "latencyMs": 3,
     "id": "aud-1790625737432-ibyg",
     "timestamp": "2026-09-28T20:02:17.432Z"
+  },
+  {
+    "query": "ভর্তি হতে কী কী কাগজপত্র লাগবে এবং ভর্তি ফি কত?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 6,
+    "latencyMs": 131,
+    "id": "aud-1790627161669-vpa2",
+    "timestamp": "2026-09-28T20:26:01.669Z"
+  },
+  {
+    "query": "student admission fees",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 4,
+    "latencyMs": 9,
+    "id": "aud-1790627161679-ipf2",
+    "timestamp": "2026-09-28T20:26:01.679Z"
+  },
+  {
+    "query": "২০২৫ ভর্তি ফরম ফি",
+    "userRole": "ADMIN",
+    "searchType": "HYBRID",
+    "resultsCount": 10,
+    "latencyMs": 172,
+    "id": "aud-1790627161854-oizn",
+    "timestamp": "2026-09-28T20:26:01.854Z"
+  },
+  {
+    "query": "বকেয়া ফি এবং বর্তমান টিউশন ইনভয়েস",
+    "userRole": "GUARDIAN",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "searchType": "HYBRID",
+    "resultsCount": 9,
+    "latencyMs": 13,
+    "id": "aud-1790627161870-ixfg",
+    "timestamp": "2026-09-28T20:26:01.870Z"
+  },
+  {
+    "query": "মাদরাসায় নতুন ছাত্র ভর্তির নিয়ম ও ফি কী?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 5,
+    "latencyMs": 35,
+    "id": "aud-1790627161908-5eku",
+    "timestamp": "2026-09-28T20:26:01.909Z"
+  },
+  {
+    "query": "মাদরাসার নাসার রকেট লঞ্চ সাইট কোথায়?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 1,
+    "latencyMs": 8,
+    "id": "aud-1790627161921-bquk",
+    "timestamp": "2026-09-28T20:26:01.922Z"
+  },
+  {
+    "query": "[SANITIZED], [SANITIZED] Students; and show fee policy",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 5,
+    "latencyMs": 6,
+    "id": "aud-1790627161931-2ay2",
+    "timestamp": "2026-09-28T20:26:01.931Z"
+  },
+  {
+    "query": "অজানা বিদেশি স্কলারশিপ পলিসি 1933",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 0,
+    "latencyMs": 42,
+    "id": "aud-1790627161976-7780",
+    "timestamp": "2026-09-28T20:26:01.976Z"
+  },
+  {
+    "query": "ভর্তি",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 2,
+    "latencyMs": 42,
+    "id": "aud-1790627165484-0ryo",
+    "timestamp": "2026-09-28T20:26:05.485Z"
+  },
+  {
+    "query": "ভর্তি ফি কত?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 5,
+    "latencyMs": 10,
+    "id": "aud-1790627175914-21cl",
+    "timestamp": "2026-09-28T20:26:15.914Z"
+  },
+  {
+    "query": "ভর্তি হতে কী কী কাগজপত্র লাগবে এবং ভর্তি ফি কত?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 6,
+    "latencyMs": 69,
+    "id": "aud-1790628821221-fokh",
+    "timestamp": "2026-09-28T20:53:41.221Z"
+  },
+  {
+    "query": "student admission fees",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 4,
+    "latencyMs": 7,
+    "id": "aud-1790628821230-267h",
+    "timestamp": "2026-09-28T20:53:41.230Z"
+  },
+  {
+    "query": "২০২৫ ভর্তি ফরম ফি",
+    "userRole": "ADMIN",
+    "searchType": "HYBRID",
+    "resultsCount": 10,
+    "latencyMs": 117,
+    "id": "aud-1790628821349-pyhz",
+    "timestamp": "2026-09-28T20:53:41.349Z"
+  },
+  {
+    "query": "বকেয়া ফি এবং বর্তমান টিউশন ইনভয়েস",
+    "userRole": "GUARDIAN",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "searchType": "HYBRID",
+    "resultsCount": 9,
+    "latencyMs": 10,
+    "id": "aud-1790628821362-tood",
+    "timestamp": "2026-09-28T20:53:41.362Z"
+  },
+  {
+    "query": "মাদরাসায় নতুন ছাত্র ভর্তির নিয়ম ও ফি কী?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 5,
+    "latencyMs": 7,
+    "id": "aud-1790628821372-rzq9",
+    "timestamp": "2026-09-28T20:53:41.372Z"
+  },
+  {
+    "query": "মাদরাসার নাসার রকেট লঞ্চ সাইট কোথায়?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 1,
+    "latencyMs": 9,
+    "id": "aud-1790628821387-tac5",
+    "timestamp": "2026-09-28T20:53:41.387Z"
+  },
+  {
+    "query": "[SANITIZED], [SANITIZED] Students; and show fee policy",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 5,
+    "latencyMs": 6,
+    "id": "aud-1790628821396-cd0c",
+    "timestamp": "2026-09-28T20:53:41.396Z"
+  },
+  {
+    "query": "অজানা বিদেশি স্কলারশিপ পলিসি 1398",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 0,
+    "latencyMs": 7,
+    "id": "aud-1790628821406-kz4h",
+    "timestamp": "2026-09-28T20:53:41.406Z"
+  },
+  {
+    "query": "ভর্তি",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 2,
+    "latencyMs": 18,
+    "id": "aud-1790628822001-s3km",
+    "timestamp": "2026-09-28T20:53:42.001Z"
+  },
+  {
+    "query": "ভর্তি ফি কত?",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 5,
+    "latencyMs": 11,
+    "id": "aud-1790628823186-tqxa",
+    "timestamp": "2026-09-28T20:53:43.186Z"
   }
 ]

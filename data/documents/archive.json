@@ -1,5 +1,142 @@
 [
   {
+    "id": "DOC-1790628752761-N4NFB",
+    "documentType": "SUPPLIER_INVOICE",
+    "title": "মাদরাসা খাদ্য সরবরাহকারী রসিদ ও বিল",
+    "description": "",
+    "entityType": "PROCUREMENT",
+    "entityId": "PROC-FOOD-001",
+    "entityName": "আল-ফালাহ ফুড কর্পোরেশন",
+    "status": "UPLOADED",
+    "currentVersion": 1,
+    "fileHash": "09727c649f421d60248f27668f4c91ce5619756a053fa0b8e84e41321c35b1d4",
+    "hashAlgorithm": "SHA-256",
+    "originalFileName": "food_supplier_invoice.txt",
+    "mimeType": "text/plain",
+    "sizeBytes": 66,
+    "filePath": "data\\documents\\storage\\DOC-1790628752761-N4NFB_v1_food_supplier_invoice.txt",
+    "isEncrypted": false,
+    "hasOcrText": false,
+    "isOcrReviewed": false,
+    "extractedFields": [],
+    "qualityWarnings": [],
+    "isVerified": false,
+    "signatures": [],
+    "retentionPolicy": {
+      "retentionYears": 5,
+      "retentionUntil": "2031-09-28T20:52:32.761Z",
+      "isLegalHoldActive": false,
+      "disposalEligible": false
+    },
+    "isArchived": false,
+    "relatedDocumentIds": [],
+    "createdAt": "2026-09-28T20:52:32.762Z",
+    "updatedAt": "2026-09-28T20:52:32.762Z",
+    "uploadedBy": {
+      "userId": "ADMIN-001",
+      "name": "Mawlana Principal",
+      "role": "PRINCIPAL"
+    }
+  },
+  {
+    "id": "DOC-1790628752689-1QVBI",
+    "documentType": "BIRTH_REGISTRATION",
+    "title": "মুহাম্মদ জুবায়ের আহমেদ - জন্ম নিবন্ধন",
+    "description": "",
+    "entityType": "STUDENT",
+    "entityId": "STU-ALPHA-101",
+    "entityName": "মুহাম্মদ জুবায়ের আহমেদ",
+    "status": "OCR_COMPLETED",
+    "currentVersion": 2,
+    "fileHash": "1ffb5ab7a910fb8cac5fc112b27b551b19d0178ad641837bf932a6d76005e158",
+    "hashAlgorithm": "SHA-256",
+    "originalFileName": "zubair_birth_cert_revised.txt",
+    "mimeType": "text/plain",
+    "sizeBytes": 331,
+    "filePath": "data\\documents\\storage\\DOC-1790628752689-1QVBI_v2_zubair_birth_cert_revised.txt",
+    "isEncrypted": false,
+    "hasOcrText": true,
+    "isOcrReviewed": false,
+    "extractedFields": [
+      {
+        "id": "FLD-1790628752722-STUID",
+        "fieldName": "studentIdNumber",
+        "fieldLabelBn": "শিক্ষার্থী আইডি নম্বর",
+        "value": "STU-ALPHA-101",
+        "confidence": 1,
+        "source": "HUMAN_VERIFIED",
+        "reviewStatus": "CONFIRMED",
+        "reviewedBy": "Mawlana Principal (PRINCIPAL)",
+        "reviewedAt": "2026-09-28T20:52:32.728Z",
+        "notes": "অফিসারের মূল কপি দেখে যাচাইকৃত"
+      },
+      {
+        "id": "FLD-1790628752722-DOCNO",
+        "fieldName": "documentNumber",
+        "fieldLabelBn": "দলিল / সনদ নম্বর",
+        "value": "EHRJ/2026/0892-REV",
+        "confidence": 0.94,
+        "source": "OCR",
+        "reviewStatus": "NEEDS_REVIEW"
+      },
+      {
+        "id": "FLD-1790628752723-DATE",
+        "fieldName": "issueDate",
+        "fieldLabelBn": "ইস্যু তারিখ",
+        "value": "2026-09-29",
+        "confidence": 0.88,
+        "source": "OCR",
+        "reviewStatus": "NEEDS_REVIEW"
+      }
+    ],
+    "qualityWarnings": [
+      "WARNING_VERY_SMALL_FILE: File size is under 2KB, likely corrupted or truncated."
+    ],
+    "isVerified": false,
+    "signatures": [
+      {
+        "id": "SIG-1790628752736-NZDS",
+        "documentId": "DOC-1790628752689-1QVBI",
+        "versionNumber": 2,
+        "signer": {
+          "userId": "ADMIN-001",
+          "name": "Mawlana Principal",
+          "role": "PRINCIPAL",
+          "designation": "মুহতামিম / অধ্যক্ষ"
+        },
+        "signingMethod": "OFFICIAL_DIGITAL_STAMP",
+        "signatureStatus": "SIGNED",
+        "signatureReference": "EHRJ-SIG-752736",
+        "documentHash": "1ffb5ab7a910fb8cac5fc112b27b551b19d0178ad641837bf932a6d76005e158",
+        "signatureToken": "4b8e859bfa5b53269584e5fa139fbf5d106849e02868ed98d40bee72f0c6ca47",
+        "watermark": "OFFICIAL",
+        "signedAt": "2026-09-28T20:52:32.731Z",
+        "verificationResult": {
+          "valid": true,
+          "checkedAt": "2026-09-28T20:52:32.731Z",
+          "details": "Institutional digital signature verified against master cryptographic key."
+        }
+      }
+    ],
+    "retentionPolicy": {
+      "retentionYears": 10,
+      "retentionUntil": "2036-09-28T20:52:32.690Z",
+      "isLegalHoldActive": false,
+      "disposalEligible": false
+    },
+    "isArchived": false,
+    "relatedDocumentIds": [],
+    "createdAt": "2026-09-28T20:52:32.693Z",
+    "updatedAt": "2026-09-28T20:52:32.731Z",
+    "uploadedBy": {
+      "userId": "ADMIN-001",
+      "name": "Mawlana Principal",
+      "role": "PRINCIPAL"
+    },
+    "ocrLanguage": "bn",
+    "ocrConfidence": 0.86
+  },
+  {
     "id": "DOC-1790626915723-WMZV5",
     "documentType": "SUPPLIER_INVOICE",
     "title": "মাদরাসা খাদ্য সরবরাহকারী রসিদ ও বিল",

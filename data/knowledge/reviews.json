@@ -268,5 +268,59 @@
     "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
     "actorRole": "ADMIN",
     "timestamp": "2026-09-28T20:02:16.033Z"
+  },
+  {
+    "id": "rev-1790627161525",
+    "documentId": "doc-1790627161488-hildt",
+    "action": "SUBMITTED",
+    "status": "UNDER_REVIEW",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T20:26:01.491Z"
+  },
+  {
+    "id": "rev-1790627161529",
+    "documentId": "doc-1790627161488-hildt",
+    "action": "APPROVED",
+    "status": "APPROVED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T20:26:01.527Z"
+  },
+  {
+    "id": "rev-1790627161532",
+    "documentId": "doc-1790627161488-hildt",
+    "action": "PUBLISHED",
+    "status": "PUBLISHED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T20:26:01.530Z"
+  },
+  {
+    "id": "rev-1790628821137",
+    "documentId": "doc-1790628821129-4hpzu",
+    "action": "SUBMITTED",
+    "status": "UNDER_REVIEW",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T20:53:41.133Z"
+  },
+  {
+    "id": "rev-1790628821141",
+    "documentId": "doc-1790628821129-4hpzu",
+    "action": "APPROVED",
+    "status": "APPROVED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T20:53:41.138Z"
+  },
+  {
+    "id": "rev-1790628821145",
+    "documentId": "doc-1790628821129-4hpzu",
+    "action": "PUBLISHED",
+    "status": "PUBLISHED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-28T20:53:41.142Z"
   }
 ]

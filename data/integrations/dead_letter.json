@@ -2,6 +2,92 @@
   {
     "source": "OUTBOUND_DELIVERY",
     "integrationCode": "DATA_IMPORT_EXPORT",
+    "referenceId": "DEL-1790628776738-09B170",
+    "eventType": "STUDENT_CREATED",
+    "requestPayload": {
+      "id": "DEL-1790628776738-09B170",
+      "eventId": "EVT-2026-000012",
+      "eventType": "STUDENT_CREATED",
+      "sourceModule": "ADMISSION",
+      "occurredAt": "2026-09-28T20:52:56.736Z",
+      "correlationId": "EVT-2026-000012",
+      "data": {
+        "studentName": "টেস্ট শিক্ষার্থী",
+        "classCode": "CLASS_1"
+      }
+    },
+    "lastError": "fetch failed",
+    "attempts": 3,
+    "correlationId": "EVT-2026-000012",
+    "id": "DLQ-MULQ53T6-779793",
+    "quarantinedAt": "2026-09-28T20:52:58.122Z",
+    "resolutionStatus": "PENDING"
+  },
+  {
+    "source": "INBOUND_WEBHOOK",
+    "integrationCode": "BKASH_PGW",
+    "referenceId": "WH-IN-1790628776713-C73FBE",
+    "eventType": "PAYMENT_COMPLETED",
+    "requestPayload": {
+      "paymentId": "STALE-TXN-1790628776710",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790628776709
+    },
+    "lastError": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "attempts": 2,
+    "correlationId": "corr_d18c81a50ce1aa8f",
+    "id": "DLQ-MULQ52Q3-793C8E",
+    "quarantinedAt": "2026-09-28T20:52:56.715Z",
+    "resolutionStatus": "REPLAYED",
+    "resolvedAt": "2026-09-28T20:52:56.717Z"
+  },
+  {
+    "source": "OUTBOUND_DELIVERY",
+    "integrationCode": "DATA_IMPORT_EXPORT",
+    "referenceId": "DEL-1790627127552-6558C9",
+    "eventType": "STUDENT_CREATED",
+    "requestPayload": {
+      "id": "DEL-1790627127552-6558C9",
+      "eventId": "EVT-2026-000010",
+      "eventType": "STUDENT_CREATED",
+      "sourceModule": "ADMISSION",
+      "occurredAt": "2026-09-28T20:25:27.550Z",
+      "correlationId": "EVT-2026-000010",
+      "data": {
+        "studentName": "টেস্ট শিক্ষার্থী",
+        "classCode": "CLASS_1"
+      }
+    },
+    "lastError": "fetch failed",
+    "attempts": 3,
+    "correlationId": "EVT-2026-000010",
+    "id": "DLQ-MULP5RCH-C51807",
+    "quarantinedAt": "2026-09-28T20:25:29.009Z",
+    "resolutionStatus": "PENDING"
+  },
+  {
+    "source": "INBOUND_WEBHOOK",
+    "integrationCode": "BKASH_PGW",
+    "referenceId": "WH-IN-1790627127523-821893",
+    "eventType": "PAYMENT_COMPLETED",
+    "requestPayload": {
+      "paymentId": "STALE-TXN-1790627127517",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790627127514
+    },
+    "lastError": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "attempts": 2,
+    "correlationId": "corr_cfc0466008a26681",
+    "id": "DLQ-MULP5Q7A-C38F47",
+    "quarantinedAt": "2026-09-28T20:25:27.526Z",
+    "resolutionStatus": "REPLAYED",
+    "resolvedAt": "2026-09-28T20:25:27.529Z"
+  },
+  {
+    "source": "OUTBOUND_DELIVERY",
+    "integrationCode": "DATA_IMPORT_EXPORT",
     "referenceId": "DEL-1790625833921-FBCC6C",
     "eventType": "STUDENT_CREATED",
     "requestPayload": {

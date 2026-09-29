@@ -143,10 +143,31 @@ export default function Navbar() {
             <Link href="/admission" className="text-emerald-100 hover:text-[#C59B27] transition">
               ভর্তি
             </Link>
-            <Link href="/search" className="text-emerald-100 hover:text-[#C59B27] flex items-center gap-1 transition">
+            <Link
+              href="/search"
+              className="text-emerald-100 hover:text-[#C59B27] flex items-center gap-1 transition"
+            >
               <Search className="w-3.5 h-3.5 text-amber-300" />
               অনুসন্ধান
             </Link>
+            <button
+              onClick={() => {
+                const event = new KeyboardEvent("keydown", {
+                  key: "k",
+                  ctrlKey: true,
+                  bubbles: true,
+                });
+                window.dispatchEvent(event);
+              }}
+              className="bg-black/30 hover:bg-black/40 border border-emerald-700/60 text-emerald-100 hover:text-white px-2 py-1 rounded text-[11px] font-mono flex items-center gap-1.5 transition"
+              title="কমান্ড প্যালেট চালু করুন (Ctrl + K)"
+            >
+              <Search className="w-3 h-3 text-[#C59B27]" />
+              <span>সার্চ</span>
+              <kbd className="bg-emerald-950/80 px-1 py-0.2 rounded text-[10px] text-gray-300 border border-emerald-800">
+                Ctrl K
+              </kbd>
+            </button>
             <Link href="/notices" className="text-emerald-100 hover:text-[#C59B27] transition">
               নোটিশ
             </Link>

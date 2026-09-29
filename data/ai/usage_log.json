@@ -737,5 +737,83 @@
     "status": "SUCCESS",
     "humanReviewRequired": false,
     "timestamp": "2026-09-28T20:02:17.432Z"
+  },
+  {
+    "requestId": "rag-1790627161910",
+    "userRole": "PUBLIC",
+    "module": "ADMISSION",
+    "queryIntent": "RAG_QUERY_ADMISSION",
+    "model": "EHRJ-RAG-GROUNDING-v1",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 140,
+    "latencyMs": 38,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-28T20:26:01.910Z"
+  },
+  {
+    "requestId": "rag-1790627161932",
+    "userRole": "PUBLIC",
+    "module": "FINANCE",
+    "queryIntent": "RAG_QUERY_FINANCE",
+    "model": "EHRJ-RAG-GROUNDING-v1",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 140,
+    "latencyMs": 9,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-28T20:26:01.932Z"
+  },
+  {
+    "requestId": "rag-1790627175915",
+    "userRole": "PUBLIC",
+    "module": "ADMISSION",
+    "queryIntent": "RAG_QUERY_ADMISSION",
+    "model": "EHRJ-RAG-GROUNDING-v1",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 140,
+    "latencyMs": 12,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-28T20:26:15.915Z"
+  },
+  {
+    "requestId": "rag-1790628821373",
+    "userRole": "PUBLIC",
+    "module": "ADMISSION",
+    "queryIntent": "RAG_QUERY_ADMISSION",
+    "model": "EHRJ-RAG-GROUNDING-v1",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 140,
+    "latencyMs": 10,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-28T20:53:41.373Z"
+  },
+  {
+    "requestId": "rag-1790628821397",
+    "userRole": "PUBLIC",
+    "module": "FINANCE",
+    "queryIntent": "RAG_QUERY_FINANCE",
+    "model": "EHRJ-RAG-GROUNDING-v1",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 140,
+    "latencyMs": 9,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-28T20:53:41.397Z"
+  },
+  {
+    "requestId": "rag-1790628823187",
+    "userRole": "PUBLIC",
+    "module": "ADMISSION",
+    "queryIntent": "RAG_QUERY_ADMISSION",
+    "model": "EHRJ-RAG-GROUNDING-v1",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 140,
+    "latencyMs": 16,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-28T20:53:43.187Z"
   }
 ]

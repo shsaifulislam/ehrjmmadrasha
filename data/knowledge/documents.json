@@ -469,5 +469,61 @@
     "approver": "প্রধান অ্যাডমিন (অপারেশনাল)",
     "approvalTimestamp": "2026-09-28T20:02:16.029Z",
     "publicationTimestamp": "2026-09-28T20:02:16.033Z"
+  },
+  {
+    "documentCode": "EHRJ-TEST-POL-1479",
+    "titleBn": "পরীক্ষামূলক পাঠাগার নীতিমালা ২০২৬",
+    "titleEn": "Experimental Library Policy 2026",
+    "category": "LIBRARY",
+    "documentType": "POLICY",
+    "version": "1.0",
+    "status": "PUBLISHED",
+    "effectiveDate": "2026-09-28T20:26:01.479Z",
+    "author": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "securityClassification": "PUBLIC",
+    "roleScope": "ALL",
+    "language": "bn",
+    "contentText": "১. পাঠাগারের প্রতিটি কিতাব সর্বোচ্চ ১৪ দিনের জন্য ইস্যু করা যাবে।\n২. কিতাব নষ্ট করলে সমপরিমাণ জরিমানা প্রযোজ্য।",
+    "contentMarkdown": "### পাঠাগার নীতিমালা\n- সর্বোচ্চ ১৪ দিন।",
+    "tags": [
+      "লাইব্রেরি",
+      "কিতাব",
+      "পাঠাগার"
+    ],
+    "id": "doc-1790627161488-hildt",
+    "checksum": "70d1f196e999828601d2cf3887c21ced02160639bdb8c6a42dd74099ded7209c",
+    "createdAt": "2026-09-28T20:26:01.488Z",
+    "updatedAt": "2026-09-28T20:26:01.531Z",
+    "approver": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "approvalTimestamp": "2026-09-28T20:26:01.527Z",
+    "publicationTimestamp": "2026-09-28T20:26:01.530Z"
+  },
+  {
+    "documentCode": "EHRJ-TEST-POL-1126",
+    "titleBn": "পরীক্ষামূলক পাঠাগার নীতিমালা ২০২৬",
+    "titleEn": "Experimental Library Policy 2026",
+    "category": "LIBRARY",
+    "documentType": "POLICY",
+    "version": "1.0",
+    "status": "PUBLISHED",
+    "effectiveDate": "2026-09-28T20:53:41.126Z",
+    "author": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "securityClassification": "PUBLIC",
+    "roleScope": "ALL",
+    "language": "bn",
+    "contentText": "১. পাঠাগারের প্রতিটি কিতাব সর্বোচ্চ ১৪ দিনের জন্য ইস্যু করা যাবে।\n২. কিতাব নষ্ট করলে সমপরিমাণ জরিমানা প্রযোজ্য।",
+    "contentMarkdown": "### পাঠাগার নীতিমালা\n- সর্বোচ্চ ১৪ দিন।",
+    "tags": [
+      "লাইব্রেরি",
+      "কিতাব",
+      "পাঠাগার"
+    ],
+    "id": "doc-1790628821129-4hpzu",
+    "checksum": "70d1f196e999828601d2cf3887c21ced02160639bdb8c6a42dd74099ded7209c",
+    "createdAt": "2026-09-28T20:53:41.129Z",
+    "updatedAt": "2026-09-28T20:53:41.143Z",
+    "approver": "প্রধান অ্যাডমিন (অপারেশনাল)",
+    "approvalTimestamp": "2026-09-28T20:53:41.138Z",
+    "publicationTimestamp": "2026-09-28T20:53:41.142Z"
   }
 ]

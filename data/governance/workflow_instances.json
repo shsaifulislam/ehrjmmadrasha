@@ -79,5 +79,59 @@
     "createdAt": "2026-09-28T20:03:39.145Z",
     "updatedAt": "2026-09-28T20:03:39.150Z",
     "completedAt": "2026-09-28T20:03:39.150Z"
+  },
+  {
+    "instanceId": "WFI-2026-000004",
+    "workflowCode": "WF-INV-001",
+    "workflowVersion": "1.0",
+    "status": "COMPLETED",
+    "triggerEventId": "EVT-2026-TEST-1790627137599",
+    "correlationId": "CORR-INV-TEST-001",
+    "entityType": "InventoryItem",
+    "entityId": "ITEM-FLOUR-1790627137599",
+    "currentStepIndex": 1,
+    "stepsExecution": [
+      {
+        "stepId": "STEP_PURCHASE_APPROVAL_GATE",
+        "status": "SUCCEEDED",
+        "approvalRequestId": "EHRJ-APR-2026-000012",
+        "executedAt": "2026-09-28T20:25:37.636Z"
+      }
+    ],
+    "payload": {
+      "currentStock": 2,
+      "reorderLevel": 10,
+      "itemName": "আটা ৫০ কেজি"
+    },
+    "createdAt": "2026-09-28T20:25:37.628Z",
+    "updatedAt": "2026-09-28T20:25:37.636Z",
+    "completedAt": "2026-09-28T20:25:37.636Z"
+  },
+  {
+    "instanceId": "WFI-2026-000005",
+    "workflowCode": "WF-INV-001",
+    "workflowVersion": "1.0",
+    "status": "COMPLETED",
+    "triggerEventId": "EVT-2026-TEST-1790628798416",
+    "correlationId": "CORR-INV-TEST-001",
+    "entityType": "InventoryItem",
+    "entityId": "ITEM-FLOUR-1790628798416",
+    "currentStepIndex": 1,
+    "stepsExecution": [
+      {
+        "stepId": "STEP_PURCHASE_APPROVAL_GATE",
+        "status": "SUCCEEDED",
+        "approvalRequestId": "EHRJ-APR-2026-000015",
+        "executedAt": "2026-09-28T20:53:18.423Z"
+      }
+    ],
+    "payload": {
+      "currentStock": 2,
+      "reorderLevel": 10,
+      "itemName": "আটা ৫০ কেজি"
+    },
+    "createdAt": "2026-09-28T20:53:18.419Z",
+    "updatedAt": "2026-09-28T20:53:18.423Z",
+    "completedAt": "2026-09-28T20:53:18.423Z"
   }
 ]

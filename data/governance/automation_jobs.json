@@ -219,5 +219,117 @@
     "idempotencyKey": "job_TEST_CANCEL_JOB_e2eaa047a30b",
     "error": "Cancelled: Admin testing cancellation",
     "completedAt": "2026-09-28T20:03:39.101Z"
+  },
+  {
+    "jobId": "JOB-2026-000013",
+    "jobType": "TEST_SUCCESSFUL_JOB",
+    "status": "SUCCEEDED",
+    "payload": {
+      "num": 21,
+      "testRun": 1790627137552
+    },
+    "attempts": 1,
+    "maxAttempts": 3,
+    "createdAt": "2026-09-28T20:25:37.555Z",
+    "correlationId": "JOB-2026-000013",
+    "idempotencyKey": "job_TEST_SUCCESSFUL_JOB_42ef6a819803",
+    "startedAt": "2026-09-28T20:25:37.564Z",
+    "result": {
+      "processed": true,
+      "number": 42
+    },
+    "completedAt": "2026-09-28T20:25:37.565Z"
+  },
+  {
+    "jobId": "JOB-2026-000014",
+    "jobType": "TEST_FAILING_JOB",
+    "status": "SUCCEEDED",
+    "payload": {
+      "data": "transient-failure",
+      "testRun": 1790627137552
+    },
+    "attempts": 1,
+    "maxAttempts": 2,
+    "createdAt": "2026-09-28T20:25:37.566Z",
+    "correlationId": "JOB-2026-000014",
+    "idempotencyKey": "job_TEST_FAILING_JOB_7c46f3e91f94",
+    "startedAt": "2026-09-28T20:25:37.574Z",
+    "result": {
+      "replayed": true,
+      "resolved": true
+    },
+    "completedAt": "2026-09-28T20:25:37.574Z"
+  },
+  {
+    "jobId": "JOB-2026-000015",
+    "jobType": "TEST_CANCEL_JOB",
+    "status": "CANCELLED",
+    "payload": {
+      "action": "cancel-me",
+      "testRun": 1790627137552
+    },
+    "attempts": 0,
+    "maxAttempts": 3,
+    "createdAt": "2026-09-28T20:25:37.576Z",
+    "correlationId": "JOB-2026-000015",
+    "idempotencyKey": "job_TEST_CANCEL_JOB_f2da718932ac",
+    "error": "Cancelled: Admin testing cancellation",
+    "completedAt": "2026-09-28T20:25:37.578Z"
+  },
+  {
+    "jobId": "JOB-2026-000016",
+    "jobType": "TEST_SUCCESSFUL_JOB",
+    "status": "SUCCEEDED",
+    "payload": {
+      "num": 21,
+      "testRun": 1790628798386
+    },
+    "attempts": 1,
+    "maxAttempts": 3,
+    "createdAt": "2026-09-28T20:53:18.390Z",
+    "correlationId": "JOB-2026-000016",
+    "idempotencyKey": "job_TEST_SUCCESSFUL_JOB_830ee8333cfe",
+    "startedAt": "2026-09-28T20:53:18.391Z",
+    "result": {
+      "processed": true,
+      "number": 42
+    },
+    "completedAt": "2026-09-28T20:53:18.392Z"
+  },
+  {
+    "jobId": "JOB-2026-000017",
+    "jobType": "TEST_FAILING_JOB",
+    "status": "SUCCEEDED",
+    "payload": {
+      "data": "transient-failure",
+      "testRun": 1790628798386
+    },
+    "attempts": 1,
+    "maxAttempts": 2,
+    "createdAt": "2026-09-28T20:53:18.393Z",
+    "correlationId": "JOB-2026-000017",
+    "idempotencyKey": "job_TEST_FAILING_JOB_1534ecfe77f1",
+    "startedAt": "2026-09-28T20:53:18.399Z",
+    "result": {
+      "replayed": true,
+      "resolved": true
+    },
+    "completedAt": "2026-09-28T20:53:18.400Z"
+  },
+  {
+    "jobId": "JOB-2026-000018",
+    "jobType": "TEST_CANCEL_JOB",
+    "status": "CANCELLED",
+    "payload": {
+      "action": "cancel-me",
+      "testRun": 1790628798386
+    },
+    "attempts": 0,
+    "maxAttempts": 3,
+    "createdAt": "2026-09-28T20:53:18.401Z",
+    "correlationId": "JOB-2026-000018",
+    "idempotencyKey": "job_TEST_CANCEL_JOB_59d8ad3bd2fa",
+    "error": "Cancelled: Admin testing cancellation",
+    "completedAt": "2026-09-28T20:53:18.402Z"
   }
 ]
