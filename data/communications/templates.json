@@ -1,0 +1,177 @@
+[
+  {
+    "code": "COM_EXAM_ROUTINE_ANNOUNCEMENT",
+    "nameBn": "পরীক্ষার রুটিন ও নির্দেশনা ঘোষণা",
+    "nameEn": "Exam Schedule & Instructions Announcement",
+    "category": "OFFICIAL_NOTICE",
+    "subjectTemplateBn": "আসন্ন পরীক্ষার সময়সূচি ও দিকনির্দেশনা: {{exam_name}} [হালনাগাদ] [হালনাগাদ] [হালনাগাদ] [হালনাগাদ]",
+    "subjectTemplateEn": "Upcoming Examination Schedule & Guidelines: {{exam_name}}",
+    "subjectTemplateAr": "إعلان جدول الامتحانات والتعليمات: {{exam_name}}",
+    "bodyTemplateBn": "মুহতারাম {{recipient_name}}, আগামী {{start_date}} তারিখ হতে অত্র মাদরাসার {{exam_name}} শুরু হতে যাচ্ছে। বিস্তারিত রুটিন ও আসন বিন্যাস শিক্ষার্থী ও অভিভাবক পোর্টালে প্রকাশ করা হয়েছে। সকল শিক্ষার্থীকে সময়মতো উপস্থিত থাকার নির্দেশ দেওয়া যাচ্ছে।",
+    "bodyTemplateEn": "Respected {{recipient_name}}, The {{exam_name}} will commence on {{start_date}}. Detailed schedule has been published on the student portal.",
+    "bodyTemplateAr": "المحترم {{recipient_name}}، ستبدأ امتحانات {{exam_name}} في تاريخ {{start_date}}.",
+    "allowedVariables": [
+      "recipient_name",
+      "exam_name",
+      "start_date",
+      "class_title"
+    ],
+    "supportedChannels": [
+      "PORTAL",
+      "EMAIL",
+      "PUBLIC_WEBSITE"
+    ],
+    "version": 5,
+    "isMandatory": false,
+    "isActive": true,
+    "versionsHistory": [
+      {
+        "version": 4,
+        "subjectTemplateBn": "আসন্ন পরীক্ষার সময়সূচি ও দিকনির্দেশনা: {{exam_name}} [হালনাগাদ] [হালনাগাদ] [হালনাগাদ]",
+        "bodyTemplateBn": "মুহতারাম {{recipient_name}}, আগামী {{start_date}} তারিখ হতে অত্র মাদরাসার {{exam_name}} শুরু হতে যাচ্ছে। বিস্তারিত রুটিন ও আসন বিন্যাস শিক্ষার্থী ও অভিভাবক পোর্টালে প্রকাশ করা হয়েছে। সকল শিক্ষার্থীকে সময়মতো উপস্থিত থাকার নির্দেশ দেওয়া যাচ্ছে।",
+        "updatedAt": "2026-09-29T07:52:10.953Z",
+        "updatedBy": "TEST_ADMIN",
+        "changeNote": "Updated to v5"
+      },
+      {
+        "version": 3,
+        "subjectTemplateBn": "আসন্ন পরীক্ষার সময়সূচি ও দিকনির্দেশনা: {{exam_name}} [হালনাগাদ] [হালনাগাদ]",
+        "bodyTemplateBn": "মুহতারাম {{recipient_name}}, আগামী {{start_date}} তারিখ হতে অত্র মাদরাসার {{exam_name}} শুরু হতে যাচ্ছে। বিস্তারিত রুটিন ও আসন বিন্যাস শিক্ষার্থী ও অভিভাবক পোর্টালে প্রকাশ করা হয়েছে। সকল শিক্ষার্থীকে সময়মতো উপস্থিত থাকার নির্দেশ দেওয়া যাচ্ছে।",
+        "updatedAt": "2026-09-29T07:45:22.390Z",
+        "updatedBy": "TEST_ADMIN",
+        "changeNote": "Updated to v4"
+      },
+      {
+        "version": 2,
+        "subjectTemplateBn": "আসন্ন পরীক্ষার সময়সূচি ও দিকনির্দেশনা: {{exam_name}} [হালনাগাদ]",
+        "bodyTemplateBn": "মুহতারাম {{recipient_name}}, আগামী {{start_date}} তারিখ হতে অত্র মাদরাসার {{exam_name}} শুরু হতে যাচ্ছে। বিস্তারিত রুটিন ও আসন বিন্যাস শিক্ষার্থী ও অভিভাবক পোর্টালে প্রকাশ করা হয়েছে। সকল শিক্ষার্থীকে সময়মতো উপস্থিত থাকার নির্দেশ দেওয়া যাচ্ছে।",
+        "updatedAt": "2026-09-29T07:37:31.190Z",
+        "updatedBy": "TEST_ADMIN",
+        "changeNote": "Updated to v3"
+      },
+      {
+        "version": 1,
+        "subjectTemplateBn": "আসন্ন পরীক্ষার সময়সূচি ও দিকনির্দেশনা: {{exam_name}}",
+        "bodyTemplateBn": "মুহতারাম {{recipient_name}}, আগামী {{start_date}} তারিখ হতে অত্র মাদরাসার {{exam_name}} শুরু হতে যাচ্ছে। বিস্তারিত রুটিন ও আসন বিন্যাস শিক্ষার্থী ও অভিভাবক পোর্টালে প্রকাশ করা হয়েছে। সকল শিক্ষার্থীকে সময়মতো উপস্থিত থাকার নির্দেশ দেওয়া যাচ্ছে।",
+        "updatedAt": "2026-09-29T07:35:31.934Z",
+        "updatedBy": "TEST_ADMIN",
+        "changeNote": "Updated to v2"
+      },
+      {
+        "version": 1,
+        "subjectTemplateBn": "আসন্ন পরীক্ষার সময়সূচি ও দিকনির্দেশনা: {{exam_name}}",
+        "bodyTemplateBn": "মুহতারাম {{recipient_name}}, আগামী {{start_date}} তারিখ হতে অত্র মাদরাসার {{exam_name}} শুরু হতে যাচ্ছে।",
+        "updatedAt": "2026-09-29T07:35:31.073Z",
+        "updatedBy": "SYSTEM_INIT",
+        "changeNote": "Initial default template"
+      }
+    ],
+    "createdAt": "2026-09-29T07:35:31.073Z",
+    "updatedAt": "2026-09-29T07:52:10.953Z"
+  },
+  {
+    "code": "COM_FEE_PAYMENT_DUE_REMINDER",
+    "nameBn": "বকেয়া মাসিক ফি পরিশোধের তাগিদপত্র",
+    "nameEn": "Monthly Fee Due Reminder",
+    "category": "PAYMENT_REMINDER",
+    "subjectTemplateBn": "জরুরি: শিক্ষার্থী {{student_name}}-এর বকেয়া ফি পরিশোধের অনুরোধ",
+    "subjectTemplateEn": "Reminder: Outstanding Fee Payment for {{student_name}}",
+    "bodyTemplateBn": "মুহতারাম {{guardian_name}}, আপনার সন্তান {{student_name}} (জামাত: {{class_title}}, রোল: {{roll}})-এর চলতি মাসের নির্ধারিত ফি বাবদ ৳{{amount}} টাকা বকেয়া রয়েছে (শেষ তারিখ: {{due_date}})। অনলাইন পোর্টাল অথবা মাদরাসা ক্যাশ কাউন্টারে উক্ত ফি পরিশোধের অনুরোধ করা হলো।",
+    "bodyTemplateEn": "Respected {{guardian_name}}, Outstanding fee of ৳{{amount}} for student {{student_name}} is due by {{due_date}}.",
+    "allowedVariables": [
+      "guardian_name",
+      "student_name",
+      "class_title",
+      "roll",
+      "amount",
+      "due_date"
+    ],
+    "supportedChannels": [
+      "PORTAL",
+      "EMAIL"
+    ],
+    "version": 1,
+    "isMandatory": false,
+    "isActive": true,
+    "versionsHistory": [],
+    "createdAt": "2026-09-29T07:35:31.073Z",
+    "updatedAt": "2026-09-29T07:35:31.073Z"
+  },
+  {
+    "code": "COM_ADMISSION_APPLICATION_UPDATE",
+    "nameBn": "ভর্তি আবেদন ও যাচাইকরণ অগ্রগতি",
+    "nameEn": "Admission Application Status Update",
+    "category": "ADMISSION_UPDATE",
+    "subjectTemplateBn": "ভর্তি আবেদন স্থিতি: ট্র্যাকিং নম্বর {{tracking_id}} - {{status_bn}}",
+    "subjectTemplateEn": "Admission Application Status: {{tracking_id}} - {{status_en}}",
+    "bodyTemplateBn": "মুহতারাম {{applicant_name}}, আপনার দাখিলকৃত ভর্তি আবেদন (ট্র্যাকিং আইডি: {{tracking_id}})-এর বর্তমান অবস্থা: '{{status_bn}}'। বিস্তারিত তথ্য ও পরবর্তী নির্দেশনার জন্য ওয়েবসাইট ভিজিট করুন।",
+    "allowedVariables": [
+      "applicant_name",
+      "tracking_id",
+      "status_bn",
+      "status_en",
+      "action_url"
+    ],
+    "supportedChannels": [
+      "PORTAL",
+      "EMAIL"
+    ],
+    "version": 1,
+    "isMandatory": true,
+    "isActive": true,
+    "versionsHistory": [],
+    "createdAt": "2026-09-29T07:35:31.074Z",
+    "updatedAt": "2026-09-29T07:35:31.074Z"
+  },
+  {
+    "code": "COM_LIBRARY_OVERDUE_ALERT",
+    "nameBn": "লাইব্রেরি বই ফেরত বিলম্ব নোটিশ",
+    "nameEn": "Library Book Overdue Alert",
+    "category": "LIBRARY_REMINDER",
+    "subjectTemplateBn": "তাগিদপত্র: লাইব্রেরি বই ফেরত দেওয়ার মেয়াদ উত্তীর্ণ হয়েছে - {{book_title}}",
+    "subjectTemplateEn": "Alert: Overdue Library Book - {{book_title}}",
+    "bodyTemplateBn": "মুহতারাম {{recipient_name}}, আপনার নামে ইস্যুকৃত '{{book_title}}' বইটির ফেরত দেওয়ার নির্ধারিত মেয়াদ উত্তীর্ণ হয়েছে। দৈনিক বিলম্ব জরিমানা এড়াতে অবিলম্বে লাইব্রেরি শাখায় বইটি ফেরত দিন।",
+    "allowedVariables": [
+      "recipient_name",
+      "book_title",
+      "accession_no",
+      "due_date"
+    ],
+    "supportedChannels": [
+      "PORTAL",
+      "EMAIL"
+    ],
+    "version": 1,
+    "isMandatory": true,
+    "isActive": true,
+    "versionsHistory": [],
+    "createdAt": "2026-09-29T07:35:31.074Z",
+    "updatedAt": "2026-09-29T07:35:31.074Z"
+  },
+  {
+    "code": "COM_INSTITUTIONAL_EVENT_INVITATION",
+    "nameBn": "বার্ষিক ওয়াজ মাহফিল ও আলোচনা সভার দাওয়াত",
+    "nameEn": "Annual Program / Event Invitation",
+    "category": "EVENT_INVITATION",
+    "subjectTemplateBn": "আমন্ত্রণপত্র: ইলিয়টগঞ্জ মাদরাসার {{event_title}}",
+    "subjectTemplateEn": "Invitation: {{event_title}} at Eliotganj Madrasha",
+    "bodyTemplateBn": "আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ, ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসার উদ্যোগে আগামী {{event_date}} তারিখে '{{event_title}}' অনুষ্ঠিত হতে যাচ্ছে। উক্ত বরকতময় মাহফিলে আপনার উপস্থিতি ও আন্তরিক দোয়া কামনা করছি।",
+    "allowedVariables": [
+      "recipient_name",
+      "event_title",
+      "event_date",
+      "location"
+    ],
+    "supportedChannels": [
+      "PORTAL",
+      "EMAIL",
+      "PUBLIC_WEBSITE"
+    ],
+    "version": 1,
+    "isMandatory": false,
+    "isActive": true,
+    "versionsHistory": [],
+    "createdAt": "2026-09-29T07:35:31.074Z",
+    "updatedAt": "2026-09-29T07:35:31.074Z"
+  }
+]

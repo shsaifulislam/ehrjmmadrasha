@@ -1,0 +1,39 @@
+import { NextRequest, NextResponse } from "next/server";
+import {
+  getCommunicationTemplates,
+  saveCommunicationTemplate,
+} from "@/lib/communications";
+
+export async function GET() {
+  try {
+    const templates = getCommunicationTemplates();
+    return NextResponse.json({ success: true, count: templates.length, templates });
+  } catch (err: any) {
+    return NextResponse.json(
+      { success: false, error: err.message },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+
+    if (!body.code || !body.nameBn || !body.category) {
+      return NextResponse.json(
+        { success: false, error: "Template Code, Name, and Category are required." },
+        { status: 400 }
+      );
+    }
+
+    const template = saveCommunicationTemplate(body, body.actorId || "ADMIN");
+
+    return NextResponse.json({ success: true, template });
+  } catch (err: any) {
+    return NextResponse.json(
+      { success: false, error: err.message },
+      { status: 500 }
+    );
+  }
+}

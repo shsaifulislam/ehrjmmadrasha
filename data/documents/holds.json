@@ -1,5 +1,25 @@
 [
   {
+    "id": "HOLD-1790668289981-2OU1",
+    "documentId": "DOC-1790668289948-YDIX8",
+    "reason": "সরকারি নিরীক্ষা এবং বোর্ড যাচাইয়ের জন্য সংরক্ষিত",
+    "caseReference": "AUDIT-2026-GOV-09",
+    "placedBy": {
+      "userId": "ADMIN-001",
+      "name": "Mawlana Principal",
+      "role": "PRINCIPAL"
+    },
+    "placedAt": "2026-09-29T07:51:29.981Z",
+    "isActive": false,
+    "releasedBy": {
+      "userId": "ADMIN-001",
+      "name": "Mawlana Principal",
+      "role": "PRINCIPAL"
+    },
+    "releasedAt": "2026-09-29T07:51:29.984Z",
+    "releaseReason": "অডিট সফলভাবে নিষ্পত্তি"
+  },
+  {
     "id": "HOLD-1790666108183-839Q",
     "documentId": "DOC-1790666108120-W7RVY",
     "reason": "সরকারি নিরীক্ষা এবং বোর্ড যাচাইয়ের জন্য সংরক্ষিত",

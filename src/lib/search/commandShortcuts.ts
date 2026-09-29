@@ -166,6 +166,16 @@ export const GLOBAL_COMMAND_SHORTCUTS: CommandShortcutItem[] = [
     requiredRole: ["ADMIN", "PRINCIPAL"],
     descriptionBn: "API চাবি, ব্যাংক স্টেটমেন্ট ম্যাচিং ও ওয়েবহুক",
   },
+  {
+    id: "CMD-NAV-COMMUNICATIONS",
+    titleBn: "কমিউনিকেশন ও ক্যাম্পেইন ইঞ্জিন",
+    titleEn: "Communications & Outreach Engine",
+    category: "NAVIGATION",
+    shortcutKey: "G C",
+    url: "/admin/communications",
+    requiredRole: ["ADMIN", "PRINCIPAL"],
+    descriptionBn: "প্রাতিষ্ঠানিক ঘোষণা, টার্গেটেড ইমেইল/পোর্টাল ক্যাম্পেইন ও ডাইজেস্ট",
+  },
   // 2. Guardian Portal Shortcuts
   {
     id: "CMD-NAV-PORTAL-CHILDREN",

@@ -1,5 +1,68 @@
 [
   {
+    "id": "CMS-AUD-1790668181459-02cap",
+    "action": "CREATE",
+    "contentType": "DOWNLOAD",
+    "contentId": "DL-MUMDLNMB",
+    "details": "Created new download item: ২০২৬ শিক্ষাবর্ষের টেস্ট প্রসপেক্টাস",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T07:49:41.459Z"
+  },
+  {
+    "id": "CMS-AUD-1790668181457-871he",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMDLNM8",
+    "details": "Created new gallery item: সম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T07:49:41.457Z"
+  },
+  {
+    "id": "CMS-AUD-1790668181455-axs6c",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMDLNM6",
+    "details": "Created new gallery item: অসম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T07:49:41.455Z"
+  },
+  {
+    "id": "CMS-AUD-1790668181450-r4csp",
+    "action": "UPDATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMDLNLZ",
+    "details": "Updated FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "PRINCIPAL",
+    "timestamp": "2026-09-29T07:49:41.450Z"
+  },
+  {
+    "id": "CMS-AUD-1790668181448-9l0ck",
+    "action": "CREATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMDLNLZ",
+    "details": "Created new FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T07:49:41.448Z"
+  },
+  {
+    "id": "CMS-AUD-1790668181446-95l0n",
+    "action": "ARCHIVE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMDLNLU",
+    "details": "Archived event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T07:49:41.446Z"
+  },
+  {
+    "id": "CMS-AUD-1790668181444-dfx2b",
+    "action": "CREATE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMDLNLU",
+    "details": "Created new event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T07:49:41.444Z"
+  },
+  {
     "id": "CMS-AUD-1790666001665-qnq6m",
     "action": "CREATE",
     "contentType": "DOWNLOAD",
