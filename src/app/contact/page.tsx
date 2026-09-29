@@ -8,17 +8,58 @@ import { INSTITUTION_INFO } from "@/lib/constants";
 
 export default function ContactPage() {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [subject, setSubject] = useState("");
+  const [category, setCategory] = useState("GENERAL");
   const [message, setMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [honeypot, setHoneypot] = useState(""); // Anti-bot honeypot
+  const [loading, setLoading] = useState(false);
+  const [resultMessage, setResultMessage] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [ticketNumber, setTicketNumber] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setName("");
-    setPhone("");
-    setMessage("");
-    setTimeout(() => setSubmitted(false), 4000);
+    setLoading(true);
+    setResultMessage(null);
+
+    try {
+      const res = await fetch("/api/public/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          subject,
+          category,
+          message,
+          honeypot,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setIsSuccess(true);
+        setTicketNumber(data.ticketNumber || null);
+        setResultMessage(data.messageBn || "আপনার বার্তাটি সফলভাবে মাদরাসা অফিসে পৌঁছেছে।");
+        setName("");
+        setEmail("");
+        setPhone("");
+        setSubject("");
+        setMessage("");
+      } else {
+        setIsSuccess(false);
+        setResultMessage(data.messageBn || "বার্তা প্রেরণে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।");
+      }
+    } catch (err) {
+      console.error(err);
+      setIsSuccess(false);
+      setResultMessage("সার্ভারের সাথে সংযোগ স্থাপন করা সম্ভব হয়নি। সরাসরি ফোনে যোগাযোগ করুন।");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -127,34 +168,101 @@ export default function ContactPage() {
             <h2 className="text-lg font-bold text-[#083B25]">সরাসরি বার্তা বা প্রশ্ন পাঠান</h2>
             <p className="text-xs text-gray-500">আপনার যেকোনো জিজ্ঞাসা লিখুন, কর্তৃপক্ষ দ্রুত উত্তর প্রদান করবে।</p>
 
-            {submitted && (
-              <div className="p-3.5 rounded-lg bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                আপনার বার্তাটি মাদরাসা অফিসে পৌঁছেছে। জাযাকাল্লাহু খাইরান!
+            {resultMessage && (
+              <div
+                className={`p-3.5 rounded-lg border text-xs flex flex-col gap-1 ${
+                  isSuccess
+                    ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+                    : "bg-red-50 border-red-200 text-red-700"
+                }`}
+              >
+                <div className="flex items-center gap-2 font-semibold">
+                  <CheckCircle className="w-4 h-4 flex-shrink-0" />
+                  {resultMessage}
+                </div>
+                {ticketNumber && (
+                  <p className="text-[11px] font-mono text-emerald-700 bg-white/70 px-2 py-1 rounded w-fit mt-1">
+                    হেল্পডেস্ক টিকিট নং: {ticketNumber}
+                  </p>
+                )}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-3.5">
-              <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">আপনার নাম *</label>
+              {/* Anti-bot honeypot field - invisible to human users */}
+              <div style={{ display: "none" }} aria-hidden="true">
                 <input
                   type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="মুহাম্মদ..."
-                  className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none focus:ring-1 focus:ring-[#0D5C3A]"
+                  name="honeypot_field"
+                  tabIndex={-1}
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  autoComplete="off"
                 />
               </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">আপনার নাম *</label>
+                  <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="মুহাম্মদ..."
+                    className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none focus:ring-1 focus:ring-[#0D5C3A]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">ইমেইল ঠিকানা *</label>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="example@gmail.com"
+                    className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none focus:ring-1 focus:ring-[#0D5C3A]"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">মোবাইল নম্বর (ঐচ্ছিক)</label>
+                  <input
+                    type="text"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="01XXXXXXXXX"
+                    className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none focus:ring-1 focus:ring-[#0D5C3A]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">জিজ্ঞাসার ধরণ</label>
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none focus:ring-1 focus:ring-[#0D5C3A] bg-white"
+                  >
+                    <option value="GENERAL">সাধারণ পরামর্শ</option>
+                    <option value="ADMISSION">ভর্তি বিষয়ক তথ্য</option>
+                    <option value="ACADEMIC">সিলেবাস ও শিক্ষা কার্যক্রম</option>
+                    <option value="FEES">ফি ও দান সংক্রান্ত</option>
+                    <option value="RESIDENTIAL">ছাত্রাবাস ও এতিমখানা</option>
+                  </select>
+                </div>
+              </div>
+
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">মোবাইল নম্বর *</label>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">বার্তার বিষয় *</label>
                 <input
                   type="text"
                   required
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="01XXXXXXXXX"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                  placeholder="যেমন: হিফজ বিভাগে নতুন ছাত্র ভর্তি সম্পর্কে..."
                   className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none focus:ring-1 focus:ring-[#0D5C3A]"
                 />
               </div>
@@ -166,17 +274,18 @@ export default function ContactPage() {
                   rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="আপনার বার্তা বা প্রশ্ন বিস্তারিত লিখুন..."
+                  placeholder="আপনার বার্তা বা প্রশ্ন বিস্তারিত লিখুন (কমপক্ষে ১০ অক্ষর)..."
                   className="w-full p-2.5 border border-gray-300 rounded-lg text-xs outline-none focus:ring-1 focus:ring-[#0D5C3A]"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-[#0D5C3A] hover:bg-[#158052] text-white py-2.5 rounded-lg text-xs font-bold transition shadow flex items-center justify-center gap-2"
+                disabled={loading}
+                className="w-full bg-[#0D5C3A] hover:bg-[#158052] disabled:opacity-50 text-white py-2.5 rounded-lg text-xs font-bold transition shadow flex items-center justify-center gap-2"
               >
                 <Send className="w-4 h-4" />
-                বার্তা পাঠান
+                {loading ? "বার্তা পাঠানো হচ্ছে..." : "বার্তা পাঠান"}
               </button>
             </form>
           </div>

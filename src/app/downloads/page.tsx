@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
@@ -8,7 +8,34 @@ import { Download, FileText, Calendar, BookOpen, FileCheck } from "lucide-react"
 import { INSTITUTION_INFO } from "@/lib/constants";
 
 export default function DownloadsPage() {
-  const downloadItems = [
+  const [downloadItems, setDownloadItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/public/content/downloads")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.success && data.downloads?.length > 0) {
+          setDownloadItems(
+            data.downloads.map((d: any) => ({
+              title: d.titleBn,
+              category: d.category,
+              size: d.fileSizeDisplay,
+              type: d.fileType,
+              date: d.versionString,
+              description: d.descriptionBn,
+              fileUrl: d.fileUrl,
+            }))
+          );
+        } else {
+          setDownloadItems(FALLBACK_DOWNLOADS);
+        }
+      })
+      .catch(() => setDownloadItems(FALLBACK_DOWNLOADS))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const FALLBACK_DOWNLOADS = [
     {
       title: "নতুন ছাত্র ভর্তি আবেদন ফরম (অফলাইন)",
       category: "ভর্তি",

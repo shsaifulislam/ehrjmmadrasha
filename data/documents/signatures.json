@@ -1,5 +1,28 @@
 [
   {
+    "id": "SIG-1790666108169-CQQV",
+    "documentId": "DOC-1790666108120-W7RVY",
+    "versionNumber": 2,
+    "signer": {
+      "userId": "ADMIN-001",
+      "name": "Mawlana Principal",
+      "role": "PRINCIPAL",
+      "designation": "মুহতামিম / অধ্যক্ষ"
+    },
+    "signingMethod": "OFFICIAL_DIGITAL_STAMP",
+    "signatureStatus": "SIGNED",
+    "signatureReference": "EHRJ-SIG-108169",
+    "documentHash": "1ffb5ab7a910fb8cac5fc112b27b551b19d0178ad641837bf932a6d76005e158",
+    "signatureToken": "79cd1a3415d9ce4a568e90b5d727f98d6ee9f10bc4d4c5fb1fc1d5f0eca67c8c",
+    "watermark": "OFFICIAL",
+    "signedAt": "2026-09-29T07:15:08.166Z",
+    "verificationResult": {
+      "valid": true,
+      "checkedAt": "2026-09-29T07:15:08.166Z",
+      "details": "Institutional digital signature verified against master cryptographic key."
+    }
+  },
+  {
     "id": "SIG-1790628752736-NZDS",
     "documentId": "DOC-1790628752689-1QVBI",
     "versionNumber": 2,

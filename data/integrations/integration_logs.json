@@ -83,5 +83,22 @@
     },
     "errorCode": "PROVIDER_ERROR",
     "errorMessage": "fetch failed"
+  },
+  {
+    "id": "LOG-1790666123937-8c53be",
+    "integrationCode": "DATA_IMPORT_EXPORT",
+    "operation": "POST https://mock-bmeb-board.gov.bd/api/v1/sync",
+    "timestamp": "2026-09-29T07:15:23.937Z",
+    "requestId": "req_d09d164004fe",
+    "correlationId": "EVT-2026-000014",
+    "status": "FAILURE",
+    "durationMs": 1487,
+    "sanitizedMetadata": {
+      "method": "POST",
+      "attempts": 3,
+      "circuitFailures": 1
+    },
+    "errorCode": "PROVIDER_ERROR",
+    "errorMessage": "fetch failed"
   }
 ]

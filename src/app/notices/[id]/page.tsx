@@ -14,12 +14,15 @@ interface NoticeDetailsProps {
   };
 }
 
+import { generateNoticeJsonLd } from "@/lib/cms";
+
 export default async function NoticeDetailsPage({ params }: NoticeDetailsProps) {
   const notice = await prisma.notice.findUnique({
     where: { id: params.id },
   });
 
-  if (!notice) {
+  // SECURITY GUARD: Never expose draft, scheduled, or non-public internal notices to unauthenticated visitors
+  if (!notice || !notice.isPublished || notice.audience !== "PUBLIC" || notice.status !== "PUBLISHED") {
     return (
       <div className="min-h-screen bg-[#F9F8F3] flex flex-col font-sans text-[#0B1914]">
         <Navbar />
@@ -44,8 +47,14 @@ export default async function NoticeDetailsPage({ params }: NoticeDetailsProps) 
     );
   }
 
+  const jsonLd = generateNoticeJsonLd(notice);
+
   return (
     <div className="min-h-screen bg-[#F9F8F3] flex flex-col font-sans text-[#0B1914]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
 
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8 space-y-6">

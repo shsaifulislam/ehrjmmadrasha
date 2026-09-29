@@ -21,14 +21,16 @@ import {
   Search,
   Camera,
   ExternalLink,
+  HelpCircle,
 } from "lucide-react";
+import { getCmsEvents, getCmsFaqs, getHomepageConfig } from "@/lib/cms";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
   const [notices, principalProfile, classesCount, currentSession] = await Promise.all([
     prisma.notice.findMany({
-      where: { isPublished: true },
+      where: { isPublished: true, audience: "PUBLIC", status: "PUBLISHED" },
       orderBy: { publishedAt: "desc" },
       take: 4,
     }),
@@ -36,6 +38,10 @@ export default async function HomePage() {
     prisma.jamatClass.count({ where: { isActive: true } }),
     prisma.academicSession.findFirst({ where: { isCurrent: true } }),
   ]);
+
+  const events = getCmsEvents(true);
+  const faqs = getCmsFaqs(true);
+  const homepageConfig = getHomepageConfig();
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F9F8F3]">
@@ -68,7 +74,7 @@ export default async function HomePage() {
 
           <div className="inline-flex items-center gap-2 bg-[#083B25]/90 border border-[#C59B27]/50 px-4 py-1.5 rounded-full text-xs font-semibold text-amber-200 mb-6 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            শিক্ষাবর্ষ {currentSession?.name || "২০২৫-২০২৬"} ভর্তি চলছে • স্থাপিত: {INSTITUTION_INFO.established}ইং
+            {homepageConfig.admissionAnnouncementBn || `শিক্ষাবর্ষ ${currentSession?.name || "২০২৫-২০২৬"} ভর্তি চলছে • স্থাপিত: ${INSTITUTION_INFO.established}ইং`}
           </div>
 
           {/* Main Headline */}
@@ -424,7 +430,81 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 9. Institutional Footer */}
+      {/* 9. Upcoming Events & Mahfil Section */}
+      {events.length > 0 && (
+        <section className="py-12 px-4 max-w-6xl mx-auto w-full" id="events">
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <span className="text-xs font-bold text-[#0D5C3A] bg-[#E7F3EC] px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 w-fit mx-auto">
+              <Calendar className="w-3.5 h-3.5" />
+              আসন্ন অনুষ্ঠান ও সম্মেলন
+            </span>
+            <h2 className="text-2xl font-bold text-[#0B1914] mt-2">
+              মাদরাসার বার্ষিক মাহফিল ও বিশেষ আয়োজন
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {events.map((evt) => (
+              <div
+                key={evt.id}
+                className="bg-white p-6 rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-md transition space-y-3"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="bg-amber-100 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded">
+                    {evt.category}
+                  </span>
+                  <span className="text-xs font-mono text-gray-500 flex items-center gap-1">
+                    <Calendar className="w-3.5 h-3.5 text-[#0D5C3A]" />
+                    {evt.eventDate}
+                  </span>
+                </div>
+                <h3 className="font-bold text-base text-[#083B25]">{evt.titleBn}</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">{evt.descriptionBn}</p>
+                <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500">
+                  <span>স্থান: {evt.location}</span>
+                  {evt.startTime && <span>সময়: {evt.startTime}</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 10. Frequently Asked Questions (FAQ) Section */}
+      {faqs.length > 0 && (
+        <section className="py-12 px-4 bg-white border-t border-[#E2E8F0]" id="faq">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center max-w-2xl mx-auto mb-8">
+              <span className="text-xs font-bold text-[#0D5C3A] bg-[#E7F3EC] px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 w-fit mx-auto">
+                <HelpCircle className="w-3.5 h-3.5" />
+                সাধারণ প্রশ্নোত্তর
+              </span>
+              <h2 className="text-2xl font-bold text-[#0B1914] mt-2">
+                মাদরাসা সম্পর্কিত বহুল জিজ্ঞাসিত প্রশ্নসমূহ
+              </h2>
+            </div>
+
+            <div className="space-y-4">
+              {faqs.map((f) => (
+                <div
+                  key={f.id}
+                  className="bg-[#F9F8F3] p-5 rounded-xl border border-gray-200 hover:border-[#0D5C3A] transition space-y-2"
+                >
+                  <h3 className="font-bold text-sm text-[#083B25] flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-[#0D5C3A] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">
+                      ?
+                    </span>
+                    {f.questionBn}
+                  </h3>
+                  <p className="text-xs text-gray-700 leading-relaxed pl-7">{f.answerBn}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 11. Institutional Footer */}
       <Footer />
     </div>
   );

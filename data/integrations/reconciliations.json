@@ -1,5 +1,43 @@
 [
   {
+    "id": "REC-1790666122585-3AE432",
+    "provider": "BKASH",
+    "providerTransactionId": "TXN-RECON-MATCHED-1790666122565",
+    "invoiceId": "23800dc3-cdbc-40d6-92a5-6347f6152062",
+    "invoiceNumber": "INV-2026-0001",
+    "amount": 1200,
+    "currency": "BDT",
+    "transactionDate": "2026-09-28",
+    "status": "CONFLICT",
+    "notes": "ইনভয়েস INV-2026-0001 পাওয়া গেছে, কিন্তু গেটওয়ে ট্রানজেকশনটি সিস্টেম রসিদে এন্ট্রি নেই।",
+    "reconciledBy": "SYSTEM_TEST",
+    "reconciledAt": "2026-09-29T07:15:22.585Z"
+  },
+  {
+    "id": "REC-1790666122586-933C51",
+    "provider": "BKASH",
+    "providerTransactionId": "TXN-RECON-UNMATCHED-1790666122565",
+    "amount": 3400,
+    "currency": "BDT",
+    "transactionDate": "2026-09-28",
+    "status": "UNMATCHED",
+    "notes": "মাদরাসা ফিন্যান্স সিস্টেমে কোনো ম্যাচ পাওয়া যায়নি। ম্যানুয়াল পর্যালোচনার জন্য চিহ্নিত।",
+    "reconciledBy": "SYSTEM_TEST",
+    "reconciledAt": "2026-09-29T07:15:22.586Z"
+  },
+  {
+    "id": "REC-1790666122586-B6E10D",
+    "provider": "BKASH",
+    "providerTransactionId": "TXN-RECON-UNMATCHED-1790666122565",
+    "amount": 3400,
+    "currency": "BDT",
+    "transactionDate": "2026-09-28",
+    "status": "DUPLICATE",
+    "notes": "একই স্টেটমেন্ট ব্যাচে ডুপ্লিকেট ট্রানজেকশন রেফারেন্স।",
+    "reconciledBy": "SYSTEM_TEST",
+    "reconciledAt": "2026-09-29T07:15:22.586Z"
+  },
+  {
     "id": "REC-1790628776830-41EBCD",
     "provider": "BKASH",
     "providerTransactionId": "TXN-RECON-MATCHED-1790628776822",

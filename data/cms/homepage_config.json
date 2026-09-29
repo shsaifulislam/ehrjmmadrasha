@@ -1,0 +1,69 @@
+{
+  "admissionState": "OPEN",
+  "admissionAnnouncementBn": "২০২৬ শিক্ষাবর্ষে নূরানী, হিফজুল কুরআন ও কিতাব বিভাগে সীমিত আসনে ভর্তি চলছে",
+  "sections": [
+    {
+      "id": "hero",
+      "titleBn": "হিরো ব্যানার ও মোবারকবাদ",
+      "enabled": true,
+      "order": 1
+    },
+    {
+      "id": "stats",
+      "titleBn": "প্রাতিষ্ঠানিক পরিসংখ্যান চার্ট",
+      "enabled": true,
+      "order": 2
+    },
+    {
+      "id": "gallery",
+      "titleBn": "ক্যাম্পাস ও শিক্ষার্থী গ্যালারি",
+      "enabled": true,
+      "order": 3
+    },
+    {
+      "id": "notices",
+      "titleBn": "নোটিশ বোর্ড ও লাইভ ঘোষণা",
+      "enabled": true,
+      "order": 4
+    },
+    {
+      "id": "principal",
+      "titleBn": "মুহতামিম সাহেবের বাণী",
+      "enabled": true,
+      "order": 5
+    },
+    {
+      "id": "departments",
+      "titleBn": "শিক্ষা বিভাগসমূহ ও কারিকুলাম",
+      "enabled": true,
+      "order": 6
+    },
+    {
+      "id": "events",
+      "titleBn": "আসন্ন অনুষ্ঠান ও মাহফিল",
+      "enabled": true,
+      "order": 7
+    },
+    {
+      "id": "donate",
+      "titleBn": "সদকা ও যাকাত ফান্ড আহ্বান",
+      "enabled": true,
+      "order": 8
+    },
+    {
+      "id": "faq",
+      "titleBn": "সাধারণ প্রশ্নোত্তর (FAQ)",
+      "enabled": true,
+      "order": 9
+    },
+    {
+      "id": "contact",
+      "titleBn": "যোগাযোগ ও ঠিকানা",
+      "enabled": true,
+      "order": 10
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-09-29T07:18:33.580Z",
+  "updatedBy": "SYSTEM_INITIALIZER"
+}

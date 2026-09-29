@@ -21,13 +21,13 @@
       "fromName": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা"
     },
     "enabledAt": "2026-01-01T00:00:00.000Z",
-    "lastHealthCheck": "2026-09-28T20:52:56.477Z",
+    "lastHealthCheck": "2026-09-29T07:15:21.932Z",
     "lastSuccessfulSync": "2026-09-28T20:00:14.152Z",
     "metrics": {
-      "totalRequests": 148,
-      "successRequests": 147,
+      "totalRequests": 149,
+      "successRequests": 148,
       "failedRequests": 1,
-      "averageLatencyMs": 212
+      "averageLatencyMs": 195
     },
     "createdBy": "SYSTEM_INIT",
     "updatedBy": "SYSTEM_INIT",
@@ -56,19 +56,19 @@
       "idempotencyEnabled": true
     },
     "enabledAt": "2026-02-15T00:00:00.000Z",
-    "lastHealthCheck": "2026-09-28T20:52:56.621Z",
+    "lastHealthCheck": "2026-09-29T07:15:22.069Z",
     "lastSuccessfulSync": "2026-09-28T20:00:14.152Z",
     "metrics": {
-      "totalRequests": 95,
-      "successRequests": 93,
+      "totalRequests": 96,
+      "successRequests": 94,
       "failedRequests": 2,
-      "averageLatencyMs": 236
+      "averageLatencyMs": 214
     },
     "createdBy": "SYSTEM_INIT",
     "updatedBy": "SYSTEM_TEST",
     "createdAt": "2026-02-15T00:00:00.000Z",
-    "updatedAt": "2026-09-28T20:52:56.647Z",
-    "disabledAt": "2026-09-28T20:52:56.633Z"
+    "updatedAt": "2026-09-29T07:15:22.168Z",
+    "disabledAt": "2026-09-29T07:15:22.137Z"
   },
   {
     "id": "INT-NAGAD-PGW-01",

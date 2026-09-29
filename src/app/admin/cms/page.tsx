@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function AdminCmsPage() {
-  redirect("/admin?tab=CMS");
+  redirect("/admin/content");
 }

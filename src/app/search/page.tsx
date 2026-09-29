@@ -34,16 +34,44 @@ export default function GlobalSearchPage() {
     setLoading(true);
     setHasSearched(true);
     try {
-      const url = `/api/search?q=${encodeURIComponent(query.trim())}${
+      const q = encodeURIComponent(query.trim());
+      const knowledgeUrl = `/api/search?q=${q}${
         category !== "ALL" ? `&category=${encodeURIComponent(category)}` : ""
       }`;
-      const res = await fetch(url);
-      const data = await res.json();
-      if (data.success) {
-        setResults(data.results || []);
-        setConflictNotice(data.conflictNotice || null);
-        setLatencyMs(data.latencyMs || 0);
+      const publicUrl = `/api/public/search?q=${q}`;
+
+      const [kRes, pRes] = await Promise.all([
+        fetch(knowledgeUrl).then((r) => r.json()).catch(() => null),
+        fetch(publicUrl).then((r) => r.json()).catch(() => null),
+      ]);
+
+      const combined: SearchResult[] = [];
+
+      // 1. Add Public Content Results (Notices, Events, FAQs, Downloads)
+      if (pRes?.success && pRes.results) {
+        for (const pr of pRes.results) {
+          combined.push({
+            id: pr.id,
+            title: pr.title,
+            snippet: pr.snippet,
+            sourceType: pr.entityType,
+            sourceTier: 1,
+            category: pr.badge,
+            score: 1.0,
+            citation: `[পাবলিক পোর্টাল: ${pr.badge}]`,
+            effectiveDate: pr.date,
+          });
+        }
       }
+
+      // 2. Add Knowledge Document Results
+      if (kRes?.success && kRes.results) {
+        combined.push(...kRes.results);
+        setConflictNotice(kRes.conflictNotice || null);
+      }
+
+      setResults(combined);
+      setLatencyMs((kRes?.latencyMs || 0) + (pRes?.latencyMs || 0));
     } catch (err) {
       console.error(err);
     } finally {

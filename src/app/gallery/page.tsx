@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
@@ -9,8 +9,29 @@ import { INSTITUTION_INFO } from "@/lib/constants";
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const [photos, setPhotos] = useState<any[]>([]);
 
-  const photos = [
+  useEffect(() => {
+    fetch("/api/public/content/gallery")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.success && data.items?.length > 0) {
+          setPhotos(
+            data.items.map((item: any) => ({
+              src: item.imageUrl,
+              title: item.titleBn,
+              category: item.category,
+              description: item.descriptionBn || item.altText,
+            }))
+          );
+        } else {
+          setPhotos(FALLBACK_PHOTOS);
+        }
+      })
+      .catch(() => setPhotos(FALLBACK_PHOTOS));
+  }, []);
+
+  const FALLBACK_PHOTOS = [
     {
       src: "/images/students-class.jpg",
       title: "নূরানী ও নাযেরা বিভাগের শ্রেণিকক্ষ",

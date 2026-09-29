@@ -2,6 +2,49 @@
   {
     "source": "OUTBOUND_DELIVERY",
     "integrationCode": "DATA_IMPORT_EXPORT",
+    "referenceId": "DEL-1790666122449-5743F5",
+    "eventType": "STUDENT_CREATED",
+    "requestPayload": {
+      "id": "DEL-1790666122449-5743F5",
+      "eventId": "EVT-2026-000014",
+      "eventType": "STUDENT_CREATED",
+      "sourceModule": "ADMISSION",
+      "occurredAt": "2026-09-29T07:15:22.447Z",
+      "correlationId": "EVT-2026-000014",
+      "data": {
+        "studentName": "টেস্ট শিক্ষার্থী",
+        "classCode": "CLASS_1"
+      }
+    },
+    "lastError": "fetch failed",
+    "attempts": 3,
+    "correlationId": "EVT-2026-000014",
+    "id": "DLQ-MUMCDK1N-E32412",
+    "quarantinedAt": "2026-09-29T07:15:23.963Z",
+    "resolutionStatus": "PENDING"
+  },
+  {
+    "source": "INBOUND_WEBHOOK",
+    "integrationCode": "BKASH_PGW",
+    "referenceId": "WH-IN-1790666122410-4E5FA2",
+    "eventType": "PAYMENT_COMPLETED",
+    "requestPayload": {
+      "paymentId": "STALE-TXN-1790666122404",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1790666122402
+    },
+    "lastError": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "attempts": 2,
+    "correlationId": "corr_f7b0a02d1d9a7266",
+    "id": "DLQ-MUMCDIUL-AD9EA3",
+    "quarantinedAt": "2026-09-29T07:15:22.413Z",
+    "resolutionStatus": "REPLAYED",
+    "resolvedAt": "2026-09-29T07:15:22.417Z"
+  },
+  {
+    "source": "OUTBOUND_DELIVERY",
+    "integrationCode": "DATA_IMPORT_EXPORT",
     "referenceId": "DEL-1790628776738-09B170",
     "eventType": "STUDENT_CREATED",
     "requestPayload": {
