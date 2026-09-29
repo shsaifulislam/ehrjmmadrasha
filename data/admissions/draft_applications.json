@@ -1,0 +1,24 @@
+[
+  {
+    "draftId": "DFT-ADM-1790670312724-30PV",
+    "resumeToken": "8241cd02f0842f081224e4cb47fc2b42",
+    "guardianPhone": "01799887766",
+    "studentNameBn": "মুহাম্মদ আব্দুল্লাহ",
+    "desiredClassId": "cls-1",
+    "currentStep": 3,
+    "completionPercentage": 53,
+    "formData": {
+      "sessionId": "sess-2026",
+      "desiredClassId": "cls-1",
+      "studentNameBn": "মুহাম্মদ আব্দুল্লাহ",
+      "guardianName": "মোহাম্মদ রফিক",
+      "guardianPhone": "01799887766"
+    },
+    "missingRequiredFields": [
+      "dateOfBirth",
+      "address"
+    ],
+    "lastSavedAt": "2026-09-29T08:28:24.695Z",
+    "expiresAt": "2026-10-29T08:28:24.695Z"
+  }
+]

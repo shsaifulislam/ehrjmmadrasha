@@ -4,7 +4,7 @@
     "nameBn": "পরীক্ষার রুটিন ও নির্দেশনা ঘোষণা",
     "nameEn": "Exam Schedule & Instructions Announcement",
     "category": "OFFICIAL_NOTICE",
-    "subjectTemplateBn": "আসন্ন পরীক্ষার সময়সূচি ও দিকনির্দেশনা: {{exam_name}} [হালনাগাদ] [হালনাগাদ] [হালনাগাদ] [হালনাগাদ] [হালনাগাদ]",
+    "subjectTemplateBn": "আসন্ন পরীক্ষার সময়সূচি ও দিকনির্দেশনা: {{exam_name}} [হালনাগাদ] [হালনাগাদ] [হালনাগাদ] [হালনাগাদ] [হালনাগাদ] [হালনাগাদ]",
     "subjectTemplateEn": "Upcoming Examination Schedule & Guidelines: {{exam_name}}",
     "subjectTemplateAr": "إعلان جدول الامتحانات والتعليمات: {{exam_name}}",
     "bodyTemplateBn": "মুহতারাম {{recipient_name}}, আগামী {{start_date}} তারিখ হতে অত্র মাদরাসার {{exam_name}} শুরু হতে যাচ্ছে। বিস্তারিত রুটিন ও আসন বিন্যাস শিক্ষার্থী ও অভিভাবক পোর্টালে প্রকাশ করা হয়েছে। সকল শিক্ষার্থীকে সময়মতো উপস্থিত থাকার নির্দেশ দেওয়া যাচ্ছে।",
@@ -21,10 +21,18 @@
       "EMAIL",
       "PUBLIC_WEBSITE"
     ],
-    "version": 6,
+    "version": 7,
     "isMandatory": false,
     "isActive": true,
     "versionsHistory": [
+      {
+        "version": 6,
+        "subjectTemplateBn": "আসন্ন পরীক্ষার সময়সূচি ও দিকনির্দেশনা: {{exam_name}} [হালনাগাদ] [হালনাগাদ] [হালনাগাদ] [হালনাগাদ] [হালনাগাদ]",
+        "bodyTemplateBn": "মুহতারাম {{recipient_name}}, আগামী {{start_date}} তারিখ হতে অত্র মাদরাসার {{exam_name}} শুরু হতে যাচ্ছে। বিস্তারিত রুটিন ও আসন বিন্যাস শিক্ষার্থী ও অভিভাবক পোর্টালে প্রকাশ করা হয়েছে। সকল শিক্ষার্থীকে সময়মতো উপস্থিত থাকার নির্দেশ দেওয়া যাচ্ছে।",
+        "updatedAt": "2026-09-29T08:28:52.238Z",
+        "updatedBy": "TEST_ADMIN",
+        "changeNote": "Updated to v7"
+      },
       {
         "version": 5,
         "subjectTemplateBn": "আসন্ন পরীক্ষার সময়সূচি ও দিকনির্দেশনা: {{exam_name}} [হালনাগাদ] [হালনাগাদ] [হালনাগাদ] [হালনাগাদ]",
@@ -75,7 +83,7 @@
       }
     ],
     "createdAt": "2026-09-29T07:35:31.073Z",
-    "updatedAt": "2026-09-29T08:08:27.498Z"
+    "updatedAt": "2026-09-29T08:28:52.238Z"
   },
   {
     "code": "COM_FEE_PAYMENT_DUE_REMINDER",

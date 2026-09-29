@@ -1,5 +1,68 @@
 [
   {
+    "id": "CMS-AUD-1790670552033-xuois",
+    "action": "CREATE",
+    "contentType": "DOWNLOAD",
+    "contentId": "DL-MUMF0GRL",
+    "details": "Created new download item: ২০২৬ শিক্ষাবর্ষের টেস্ট প্রসপেক্টাস",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:29:12.034Z"
+  },
+  {
+    "id": "CMS-AUD-1790670552023-h4p33",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMF0GRB",
+    "details": "Created new gallery item: সম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:29:12.023Z"
+  },
+  {
+    "id": "CMS-AUD-1790670552021-m75oz",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMF0GR9",
+    "details": "Created new gallery item: অসম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:29:12.021Z"
+  },
+  {
+    "id": "CMS-AUD-1790670552019-uy80l",
+    "action": "UPDATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMF0GR2",
+    "details": "Updated FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "PRINCIPAL",
+    "timestamp": "2026-09-29T08:29:12.019Z"
+  },
+  {
+    "id": "CMS-AUD-1790670552014-enyv7",
+    "action": "CREATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMF0GR2",
+    "details": "Created new FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:29:12.014Z"
+  },
+  {
+    "id": "CMS-AUD-1790670552004-4nkr9",
+    "action": "ARCHIVE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMF0GQM",
+    "details": "Archived event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:29:12.004Z"
+  },
+  {
+    "id": "CMS-AUD-1790670552000-2d60j",
+    "action": "CREATE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMF0GQM",
+    "details": "Created new event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:29:12.000Z"
+  },
+  {
     "id": "CMS-AUD-1790669323431-qvr90",
     "action": "CREATE",
     "contentType": "DOWNLOAD",

@@ -32,7 +32,8 @@
     "test:phase30": "npx tsx scratch/test_phase30_global_search.ts",
     "test:phase31": "npx tsx scratch/test_phase31_portal_cms.ts",
     "test:phase32": "npx tsx scratch/test_phase32_communication_engine.ts",
-    "test:phase33": "npx tsx scratch/test_phase33_calendar_engine.ts"
+    "test:phase33": "npx tsx scratch/test_phase33_calendar_engine.ts",
+    "test:phase34": "npx tsx scratch/test_phase34_admission_experience.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

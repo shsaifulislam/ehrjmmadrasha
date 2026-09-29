@@ -4,6 +4,9 @@
  * Checkpoint: EHRJ-AI-2026-PHASE33
  */
 
+import fs from "fs";
+import path from "path";
+
 import {
   getInstitutionalResources,
   getInstitutionalHolidays,
@@ -65,6 +68,12 @@ async function runPhase33Tests() {
   console.log("=======================================================================");
   console.log("  EHRJ PHASE 33 — CALENDAR, SCHEDULING & BOOKING VERIFICATION SUITE    ");
   console.log("=======================================================================\n");
+
+  // Reset test bookings for deterministic idempotency
+  const bookingsFile = path.join(process.cwd(), "data", "calendar", "bookings.json");
+  if (fs.existsSync(bookingsFile)) {
+    fs.writeFileSync(bookingsFile, "[]", "utf-8");
+  }
 
   // -------------------------------------------------------------
   // TEST GROUP 1: Datastore & Seed Data Integrity

@@ -1,0 +1,76 @@
+{
+  "sessionId": "SESSION-2026-CURRENT",
+  "sessionName": "২০২৬-২০২৭ শিক্ষাবর্ষ",
+  "isOpen": true,
+  "startDate": "2026-01-01",
+  "endDate": "2026-04-30",
+  "availableClasses": [
+    {
+      "classId": "CLS-NOORANI",
+      "classNameBn": "নূরানী ও নাযেরা বিভাগ",
+      "classNameEn": "Noorani & Nazera",
+      "maxCapacity": 120,
+      "currentApplicants": 0,
+      "genderAllowed": "COMBINED",
+      "isActive": true
+    },
+    {
+      "classId": "CLS-HIFZ",
+      "classNameBn": "হিফজুল কুরআন বিভাগ",
+      "classNameEn": "Tahfizul Quran",
+      "maxCapacity": 150,
+      "currentApplicants": 0,
+      "genderAllowed": "MALE",
+      "isActive": true
+    },
+    {
+      "classId": "CLS-KITAB-MIZAN",
+      "classNameBn": "কিতাব বিভাগ (মিযান জামাত)",
+      "classNameEn": "Kitab - Mizan",
+      "maxCapacity": 80,
+      "currentApplicants": 0,
+      "genderAllowed": "MALE",
+      "isActive": true
+    },
+    {
+      "classId": "CLS-DAWRA",
+      "classNameBn": "দাওরায়ে হাদিস (তাকমীল)",
+      "classNameEn": "Dawra-e-Hadith (Masters)",
+      "maxCapacity": 60,
+      "currentApplicants": 0,
+      "genderAllowed": "MALE",
+      "isActive": true
+    }
+  ],
+  "residentialOptions": [
+    "RESIDENTIAL",
+    "NON_RESIDENTIAL",
+    "DAY_CARE"
+  ],
+  "requiredDocuments": [
+    {
+      "type": "PHOTO",
+      "nameBn": "শিক্ষার্থীর পাসপোর্ট সাইজ ছবি",
+      "isRequired": true
+    },
+    {
+      "type": "BIRTH_CERTIFICATE",
+      "nameBn": "অনলাইন জন্ম নিবন্ধন সনদ",
+      "isRequired": true
+    },
+    {
+      "type": "GUARDIAN_NID",
+      "nameBn": "অভিভাবকের জাতীয় পরিচয়পত্র (NID)",
+      "isRequired": true
+    },
+    {
+      "type": "PREVIOUS_MARKSHEET",
+      "nameBn": "পূর্ববর্তী মাদরাসা/স্কুলের প্রশংসাপত্র বা ছাড়পত্র",
+      "isRequired": false
+    }
+  ],
+  "specialInstructionsBn": "অনলাইনে আবেদন সাবমিট করার পর প্রাপ্ত ট্র্যাকিং নম্বরটি সংরক্ষণ করুন। এতিম ও আর্থিকভাবে অসচ্ছল শিক্ষার্থীদের জন্য মাদরাসা তহবিলের পক্ষ থেকে বিশেষ সুবিধার সুযোগ রয়েছে।",
+  "updatedAt": "2026-09-29T08:28:24.692Z",
+  "updatedBy": "TEST_ADMIN_USER",
+  "isAdmissionOpen": true
+}
