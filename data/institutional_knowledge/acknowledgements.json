@@ -1,0 +1,44 @@
+[
+  {
+    "id": "EHRJ-ACK-1790687066929-616",
+    "documentId": "EHRJ-POL-2026-TCH001",
+    "documentCode": "EHRJ-POL-2026-TCH001",
+    "version": "v1.1",
+    "userId": "usr-tch-007",
+    "userName": "মুফতি মাহমুদুল হাসান",
+    "userRole": "TEACHER",
+    "acknowledgedAt": "2026-09-29T13:04:26.929Z",
+    "deviceMetadata": {
+      "userAgent": "PortalBrowser/Chrome",
+      "ipAddress": "10.0.0.12"
+    }
+  },
+  {
+    "id": "EHRJ-ACK-2026-0001",
+    "documentId": "EHRJ-POL-2026-TCH001",
+    "documentCode": "EHRJ-POL-2026-TCH001",
+    "version": "v1.1",
+    "userId": "teacher-hafiz-01",
+    "userName": "হাফেজ মাওলানা জুবায়ের আহমেদ",
+    "userRole": "TEACHER",
+    "acknowledgedAt": "2026-01-22T09:30:00.000Z",
+    "deviceMetadata": {
+      "userAgent": "Mozilla/5.0 PortalApp",
+      "ipAddress": "192.168.1.45"
+    }
+  },
+  {
+    "id": "EHRJ-ACK-2026-0002",
+    "documentId": "EHRJ-POL-2026-SEC001",
+    "documentCode": "EHRJ-POL-2026-SEC001",
+    "version": "v2.0",
+    "userId": "teacher-hafiz-01",
+    "userName": "হাফেজ মাওলানা জুবায়ের আহমেদ",
+    "userRole": "TEACHER",
+    "acknowledgedAt": "2026-02-06T14:15:00.000Z",
+    "deviceMetadata": {
+      "userAgent": "Mozilla/5.0 PortalApp",
+      "ipAddress": "192.168.1.45"
+    }
+  }
+]

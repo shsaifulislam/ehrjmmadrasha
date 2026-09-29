@@ -815,5 +815,44 @@
     "status": "SUCCESS",
     "humanReviewRequired": false,
     "timestamp": "2026-09-28T20:53:43.187Z"
+  },
+  {
+    "requestId": "rag-1790687126887",
+    "userRole": "PUBLIC",
+    "module": "ADMISSION",
+    "queryIntent": "RAG_QUERY_ADMISSION",
+    "model": "EHRJ-RAG-GROUNDING-v1",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 140,
+    "latencyMs": 13,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-29T13:05:26.887Z"
+  },
+  {
+    "requestId": "rag-1790687126910",
+    "userRole": "PUBLIC",
+    "module": "FINANCE",
+    "queryIntent": "RAG_QUERY_FINANCE",
+    "model": "EHRJ-RAG-GROUNDING-v1",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 140,
+    "latencyMs": 10,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-29T13:05:26.910Z"
+  },
+  {
+    "requestId": "rag-1790687134922",
+    "userRole": "PUBLIC",
+    "module": "ADMISSION",
+    "queryIntent": "RAG_QUERY_ADMISSION",
+    "model": "EHRJ-RAG-GROUNDING-v1",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 140,
+    "latencyMs": 23,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-09-29T13:05:34.922Z"
   }
 ]

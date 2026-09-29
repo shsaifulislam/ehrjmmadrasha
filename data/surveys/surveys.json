@@ -1,5 +1,138 @@
 [
   {
+    "id": "EHRJ-SUR-2026-258157",
+    "titleBn": "হিফজুল কুরআন বিভাগীয় মূল্যায়ন জরিপ ২০২৬",
+    "titleEn": "Tahfeez Department Academic Evaluation Survey 2026",
+    "surveyType": "ACADEMIC_EXPERIENCE",
+    "ownerId": "USR-TALEEMAT-001",
+    "ownerName": "নাজিম-এ-তা'লীমাত",
+    "audience": {
+      "type": "ALL_GUARDIANS",
+      "descriptionBn": "হিফজুল কুরআন বিভাগের সকল অভিভাবক"
+    },
+    "startDate": "2026-09-29T13:06:40.272Z",
+    "endDate": "2026-10-29T13:06:40.275Z",
+    "status": "DRAFT",
+    "responseMode": "PSEUDONYMOUS",
+    "responseLimit": "ONE_PER_STUDENT",
+    "version": 2,
+    "isVersionLocked": false,
+    "isPublic": false,
+    "questions": [
+      {
+        "id": "TQ1",
+        "textBn": "দৈনিক ছবক ও ছবকি আদায়ের মান কেমন?",
+        "textEn": "How is the quality of daily Sabaq & Sabqi recitation?",
+        "type": "RATING_SCALE",
+        "required": true,
+        "scaleMin": 1,
+        "scaleMax": 5,
+        "displayOrder": 1
+      },
+      {
+        "id": "TQ2",
+        "textBn": "মাদরাসার ছুটির পর আমোখতা (মঞ্জিল) রিভিশনে ব্যক্তিগত যত্ন পান কি?",
+        "textEn": "Do you receive personal care for Manzil revision after regular hours?",
+        "type": "YES_NO",
+        "required": true,
+        "displayOrder": 2
+      },
+      {
+        "id": "TQ3",
+        "textBn": "মঞ্জিল রিভিশন বিষয়ে কোনো ঘাটতি থাকলে বিস্তারিত লিখুন:",
+        "textEn": "If any shortcoming in Manzil revision, please detail:",
+        "type": "LONG_TEXT",
+        "required": false,
+        "displayOrder": 3,
+        "conditionalRules": [
+          {
+            "questionId": "TQ2",
+            "operator": "EQUALS",
+            "value": false,
+            "action": "SHOW"
+          }
+        ]
+      }
+    ],
+    "responseCount": 0,
+    "completionCount": 0,
+    "allowHelpdeskConversion": true,
+    "createdAt": "2026-09-29T13:06:40.339Z",
+    "updatedAt": "2026-09-29T13:06:40.339Z",
+    "previousSurveyId": "EHRJ-SUR-2026-592752"
+  },
+  {
+    "id": "EHRJ-SUR-2026-592752",
+    "titleBn": "হিফজুল কুরআন বিভাগীয় মূল্যায়ন জরিপ ২০২৬",
+    "titleEn": "Tahfeez Department Academic Evaluation Survey 2026",
+    "surveyType": "ACADEMIC_EXPERIENCE",
+    "ownerId": "USR-TALEEMAT-001",
+    "ownerName": "নাজিম-এ-তা'লীমাত",
+    "audience": {
+      "type": "ALL_GUARDIANS",
+      "descriptionBn": "হিফজুল কুরআন বিভাগের সকল অভিভাবক"
+    },
+    "startDate": "2026-09-29T13:06:40.272Z",
+    "endDate": "2026-10-29T13:06:40.275Z",
+    "status": "OPEN",
+    "responseMode": "PSEUDONYMOUS",
+    "responseLimit": "ONE_PER_STUDENT",
+    "version": 1,
+    "isVersionLocked": true,
+    "isPublic": false,
+    "questions": [
+      {
+        "id": "TQ1",
+        "textBn": "দৈনিক ছবক ও ছবকি আদায়ের মান কেমন?",
+        "textEn": "How is the quality of daily Sabaq & Sabqi recitation?",
+        "type": "RATING_SCALE",
+        "required": true,
+        "scaleMin": 1,
+        "scaleMax": 5,
+        "displayOrder": 1
+      },
+      {
+        "id": "TQ2",
+        "textBn": "মাদরাসার ছুটির পর আমোখতা (মঞ্জিল) রিভিশনে ব্যক্তিগত যত্ন পান কি?",
+        "textEn": "Do you receive personal care for Manzil revision after regular hours?",
+        "type": "YES_NO",
+        "required": true,
+        "displayOrder": 2
+      },
+      {
+        "id": "TQ3",
+        "textBn": "মঞ্জিল রিভিশন বিষয়ে কোনো ঘাটতি থাকলে বিস্তারিত লিখুন:",
+        "textEn": "If any shortcoming in Manzil revision, please detail:",
+        "type": "LONG_TEXT",
+        "required": false,
+        "displayOrder": 3,
+        "conditionalRules": [
+          {
+            "questionId": "TQ2",
+            "operator": "EQUALS",
+            "value": false,
+            "action": "SHOW"
+          }
+        ]
+      }
+    ],
+    "responseCount": 1,
+    "completionCount": 1,
+    "allowHelpdeskConversion": true,
+    "createdAt": "2026-09-29T13:06:40.280Z",
+    "updatedAt": "2026-09-29T13:06:40.355Z",
+    "audienceSnapshot": {
+      "audienceDefinition": {
+        "type": "ALL_GUARDIANS",
+        "descriptionBn": "হিফজুল কুরআন বিভাগের সকল অভিভাবক"
+      },
+      "targetCount": 150,
+      "snapshotTimestamp": "2026-09-29T13:06:40.321Z",
+      "surveyVersion": 1
+    },
+    "followUpSurveyId": "EHRJ-SUR-2026-258157"
+  },
+  {
     "id": "EHRJ-SUR-2026-293894",
     "titleBn": "হিফজুল কুরআন বিভাগীয় মূল্যায়ন জরিপ ২০২৬",
     "titleEn": "Tahfeez Department Academic Evaluation Survey 2026",

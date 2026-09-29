@@ -392,6 +392,24 @@ PHASE 37: Institutional Survey, Feedback, Assessment & Voice-of-Community Engine
 ├── Strictly NO SMS (Portal, In-app notice, Email)
 ├── Frontend: Public Hub (/surveys), Interactive Form (/surveys/[id]), Portal (/portal/surveys), Admin Cockpit (/admin/surveys, /admin/surveys/[id])
 └── Verified: 43/43 Phase 37 Tests Passed, 276/276 Cumulative Regression Tests Passed
+
+PHASE 38: Institutional Knowledge, SOP, Policy, Handbook & Governance Document Management Engine (EHRJ-AI-2026-PHASE38)
+├── Core Invariant: One authoritative policy, one controlled version; Phase 38 owns authority, Phase 22 owns RAG
+├── Document Master Engine (Policies, SOPs, Handbooks, Guidelines, Rules, Memos)
+├── Lifecycle State Machine (DRAFT -> UNDER_REVIEW -> APPROVED -> PUBLISHED -> EFFECTIVE -> SUPERSEDED -> EXPIRED -> ARCHIVED -> WITHDRAWN)
+├── Immutable Versioning (v1.0 -> v1.1 minor, v2.0 major) preserving historical versions
+├── Historical Effective-Date Engine: Resolves authoritative policy version for any past date
+├── Legal Hold / Institutional Hold: Prevents archival, withdrawal, or deletion under legal/administrative inquiry
+├── Principal Oversight & Approval Workflow with detailed audit provenance
+├── Mandatory Role-Targeted Digital Acknowledgements (Teachers, Staff) & Compliance Metrics
+├── Automated Policy Conflict Detection Scanner (Duplicate categories, overlapping dates, superseded collisions)
+├── Authorized, Scoped & Time-Bounded Policy Exceptions Management
+├── SOP Operational Steps Engine with Roles, Decision Points & Phase 27 Workflow Links
+├── Handbook Engine with Multi-Level Table of Contents Navigation
+├── Phase 22 RAG Sync Bridge: Auto-syncs approved/effective policies to Phase 22 knowledge store
+├── Strictly NO SMS (In-app portal notices & calendar reminders only)
+├── Frontend: Public Knowledge Hub (/knowledge), User Acknowledgement Console (/portal/knowledge), Admin Cockpit (/admin/knowledge, /admin/knowledge/documents, /admin/knowledge/reviews, /admin/knowledge/acknowledgements, /admin/knowledge/conflicts)
+└── Verified: 55/55 Phase 38 Tests Passed, 173/173 Next.js Routes Production Build Clean
 ```
 
 ---

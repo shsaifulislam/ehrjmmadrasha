@@ -1,0 +1,36 @@
+[
+  {
+    "id": "EHRJ-EXC-2026-TEST",
+    "documentId": "EHRJ-POL-2026-ADM001",
+    "documentCode": "EHRJ-POL-2026-ADM001",
+    "version": "v2.1",
+    "subject": "বয়স ছাড় অনুমোদন",
+    "reason": "বিশেষ কুরআনি মেধা",
+    "approvedBy": "মাওলানা আব্দুল করিম (প্রিন্সিপাল)",
+    "startDate": "2026-01-01",
+    "endDate": "2026-12-31",
+    "scope": "ছাত্র কোড STD-2026-099",
+    "conditions": "নিয়মিত পাঠ প্রস্তুতি",
+    "status": "ACTIVE",
+    "auditRef": "AUD-EXC-TEST",
+    "createdAt": "2026-09-29T13:04:27.020Z",
+    "updatedAt": "2026-09-29T13:04:27.020Z"
+  },
+  {
+    "id": "EHRJ-EXC-2026-0001",
+    "documentId": "EHRJ-POL-2026-ADM001",
+    "documentCode": "EHRJ-POL-2026-ADM001",
+    "version": "v2.1",
+    "subject": "বয়স শিথিলকরণ অনুমোদন (ছাত্র আইডি: STD-2026-089)",
+    "reason": "বিশেষ মেধা ও কুরআন হিফজের প্রাথমিক দক্ষতার কারণে ৪ বছর ১০ মাস বয়সে ভর্তির অনুমতি।",
+    "approvedBy": "মাওলানা আব্দুল করিম (প্রিন্সিপাল)",
+    "startDate": "2026-01-15",
+    "endDate": "2026-12-31",
+    "scope": "ছাত্র আইডি STD-2026-089 এর প্রাথমিক মূল্যায়ন",
+    "conditions": "ত্রৈমাসিক পরীক্ষায় প্রথম ১০ জনের মধ্যে অবস্থান নিশ্চিত করতে হবে।",
+    "status": "ACTIVE",
+    "auditRef": "AUD-EXC-2026-001",
+    "createdAt": "2026-01-15T10:00:00.000Z",
+    "updatedAt": "2026-01-15T10:00:00.000Z"
+  }
+]

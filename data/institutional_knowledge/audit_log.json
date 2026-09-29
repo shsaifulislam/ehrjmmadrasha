@@ -1,0 +1,172 @@
+[
+  {
+    "documentId": "EHRJ-POL-2026-TCH001",
+    "documentCode": "EHRJ-POL-2026-TCH001",
+    "version": "v1.1",
+    "action": "ACKNOWLEDGE",
+    "actorId": "usr-tch-007",
+    "actorName": "মুফতি মাহমুদুল হাসান",
+    "actorRole": "TEACHER",
+    "notes": "User acknowledged policy EHRJ-POL-2026-TCH001 v1.1",
+    "details": {
+      "ackId": "EHRJ-ACK-1790687066929-616",
+      "device": {
+        "userAgent": "PortalBrowser/Chrome",
+        "ipAddress": "10.0.0.12"
+      }
+    },
+    "id": "AUD-GOV-1790687066933-143",
+    "timestamp": "2026-09-29T13:04:26.933Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.1",
+    "action": "CREATE_NEW_VERSION",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "New version v1.1 created (Minor). Reason: কওমি কিতাব বিভাগে নতুন জামাত সংযোজন",
+    "details": {
+      "newVersion": "v1.1",
+      "isMajor": false
+    },
+    "id": "AUD-GOV-1790687066813-486",
+    "timestamp": "2026-09-29T13:04:26.813Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "TOGGLE_LEGAL_HOLD",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Legal Hold RELEASED. Reason: N/A",
+    "details": {
+      "isHoldActive": false
+    },
+    "id": "AUD-GOV-1790687066796-45",
+    "timestamp": "2026-09-29T13:04:26.796Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "TOGGLE_LEGAL_HOLD",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Legal Hold ACTIVATED. Reason: আইনি তদন্তাধীন থাকায় স্থগিত",
+    "details": {
+      "isHoldActive": true,
+      "reason": "আইনি তদন্তাধীন থাকায় স্থগিত"
+    },
+    "id": "AUD-GOV-1790687066753-467",
+    "timestamp": "2026-09-29T13:04:26.754Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "MARK_EFFECTIVE",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Status changed from PUBLISHED to EFFECTIVE",
+    "details": {
+      "previousStatus": "PUBLISHED",
+      "targetStatus": "EFFECTIVE"
+    },
+    "id": "AUD-GOV-1790687066704-422",
+    "timestamp": "2026-09-29T13:04:26.704Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "UPDATE_DRAFT",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Status changed from APPROVED to PUBLISHED",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "PUBLISHED"
+    },
+    "id": "AUD-GOV-1790687066642-66",
+    "timestamp": "2026-09-29T13:04:26.642Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "APPROVE",
+    "actorId": "pr-01",
+    "actorName": "মাওলানা আব্দুল করিম (প্রিন্সিপাল)",
+    "actorRole": "PRINCIPAL",
+    "notes": "Policy approved: গভর্নিং বডির সিদ্ধান্ত অনুযায়ী অনুমোদিত।",
+    "details": {
+      "decision": "APPROVED",
+      "auditRef": "AUD-DEC-1790687066579-991"
+    },
+    "id": "AUD-GOV-1790687066620-41",
+    "timestamp": "2026-09-29T13:04:26.620Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "UPDATE_DRAFT",
+    "actorId": "pr-01",
+    "actorName": "মাওলানা আব্দুল করিম (প্রিন্সিপাল)",
+    "actorRole": "PRINCIPAL",
+    "notes": "অনুমোদন সম্পন্ন করেছেন: মাওলানা আব্দুল করিম (প্রিন্সিপাল) (গভর্নিং বডির সিদ্ধান্ত অনুযায়ী অনুমোদিত।)",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED"
+    },
+    "id": "AUD-GOV-1790687066608-2",
+    "timestamp": "2026-09-29T13:04:26.608Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "SUBMIT_FOR_REVIEW",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Review requested",
+    "id": "AUD-GOV-1790687066559-337",
+    "timestamp": "2026-09-29T13:04:26.559Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "UPDATE_DRAFT",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Review requested",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "UNDER_REVIEW"
+    },
+    "id": "AUD-GOV-1790687066556-134",
+    "timestamp": "2026-09-29T13:04:26.556Z"
+  },
+  {
+    "id": "AUD-INIT-001",
+    "timestamp": "2026-01-10T12:00:00.000Z",
+    "documentId": "EHRJ-POL-2026-ADM001",
+    "documentCode": "EHRJ-POL-2026-ADM001",
+    "version": "v2.1",
+    "action": "MARK_EFFECTIVE",
+    "actorId": "admin-01",
+    "actorName": "এডমিন অফিস",
+    "actorRole": "ADMIN",
+    "notes": "২০২৬ ভর্তি নীতিমালা কার্যকর ঘোষণা করা হয়েছে।"
+  }
+]

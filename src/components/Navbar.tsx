@@ -177,6 +177,9 @@ export default function Navbar() {
             <Link href="/gallery" className="text-emerald-100 hover:text-[#C59B27] transition">
               গ্যালারি
             </Link>
+            <Link href="/knowledge" className="text-emerald-100 hover:text-[#C59B27] transition">
+              নীতিমালা ও এসওপি
+            </Link>
             <Link href="/downloads" className="text-emerald-100 hover:text-[#C59B27] transition">
               ডাউনলোড
             </Link>
@@ -269,6 +272,13 @@ export default function Navbar() {
               className="py-1.5 px-3 rounded hover:bg-[#158052] transition"
             >
               ফটো গ্যালারি
+            </Link>
+            <Link
+              href="/knowledge"
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-1.5 px-3 rounded hover:bg-[#158052] transition"
+            >
+              নীতিমালা ও এসওপি
             </Link>
             <Link
               href="/downloads"

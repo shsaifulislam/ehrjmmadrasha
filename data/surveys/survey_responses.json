@@ -1,5 +1,52 @@
 [
   {
+    "id": "EHRJ-SUR-RES-2026-641439",
+    "surveyId": "EHRJ-SUR-2026-592752",
+    "surveyVersion": 1,
+    "respondentId": "USR-DRAFT-1790687200365",
+    "respondentType": "PUBLIC",
+    "responseMode": "PSEUDONYMOUS",
+    "isComplete": false,
+    "isDraft": true,
+    "answers": [
+      {
+        "questionId": "TQ1",
+        "answerValue": 3,
+        "score": 3
+      }
+    ],
+    "totalScore": 3,
+    "createdAt": "2026-09-29T13:06:40.366Z",
+    "updatedAt": "2026-09-29T13:06:40.366Z"
+  },
+  {
+    "id": "EHRJ-SUR-RES-2026-138100",
+    "surveyId": "EHRJ-SUR-2026-592752",
+    "surveyVersion": 1,
+    "respondentId": "USR-TEST-1790687200350",
+    "respondentType": "GUARDIAN",
+    "linkedStudentId": "STU-TEST-1790687200350",
+    "responseMode": "PSEUDONYMOUS",
+    "isComplete": true,
+    "isDraft": false,
+    "answers": [
+      {
+        "questionId": "TQ1",
+        "answerValue": 4,
+        "score": 4
+      },
+      {
+        "questionId": "TQ2",
+        "answerValue": true,
+        "score": 0
+      }
+    ],
+    "totalScore": 4,
+    "submittedAt": "2026-09-29T13:06:40.355Z",
+    "createdAt": "2026-09-29T13:06:40.355Z",
+    "updatedAt": "2026-09-29T13:06:40.355Z"
+  },
+  {
     "id": "EHRJ-SUR-RES-2026-746149",
     "surveyId": "EHRJ-SUR-2026-454338",
     "surveyVersion": 1,
