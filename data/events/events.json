@@ -1,0 +1,398 @@
+[
+  {
+    "id": "EHRJ-EVT-2026-000001",
+    "typeCode": "QURAN_COMPETITION",
+    "titleBn": "বার্ষিক কেন্দ্রীয় কুরআন হিফজ ও হুসনে সওত প্রতিযোগিতা ২০২৬",
+    "titleEn": "Annual Quran Memorization & Recitation Championship 2026",
+    "titleAr": "مسابقة تحفيظ القرآن الكريم وحسن التلاوة السنوية",
+    "descriptionBn": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসার সকল বিভাগের শিক্ষার্থীদের অংশগ্রহণে বার্ষিক হিফজ ও সহিহ তিলাওয়াত প্রতিযোগিতা। দেশবরেণ্য ক্বারীগণ বিচারক হিসেবে উপস্থিত থাকবেন।",
+    "organizer": "কুরআন শিক্ষা ও তিলাওয়াত বিভাগ, EHRJ",
+    "sessionId": "SESSION-2026",
+    "sessionName": "২০২৬ শিক্ষাবর্ষ",
+    "audienceRule": {
+      "audienceTypes": [
+        "ALL_STUDENTS",
+        "BOYS_ONLY"
+      ],
+      "genders": [
+        "MALE"
+      ]
+    },
+    "startAt": "2026-10-15T09:00:00.000Z",
+    "endAt": "2026-10-15T17:00:00.000Z",
+    "registrationOpensAt": "2026-09-01T00:00:00.000Z",
+    "registrationClosesAt": "2026-10-10T23:59:59.000Z",
+    "venueText": "দারুল হাদিস অডিটোরিয়াম, প্রধান একাডেমি ভবন",
+    "resourceId": "RES-001",
+    "calendarEventId": "EVT-CAL-2026-000001",
+    "isRegistrationRequired": true,
+    "maxCapacity": 100,
+    "registeredCount": 2,
+    "waitlistCapacity": 20,
+    "waitlistedCount": 0,
+    "isPublic": true,
+    "status": "REGISTRATION_OPEN",
+    "leadTeacherId": "TEACHER-001",
+    "assignedTeacherIds": [
+      "TEACHER-001",
+      "TEACHER-002"
+    ],
+    "hasFee": false,
+    "version": 1,
+    "instructionsBn": "অংশগ্রহণকারী ছাত্রদের অবশ্যই নির্ধারিত সময় অনুযায়ী উপস্থিত হয়ে মঞ্চে উপস্থিত থাকতে হবে। তিলাওয়াতের জন্য নির্ধারিত পারা অনুযায়ী বিচারকগণ প্রশ্ন করবেন।",
+    "contactPhone": "+8801712345678",
+    "createdAt": "2026-09-01T00:00:00.000Z",
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedAt": "2026-09-01T00:00:00.000Z",
+    "updatedBy": "admin@ehrj.edu.bd"
+  },
+  {
+    "id": "EHRJ-EVT-2026-000002",
+    "typeCode": "DEBATE_SPEECH",
+    "titleBn": "আন্তঃবিভাগ বাংলা ও আরবি বিতর্ক প্রতিযোগিতা ২০২৬",
+    "titleEn": "Inter-Department Bangla & Arabic Debate Competition 2026",
+    "descriptionBn": "শিক্ষার্থীদের সমসাময়িক যুক্তি ও জ্ঞান বিকাশের লক্ষ্যে বার্ষিক প্রাতিষ্ঠানিক বিতর্ক প্রতিযোগিতা।",
+    "organizer": "সাহিত্য ও বিতর্ক পরিষদ, EHRJ",
+    "sessionId": "SESSION-2026",
+    "sessionName": "২০২৬ শিক্ষাবর্ষ",
+    "audienceRule": {
+      "audienceTypes": [
+        "SPECIFIC_CLASS"
+      ]
+    },
+    "startAt": "2026-11-05T10:00:00.000Z",
+    "endAt": "2026-11-05T15:30:00.000Z",
+    "registrationOpensAt": "2026-09-15T00:00:00.000Z",
+    "registrationClosesAt": "2026-10-25T23:59:59.000Z",
+    "venueText": "কেন্দ্রীয় সম্মেলন কক্ষ",
+    "resourceId": "RES-002",
+    "isRegistrationRequired": true,
+    "maxCapacity": 40,
+    "registeredCount": 0,
+    "waitlistCapacity": 10,
+    "waitlistedCount": 0,
+    "isPublic": true,
+    "status": "REGISTRATION_OPEN",
+    "leadTeacherId": "TEACHER-003",
+    "hasFee": false,
+    "version": 1,
+    "instructionsBn": "বিতর্কের বিষয়সমূহ রেজিস্ট্রেশন চূড়ান্ত হওয়ার পর অংশগ্রহণকারী দলসমূহের নিকট সরবরাহ করা হবে।",
+    "createdAt": "2026-09-15T00:00:00.000Z",
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedAt": "2026-09-15T00:00:00.000Z",
+    "updatedBy": "admin@ehrj.edu.bd"
+  },
+  {
+    "id": "EHRJ-EVT-2026-000003",
+    "typeCode": "PRIZE_GIVING",
+    "titleBn": "বার্ষিক দস্তারবন্দী ও হিফজ সমাপনী মহাসম্মেলন ২০২৬",
+    "titleEn": "Annual Dastarbandi Convocation & Prize Giving Ceremony 2026",
+    "descriptionBn": "হিফজুল কুরআন সমাপ্তকারী কৃতি শিক্ষার্থীদের সম্মানসূচক দস্তার (পাগড়ী) প্রদান, বার্ষিক পরীক্ষার পুরস্কার বিতরণ ও সার্বজনীন দোয়া মাহফিল।",
+    "organizer": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা এন্তেজামিয়া কমিটি",
+    "sessionId": "SESSION-2026",
+    "sessionName": "২০২৬ শিক্ষাবর্ষ",
+    "audienceRule": {
+      "audienceTypes": [
+        "ALL_STUDENTS",
+        "GUARDIANS",
+        "TEACHERS",
+        "PUBLIC"
+      ]
+    },
+    "startAt": "2026-11-20T09:00:00.000Z",
+    "endAt": "2026-11-20T17:00:00.000Z",
+    "venueText": "মাদরাসা প্রাঙ্গণ ও অডিটোরিয়াম",
+    "resourceId": "RES-001",
+    "isRegistrationRequired": false,
+    "maxCapacity": 600,
+    "registeredCount": 0,
+    "waitlistCapacity": 0,
+    "waitlistedCount": 0,
+    "isPublic": true,
+    "status": "PUBLISHED",
+    "hasFee": false,
+    "version": 1,
+    "contactPhone": "+8801712345678",
+    "createdAt": "2026-09-10T00:00:00.000Z",
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedAt": "2026-09-10T00:00:00.000Z",
+    "updatedBy": "admin@ehrj.edu.bd"
+  },
+  {
+    "typeCode": "QURAN_COMPETITION",
+    "titleBn": "টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬",
+    "titleEn": "Test Central Quran Tilawat Competition 2026",
+    "descriptionBn": "টেস্ট ইভেন্ট ডেসক্রিপশন",
+    "organizer": "কুরআন শিক্ষা বিভাগ",
+    "sessionId": "SESSION-2026",
+    "audienceRule": {
+      "audienceTypes": [
+        "ALL_STUDENTS"
+      ],
+      "genders": [
+        "MALE"
+      ]
+    },
+    "startAt": "2026-11-15T09:00:00.000Z",
+    "endAt": "2026-11-15T16:00:00.000Z",
+    "registrationOpensAt": "2026-10-01T00:00:00.000Z",
+    "registrationClosesAt": "2026-11-10T23:59:59.000Z",
+    "venueText": "দারুল হাদিস অডিটোরিয়াম",
+    "resourceId": "RES-001",
+    "isRegistrationRequired": true,
+    "maxCapacity": 1,
+    "waitlistCapacity": 1,
+    "isPublic": true,
+    "status": "REGISTRATION_OPEN",
+    "hasFee": false,
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "id": "EHRJ-EVT-2026-000004",
+    "registeredCount": 1,
+    "waitlistedCount": 0,
+    "version": 4,
+    "createdAt": "2026-09-29T08:52:39.647Z",
+    "updatedAt": "2026-09-29T08:52:39.687Z",
+    "calendarEventId": "CAL-EVT-1790671959680-784E",
+    "bookingId": "BKG-1790671959674-WL3F"
+  },
+  {
+    "typeCode": "ESSAY_CULTURAL",
+    "titleBn": "মহিলা শাখা ইসলামী কুইজ",
+    "descriptionBn": "কুইজ প্রতিযোগিতা",
+    "organizer": "মহিলা শাখা",
+    "sessionId": "SESSION-2026",
+    "audienceRule": {
+      "audienceTypes": [
+        "GIRLS_ONLY"
+      ],
+      "genders": [
+        "FEMALE"
+      ]
+    },
+    "startAt": "2026-11-20T10:00:00.000Z",
+    "endAt": "2026-11-20T12:00:00.000Z",
+    "venueText": "মহিলা শাখা হলরুম",
+    "isRegistrationRequired": true,
+    "maxCapacity": 20,
+    "waitlistCapacity": 5,
+    "isPublic": false,
+    "status": "REGISTRATION_OPEN",
+    "hasFee": false,
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "id": "EHRJ-EVT-2026-000005",
+    "registeredCount": 0,
+    "waitlistedCount": 0,
+    "version": 1,
+    "createdAt": "2026-09-29T08:52:39.698Z",
+    "updatedAt": "2026-09-29T08:52:39.698Z"
+  },
+  {
+    "typeCode": "QURAN_COMPETITION",
+    "titleBn": "টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬",
+    "titleEn": "Test Central Quran Tilawat Competition 2026",
+    "descriptionBn": "টেস্ট ইভেন্ট ডেসক্রিপশন",
+    "organizer": "কুরআন শিক্ষা বিভাগ",
+    "sessionId": "SESSION-2026",
+    "audienceRule": {
+      "audienceTypes": [
+        "ALL_STUDENTS"
+      ],
+      "genders": [
+        "MALE"
+      ]
+    },
+    "startAt": "2026-11-15T09:00:00.000Z",
+    "endAt": "2026-11-15T16:00:00.000Z",
+    "registrationOpensAt": "2026-10-01T00:00:00.000Z",
+    "registrationClosesAt": "2026-11-10T23:59:59.000Z",
+    "venueText": "দারুল হাদিস অডিটোরিয়াম",
+    "resourceId": "RES-001",
+    "isRegistrationRequired": true,
+    "maxCapacity": 1,
+    "waitlistCapacity": 1,
+    "isPublic": true,
+    "status": "REGISTRATION_OPEN",
+    "hasFee": false,
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "id": "EHRJ-EVT-2026-000006",
+    "registeredCount": 1,
+    "waitlistedCount": 0,
+    "version": 4,
+    "createdAt": "2026-09-29T08:54:35.256Z",
+    "updatedAt": "2026-09-29T08:54:35.361Z",
+    "calendarEventId": "CAL-EVT-1790672075356-TYAP"
+  },
+  {
+    "typeCode": "ESSAY_CULTURAL",
+    "titleBn": "মহিলা শাখা ইসলামী কুইজ",
+    "descriptionBn": "কুইজ প্রতিযোগিতা",
+    "organizer": "মহিলা শাখা",
+    "sessionId": "SESSION-2026",
+    "audienceRule": {
+      "audienceTypes": [
+        "GIRLS_ONLY"
+      ],
+      "genders": [
+        "FEMALE"
+      ]
+    },
+    "startAt": "2026-11-20T10:00:00.000Z",
+    "endAt": "2026-11-20T12:00:00.000Z",
+    "venueText": "মহিলা শাখা হলরুম",
+    "isRegistrationRequired": true,
+    "maxCapacity": 20,
+    "waitlistCapacity": 5,
+    "isPublic": false,
+    "status": "REGISTRATION_OPEN",
+    "hasFee": false,
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "id": "EHRJ-EVT-2026-000007",
+    "registeredCount": 0,
+    "waitlistedCount": 0,
+    "version": 1,
+    "createdAt": "2026-09-29T08:54:35.365Z",
+    "updatedAt": "2026-09-29T08:54:35.365Z"
+  },
+  {
+    "typeCode": "QURAN_COMPETITION",
+    "titleBn": "টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬",
+    "titleEn": "Test Central Quran Tilawat Competition 2026",
+    "descriptionBn": "টেস্ট ইভেন্ট ডেসক্রিপশন",
+    "organizer": "কুরআন শিক্ষা বিভাগ",
+    "sessionId": "SESSION-2026",
+    "audienceRule": {
+      "audienceTypes": [
+        "ALL_STUDENTS"
+      ],
+      "genders": [
+        "MALE"
+      ]
+    },
+    "startAt": "2026-11-15T09:00:00.000Z",
+    "endAt": "2026-11-15T16:00:00.000Z",
+    "registrationOpensAt": "2026-10-01T00:00:00.000Z",
+    "registrationClosesAt": "2026-11-10T23:59:59.000Z",
+    "venueText": "দারুল হাদিস অডিটোরিয়াম",
+    "resourceId": "RES-001",
+    "isRegistrationRequired": true,
+    "maxCapacity": 1,
+    "waitlistCapacity": 1,
+    "isPublic": true,
+    "status": "REGISTRATION_OPEN",
+    "hasFee": false,
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "id": "EHRJ-EVT-2026-000008",
+    "registeredCount": 1,
+    "waitlistedCount": 0,
+    "version": 4,
+    "createdAt": "2026-09-29T08:56:07.118Z",
+    "updatedAt": "2026-09-29T08:56:07.217Z",
+    "calendarEventId": "CAL-EVT-1790672167213-7TSH"
+  },
+  {
+    "typeCode": "ESSAY_CULTURAL",
+    "titleBn": "মহিলা শাখা ইসলামী কুইজ",
+    "descriptionBn": "কুইজ প্রতিযোগিতা",
+    "organizer": "মহিলা শাখা",
+    "sessionId": "SESSION-2026",
+    "audienceRule": {
+      "audienceTypes": [
+        "GIRLS_ONLY"
+      ],
+      "genders": [
+        "FEMALE"
+      ]
+    },
+    "startAt": "2026-11-20T10:00:00.000Z",
+    "endAt": "2026-11-20T12:00:00.000Z",
+    "venueText": "মহিলা শাখা হলরুম",
+    "isRegistrationRequired": true,
+    "maxCapacity": 20,
+    "waitlistCapacity": 5,
+    "isPublic": false,
+    "status": "REGISTRATION_OPEN",
+    "hasFee": false,
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "id": "EHRJ-EVT-2026-000009",
+    "registeredCount": 0,
+    "waitlistedCount": 0,
+    "version": 1,
+    "createdAt": "2026-09-29T08:56:07.224Z",
+    "updatedAt": "2026-09-29T08:56:07.224Z"
+  },
+  {
+    "typeCode": "QURAN_COMPETITION",
+    "titleBn": "টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬",
+    "titleEn": "Test Central Quran Tilawat Competition 2026",
+    "descriptionBn": "টেস্ট ইভেন্ট ডেসক্রিপশন",
+    "organizer": "কুরআন শিক্ষা বিভাগ",
+    "sessionId": "SESSION-2026",
+    "audienceRule": {
+      "audienceTypes": [
+        "ALL_STUDENTS"
+      ],
+      "genders": [
+        "MALE"
+      ]
+    },
+    "startAt": "2026-11-15T09:00:00.000Z",
+    "endAt": "2026-11-15T16:00:00.000Z",
+    "registrationOpensAt": "2026-10-01T00:00:00.000Z",
+    "registrationClosesAt": "2026-11-10T23:59:59.000Z",
+    "venueText": "দারুল হাদিস অডিটোরিয়াম",
+    "resourceId": "RES-001",
+    "isRegistrationRequired": true,
+    "maxCapacity": 1,
+    "waitlistCapacity": 1,
+    "isPublic": true,
+    "status": "ARCHIVED",
+    "hasFee": false,
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "id": "EHRJ-EVT-2026-000010",
+    "registeredCount": 1,
+    "waitlistedCount": 0,
+    "version": 6,
+    "createdAt": "2026-09-29T08:56:52.126Z",
+    "updatedAt": "2026-09-29T08:56:53.003Z",
+    "calendarEventId": "CAL-EVT-1790672212196-2R11"
+  },
+  {
+    "typeCode": "ESSAY_CULTURAL",
+    "titleBn": "মহিলা শাখা ইসলামী কুইজ",
+    "descriptionBn": "কুইজ প্রতিযোগিতা",
+    "organizer": "মহিলা শাখা",
+    "sessionId": "SESSION-2026",
+    "audienceRule": {
+      "audienceTypes": [
+        "GIRLS_ONLY"
+      ],
+      "genders": [
+        "FEMALE"
+      ]
+    },
+    "startAt": "2026-11-20T10:00:00.000Z",
+    "endAt": "2026-11-20T12:00:00.000Z",
+    "venueText": "মহিলা শাখা হলরুম",
+    "isRegistrationRequired": true,
+    "maxCapacity": 20,
+    "waitlistCapacity": 5,
+    "isPublic": false,
+    "status": "REGISTRATION_OPEN",
+    "hasFee": false,
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "id": "EHRJ-EVT-2026-000011",
+    "registeredCount": 0,
+    "waitlistedCount": 0,
+    "version": 1,
+    "createdAt": "2026-09-29T08:56:52.207Z",
+    "updatedAt": "2026-09-29T08:56:52.207Z"
+  }
+]

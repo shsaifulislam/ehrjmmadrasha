@@ -1,0 +1,443 @@
+[
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: COMPLETED -> ARCHIVED",
+    "id": "AUD-EVT-1790672213006-1V32",
+    "timestamp": "2026-09-29T08:56:53.006Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: REGISTRATION_OPEN -> COMPLETED",
+    "id": "AUD-EVT-1790672213001-3412",
+    "timestamp": "2026-09-29T08:56:53.001Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "ISSUE_CERTIFICATE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "সনদপত্র ইস্যু সম্পন্ন: মুহাম্মদ আব্দুর রহমান (EHRJ-EVT-CERT-2026-00003) - ধরন: WINNER",
+    "id": "AUD-EVT-1790672212981-GXS2",
+    "timestamp": "2026-09-29T08:56:52.981Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "RECORD_RESULT",
+    "actorId": "TEACHER-001",
+    "actorRole": "TEACHER",
+    "details": "প্রতিযোগিতার ফলাফল লিপিবদ্ধ: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - বিভাগ: হিফজ ১০ পারা বিভাগ",
+    "id": "AUD-EVT-1790672212540-V8GI",
+    "timestamp": "2026-09-29T08:56:52.540Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "MARK_ATTENDANCE",
+    "actorId": "TEACHER-001",
+    "actorRole": "TEACHER",
+    "details": "ইভেন্ট চেক-ইন সম্পন্ন: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - পদ্ধতি: QR_SCAN",
+    "id": "AUD-EVT-1790672212530-RKK5",
+    "timestamp": "2026-09-29T08:56:52.530Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "CANCEL_REGISTRATION",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "রেজিস্ট্রেশন বাতিল: মুহাম্মদ আব্দুল্লাহ আল মামুন (EHRJ-2026-0001) - কারণ: অনিবার্য কারণে আবেদন প্রত্যাহার",
+    "id": "AUD-EVT-1790672212511-93AH",
+    "timestamp": "2026-09-29T08:56:52.511Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "PROMOTE_WAITLIST",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "অপেক্ষমাণ তালিকা থেকে উত্তীর্ণ: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002)",
+    "id": "AUD-EVT-1790672212508-MANO",
+    "timestamp": "2026-09-29T08:56:52.508Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "REGISTER_STUDENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "শিক্ষার্থী রেজিস্ট্রেশন: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - স্ট্যাটাস: WAITLISTED",
+    "id": "AUD-EVT-1790672212506-TY0Q",
+    "timestamp": "2026-09-29T08:56:52.506Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "REGISTER_STUDENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "শিক্ষার্থী রেজিস্ট্রেশন: মুহাম্মদ আব্দুল্লাহ আল মামুন (EHRJ-2026-0001) - স্ট্যাটাস: CONFIRMED",
+    "id": "AUD-EVT-1790672212493-HKFZ",
+    "timestamp": "2026-09-29T08:56:52.493Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000011",
+    "action": "CREATE_EVENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "নতুন ইভেন্ট তৈরি করা হয়েছে: মহিলা শাখা ইসলামী কুইজ (EHRJ-EVT-2026-000011)",
+    "id": "AUD-EVT-1790672212212-EIO6",
+    "timestamp": "2026-09-29T08:56:52.212Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: APPROVED -> REGISTRATION_OPEN",
+    "id": "AUD-EVT-1790672212204-S6KW",
+    "timestamp": "2026-09-29T08:56:52.204Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: REVIEW -> APPROVED",
+    "id": "AUD-EVT-1790672212199-RIEU",
+    "timestamp": "2026-09-29T08:56:52.199Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: DRAFT -> REVIEW",
+    "id": "AUD-EVT-1790672212132-Q9ZL",
+    "timestamp": "2026-09-29T08:56:52.132Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000010",
+    "action": "CREATE_EVENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "নতুন ইভেন্ট তৈরি করা হয়েছে: টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬ (EHRJ-EVT-2026-000010)",
+    "id": "AUD-EVT-1790672212128-C03L",
+    "timestamp": "2026-09-29T08:56:52.128Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "ISSUE_CERTIFICATE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "সনদপত্র ইস্যু সম্পন্ন: মুহাম্মদ আব্দুর রহমান (EHRJ-EVT-CERT-2026-00002) - ধরন: WINNER",
+    "id": "AUD-EVT-1790672167436-JAKD",
+    "timestamp": "2026-09-29T08:56:07.436Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "RECORD_RESULT",
+    "actorId": "TEACHER-001",
+    "actorRole": "TEACHER",
+    "details": "প্রতিযোগিতার ফলাফল লিপিবদ্ধ: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - বিভাগ: হিফজ ১০ পারা বিভাগ",
+    "id": "AUD-EVT-1790672167298-1NVN",
+    "timestamp": "2026-09-29T08:56:07.298Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "MARK_ATTENDANCE",
+    "actorId": "TEACHER-001",
+    "actorRole": "TEACHER",
+    "details": "ইভেন্ট চেক-ইন সম্পন্ন: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - পদ্ধতি: QR_SCAN",
+    "id": "AUD-EVT-1790672167284-0MZA",
+    "timestamp": "2026-09-29T08:56:07.284Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "CANCEL_REGISTRATION",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "রেজিস্ট্রেশন বাতিল: মুহাম্মদ আব্দুল্লাহ আল মামুন (EHRJ-2026-0001) - কারণ: অনিবার্য কারণে আবেদন প্রত্যাহার",
+    "id": "AUD-EVT-1790672167271-J33U",
+    "timestamp": "2026-09-29T08:56:07.271Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "PROMOTE_WAITLIST",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "অপেক্ষমাণ তালিকা থেকে উত্তীর্ণ: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002)",
+    "id": "AUD-EVT-1790672167267-5Q9R",
+    "timestamp": "2026-09-29T08:56:07.267Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "REGISTER_STUDENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "শিক্ষার্থী রেজিস্ট্রেশন: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - স্ট্যাটাস: WAITLISTED",
+    "id": "AUD-EVT-1790672167263-MOUE",
+    "timestamp": "2026-09-29T08:56:07.263Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "REGISTER_STUDENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "শিক্ষার্থী রেজিস্ট্রেশন: মুহাম্মদ আব্দুল্লাহ আল মামুন (EHRJ-2026-0001) - স্ট্যাটাস: CONFIRMED",
+    "id": "AUD-EVT-1790672167248-I1EY",
+    "timestamp": "2026-09-29T08:56:07.248Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000009",
+    "action": "CREATE_EVENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "নতুন ইভেন্ট তৈরি করা হয়েছে: মহিলা শাখা ইসলামী কুইজ (EHRJ-EVT-2026-000009)",
+    "id": "AUD-EVT-1790672167226-RRY1",
+    "timestamp": "2026-09-29T08:56:07.226Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: APPROVED -> REGISTRATION_OPEN",
+    "id": "AUD-EVT-1790672167222-3NRX",
+    "timestamp": "2026-09-29T08:56:07.222Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: REVIEW -> APPROVED",
+    "id": "AUD-EVT-1790672167215-ZYQZ",
+    "timestamp": "2026-09-29T08:56:07.215Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: DRAFT -> REVIEW",
+    "id": "AUD-EVT-1790672167128-18NL",
+    "timestamp": "2026-09-29T08:56:07.128Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000008",
+    "action": "CREATE_EVENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "নতুন ইভেন্ট তৈরি করা হয়েছে: টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬ (EHRJ-EVT-2026-000008)",
+    "id": "AUD-EVT-1790672167122-ISKG",
+    "timestamp": "2026-09-29T08:56:07.122Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "ISSUE_CERTIFICATE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "সনদপত্র ইস্যু সম্পন্ন: মুহাম্মদ আব্দুর রহমান (EHRJ-EVT-CERT-2026-00001) - ধরন: WINNER",
+    "id": "AUD-EVT-1790672075522-J7B9",
+    "timestamp": "2026-09-29T08:54:35.522Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "RECORD_RESULT",
+    "actorId": "TEACHER-001",
+    "actorRole": "TEACHER",
+    "details": "প্রতিযোগিতার ফলাফল লিপিবদ্ধ: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - বিভাগ: হিফজ ১০ পারা বিভাগ",
+    "id": "AUD-EVT-1790672075426-WW26",
+    "timestamp": "2026-09-29T08:54:35.426Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "MARK_ATTENDANCE",
+    "actorId": "TEACHER-001",
+    "actorRole": "TEACHER",
+    "details": "ইভেন্ট চেক-ইন সম্পন্ন: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - পদ্ধতি: QR_SCAN",
+    "id": "AUD-EVT-1790672075414-594O",
+    "timestamp": "2026-09-29T08:54:35.414Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "CANCEL_REGISTRATION",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "রেজিস্ট্রেশন বাতিল: মুহাম্মদ আব্দুল্লাহ আল মামুন (EHRJ-2026-0001) - কারণ: অনিবার্য কারণে আবেদন প্রত্যাহার",
+    "id": "AUD-EVT-1790672075403-45VA",
+    "timestamp": "2026-09-29T08:54:35.403Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "PROMOTE_WAITLIST",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "অপেক্ষমাণ তালিকা থেকে উত্তীর্ণ: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002)",
+    "id": "AUD-EVT-1790672075399-SQG0",
+    "timestamp": "2026-09-29T08:54:35.399Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "REGISTER_STUDENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "শিক্ষার্থী রেজিস্ট্রেশন: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - স্ট্যাটাস: WAITLISTED",
+    "id": "AUD-EVT-1790672075394-492S",
+    "timestamp": "2026-09-29T08:54:35.394Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "REGISTER_STUDENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "শিক্ষার্থী রেজিস্ট্রেশন: মুহাম্মদ আব্দুল্লাহ আল মামুন (EHRJ-2026-0001) - স্ট্যাটাস: CONFIRMED",
+    "id": "AUD-EVT-1790672075384-VINA",
+    "timestamp": "2026-09-29T08:54:35.384Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000007",
+    "action": "CREATE_EVENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "নতুন ইভেন্ট তৈরি করা হয়েছে: মহিলা শাখা ইসলামী কুইজ (EHRJ-EVT-2026-000007)",
+    "id": "AUD-EVT-1790672075367-GRDT",
+    "timestamp": "2026-09-29T08:54:35.367Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: APPROVED -> REGISTRATION_OPEN",
+    "id": "AUD-EVT-1790672075364-JRSZ",
+    "timestamp": "2026-09-29T08:54:35.364Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: REVIEW -> APPROVED",
+    "id": "AUD-EVT-1790672075359-FGDC",
+    "timestamp": "2026-09-29T08:54:35.359Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: DRAFT -> REVIEW",
+    "id": "AUD-EVT-1790672075266-6S0V",
+    "timestamp": "2026-09-29T08:54:35.266Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000006",
+    "action": "CREATE_EVENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "নতুন ইভেন্ট তৈরি করা হয়েছে: টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬ (EHRJ-EVT-2026-000006)",
+    "id": "AUD-EVT-1790672075259-Y2W6",
+    "timestamp": "2026-09-29T08:54:35.259Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000004",
+    "action": "RECORD_RESULT",
+    "actorId": "TEACHER-001",
+    "actorRole": "TEACHER",
+    "details": "প্রতিযোগিতার ফলাফল লিপিবদ্ধ: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - বিভাগ: হিফজ ১০ পারা বিভাগ",
+    "id": "AUD-EVT-1790671959895-I2XS",
+    "timestamp": "2026-09-29T08:52:39.895Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000004",
+    "action": "MARK_ATTENDANCE",
+    "actorId": "TEACHER-001",
+    "actorRole": "TEACHER",
+    "details": "ইভেন্ট চেক-ইন সম্পন্ন: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - পদ্ধতি: QR_SCAN",
+    "id": "AUD-EVT-1790671959780-57EA",
+    "timestamp": "2026-09-29T08:52:39.780Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000004",
+    "action": "CANCEL_REGISTRATION",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "রেজিস্ট্রেশন বাতিল: মুহাম্মদ আব্দুল্লাহ আল মামুন (EHRJ-2026-0001) - কারণ: অনিবার্য কারণে আবেদন প্রত্যাহার",
+    "id": "AUD-EVT-1790671959766-9V1V",
+    "timestamp": "2026-09-29T08:52:39.766Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000004",
+    "action": "PROMOTE_WAITLIST",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "অপেক্ষমাণ তালিকা থেকে উত্তীর্ণ: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002)",
+    "id": "AUD-EVT-1790671959755-PS3A",
+    "timestamp": "2026-09-29T08:52:39.755Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000004",
+    "action": "REGISTER_STUDENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "শিক্ষার্থী রেজিস্ট্রেশন: মুহাম্মদ আব্দুর রহমান (EHRJ-2026-0002) - স্ট্যাটাস: WAITLISTED",
+    "id": "AUD-EVT-1790671959749-458J",
+    "timestamp": "2026-09-29T08:52:39.749Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000004",
+    "action": "REGISTER_STUDENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "শিক্ষার্থী রেজিস্ট্রেশন: মুহাম্মদ আব্দুল্লাহ আল মামুন (EHRJ-2026-0001) - স্ট্যাটাস: CONFIRMED",
+    "id": "AUD-EVT-1790671959728-A4DC",
+    "timestamp": "2026-09-29T08:52:39.728Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000005",
+    "action": "CREATE_EVENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "নতুন ইভেন্ট তৈরি করা হয়েছে: মহিলা শাখা ইসলামী কুইজ (EHRJ-EVT-2026-000005)",
+    "id": "AUD-EVT-1790671959700-XZ6J",
+    "timestamp": "2026-09-29T08:52:39.700Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000004",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: APPROVED -> REGISTRATION_OPEN",
+    "id": "AUD-EVT-1790671959692-CFSA",
+    "timestamp": "2026-09-29T08:52:39.692Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000004",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: REVIEW -> APPROVED",
+    "id": "AUD-EVT-1790671959685-Y5Y6",
+    "timestamp": "2026-09-29T08:52:39.685Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000004",
+    "action": "STATUS_CHANGE",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "ইভেন্ট স্ট্যাটাস পরিবর্তিত: DRAFT -> REVIEW",
+    "id": "AUD-EVT-1790671959666-REAL",
+    "timestamp": "2026-09-29T08:52:39.666Z"
+  },
+  {
+    "eventId": "EHRJ-EVT-2026-000004",
+    "action": "CREATE_EVENT",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "নতুন ইভেন্ট তৈরি করা হয়েছে: টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬ (EHRJ-EVT-2026-000004)",
+    "id": "AUD-EVT-1790671959654-XYEE",
+    "timestamp": "2026-09-29T08:52:39.654Z"
+  }
+]

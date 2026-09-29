@@ -2,6 +2,36 @@
   {
     "action": "APPROVE_BOOKING",
     "entityType": "BOOKING",
+    "entityId": "BKG-1790672241803-I36B",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "বুকিং অনুমোদন করা হয়েছে: দারুল হাদিস অডিটোরিয়াম (বার্ষিক ক্বিরাআত প্রতিযোগিতা ২০২৬)",
+    "id": "AUD-CAL-1790672241808-UWN7",
+    "timestamp": "2026-09-29T08:57:21.809Z"
+  },
+  {
+    "action": "BOOK_RESOURCE",
+    "entityType": "BOOKING",
+    "entityId": "BKG-1790672241803-I36B",
+    "actorId": "teacher_qari@ehrj.edu.bd",
+    "actorRole": "TEACHER",
+    "details": "রিসোর্স বুকিং আবেদন: দারুল হাদিস অডিটোরিয়াম (বার্ষিক ক্বিরাআত প্রতিযোগিতা ২০২৬) - স্ট্যাটাস: PENDING_APPROVAL",
+    "id": "AUD-CAL-1790672241804-XFX1",
+    "timestamp": "2026-09-29T08:57:21.804Z"
+  },
+  {
+    "action": "BOOK_RESOURCE",
+    "entityType": "BOOKING",
+    "entityId": "BKG-1790671959674-WL3F",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "রিসোর্স বুকিং আবেদন: দারুল হাদিস অডিটোরিয়াম (টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬) - স্ট্যাটাস: PENDING_APPROVAL",
+    "id": "AUD-CAL-1790671959678-O7GO",
+    "timestamp": "2026-09-29T08:52:39.678Z"
+  },
+  {
+    "action": "APPROVE_BOOKING",
+    "entityType": "BOOKING",
     "entityId": "BKG-1790670653465-B7HI",
     "actorId": "admin@ehrj.edu.bd",
     "actorRole": "ADMIN",

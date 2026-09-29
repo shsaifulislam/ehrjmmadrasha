@@ -1,5 +1,68 @@
 [
   {
+    "id": "CMS-AUD-1790672398250-iupn6",
+    "action": "CREATE",
+    "contentType": "DOWNLOAD",
+    "contentId": "DL-MUMG41BD",
+    "details": "Created new download item: ২০২৬ শিক্ষাবর্ষের টেস্ট প্রসপেক্টাস",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:59:58.250Z"
+  },
+  {
+    "id": "CMS-AUD-1790672398247-rtry6",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMG41BA",
+    "details": "Created new gallery item: সম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:59:58.247Z"
+  },
+  {
+    "id": "CMS-AUD-1790672398244-8h4t6",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMG41B8",
+    "details": "Created new gallery item: অসম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:59:58.244Z"
+  },
+  {
+    "id": "CMS-AUD-1790672398240-rhig4",
+    "action": "UPDATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMG41B0",
+    "details": "Updated FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "PRINCIPAL",
+    "timestamp": "2026-09-29T08:59:58.240Z"
+  },
+  {
+    "id": "CMS-AUD-1790672398236-6xkv4",
+    "action": "CREATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMG41B0",
+    "details": "Created new FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:59:58.236Z"
+  },
+  {
+    "id": "CMS-AUD-1790672398233-e6v6s",
+    "action": "ARCHIVE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMG41AS",
+    "details": "Archived event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:59:58.233Z"
+  },
+  {
+    "id": "CMS-AUD-1790672398229-5oogu",
+    "action": "CREATE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMG41AS",
+    "details": "Created new event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:59:58.229Z"
+  },
+  {
     "id": "CMS-AUD-1790670552033-xuois",
     "action": "CREATE",
     "contentType": "DOWNLOAD",

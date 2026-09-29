@@ -138,5 +138,19 @@
     "updatedAt": "2026-09-29T08:29:12.018Z",
     "createdBy": "TEST_ADMIN",
     "approvedBy": "PRINCIPAL"
+  },
+  {
+    "id": "FAQ-MUMG41B0",
+    "questionBn": "খসড়া প্রশ্ন?",
+    "answerBn": "খসড়া উত্তর যা এখনো অনুমোদিত নয়",
+    "category": "ADMISSION",
+    "order": 11,
+    "status": "PUBLISHED",
+    "isApproved": true,
+    "version": 2,
+    "createdAt": "2026-09-29T08:59:58.236Z",
+    "updatedAt": "2026-09-29T08:59:58.239Z",
+    "createdBy": "TEST_ADMIN",
+    "approvedBy": "PRINCIPAL"
   }
 ]

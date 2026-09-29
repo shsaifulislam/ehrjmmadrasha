@@ -1,5 +1,131 @@
 [
   {
+    "id": "AUD-COM-MUMG11E9-6z8",
+    "timestamp": "2026-09-29T08:57:38.385Z",
+    "actorId": "SYSTEM_SCHEDULER",
+    "actorRole": "SYSTEM",
+    "action": "GENERATE_DIGEST",
+    "details": {
+      "digestId": "DIG-MUMG11E6-BQV",
+      "digestType": "WEEKLY",
+      "targetRole": "TEACHER",
+      "totalItems": 7,
+      "dispatchedLive": false
+    }
+  },
+  {
+    "id": "AUD-COM-MUMG11D7-xla",
+    "timestamp": "2026-09-29T08:57:38.347Z",
+    "actorId": "SYSTEM_SCHEDULER",
+    "actorRole": "SYSTEM",
+    "action": "GENERATE_DIGEST",
+    "details": {
+      "digestId": "DIG-MUMG11D3-3X6",
+      "digestType": "DAILY",
+      "targetRole": "GUARDIAN",
+      "totalItems": 2,
+      "dispatchedLive": false
+    }
+  },
+  {
+    "id": "AUD-COM-MUMG11CU-3vo",
+    "timestamp": "2026-09-29T08:57:38.334Z",
+    "actorId": "TEST_ADMIN",
+    "actorRole": "ADMIN",
+    "action": "SEND_CAMPAIGN",
+    "campaignId": "EHRJ-COM-2026-MUMG0WZU-FSSI",
+    "details": {
+      "isDryRun": false,
+      "totalAudience": 14,
+      "sentCount": 14,
+      "suppressedCount": 0,
+      "failedCount": 0
+    }
+  },
+  {
+    "id": "AUD-COM-MUMG10H8-4i7",
+    "timestamp": "2026-09-29T08:57:37.196Z",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "action": "TEST_SEND",
+    "campaignId": "EHRJ-COM-2026-MUMG0WZU-FSSI",
+    "details": {
+      "sentTo": "admin@ehrj.edu.bd"
+    }
+  },
+  {
+    "id": "AUD-COM-MUMG0X37-qzt",
+    "timestamp": "2026-09-29T08:57:32.803Z",
+    "actorId": "TEST_ADMIN",
+    "actorRole": "ADMIN",
+    "action": "DRY_RUN",
+    "campaignId": "EHRJ-COM-2026-MUMG0WZU-FSSI",
+    "details": {
+      "isDryRun": true,
+      "totalAudience": 14,
+      "sentCount": 14,
+      "suppressedCount": 0,
+      "failedCount": 0
+    }
+  },
+  {
+    "id": "AUD-COM-MUMG0X27-dw5",
+    "timestamp": "2026-09-29T08:57:32.767Z",
+    "actorId": "TEST_ADMIN",
+    "actorRole": "ADMIN",
+    "action": "APPROVE_CAMPAIGN",
+    "campaignId": "EHRJ-COM-2026-MUMG0WZU-FSSI",
+    "details": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "AUD-COM-MUMG0X1N-nnt",
+    "timestamp": "2026-09-29T08:57:32.747Z",
+    "actorId": "TEST_ADMIN",
+    "actorRole": "ADMIN",
+    "action": "CREATE_CAMPAIGN",
+    "campaignId": "EHRJ-COM-2026-MUMG0WZU-FSSI",
+    "details": {
+      "title": "টেস্ট পরীক্ষার বিশেষ দিকনির্দেশনা",
+      "audienceType": "ALL_GUARDIANS",
+      "estimatedRecipients": 14,
+      "requiresApproval": true
+    }
+  },
+  {
+    "id": "AUD-COM-MUMG0WZS-8jo",
+    "timestamp": "2026-09-29T08:57:32.680Z",
+    "actorId": "SYSTEM_ADMIN",
+    "actorRole": "ADMIN",
+    "action": "REMOVE_SUPPRESSION",
+    "details": {
+      "email": "test_bounce_student@ehrj-test.com"
+    }
+  },
+  {
+    "id": "AUD-COM-MUMG0WZD-oq0",
+    "timestamp": "2026-09-29T08:57:32.665Z",
+    "actorId": "SYSTEM",
+    "actorRole": "ADMIN",
+    "action": "ADD_SUPPRESSION",
+    "details": {
+      "email": "test_bounce_student@ehrj-test.com",
+      "reason": "BOUNCE_PERMANENT"
+    }
+  },
+  {
+    "id": "AUD-COM-MUMG0WZ8-e2w",
+    "timestamp": "2026-09-29T08:57:32.660Z",
+    "actorId": "TEST_ADMIN",
+    "actorRole": "ADMIN",
+    "action": "UPDATE_TEMPLATE",
+    "templateCode": "COM_EXAM_ROUTINE_ANNOUNCEMENT",
+    "details": {
+      "version": 8
+    }
+  },
+  {
     "id": "AUD-COM-MUMF02S1-xh8",
     "timestamp": "2026-09-29T08:28:53.905Z",
     "actorId": "SYSTEM_SCHEDULER",
