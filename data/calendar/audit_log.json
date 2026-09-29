@@ -1,0 +1,22 @@
+[
+  {
+    "action": "APPROVE_BOOKING",
+    "entityType": "BOOKING",
+    "entityId": "BKG-1790669274990-84B2",
+    "actorId": "admin@ehrj.edu.bd",
+    "actorRole": "ADMIN",
+    "details": "বুকিং অনুমোদন করা হয়েছে: দারুল হাদিস অডিটোরিয়াম (বার্ষিক ক্বিরাআত প্রতিযোগিতা ২০২৬)",
+    "id": "AUD-CAL-1790669274997-2LS8",
+    "timestamp": "2026-09-29T08:07:54.997Z"
+  },
+  {
+    "action": "BOOK_RESOURCE",
+    "entityType": "BOOKING",
+    "entityId": "BKG-1790669274990-84B2",
+    "actorId": "teacher_qari@ehrj.edu.bd",
+    "actorRole": "TEACHER",
+    "details": "রিসোর্স বুকিং আবেদন: দারুল হাদিস অডিটোরিয়াম (বার্ষিক ক্বিরাআত প্রতিযোগিতা ২০২৬) - স্ট্যাটাস: PENDING_APPROVAL",
+    "id": "AUD-CAL-1790669274992-RS6A",
+    "timestamp": "2026-09-29T08:07:54.992Z"
+  }
+]

@@ -176,6 +176,16 @@ export const GLOBAL_COMMAND_SHORTCUTS: CommandShortcutItem[] = [
     requiredRole: ["ADMIN", "PRINCIPAL"],
     descriptionBn: "প্রাতিষ্ঠানিক ঘোষণা, টার্গেটেড ইমেইল/পোর্টাল ক্যাম্পেইন ও ডাইজেস্ট",
   },
+  {
+    id: "CMD-NAV-CALENDAR",
+    titleBn: "ক্যালেন্ডার ও ক্লাস রুটিন হাব",
+    titleEn: "Institutional Calendar & Routines",
+    category: "NAVIGATION",
+    shortcutKey: "G K",
+    url: "/admin/calendar",
+    requiredRole: ["ADMIN", "PRINCIPAL", "TEACHER"],
+    descriptionBn: "একাডেমিক ক্যালেন্ডার, সাপ্তাহিক ক্লাস রুটিন ও রিসোর্স বুকিং",
+  },
   // 2. Guardian Portal Shortcuts
   {
     id: "CMD-NAV-PORTAL-CHILDREN",

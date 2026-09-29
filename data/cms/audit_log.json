@@ -1,5 +1,68 @@
 [
   {
+    "id": "CMS-AUD-1790669323431-qvr90",
+    "action": "CREATE",
+    "contentType": "DOWNLOAD",
+    "contentId": "DL-MUMEA4RQ",
+    "details": "Created new download item: ২০২৬ শিক্ষাবর্ষের টেস্ট প্রসপেক্টাস",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:08:43.431Z"
+  },
+  {
+    "id": "CMS-AUD-1790669323427-uq965",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMEA4RN",
+    "details": "Created new gallery item: সম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:08:43.427Z"
+  },
+  {
+    "id": "CMS-AUD-1790669323425-gefr4",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMEA4RL",
+    "details": "Created new gallery item: অসম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:08:43.425Z"
+  },
+  {
+    "id": "CMS-AUD-1790669323421-5foyf",
+    "action": "UPDATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMEA4RF",
+    "details": "Updated FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "PRINCIPAL",
+    "timestamp": "2026-09-29T08:08:43.422Z"
+  },
+  {
+    "id": "CMS-AUD-1790669323419-27248",
+    "action": "CREATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMEA4RF",
+    "details": "Created new FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:08:43.419Z"
+  },
+  {
+    "id": "CMS-AUD-1790669323416-shk9m",
+    "action": "ARCHIVE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMEA4R6",
+    "details": "Archived event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:08:43.416Z"
+  },
+  {
+    "id": "CMS-AUD-1790669323411-n48j4",
+    "action": "CREATE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMEA4R6",
+    "details": "Created new event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T08:08:43.411Z"
+  },
+  {
     "id": "CMS-AUD-1790668181459-02cap",
     "action": "CREATE",
     "contentType": "DOWNLOAD",

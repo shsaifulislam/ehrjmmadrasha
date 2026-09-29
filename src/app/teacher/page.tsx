@@ -29,6 +29,7 @@ import PortalNotificationsViewer from "@/components/communication/PortalNotifica
 import TeacherLibraryViewer from "@/components/library/TeacherLibraryViewer";
 import TeacherHostelViewer from "@/components/hostel/TeacherHostelViewer";
 import TeacherInventoryViewer from "@/components/inventory/TeacherInventoryViewer";
+import TeacherRoutineViewer from "@/components/calendar/TeacherRoutineViewer";
 
 interface StudentAttendanceItem {
   id: string;
@@ -299,19 +300,7 @@ export default function TeacherPanelPage() {
         {activeTab === "RESULTS" && <TeacherMarksEntry />}
 
         {/* 5. ROUTINE */}
-        {activeTab === "ROUTINE" && (
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-3 text-xs">
-            <h2 className="text-base font-bold text-[#083B25] border-b pb-2">আমার সাপ্তাহিক ক্লাস রুটিন</h2>
-            <div className="p-3 bg-gray-50 rounded">
-              <p className="font-bold">সকাল ৮:০০ - ৯:০০</p>
-              <p className="text-gray-600">নূরানী বিভাগ - বিশুদ্ধ কুরআন তিলাওয়াত ও ক্বিরাআত</p>
-            </div>
-            <div className="p-3 bg-gray-50 rounded">
-              <p className="font-bold">সকাল ৯:১৫ - ১০:১৫</p>
-              <p className="text-gray-600">হিফজ বিভাগ - দৈনন্দিন নতুন সবক গ্রহণ</p>
-            </div>
-          </div>
-        )}
+        {activeTab === "ROUTINE" && <TeacherRoutineViewer />}
 
         {/* 6. EXAM */}
         {activeTab === "EXAM" && (

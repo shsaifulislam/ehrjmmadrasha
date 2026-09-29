@@ -1,0 +1,12 @@
+[
+  {
+    "id": "REM-CAL-EVT-2026-0001-USER-TEA-001-60",
+    "eventId": "CAL-EVT-2026-0001",
+    "recipientId": "USER-TEA-001",
+    "recipientRole": "TEACHER",
+    "reminderType": "IN_APP",
+    "offsetMinutes": 60,
+    "scheduledTime": "2026-04-10T08:00:00.000Z",
+    "status": "PENDING"
+  }
+]

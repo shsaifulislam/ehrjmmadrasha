@@ -1,0 +1,101 @@
+[
+  {
+    "id": "RES-001",
+    "nameBn": "দারুল হাদিস অডিটোরিয়াম",
+    "nameEn": "Darul Hadith Auditorium",
+    "type": "AUDITORIUM",
+    "capacity": 450,
+    "location": "প্রধান একাডেমি ভবন, ২য় তলা",
+    "status": "AVAILABLE",
+    "isExclusive": true,
+    "requiresApproval": true,
+    "description": "প্রধান অডিটোরিয়াম ও প্রাতিষ্ঠানিক সম্মেলন কক্ষ, উন্নত সাউন্ড সিস্টেম সম্বলিত",
+    "equipment": [
+      "সাউন্ড সিস্টেম",
+      "ওয়্যারলেস মাইক্রোফোন",
+      "প্রজেক্টর ও স্ক্রিন",
+      "পডিয়াম"
+    ],
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "RES-002",
+    "nameBn": "কেন্দ্রীয় শিক্ষক ও প্রশাসনিক সম্মেলন কক্ষ",
+    "nameEn": "Central Faculty & Admin Conference Room",
+    "type": "MEETING_ROOM",
+    "capacity": 35,
+    "location": "প্রশাসনিক ভবন, ১ম তলা",
+    "status": "AVAILABLE",
+    "isExclusive": true,
+    "requiresApproval": true,
+    "description": "মুহতামিম ও শিক্ষক পরিষদের যৌথ বৈঠকের জন্য শীতাতপ নিয়ন্ত্রিত মিটিং রুম",
+    "equipment": [
+      "কনফারেন্স টেবিল",
+      "হোয়াইটবোর্ড",
+      "ডিজিটাল ডিসপ্লে",
+      "ভিডিও কনফারেন্সিং ক্যামেরা"
+    ],
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "RES-003",
+    "nameBn": "কম্পিউটার ও ডিজিটাল শিক্ষা ল্যাব",
+    "nameEn": "Computer & Digital Learning Lab",
+    "type": "LAB",
+    "capacity": 40,
+    "location": "একাডেমিক ভবন, ৩য় তলা",
+    "status": "AVAILABLE",
+    "isExclusive": true,
+    "requiresApproval": true,
+    "description": "আইসিটি ও আধুনিক ডিজিটাল শিক্ষা কার্যক্রমে ব্যবহারের জন্য কম্পিউটার ল্যাব",
+    "equipment": [
+      "৩০টি ডেস্কটপ কম্পিউটার",
+      "হাই-স্পিড ব্রডব্যান্ড",
+      "প্রজেক্টর",
+      "ইউপিএস ব্যাকআপ"
+    ],
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "RES-004",
+    "nameBn": "মুভেবল ডিজিটাল প্রজেক্টর ইউনিট-১",
+    "nameEn": "Portable Digital Projector Unit 1",
+    "type": "PROJECTOR",
+    "capacity": 1,
+    "location": "মিডিয়া ও আইসিটি শাখা",
+    "status": "AVAILABLE",
+    "isExclusive": true,
+    "requiresApproval": false,
+    "description": "যেকোনো শ্রেণিকক্ষে প্রেজেন্টেশন ও বিশেষ ক্লাসের জন্য স্থানান্তরযোগ্য প্রজেক্টর",
+    "equipment": [
+      "HD Projector",
+      "HDMI/Type-C Cables",
+      "Portable Screen",
+      "Extension Cord"
+    ],
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "RES-005",
+    "nameBn": "কুতুবখানা কেন্দ্রীয় অধ্যয়ন হল",
+    "nameEn": "Central Library Study Hall",
+    "type": "MEETING_ROOM",
+    "capacity": 90,
+    "location": "কুতুবখানা ভবন, নীচতলা",
+    "status": "AVAILABLE",
+    "isExclusive": false,
+    "requiresApproval": true,
+    "description": "কিতাব অধ্যয়ন, মুতালাআ ও কিতাব প্রদর্শনী অনুষ্ঠানের জন্য উন্মুক্ত হল",
+    "equipment": [
+      "অধ্যয়ন ডেস্ক",
+      "রেফারেন্স কিতাবের তাকসমূহ",
+      "পর্যাপ্ত আলোকসজ্জা"
+    ],
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  }
+]
