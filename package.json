@@ -38,7 +38,8 @@
     "test:phase36": "npx tsx scratch/test_phase36_alumni_engine.ts",
     "test:phase37": "npx tsx scratch/test_phase37_survey_engine.ts",
     "test:phase38": "npx tsx scratch/test_phase38_knowledge_engine.ts",
-    "test:phase39": "npx tsx scratch/test_phase39_training_engine.ts"
+    "test:phase39": "npx tsx scratch/test_phase39_training_engine.ts",
+    "test:phase41": "npx tsx scratch/test_phase41_budget_engine.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

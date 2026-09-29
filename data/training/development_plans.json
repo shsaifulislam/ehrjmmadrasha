@@ -1,5 +1,24 @@
 [
   {
+    "id": "PDP-1790694225810",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "employeeName": "উস্তাদ আহমদ শাকিল",
+    "department": "হিফজ বিভাগ",
+    "designation": "হিফজ শিক্ষক",
+    "objectiveBn": "আন্তর্জাতিক হিফজ ও কিরাত প্রতিযোগিতার বিচারক প্রশিক্ষণ",
+    "competencyCategory": "TEACHING",
+    "targetCompetencyLevel": "ADVANCED",
+    "requiredTrainingIds": [
+      "EHRJ-TRN-2026-3609"
+    ],
+    "targetCompletionDate": "2026-12-31",
+    "progressPercentage": 50,
+    "status": "ACTIVE",
+    "createdBy": "এডমিন সাহেব",
+    "createdAt": "2026-09-29T15:03:45.810Z",
+    "updatedAt": "2026-09-29T15:03:45.811Z"
+  },
+  {
     "id": "PDP-1790689282232",
     "employeeId": "EHRJ-EMP-TEST-001",
     "employeeName": "উস্তাদ আহমদ শাকিল",

@@ -1,0 +1,48 @@
+[
+  {
+    "id": "EHRJ-BPR-TEST-2026",
+    "periodCode": "FY-2026-2027-TEST",
+    "titleBn": "পরীক্ষামূলক অর্থবছর ২০২৬-২০২৭",
+    "titleEn": "Test Financial Year 2026-2027",
+    "periodType": "FINANCIAL_YEAR",
+    "startDate": "2026-07-01",
+    "endDate": "2027-06-30",
+    "status": "ACTIVE",
+    "isLocked": true,
+    "notes": "টেস্টিংয়ের জন্য প্রস্তুতকৃত আর্থিক মেয়াদ",
+    "createdBy": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "createdAt": "2026-09-29T15:03:34.650Z",
+    "lockedAt": "2026-09-29T15:03:34.652Z"
+  },
+  {
+    "id": "EHRJ-BPR-2026-FY",
+    "periodCode": "FY-2026-2027",
+    "titleBn": "অর্থবছর ২০২৬-২০২৭ বার্ষিক বাজেট মেয়াদ",
+    "titleEn": "Fiscal Year 2026-2027 Institutional Period",
+    "periodType": "FINANCIAL_YEAR",
+    "startDate": "2026-07-01",
+    "endDate": "2027-06-30",
+    "status": "ACTIVE",
+    "isLocked": false,
+    "notes": "মাদরাসার প্রধান পরিচালন ও উন্নয়ন বাজেট মেয়াদ",
+    "createdBy": "মুহতামিম সাহেব ও অর্থ কমিটি",
+    "createdAt": "2026-06-15T10:00:00.000Z",
+    "approvedBy": "সভাপতি ও গভর্নিং বডি"
+  },
+  {
+    "id": "EHRJ-BPR-2025-FY",
+    "periodCode": "FY-2025-2026",
+    "titleBn": "অর্থবছর ২০২৫-২০২৬ (সমাপ্ত)",
+    "titleEn": "Fiscal Year 2025-2026 (Closed)",
+    "periodType": "FINANCIAL_YEAR",
+    "startDate": "2025-07-01",
+    "endDate": "2026-06-30",
+    "status": "CLOSED",
+    "isLocked": true,
+    "notes": "অডিটকৃত ও সমাপ্ত অর্থবছর",
+    "createdBy": "মুহতামিম সাহেব",
+    "createdAt": "2025-06-20T10:00:00.000Z",
+    "approvedBy": "গভর্নিং বডি",
+    "lockedAt": "2026-07-05T12:00:00.000Z"
+  }
+]

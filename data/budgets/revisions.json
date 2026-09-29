@@ -1,0 +1,92 @@
+[
+  {
+    "id": "EHRJ-BREV-2026-2410",
+    "revisionCode": "EHRJ-BREV-2026-2410",
+    "budgetId": "EHRJ-BUD-2026-8566",
+    "budgetTitleBn": "রিভিশন টেস্ট বাজেট",
+    "previousVersion": 1,
+    "targetVersion": 2,
+    "titleBn": "গ্রীষ্মকালীন বিদ্যুৎ বিল অতিরিক্ত বরাদ্দ প্রস্তাব",
+    "reasonBn": "গ্রীষ্মকালে লোডশেডিংয়ের কারণে জেনারেটর ডিজেল ও বিদ্যুৎ খরচ বৃদ্ধি",
+    "lineDiffs": [
+      {
+        "budgetLineId": "LN-REV-01",
+        "categoryNameBn": "বিদ্যুৎ বিল",
+        "fundCode": "GENERAL",
+        "previousAmount": 200000,
+        "proposedAmount": 250000,
+        "amountDifference": 50000,
+        "justificationBn": "ডিজেল খরচ ৳৫০,০০০ বৃদ্ধি আবশ্যক"
+      }
+    ],
+    "netExpenseAdjustment": 50000,
+    "netIncomeAdjustment": 0,
+    "status": "APPROVED",
+    "requestedBy": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "requestedAt": "2026-09-29T15:03:34.777Z",
+    "reviewedBy": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "reviewedAt": "2026-09-29T15:03:34.782Z",
+    "approvedBy": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "approvedAt": "2026-09-29T15:03:34.789Z"
+  },
+  {
+    "id": "EHRJ-BREV-2026-6697",
+    "revisionCode": "EHRJ-BREV-2026-6697",
+    "budgetId": "EHRJ-BUD-2026-1856",
+    "budgetTitleBn": "রিভিশন টেস্ট বাজেট",
+    "previousVersion": 1,
+    "targetVersion": 2,
+    "titleBn": "গ্রীষ্মকালীন বিদ্যুৎ বিল অতিরিক্ত বরাদ্দ প্রস্তাব",
+    "reasonBn": "গ্রীষ্মকালে লোডশেডিংয়ের কারণে জেনারেটর ডিজেল ও বিদ্যুৎ খরচ বৃদ্ধি",
+    "lineDiffs": [
+      {
+        "budgetLineId": "LN-REV-01",
+        "categoryNameBn": "বিদ্যুৎ বিল",
+        "fundCode": "GENERAL",
+        "previousAmount": 200000,
+        "proposedAmount": 250000,
+        "amountDifference": 50000,
+        "justificationBn": "ডিজেল খরচ ৳৫০,০০০ বৃদ্ধি আবশ্যক"
+      }
+    ],
+    "netExpenseAdjustment": 50000,
+    "netIncomeAdjustment": 0,
+    "status": "APPROVED",
+    "requestedBy": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "requestedAt": "2026-09-29T15:02:13.884Z",
+    "reviewedBy": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "reviewedAt": "2026-09-29T15:02:13.889Z",
+    "approvedBy": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "approvedAt": "2026-09-29T15:02:13.893Z"
+  },
+  {
+    "id": "EHRJ-BREV-2026-4754",
+    "revisionCode": "EHRJ-BREV-2026-4754",
+    "budgetId": "EHRJ-BUD-2026-5839",
+    "budgetTitleBn": "রিভিশন টেস্ট বাজেট",
+    "previousVersion": 1,
+    "targetVersion": 2,
+    "titleBn": "গ্রীষ্মকালীন বিদ্যুৎ বিল অতিরিক্ত বরাদ্দ প্রস্তাব",
+    "reasonBn": "গ্রীষ্মকালে লোডশেডিংয়ের কারণে জেনারেটর ডিজেল ও বিদ্যুৎ খরচ বৃদ্ধি",
+    "lineDiffs": [
+      {
+        "budgetLineId": "LN-REV-01",
+        "categoryNameBn": "বিদ্যুৎ বিল",
+        "fundCode": "GENERAL",
+        "previousAmount": 200000,
+        "proposedAmount": 250000,
+        "amountDifference": 50000,
+        "justificationBn": "ডিজেল খরচ ৳৫০,০০০ বৃদ্ধি আবশ্যক"
+      }
+    ],
+    "netExpenseAdjustment": 50000,
+    "netIncomeAdjustment": 0,
+    "status": "APPROVED",
+    "requestedBy": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "requestedAt": "2026-09-29T15:01:19.000Z",
+    "reviewedBy": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "reviewedAt": "2026-09-29T15:01:19.005Z",
+    "approvedBy": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "approvedAt": "2026-09-29T15:01:19.011Z"
+  }
+]

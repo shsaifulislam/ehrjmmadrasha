@@ -1,0 +1,899 @@
+[
+  {
+    "budgetId": "EHRJ-BUD-2026-8566",
+    "action": "STATUS_CHANGE",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "সিস্টেম টেস্ট অডিট রেকর্ড",
+    "id": "EHRJ-BAUD-1790694214853-57",
+    "timestamp": "2026-09-29T15:03:34.853Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8566",
+    "action": "APPROVE_REVISION",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "রিভিশন অনুমোদিত: গ্রীষ্মকালীন বিদ্যুৎ বিল অতিরিক্ত বরাদ্দ প্রস্তাব (বাজেট সংস্করণ উন্নীত: v2)",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-2410",
+      "newVersionNumber": 2,
+      "approvalReference": "কমিটি কর্তৃক সর্বসম্মত অনুমোদন",
+      "totalExpensePlanned": 250000
+    },
+    "id": "EHRJ-BAUD-1790694214794-574",
+    "timestamp": "2026-09-29T15:03:34.794Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8566",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "রিভিশন EHRJ-BREV-2026-2410 স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-2410",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "বাজেট কমিটির সভায় পর্যালোচনার জন্য গৃহীত"
+    },
+    "id": "EHRJ-BAUD-1790694214785-861",
+    "timestamp": "2026-09-29T15:03:34.785Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8566",
+    "action": "REQUEST_REVISION",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট রিভিশন প্রস্তাব পেশ: গ্রীষ্মকালীন বিদ্যুৎ বিল অতিরিক্ত বরাদ্দ প্রস্তাব (সংস্করণ v1 -> v2)",
+    "details": {
+      "revisionCode": "EHRJ-BREV-2026-2410",
+      "netExpenseAdjustment": 50000,
+      "netIncomeAdjustment": 0,
+      "diffCount": 1
+    },
+    "id": "EHRJ-BAUD-1790694214779-661",
+    "timestamp": "2026-09-29T15:03:34.779Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8566",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: রিভিশন টেস্ট বাজেট (EHRJ-BUD-2026-8566)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-8566",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694214770-344",
+    "timestamp": "2026-09-29T15:03:34.770Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9918",
+    "action": "ACKNOWLEDGE_ALERT",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "সতর্কবার্তা গৃহীত হয়েছে: বিদ্যুৎ ও ইউটিলিটি বিল (WARNING)",
+    "details": {
+      "alertId": "EHRJ-BALT-2026-1577",
+      "alertLevel": "WARNING"
+    },
+    "id": "EHRJ-BAUD-1790694214765-276",
+    "timestamp": "2026-09-29T15:03:34.765Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9918",
+    "action": "OVERRUN_DETECTED",
+    "actorId": "SYSTEM",
+    "actorName": "বাজেট কন্ট্রোল ইঞ্জিন",
+    "actorRole": "SYSTEM",
+    "notes": "বাজেট অতিক্রম সনাক্ত: জরুরি চিকিৎসা সেবা (অতিরিক্ত ৳5000)",
+    "details": {
+      "lineId": "LN-OVR-105",
+      "occupied": 105000,
+      "planned": 100000,
+      "overrunAmount": 5000
+    },
+    "id": "EHRJ-BAUD-1790694214761-629",
+    "timestamp": "2026-09-29T15:03:34.761Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9918",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: কন্ট্রোল টেস্ট বাজেট (EHRJ-BUD-2026-9918)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-9918",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694214751-619",
+    "timestamp": "2026-09-29T15:03:34.751Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1699",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং খাদ্য ও রশদ সামগ্রী (বরাদ্দ: ৳600000)",
+    "details": {
+      "lineId": "BLN-2026-9563",
+      "category": "FOOD_GROCERY",
+      "plannedAmount": 600000
+    },
+    "id": "EHRJ-BAUD-1790694214737-470",
+    "timestamp": "2026-09-29T15:03:34.737Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1699",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: অসহায় ও এতিম ছাত্রদের সহায়তা (বরাদ্দ: ৳400000)",
+    "details": {
+      "lineId": "BLN-2026-8784",
+      "category": "STUDENT_WELFARE",
+      "plannedAmount": 400000
+    },
+    "id": "EHRJ-BAUD-1790694214729-147",
+    "timestamp": "2026-09-29T15:03:34.729Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1699",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: মাসিক বেতন ও ভর্তি ফি (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-6497",
+      "category": "TUITION_FEE",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790694214721-884",
+    "timestamp": "2026-09-29T15:03:34.721Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1699",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: ফান্ড যাচাই বাজেট ২০২৬ (EHRJ-BUD-2026-1699)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-1699",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694214714-285",
+    "timestamp": "2026-09-29T15:03:34.714Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9589",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: অর্থবছরের শুরুতে বাজেট কার্যকর",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "অর্থবছরের শুরুতে বাজেট কার্যকর",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694214705-417",
+    "timestamp": "2026-09-29T15:03:34.707Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9589",
+    "action": "APPROVE_BUDGET",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: মুহতামিম কর্তৃক অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "মুহতামিম কর্তৃক অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694214692-203",
+    "timestamp": "2026-09-29T15:03:34.692Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9589",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: মুহতামিম পর্যালোচনার জন্য পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "মুহতামিম পর্যালোচনার জন্য পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694214685-329",
+    "timestamp": "2026-09-29T15:03:34.685Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9589",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: প্রস্তুতি শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "প্রস্তুতি শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694214668-886",
+    "timestamp": "2026-09-29T15:03:34.668Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9589",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: হিফজ ও কিতাব বিভাগ বাজেট ২০২৬-২০২৭ (EHRJ-BUD-2026-9589)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-9589",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694214661-970",
+    "timestamp": "2026-09-29T15:03:34.661Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1856",
+    "action": "STATUS_CHANGE",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "সিস্টেম টেস্ট অডিট রেকর্ড",
+    "id": "EHRJ-BAUD-1790694134054-974",
+    "timestamp": "2026-09-29T15:02:14.054Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1856",
+    "action": "APPROVE_REVISION",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "রিভিশন অনুমোদিত: গ্রীষ্মকালীন বিদ্যুৎ বিল অতিরিক্ত বরাদ্দ প্রস্তাব (বাজেট সংস্করণ উন্নীত: v2)",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-6697",
+      "newVersionNumber": 2,
+      "approvalReference": "কমিটি কর্তৃক সর্বসম্মত অনুমোদন",
+      "totalExpensePlanned": 250000
+    },
+    "id": "EHRJ-BAUD-1790694133900-796",
+    "timestamp": "2026-09-29T15:02:13.900Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1856",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "রিভিশন EHRJ-BREV-2026-6697 স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-6697",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "বাজেট কমিটির সভায় পর্যালোচনার জন্য গৃহীত"
+    },
+    "id": "EHRJ-BAUD-1790694133890-156",
+    "timestamp": "2026-09-29T15:02:13.890Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1856",
+    "action": "REQUEST_REVISION",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট রিভিশন প্রস্তাব পেশ: গ্রীষ্মকালীন বিদ্যুৎ বিল অতিরিক্ত বরাদ্দ প্রস্তাব (সংস্করণ v1 -> v2)",
+    "details": {
+      "revisionCode": "EHRJ-BREV-2026-6697",
+      "netExpenseAdjustment": 50000,
+      "netIncomeAdjustment": 0,
+      "diffCount": 1
+    },
+    "id": "EHRJ-BAUD-1790694133887-25",
+    "timestamp": "2026-09-29T15:02:13.887Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1856",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: রিভিশন টেস্ট বাজেট (EHRJ-BUD-2026-1856)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-1856",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694133876-760",
+    "timestamp": "2026-09-29T15:02:13.876Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1277",
+    "action": "ACKNOWLEDGE_ALERT",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "সতর্কবার্তা গৃহীত হয়েছে: বিদ্যুৎ ও ইউটিলিটি বিল (WARNING)",
+    "details": {
+      "alertId": "EHRJ-BALT-2026-5831",
+      "alertLevel": "WARNING"
+    },
+    "id": "EHRJ-BAUD-1790694133869-337",
+    "timestamp": "2026-09-29T15:02:13.870Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1277",
+    "action": "OVERRUN_DETECTED",
+    "actorId": "SYSTEM",
+    "actorName": "বাজেট কন্ট্রোল ইঞ্জিন",
+    "actorRole": "SYSTEM",
+    "notes": "বাজেট অতিক্রম সনাক্ত: জরুরি চিকিৎসা সেবা (অতিরিক্ত ৳5000)",
+    "details": {
+      "lineId": "LN-OVR-105",
+      "occupied": 105000,
+      "planned": 100000,
+      "overrunAmount": 5000
+    },
+    "id": "EHRJ-BAUD-1790694133866-170",
+    "timestamp": "2026-09-29T15:02:13.866Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1277",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: কন্ট্রোল টেস্ট বাজেট (EHRJ-BUD-2026-1277)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-1277",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694133855-574",
+    "timestamp": "2026-09-29T15:02:13.855Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2756",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং খাদ্য ও রশদ সামগ্রী (বরাদ্দ: ৳600000)",
+    "details": {
+      "lineId": "BLN-2026-6445",
+      "category": "FOOD_GROCERY",
+      "plannedAmount": 600000
+    },
+    "id": "EHRJ-BAUD-1790694133840-852",
+    "timestamp": "2026-09-29T15:02:13.840Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2756",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: অসহায় ও এতিম ছাত্রদের সহায়তা (বরাদ্দ: ৳400000)",
+    "details": {
+      "lineId": "BLN-2026-9387",
+      "category": "STUDENT_WELFARE",
+      "plannedAmount": 400000
+    },
+    "id": "EHRJ-BAUD-1790694133834-574",
+    "timestamp": "2026-09-29T15:02:13.834Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2756",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: মাসিক বেতন ও ভর্তি ফি (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-2872",
+      "category": "TUITION_FEE",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790694133828-475",
+    "timestamp": "2026-09-29T15:02:13.828Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2756",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: ফান্ড যাচাই বাজেট ২০২৬ (EHRJ-BUD-2026-2756)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-2756",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694133820-128",
+    "timestamp": "2026-09-29T15:02:13.820Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-7717",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: অর্থবছরের শুরুতে বাজেট কার্যকর",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "অর্থবছরের শুরুতে বাজেট কার্যকর",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694133815-516",
+    "timestamp": "2026-09-29T15:02:13.815Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-7717",
+    "action": "APPROVE_BUDGET",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: মুহতামিম কর্তৃক অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "মুহতামিম কর্তৃক অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694133809-339",
+    "timestamp": "2026-09-29T15:02:13.809Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-7717",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: মুহতামিম পর্যালোচনার জন্য পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "মুহতামিম পর্যালোচনার জন্য পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694133803-236",
+    "timestamp": "2026-09-29T15:02:13.803Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-7717",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: প্রস্তুতি শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "প্রস্তুতি শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694133796-224",
+    "timestamp": "2026-09-29T15:02:13.796Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-7717",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: হিফজ ও কিতাব বিভাগ বাজেট ২০২৬-২০২৭ (EHRJ-BUD-2026-7717)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-7717",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694133789-932",
+    "timestamp": "2026-09-29T15:02:13.789Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5839",
+    "action": "APPROVE_REVISION",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "রিভিশন অনুমোদিত: গ্রীষ্মকালীন বিদ্যুৎ বিল অতিরিক্ত বরাদ্দ প্রস্তাব (বাজেট সংস্করণ উন্নীত: v2)",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-4754",
+      "newVersionNumber": 2,
+      "approvalReference": "কমিটি কর্তৃক সর্বসম্মত অনুমোদন",
+      "totalExpensePlanned": null
+    },
+    "id": "EHRJ-BAUD-1790694079020-684",
+    "timestamp": "2026-09-29T15:01:19.020Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5839",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "রিভিশন EHRJ-BREV-2026-4754 স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-4754",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "বাজেট কমিটির সভায় পর্যালোচনার জন্য গৃহীত"
+    },
+    "id": "EHRJ-BAUD-1790694079008-393",
+    "timestamp": "2026-09-29T15:01:19.008Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5839",
+    "action": "REQUEST_REVISION",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট রিভিশন প্রস্তাব পেশ: গ্রীষ্মকালীন বিদ্যুৎ বিল অতিরিক্ত বরাদ্দ প্রস্তাব (সংস্করণ v1 -> v2)",
+    "details": {
+      "revisionCode": "EHRJ-BREV-2026-4754",
+      "netExpenseAdjustment": 50000,
+      "netIncomeAdjustment": 0,
+      "diffCount": 1
+    },
+    "id": "EHRJ-BAUD-1790694079003-279",
+    "timestamp": "2026-09-29T15:01:19.003Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5839",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: রিভিশন টেস্ট বাজেট (EHRJ-BUD-2026-5839)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-5839",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694078995-248",
+    "timestamp": "2026-09-29T15:01:18.995Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8681",
+    "action": "ACKNOWLEDGE_ALERT",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "সতর্কবার্তা গৃহীত হয়েছে: বিদ্যুৎ ও ইউটিলিটি বিল (WARNING)",
+    "details": {
+      "alertId": "EHRJ-BALT-2026-1924",
+      "alertLevel": "WARNING"
+    },
+    "id": "EHRJ-BAUD-1790694078990-697",
+    "timestamp": "2026-09-29T15:01:18.990Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8681",
+    "action": "OVERRUN_DETECTED",
+    "actorId": "SYSTEM",
+    "actorName": "বাজেট কন্ট্রোল ইঞ্জিন",
+    "actorRole": "SYSTEM",
+    "notes": "বাজেট অতিক্রম সনাক্ত: জরুরি চিকিৎসা সেবা (অতিরিক্ত ৳5000)",
+    "details": {
+      "lineId": "LN-OVR-105",
+      "occupied": 105000,
+      "planned": 100000,
+      "overrunAmount": 5000
+    },
+    "id": "EHRJ-BAUD-1790694078987-383",
+    "timestamp": "2026-09-29T15:01:18.987Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8681",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: কন্ট্রোল টেস্ট বাজেট (EHRJ-BUD-2026-8681)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-8681",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694078976-479",
+    "timestamp": "2026-09-29T15:01:18.976Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9945",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং খাদ্য ও রশদ সামগ্রী (বরাদ্দ: ৳600000)",
+    "details": {
+      "lineId": "BLN-2026-3993",
+      "category": "FOOD_GROCERY",
+      "plannedAmount": 600000
+    },
+    "id": "EHRJ-BAUD-1790694078963-869",
+    "timestamp": "2026-09-29T15:01:18.963Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9945",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: অসহায় ও এতিম ছাত্রদের সহায়তা (বরাদ্দ: ৳400000)",
+    "details": {
+      "lineId": "BLN-2026-7220",
+      "category": "STUDENT_WELFARE",
+      "plannedAmount": 400000
+    },
+    "id": "EHRJ-BAUD-1790694078957-654",
+    "timestamp": "2026-09-29T15:01:18.957Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9945",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: মাসিক বেতন ও ভর্তি ফি (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-1503",
+      "category": "TUITION_FEE",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790694078951-189",
+    "timestamp": "2026-09-29T15:01:18.951Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9945",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: ফান্ড যাচাই বাজেট ২০২৬ (EHRJ-BUD-2026-9945)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-9945",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694078945-124",
+    "timestamp": "2026-09-29T15:01:18.945Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8286",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: অর্থবছরের শুরুতে বাজেট কার্যকর",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "অর্থবছরের শুরুতে বাজেট কার্যকর",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694078939-620",
+    "timestamp": "2026-09-29T15:01:18.939Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8286",
+    "action": "APPROVE_BUDGET",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: মুহতামিম কর্তৃক অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "মুহতামিম কর্তৃক অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694078934-880",
+    "timestamp": "2026-09-29T15:01:18.934Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8286",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: মুহতামিম পর্যালোচনার জন্য পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "মুহতামিম পর্যালোচনার জন্য পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694078927-198",
+    "timestamp": "2026-09-29T15:01:18.927Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8286",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: প্রস্তুতি শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "প্রস্তুতি শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694078922-412",
+    "timestamp": "2026-09-29T15:01:18.922Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8286",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: হিফজ ও কিতাব বিভাগ বাজেট ২০২৬-২০২৭ (EHRJ-BUD-2026-8286)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-8286",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694078918-692",
+    "timestamp": "2026-09-29T15:01:18.918Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1036",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: কন্ট্রোল টেস্ট বাজেট (EHRJ-BUD-2026-1036)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-1036",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694047560-142",
+    "timestamp": "2026-09-29T15:00:47.560Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1384",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং খাদ্য ও রশদ সামগ্রী (বরাদ্দ: ৳600000)",
+    "details": {
+      "lineId": "BLN-2026-3537",
+      "category": "FOOD_GROCERY",
+      "plannedAmount": 600000
+    },
+    "id": "EHRJ-BAUD-1790694047544-815",
+    "timestamp": "2026-09-29T15:00:47.544Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1384",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: অসহায় ও এতিম ছাত্রদের সহায়তা (বরাদ্দ: ৳400000)",
+    "details": {
+      "lineId": "BLN-2026-3806",
+      "category": "STUDENT_WELFARE",
+      "plannedAmount": 400000
+    },
+    "id": "EHRJ-BAUD-1790694047537-722",
+    "timestamp": "2026-09-29T15:00:47.537Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1384",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: মাসিক বেতন ও ভর্তি ফি (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-1404",
+      "category": "TUITION_FEE",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790694047531-298",
+    "timestamp": "2026-09-29T15:00:47.531Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-1384",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: ফান্ড যাচাই বাজেট ২০২৬ (EHRJ-BUD-2026-1384)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-1384",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694047525-414",
+    "timestamp": "2026-09-29T15:00:47.525Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9209",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: অর্থবছরের শুরুতে বাজেট কার্যকর",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "অর্থবছরের শুরুতে বাজেট কার্যকর",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694047519-13",
+    "timestamp": "2026-09-29T15:00:47.519Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9209",
+    "action": "APPROVE_BUDGET",
+    "actorId": "USR-PRN-001",
+    "actorName": "মুহতামিম মাওলানা আব্দুল বাতেন",
+    "actorRole": "PRINCIPAL",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: মুহতামিম কর্তৃক অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "মুহতামিম কর্তৃক অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694047511-858",
+    "timestamp": "2026-09-29T15:00:47.511Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9209",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: মুহতামিম পর্যালোচনার জন্য পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "মুহতামিম পর্যালোচনার জন্য পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694047506-679",
+    "timestamp": "2026-09-29T15:00:47.506Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9209",
+    "action": "UPDATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: প্রস্তুতি শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "প্রস্তুতি শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790694047500-404",
+    "timestamp": "2026-09-29T15:00:47.500Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9209",
+    "action": "CREATE_BUDGET",
+    "actorId": "USR-ADM-001",
+    "actorName": "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: হিফজ ও কিতাব বিভাগ বাজেট ২০২৬-২০২৭ (EHRJ-BUD-2026-9209)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-9209",
+      "fiscalYear": "2026-2027"
+    },
+    "id": "EHRJ-BAUD-1790694047492-80",
+    "timestamp": "2026-09-29T15:00:47.492Z"
+  }
+]

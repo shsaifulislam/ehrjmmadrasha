@@ -1,13 +1,13 @@
 [
   {
-    "id": "EHRJ-ACK-1790689300068-729",
+    "id": "EHRJ-ACK-1790694235164-127",
     "documentId": "EHRJ-POL-2026-TCH001",
     "documentCode": "EHRJ-POL-2026-TCH001",
     "version": "v1.1",
     "userId": "usr-tch-007",
     "userName": "মুফতি মাহমুদুল হাসান",
     "userRole": "TEACHER",
-    "acknowledgedAt": "2026-09-29T13:41:40.068Z",
+    "acknowledgedAt": "2026-09-29T15:03:55.164Z",
     "deviceMetadata": {
       "userAgent": "PortalBrowser/Chrome",
       "ipAddress": "10.0.0.12"

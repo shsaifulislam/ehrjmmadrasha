@@ -424,7 +424,23 @@ PHASE 39: Teacher/Staff Training, Professional Development & Certification Engin
 ├── Strictly NO SMS (In-app portal alerts and calendar schedules only)
 ├── Frontend: Admin Cockpit (/admin/training, /admin/training/programs, /admin/training/sessions, /admin/training/participants, /admin/training/assessments, /admin/training/certificates, /admin/training/renewals)
 ├── Frontend: Teacher/Staff Portal (/portal/training, /portal/training/[id], /portal/training/certificates)
-└── Verified: 40/40 Phase 39 Tests Passed, 98/98 Cumulative Phase 37-38 Regression Tests Passed, Next.js Production Build Clean across 185+ routes
+PHASE 41: Institutional Budget Planning, Financial Planning & Budget Control Engine (EHRJ-AI-2026-PHASE41)
+├── Core Principle: Plan the money, control the money, but never duplicate the accounting source of truth
+├── Core Invariant: Automate the process, not the authority (AI advisory only, human approval required)
+├── Shariah & Institutional Fund Segregation (General, Lillah, Zakat, Construction, Orphan)
+├── Zakat Expense Rule Enforcement: Strictly limited to student welfare, cloth, medical; building/admin blocked
+├── Budget Period Governance (Financial Years & Academic Sessions with lock toggles)
+├── Budget Lifecycle State Machine (DRAFT -> PREPARATION -> UNDER_REVIEW -> APPROVED -> ACTIVE -> REVISED -> CLOSED -> ARCHIVED)
+├── Immutable Version Snapshots (v1, v2, v3...) generated on formal human approval
+├── Budget Line Items with linear 12-month allocation profiles and fund classification
+├── Calculation Engine: Remaining amount, utilization %, favorable/unfavorable variance, fund summaries
+├── Soft Control Threshold Engine: 80% Warning, 90% Critical, 100%+ Overrun alerts with human acknowledgment
+├── Budget Revision Workflow with line diff calculation, reason documentation, and version promotion
+├── CapEx Capital Development Projects (Linked construction and physical infrastructure budgets)
+├── Non-Duplicative Integration Bridge: Real-time link to Phase 6 CashTransaction, Phase 12 POs, Phase 13 Payroll
+├── Strictly NO SMS (In-app portal alerts and calendar schedules only)
+├── Frontend: Admin Budget Console (/admin/budgets, /admin/budgets/periods, /admin/budgets/new, /admin/budgets/[id], /admin/budgets/[id]/versions, /admin/budgets/[id]/revisions, /admin/budgets/[id]/variance, /admin/budgets/projects)
+└── Verified: 55/55 Phase 41 Tests Passed, 95/95 Cumulative Phase 38-39 Regression Tests Passed, Next.js Production Build Clean across 190+ routes
 ```
 
 ---
