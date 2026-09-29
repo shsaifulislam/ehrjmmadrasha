@@ -35,7 +35,8 @@
     "test:phase33": "npx tsx scratch/test_phase33_calendar_engine.ts",
     "test:phase34": "npx tsx scratch/test_phase34_admission_experience.ts",
     "test:phase35": "npx tsx scratch/test_phase35_student_life_events.ts",
-    "test:phase36": "npx tsx scratch/test_phase36_alumni_engine.ts"
+    "test:phase36": "npx tsx scratch/test_phase36_alumni_engine.ts",
+    "test:phase37": "npx tsx scratch/test_phase37_survey_engine.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

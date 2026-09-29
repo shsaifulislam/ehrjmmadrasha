@@ -4,6 +4,238 @@
     "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
     "actorRole": "ADMIN",
     "details": "ঐতিহাসিক অ্যালামনাই ডেটা ইমপোর্ট: ব্যাচ Executed Batch 2026 (1 টি যুক্ত, 0 টি বাদ)",
+    "id": "AUD-ALM-1790685490094-HMBK",
+    "timestamp": "2026-09-29T12:38:10.094Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "CONTRIBUTION_RECORDED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "অ্যালামনাই অবদান লিপিবদ্ধ: মাওলানা জাবের ইবনে হাইয়ান - মাদরাসা লাইব্রেরির জন্য ২৫ খণ্ড তাফসীর গ্রন্থ অনুদান",
+    "id": "AUD-ALM-1790685490085-OCR3",
+    "timestamp": "2026-09-29T12:38:10.085Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "CONTRIBUTION_RECORDED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "অ্যালামনাই অবদান লিপিবদ্ধ: মাওলানা জাবের ইবনে হাইয়ান - ৳15000 (ORPHAN_SUPPORT)",
+    "id": "AUD-ALM-1790685490080-95VO",
+    "timestamp": "2026-09-29T12:38:10.080Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "VOLUNTEER_HOURS_LOGGED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "12 ঘণ্টা সমাজসেবা খেদমত লিপিবদ্ধ ও যাচাই করা হয়েছে: বার্ষিক ক্বেরাত ও হিফজ প্রতিযোগিতায় বিচারক সহকারী ও পরিচালনা",
+    "id": "AUD-ALM-1790685490069-EJXE",
+    "timestamp": "2026-09-29T12:38:10.069Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "VOLUNTEER_REVIEWED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "স্বেচ্ছাসেবক আবেদন APPROVED: APP-VOL-1790685490056-khjq (বার্ষিক ক্বেরাত ও হিফজ প্রতিযোগিতায় বিচারক সহকারী ও পরিচালনা)",
+    "id": "AUD-ALM-1790685490063-ES4V",
+    "timestamp": "2026-09-29T12:38:10.063Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "VOLUNTEER_APPLIED",
+    "actorId": "ALUMNI_USER",
+    "actorRole": "ALUMNI",
+    "details": "স্বেচ্ছাসেবক আবেদন জমা দেওয়া হয়েছে: বার্ষিক ক্বেরাত ও হিফজ প্রতিযোগিতায় বিচারক সহকারী ও পরিচালনা (VOL-OPP-001)",
+    "id": "AUD-ALM-1790685490059-4I5P",
+    "timestamp": "2026-09-29T12:38:10.059Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "MENTORSHIP_COMPLETED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "MENTOR",
+    "details": "মেন্টরশিপ সেশন সম্পন্ন: REQ-MENTOR-1790685490037-bnop - সফলভাবে শিক্ষার্থীদের আরবি ভাষা দিকনির্দেশনা প্রদান সম্পন্ন হয়েছে",
+    "id": "AUD-ALM-1790685490046-BXLR",
+    "timestamp": "2026-09-29T12:38:10.047Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "MENTORSHIP_REVIEWED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "মেন্টরশিপ অনুরোধ ACCEPTED: REQ-MENTOR-1790685490037-bnop (বিষয়: আরবি ভাষা)",
+    "id": "AUD-ALM-1790685490043-ZDKC",
+    "timestamp": "2026-09-29T12:38:10.043Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "MENTORSHIP_REQUEST",
+    "actorRole": "STUDENT",
+    "details": "শিক্ষার্থী মেন্টরশিপ অনুরোধ জমা দিয়েছে: ছাত্র undefined -> মেন্টর EHRJ-ALM-2026-000036 (বিষয়: আরবি ভাষা)",
+    "id": "AUD-ALM-1790685490039-8QZ8",
+    "timestamp": "2026-09-29T12:38:10.039Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "MENTOR_REGISTERED",
+    "actorId": "ALUMNI_USER",
+    "actorRole": "ALUMNI",
+    "details": "মেন্টর হিসেবে নিবন্ধন সম্পন্ন: মাওলানা জাবের ইবনে হাইয়ান (বিষয়: হিফজুল কুরআন, আরবি ভাষা, উচ্চশিক্ষা গাইডেন্স)",
+    "id": "AUD-ALM-1790685490033-9ORR",
+    "timestamp": "2026-09-29T12:38:10.033Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "GROUP_JOINED",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "গ্রুপ সদস্যপদ অনুমোদিত: EHRJ-ALM-GRP-2026-0001",
+    "id": "AUD-ALM-1790685490027-4ABX",
+    "timestamp": "2026-09-29T12:38:10.027Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "GROUP_JOINED",
+    "actorId": "ALUMNI_USER",
+    "actorRole": "ALUMNI",
+    "details": "গ্রুপে যোগদানের আবেদন: দাওরায়ে হাদিস ব্যাচ ২০২৪ অ্যালামনাই পরিষদ (EHRJ-ALM-GRP-2026-0001)",
+    "id": "AUD-ALM-1790685490021-Q0UH",
+    "timestamp": "2026-09-29T12:38:10.021Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "PROFILE_UPDATED",
+    "actorId": "ALUMNI_USER",
+    "actorRole": "ALUMNI",
+    "details": "স্ব-ঘোষিত তথ্য হালনাগাদ: মাওলানা জাবের ইবনে হাইয়ান (EHRJ-ALM-2026-000036)",
+    "id": "AUD-ALM-1790685490012-YNOE",
+    "timestamp": "2026-09-29T12:38:10.012Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "VERIFY_ALUMNI",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "অ্যালামনাই প্রোফাইল যাচাইকৃত ও অনুমোদিত: মাওলানা জাবের ইবনে হাইয়ান (EHRJ-ALM-2026-000036) - Verified profile",
+    "id": "AUD-ALM-1790685490007-J6YP",
+    "timestamp": "2026-09-29T12:38:10.007Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "action": "CREATE_PROFILE",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ALUMNI",
+    "details": "নতুন অ্যালামনাই প্রোফাইল নিবন্ধন: মাওলানা জাবের ইবনে হাইয়ান (EHRJ-ALM-2026-000036)",
+    "id": "AUD-ALM-1790685490002-0EK2",
+    "timestamp": "2026-09-29T12:38:10.002Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000035",
+    "action": "OPT_OUT",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "USER",
+    "details": "অ্যালামনাই প্রোফাইল অপ্ট-আউট সম্পন্ন: হাফেজ তানভীর আহমেদ (EHRJ-ALM-2026-000035) - Test hiding from directory",
+    "id": "AUD-ALM-1790685489993-ETPY",
+    "timestamp": "2026-09-29T12:38:09.993Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000035",
+    "action": "VERIFY_ALUMNI",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "অ্যালামনাই প্রোফাইল যাচাইকৃত ও অনুমোদিত: হাফেজ তানভীর আহমেদ (EHRJ-ALM-2026-000035) - Approved for privacy test",
+    "id": "AUD-ALM-1790685489985-WNBA",
+    "timestamp": "2026-09-29T12:38:09.985Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000035",
+    "action": "CREATE_PROFILE",
+    "actorId": "ACTOR_PRIVACY",
+    "actorRole": "ALUMNI",
+    "details": "নতুন অ্যালামনাই প্রোফাইল নিবন্ধন: হাফেজ তানভীর আহমেদ (EHRJ-ALM-2026-000035)",
+    "id": "AUD-ALM-1790685489981-EOIK",
+    "timestamp": "2026-09-29T12:38:09.981Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000034",
+    "action": "VERIFY_ALUMNI",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "অ্যালামনাই প্রোফাইল যাচাইকৃত ও অনুমোদিত: মাওলানা ক্বারী নুরুল ইসলাম (EHRJ-ALM-2026-000034) - Verified via historical paper register",
+    "id": "AUD-ALM-1790685489973-MSGC",
+    "timestamp": "2026-09-29T12:38:09.973Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000034",
+    "action": "CREATE_PROFILE",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ALUMNI",
+    "details": "নতুন অ্যালামনাই প্রোফাইল নিবন্ধন: মাওলানা ক্বারী নুরুল ইসলাম (EHRJ-ALM-2026-000034)",
+    "id": "AUD-ALM-1790685489967-WVVN",
+    "timestamp": "2026-09-29T12:38:09.967Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000033",
+    "action": "REJECT_VERIFICATION",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "অ্যালামনাই আবেদন প্রত্যাখ্যাত: ভুয়া আবেদনকারী (EHRJ-ALM-2026-000033) - No matching student record in madrasa registry",
+    "id": "AUD-ALM-1790685489958-UH1E",
+    "timestamp": "2026-09-29T12:38:09.958Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000033",
+    "action": "CREATE_PROFILE",
+    "actorId": "ACTOR_SUSPICIOUS",
+    "actorRole": "ALUMNI",
+    "details": "নতুন অ্যালামনাই প্রোফাইল নিবন্ধন: ভুয়া আবেদনকারী (EHRJ-ALM-2026-000033)",
+    "id": "AUD-ALM-1790685489953-I56A",
+    "timestamp": "2026-09-29T12:38:09.953Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000032",
+    "action": "ARCHIVE_PROFILE",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "অ্যালামনাই প্রোফাইল আর্কাইভ করা হয়েছে: হাফেজ মাহমুদ হাসান (EHRJ-ALM-2026-000032) - Archiving past record",
+    "id": "AUD-ALM-1790685489944-TSOM",
+    "timestamp": "2026-09-29T12:38:09.944Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000032",
+    "action": "OPT_OUT",
+    "actorId": "SELF_USER_01",
+    "actorRole": "USER",
+    "details": "অ্যালামনাই প্রোফাইল অপ্ট-আউট সম্পন্ন: হাফেজ মাহমুদ হাসান (EHRJ-ALM-2026-000032) - User requested privacy opt-out",
+    "id": "AUD-ALM-1790685489939-G4D3",
+    "timestamp": "2026-09-29T12:38:09.939Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000032",
+    "action": "VERIFY_ALUMNI",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "অ্যালামনাই প্রোফাইল যাচাইকৃত ও অনুমোদিত: হাফেজ মাহমুদ হাসান (EHRJ-ALM-2026-000032) - Official verification by principal office",
+    "id": "AUD-ALM-1790685489932-Y9SF",
+    "timestamp": "2026-09-29T12:38:09.932Z"
+  },
+  {
+    "alumniId": "EHRJ-ALM-2026-000032",
+    "action": "CREATE_PROFILE",
+    "actorId": "SELF_USER_01",
+    "actorRole": "ALUMNI",
+    "details": "নতুন অ্যালামনাই প্রোফাইল নিবন্ধন: হাফেজ মাহমুদ হাসান (EHRJ-ALM-2026-000032)",
+    "id": "AUD-ALM-1790685489926-G72F",
+    "timestamp": "2026-09-29T12:38:09.926Z"
+  },
+  {
+    "action": "BATCH_IMPORT",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "ঐতিহাসিক অ্যালামনাই ডেটা ইমপোর্ট: ব্যাচ Executed Batch 2026 (1 টি যুক্ত, 0 টি বাদ)",
     "id": "AUD-ALM-1790684440003-AW1E",
     "timestamp": "2026-09-29T12:20:40.003Z"
   },

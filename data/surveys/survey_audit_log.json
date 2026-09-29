@@ -1,0 +1,218 @@
+[
+  {
+    "id": "AUD-SUR-1790685456292-563t",
+    "timestamp": "2026-09-29T12:37:36.292Z",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "action": "PUBLISH_SURVEY",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ আমন্ত্রণপত্র প্রেরণ সম্পন্ন [চ্যানেল: ওয়েব পোর্টাল ও ইন-অ্যাপ নোটিশ, আমন্ত্রিত: 50, এসএমএস: ০]"
+  },
+  {
+    "id": "AUD-SUR-1790685456286-6eo6",
+    "timestamp": "2026-09-29T12:37:36.286Z",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "action": "CONVERT_TO_HELPDESK",
+    "actorId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "actorRole": "ADMIN",
+    "details": "জরিপ মতামত হেল্পডেস্কে টিকিট হিসেবে প্রেরণ করা হয়েছে [পদক্ষেপ: EHRJ-SUR-ACT-2026-490988, টিকিট: EHRJ-REQ-2026-000040]"
+  },
+  {
+    "id": "AUD-SUR-1790685455977-oj5b",
+    "timestamp": "2026-09-29T12:37:35.977Z",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "action": "UPDATE_ACTION",
+    "actorId": "ADMIN",
+    "actorRole": "ADMIN",
+    "details": "উন্নয়ন পদক্ষেপ স্ট্যাটাস পরিবর্তন [EHRJ-SUR-ACT-2026-490988]: IDENTIFIED -> IN_PROGRESS. মন্তব্য: পদক্ষেপ বাস্তবায়ন চলছে"
+  },
+  {
+    "id": "AUD-SUR-1790685455970-wgw4",
+    "timestamp": "2026-09-29T12:37:35.970Z",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "action": "CREATE_ACTION",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "নতুন প্রাতিষ্ঠানিক উন্নয়ন পদক্ষেপ গ্রহণ [EHRJ-SUR-ACT-2026-490988]: আমোখতা (মঞ্জিল) রিভিশনের জন্য সন্ধ্যার পর বিশেষ তত্ত্বাবধায়ক শিক্ষক নিয়োগ। (দায়িত্বপ্রাপ্ত: হিফজ তত্ত্বাবধায়ক)"
+  },
+  {
+    "id": "AUD-SUR-1790685455888-i6lp",
+    "timestamp": "2026-09-29T12:37:35.888Z",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "action": "SUBMIT_RESPONSE",
+    "actorId": "USR-TEST-1790685455851",
+    "actorRole": "GUARDIAN",
+    "details": "জরিপে নতুন প্রতিক্রিয়া দাখিল সম্পন্ন [আইডি: EHRJ-SUR-RES-2026-211840, মোড: PSEUDONYMOUS]"
+  },
+  {
+    "id": "AUD-SUR-1790685455845-1i85",
+    "timestamp": "2026-09-29T12:37:35.845Z",
+    "surveyId": "EHRJ-SUR-2026-293894",
+    "action": "CREATE_VERSION",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "নতুন সংস্করণ তৈরি (সংস্করণ: 2) পূর্ববর্তী জরিপ [EHRJ-SUR-2026-454338] থেকে [EHRJ-SUR-2026-293894]"
+  },
+  {
+    "id": "AUD-SUR-1790685455835-1axi",
+    "timestamp": "2026-09-29T12:37:35.835Z",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "action": "OPEN_SURVEY",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ স্ট্যাটাস পরিবর্তন: 'PUBLISHED' -> 'OPEN'. "
+  },
+  {
+    "id": "AUD-SUR-1790685455830-w02b",
+    "timestamp": "2026-09-29T12:37:35.830Z",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "action": "PUBLISH_SURVEY",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ স্ট্যাটাস পরিবর্তন: 'APPROVED' -> 'PUBLISHED'. "
+  },
+  {
+    "id": "AUD-SUR-1790685455823-2tzq",
+    "timestamp": "2026-09-29T12:37:35.823Z",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "action": "UPDATE_SURVEY",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ স্ট্যাটাস পরিবর্তন: 'REVIEW' -> 'APPROVED'. "
+  },
+  {
+    "id": "AUD-SUR-1790685455818-oo48",
+    "timestamp": "2026-09-29T12:37:35.818Z",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "action": "UPDATE_SURVEY",
+    "actorId": "USR-TALEEMAT-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ স্ট্যাটাস পরিবর্তন: 'DRAFT' -> 'REVIEW'. "
+  },
+  {
+    "id": "AUD-SUR-1790685455814-mkgz",
+    "timestamp": "2026-09-29T12:37:35.815Z",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "action": "CREATE_SURVEY",
+    "actorId": "USR-TALEEMAT-001",
+    "actorRole": "ADMIN",
+    "details": "নতুন জরিপ তৈরি (খসড়া): হিফজুল কুরআন বিভাগীয় মূল্যায়ন জরিপ ২০২৬ [EHRJ-SUR-2026-454338]"
+  },
+  {
+    "id": "AUD-SUR-1790685311631-tyt8",
+    "timestamp": "2026-09-29T12:35:11.631Z",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "action": "PUBLISH_SURVEY",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ আমন্ত্রণপত্র প্রেরণ সম্পন্ন [চ্যানেল: ওয়েব পোর্টাল ও ইন-অ্যাপ নোটিশ, আমন্ত্রিত: 50, এসএমএস: ০]"
+  },
+  {
+    "id": "AUD-SUR-1790685311343-q9fz",
+    "timestamp": "2026-09-29T12:35:11.343Z",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "action": "UPDATE_ACTION",
+    "actorId": "ADMIN",
+    "actorRole": "ADMIN",
+    "details": "উন্নয়ন পদক্ষেপ স্ট্যাটাস পরিবর্তন [EHRJ-SUR-ACT-2026-768144]: IDENTIFIED -> IN_PROGRESS. মন্তব্য: পদক্ষেপ বাস্তবায়ন চলছে"
+  },
+  {
+    "id": "AUD-SUR-1790685311339-vpjt",
+    "timestamp": "2026-09-29T12:35:11.339Z",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "action": "CREATE_ACTION",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "নতুন প্রাতিষ্ঠানিক উন্নয়ন পদক্ষেপ গ্রহণ [EHRJ-SUR-ACT-2026-768144]: আমোখতা (মঞ্জিল) রিভিশনের জন্য সন্ধ্যার পর বিশেষ তত্ত্বাবধায়ক শিক্ষক নিয়োগ। (দায়িত্বপ্রাপ্ত: হিফজ তত্ত্বাবধায়ক)"
+  },
+  {
+    "id": "AUD-SUR-1790685311325-d47u",
+    "timestamp": "2026-09-29T12:35:11.325Z",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "action": "SUBMIT_RESPONSE",
+    "actorId": "USR-TEST-1790685311306",
+    "actorRole": "RESPONDENT",
+    "details": "জরিপে নতুন প্রতিক্রিয়া দাখিল সম্পন্ন [আইডি: EHRJ-SUR-RES-2026-623289, মোড: PSEUDONYMOUS]"
+  },
+  {
+    "id": "AUD-SUR-1790685311316-72cv",
+    "timestamp": "2026-09-29T12:35:11.316Z",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "action": "SUBMIT_RESPONSE",
+    "actorId": "USR-TEST-1790685311306",
+    "actorRole": "GUARDIAN",
+    "details": "জরিপে নতুন প্রতিক্রিয়া দাখিল সম্পন্ন [আইডি: EHRJ-SUR-RES-2026-715531, মোড: PSEUDONYMOUS]"
+  },
+  {
+    "id": "AUD-SUR-1790685311302-fcmm",
+    "timestamp": "2026-09-29T12:35:11.302Z",
+    "surveyId": "EHRJ-SUR-2026-413655",
+    "action": "CREATE_VERSION",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "নতুন সংস্করণ তৈরি (সংস্করণ: 2) পূর্ববর্তী জরিপ [EHRJ-SUR-2026-446809] থেকে [EHRJ-SUR-2026-413655]"
+  },
+  {
+    "id": "AUD-SUR-1790685311289-lw3f",
+    "timestamp": "2026-09-29T12:35:11.289Z",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "action": "OPEN_SURVEY",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ স্ট্যাটাস পরিবর্তন: 'PUBLISHED' -> 'OPEN'. "
+  },
+  {
+    "id": "AUD-SUR-1790685311285-0pjz",
+    "timestamp": "2026-09-29T12:35:11.285Z",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "action": "PUBLISH_SURVEY",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ স্ট্যাটাস পরিবর্তন: 'APPROVED' -> 'PUBLISHED'. "
+  },
+  {
+    "id": "AUD-SUR-1790685311281-hq7g",
+    "timestamp": "2026-09-29T12:35:11.281Z",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "action": "UPDATE_SURVEY",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ স্ট্যাটাস পরিবর্তন: 'REVIEW' -> 'APPROVED'. "
+  },
+  {
+    "id": "AUD-SUR-1790685311275-fb6x",
+    "timestamp": "2026-09-29T12:35:11.275Z",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "action": "UPDATE_SURVEY",
+    "actorId": "USR-TALEEMAT-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ স্ট্যাটাস পরিবর্তন: 'DRAFT' -> 'REVIEW'. "
+  },
+  {
+    "id": "AUD-SUR-1790685311272-teve",
+    "timestamp": "2026-09-29T12:35:11.272Z",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "action": "CREATE_SURVEY",
+    "actorId": "USR-TALEEMAT-001",
+    "actorRole": "ADMIN",
+    "details": "নতুন জরিপ তৈরি (খসড়া): হিফজুল কুরআন বিভাগীয় মূল্যায়ন জরিপ ২০২৬ [EHRJ-SUR-2026-446809]"
+  },
+  {
+    "id": "AUD-SUR-001",
+    "surveyId": "EHRJ-SUR-2026-000001",
+    "action": "CREATE_SURVEY",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "অভিভাবক বার্ষিক প্রাতিষ্ঠানিক সন্তুষ্টি জরিপ ২০২৬ তৈরি করা হয়েছে",
+    "timestamp": "2026-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "AUD-SUR-002",
+    "surveyId": "EHRJ-SUR-2026-000001",
+    "action": "PUBLISH_SURVEY",
+    "actorId": "USR-ADMIN-001",
+    "actorRole": "ADMIN",
+    "details": "জরিপ সংস্করণ ১ প্রকাশিত ও উন্মুক্ত করা হয়েছে। অডিয়েন্স স্ন্যাপশট ধারণ করা হয়েছে।",
+    "timestamp": "2026-01-01T10:05:00.000Z"
+  }
+]

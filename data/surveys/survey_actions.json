@@ -1,0 +1,49 @@
+[
+  {
+    "id": "EHRJ-SUR-ACT-2026-490988",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "findingBn": "আমোখতা (মঞ্জিল) রিভিশনের জন্য সন্ধ্যার পর বিশেষ তত্ত্বাবধায়ক শিক্ষক নিয়োগ।",
+    "priority": "HIGH",
+    "ownerId": "USR-STAFF-TAHFIZ",
+    "ownerName": "হিফজ তত্ত্বাবধায়ক",
+    "assignedRole": "TEACHER",
+    "dueDate": "2026-05-01",
+    "status": "IN_PROGRESS",
+    "createdAt": "2026-09-29T12:37:35.932Z",
+    "updatedAt": "2026-09-29T12:37:36.283Z",
+    "completionNotes": "পদক্ষেপ বাস্তবায়ন চলছে",
+    "helpdeskTicketId": "EHRJ-REQ-2026-000040"
+  },
+  {
+    "id": "EHRJ-SUR-ACT-2026-768144",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "findingBn": "আমোখতা (মঞ্জিল) রিভিশনের জন্য সন্ধ্যার পর বিশেষ তত্ত্বাবধায়ক শিক্ষক নিয়োগ।",
+    "priority": "HIGH",
+    "ownerId": "USR-STAFF-TAHFIZ",
+    "ownerName": "হিফজ তত্ত্বাবধায়ক",
+    "assignedRole": "TEACHER",
+    "dueDate": "2026-05-01",
+    "status": "IN_PROGRESS",
+    "createdAt": "2026-09-29T12:35:11.336Z",
+    "updatedAt": "2026-09-29T12:35:11.622Z",
+    "completionNotes": "পদক্ষেপ বাস্তবায়ন চলছে",
+    "helpdeskTicketId": "EHRJ-REQ-2026-412968"
+  },
+  {
+    "id": "EHRJ-SUR-ACT-2026-000001",
+    "surveyId": "EHRJ-SUR-2026-000001",
+    "relatedQuestionId": "Q4",
+    "findingBn": "কয়েকজন অভিভাবক আবাসিক হোস্টেল ডাইনিং এর বিকালের নাস্তায় পুষ্টিকর বৈচিত্র্যের প্রস্তাব দিয়েছেন।",
+    "findingEn": "Guardians suggested nutritious variety in residential hostel evening snacks.",
+    "priority": "NORMAL",
+    "ownerId": "USR-STAFF-HOSTEL",
+    "ownerName": "হোস্টেল সুপারিনটেনডেন্ট (Hostel Superintendent)",
+    "assignedRole": "HOSTEL_SUPER",
+    "dueDate": "2026-04-15",
+    "status": "IN_PROGRESS",
+    "evidenceDescription": "মেস কমিটির সভায় নতুন খাদ্যতালিকা পর্যালোচনা করা হয়েছে।",
+    "helpdeskTicketId": "EHRJ-REQ-2026-000015",
+    "createdAt": "2026-01-25T11:00:00.000Z",
+    "updatedAt": "2026-01-28T09:30:00.000Z"
+  }
+]

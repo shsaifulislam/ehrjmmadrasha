@@ -166,5 +166,19 @@
     "updatedAt": "2026-09-29T11:59:13.290Z",
     "createdBy": "TEST_ADMIN",
     "approvedBy": "PRINCIPAL"
+  },
+  {
+    "id": "FAQ-MUMNXDJ6",
+    "questionBn": "খসড়া প্রশ্ন?",
+    "answerBn": "খসড়া উত্তর যা এখনো অনুমোদিত নয়",
+    "category": "ADMISSION",
+    "order": 13,
+    "status": "PUBLISHED",
+    "isApproved": true,
+    "version": 2,
+    "createdAt": "2026-09-29T12:38:44.418Z",
+    "updatedAt": "2026-09-29T12:38:44.426Z",
+    "createdBy": "TEST_ADMIN",
+    "approvedBy": "PRINCIPAL"
   }
 ]

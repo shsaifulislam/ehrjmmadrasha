@@ -278,5 +278,34 @@
     "uploadedAt": "2026-09-29T11:59:13.300Z",
     "updatedAt": "2026-09-29T11:59:13.300Z",
     "createdBy": "TEST_ADMIN"
+  },
+  {
+    "id": "GAL-MUMNXDJM",
+    "titleBn": "অসম্মতিযুক্ত টেস্ট ছবি",
+    "category": "CAMPUS",
+    "imageUrl": "/images/test.jpg",
+    "altText": "মাদরাসা ক্যাম্পাস ছবি",
+    "consentVerified": false,
+    "status": "PUBLISHED",
+    "isPublic": true,
+    "order": 20,
+    "uploadedAt": "2026-09-29T12:38:44.434Z",
+    "updatedAt": "2026-09-29T12:38:44.434Z",
+    "createdBy": "TEST_ADMIN"
+  },
+  {
+    "id": "GAL-MUMNXDKA",
+    "titleBn": "সম্মতিযুক্ত টেস্ট ছবি",
+    "category": "CAMPUS",
+    "imageUrl": "/images/test-consented.jpg",
+    "altText": "মাদরাসা ক্যাম্পাস ছবি",
+    "consentVerified": true,
+    "consentReference": "CONSENT-PARENT-TEST-001",
+    "status": "PUBLISHED",
+    "isPublic": true,
+    "order": 21,
+    "uploadedAt": "2026-09-29T12:38:44.457Z",
+    "updatedAt": "2026-09-29T12:38:44.457Z",
+    "createdBy": "TEST_ADMIN"
   }
 ]

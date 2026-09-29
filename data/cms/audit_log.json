@@ -1,5 +1,68 @@
 [
   {
+    "id": "CMS-AUD-1790685524483-idsbj",
+    "action": "CREATE",
+    "contentType": "DOWNLOAD",
+    "contentId": "DL-MUMNXDKZ",
+    "details": "Created new download item: ২০২৬ শিক্ষাবর্ষের টেস্ট প্রসপেক্টাস",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T12:38:44.483Z"
+  },
+  {
+    "id": "CMS-AUD-1790685524458-agvxg",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMNXDKA",
+    "details": "Created new gallery item: সম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T12:38:44.458Z"
+  },
+  {
+    "id": "CMS-AUD-1790685524436-8ko0q",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMNXDJM",
+    "details": "Created new gallery item: অসম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T12:38:44.436Z"
+  },
+  {
+    "id": "CMS-AUD-1790685524427-qfgmo",
+    "action": "UPDATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMNXDJ6",
+    "details": "Updated FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "PRINCIPAL",
+    "timestamp": "2026-09-29T12:38:44.427Z"
+  },
+  {
+    "id": "CMS-AUD-1790685524419-5ud88",
+    "action": "CREATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMNXDJ6",
+    "details": "Created new FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T12:38:44.419Z"
+  },
+  {
+    "id": "CMS-AUD-1790685524414-0iypd",
+    "action": "ARCHIVE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMNXDIU",
+    "details": "Archived event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T12:38:44.415Z"
+  },
+  {
+    "id": "CMS-AUD-1790685524409-jsjrc",
+    "action": "CREATE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMNXDIU",
+    "details": "Created new event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T12:38:44.409Z"
+  },
+  {
     "id": "CMS-AUD-1790683153308-ksdn7",
     "action": "CREATE",
     "contentType": "DOWNLOAD",

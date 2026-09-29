@@ -73,5 +73,20 @@
     "recordedMethod": "QR_SCAN",
     "createdAt": "2026-09-29T11:58:12.529Z",
     "updatedAt": "2026-09-29T11:58:12.529Z"
+  },
+  {
+    "id": "EHRJ-EVT-ATT-2026-000006",
+    "eventId": "EHRJ-EVT-2026-000014",
+    "studentId": "f3822b9d-0bf2-4584-9b8f-06a5c609b9ca",
+    "studentNameBn": "মুহাম্মদ আব্দুর রহমান",
+    "studentIdNumber": "EHRJ-2026-0002",
+    "registrationId": "EHRJ-EVT-REG-2026-000012",
+    "status": "PRESENT",
+    "checkInAt": "2026-09-29T12:38:13.256Z",
+    "recordedByTeacherId": "TEACHER-001",
+    "recordedByTeacherName": "মাওলানা আব্দুল করিম",
+    "recordedMethod": "QR_SCAN",
+    "createdAt": "2026-09-29T12:38:13.256Z",
+    "updatedAt": "2026-09-29T12:38:13.256Z"
   }
 ]

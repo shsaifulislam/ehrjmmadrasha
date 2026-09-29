@@ -53,5 +53,16 @@
     "joinedAt": "2026-09-29T12:20:39.916Z",
     "note": "I want to connect with batchmates",
     "approvedBy": "8f2ff11f-0782-42de-aaaf-6fe242822864"
+  },
+  {
+    "id": "MEM-GRP-1790685490018-v4t2",
+    "groupId": "EHRJ-ALM-GRP-2026-0001",
+    "alumniId": "EHRJ-ALM-2026-000036",
+    "alumniNameBn": "মাওলানা জাবের ইবনে হাইয়ান",
+    "role": "MEMBER",
+    "status": "APPROVED",
+    "joinedAt": "2026-09-29T12:38:10.018Z",
+    "note": "I want to connect with batchmates",
+    "approvedBy": "8f2ff11f-0782-42de-aaaf-6fe242822864"
   }
 ]

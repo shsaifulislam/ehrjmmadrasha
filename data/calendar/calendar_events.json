@@ -171,5 +171,27 @@
     "updatedBy": "admin@ehrj.edu.bd",
     "createdAt": "2026-09-29T11:58:12.468Z",
     "updatedAt": "2026-09-29T11:58:12.721Z"
+  },
+  {
+    "id": "CAL-EVT-1790685493196-QC5I",
+    "title": "Test Central Quran Tilawat Competition 2026",
+    "titleBn": "টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬",
+    "description": "টেস্ট ইভেন্ট ডেসক্রিপশন",
+    "descriptionBn": "টেস্ট ইভেন্ট ডেসক্রিপশন",
+    "eventType": "EVENT",
+    "startAt": "2026-11-15T09:00:00.000Z",
+    "endAt": "2026-11-15T16:00:00.000Z",
+    "timezone": "Asia/Dhaka",
+    "allDay": false,
+    "status": "DRAFT",
+    "visibility": "PUBLIC",
+    "sourceModule": "CMS",
+    "sourceEntityId": "EHRJ-EVT-2026-000014",
+    "location": "দারুল হাদিস অডিটোরিয়াম",
+    "resourceId": "RES-001",
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "createdAt": "2026-09-29T12:38:13.196Z",
+    "updatedAt": "2026-09-29T12:38:13.425Z"
   }
 ]

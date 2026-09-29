@@ -1,0 +1,247 @@
+[
+  {
+    "id": "EHRJ-SUR-RES-2026-746149",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "surveyVersion": 1,
+    "respondentId": "USR-DRAFT-1790685455890",
+    "respondentType": "PUBLIC",
+    "responseMode": "PSEUDONYMOUS",
+    "isComplete": false,
+    "isDraft": true,
+    "answers": [
+      {
+        "questionId": "TQ1",
+        "answerValue": 3,
+        "score": 3
+      }
+    ],
+    "totalScore": 3,
+    "createdAt": "2026-09-29T12:37:35.892Z",
+    "updatedAt": "2026-09-29T12:37:35.892Z"
+  },
+  {
+    "id": "EHRJ-SUR-RES-2026-211840",
+    "surveyId": "EHRJ-SUR-2026-454338",
+    "surveyVersion": 1,
+    "respondentId": "USR-TEST-1790685455851",
+    "respondentType": "GUARDIAN",
+    "linkedStudentId": "STU-TEST-1790685455851",
+    "responseMode": "PSEUDONYMOUS",
+    "isComplete": true,
+    "isDraft": false,
+    "answers": [
+      {
+        "questionId": "TQ1",
+        "answerValue": 4,
+        "score": 4
+      },
+      {
+        "questionId": "TQ2",
+        "answerValue": true,
+        "score": 0
+      }
+    ],
+    "totalScore": 4,
+    "submittedAt": "2026-09-29T12:37:35.885Z",
+    "createdAt": "2026-09-29T12:37:35.885Z",
+    "updatedAt": "2026-09-29T12:37:35.885Z"
+  },
+  {
+    "id": "EHRJ-SUR-RES-2026-847070",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "surveyVersion": 1,
+    "respondentId": "USR-DRAFT-1790685311327",
+    "respondentType": "PUBLIC",
+    "responseMode": "PSEUDONYMOUS",
+    "isComplete": false,
+    "isDraft": true,
+    "answers": [
+      {
+        "questionId": "TQ1",
+        "answerValue": 3,
+        "score": 3
+      }
+    ],
+    "totalScore": 3,
+    "createdAt": "2026-09-29T12:35:11.328Z",
+    "updatedAt": "2026-09-29T12:35:11.328Z"
+  },
+  {
+    "id": "EHRJ-SUR-RES-2026-623289",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "surveyVersion": 1,
+    "respondentId": "USR-TEST-1790685311306",
+    "respondentType": "PUBLIC",
+    "responseMode": "PSEUDONYMOUS",
+    "isComplete": true,
+    "isDraft": false,
+    "answers": [
+      {
+        "questionId": "TQ1",
+        "answerValue": 5,
+        "score": 5
+      },
+      {
+        "questionId": "TQ2",
+        "answerValue": true,
+        "score": 0
+      }
+    ],
+    "totalScore": 5,
+    "submittedAt": "2026-09-29T12:35:11.319Z",
+    "createdAt": "2026-09-29T12:35:11.319Z",
+    "updatedAt": "2026-09-29T12:35:11.319Z"
+  },
+  {
+    "id": "EHRJ-SUR-RES-2026-715531",
+    "surveyId": "EHRJ-SUR-2026-446809",
+    "surveyVersion": 1,
+    "respondentId": "USR-TEST-1790685311306",
+    "respondentType": "GUARDIAN",
+    "responseMode": "PSEUDONYMOUS",
+    "isComplete": true,
+    "isDraft": false,
+    "answers": [
+      {
+        "questionId": "TQ1",
+        "answerValue": 4,
+        "score": 4
+      },
+      {
+        "questionId": "TQ2",
+        "answerValue": true,
+        "score": 0
+      }
+    ],
+    "totalScore": 4,
+    "submittedAt": "2026-09-29T12:35:11.310Z",
+    "createdAt": "2026-09-29T12:35:11.310Z",
+    "updatedAt": "2026-09-29T12:35:11.310Z"
+  },
+  {
+    "id": "EHRJ-SUR-RES-2026-000001",
+    "surveyId": "EHRJ-SUR-2026-000001",
+    "surveyVersion": 1,
+    "respondentId": "USR-GDN-001",
+    "respondentType": "GUARDIAN",
+    "respondentName": "আলহাজ্ব মোবারক হোসেন",
+    "linkedStudentId": "STU-2026-001",
+    "linkedStudentName": "মুহাম্মদ আব্দুল্লাহ আল মামুন",
+    "responseMode": "PSEUDONYMOUS",
+    "participationToken": "tok-sec-001",
+    "isComplete": true,
+    "answers": [
+      {
+        "questionId": "Q1",
+        "answerValue": 5,
+        "numericValue": 5,
+        "score": 5
+      },
+      {
+        "questionId": "Q2",
+        "answerValue": "opt-1",
+        "selectedOptionIds": [
+          "opt-1"
+        ],
+        "score": 5
+      },
+      {
+        "questionId": "Q3",
+        "answerValue": "opt-c1",
+        "selectedOptionIds": [
+          "opt-c1"
+        ],
+        "score": 5
+      },
+      {
+        "questionId": "Q4",
+        "answerValue": false,
+        "booleanValue": false
+      }
+    ],
+    "totalScore": 15,
+    "submittedAt": "2026-01-15T14:30:00.000Z",
+    "createdAt": "2026-01-15T14:30:00.000Z",
+    "updatedAt": "2026-01-15T14:30:00.000Z"
+  },
+  {
+    "id": "EHRJ-SUR-RES-2026-000002",
+    "surveyId": "EHRJ-SUR-2026-000001",
+    "surveyVersion": 1,
+    "respondentId": "USR-GDN-002",
+    "respondentType": "GUARDIAN",
+    "respondentName": "কারী মাওলানা আব্দুর রশিদ",
+    "linkedStudentId": "STU-2026-002",
+    "linkedStudentName": "মুহাম্মদ হাবিবুর রহমান",
+    "responseMode": "PSEUDONYMOUS",
+    "participationToken": "tok-sec-002",
+    "isComplete": true,
+    "answers": [
+      {
+        "questionId": "Q1",
+        "answerValue": 4,
+        "numericValue": 4,
+        "score": 4
+      },
+      {
+        "questionId": "Q2",
+        "answerValue": "opt-2",
+        "selectedOptionIds": [
+          "opt-2"
+        ],
+        "score": 4
+      },
+      {
+        "questionId": "Q3",
+        "answerValue": "opt-c1",
+        "selectedOptionIds": [
+          "opt-c1"
+        ],
+        "score": 5
+      },
+      {
+        "questionId": "Q4",
+        "answerValue": true,
+        "booleanValue": true
+      },
+      {
+        "questionId": "Q5",
+        "answerValue": "হোস্টেল ডাইনিং এ বিকালের নাস্তায় বৈচিত্র্য আনলে ভালো হয়।",
+        "textValue": "হোস্টেল ডাইনিং এ বিকালের নাস্তায় বৈচিত্র্য আনলে ভালো হয়।"
+      }
+    ],
+    "totalScore": 13,
+    "submittedAt": "2026-01-18T10:15:00.000Z",
+    "createdAt": "2026-01-18T10:15:00.000Z",
+    "updatedAt": "2026-01-18T10:15:00.000Z"
+  },
+  {
+    "id": "EHRJ-SUR-RES-2026-000003",
+    "surveyId": "EHRJ-SUR-2026-000005",
+    "surveyVersion": 1,
+    "responseMode": "ANONYMOUS",
+    "isComplete": true,
+    "answers": [
+      {
+        "questionId": "Q1",
+        "answerValue": 5,
+        "numericValue": 5,
+        "score": 5
+      },
+      {
+        "questionId": "Q2",
+        "answerValue": true,
+        "booleanValue": true
+      },
+      {
+        "questionId": "Q3",
+        "answerValue": "অনলাইন বিকাশ অনুদানের রশিদ পাওয়ার বিষয়টি চমৎকার লেগেছে। জাযাকাল্লাহু খাইরান।",
+        "textValue": "অনলাইন বিকাশ অনুদানের রশিদ পাওয়ার বিষয়টি চমৎকার লেগেছে। জাযাকাল্লাহু খাইরান।"
+      }
+    ],
+    "totalScore": 5,
+    "submittedAt": "2026-01-20T16:45:00.000Z",
+    "createdAt": "2026-01-20T16:45:00.000Z",
+    "updatedAt": "2026-01-20T16:45:00.000Z"
+  }
+]

@@ -377,6 +377,21 @@ PHASE 36: Alumni, Former Student & Community Relationship Management Engine (EHR
 ├── Legacy Batch Import Engine with Phone/Email/Name-Year Duplicate Diagnostics
 ├── Portals: Public Directory (/alumni/directory), Personal Portal (/portal/alumni), Admin Cockpit (/admin/alumni)
 └── Verified: 37/37 Phase 36 Tests Passed, 233/233 Cumulative Regression Tests Passed
+
+PHASE 37: Institutional Survey, Feedback, Assessment & Voice-of-Community Engine (EHRJ-AI-2026-PHASE37)
+├── Core Invariant: Feedback informs decisions; never autonomously makes high-stakes decisions (assertNoHighStakesDecisionMutation)
+├── Survey Lifecycle State Machine (DRAFT -> REVIEW -> APPROVED -> PUBLISHED -> OPEN -> CLOSED -> ANALYZING -> COMPLETED -> ARCHIVED)
+├── Immutable Published Versions (v1 -> v2) preserving historical response binding
+├── Audience Snapshot captured at publication
+├── Response Modes: Identified, Pseudonymous, and Anonymous with technical PII segregation
+├── Small-Group Protection (< 5 response threshold suppression)
+├── Conditional Question Visibility Engine & Option Validation
+├── Response Engine with Duplicate Protection & Save/Resume Draft
+├── Bounded AI Qualitative Theme Summaries (permanently tagged humanReviewRequired: true)
+├── Institutional Improvement Actions Lifecycle & Phase 14 Help Desk Ticket Bridge (EHRJ-REQ-YYYY-XXXXXX)
+├── Strictly NO SMS (Portal, In-app notice, Email)
+├── Frontend: Public Hub (/surveys), Interactive Form (/surveys/[id]), Portal (/portal/surveys), Admin Cockpit (/admin/surveys, /admin/surveys/[id])
+└── Verified: 43/43 Phase 37 Tests Passed, 276/276 Cumulative Regression Tests Passed
 ```
 
 ---
