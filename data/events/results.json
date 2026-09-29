@@ -74,5 +74,24 @@
     "evaluatedByUserId": "TEACHER-001",
     "createdAt": "2026-09-29T08:56:52.538Z",
     "updatedAt": "2026-09-29T08:56:52.538Z"
+  },
+  {
+    "id": "EHRJ-EVT-RES-2026-000005",
+    "eventId": "EHRJ-EVT-2026-000012",
+    "studentId": "f3822b9d-0bf2-4584-9b8f-06a5c609b9ca",
+    "studentNameBn": "মুহাম্মদ আব্দুর রহমান",
+    "studentIdNumber": "EHRJ-2026-0002",
+    "competitionCategory": "হিফজ ১০ পারা বিভাগ",
+    "score": 98,
+    "maxScore": 100,
+    "rank": 1,
+    "awardType": "FIRST_PLACE",
+    "judgeName": "হাফেজ মাওলানা কারী নূরুল ইসলাম",
+    "judgeCommentsBn": "মাখরাজ ও সুর অত্যন্ত চমৎকার ও প্রশংসনীয়।",
+    "isPublished": true,
+    "publishedAt": "2026-09-29T11:58:12.627Z",
+    "evaluatedByUserId": "TEACHER-001",
+    "createdAt": "2026-09-29T11:58:12.627Z",
+    "updatedAt": "2026-09-29T11:58:12.627Z"
   }
 ]

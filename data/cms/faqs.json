@@ -152,5 +152,19 @@
     "updatedAt": "2026-09-29T08:59:58.239Z",
     "createdBy": "TEST_ADMIN",
     "approvedBy": "PRINCIPAL"
+  },
+  {
+    "id": "FAQ-MUMMIJYF",
+    "questionBn": "খসড়া প্রশ্ন?",
+    "answerBn": "খসড়া উত্তর যা এখনো অনুমোদিত নয়",
+    "category": "ADMISSION",
+    "order": 12,
+    "status": "PUBLISHED",
+    "isApproved": true,
+    "version": 2,
+    "createdAt": "2026-09-29T11:59:13.287Z",
+    "updatedAt": "2026-09-29T11:59:13.290Z",
+    "createdBy": "TEST_ADMIN",
+    "approvedBy": "PRINCIPAL"
   }
 ]

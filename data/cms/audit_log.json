@@ -1,5 +1,68 @@
 [
   {
+    "id": "CMS-AUD-1790683153308-ksdn7",
+    "action": "CREATE",
+    "contentType": "DOWNLOAD",
+    "contentId": "DL-MUMMIJYZ",
+    "details": "Created new download item: ২০২৬ শিক্ষাবর্ষের টেস্ট প্রসপেক্টাস",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T11:59:13.308Z"
+  },
+  {
+    "id": "CMS-AUD-1790683153301-o382n",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMMIJYS",
+    "details": "Created new gallery item: সম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T11:59:13.302Z"
+  },
+  {
+    "id": "CMS-AUD-1790683153296-b9cxo",
+    "action": "CREATE",
+    "contentType": "GALLERY",
+    "contentId": "GAL-MUMMIJYO",
+    "details": "Created new gallery item: অসম্মতিযুক্ত টেস্ট ছবি",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T11:59:13.296Z"
+  },
+  {
+    "id": "CMS-AUD-1790683153290-y9ykv",
+    "action": "UPDATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMMIJYF",
+    "details": "Updated FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "PRINCIPAL",
+    "timestamp": "2026-09-29T11:59:13.290Z"
+  },
+  {
+    "id": "CMS-AUD-1790683153288-enhsq",
+    "action": "CREATE",
+    "contentType": "FAQ",
+    "contentId": "FAQ-MUMMIJYF",
+    "details": "Created new FAQ: খসড়া প্রশ্ন?",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T11:59:13.288Z"
+  },
+  {
+    "id": "CMS-AUD-1790683153282-dci3z",
+    "action": "ARCHIVE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMMIJY4",
+    "details": "Archived event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T11:59:13.282Z"
+  },
+  {
+    "id": "CMS-AUD-1790683153277-bhpfl",
+    "action": "CREATE",
+    "contentType": "EVENT",
+    "contentId": "EVT-MUMMIJY4",
+    "details": "Created new event: টেস্ট বার্ষিক প্রতিযোগিতা ২০২৬",
+    "performedBy": "TEST_ADMIN",
+    "timestamp": "2026-09-29T11:59:13.277Z"
+  },
+  {
     "id": "CMS-AUD-1790672398250-iupn6",
     "action": "CREATE",
     "contentType": "DOWNLOAD",

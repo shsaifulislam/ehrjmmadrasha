@@ -1,5 +1,92 @@
 [
   {
+    "id": "DIG-MUMMI1MK-S5I",
+    "digestType": "WEEKLY",
+    "targetRole": "TEACHER",
+    "generatedAt": "2026-09-29T11:58:49.488Z",
+    "periodStart": "2026-09-22T11:58:49.488Z",
+    "periodEnd": "2026-09-29T11:58:49.488Z",
+    "totalItems": 7,
+    "items": [
+      {
+        "title": "শিক্ষকমণ্ডলীর জরুরি বৈঠক",
+        "category": "বিজ্ঞপ্তি • OFFICIAL_NOTICE",
+        "summary": "আগামীকাল আসরের পর শিক্ষক মিলনায়তনে বৈঠক অনুষ্ঠিত হবে।",
+        "url": "/notices/1c35172d-4eef-4764-a3a5-a67cc071705b",
+        "date": "২৭/৯/২০২৬"
+      },
+      {
+        "title": "নির্দিষ্ট জামাতের বিশেষ নোটিশ",
+        "category": "বিজ্ঞপ্তি • ACADEMIC",
+        "summary": "নাহবেমীর জামাতের বিশেষ ক্লাসের সময়সূচী পরিবর্তন।",
+        "url": "/notices/bcfa2de3-1287-4abf-bff4-aab5b8b0ce7f",
+        "date": "২৭/৯/২০২৬"
+      },
+      {
+        "title": "সকল সম্মানিত অভিভাবকবৃন্দের অবগতির জন্য",
+        "category": "বিজ্ঞপ্তি • ACADEMIC",
+        "summary": "মাদরাসার নতুন পাঠ্যক্রম সংক্রান্ত নির্দেশনা।",
+        "url": "/notices/09c53d3d-3a5d-4a1f-8cd4-2c3ddcfa8ec5",
+        "date": "২৭/৯/২০২৬"
+      },
+      {
+        "title": "মাদরাসার প্রকাশ্য বিজ্ঞপ্তি ২০২৬",
+        "category": "বিজ্ঞপ্তি • ACADEMIC",
+        "summary": "এটি সাধারণ জনগণের জন্য প্রকাশ্য বিজ্ঞপ্তি।",
+        "url": "/notices/823ffc89-2a6f-4954-be40-a9e9e51a84a6",
+        "date": "২৭/৯/২০২৬"
+      },
+      {
+        "title": "শিক্ষকমণ্ডলীর জরুরি বৈঠক",
+        "category": "বিজ্ঞপ্তি • OFFICIAL_NOTICE",
+        "summary": "আগামীকাল আসরের পর শিক্ষক মিলনায়তনে বৈঠক অনুষ্ঠিত হবে।",
+        "url": "/notices/c86bbf29-20ac-4d67-86a4-87fa80a3b639",
+        "date": "২৭/৯/২০২৬"
+      },
+      {
+        "title": "বার্ষিক দস্তারবন্দী ও হিফজ সমাপনী সম্মেলন ২০২৬",
+        "category": "অনুষ্ঠান • CONVOCATION",
+        "summary": "2026-11-15 | স্থান: মাদরাসা প্রাঙ্গণ, পূর্ব লক্ষ্মীপুর, ইলিয়টগঞ্জ, দাউদকান্দি",
+        "url": "/#events",
+        "date": "2026-11-15"
+      },
+      {
+        "title": "নতুন শিক্ষাবর্ষের কেন্দ্রীয় সবক উদ্বোধন ও দোয়া মাহফিল",
+        "category": "অনুষ্ঠান • ACADEMIC",
+        "summary": "2026-10-05 | স্থান: মাদরাসা অডিটোরিয়াম ও কেন্দ্রীয় মসজিদ",
+        "url": "/#events",
+        "date": "2026-10-05"
+      }
+    ],
+    "status": "GENERATED"
+  },
+  {
+    "id": "DIG-MUMMI1L5-MX4",
+    "digestType": "DAILY",
+    "targetRole": "GUARDIAN",
+    "generatedAt": "2026-09-29T11:58:49.474Z",
+    "periodStart": "2026-09-28T11:58:49.474Z",
+    "periodEnd": "2026-09-29T11:58:49.474Z",
+    "totalItems": 2,
+    "items": [
+      {
+        "title": "বার্ষিক দস্তারবন্দী ও হিফজ সমাপনী সম্মেলন ২০২৬",
+        "category": "অনুষ্ঠান • CONVOCATION",
+        "summary": "2026-11-15 | স্থান: মাদরাসা প্রাঙ্গণ, পূর্ব লক্ষ্মীপুর, ইলিয়টগঞ্জ, দাউদকান্দি",
+        "url": "/#events",
+        "date": "2026-11-15"
+      },
+      {
+        "title": "নতুন শিক্ষাবর্ষের কেন্দ্রীয় সবক উদ্বোধন ও দোয়া মাহফিল",
+        "category": "অনুষ্ঠান • ACADEMIC",
+        "summary": "2026-10-05 | স্থান: মাদরাসা অডিটোরিয়াম ও কেন্দ্রীয় মসজিদ",
+        "url": "/#events",
+        "date": "2026-10-05"
+      }
+    ],
+    "status": "GENERATED"
+  },
+  {
     "id": "DIG-MUMG11E6-BQV",
     "digestType": "WEEKLY",
     "targetRole": "TEACHER",

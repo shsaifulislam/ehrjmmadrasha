@@ -1,0 +1,57 @@
+[
+  {
+    "id": "MEM-GRP-1790683017408-nyes",
+    "groupId": "EHRJ-ALM-GRP-2026-0001",
+    "alumniId": "EHRJ-ALM-2026-000007",
+    "alumniNameBn": "মাওলানা জাবের ইবনে হাইয়ান",
+    "role": "MEMBER",
+    "status": "APPROVED",
+    "joinedAt": "2026-09-29T11:56:57.408Z",
+    "note": "I want to connect with batchmates",
+    "approvedBy": "8f2ff11f-0782-42de-aaaf-6fe242822864"
+  },
+  {
+    "id": "MEM-GRP-1790683043652-sgcu",
+    "groupId": "EHRJ-ALM-GRP-2026-0001",
+    "alumniId": "EHRJ-ALM-2026-000013",
+    "alumniNameBn": "মাওলানা জাবের ইবনে হাইয়ান",
+    "role": "MEMBER",
+    "status": "APPROVED",
+    "joinedAt": "2026-09-29T11:57:23.652Z",
+    "note": "I want to connect with batchmates",
+    "approvedBy": "8f2ff11f-0782-42de-aaaf-6fe242822864"
+  },
+  {
+    "id": "MEM-GRP-1790683080400-mlh4",
+    "groupId": "EHRJ-ALM-GRP-2026-0001",
+    "alumniId": "EHRJ-ALM-2026-000018",
+    "alumniNameBn": "মাওলানা জাবের ইবনে হাইয়ান",
+    "role": "MEMBER",
+    "status": "APPROVED",
+    "joinedAt": "2026-09-29T11:58:00.400Z",
+    "note": "I want to connect with batchmates",
+    "approvedBy": "8f2ff11f-0782-42de-aaaf-6fe242822864"
+  },
+  {
+    "id": "MEM-GRP-1790683407994-5rvn",
+    "groupId": "EHRJ-ALM-GRP-2026-0001",
+    "alumniId": "EHRJ-ALM-2026-000024",
+    "alumniNameBn": "মাওলানা জাবের ইবনে হাইয়ান",
+    "role": "MEMBER",
+    "status": "APPROVED",
+    "joinedAt": "2026-09-29T12:03:27.994Z",
+    "note": "I want to connect with batchmates",
+    "approvedBy": "8f2ff11f-0782-42de-aaaf-6fe242822864"
+  },
+  {
+    "id": "MEM-GRP-1790684439916-f228",
+    "groupId": "EHRJ-ALM-GRP-2026-0001",
+    "alumniId": "EHRJ-ALM-2026-000030",
+    "alumniNameBn": "মাওলানা জাবের ইবনে হাইয়ান",
+    "role": "MEMBER",
+    "status": "APPROVED",
+    "joinedAt": "2026-09-29T12:20:39.916Z",
+    "note": "I want to connect with batchmates",
+    "approvedBy": "8f2ff11f-0782-42de-aaaf-6fe242822864"
+  }
+]

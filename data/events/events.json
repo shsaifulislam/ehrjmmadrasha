@@ -394,5 +394,75 @@
     "version": 1,
     "createdAt": "2026-09-29T08:56:52.207Z",
     "updatedAt": "2026-09-29T08:56:52.207Z"
+  },
+  {
+    "typeCode": "QURAN_COMPETITION",
+    "titleBn": "টেস্ট কেন্দ্রীয় কুরআন তিলাওয়াত প্রতিযোগিতা ২০২৬",
+    "titleEn": "Test Central Quran Tilawat Competition 2026",
+    "descriptionBn": "টেস্ট ইভেন্ট ডেসক্রিপশন",
+    "organizer": "কুরআন শিক্ষা বিভাগ",
+    "sessionId": "SESSION-2026",
+    "audienceRule": {
+      "audienceTypes": [
+        "ALL_STUDENTS"
+      ],
+      "genders": [
+        "MALE"
+      ]
+    },
+    "startAt": "2026-11-15T09:00:00.000Z",
+    "endAt": "2026-11-15T16:00:00.000Z",
+    "registrationOpensAt": "2026-10-01T00:00:00.000Z",
+    "registrationClosesAt": "2026-11-10T23:59:59.000Z",
+    "venueText": "দারুল হাদিস অডিটোরিয়াম",
+    "resourceId": "RES-001",
+    "isRegistrationRequired": true,
+    "maxCapacity": 1,
+    "waitlistCapacity": 1,
+    "isPublic": true,
+    "status": "ARCHIVED",
+    "hasFee": false,
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "id": "EHRJ-EVT-2026-000012",
+    "registeredCount": 1,
+    "waitlistedCount": 0,
+    "version": 6,
+    "createdAt": "2026-09-29T11:58:12.442Z",
+    "updatedAt": "2026-09-29T11:58:12.737Z",
+    "calendarEventId": "CAL-EVT-1790683092468-3MZP",
+    "bookingId": "BKG-1790683092462-SO77"
+  },
+  {
+    "typeCode": "ESSAY_CULTURAL",
+    "titleBn": "মহিলা শাখা ইসলামী কুইজ",
+    "descriptionBn": "কুইজ প্রতিযোগিতা",
+    "organizer": "মহিলা শাখা",
+    "sessionId": "SESSION-2026",
+    "audienceRule": {
+      "audienceTypes": [
+        "GIRLS_ONLY"
+      ],
+      "genders": [
+        "FEMALE"
+      ]
+    },
+    "startAt": "2026-11-20T10:00:00.000Z",
+    "endAt": "2026-11-20T12:00:00.000Z",
+    "venueText": "মহিলা শাখা হলরুম",
+    "isRegistrationRequired": true,
+    "maxCapacity": 20,
+    "waitlistCapacity": 5,
+    "isPublic": false,
+    "status": "REGISTRATION_OPEN",
+    "hasFee": false,
+    "createdBy": "admin@ehrj.edu.bd",
+    "updatedBy": "admin@ehrj.edu.bd",
+    "id": "EHRJ-EVT-2026-000013",
+    "registeredCount": 0,
+    "waitlistedCount": 0,
+    "version": 1,
+    "createdAt": "2026-09-29T11:58:12.478Z",
+    "updatedAt": "2026-09-29T11:58:12.478Z"
   }
 ]

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "BAT-ALM-1790684439998",
+    "batchName": "Executed Batch 2026",
+    "sourceFormat": "JSON",
+    "totalRows": 1,
+    "importedCount": 1,
+    "duplicatesCount": 0,
+    "errorsCount": 0,
+    "uploadedByUserId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "createdAt": "2026-09-29T12:20:40.000Z"
+  },
+  {
+    "id": "BAT-ALM-1790683408065",
+    "batchName": "Executed Batch 2026",
+    "sourceFormat": "JSON",
+    "totalRows": 1,
+    "importedCount": 1,
+    "duplicatesCount": 0,
+    "errorsCount": 0,
+    "uploadedByUserId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "createdAt": "2026-09-29T12:03:28.067Z"
+  },
+  {
+    "id": "BAT-ALM-1790683080512",
+    "batchName": "Executed Batch 2026",
+    "sourceFormat": "JSON",
+    "totalRows": 1,
+    "importedCount": 1,
+    "duplicatesCount": 0,
+    "errorsCount": 0,
+    "uploadedByUserId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "createdAt": "2026-09-29T11:58:00.515Z"
+  },
+  {
+    "id": "BAT-ALM-1790683043701",
+    "batchName": "Executed Batch 2026",
+    "sourceFormat": "JSON",
+    "totalRows": 1,
+    "importedCount": 0,
+    "duplicatesCount": 1,
+    "errorsCount": 0,
+    "uploadedByUserId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "createdAt": "2026-09-29T11:57:23.703Z"
+  },
+  {
+    "id": "BAT-ALM-1790683017497",
+    "batchName": "Executed Batch 2026",
+    "sourceFormat": "JSON",
+    "totalRows": 1,
+    "importedCount": 1,
+    "duplicatesCount": 0,
+    "errorsCount": 0,
+    "uploadedByUserId": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "createdAt": "2026-09-29T11:56:57.499Z"
+  }
+]

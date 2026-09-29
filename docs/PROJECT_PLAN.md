@@ -365,6 +365,18 @@ PHASE 6: Hardening, Regression Testing & Final Delivery
 ├── Cross-device testing (Mobile, Tablet, Desktop)
 ├── Automated E2E User Flow Tests
 └── Final Signoff & Comprehensive Documentation
+
+PHASE 36: Alumni, Former Student & Community Relationship Management Engine (EHRJ-AI-2026-PHASE36)
+├── Core Invariant: Relationship layer, zero student master duplication
+├── Verification Engine (Pending -> Verified -> Active -> Opted Out -> Archived)
+├── Privacy Sanitization & Anti-Scraping Defense (Max 50 records/query)
+├── Community Groups (Batch Year, Professional, Regional, Volunteer)
+├── Controlled Mentorship Workflow (Student Request -> Admin Facilitation -> Connection)
+├── Volunteer Opportunities & Verified Service Hours Ledger
+├── Financial Contributions linked to Phase 6 Funds (Zakat, Lillah, etc.) & In-kind gifts
+├── Legacy Batch Import Engine with Phone/Email/Name-Year Duplicate Diagnostics
+├── Portals: Public Directory (/alumni/directory), Personal Portal (/portal/alumni), Admin Cockpit (/admin/alumni)
+└── Verified: 37/37 Phase 36 Tests Passed, 233/233 Cumulative Regression Tests Passed
 ```
 
 ---

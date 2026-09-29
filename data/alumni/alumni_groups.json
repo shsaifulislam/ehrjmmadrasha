@@ -1,0 +1,43 @@
+[
+  {
+    "id": "EHRJ-ALM-GRP-2026-0001",
+    "code": "BATCH-2024",
+    "nameBn": "দাওরায়ে হাদিস ব্যাচ ২০২৪ অ্যালামনাই পরিষদ",
+    "nameEn": "Dawat-e-Hadith Batch 2024 Alumni Circle",
+    "type": "SESSION_GROUP",
+    "descriptionBn": "২০২৪ সালের তাকমীল সমাপনকারী প্রাক্তন শিক্ষার্থীদের পারস্পরিক যোগাযোগ ও পরামর্শ ফোরাম",
+    "sessionYear": 2024,
+    "batchYear": 2024,
+    "department": "Kitab",
+    "isActive": true,
+    "memberCount": 43,
+    "createdAt": "2024-07-01T00:00:00.000Z",
+    "createdBy": "admin@ehrj.edu.bd"
+  },
+  {
+    "id": "EHRJ-ALM-GRP-2026-0002",
+    "code": "DHAKA-CHAPTER",
+    "nameBn": "ঢাকা মহানগর প্রাক্তন শিক্ষার্থী চ্যাপ্টার",
+    "nameEn": "Dhaka Metropolitan Alumni Chapter",
+    "type": "GEOGRAPHIC_GROUP",
+    "descriptionBn": "ঢাকা ও পার্শ্ববর্তী অঞ্চলে কর্মরত ও অধ্যয়নরত ইলিয়টগঞ্জ মাদরাসার প্রাক্তন শিক্ষার্থীদের পরিষদ",
+    "region": "ঢাকা",
+    "locationScope": "ঢাকা বিভাগ",
+    "isActive": true,
+    "memberCount": 75,
+    "createdAt": "2024-07-15T00:00:00.000Z",
+    "createdBy": "admin@ehrj.edu.bd"
+  },
+  {
+    "id": "EHRJ-ALM-GRP-2026-0003",
+    "code": "VOLUNTEER-WING",
+    "nameBn": "ইলিয়টগঞ্জ মাদরাসা স্বেচ্ছাসেবী ও সমাজকল্যাণ উইং",
+    "nameEn": "EHRJ Community Service & Volunteer Wing",
+    "type": "VOLUNTEER_GROUP",
+    "descriptionBn": "বন্যা, শীতবস্ত্র বিতরণ ও প্রাতিষ্ঠানিক মাহফিলে সক্রিয় স্বেচ্ছাসেবকদের সমন্বিত পরিষদ",
+    "isActive": true,
+    "memberCount": 42,
+    "createdAt": "2024-08-01T00:00:00.000Z",
+    "createdBy": "admin@ehrj.edu.bd"
+  }
+]

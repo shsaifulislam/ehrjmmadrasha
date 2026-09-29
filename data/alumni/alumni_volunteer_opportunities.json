@@ -1,0 +1,28 @@
+[
+  {
+    "id": "VOL-OPP-001",
+    "titleBn": "বার্ষিক ক্বেরাত ও হিফজ প্রতিযোগিতায় বিচারক সহকারী ও পরিচালনা",
+    "titleEn": "Annual Quran Recitation & Memorization Competition Support",
+    "descriptionBn": "মাদরাসার বার্ষিক ক্বেরাত প্রতিযোগিতায় মঞ্চ ব্যবস্থাপনা ও বিচারকমণ্ডলীর সহায়তা প্রদান",
+    "category": "EVENT_SUPPORT",
+    "requiredVolunteers": 10,
+    "maxVolunteers": 10,
+    "appliedCount": 9,
+    "status": "OPEN",
+    "location": "দারুল হাদিস অডিটোরিয়াম",
+    "createdAt": "2026-09-01T00:00:00.000Z"
+  },
+  {
+    "id": "VOL-OPP-002",
+    "titleBn": "হিফজুল কুরআন সমাপনকারী ছাত্রদের উচ্চশিক্ষা ও কর্মশালা পরামর্শ",
+    "titleEn": "Career Guidance Workshop for Hifz Graduates",
+    "descriptionBn": "নতুন হাফেজদের হিফজ পরবর্তী পাঠ্যক্রম ও শিক্ষাজীবন নিয়ে মোটিভেশনাল সেশন",
+    "category": "CAREER_GUIDANCE",
+    "requiredVolunteers": 5,
+    "maxVolunteers": 5,
+    "appliedCount": 2,
+    "status": "OPEN",
+    "location": "কেন্দ্রীয় সম্মেলন কক্ষ",
+    "createdAt": "2026-09-10T00:00:00.000Z"
+  }
+]
