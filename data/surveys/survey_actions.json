@@ -1,5 +1,20 @@
 [
   {
+    "id": "EHRJ-SUR-ACT-2026-705227",
+    "surveyId": "EHRJ-SUR-2026-773562",
+    "findingBn": "আমোখতা (মঞ্জিল) রিভিশনের জন্য সন্ধ্যার পর বিশেষ তত্ত্বাবধায়ক শিক্ষক নিয়োগ।",
+    "priority": "HIGH",
+    "ownerId": "USR-STAFF-TAHFIZ",
+    "ownerName": "হিফজ তত্ত্বাবধায়ক",
+    "assignedRole": "TEACHER",
+    "dueDate": "2026-05-01",
+    "status": "IN_PROGRESS",
+    "createdAt": "2026-09-29T13:41:44.309Z",
+    "updatedAt": "2026-09-29T13:41:44.510Z",
+    "completionNotes": "পদক্ষেপ বাস্তবায়ন চলছে",
+    "helpdeskTicketId": "EHRJ-REQ-2026-000042"
+  },
+  {
     "id": "EHRJ-SUR-ACT-2026-549806",
     "surveyId": "EHRJ-SUR-2026-592752",
     "findingBn": "আমোখতা (মঞ্জিল) রিভিশনের জন্য সন্ধ্যার পর বিশেষ তত্ত্বাবধায়ক শিক্ষক নিয়োগ।",

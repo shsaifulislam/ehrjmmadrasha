@@ -1,0 +1,644 @@
+[
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "action": "EVALUATE_ASSESSMENT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Instructor evaluation by এডমিন সাহেব: PASSED (80%) with feedback",
+    "details": {
+      "submissionId": "SUB-TRN-1790689282187-702",
+      "adjustedScore": 16,
+      "percentage": 80,
+      "feedback": "পুনরায় মৌখিক পরীক্ষা গ্রহণ করে উত্তীর্ণ করা হলো।"
+    },
+    "id": "AUD-TRN-1790689282230-306",
+    "timestamp": "2026-09-29T13:41:22.230Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "RENEW_CERTIFICATE",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Certificate EHRJ-TRN-CERT-2026-5747 renewed until 2027-09-29",
+    "details": {
+      "certificateId": "EHRJ-TRN-CERT-2026-5747",
+      "newValidUntil": "2027-09-29"
+    },
+    "id": "AUD-TRN-1790689282217-10",
+    "timestamp": "2026-09-29T13:41:22.217Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "ISSUE_CERTIFICATE",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Issued institutional certificate EHRJ-TRN-CERT-2026-5747 (VER-TRN-2026-NA9C99) for উস্তাদ আহমদ শাকিল",
+    "details": {
+      "certId": "EHRJ-TRN-CERT-2026-5747",
+      "verificationToken": "VER-TRN-2026-NA9C99"
+    },
+    "id": "AUD-TRN-1790689282207-47",
+    "timestamp": "2026-09-29T13:41:22.207Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "action": "SUBMIT_ASSESSMENT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Assessment attempt #1 submitted by উস্তাদ বোরহান উদ্দিন: FAILED (0%)",
+    "details": {
+      "submissionId": "SUB-TRN-1790689282187-702",
+      "score": 0,
+      "totalPoints": 20,
+      "percentage": 0,
+      "status": "FAILED"
+    },
+    "id": "AUD-TRN-1790689282192-614",
+    "timestamp": "2026-09-29T13:41:22.192Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "SUBMIT_ASSESSMENT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Assessment attempt #1 submitted by উস্তাদ আহমদ শাকিল: PASSED (100%)",
+    "details": {
+      "submissionId": "SUB-TRN-1790689282180-608",
+      "score": 20,
+      "totalPoints": 20,
+      "percentage": 100,
+      "status": "PASSED"
+    },
+    "id": "AUD-TRN-1790689282185-89",
+    "timestamp": "2026-09-29T13:41:22.185Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "action": "RECORD_ATTENDANCE",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Attendance recorded for উস্তাদ বোরহান উদ্দিন at Session 1: PRESENT (Rate: 100%)",
+    "details": {
+      "sessionId": "EHRJ-TRN-SES-2026-785",
+      "status": "PRESENT",
+      "qrVerified": true,
+      "attendanceRate": 100
+    },
+    "id": "AUD-TRN-1790689282172-981",
+    "timestamp": "2026-09-29T13:41:22.172Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "RECORD_ATTENDANCE",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Attendance recorded for উস্তাদ আহমদ শাকিল at Session 1: PRESENT (Rate: 100%)",
+    "details": {
+      "sessionId": "EHRJ-TRN-SES-2026-785",
+      "status": "PRESENT",
+      "qrVerified": false,
+      "attendanceRate": 100
+    },
+    "id": "AUD-TRN-1790689282163-379",
+    "timestamp": "2026-09-29T13:41:22.163Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-003",
+    "action": "WAITLIST_PARTICIPANT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Participant উস্তাদ জহিরুল ইসলাম (EHRJ-EMP-TEST-003) enrolled with status WAITLISTED",
+    "details": {
+      "enrollmentId": "ENR-TRN-1790689282150-130",
+      "status": "WAITLISTED",
+      "capacity": 2,
+      "currentCount": 2
+    },
+    "id": "AUD-TRN-1790689282151-696",
+    "timestamp": "2026-09-29T13:41:22.151Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "action": "ENROLL_PARTICIPANT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Participant উস্তাদ বোরহান উদ্দিন (EHRJ-EMP-TEST-002) enrolled with status CONFIRMED",
+    "details": {
+      "enrollmentId": "ENR-TRN-1790689282146-998",
+      "status": "CONFIRMED",
+      "capacity": 2,
+      "currentCount": 1
+    },
+    "id": "AUD-TRN-1790689282147-674",
+    "timestamp": "2026-09-29T13:41:22.147Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "ENROLL_PARTICIPANT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Participant উস্তাদ আহমদ শাকিল (EHRJ-EMP-TEST-001) enrolled with status CONFIRMED",
+    "details": {
+      "enrollmentId": "ENR-TRN-1790689282141-509",
+      "status": "CONFIRMED",
+      "capacity": 2,
+      "currentCount": 0
+    },
+    "id": "AUD-TRN-1790689282143-237",
+    "timestamp": "2026-09-29T13:41:22.143Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "action": "SCHEDULE_SESSION",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Scheduled session 1 (2026-10-05 09:00-11:00)",
+    "details": {
+      "sessionId": "EHRJ-TRN-SES-2026-785",
+      "date": "2026-10-05",
+      "venue": "সেমিনার হল ৩"
+    },
+    "id": "AUD-TRN-1790689282138-404",
+    "timestamp": "2026-09-29T13:41:22.138Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from PUBLISHED to REGISTRATION_OPEN. Reason: N/A",
+    "details": {
+      "previousStatus": "PUBLISHED",
+      "newStatus": "REGISTRATION_OPEN"
+    },
+    "id": "AUD-TRN-1790689282131-226",
+    "timestamp": "2026-09-29T13:41:22.131Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from APPROVED to PUBLISHED. Reason: N/A",
+    "details": {
+      "previousStatus": "APPROVED",
+      "newStatus": "PUBLISHED"
+    },
+    "id": "AUD-TRN-1790689282126-301",
+    "timestamp": "2026-09-29T13:41:22.126Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from REVIEW to APPROVED. Reason: N/A",
+    "details": {
+      "previousStatus": "REVIEW",
+      "newStatus": "APPROVED"
+    },
+    "id": "AUD-TRN-1790689282123-85",
+    "timestamp": "2026-09-29T13:41:22.123Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from DRAFT to REVIEW. Reason: N/A",
+    "details": {
+      "previousStatus": "DRAFT",
+      "newStatus": "REVIEW"
+    },
+    "id": "AUD-TRN-1790689282113-51",
+    "timestamp": "2026-09-29T13:41:22.113Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "action": "CREATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Created new training program: পরীক্ষামূলক তাজবীদ কর্মশালা (EHRJ-TRN-2026-9496)",
+    "details": {
+      "trainingCode": "EHRJ-TRN-2026-9496",
+      "mandatoryStatus": "MANDATORY"
+    },
+    "id": "AUD-TRN-1790689282109-645",
+    "timestamp": "2026-09-29T13:41:22.109Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "RENEW_CERTIFICATE",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Certificate EHRJ-TRN-CERT-2026-4543 renewed until 2027-09-29",
+    "details": {
+      "certificateId": "EHRJ-TRN-CERT-2026-4543",
+      "newValidUntil": "2027-09-29"
+    },
+    "id": "AUD-TRN-1790689244018-944",
+    "timestamp": "2026-09-29T13:40:44.018Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "ISSUE_CERTIFICATE",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Issued institutional certificate EHRJ-TRN-CERT-2026-4543 (VER-TRN-2026-6CX4T9) for উস্তাদ আহমদ শাকিল",
+    "details": {
+      "certId": "EHRJ-TRN-CERT-2026-4543",
+      "verificationToken": "VER-TRN-2026-6CX4T9"
+    },
+    "id": "AUD-TRN-1790689244012-773",
+    "timestamp": "2026-09-29T13:40:44.012Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "action": "SUBMIT_ASSESSMENT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Assessment attempt #1 submitted by উস্তাদ বোরহান উদ্দিন: FAILED (0%)",
+    "details": {
+      "submissionId": "SUB-TRN-1790689243997-578",
+      "score": 0,
+      "totalPoints": 20,
+      "percentage": 0,
+      "status": "FAILED"
+    },
+    "id": "AUD-TRN-1790689244001-743",
+    "timestamp": "2026-09-29T13:40:44.001Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "SUBMIT_ASSESSMENT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Assessment attempt #1 submitted by উস্তাদ আহমদ শাকিল: PASSED (100%)",
+    "details": {
+      "submissionId": "SUB-TRN-1790689243991-244",
+      "score": 20,
+      "totalPoints": 20,
+      "percentage": 100,
+      "status": "PASSED"
+    },
+    "id": "AUD-TRN-1790689243995-55",
+    "timestamp": "2026-09-29T13:40:43.995Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "action": "RECORD_ATTENDANCE",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Attendance recorded for উস্তাদ বোরহান উদ্দিন at Session 1: PRESENT (Rate: 100%)",
+    "details": {
+      "sessionId": "EHRJ-TRN-SES-2026-990",
+      "status": "PRESENT",
+      "qrVerified": true,
+      "attendanceRate": 100
+    },
+    "id": "AUD-TRN-1790689243984-434",
+    "timestamp": "2026-09-29T13:40:43.984Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "RECORD_ATTENDANCE",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Attendance recorded for উস্তাদ আহমদ শাকিল at Session 1: PRESENT (Rate: 100%)",
+    "details": {
+      "sessionId": "EHRJ-TRN-SES-2026-990",
+      "status": "PRESENT",
+      "qrVerified": false,
+      "attendanceRate": 100
+    },
+    "id": "AUD-TRN-1790689243978-662",
+    "timestamp": "2026-09-29T13:40:43.978Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-003",
+    "action": "WAITLIST_PARTICIPANT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Participant উস্তাদ জহিরুল ইসলাম (EHRJ-EMP-TEST-003) enrolled with status WAITLISTED",
+    "details": {
+      "enrollmentId": "ENR-TRN-1790689243967-617",
+      "status": "WAITLISTED",
+      "capacity": 2,
+      "currentCount": 2
+    },
+    "id": "AUD-TRN-1790689243969-57",
+    "timestamp": "2026-09-29T13:40:43.969Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "action": "ENROLL_PARTICIPANT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Participant উস্তাদ বোরহান উদ্দিন (EHRJ-EMP-TEST-002) enrolled with status CONFIRMED",
+    "details": {
+      "enrollmentId": "ENR-TRN-1790689243964-660",
+      "status": "CONFIRMED",
+      "capacity": 2,
+      "currentCount": 1
+    },
+    "id": "AUD-TRN-1790689243965-641",
+    "timestamp": "2026-09-29T13:40:43.965Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "ENROLL_PARTICIPANT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Participant উস্তাদ আহমদ শাকিল (EHRJ-EMP-TEST-001) enrolled with status CONFIRMED",
+    "details": {
+      "enrollmentId": "ENR-TRN-1790689243960-384",
+      "status": "CONFIRMED",
+      "capacity": 2,
+      "currentCount": 0
+    },
+    "id": "AUD-TRN-1790689243962-964",
+    "timestamp": "2026-09-29T13:40:43.962Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "action": "SCHEDULE_SESSION",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Scheduled session 1 (2026-10-05 09:00-11:00)",
+    "details": {
+      "sessionId": "EHRJ-TRN-SES-2026-990",
+      "date": "2026-10-05",
+      "venue": "সেমিনার হল ৩"
+    },
+    "id": "AUD-TRN-1790689243954-528",
+    "timestamp": "2026-09-29T13:40:43.954Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from PUBLISHED to REGISTRATION_OPEN. Reason: N/A",
+    "details": {
+      "previousStatus": "PUBLISHED",
+      "newStatus": "REGISTRATION_OPEN"
+    },
+    "id": "AUD-TRN-1790689243949-67",
+    "timestamp": "2026-09-29T13:40:43.949Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from APPROVED to PUBLISHED. Reason: N/A",
+    "details": {
+      "previousStatus": "APPROVED",
+      "newStatus": "PUBLISHED"
+    },
+    "id": "AUD-TRN-1790689243946-595",
+    "timestamp": "2026-09-29T13:40:43.946Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from REVIEW to APPROVED. Reason: N/A",
+    "details": {
+      "previousStatus": "REVIEW",
+      "newStatus": "APPROVED"
+    },
+    "id": "AUD-TRN-1790689243943-890",
+    "timestamp": "2026-09-29T13:40:43.943Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from DRAFT to REVIEW. Reason: N/A",
+    "details": {
+      "previousStatus": "DRAFT",
+      "newStatus": "REVIEW"
+    },
+    "id": "AUD-TRN-1790689243936-425",
+    "timestamp": "2026-09-29T13:40:43.936Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "action": "CREATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Created new training program: পরীক্ষামূলক তাজবীদ কর্মশালা (EHRJ-TRN-2026-3710)",
+    "details": {
+      "trainingCode": "EHRJ-TRN-2026-3710",
+      "mandatoryStatus": "MANDATORY"
+    },
+    "id": "AUD-TRN-1790689243931-136",
+    "timestamp": "2026-09-29T13:40:43.931Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "RECORD_ATTENDANCE",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Attendance recorded for উস্তাদ আহমদ শাকিল at Session 1: PRESENT (Rate: 100%)",
+    "details": {
+      "sessionId": "EHRJ-TRN-SES-2026-225",
+      "status": "PRESENT",
+      "qrVerified": false,
+      "attendanceRate": 100
+    },
+    "id": "AUD-TRN-1790689152320-305",
+    "timestamp": "2026-09-29T13:39:12.320Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "employeeId": "EHRJ-EMP-TEST-003",
+    "action": "WAITLIST_PARTICIPANT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Participant উস্তাদ জহিরুল ইসলাম (EHRJ-EMP-TEST-003) enrolled with status WAITLISTED",
+    "details": {
+      "enrollmentId": "ENR-TRN-1790689152307-490",
+      "status": "WAITLISTED",
+      "capacity": 2,
+      "currentCount": 2
+    },
+    "id": "AUD-TRN-1790689152309-205",
+    "timestamp": "2026-09-29T13:39:12.309Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "action": "ENROLL_PARTICIPANT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Participant উস্তাদ বোরহান উদ্দিন (EHRJ-EMP-TEST-002) enrolled with status CONFIRMED",
+    "details": {
+      "enrollmentId": "ENR-TRN-1790689152302-302",
+      "status": "CONFIRMED",
+      "capacity": 2,
+      "currentCount": 1
+    },
+    "id": "AUD-TRN-1790689152305-518",
+    "timestamp": "2026-09-29T13:39:12.305Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "action": "ENROLL_PARTICIPANT",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Participant উস্তাদ আহমদ শাকিল (EHRJ-EMP-TEST-001) enrolled with status CONFIRMED",
+    "details": {
+      "enrollmentId": "ENR-TRN-1790689152295-432",
+      "status": "CONFIRMED",
+      "capacity": 2,
+      "currentCount": 0
+    },
+    "id": "AUD-TRN-1790689152299-16",
+    "timestamp": "2026-09-29T13:39:12.299Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "action": "SCHEDULE_SESSION",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Scheduled session 1 (2026-10-05 09:00-11:00)",
+    "details": {
+      "sessionId": "EHRJ-TRN-SES-2026-225",
+      "date": "2026-10-05",
+      "venue": "সেমিনার হল ৩"
+    },
+    "id": "AUD-TRN-1790689152288-493",
+    "timestamp": "2026-09-29T13:39:12.288Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from PUBLISHED to REGISTRATION_OPEN. Reason: N/A",
+    "details": {
+      "previousStatus": "PUBLISHED",
+      "newStatus": "REGISTRATION_OPEN"
+    },
+    "id": "AUD-TRN-1790689152281-332",
+    "timestamp": "2026-09-29T13:39:12.281Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from APPROVED to PUBLISHED. Reason: N/A",
+    "details": {
+      "previousStatus": "APPROVED",
+      "newStatus": "PUBLISHED"
+    },
+    "id": "AUD-TRN-1790689152277-65",
+    "timestamp": "2026-09-29T13:39:12.277Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from REVIEW to APPROVED. Reason: N/A",
+    "details": {
+      "previousStatus": "REVIEW",
+      "newStatus": "APPROVED"
+    },
+    "id": "AUD-TRN-1790689152273-334",
+    "timestamp": "2026-09-29T13:39:12.273Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "action": "UPDATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Program status changed from DRAFT to REVIEW. Reason: N/A",
+    "details": {
+      "previousStatus": "DRAFT",
+      "newStatus": "REVIEW"
+    },
+    "id": "AUD-TRN-1790689152264-959",
+    "timestamp": "2026-09-29T13:39:12.264Z"
+  },
+  {
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "action": "CREATE_PROGRAM",
+    "actorId": "EMP-ADM-001",
+    "actorName": "এডমিন সাহেব",
+    "actorRole": "ADMIN",
+    "notes": "Created new training program: পরীক্ষামূলক তাজবীদ কর্মশালা (EHRJ-TRN-2026-8074)",
+    "details": {
+      "trainingCode": "EHRJ-TRN-2026-8074",
+      "mandatoryStatus": "MANDATORY"
+    },
+    "id": "AUD-TRN-1790689152257-866",
+    "timestamp": "2026-09-29T13:39:12.257Z"
+  }
+]

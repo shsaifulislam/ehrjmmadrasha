@@ -1,0 +1,64 @@
+[
+  {
+    "id": "ATT-TRN-1790689282168-881",
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "sessionId": "EHRJ-TRN-SES-2026-785",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "employeeName": "উস্তাদ বোরহান উদ্দিন",
+    "status": "PRESENT",
+    "checkInTime": "2026-09-29T13:41:22.168Z",
+    "qrVerified": true,
+    "recordedBy": "এডমিন সাহেব",
+    "recordedAt": "2026-09-29T13:41:22.168Z",
+    "notes": "Verified via Institutional QR Scanner"
+  },
+  {
+    "id": "ATT-TRN-1790689282158-139",
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "sessionId": "EHRJ-TRN-SES-2026-785",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "employeeName": "উস্তাদ আহমদ শাকিল",
+    "status": "PRESENT",
+    "checkInTime": "2026-10-05T09:05:00.000Z",
+    "qrVerified": false,
+    "recordedBy": "এডমিন সাহেব",
+    "recordedAt": "2026-09-29T13:41:22.157Z"
+  },
+  {
+    "id": "ATT-TRN-1790689243981-645",
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "sessionId": "EHRJ-TRN-SES-2026-990",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "employeeName": "উস্তাদ বোরহান উদ্দিন",
+    "status": "PRESENT",
+    "checkInTime": "2026-09-29T13:40:43.981Z",
+    "qrVerified": true,
+    "recordedBy": "এডমিন সাহেব",
+    "recordedAt": "2026-09-29T13:40:43.981Z",
+    "notes": "Verified via Institutional QR Scanner"
+  },
+  {
+    "id": "ATT-TRN-1790689243974-978",
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "sessionId": "EHRJ-TRN-SES-2026-990",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "employeeName": "উস্তাদ আহমদ শাকিল",
+    "status": "PRESENT",
+    "checkInTime": "2026-10-05T09:05:00.000Z",
+    "qrVerified": false,
+    "recordedBy": "এডমিন সাহেব",
+    "recordedAt": "2026-09-29T13:40:43.973Z"
+  },
+  {
+    "id": "ATT-TRN-1790689152315-366",
+    "trainingProgramId": "EHRJ-TRN-2026-8074",
+    "sessionId": "EHRJ-TRN-SES-2026-225",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "employeeName": "উস্তাদ আহমদ শাকিল",
+    "status": "PRESENT",
+    "checkInTime": "2026-10-05T09:05:00.000Z",
+    "qrVerified": false,
+    "recordedBy": "এডমিন সাহেব",
+    "recordedAt": "2026-09-29T13:39:12.314Z"
+  }
+]

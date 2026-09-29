@@ -1,0 +1,68 @@
+[
+  {
+    "id": "SUB-TRN-1790689282187-702",
+    "assessmentId": "ASS-TEST-001",
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "employeeName": "উস্তাদ বোরহান উদ্দিন",
+    "answers": {
+      "q1": "১০টি",
+      "q2": "৪টি"
+    },
+    "score": 16,
+    "percentage": 80,
+    "status": "PASSED",
+    "attemptNumber": 1,
+    "submittedAt": "2026-09-29T13:41:22.187Z",
+    "evaluatedBy": "এডমিন সাহেব",
+    "instructorFeedback": "পুনরায় মৌখিক পরীক্ষা গ্রহণ করে উত্তীর্ণ করা হলো।"
+  },
+  {
+    "id": "SUB-TRN-1790689282180-608",
+    "assessmentId": "ASS-TEST-001",
+    "trainingProgramId": "EHRJ-TRN-2026-9496",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "employeeName": "উস্তাদ আহমদ শাকিল",
+    "answers": {
+      "q1": "১৫টি",
+      "q2": "২টি (র, লাম)"
+    },
+    "score": 20,
+    "percentage": 100,
+    "status": "PASSED",
+    "attemptNumber": 1,
+    "submittedAt": "2026-09-29T13:41:22.180Z"
+  },
+  {
+    "id": "SUB-TRN-1790689243997-578",
+    "assessmentId": "ASS-TEST-001",
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "employeeName": "উস্তাদ বোরহান উদ্দিন",
+    "answers": {
+      "q1": "১০টি",
+      "q2": "৪টি"
+    },
+    "score": 0,
+    "percentage": 0,
+    "status": "FAILED",
+    "attemptNumber": 1,
+    "submittedAt": "2026-09-29T13:40:43.997Z"
+  },
+  {
+    "id": "SUB-TRN-1790689243991-244",
+    "assessmentId": "ASS-TEST-001",
+    "trainingProgramId": "EHRJ-TRN-2026-3710",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "employeeName": "উস্তাদ আহমদ শাকিল",
+    "answers": {
+      "q1": "১৫টি",
+      "q2": "২টি (র, লাম)"
+    },
+    "score": 20,
+    "percentage": 100,
+    "status": "PASSED",
+    "attemptNumber": 1,
+    "submittedAt": "2026-09-29T13:40:43.991Z"
+  }
+]

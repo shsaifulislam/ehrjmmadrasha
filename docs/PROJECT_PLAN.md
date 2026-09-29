@@ -410,6 +410,21 @@ PHASE 38: Institutional Knowledge, SOP, Policy, Handbook & Governance Document M
 ├── Strictly NO SMS (In-app portal notices & calendar reminders only)
 ├── Frontend: Public Knowledge Hub (/knowledge), User Acknowledgement Console (/portal/knowledge), Admin Cockpit (/admin/knowledge, /admin/knowledge/documents, /admin/knowledge/reviews, /admin/knowledge/acknowledgements, /admin/knowledge/conflicts)
 └── Verified: 55/55 Phase 38 Tests Passed, 173/173 Next.js Routes Production Build Clean
+
+PHASE 39: Teacher/Staff Training, Professional Development & Certification Engine (EHRJ-AI-2026-PHASE39)
+├── Core Invariants: Phase 13 owns authoritative employee master; training attendance separate from HR/payroll; assessment does not affect academic grades
+├── Training Program Lifecycle (DRAFT -> REVIEW -> APPROVED -> PUBLISHED -> REGISTRATION_OPEN -> SCHEDULED -> IN_PROGRESS -> COMPLETED -> ARCHIVED)
+├── Session Scheduling with Phase 33 Calendar Synchronous Payload
+├── Transactional Participant Enrollment with Strict Capacity Validation & Automatic Waitlisting
+├── Training Attendance Engine with QR Verification & Recalculated Attendance Percentage
+├── Professional Assessment Engine with Answer Key Redaction, Automated Quiz Grading & Instructor Evaluation
+├── Verifiable Certificate Engine with Phase 7/29 Tokens (VER-TRN-YYYY-XXXX) & Idempotent Issuance
+├── Certificate Validity & Expiration Renewal Workflow (VALID -> EXPIRING_SOON -> EXPIRED -> RENEWED)
+├── Phase 13 Non-Duplicative Employee Training Profile Integration Bridge & Professional Development Plans
+├── Strictly NO SMS (In-app portal alerts and calendar schedules only)
+├── Frontend: Admin Cockpit (/admin/training, /admin/training/programs, /admin/training/sessions, /admin/training/participants, /admin/training/assessments, /admin/training/certificates, /admin/training/renewals)
+├── Frontend: Teacher/Staff Portal (/portal/training, /portal/training/[id], /portal/training/certificates)
+└── Verified: 40/40 Phase 39 Tests Passed, 98/98 Cumulative Phase 37-38 Regression Tests Passed, Next.js Production Build Clean across 185+ routes
 ```
 
 ---
