@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAdmissionSessionConfig, updateAdmissionSessionConfig } from "@/lib/admissions/admissionConfigEngine";
+import {
+  getAdmissionSessionConfig,
+  isAdmissionCurrentlyOpen,
+  isValidAdmissionDateRange,
+  updateAdmissionSessionConfig,
+} from "@/lib/admissions/admissionConfigEngine";
 import { getSessionUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
@@ -11,10 +16,12 @@ export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   try {
     const config = await getAdmissionSessionConfig();
+    const admissionStatus = await isAdmissionCurrentlyOpen();
 
     const enrichedConfig = {
       ...config,
-      isAdmissionOpen: (config as any).isOpen ?? true,
+      isAdmissionOpen: admissionStatus.isOpen,
+      admissionClosedReason: admissionStatus.reason,
       generalRequirements: [
         "শিক্ষার্থীর মৌলিক দীনী শিক্ষার প্রতি আন্তরিক আগ্রহ ও শৃঙ্খলা বজায় রাখার মানসিকতা থাকতে হবে।",
         "অনলাইন অথবা মাদরাসা অফিসে নির্ধারিত আবেদন ফরম যথাযথভাবে পূরণ করতে হবে।",
@@ -57,6 +64,21 @@ export async function PUT(req: NextRequest) {
     }
 
     const updates = await req.json();
+    if (!updates || typeof updates !== "object" || Array.isArray(updates)) {
+      return NextResponse.json({ error: "অবৈধ ভর্তি কনফিগারেশন।" }, { status: 400 });
+    }
+
+    const currentConfig = await getAdmissionSessionConfig();
+    const nextStartDate = typeof updates.startDate === "string" ? updates.startDate : currentConfig.startDate;
+    const nextEndDate = typeof updates.endDate === "string" ? updates.endDate : currentConfig.endDate;
+    const nextIsOpen = typeof updates.isOpen === "boolean" ? updates.isOpen : currentConfig.isOpen;
+    if (nextIsOpen && !isValidAdmissionDateRange(nextStartDate, nextEndDate)) {
+      return NextResponse.json(
+        { error: "ভর্তি চালু করতে একটি বৈধ শুরু ও শেষ তারিখ নির্ধারণ করুন।" },
+        { status: 400 }
+      );
+    }
+
     const updatedConfig = await updateAdmissionSessionConfig(updates, user.userId);
 
     return NextResponse.json({
@@ -64,10 +86,10 @@ export async function PUT(req: NextRequest) {
       message: "ভর্তি কনফিগারেশন সফলভাবে আপডেট করা হয়েছে।",
       config: updatedConfig,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("PUT /api/admissions/config error:", error);
     return NextResponse.json(
-      { error: error.message || "ভর্তি কনফিগারেশন সংরক্ষণে সমস্যা হয়েছে।" },
+      { error: error instanceof Error ? error.message : "ভর্তি কনফিগারেশন সংরক্ষণে সমস্যা হয়েছে।" },
       { status: 500 }
     );
   }

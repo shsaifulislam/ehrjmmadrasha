@@ -80,13 +80,6 @@ const DEFAULT_FAQS = [
   { questionBn: "এতিম বা অসচ্ছল শিক্ষার্থীদের জন্য কোনো বিশেষ ছাড় আছে কি?", answerBn: "হ্যাঁ, ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসায় লিল্লাহ বোর্ডিং ও যাকাত তহবিলের মাধ্যমে যোগ্য ও অসচ্ছল শিক্ষার্থীদের সম্পূর্ণ বিনামূল্যে (১০০% ফ্রি) থাকা-খাওয়া ও শিক্ষার সুযোগ রয়েছে।", category: "FINANCIAL" },
 ];
 
-const DEFAULT_CLASSES = [
-  { classId: "CLS-NOORANI", classNameBn: "নূরানী ও নাযেরা বিভাগ", totalSeats: 120, appliedCount: 25, availableSeats: 95, isOpen: true },
-  { classId: "CLS-HIFZ", classNameBn: "হিফজুল কুরআন বিভাগ", totalSeats: 150, appliedCount: 40, availableSeats: 110, isOpen: true },
-  { classId: "CLS-KITAB-MIZAN", classNameBn: "কিতাব বিভাগ (মিযান জামাত)", totalSeats: 80, appliedCount: 15, availableSeats: 65, isOpen: true },
-  { classId: "CLS-DAWRA", classNameBn: "দাওরায়ে হাদিস (তাকমীল)", totalSeats: 60, appliedCount: 10, availableSeats: 50, isOpen: true }
-];
-
 export default function AdmissionLandingPage() {
   const [config, setConfig] = useState<AdmissionConfig | null>(null);
   const [loading, setLoading] = useState(true);
@@ -99,21 +92,32 @@ export default function AdmissionLandingPage() {
         if (data && data.config) {
           const raw = data.config;
           setConfig({
-            sessionName: raw.sessionName || "চলতি শিক্ষাবর্ষ ২০২৬",
-            isAdmissionOpen: raw.isAdmissionOpen ?? raw.isOpen ?? true,
-            startDate: raw.startDate || "০১ জানুয়ারি ২০২৬",
-            endDate: raw.endDate || "৩০ এপ্রিল ২০২৬",
+            sessionName: raw.sessionName || "শিক্ষাবর্ষ নির্ধারিত নয়",
+            isAdmissionOpen: raw.isAdmissionOpen ?? raw.isOpen ?? false,
+            startDate: raw.startDate || "",
+            endDate: raw.endDate || "",
             helplinePhone: raw.helplinePhone || INSTITUTION_INFO.primaryPhone,
-            availableClasses: Array.isArray(raw.availableClasses) && raw.availableClasses.length > 0
-              ? raw.availableClasses.map((cls: any) => ({
-                  classId: cls.classId || "CLS-" + Math.random(),
-                  classNameBn: cls.classNameBn || "শ্রেণি",
-                  totalSeats: cls.totalSeats || cls.maxCapacity || 50,
-                  appliedCount: cls.appliedCount || cls.currentApplicants || 0,
-                  availableSeats: cls.availableSeats !== undefined ? cls.availableSeats : Math.max(0, (cls.maxCapacity || 50) - (cls.currentApplicants || 0)),
-                  isOpen: cls.isOpen !== undefined ? cls.isOpen : (cls.isActive !== false)
-                }))
-              : DEFAULT_CLASSES,
+            availableClasses: Array.isArray(raw.availableClasses)
+              ? raw.availableClasses
+                  .filter((cls: any) => typeof cls?.classId === "string" && typeof cls?.classNameBn === "string")
+                  .map((cls: any) => {
+                    const totalSeats = Math.max(0, Number(cls.totalSeats ?? cls.maxCapacity) || 0);
+                    const appliedCount = Math.max(0, Number(cls.appliedCount ?? cls.currentApplicants) || 0);
+                    return {
+                      classId: cls.classId,
+                      classNameBn: cls.classNameBn,
+                      totalSeats,
+                      appliedCount,
+                      availableSeats: Math.max(
+                        0,
+                        Number.isFinite(Number(cls.availableSeats))
+                          ? Number(cls.availableSeats)
+                          : totalSeats - appliedCount
+                      ),
+                      isOpen: typeof cls.isOpen === "boolean" ? cls.isOpen : cls.isActive === true,
+                    };
+                  })
+              : [],
             generalRequirements: Array.isArray(raw.generalRequirements) && raw.generalRequirements.length > 0
               ? raw.generalRequirements
               : DEFAULT_GENERAL_REQUIREMENTS,
@@ -142,9 +146,9 @@ export default function AdmissionLandingPage() {
 
       {/* 1. OFFICIAL PAGE HEADER BANNER WITH BREADCRUMB */}
       <PageHeaderBanner
-        title="ভর্তি বিজ্ঞপ্তি ও অনলাইন আবেদন ২০২৬"
+        title="ভর্তি বিজ্ঞপ্তি ও অনলাইন আবেদন"
         subtitle="কুরআন-সুন্নাহ ও যুগোপযোগী শিক্ষার সমন্বয়ে আলোকিত প্রজন্ম গড়ার ঐতিহ্যবাহী দ্বীনি মারকাজ"
-        badge="নতুন শিক্ষাবর্ষে ভর্তি চলছে • পৃথক বালক ও বালিকা শাখা"
+        badge="পৃথক বালক ও বালিকা শাখার ভর্তি তথ্য"
         breadcrumbs={[{ label: "ভর্তি তথ্য" }]}
       />
 
@@ -153,10 +157,14 @@ export default function AdmissionLandingPage() {
         <div className="bg-white rounded-3xl border border-slate-200 shadow-md p-6 sm:p-7 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1.5 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 text-xs font-bold text-emerald-800">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>সেশন: {config?.sessionName || "২০২৬ শিক্ষাবর্ষ"}</span>
+              <span className={`w-2.5 h-2.5 rounded-full ${config?.isAdmissionOpen ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}`} />
+              <span>সেশন: {config?.sessionName || "শিক্ষাবর্ষ নির্ধারিত নয়"}</span>
               <span className="text-slate-300">•</span>
-              <span className="text-slate-600">আবেদনের সময়সীমা: <strong>{config?.startDate || "০১ জানুয়ারি"} হতে {config?.endDate || "৩০ এপ্রিল"}</strong></span>
+              <span className="text-slate-600">
+                {config?.isAdmissionOpen && config.startDate && config.endDate
+                  ? <>আবেদনের সময়সীমা: <strong>{config.startDate} হতে {config.endDate}</strong></>
+                  : <strong>বর্তমানে আবেদন গ্রহণ বন্ধ</strong>}
+              </span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold font-display text-slate-900">
               ঘরে বসেই সরাসরি ভর্তি আবেদন সম্পন্ন করুন
@@ -167,14 +175,20 @@ export default function AdmissionLandingPage() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/admission/apply"
-              className="btn-gold px-6 py-3 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 shadow"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>অনলাইনে নতুন আবেদন</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            {config?.isAdmissionOpen ? (
+              <Link
+                href="/admission/apply"
+                className="btn-gold px-6 py-3 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 shadow"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>অনলাইনে নতুন আবেদন</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            ) : (
+              <span className="px-6 py-3 rounded-xl bg-slate-100 text-slate-600 text-xs sm:text-sm font-bold">
+                ভর্তি কার্যক্রম বন্ধ বা তারিখ নির্ধারিত নয়
+              </span>
+            )}
 
             <Link
               href="/login?tab=guardian&redirect=/admission/apply"
@@ -232,12 +246,16 @@ export default function AdmissionLandingPage() {
                   নূরানী, নাজেরা, হিফজ, কিতাব (দ্বীনি শিক্ষা) ও মেয়েদের বিভাগ (উর্দু থেকে মিশকাত)
                 </p>
               </div>
-              <Link
-                href="/admission/apply"
-                className="btn-gold px-5 py-2 rounded-xl text-slate-950 font-bold text-xs flex-shrink-0 shadow hover:scale-105 transition"
-              >
-                অনলাইনে আবেদন করুন
-              </Link>
+              {config?.isAdmissionOpen ? (
+                <Link
+                  href="/admission/apply"
+                  className="btn-gold px-5 py-2 rounded-xl text-slate-950 font-bold text-xs flex-shrink-0 shadow hover:scale-105 transition"
+                >
+                  অনলাইনে আবেদন করুন
+                </Link>
+              ) : (
+                <span className="text-emerald-100 text-xs font-semibold">বর্তমানে আবেদন গ্রহণ বন্ধ</span>
+              )}
             </div>
           </div>
 
@@ -259,20 +277,23 @@ export default function AdmissionLandingPage() {
                     ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা
                   </h4>
                   <p className="text-xs text-emerald-100 font-sans">
-                    ইলম, আমল ও আদর্শের সমন্বয়ে দ্বীনি শিক্ষা • স্থাপিত: ২০২১ ইং
+                    ইলম, আমল ও আদর্শের সমন্বয়ে দ্বীনি শিক্ষা
                   </p>
                 </div>
-                <Link
-                  href="/admission/apply"
-                  className="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow flex-shrink-0"
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>আবেদন শুরু করুন</span>
-                </Link>
+                {config?.isAdmissionOpen && (
+                  <Link
+                    href="/admission/apply"
+                    className="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow flex-shrink-0"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>আবেদন শুরু করুন</span>
+                  </Link>
+                )}
               </div>
             </div>
 
             {/* Square Admission Announcement Poster (col-span-5) */}
+            {config?.isAdmissionOpen && (
             <div className="lg:col-span-5 bg-white rounded-3xl border-2 border-[#D4AF37] overflow-hidden shadow-lg flex flex-col justify-between group">
               <div className="relative aspect-square w-full bg-slate-950 overflow-hidden">
                 <Image
@@ -297,6 +318,7 @@ export default function AdmissionLandingPage() {
                 </Link>
               </div>
             </div>
+            )}
           </div>
         </section>
         
@@ -336,7 +358,7 @@ export default function AdmissionLandingPage() {
               </h3>
             </div>
             <span className="text-xs bg-emerald-50 text-[#0D5C3A] font-semibold px-3 py-1.5 rounded-full border border-emerald-200">
-              সেশন: {config?.sessionName || "চলতি শিক্ষাবর্ষ ২০২৬"}
+              সেশন: {config?.sessionName || "শিক্ষাবর্ষ নির্ধারিত নয়"}
             </span>
           </div>
 
@@ -347,9 +369,12 @@ export default function AdmissionLandingPage() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {(config?.availableClasses || DEFAULT_CLASSES).map((cls) => {
-                const fillPercentage = Math.min(100, Math.round(((cls.totalSeats - cls.availableSeats) / cls.totalSeats) * 100));
+            config?.availableClasses.length ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {config.availableClasses.map((cls) => {
+                const fillPercentage = cls.totalSeats > 0
+                  ? Math.min(100, Math.round(((cls.totalSeats - cls.availableSeats) / cls.totalSeats) * 100))
+                  : 0;
                 return (
                   <div
                     key={cls.classId}
@@ -358,14 +383,16 @@ export default function AdmissionLandingPage() {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
-                          cls.isOpen 
+                          config.isAdmissionOpen && cls.isOpen
                             ? "bg-emerald-50 text-emerald-700 border-emerald-200" 
                             : "bg-red-50 text-red-700 border-red-200"
                         }`}>
-                          {cls.isOpen ? "● আসন উন্মুক্ত" : "আসন পূর্ণ"}
+                          {config.isAdmissionOpen && cls.isOpen ? "● আসন উন্মুক্ত" : "ভর্তি বন্ধ"}
                         </span>
                         <span className="text-[11px] text-slate-500 font-medium">
-                          অবশিষ্ট: <strong className="text-emerald-700 font-bold">{cls.availableSeats}</strong> টি
+                          {cls.totalSeats > 0
+                            ? <>অবশিষ্ট: <strong className="text-emerald-700 font-bold">{cls.availableSeats}</strong> টি</>
+                            : "আসনসংখ্যা নির্ধারিত নয়"}
                         </span>
                       </div>
 
@@ -373,12 +400,14 @@ export default function AdmissionLandingPage() {
                         {cls.classNameBn}
                       </h4>
 
-                      <p className="text-[11px] text-slate-500">
-                        মোট আসন: {cls.totalSeats} টি | আবেদন: {cls.appliedCount} টি
-                      </p>
+                      {cls.totalSeats > 0 && (
+                        <p className="text-[11px] text-slate-500">
+                          মোট আসন: {cls.totalSeats} টি | আবেদন: {cls.appliedCount} টি
+                        </p>
+                      )}
 
                       {/* Progress bar */}
-                      <div className="space-y-1">
+                      {cls.totalSeats > 0 && <div className="space-y-1">
                         <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
                           <div
                             className="bg-gradient-to-r from-emerald-500 to-[#D4AF37] h-1.5 rounded-full"
@@ -388,22 +417,31 @@ export default function AdmissionLandingPage() {
                         <div className="text-[10px] text-slate-400 text-right">
                           {fillPercentage}% পূরণ
                         </div>
-                      </div>
+                      </div>}
                     </div>
 
                     <div className="pt-3 border-t border-slate-100 mt-4">
-                      <Link
-                        href={`/admission/apply?classId=${cls.classId}`}
-                        className="text-xs font-bold text-[#0D5C3A] group-hover:text-emerald-700 flex items-center justify-between transition"
-                      >
-                        <span>আবেদন ফরম</span>
-                        <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                      </Link>
+                      {config.isAdmissionOpen && cls.isOpen ? (
+                        <Link
+                          href={`/admission/apply?classId=${encodeURIComponent(cls.classId)}`}
+                          className="text-xs font-bold text-[#0D5C3A] group-hover:text-emerald-700 flex items-center justify-between transition"
+                        >
+                          <span>আবেদন ফরম</span>
+                          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      ) : (
+                        <span className="text-xs font-semibold text-slate-500">এখন আবেদন গ্রহণ হচ্ছে না</span>
+                      )}
                     </div>
                   </div>
                 );
               })}
-            </div>
+              </div>
+            ) : (
+              <p className="rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-center text-sm text-slate-600">
+                ভর্তি সেশন, জামাত ও আসনসংখ্যার তথ্য প্রশাসন এখনো নির্ধারণ করেনি।
+              </p>
+            )
           )}
         </section>
 

@@ -78,46 +78,13 @@ export default async function HomePage() {
     prisma.certificate.count({ where: { status: "ISSUED" } }),
   ]);
 
-  const defaultNotices = [
-    {
-      id: "admission-2026",
-      titleBn: "২০২৬ শিক্ষাবর্ষে নূরানী, নাজেরা, হিফজ ও কিতাব বিভাগে নতুন ভর্তি বিজ্ঞপ্তি",
-      category: "ভর্তি",
-      publishedAt: new Date(),
-    },
-    {
-      id: "exam-routine",
-      titleBn: "আসন্ন সাময়িক ও বার্ষিক পরীক্ষার চূড়ান্ত সময়সূচি ও আসন বিন্যাস প্রকাশ",
-      category: "পরীক্ষা",
-      publishedAt: new Date(Date.now() - 86400000 * 2),
-    },
-    {
-      id: "ramadan-vacation",
-      titleBn: "পবিত্র রমজানুল মুবারক ও ঈদুল ফিতর উপলক্ষে মাদরাসা ছুটির জরুরি নোটিশ",
-      category: "ছুটি",
-      publishedAt: new Date(Date.now() - 86400000 * 5),
-    },
-    {
-      id: "hifz-convocation",
-      titleBn: "বার্ষিক হিফজুল কুরআন সমাপনী ও পাগড়ী প্রদান অনুষ্ঠানের সময়সূচী",
-      category: "অনুষ্ঠান",
-      publishedAt: new Date(Date.now() - 86400000 * 8),
-    },
-    {
-      id: "scholarship-notice",
-      titleBn: "মেধাবী ও অসচ্ছল শিক্ষার্থীদের মাঝে বিশেষ মেধা বৃত্তি প্রদান সংক্রান্ত সার্কুলার",
-      category: "বৃত্তি",
-      publishedAt: new Date(Date.now() - 86400000 * 12),
-    },
-  ];
-
-  const displayNotices = dbNotices.length >= 3 ? dbNotices : defaultNotices;
+  const displayNotices = dbNotices;
 
   // Digital Quick Services Matrix
   const quickServices = [
     {
       title: "অনলাইন ভর্তি",
-      sub: "২০২৬ শিক্ষাবর্ষে আবেদন",
+      sub: "ভর্তি তথ্য ও আবেদন",
       href: "/admission",
       icon: GraduationCap,
       color: "bg-emerald-50 text-[#0D5C3A] border-emerald-200 group-hover:bg-[#0D5C3A] group-hover:text-white",
@@ -570,7 +537,7 @@ export default async function HomePage() {
             <div className="bg-gradient-to-b from-white to-emerald-50/50 rounded-2xl border-2 border-[#D4AF37] p-4 shadow-lg overflow-hidden group">
               <div className="flex items-center justify-between mb-3 border-b border-emerald-100 pb-2">
                 <span className="bg-rose-600 text-white text-[11px] font-black px-2.5 py-0.5 rounded-full animate-pulse shadow-sm font-serif-bn">
-                  ভর্তি চলছে ২০২৬
+                  ভর্তি বিজ্ঞপ্তি
                 </span>
                 <span className="text-xs font-bold text-[#0D5C3A] font-serif-bn">
                   নূরানী • হিফজ • কিতাব
@@ -661,7 +628,9 @@ export default async function HomePage() {
               </div>
 
               <div className="divide-y divide-slate-100 max-h-[380px] overflow-y-auto">
-                {displayNotices.slice(0, 5).map((notice, idx) => {
+                {displayNotices.length === 0 ? (
+                  <p className="p-4 text-sm text-slate-500 text-center">এখন কোনো প্রকাশিত নোটিশ নেই।</p>
+                ) : displayNotices.slice(0, 5).map((notice, idx) => {
                   const dateInfo = formatBnDate(notice.publishedAt);
                   return (
                     <article key={notice.id || idx} className="p-3 hover:bg-slate-50 transition flex items-start gap-3">

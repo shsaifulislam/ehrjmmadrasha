@@ -27,7 +27,9 @@ export default function NoticeTicker({ notices }: NoticeTickerProps) {
         {/* Marquee Content */}
         <div className="flex-1 overflow-hidden px-4 py-2 text-xs sm:text-sm text-slate-800 font-medium whitespace-nowrap">
           <div className="animate-marquee cursor-pointer inline-flex items-center">
-            {notices.map((notice, idx) => (
+            {notices.length === 0 ? (
+              <span className="text-slate-500">এখন কোনো জরুরি নোটিশ নেই।</span>
+            ) : notices.map((notice, idx) => (
               <span key={notice.id || idx} className="inline-flex items-center mr-8">
                 <Link
                   href={`/notices/${notice.id}`}

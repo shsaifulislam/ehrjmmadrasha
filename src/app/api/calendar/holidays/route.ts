@@ -1,17 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getInstitutionalHolidays } from "@/lib/calendar/calendarStore";
+import {
+  getPublicInstitutionalHolidays,
+  getInstitutionalHolidays,
+} from "@/lib/calendar/calendarStore";
+import { requireAdminAuth } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const publicOnly = searchParams.get("publicOnly") === "true";
-
-    let holidays = getInstitutionalHolidays();
-    if (publicOnly) {
-      holidays = holidays.filter((h) => h.isPublic);
+    const includePrivate = searchParams.get("publicOnly") === "false";
+    if (includePrivate) {
+      const auth = await requireAdminAuth(request);
+      if (!auth.authorized) return auth.response;
     }
+
+    const holidays = includePrivate
+      ? getInstitutionalHolidays()
+      : getPublicInstitutionalHolidays();
 
     // Sort chronologically by start date
     holidays.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());

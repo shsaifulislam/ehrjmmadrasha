@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionUser } from "@/lib/auth";
 import { recordUserAcknowledgement } from "@/lib/policies";
+import { getClientIp } from "@/lib/security";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +21,7 @@ export async function POST(
     const { version } = body;
 
     const userAgent = req.headers.get("user-agent") || undefined;
-    const ipAddress = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || undefined;
+    const ipAddress = getClientIp(req);
 
     const res = recordUserAcknowledgement({
       documentIdOrCode: id,

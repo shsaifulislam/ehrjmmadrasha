@@ -1,15 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { hashPassword, createSessionToken, setAuthCookie } from "@/lib/auth";
-import { checkRateLimit, recordAuditLog } from "@/lib/security";
+import { checkRateLimit, getClientIp, recordAuditLog } from "@/lib/security";
 import { sendInstitutionalEmail } from "@/lib/mail";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
-    const rawForwarded = req.headers.get("x-forwarded-for");
-    const ip = rawForwarded ? rawForwarded.split(",")[0].trim() : (req.headers.get("x-real-ip") || "127.0.0.1");
+    const ip = getClientIp(req);
     const userAgent = req.headers.get("user-agent") || "unknown";
 
     // Rate limiting: 5 registration attempts per 10 minutes per IP

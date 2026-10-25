@@ -53,9 +53,9 @@ const SETTINGS_FILE = path.join(process.cwd(), "data", "institutional_settings.j
 
 const DEFAULT_SETTINGS: SystemSettingsData = {
   admission: {
-    isOpen: true,
-    sessionName: "২০২৬",
-    closedMessage: "বর্তমানে নতুন শিক্ষাবর্ষের ভর্তি কার্যক্রম সাময়িকভাবে বন্ধ রয়েছে। পরবর্তী সেশনের ভর্তি বিজ্ঞপ্তি খুব শীঘ্রই ওয়েবসাইটে এবং নোটিশ বোর্ডে প্রকাশ করা হবে। জরুরি তথ্যের জন্য মাদরাসা অফিসে যোগাযোগ করুন।",
+    isOpen: false,
+    sessionName: "শিক্ষাবর্ষ নির্ধারিত নয়",
+    closedMessage: "ভর্তির সময়সীমা নির্ধারিত হলে এখানে বিজ্ঞপ্তি প্রকাশ করা হবে।",
     helplinePhone: "01845-162664",
     updatedAt: new Date().toISOString(),
   },

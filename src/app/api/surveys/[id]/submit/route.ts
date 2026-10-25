@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionUser } from "@/lib/auth";
+import { getClientIp } from "@/lib/security";
 import { submitSurveyResponse } from "@/lib/surveys";
 
 export const dynamic = "force-dynamic";
@@ -34,7 +35,7 @@ export async function POST(req: NextRequest, { params: paramsPromise }: RoutePar
     }
 
     // IP / UA hash placeholder for rate protection on anonymous
-    const ip = req.headers.get("x-forwarded-for") || "127.0.0.1";
+    const ip = getClientIp(req);
     const ua = req.headers.get("user-agent") || "unknown";
     const ipHash = Buffer.from(ip).toString("base64").substring(0, 16);
     const userAgentHash = Buffer.from(ua).toString("base64").substring(0, 16);

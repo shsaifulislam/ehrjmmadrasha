@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { checkRateLimit } from "@/lib/security";
+import { checkRateLimit, getClientIp } from "@/lib/security";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
-    const ip = req.headers.get("x-forwarded-for") || "127.0.0.1";
+    const ip = getClientIp(req);
 
     // Rate limit: 20 searches per minute per IP to prevent scraping
     const rateLimit = checkRateLimit(`search:${ip}`, 20, 60000);

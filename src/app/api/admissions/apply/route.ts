@@ -5,6 +5,7 @@ import { detectDuplicates } from "@/lib/duplicateDetection";
 import { recordAuditLog, checkAdmissionRateLimit, getClientIp } from "@/lib/security";
 
 import { getSessionUser } from "@/lib/auth";
+import { isAdmissionCurrentlyOpen } from "@/lib/admissions/admissionConfigEngine";
 
 import crypto from "crypto";
 
@@ -27,12 +28,13 @@ export async function POST(req: NextRequest) {
     }
 
     // ADMISSION-STATUS-CHECK: Verify if institutional admission is currently open
-    const { getAdmissionSettings } = await import("@/lib/systemSettings");
-    const admissionSettings = getAdmissionSettings();
-    if (!admissionSettings.isOpen) {
+    const admissionStatus = await isAdmissionCurrentlyOpen();
+    if (!admissionStatus.isOpen) {
+      const { getAdmissionSettings } = await import("@/lib/systemSettings");
+      const admissionSettings = getAdmissionSettings();
       return NextResponse.json(
         {
-          error: admissionSettings.closedMessage || "বর্তমানে নতুন শিক্ষাবর্ষের ভর্তি কার্যক্রম সাময়িকভাবে বন্ধ রয়েছে।",
+          error: admissionStatus.reason || admissionSettings.closedMessage,
           admissionClosed: true,
           helplinePhone: admissionSettings.helplinePhone,
         },

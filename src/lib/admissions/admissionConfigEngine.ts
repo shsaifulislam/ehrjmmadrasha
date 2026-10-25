@@ -41,53 +41,17 @@ function safeWrite<T>(filePath: string, data: T): void {
     fs.renameSync(tempFile, filePath);
   } catch (err) {
     console.error(`[AdmissionConfig] Write error on ${filePath}:`, err);
+    throw err;
   }
 }
 
 const DEFAULT_CONFIG: AdmissionSessionConfig = {
-  sessionId: "SESSION-2026-CURRENT",
-  sessionName: "২০২৬-২০২৭ শিক্ষাবর্ষ",
-  isOpen: true,
-  startDate: "2026-01-01",
-  endDate: "2026-04-30",
-  availableClasses: [
-    {
-      classId: "CLS-NOORANI",
-      classNameBn: "নূরানী ও নাযেরা বিভাগ",
-      classNameEn: "Noorani & Nazera",
-      maxCapacity: 120,
-      currentApplicants: 0,
-      genderAllowed: "COMBINED",
-      isActive: true,
-    },
-    {
-      classId: "CLS-HIFZ",
-      classNameBn: "হিফজুল কুরআন বিভাগ",
-      classNameEn: "Tahfizul Quran",
-      maxCapacity: 150,
-      currentApplicants: 0,
-      genderAllowed: "MALE",
-      isActive: true,
-    },
-    {
-      classId: "CLS-KITAB-MIZAN",
-      classNameBn: "কিতাব বিভাগ (মিযান জামাত)",
-      classNameEn: "Kitab - Mizan",
-      maxCapacity: 80,
-      currentApplicants: 0,
-      genderAllowed: "MALE",
-      isActive: true,
-    },
-    {
-      classId: "CLS-DAWRA",
-      classNameBn: "দাওরায়ে হাদিস (তাকমীল)",
-      classNameEn: "Dawra-e-Hadith (Masters)",
-      maxCapacity: 60,
-      currentApplicants: 0,
-      genderAllowed: "MALE",
-      isActive: true,
-    },
-  ],
+  sessionId: "",
+  sessionName: "শিক্ষাবর্ষ নির্ধারিত নয়",
+  isOpen: false,
+  startDate: "",
+  endDate: "",
+  availableClasses: [],
   residentialOptions: ["RESIDENTIAL", "NON_RESIDENTIAL", "DAY_CARE"],
   requiredDocuments: [
     { type: "PHOTO", nameBn: "শিক্ষার্থীর পাসপোর্ট সাইজ ছবি", isRequired: true },
@@ -97,9 +61,24 @@ const DEFAULT_CONFIG: AdmissionSessionConfig = {
   ],
   specialInstructionsBn:
     "অনলাইনে আবেদন সাবমিট করার পর প্রাপ্ত ট্র্যাকিং নম্বরটি সংরক্ষণ করুন। এতিম ও আর্থিকভাবে অসচ্ছল শিক্ষার্থীদের জন্য মাদরাসা তহবিলের পক্ষ থেকে বিশেষ সুবিধার সুযোগ রয়েছে।",
-  updatedAt: "2026-01-01T00:00:00.000Z",
-  updatedBy: "admin@ehrj.edu.bd",
+  updatedAt: "",
+  updatedBy: "",
 };
+
+function parseDateOnly(value: string): number | null {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+
+  const timestamp = Date.parse(`${value}T00:00:00.000Z`);
+  return Number.isFinite(timestamp) && new Date(timestamp).toISOString().slice(0, 10) === value
+    ? timestamp
+    : null;
+}
+
+export function isValidAdmissionDateRange(startDate: string, endDate: string): boolean {
+  const start = parseDateOnly(startDate);
+  const end = parseDateOnly(endDate);
+  return start !== null && end !== null && start <= end;
+}
 
 /**
  * Returns dynamic admission configuration enriched with authoritative database counts
@@ -144,6 +123,9 @@ export async function updateAdmissionConfig(
     updatedAt: new Date().toISOString(),
     updatedBy: adminUserId,
   };
+  if (updated.isOpen && !isValidAdmissionDateRange(updated.startDate, updated.endDate)) {
+    throw new Error("ভর্তি চালু করতে একটি বৈধ শুরু ও শেষ তারিখ নির্ধারণ করুন।");
+  }
   safeWrite(CONFIG_FILE, updated);
   return updated;
 }
@@ -169,7 +151,22 @@ export async function isAdmissionCurrentlyOpen(): Promise<{
     };
   }
 
-  const today = new Date().toISOString().split("T")[0];
+  if (!isValidAdmissionDateRange(config.startDate, config.endDate)) {
+    return {
+      isOpen: false,
+      reason: "ভর্তির সময়সীমা নির্ধারিত হয়নি বা সঠিক নয়।",
+      config,
+    };
+  }
+
+  const dateParts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Dhaka",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const part = (type: string) => dateParts.find((item) => item.type === type)?.value ?? "";
+  const today = `${part("year")}-${part("month")}-${part("day")}`;
   if (today < config.startDate) {
     return {
       isOpen: false,

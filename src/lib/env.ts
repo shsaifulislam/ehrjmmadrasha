@@ -5,6 +5,10 @@
  * and harmonizes public URLs across client and server.
  */
 
+import { INSECURE_FALLBACK_JWT } from "./jwtSecret";
+
+export { getJwtSecretBytes } from "./jwtSecret";
+
 export interface AppEnv {
   NODE_ENV: "development" | "production" | "test";
   DATABASE_URL: string;
@@ -27,7 +31,6 @@ export interface AppEnv {
   NAGAD_MODE?: "SANDBOX" | "PRODUCTION";
 }
 
-const INSECURE_FALLBACK_JWT = "ehrj-madrasa-digital-campus-secure-production-jwt-secret-key-2026";
 const INSECURE_FALLBACK_CRON = "ehrj-internal-cron-token";
 const INSECURE_FALLBACK_WEBHOOK = "ehrj_demo_webhook_secret_2026";
 
@@ -54,27 +57,6 @@ export function getAppUrl(): string {
     return "https://www.ehrjmadrasha.com";
   }
   return "http://localhost:3000";
-}
-
-/**
- * Returns JWT secret bytes. Enforces minimum 32 characters in production.
- * In production, halts execution if JWT_SECRET is missing or matches public fallback.
- */
-export function getJwtSecretBytes(): Uint8Array {
-  const rawSecret = process.env.JWT_SECRET?.trim();
-
-  if (isProduction()) {
-    if (!rawSecret || rawSecret.length < 32 || rawSecret === INSECURE_FALLBACK_JWT) {
-      throw new Error(
-        "FATAL SECURITY CONFIGURATION ERROR: JWT_SECRET must be explicitly set to a unique key of at least 32 characters in production mode."
-      );
-    }
-    return new TextEncoder().encode(rawSecret);
-  }
-
-  // Development / Test fallback with explicit audit trail
-  const fallback = rawSecret || INSECURE_FALLBACK_JWT;
-  return new TextEncoder().encode(fallback);
 }
 
 /**
@@ -198,4 +180,3 @@ export function getDatabaseFilePath(): string {
   }
   return pathModule.join(process.cwd(), "prisma", "dev.db");
 }
-

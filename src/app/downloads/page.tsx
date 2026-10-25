@@ -8,15 +8,9 @@ import Link from "next/link";
 import {
   Download,
   FileText,
-  Calendar,
-  BookOpen,
-  FileCheck,
   Search,
-  Sparkles,
-  ArrowRight,
   CheckCircle2,
 } from "lucide-react";
-import { INSTITUTION_INFO } from "@/lib/constants";
 
 export default function DownloadsPage() {
   const [downloadItems, setDownloadItems] = useState<any[]>([]);
@@ -24,61 +18,22 @@ export default function DownloadsPage() {
   const [activeCategory, setActiveCategory] = useState("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const [downloadToast, setDownloadToast] = useState<string | null>(null);
-
-  const FALLBACK_DOWNLOADS = [
-    {
-      title: "নতুন ছাত্র ভর্তি আবেদন ফরম (অফলাইন কপি)",
-      category: "ভর্তি",
-      size: "১.২ মেগাবাইট",
-      type: "PDF",
-      date: "২০২৬ শিক্ষাবর্ষ",
-      description: "মাদরাসা অফিসে সরাসরি জমা দেওয়ার জন্য প্রিন্ট উপযোগী অফিসিয়াল ভর্তি আবেদন ফরম।",
-      fileUrl: "/downloads/admission_form_2026.pdf",
-    },
-    {
-      title: "হিফজুল কুরআন ও কিতাব বিভাগের বার্ষিক সিলেবাস",
-      category: "সিলেবাস",
-      size: "২.৫ মেগাবাইট",
-      type: "PDF",
-      date: "২০২৫-২০২৬",
-      description: "নূরানী, হিফজুল কুরআন ও কিতাব অনুষদের পরীক্ষা ও পাঠ্যসূচির পূর্ণ বিবরণ ও বিষয় বিন্যাস।",
-      fileUrl: "/downloads/syllabus_2025_2026.pdf",
-    },
-    {
-      title: "দৈনন্দিন ক্লাস ও সবক রুটিন (পূর্ণ সময়সূচি)",
-      category: "রুটিন",
-      size: "৮৫০ কিলোবাইট",
-      type: "PDF",
-      date: "২০২৬ শিক্ষাবর্ষ",
-      description: "ফজর থেকে এশা পর্যন্ত তাহাজ্জুদ, তেলাওয়াত, সবক ও সাধারণ পাঠদানের সুশৃঙ্খল রুটিন।",
-      fileUrl: "/downloads/daily_routine_2026.pdf",
-    },
-    {
-      title: "বার্ষিক ছুটির তালিকা ও প্রাতিষ্ঠানিক ক্যালেন্ডার",
-      category: "ক্যালেন্ডার",
-      size: "১.১ মেগাবাইট",
-      type: "PDF",
-      date: "২০২৬",
-      description: "রমজান, দুই ঈদ এবং জাতীয় দিবস সমূহের সরকারি ও দ্বীনি ছুটির অনুমোদিত ক্যালেন্ডার।",
-      fileUrl: "/downloads/academic_calendar_2026.pdf",
-    },
-    {
-      title: "মাদরাসা পরিচিতি ও প্রসপেক্টাস (ব্রোশার)",
-      category: "পরিচিতি",
-      size: "৪.০ মেগাবাইট",
-      type: "PDF",
-      date: "২০২৬ সংস্করণ",
-      description: "মাদরাসার ইতিহাস, অবকাঠামো, সুযোগ-সুবিধা ও লিল্লাহ তহবিলের সচিত্র তথ্যাবলি।",
-      fileUrl: "/downloads/prospectus_2026.pdf",
-    },
-  ];
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/public/content/downloads")
-      .then((res) => (res.ok ? res.json() : null))
+      .then((res) => {
+        if (!res.ok) throw new Error(`Download API returned ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
-        if (data?.success && data.downloads?.length > 0) {
-          const apiItems = data.downloads.map((d: any) => ({
+        if (!data?.success || !Array.isArray(data.downloads)) {
+          throw new Error("Download API returned an invalid response");
+        }
+        const apiItems = data.downloads
+          .filter((d: any) => typeof d?.fileUrl === "string" && d.fileUrl.trim())
+          .map((d: any) => ({
             title: d.titleBn,
             category: d.category,
             size: d.fileSizeDisplay,
@@ -87,16 +42,14 @@ export default function DownloadsPage() {
             description: d.descriptionBn,
             fileUrl: d.fileUrl,
           }));
-          setDownloadItems(apiItems);
-          setFilteredItems(apiItems);
-        } else {
-          setDownloadItems(FALLBACK_DOWNLOADS);
-          setFilteredItems(FALLBACK_DOWNLOADS);
-        }
+        setDownloadItems(apiItems);
       })
-      .catch(() => {
-        setDownloadItems(FALLBACK_DOWNLOADS);
-        setFilteredItems(FALLBACK_DOWNLOADS);
+      .catch((error) => {
+        console.error("Failed to load official downloads:", error);
+        setLoadError("অফিসিয়াল ফাইলের তালিকা লোড করা যায়নি। কিছুক্ষণ পর আবার চেষ্টা করুন।");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -127,7 +80,7 @@ export default function DownloadsPage() {
       {/* 1. OFFICIAL PAGE HEADER BANNER WITH BREADCRUMB */}
       <PageHeaderBanner
         title="ডাউনলোড কর্নার ও প্রাতিষ্ঠানিক প্রকাশনা"
-        subtitle="মাদরাসার অফলাইন ভর্তি ফরম, একাডেমিক রুটিন, সিলেবাস এবং প্রয়োজনীয় নথিপত্র এক ক্লিকে ডাউনলোড করুন"
+        subtitle="প্রশাসন প্রকাশিত অফিসিয়াল ফরম, সিলেবাস, রুটিন ও প্রয়োজনীয় নথিপত্র এখান থেকে ডাউনলোড করুন"
         badge="অফিসিয়াল রিসোর্স ও পাবলিকেশন কর্নার"
         breadcrumbs={[{ label: "ডাউনলোড কর্নার" }]}
       />
@@ -181,11 +134,23 @@ export default function DownloadsPage() {
 
         {/* Download Items List */}
         <div className="space-y-4">
-          {filteredItems.length === 0 ? (
+          {loading ? (
+            <div className="p-16 bg-white rounded-3xl border border-slate-200 text-center text-xs text-slate-500">
+              অফিসিয়াল ফাইলের তালিকা লোড হচ্ছে...
+            </div>
+          ) : loadError ? (
+            <div role="alert" className="p-16 bg-white rounded-3xl border border-rose-200 text-center text-xs text-rose-700">
+              {loadError}
+            </div>
+          ) : filteredItems.length === 0 ? (
             <div className="p-16 bg-white rounded-3xl border border-slate-200 text-center space-y-2 text-xs text-slate-500">
               <FileText className="w-10 h-10 text-slate-300 mx-auto" />
-              <p className="text-sm font-bold text-slate-700">কোনো ফাইল পাওয়া যায়নি।</p>
-              <p className="text-slate-400">অনুগ্রহ করে অন্য কোনো ক্যাটাগরি বা অনুসন্ধানী শব্দ দিয়ে চেষ্টা করুন।</p>
+              <p className="text-sm font-bold text-slate-700">
+                {downloadItems.length === 0 ? "এখনো কোনো অফিসিয়াল ফাইল প্রকাশিত হয়নি।" : "কোনো ফাইল পাওয়া যায়নি।"}
+              </p>
+              {downloadItems.length > 0 && (
+                <p className="text-slate-400">অনুগ্রহ করে অন্য কোনো ক্যাটাগরি বা অনুসন্ধানী শব্দ দিয়ে চেষ্টা করুন।</p>
+              )}
             </div>
           ) : (
             filteredItems.map((item, idx) => (
@@ -222,7 +187,7 @@ export default function DownloadsPage() {
                 </div>
 
                 <a
-                  href={item.fileUrl || "/downloads/prospectus_2026.pdf"}
+                  href={item.fileUrl}
                   download
                   target="_blank"
                   rel="noopener noreferrer"

@@ -61,17 +61,12 @@ export function checkAdmissionRateLimit(clientIp: string): { allowed: boolean; r
 }
 
 /**
- * Extracts normalized client IP from trusted reverse proxy headers without trusting arbitrary spoofing.
+ * Reads only X-Real-IP, which the configured reverse proxy overwrites with the peer address.
+ * X-Forwarded-For is intentionally ignored because clients can supply its leftmost value.
  */
 export function getClientIp(req: { headers: { get: (name: string) => string | null } }): string {
-  const forwarded = req.headers.get("x-forwarded-for");
-  if (forwarded) {
-    const firstIp = forwarded.split(",")[0].trim();
-    if (firstIp) return firstIp;
-  }
-  const realIp = req.headers.get("x-real-ip");
-  if (realIp && realIp.trim()) return realIp.trim();
-  return "127.0.0.1";
+  const realIp = req.headers.get("x-real-ip")?.trim();
+  return realIp || "unknown";
 }
 
 export async function recordAuditLog({

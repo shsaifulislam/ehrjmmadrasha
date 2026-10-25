@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendPasswordResetOtpEmail } from "@/lib/mail";
-import { checkRateLimit } from "@/lib/security";
+import { checkRateLimit, getClientIp } from "@/lib/security";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 
 export async function POST(req: NextRequest) {
   try {
-    const rawForwarded = req.headers.get("x-forwarded-for");
-    const ip = rawForwarded ? rawForwarded.split(",")[0].trim() : (req.headers.get("x-real-ip") || "127.0.0.1");
+    const ip = getClientIp(req);
 
     // IP-level abuse protection: Max 5 OTP requests per 5 minutes per IP
     const ipRateLimit = checkRateLimit(`forgot-otp:${ip}`, 5, 300000);

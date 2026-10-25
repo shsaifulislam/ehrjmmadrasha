@@ -140,179 +140,31 @@ const DEFAULT_RESOURCES: InstitutionalResource[] = [
   },
 ];
 
-const DEFAULT_HOLIDAYS: InstitutionalHoliday[] = [
-  {
-    id: "HOL-2026-001",
-    titleBn: "পবিত্র শবে বরাত",
-    titleEn: "Holy Shab-e-Barat",
-    startDate: "2026-02-04",
-    endDate: "2026-02-04",
-    holidayType: "RELIGIOUS",
-    descriptionBn: "পবিত্র শবে বরাত উপলক্ষে মাদরাসার সকল শিক্ষা কার্যক্রম বন্ধ থাকবে।",
-    affectsClassRoutine: true,
-    affectsExamRoutine: true,
-    affectsOffices: true,
-    isPublic: true,
-    createdAt: "2026-01-01T00:00:00.000Z",
-  },
-  {
-    id: "HOL-2026-002",
-    titleBn: "মহান শহীদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস",
-    titleEn: "Martyrs' Day & International Mother Language Day",
-    startDate: "2026-02-21",
-    endDate: "2026-02-21",
-    holidayType: "NATIONAL",
-    descriptionBn: "জাতীয় দিবস ও মাতৃভাষা দিবস উপলক্ষে জাতীয় পতাকা উত্তোলন ও আলোচনা সভা অনুষ্ঠিত হবে।",
-    affectsClassRoutine: true,
-    affectsExamRoutine: true,
-    affectsOffices: false,
-    isPublic: true,
-    createdAt: "2026-01-01T00:00:00.000Z",
-  },
-  {
-    id: "HOL-2026-003",
-    titleBn: "পবিত্র মাহে রমজান ও ঈদুল ফিতরের সাধারণ ছুটি",
-    titleEn: "Holy Ramadan & Eid-ul-Fitr Vacation",
-    startDate: "2026-03-10",
-    endDate: "2026-03-27",
-    holidayType: "RELIGIOUS",
-    descriptionBn: "পবিত্র রমজানের শেষ দশক ও ঈদুল ফিতর উপলক্ষে সার্বিক মাদরাসা ছুটি।",
-    affectsClassRoutine: true,
-    affectsExamRoutine: true,
-    affectsOffices: true,
-    isPublic: true,
-    createdAt: "2026-01-01T00:00:00.000Z",
-  },
-  {
-    id: "HOL-2026-004",
-    titleBn: "মহান স্বাধীনতা ও জাতীয় দিবস",
-    titleEn: "Independence and National Day",
-    startDate: "2026-03-26",
-    endDate: "2026-03-26",
-    holidayType: "NATIONAL",
-    descriptionBn: "স্বাধীনতা দিবস উপলক্ষে প্রাতিষ্ঠানিক দোয়া ও জাতীয় কর্মসূচি।",
-    affectsClassRoutine: true,
-    affectsExamRoutine: true,
-    affectsOffices: false,
-    isPublic: true,
-    createdAt: "2026-01-01T00:00:00.000Z",
-  },
-  {
-    id: "HOL-2026-005",
-    titleBn: "পবিত্র ঈদুল আযহা ছুটি",
-    titleEn: "Eid-ul-Adha Vacation",
-    startDate: "2026-05-24",
-    endDate: "2026-06-03",
-    holidayType: "RELIGIOUS",
-    descriptionBn: "কুরবানি ও ঈদুল আযহা উপলক্ষে মাদরাসার আবাসিক ও সাধারণ বিভাগের ছুটি।",
-    affectsClassRoutine: true,
-    affectsExamRoutine: true,
-    affectsOffices: true,
-    isPublic: true,
-    createdAt: "2026-01-01T00:00:00.000Z",
-  },
-  {
-    id: "HOL-2026-006",
-    titleBn: "পবিত্র আশুরা (১০ই মহররম)",
-    titleEn: "Holy Ashura (10th Muharram)",
-    startDate: "2026-07-24",
-    endDate: "2026-07-24",
-    holidayType: "RELIGIOUS",
-    descriptionBn: "পবিত্র আশুরা উপলক্ষে মাদরাসার সকল ক্লাস বন্ধ থাকবে।",
-    affectsClassRoutine: true,
-    affectsExamRoutine: true,
-    affectsOffices: true,
-    isPublic: true,
-    createdAt: "2026-01-01T00:00:00.000Z",
-  },
-  {
-    id: "HOL-2026-007",
-    titleBn: "মহান বিজয় দিবস",
-    titleEn: "Victory Day",
-    startDate: "2026-12-16",
-    endDate: "2026-12-16",
-    holidayType: "NATIONAL",
-    descriptionBn: "মহান বিজয় দিবস উপলক্ষে খতমে কুরআন ও বিশেষ দোয়া মাহফিল।",
-    affectsClassRoutine: true,
-    affectsExamRoutine: true,
-    affectsOffices: false,
-    isPublic: true,
-    createdAt: "2026-01-01T00:00:00.000Z",
-  },
-];
-
-const DEFAULT_CALENDAR_EVENTS: CalendarEvent[] = [
-  {
-    id: "CAL-EVT-2026-0001",
-    title: "২০২৬ শিক্ষাবর্ষের বার্ষিক খতমে বুখারী ও দুআ মাহফিল",
-    titleBn: "২০২৬ শিক্ষাবর্ষের বার্ষিক খতমে বুখারী ও দুআ মাহফিল",
-    description: "দাওরায়ে হাদিস শিক্ষার্থীদের সর্বোচ্চ কিতাব সমাপ্তি ও সনদ বিতরণ উপলক্ষে ঐতিহ্যবাহী দুআ মজলিস।",
-    descriptionBn: "দাওরায়ে হাদিস শিক্ষার্থীদের সর্বোচ্চ কিতাব সমাপ্তি ও সনদ বিতরণ উপলক্ষে ঐতিহ্যবাহী দুআ মজলিস।",
-    eventType: "INSTITUTIONAL",
-    startAt: "2026-04-10T09:00:00.000Z",
-    endAt: "2026-04-10T14:00:00.000Z",
-    timezone: "Asia/Dhaka",
-    allDay: false,
-    status: "SCHEDULED",
-    visibility: "PUBLIC",
-    sourceModule: "MANUAL",
-    location: "দারুল হাদিস অডিটোরিয়াম",
-    resourceId: "RES-001",
-    createdBy: "admin@ehrj.edu.bd",
-    updatedBy: "admin@ehrj.edu.bd",
-    createdAt: "2026-01-10T00:00:00.000Z",
-    updatedAt: "2026-01-10T00:00:00.000Z",
-  },
-  {
-    id: "CAL-EVT-2026-0002",
-    title: "অভিভাবক সমাবেশ ও ত্রৈমাসিক মতবিনিময় সভা",
-    titleBn: "অভিভাবক সমাবেশ ও ত্রৈমাসিক মতবিনিময় সভা",
-    description: "নূরানী, নাযেরা ও হিফজ বিভাগের শিক্ষার্থীদের অভিভাবকগণের সাথে সার্বিক অগ্রগতি নিয়ে মতবিনিময়।",
-    descriptionBn: "নূরানী, নাযেরা ও হিফজ বিভাগের শিক্ষার্থীদের অভিভাবকগণের সাথে সার্বিক অগ্রগতি নিয়ে মতবিনিময়।",
-    eventType: "MEETING",
-    startAt: "2026-04-18T10:00:00.000Z",
-    endAt: "2026-04-18T13:00:00.000Z",
-    timezone: "Asia/Dhaka",
-    allDay: false,
-    status: "SCHEDULED",
-    visibility: "GUARDIAN",
-    sourceModule: "MANUAL",
-    location: "দারুল হাদিস অডিটোরিয়াম",
-    resourceId: "RES-001",
-    createdBy: "admin@ehrj.edu.bd",
-    updatedBy: "admin@ehrj.edu.bd",
-    createdAt: "2026-01-15T00:00:00.000Z",
-    updatedAt: "2026-01-15T00:00:00.000Z",
-  },
-  {
-    id: "CAL-EVT-2026-0003",
-    title: "একাডেমিক কাউন্সিল ও পরীক্ষার প্রশ্নপত্র প্রণয়ন সভা",
-    titleBn: "একাডেমিক কাউন্সিল ও পরীক্ষার প্রশ্নপত্র প্রণয়ন সভা",
-    description: "প্রথম সাময়িক পরীক্ষার বিষয়ভিত্তিক প্রশ্নপত্র চূড়ান্তকরণ বিষয়ে বিভাগীয় প্রধানগণের জরুরি অধিবেশন।",
-    descriptionBn: "প্রথম সাময়িক পরীক্ষার বিষয়ভিত্তিক প্রশ্নপত্র চূড়ান্তকরণ বিষয়ে বিভাগীয় প্রধানগণের জরুরি অধিবেশন।",
-    eventType: "MEETING",
-    startAt: "2026-03-05T14:30:00.000Z",
-    endAt: "2026-03-05T16:30:00.000Z",
-    timezone: "Asia/Dhaka",
-    allDay: false,
-    status: "SCHEDULED",
-    visibility: "TEACHER",
-    sourceModule: "MANUAL",
-    location: "কেন্দ্রীয় সম্মেলন কক্ষ",
-    resourceId: "RES-002",
-    createdBy: "admin@ehrj.edu.bd",
-    updatedBy: "admin@ehrj.edu.bd",
-    createdAt: "2026-01-20T00:00:00.000Z",
-    updatedAt: "2026-01-20T00:00:00.000Z",
-  },
-];
+const DEFAULT_HOLIDAYS: InstitutionalHoliday[] = [];
+const LEGACY_DEMO_HOLIDAY_IDS = new Set([
+  "HOL-2026-001",
+  "HOL-2026-002",
+  "HOL-2026-003",
+  "HOL-2026-004",
+  "HOL-2026-005",
+  "HOL-2026-006",
+  "HOL-2026-007",
+]);
+const DEFAULT_CALENDAR_EVENTS: CalendarEvent[] = [];
+const LEGACY_DEMO_EVENT_IDS = new Set([
+  "CAL-EVT-2026-0001",
+  "CAL-EVT-2026-0002",
+  "CAL-EVT-2026-0003",
+]);
 
 // -------------------------------------------------------------
 // STORE METHODS
 // -------------------------------------------------------------
 
 export function getCalendarEvents(): CalendarEvent[] {
-  return safeRead<CalendarEvent[]>(EVENTS_FILE, DEFAULT_CALENDAR_EVENTS);
+  return safeRead<CalendarEvent[]>(EVENTS_FILE, DEFAULT_CALENDAR_EVENTS).filter(
+    (event) => !LEGACY_DEMO_EVENT_IDS.has(event.id)
+  );
 }
 
 export function saveCalendarEvents(events: CalendarEvent[]): void {
@@ -329,6 +181,12 @@ export function saveClassRoutineSlots(slots: ClassRoutineSlot[]): void {
 
 export function getInstitutionalHolidays(): InstitutionalHoliday[] {
   return safeRead<InstitutionalHoliday[]>(HOLIDAYS_FILE, DEFAULT_HOLIDAYS);
+}
+
+export function getPublicInstitutionalHolidays(): InstitutionalHoliday[] {
+  return getInstitutionalHolidays().filter(
+    (holiday) => holiday.isPublic && !LEGACY_DEMO_HOLIDAY_IDS.has(holiday.id)
+  );
 }
 
 export function saveInstitutionalHolidays(holidays: InstitutionalHoliday[]): void {

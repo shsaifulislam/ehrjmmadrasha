@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
-import { getJwtSecretBytes } from "@/lib/env";
+import { getJwtSecretBytes } from "@/lib/jwtSecret";
 
 const JWT_SECRET = getJwtSecretBytes();
 

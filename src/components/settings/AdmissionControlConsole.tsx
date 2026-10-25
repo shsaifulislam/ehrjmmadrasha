@@ -17,6 +17,8 @@ import {
 interface AdmissionStatus {
   isOpen: boolean;
   sessionName: string;
+  startDate: string;
+  endDate: string;
   closedMessage: string;
   helplinePhone: string;
   updatedAt?: string;
@@ -24,10 +26,11 @@ interface AdmissionStatus {
 
 export default function AdmissionControlConsole() {
   const [status, setStatus] = useState<AdmissionStatus>({
-    isOpen: true,
-    sessionName: "২০২৬",
-    closedMessage:
-      "বর্তমানে নতুন শিক্ষাবর্ষের ভর্তি কার্যক্রম সাময়িকভাবে বন্ধ রয়েছে। পরবর্তী সেশনের ভর্তি বিজ্ঞপ্তি খুব শীঘ্রই ওয়েবসাইটে এবং নোটিশ বোর্ডে প্রকাশ করা হবে। জরুরি তথ্যের জন্য মাদরাসা অফিসে যোগাযোগ করুন।",
+    isOpen: false,
+    sessionName: "শিক্ষাবর্ষ নির্ধারিত নয়",
+    startDate: "",
+    endDate: "",
+    closedMessage: "ভর্তির সময়সীমা নির্ধারিত হলে এখানে বিজ্ঞপ্তি প্রকাশ করা হবে।",
     helplinePhone: "01845-162664",
   });
   const [loading, setLoading] = useState(true);
@@ -69,8 +72,9 @@ export default function AdmissionControlConsole() {
 
       const data = await res.json();
       if (res.ok && data.success) {
+        const effectiveIsOpen = data.admission?.isOpen ?? status.isOpen;
         setMessage({
-          text: `ভর্তি নিয়ন্ত্রণ সফলভাবে সংরক্ষিত হয়েছে। বর্তমান অবস্থা: ${status.isOpen ? "ভর্তি চালু (OPEN)" : "ভর্তি বন্ধ (CLOSED)"}`,
+          text: `ভর্তি নিয়ন্ত্রণ সফলভাবে সংরক্ষিত হয়েছে। বর্তমান অবস্থা: ${effectiveIsOpen ? "ভর্তি চালু (OPEN)" : "ভর্তি বন্ধ (CLOSED)"}`,
           type: "success",
         });
         if (data.admission) setStatus(data.admission);
@@ -154,8 +158,31 @@ export default function AdmissionControlConsole() {
               value={status.sessionName}
               onChange={(e) => setStatus({ ...status, sessionName: e.target.value })}
               className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:border-[#083B25] outline-none"
-              placeholder="যেমন: ২০২৬ বা ২০২৬-২০২৭"
+              placeholder="যেমন: ১৪৪৮-১৪৪৯ হিজরি"
             />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block font-bold text-slate-700 mb-1">আবেদন শুরুর তারিখ:</label>
+              <input
+                type="date"
+                value={status.startDate}
+                onChange={(e) => setStatus({ ...status, startDate: e.target.value })}
+                required={status.isOpen}
+                className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:border-[#083B25] outline-none"
+              />
+            </div>
+            <div>
+              <label className="block font-bold text-slate-700 mb-1">আবেদনের শেষ তারিখ:</label>
+              <input
+                type="date"
+                value={status.endDate}
+                onChange={(e) => setStatus({ ...status, endDate: e.target.value })}
+                required={status.isOpen}
+                className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:border-[#083B25] outline-none"
+              />
+            </div>
           </div>
 
           <div>

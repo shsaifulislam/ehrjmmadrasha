@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { processPublicContactSubmission } from "@/lib/cms";
+import { getClientIp } from "@/lib/security";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
     const payload = await req.json();
-    const forwarded = req.headers.get("x-forwarded-for");
-    const ip = forwarded ? forwarded.split(",")[0].trim() : "127.0.0.1";
+    const ip = getClientIp(req);
 
     const result = await processPublicContactSubmission(payload, ip);
 

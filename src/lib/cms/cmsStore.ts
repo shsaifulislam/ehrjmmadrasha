@@ -67,56 +67,17 @@ export function getCmsAuditLogs(): CmsAuditEntry[] {
 // -------------------------------------------------------------
 // 2. EVENTS STORE
 // -------------------------------------------------------------
-const DEFAULT_EVENTS: CmsEvent[] = [
-  {
-    id: "EVT-2026-001",
-    titleBn: "বার্ষিক দস্তারবন্দী ও হিফজ সমাপনী সম্মেলন ২০২৬",
-    titleEn: "Annual Dastarbandi & Hifz Convocation 2026",
-    descriptionBn:
-      "হিফজুল কুরআন সমাপ্তকারী কৃতি শিক্ষার্থীদের সম্মানসূচক দস্তার (পাগড়ী) প্রদান ও বার্ষিক দোয়া মাহফিল। দেশবরেণ্য উলামায়ে কেরাম উপস্থিত থাকবেন।",
-    category: "CONVOCATION",
-    eventDate: "2026-11-15",
-    startTime: "সকাল ০৯:০০",
-    endTime: "বিকাল ০৫:০০",
-    location: "মাদরাসা প্রাঙ্গণ, পূর্ব লক্ষ্মীপুর, ইলিয়টগঞ্জ, দাউদকান্দি",
-    organizer: "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা এন্তেজামিয়া কমিটি",
-    status: "UPCOMING",
-    isPublic: true,
-    isPinned: true,
-    version: 1,
-    publishedAt: "2026-09-01T00:00:00.000Z",
-    createdAt: "2026-09-01T00:00:00.000Z",
-    updatedAt: "2026-09-01T00:00:00.000Z",
-    createdBy: "ADMIN",
-  },
-  {
-    id: "EVT-2026-002",
-    titleBn: "নতুন শিক্ষাবর্ষের কেন্দ্রীয় সবক উদ্বোধন ও দোয়া মাহফিল",
-    titleEn: "Central Sabak Opening Ceremony",
-    descriptionBn:
-      "নূরানী, হিফজ ও কিতাব বিভাগের শিক্ষার্থীদের বুখারী শরীফ ও অন্যান্য কিতাবাদির প্রথম পাঠদান এবং দোয়া অনুষ্ঠান।",
-    category: "ACADEMIC",
-    eventDate: "2026-10-05",
-    startTime: "সকাল ১০:০০",
-    endTime: "দুপুর ০১:০০",
-    location: "মাদরাসা অডিটোরিয়াম ও কেন্দ্রীয় মসজিদ",
-    organizer: "মুহতামিম ও শিক্ষক পরিষদ",
-    status: "UPCOMING",
-    isPublic: true,
-    isPinned: false,
-    version: 1,
-    publishedAt: "2026-09-10T00:00:00.000Z",
-    createdAt: "2026-09-10T00:00:00.000Z",
-    updatedAt: "2026-09-10T00:00:00.000Z",
-    createdBy: "ADMIN",
-  },
-];
+const DEFAULT_EVENTS: CmsEvent[] = [];
+const LEGACY_DEMO_EVENT_IDS = new Set(["EVT-2026-001", "EVT-2026-002"]);
 
 export function getCmsEvents(onlyPublic = false): CmsEvent[] {
   const events = readJsonFile<CmsEvent[]>("events.json", DEFAULT_EVENTS);
   if (onlyPublic) {
     return events.filter(
-      (e) => e.isPublic && (e.status === "UPCOMING" || e.status === "ONGOING" || e.status === "COMPLETED")
+      (e) =>
+        !LEGACY_DEMO_EVENT_IDS.has(e.id) &&
+        e.isPublic &&
+        (e.status === "UPCOMING" || e.status === "ONGOING" || e.status === "COMPLETED")
     );
   }
   return events;
@@ -333,81 +294,15 @@ export function saveCmsFaq(faqData: Partial<CmsFaq> & { id?: string }, performed
 // -------------------------------------------------------------
 // 4. DOWNLOADS STORE
 // -------------------------------------------------------------
-const DEFAULT_DOWNLOADS: CmsDownloadItem[] = [
-  {
-    id: "DL-001",
-    titleBn: "নতুন ছাত্র ভর্তি আবেদন ফরম (অফলাইন)",
-    descriptionBn: "সরাসরি মাদরাসা অফিসে জমা দেওয়ার জন্য প্রিন্ট উপযোগী ৩ পাতার ভর্তি আবেদন ফরম।",
-    category: "ADMISSION",
-    fileUrl: "/downloads/admission_form_2026.pdf",
-    fileType: "PDF",
-    fileSizeBytes: 1258291,
-    fileSizeDisplay: "১.২ মেগাবাইট",
-    versionString: "২০২৬ শিক্ষাবর্ষ",
-    status: "PUBLISHED",
-    isPublic: true,
-    downloadCount: 142,
-    uploadedAt: "2026-09-01T00:00:00.000Z",
-    updatedAt: "2026-09-01T00:00:00.000Z",
-    createdBy: "ADMIN",
-  },
-  {
-    id: "DL-002",
-    titleBn: "হিফজ ও কিতাব বিভাগের বার্ষিক সিলেবাস",
-    descriptionBn: "নূরানী, হিফজুল কুরআন ও কিতাব অনুষদের পরীক্ষা ও পাঠ্যসূচির পূর্ণ বিবরণ।",
-    category: "SYLLABUS",
-    fileUrl: "/downloads/syllabus_2025_2026.pdf",
-    fileType: "PDF",
-    fileSizeBytes: 2621440,
-    fileSizeDisplay: "২.৫ মেগাবাইট",
-    versionString: "২০২৫-২০২৬",
-    status: "PUBLISHED",
-    isPublic: true,
-    downloadCount: 89,
-    uploadedAt: "2026-09-01T00:00:00.000Z",
-    updatedAt: "2026-09-01T00:00:00.000Z",
-    createdBy: "ADMIN",
-  },
-  {
-    id: "DL-003",
-    titleBn: "ক্লাস ও সবক রুটিন (দৈনন্দিন সময়সূচি)",
-    descriptionBn: "ফজর থেকে এশা পর্যন্ত তাহাজ্জুদ, তেলাওয়াত, সবক ও সাধারণ শিক্ষার রুটিন।",
-    category: "ROUTINE",
-    fileUrl: "/downloads/daily_routine_2026.pdf",
-    fileType: "PDF",
-    fileSizeBytes: 870400,
-    fileSizeDisplay: "৮৫০ কিলোবাইট",
-    versionString: "২০২৬ হালনাগাদ",
-    status: "PUBLISHED",
-    isPublic: true,
-    downloadCount: 65,
-    uploadedAt: "2026-09-01T00:00:00.000Z",
-    updatedAt: "2026-09-01T00:00:00.000Z",
-    createdBy: "ADMIN",
-  },
-  {
-    id: "DL-004",
-    titleBn: "বার্ষিক ছুটির তালিকা ও ক্যালেন্ডার",
-    descriptionBn: "রমজান, ঈদ এবং জাতীয় দিবসের সরকারি ও দ্বীনি ছুটির অনুমোদিত ক্যালেন্ডার।",
-    category: "CALENDAR",
-    fileUrl: "/downloads/academic_calendar_2026.pdf",
-    fileType: "PDF",
-    fileSizeBytes: 1153433,
-    fileSizeDisplay: "১.১ মেগাবাইট",
-    versionString: "২০২৬",
-    status: "PUBLISHED",
-    isPublic: true,
-    downloadCount: 210,
-    uploadedAt: "2026-09-01T00:00:00.000Z",
-    updatedAt: "2026-09-01T00:00:00.000Z",
-    createdBy: "ADMIN",
-  },
-];
+const DEFAULT_DOWNLOADS: CmsDownloadItem[] = [];
+const LEGACY_DEMO_DOWNLOAD_IDS = new Set(["DL-001", "DL-002", "DL-003", "DL-004"]);
 
 export function getCmsDownloads(onlyPublic = false): CmsDownloadItem[] {
   const downloads = readJsonFile<CmsDownloadItem[]>("downloads.json", DEFAULT_DOWNLOADS);
   if (onlyPublic) {
-    return downloads.filter((d) => d.isPublic && d.status === "PUBLISHED");
+    return downloads.filter(
+      (d) => !LEGACY_DEMO_DOWNLOAD_IDS.has(d.id) && d.isPublic && d.status === "PUBLISHED"
+    );
   }
   return downloads;
 }
@@ -591,8 +486,8 @@ export function saveCmsGalleryItem(itemData: Partial<CmsGalleryItem> & { id?: st
 // 6. HOMEPAGE CONFIGURATION
 // -------------------------------------------------------------
 const DEFAULT_HOMEPAGE_CONFIG: HomepageConfig = {
-  admissionState: "OPEN",
-  admissionAnnouncementBn: "২০২৬ শিক্ষাবর্ষে নূরানী, হিফজুল কুরআন ও কিতাব বিভাগে সীমিত আসনে ভর্তি চলছে",
+  admissionState: "CLOSED",
+  admissionAnnouncementBn: "ভর্তি বিজ্ঞপ্তি প্রকাশিত হলে এখানে হালনাগাদ তথ্য জানানো হবে।",
   sections: [
     { id: "hero", titleBn: "হিরো ব্যানার ও মোবারকবাদ", enabled: true, order: 1 },
     { id: "stats", titleBn: "প্রাতিষ্ঠানিক পরিসংখ্যান চার্ট", enabled: true, order: 2 },
@@ -780,4 +675,3 @@ export function deleteCmsGalleryItem(id: string, performedBy: string): boolean {
   });
   return true;
 }
-

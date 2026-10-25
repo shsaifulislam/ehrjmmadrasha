@@ -5,7 +5,7 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { prisma } from "./prisma";
 
-import { getJwtSecretBytes } from "./env";
+import { getJwtSecretBytes } from "./jwtSecret";
 
 const JWT_SECRET = getJwtSecretBytes();
 
