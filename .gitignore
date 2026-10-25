@@ -25,6 +25,7 @@ dist/
 *.pem
 .vscode/
 .idea/
+/.agents/mcp_config.json
 
 # debug
 *.log
