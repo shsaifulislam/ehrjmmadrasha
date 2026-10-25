@@ -1,0 +1,87 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>আমার ক্লাসসমূহ — Teacher Classes</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.class-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:20px}
+.class-card {background:#fff;border:1px solid var(--border,#D9E1DD);border-radius:18px;padding:22px;box-shadow:0 8px 20px rgba(10,63,54,0.04)}
+.class-card h3 {margin:0 0 10px;color:var(--deep,#0A3F36)}
+.class-card p {color:#667874;font-size:14px;margin-bottom:18px}
+.class-actions {display:flex;gap:10px}
+.class-actions a {flex:1;text-align:center;padding:10px;border-radius:10px;font-weight:bold;font-size:13px}
+.btn-att {background:var(--primary,#0F5C4D);color:#fff}
+.btn-marks {background:#fff;color:var(--primary,#0F5C4D);border:1px solid var(--primary,#0F5C4D)}
+.loader {text-align:center;padding:40px;color:#667874}
+.error-state {text-align:center;padding:40px;color:#DC2626}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/teacher/dashboard">Dashboard</a>
+    <a href="/teacher/students">শিক্ষার্থী তালিকা</a>
+    <a href="/teacher/attendance-entry">উপস্থিতি এন্ট্রি</a>
+    <a href="/teacher/marks-entry">মার্কস এন্ট্রি</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>🏫 আমার দায়িত্বপ্রাপ্ত ক্লাসসমূহ (Assigned Classes)</h1>
+    <p>নিচে আপনার জন্য বরাদ্দকৃত ক্লাসসমূহের তালিকা দেওয়া হলো। সরাসরি উপস্থিতি বা ফলাফল এন্ট্রি করতে বাটনে ক্লিক করুন।</p>
+  </section>
+
+  <!-- Assigned Classes Grid -->
+  <div id="classesArea">
+    <div class="loader">📋 ক্লাসের তালিকা লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%Bাসার%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+async function loadAssignedClasses() {
+  try {
+    const [me, classes] = await Promise.all([
+      API('/api/teacher/me'),
+      API('/api/classes')
+    ]);
+
+    if (me.error || classes.error) {
+      document.getElementById('classesArea').innerHTML = '<div class="error-state">❌ তথ্য লোড করতে সমস্যা হয়েছে। অনুগ্রহ করে আগে লগইন করুন।</div>';
+      return;
+    }
+
+    const assignedIds = me.assignedClasses || [];
+    const myClasses = classes.filter(c => assignedIds.includes(c.id));
+
+    if (myClasses.length === 0) {
+      document.getElementById('classesArea').innerHTML = '<div style="text-align:center;padding:40px;color:#667874">আপনার কোনো দায়িত্বপ্রাপ্ত ক্লাস পাওয়া যায়নি।</div>';
+      return;
+    }
+
+    document.getElementById('classesArea').innerHTML = `
+      <div class="class-grid">${myClasses.map(c => `
+        <div class="class-card">
+          <h3>${c.name}</h3>
+          <p>ক্লাস আইডি: ${c.id}<br>নিবন্ধিত শিক্ষার্থী: ${c.studentCount || 0} জন</p>
+          <div class="class-actions">
+            <a href="/teacher/attendance-entry?classId=${c.id}" class="class-actions a btn-att">📝 উপস্থিতি নিন</a>
+            <a href="/teacher/marks-entry?classId=${c.id}" class="class-actions a btn-marks">📊 মার্কস এন্ট্রি</a>
+          </div>
+        </div>
+      `).join('')}</div>
+    `;
+  } catch(e) {
+    document.getElementById('classesArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না।</div>';
+  }
+}
+
+loadAssignedClasses();
+</script>
+</body></html>

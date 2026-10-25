@@ -1,0 +1,153 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>খরচ ট্র্যাকিং — Admin Expenses</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.empty-state{text-align:center;padding:40px;color:#667874}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input,.modal select,.modal textarea{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal textarea{min-height:70px}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-danger{background:#DC2626;color:#fff;border:0}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance" style="background:#0F5C4D;color:#fff;border-radius:10px">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📤 খরচ ট্র্যাকিং (Expense Tracker)</h1>
+    <p>মাদ্রাসার সমস্ত ব্যয় ও খরচের তালিকা পরিচালনা করুন এবং নতুন খরচ লিপিবদ্ধ করুন।</p>
+  </section>
+
+  <!-- Toolbar: Add Expense -->
+  <section class="toolbar">
+    <button onclick="openModal('expenseModal')" id="btnAddExpense" style="background:#DC2626;">➕ নতুন খরচ যোগ</button>
+  </section>
+
+  <!-- Expenses Table -->
+  <div id="expensesArea">
+    <div class="loader">📋 তালিকা লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- ADD EXPENSE MODAL -->
+<div class="modal-overlay" id="expenseModal">
+  <div class="modal">
+    <h2>📤 নতুন খরচ রেকর্ড</h2>
+    <label>খরচের শিরোনাম</label>
+    <input id="expTitle" placeholder="যেমন: বিদ্যুৎ বিল, আসবাবপত্র">
+    <label>ক্যাটেগরি</label>
+    <select id="expCategory">
+      <option value="maintenance">রক্ষণাবেক্ষণ</option>
+      <option value="salary">বেতন</option>
+      <option value="utilities">ইউটিলিটি</option>
+      <option value="supplies">সরবরাহ</option>
+      <option value="other">অন্যান্য</option>
+    </select>
+    <label>পরিমাণ (টাকা)</label>
+    <input id="expAmount" type="number" min="1" placeholder="টাকার পরিমাণ">
+    <label>নোট (ঐচ্ছিক)</label>
+    <textarea id="expNote" placeholder="অতিরিক্ত তথ্য..."></textarea>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('expenseModal')">বাতিল</button>
+      <button class="btn-danger" onclick="saveExpense()" id="btnSubmitExpense">✅ খরচ যোগ করুন</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+const taka = n => new Intl.NumberFormat('bn-BD').format(n||0) + ' ৳';
+
+async function loadExpenses() {
+  try {
+    const data = await API('/api/expenses');
+    if (data.error) {
+      document.getElementById('expensesArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন।</div>';
+      return;
+    }
+
+    if (data.length === 0) {
+      document.getElementById('expensesArea').innerHTML = '<div class="empty-state">📭 কোনো খরচের রেকর্ড পাওয়া যায়নি।</div>';
+      return;
+    }
+
+    const catLabels = {maintenance:'রক্ষণাবেক্ষণ',salary:'বেতন',utilities:'ইউটিলিটি',supplies:'সরবরাহ',other:'অন্যান্য'};
+
+    document.getElementById('expensesArea').innerHTML = `
+      <div class="table-wrap"><table>
+        <thead><tr>
+          <th>তারিখ</th><th>শিরোনাম</th><th>ক্যাটেগরি</th><th>নোট</th><th>পরিমাণ</th><th>অনুমোদনকারী</th>
+        </tr></thead>
+        <tbody>${data.map(e => `<tr>
+          <td>${e.date}</td>
+          <td style="font-weight:bold">${e.title}</td>
+          <td>${catLabels[e.category] || e.category}</td>
+          <td>${e.note || '-'}</td>
+          <td style="font-weight:bold;color:#DC2626">${taka(e.amount)}</td>
+          <td>${e.approvedBy || '-'}</td>
+        </tr>`).join('')}</tbody>
+      </table></div>
+    `;
+
+  } catch(e) {
+    document.getElementById('expensesArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+async function saveExpense() {
+  const title = document.getElementById('expTitle').value;
+  const category = document.getElementById('expCategory').value;
+  const amount = parseInt(document.getElementById('expAmount').value);
+  const note = document.getElementById('expNote').value;
+
+  if (!title || !amount || amount <= 0) { alert('শিরোনাম ও পরিমাণ পূরণ করুন!'); return; }
+
+  try {
+    const res = await API('/api/expenses', {
+      method: 'POST',
+      body: JSON.stringify({ title, category, amount, note })
+    });
+
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ খরচ সফলভাবে যোগ করা হয়েছে!');
+    closeModal('expenseModal');
+    document.getElementById('expTitle').value = '';
+    document.getElementById('expAmount').value = '';
+    document.getElementById('expNote').value = '';
+    loadExpenses();
+  } catch(e) {
+    alert('❌ সংরক্ষণ ব্যর্থ হয়েছে।');
+  }
+}
+
+loadExpenses();
+</script>
+</body></html>

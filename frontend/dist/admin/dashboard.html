@@ -1,0 +1,119 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ড্যাশবোর্ড — Admin Dashboard</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:16px 0}
+.summary-card{background:#fff;border:1px solid #D9E1DD;border-radius:14px;padding:18px;text-align:center}
+.summary-card h4{margin:0;color:#667874;font-size:13px}
+.summary-card .val{font-size:26px;font-weight:700;color:#0A3F36;margin:6px 0}
+.summary-card.income .val{color:#15803D}
+.summary-card.due .val{color:#F59E0B}
+.dashboard-sections {display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+@media (max-width: 768px) {
+  .dashboard-sections {grid-template-columns:1fr}
+}
+.activity-item {padding:10px 0;border-bottom:1px solid #EAEAEA;font-size:14px}
+.activity-time {color:#888;font-size:12px;margin-top:2px}
+.notice-item {padding:10px 0;border-bottom:1px solid #EAEAEA;font-size:14px}
+.notice-date {color:#888;font-size:12px;margin-top:2px;font-weight:bold}
+.loader {text-align:center;padding:40px;color:#667874}
+.error-state {text-align:center;padding:40px;color:#DC2626}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانج حاجي رحمة الله زميرية</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard" style="background:#0F5C4D;color:#fff;border-radius:10px">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>🎛️ অ্যাডমিন ড্যাশবোর্ড</h1>
+    <p>মাদ্রাসার সামগ্রিক তথ্য ও কার্যক্রমের সারসংক্ষেপ।</p>
+  </section>
+
+  <!-- Counts & Summary Cards -->
+  <div id="countsArea"><div class="loader">📊 ড্যাশবোর্ড তথ্য লোড হচ্ছে...</div></div>
+
+  <!-- Sections: Activity Logs and Notices -->
+  <div class="dashboard-sections">
+    <div class="card">
+      <h3>📜 সাম্প্রতিক কার্যক্রম (Activity Log)</h3>
+      <div id="activityArea"><div class="loader">কার্যক্রম লোড হচ্ছে...</div></div>
+    </div>
+    <div class="card">
+      <h3>📌 সাম্প্রতিক নোটিশ</h3>
+      <div id="noticesArea"><div class="loader">নোটিশ লোড হচ্ছে...</div></div>
+    </div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+const taka = n => new Intl.NumberFormat('bn-BD').format(n||0) + ' ৳';
+
+async function loadDashboard() {
+  try {
+    const d = await API('/api/admin/dashboard');
+    if (d.error) {
+      document.getElementById('countsArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন। <a href="/admin/login.html">Login</a></div>';
+      document.getElementById('activityArea').innerHTML = '';
+      document.getElementById('noticesArea').innerHTML = '';
+      return;
+    }
+
+    // Load stats
+    document.getElementById('countsArea').innerHTML = `
+      <div class="summary-grid">
+        <div class="summary-card"><h4>মোট ছাত্র</h4><div class="val">${d.counts.students} জন</div></div>
+        <div class="summary-card"><h4>মোট শিক্ষক</h4><div class="val">${d.counts.teachers} জন</div></div>
+        <div class="summary-card"><h4>মোট স্টাফ</h4><div class="val">${d.counts.staff} জন</div></div>
+        <div class="summary-card income"><h4>ব্যালেন্স (ক্যাশ)</h4><div class="val">${taka(d.finance.balance)}</div></div>
+        <div class="summary-card due"><h4>মোট বকেয়া</h4><div class="val">${taka(d.finance.totalDue)}</div></div>
+      </div>
+    `;
+
+    // Load recent activity
+    const activityHtml = d.recentActivity && d.recentActivity.length > 0 
+      ? d.recentActivity.map(act => `
+          <div class="activity-item">
+            <strong>${act.action}</strong>: ${act.details}
+            <div class="activity-time">${new Date(act.timestamp).toLocaleString('bn-BD')} (${act.user})</div>
+          </div>
+        `).join('')
+      : '<p style="color:#888;text-align:center;padding:20px;">কোনো কার্যক্রম নেই</p>';
+    document.getElementById('activityArea').innerHTML = activityHtml;
+
+    // Load recent notices
+    const noticesHtml = d.recentNotices && d.recentNotices.length > 0 
+      ? d.recentNotices.map(n => `
+          <div class="notice-item">
+            <strong>${n.title}</strong>
+            <p style="margin:5px 0 0;color:#667874;">${n.body}</p>
+            <div class="notice-date">📅 তারিখ: ${n.date}</div>
+          </div>
+        `).join('')
+      : '<p style="color:#888;text-align:center;padding:20px;">কোনো নোটিশ নেই</p>';
+    document.getElementById('noticesArea').innerHTML = noticesHtml;
+
+  } catch(e) {
+    document.getElementById('countsArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+loadDashboard();
+</script>
+</body></html>

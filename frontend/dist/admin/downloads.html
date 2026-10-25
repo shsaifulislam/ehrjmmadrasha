@@ -1,0 +1,166 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ডাউনলোড ফাইল ব্যবস্থাপনা — Admin Downloads</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-danger{background:#DC2626;color:#fff;border:0}
+.btn-success{background:#15803D;color:#fff;border:0}
+.loader{text-align:center;padding:40px;color:#667874}
+.empty-state{text-align:center;padding:40px;color:#667874;font-size:16px}
+.error-state{text-align:center;padding:40px;color:#DC2626;font-size:16px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📂 ডাউনলোড রিসোর্স ব্যবস্থাপনা</h1>
+    <p>মাদ্রাসার শিক্ষার্থীদের সিলেবাস, পরীক্ষার রুটিন, নোটিশ বা ভর্তি ফরমের মত ফাইলসমূহ আপলোড/যোগ এবং নিয়ন্ত্রণ করুন।</p>
+  </section>
+
+  <!-- Toolbar -->
+  <section class="toolbar">
+    <button onclick="openAddModal()">➕ নতুন ফাইল লিংক যোগ করুন</button>
+  </section>
+
+  <!-- Output Area -->
+  <div id="downloadsArea">
+    <div class="loader">📋 ফাইলের তালিকা লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- ADD MODAL -->
+<div class="modal-overlay" id="downloadModal">
+  <div class="modal">
+    <h2>➕ নতুন ডাউনলোড ফাইল যোগ</h2>
+    
+    <label>ফাইলের শিরোনাম (File Title)</label>
+    <input id="dwnTitle" placeholder="যেমন: বার্ষিক পরীক্ষার সিলেবাস ২০২৬">
+    
+    <label>ফাইলের লিংক / URL (File Url)</label>
+    <input id="dwnUrl" placeholder="যেমন: /assets/files/syllabus_2026.pdf">
+
+    <label>ফাইলের সাইজ (File Size)</label>
+    <input id="dwnSize" placeholder="যেমন: 1.2 MB">
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('downloadModal')">বাতিল</button>
+      <button class="btn-success" onclick="saveDownloadItem()">✅ সংরক্ষণ করুন</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let allDownloadItems = [];
+
+async function loadDownloads() {
+  try {
+    const data = await API('/api/downloads');
+    if (data.error) {
+      document.getElementById('downloadsArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। অনুগ্রহ করে আগে লগইন করুন।</div>';
+      return;
+    }
+    allDownloadItems = Array.isArray(data) ? data : [];
+    renderDownloads();
+  } catch(e) {
+    document.getElementById('downloadsArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderDownloads() {
+  if (allDownloadItems.length === 0) {
+    document.getElementById('downloadsArea').innerHTML = '<div class="empty-state">📭 কোনো ফাইল লিংক পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('downloadsArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>আইডি</th><th>ফাইলের শিরোনাম</th><th>ফাইলের সাইজ</th><th>লিংক</th><th>Action</th>
+      </tr></thead>
+      <tbody>${allDownloadItems.map(item => `<tr>
+        <td>${item.id}</td>
+        <td><strong>${item.title || 'শিরোনামহীন ফাইল'}</strong></td>
+        <td>${item.size || item.fileSize || 'N/A'}</td>
+        <td><a href="${item.url || item.fileUrl}" target="_blank" style="color:#0F5C4D;text-decoration:underline">${item.url || item.fileUrl}</a></td>
+        <td>
+          <button onclick="deleteDownloadItem('${item.id}')" style="font-size:12px;padding:6px 10px;background:#DC2626">🗑️ ফাইল মুছুন</button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openAddModal() {
+  document.getElementById('dwnTitle').value = '';
+  document.getElementById('dwnUrl').value = '';
+  document.getElementById('dwnSize').value = '';
+  openModal('downloadModal');
+}
+
+async function saveDownloadItem() {
+  const title = document.getElementById('dwnTitle').value.trim();
+  const url = document.getElementById('dwnUrl').value.trim();
+  const size = document.getElementById('dwnSize').value.trim();
+
+  if (!title || !url) { alert('ফাইলের শিরোনাম ও ডাউনলোড লিংক দিতে হবে!'); return; }
+
+  try {
+    const res = await API('/api/downloads', {
+      method: 'POST',
+      body: JSON.stringify({ title, url, size })
+    });
+
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ নতুন ডাউনলোড ফাইল যুক্ত করা হয়েছে!');
+    closeModal('downloadModal');
+    loadDownloads();
+  } catch(e) {
+    alert('❌ সংরক্ষণ ব্যর্থ হয়েছে।');
+  }
+}
+
+async function deleteDownloadItem(id) {
+  if (!confirm('আপনি কি নিশ্চিতভাবে এই ফাইলটি সরাতে চান?')) return;
+  try {
+    const res = await API('/api/downloads/' + id, { method: 'DELETE' });
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ ফাইলটি সরিয়ে ফেলা হয়েছে।');
+    loadDownloads();
+  } catch(e) {
+    alert('❌ মুছতে সমস্যা হয়েছে।');
+  }
+}
+
+loadDownloads();
+</script>
+</body></html>

@@ -1,24 +1,33 @@
 # dependencies
 /node_modules
+**/node_modules/
 /.pnp
 .pnp.js
 
 # testing
 /coverage
+**/coverage/
 
 # next.js
 /.next/
+**/.next/
 /.next_staging/
 /out/
+**/out/
 
 # production
 /build
+dist/
+**/dist/
 
 # misc
 .DS_Store
 *.pem
+.vscode/
+.idea/
 
 # debug
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -56,3 +65,7 @@ backups/
 !/scratch/audit_*.ts
 !/scratch/get_model_counts.ts
 !/scratch/run_data_governance_audit.ts
+
+# Database / Storage uploads
+/backend/uploads/*
+!/backend/uploads/.gitkeep

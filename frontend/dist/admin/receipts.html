@@ -1,0 +1,127 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>রসিদ তালিকা — Admin Receipts</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.receipt-print{display:none}
+@media print{body>*:not(.receipt-print){display:none!important}.receipt-print{display:block!important}}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents" style="background:#0F5C4D;color:#fff;border-radius:10px">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>🧾 রসিদ পুনঃমুদ্রণ (Reprint Receipts)</h1>
+    <p>পূর্বে আদায়কৃত সকল ফি ও দানের রসিদ তালিকা এবং পুনঃমুদ্রণ করুন।</p>
+  </section>
+
+  <!-- Receipts List Area -->
+  <div id="receiptsArea">
+    <div class="loader">📋 রসিদ তালিকা লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- Printable Receipt Area (Visible on print only) -->
+<div class="receipt-print" id="receiptPrint"></div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+const taka = n => new Intl.NumberFormat('bn-BD').format(n||0) + ' ৳';
+
+let allReceipts = [];
+
+async function loadReceipts() {
+  try {
+    const data = await API('/api/receipts');
+    if (data.error) {
+      document.getElementById('receiptsArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন।</div>';
+      return;
+    }
+    allReceipts = Array.isArray(data) ? data : [];
+    renderReceiptsTable();
+  } catch(e) {
+    document.getElementById('receiptsArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderReceiptsTable() {
+  if (allReceipts.length === 0) {
+    document.getElementById('receiptsArea').innerHTML = '<div class="empty-state">📭 কোনো রসিদ পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('receiptsArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>রশিদ নং</th><th>তারিখ</th><th>ধরন</th><th>বিবরণ</th><th>নাম</th><th>পরিমাণ</th><th>প্রিন্ট সংখ্যা</th><th>Action</th>
+      </tr></thead>
+      <tbody>${allReceipts.map(r => `<tr>
+        <td>${r.id}</td>
+        <td>${r.date || '-'}</td>
+        <td><span class="badge" style="background:#e8f5e9;color:#15803D">${r.type === 'fee' ? 'ফি' : 'দান'}</span></td>
+        <td>${r.title || '-'}</td>
+        <td>${r.studentName || r.donorName || '-'}</td>
+        <td style="font-weight:bold">${taka(r.amount)}</td>
+        <td>${r.printCount || 0} বার</td>
+        <td>
+          <button onclick="printReceipt('${r.id}')">🖨️ রসিদ প্রিন্ট</button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+async function printReceipt(receiptId) {
+  const r = await API(`/api/finance/receipt/${receiptId}`);
+  if (r.error) { alert('রশিদ পাওয়া যায়নি'); return; }
+  const inst = r.institution || {};
+  document.getElementById('receiptPrint').innerHTML = `
+    <div style="max-width:600px;margin:auto;padding:30px;border:3px solid #0F5C4D;font-family:'Hind Siliguri',sans-serif">
+      <div style="text-align:center;border-bottom:2px solid #0F5C4D;padding-bottom:12px;margin-bottom:16px">
+        <h2 style="margin:0;color:#0A3F36">${inst.nameBn || 'ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা'}</h2>
+        <p style="margin:4px 0;font-size:14px">${inst.nameEn || 'Eliotganj Hazi Rohmatollah Jamiria Madrasha'}</p>
+        <p style="margin:4px 0;font-family:Amiri,serif;font-size:18px;color:#C79A2B">${inst.nameAr || 'مدرسة إليوتغانج حاجي رحمة الله زميرية'}</p>
+        <p style="margin:4px 0;font-size:12px;color:#667874">${inst.address || 'Eliotganj, Daudkandi, Comilla'}</p>
+      </div>
+      <h3 style="text-align:center;color:#0F5C4D">🧾 অর্থ গ্রহণ রশিদ (পুনঃমুদ্রিত)</h3>
+      <table style="width:100%;border-collapse:collapse;margin:12px 0">
+        <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">রশিদ নং</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.id}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">তারিখ</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.date}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">ধরন</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.type === 'fee' ? 'ফি' : r.type === 'donation' ? 'দান' : 'অন্যান্য'}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">বিবরণ</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.title}</td></tr>
+        ${r.studentName ? `<tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">ছাত্রের নাম</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.studentName}</td></tr>` : ''}
+        ${r.donorName ? `<tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:600">দাতার নাম</td><td style="padding:8px;border-bottom:1px solid #ddd">${r.donorName}</td></tr>` : ''}
+        <tr><td style="padding:8px;font-weight:600;font-size:18px">পরিমাণ</td><td style="padding:8px;font-size:18px;font-weight:700;color:#0F5C4D">${taka(r.amount)}</td></tr>
+      </table>
+      <div style="display:flex;justify-content:space-between;margin-top:40px;font-size:13px;color:#667874">
+        <div style="text-align:center"><div style="border-top:1px solid #999;padding-top:6px;width:120px">গ্রহণকারীর স্বাক্ষর</div></div>
+        <div style="text-align:center"><div style="border-top:1px solid #999;padding-top:6px;width:120px">প্রধান শিক্ষকের সীল</div></div>
+      </div>
+      <p style="text-align:center;font-size:11px;color:#999;margin-top:20px">এটি কম্পিউটার জেনারেটেড রশিদ। প্রিন্ট: ${r.printCount || 1}</p>
+    </div>
+  `;
+  setTimeout(() => window.print(), 300);
+  setTimeout(() => loadReceipts(), 1000); // reload to update print count
+}
+
+loadReceipts();
+</script>
+</body></html>

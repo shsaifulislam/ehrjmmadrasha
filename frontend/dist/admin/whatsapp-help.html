@@ -1,0 +1,176 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>হোয়াটসঅ্যাপ হেল্প ও মেসেজিং — Admin WhatsApp Help</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.wa-grid {display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+@media (max-width: 768px) {
+  .wa-grid {grid-template-columns:1fr}
+}
+.card h3 {margin-top:0;color:var(--deep,#0A3F36)}
+.field-group {margin-bottom:14px}
+.field-group label {display:block;margin-bottom:4px;font-weight:600;font-size:14px}
+.field-group input, .field-group textarea, .field-group select {width:100%;padding:12px;border:1px solid var(--border,#D9E1DD);border-radius:10px;font-size:15px;font-family:inherit;min-height:44px}
+.field-group textarea {resize:vertical;min-height:90px}
+.btn-wa {background:#15803D;color:#fff;border:0;width:100%}
+.btn-wa:hover {background:#166534}
+.result-box {background:#F9FAFB;border:1px solid var(--border,#D9E1DD);padding:14px;border-radius:10px;font-size:14px;word-break:break-all;margin-top:14px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي رحمة الله زميرية</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>💬 হোয়াটসঅ্যাপ হেল্প ও মেসেজ জেনারেটর</h1>
+    <p>অভিভাবকদের বকেয়া নোটিশ, ভর্তি তথ্য বা মাদ্রাসার যেকোনো বার্তা সরাসরি হোয়াটসঅ্যাপের মাধ্যমে পাঠাতে টেমপ্লেট ও লিংক জেনারেট করুন।</p>
+  </section>
+
+  <div class="wa-grid">
+    <!-- Configuration -->
+    <div class="card">
+      <h3>⚙️ হোয়াটসঅ্যাপ কনফিগারেশন</h3>
+      <div class="field-group">
+        <label>প্রধান ফোন নম্বর</label>
+        <input type="text" id="waMainPhone" value="01845162664">
+      </div>
+      <div class="field-group">
+        <label>সহকারী ফোন নম্বর ২</label>
+        <input type="text" id="waSecPhone" value="01826416696">
+      </div>
+      <div class="field-group">
+        <label>সহকারী ফোন নম্বর ৩</label>
+        <input type="text" id="waThirdPhone" value="01949091911">
+      </div>
+      <div class="field-group">
+        <label>হোয়াটসঅ্যাপ চ্যানেল লিংক</label>
+        <input type="text" id="waChannel" value="https://whatsapp.com/channel/0029VbC30aF6buMF0LGPMp3F">
+      </div>
+      <button onclick="saveWaSettings()" style="width:100%">✅ কনফিগারেশন সংরক্ষণ করুন</button>
+    </div>
+
+    <!-- Link Generator -->
+    <div class="card">
+      <h3>🔗 কুইক মেসেজ ও লিংক জেনারেটর</h3>
+      <div class="field-group">
+        <label>মেসেজ টেমপ্লেট নির্বাচন করুন</label>
+        <select id="tplSelect" onchange="applyTemplate()">
+          <option value="custom">কাস্টম মেসেজ (Custom)</option>
+          <option value="due">বকেয়া বেতনের নোটিশ (Fee Due Notice)</option>
+          <option value="admission">ভর্তি সংক্রান্ত তথ্য (Admission Query)</option>
+          <option value="notice">সাধারণ নোটিশ (General Notice)</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>অভিভাবকের ফোন নম্বর</label>
+        <input type="text" id="receiverPhone" placeholder="যেমন: 01845162664">
+      </div>
+      <div class="field-group">
+        <label>বার্তার বিবরণ (Message Content)</label>
+        <textarea id="waMsg" placeholder="আপনার বার্তাটি এখানে লিখুন..."></textarea>
+      </div>
+      <button class="btn-wa" onclick="generateLink()">🔗 হোয়াটসঅ্যাপ মেসেজ পাঠান</button>
+      <div id="resultBox" class="result-box" style="display:none">
+        <strong>হোয়াটসঅ্যাপ লিংক:</strong><br>
+        <a id="generatedLink" href="#" target="_blank" style="color:#15803D;text-decoration:underline">এখানে ক্লিক করে মেসেজ পাঠান</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+async function loadWaSettings() {
+  try {
+    const res = await API('/api/settings');
+    if (res.settings && res.settings.whatsapp) {
+      document.getElementById('waMainPhone').value = res.settings.whatsapp.main || '01845162664';
+      document.getElementById('waSecPhone').value = res.settings.whatsapp.secondary || '01826416696';
+      document.getElementById('waThirdPhone').value = res.settings.whatsapp.third || '01949091911';
+      document.getElementById('waChannel').value = res.settings.whatsapp.channel || 'https://whatsapp.com/channel/0029VbC30aF6buMF0LGPMp3F';
+    }
+  } catch(e) {
+    console.log('Error loading WA settings');
+  }
+}
+
+async function saveWaSettings() {
+  const main = document.getElementById('waMainPhone').value;
+  const secondary = document.getElementById('waSecPhone').value;
+  const third = document.getElementById('waThirdPhone').value;
+  const channel = document.getElementById('waChannel').value;
+
+  try {
+    const res = await API('/api/settings', {
+      method: 'PUT',
+      body: JSON.stringify({
+        whatsapp: { main, secondary, third, channel }
+      })
+    });
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ হোয়াটসঅ্যাপ কনফিগারেশন সফলভাবে সংরক্ষিত হয়েছে!');
+  } catch(e) {
+    alert('❌ সংরক্ষণ ব্যর্থ হয়েছে।');
+  }
+}
+
+function applyTemplate() {
+  const tpl = document.getElementById('tplSelect').value;
+  const msgArea = document.getElementById('waMsg');
+
+  if (tpl === 'due') {
+    msgArea.value = `সম্মানিত অভিভাবক,\nআসসালামু আলাইকুম। ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসায় আপনার সন্তানের মাসিক বেতন ও বকেয়া বকেয়া পরিশোধের জন্য অনুরোধ করা যাচ্ছে। বকেয়ার পরিমাণ জানতে আমাদের অফিসিয়ালি যোগাযোগ করুন। ধন্যবাদ।`;
+  } else if (tpl === 'admission') {
+    msgArea.value = `আসসালামু আলাইকুম। ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসায় ২০২৬ শিক্ষাবর্ষের ভর্তি কার্যক্রম চলছে। বিস্তারিত জানতে এবং ফরম সংগ্রহ করতে মাদ্রাসা অফিসে দ্রুত যোগাযোগ করুন। ফোন: 01845-162664।`;
+  } else if (tpl === 'notice') {
+    msgArea.value = `সম্মানিত অভিভাবক,\nআসসালামু আলাইকুম। মাদ্রাসার একটি গুরুত্বপূর্ণ নোটিশ আমাদের নোটিশ বোর্ডে প্রকাশ করা হয়েছে। অনুগ্রহ করে মাদ্রাসার ওয়েবসাইট ভিজিট করে নোটিশটি দেখে নিন। ধন্যবাদ।`;
+  } else {
+    msgArea.value = '';
+  }
+}
+
+function generateLink() {
+  let phone = document.getElementById('receiverPhone').value.trim();
+  const msg = document.getElementById('waMsg').value.trim();
+
+  if (!msg) { alert('মেসেজের বিবরণ ফাঁকা রাখা যাবে না!'); return; }
+
+  // Clean receiver phone
+  if (phone) {
+    phone = phone.replace(/[^0-9]/g, '');
+    if (phone.startsWith('0')) {
+      phone = '88' + phone;
+    }
+  }
+
+  const encodedMsg = encodeURIComponent(msg);
+  const waUrl = `https://wa.me/${phone}?text=${encodedMsg}`;
+
+  const resBox = document.getElementById('resultBox');
+  const genLink = document.getElementById('generatedLink');
+  
+  genLink.href = waUrl;
+  resBox.style.display = 'block';
+  
+  // Open WA link automatically
+  window.open(waUrl, '_blank');
+}
+
+loadWaSettings();
+</script>
+</body></html>

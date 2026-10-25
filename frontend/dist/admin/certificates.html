@@ -1,0 +1,186 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>প্রশংসাপত্র জেনারেটর — Admin Certificates</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.cert-print-container {
+  display: none;
+}
+.certificate {
+  width: 750px;
+  height: 520px;
+  border: 15px double #C79A2B;
+  border-radius: 8px;
+  padding: 30px;
+  box-sizing: border-box;
+  font-family: 'Hind Siliguri', sans-serif;
+  background: #FFF;
+  margin: auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.cert-header {
+  text-align: center;
+  border-bottom: 2px solid #0F5C4D;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+}
+.cert-header h2 {
+  margin: 0;
+  color: #0A3F36;
+  font-size: 24px;
+}
+.cert-header p {
+  margin: 4px 0 0;
+  color: #667874;
+  font-size: 13px;
+}
+.cert-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: #C79A2B;
+  margin-bottom: 24px;
+  text-decoration: underline;
+}
+.cert-body {
+  font-size: 16px;
+  line-height: 2.2;
+  color: #1E2F2B;
+  text-align: justify;
+}
+.cert-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 40px;
+  left: 50px;
+  right: 50px;
+  font-size: 14px;
+}
+.cert-sig {
+  text-align: center;
+  border-top: 1px solid #999;
+  width: 150px;
+  padding-top: 6px;
+}
+@media print {
+  body > *:not(.cert-print-container) {
+    display: none !important;
+  }
+  .cert-print-container {
+    display: block !important;
+  }
+}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/api/finance">আর্থিক</a>
+    <a href="/admin/documents" style="background:#0F5C4D;color:#fff;border-radius:10px">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>🎓 প্রশংসাপত্র ও সার্টিফিকেট</h1>
+    <p>শিক্ষার্থীদের প্রশংসাপত্র জেনারেট ও প্রিন্ট করুন।</p>
+  </section>
+
+  <!-- Student Table for Certificate Generation -->
+  <div id="studentsArea">
+    <div class="loader">📋 তথ্য লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- Printable Certificate Container (Hidden in browser, visible on print) -->
+<div class="cert-print-container" id="certPrintContainer"></div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let allStudents = [];
+
+async function loadStudents() {
+  try {
+    const data = await API('/api/students');
+    if (data.error) {
+      document.getElementById('studentsArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন।</div>';
+      return;
+    }
+    allStudents = Array.isArray(data) ? data : [];
+    renderStudents();
+  } catch(e) {
+    document.getElementById('studentsArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderStudents() {
+  if (allStudents.length === 0) {
+    document.getElementById('studentsArea').innerHTML = '<div class="empty-state">📭 কোনো ছাত্র পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('studentsArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>আইডি</th><th>নাম</th><th>বিভাগ</th><th>রোল</th><th>ফোন</th><th>Action</th>
+      </tr></thead>
+      <tbody>${allStudents.map(s => `<tr>
+        <td>${s.id}</td>
+        <td>${s.name}</td>
+        <td>${s.className || '-'}</td>
+        <td>${s.roll || '-'}</td>
+        <td>${s.phone || '-'}</td>
+        <td>
+          <button onclick="generateCertificate('${s.id}')">🖨️ প্রশংসাপত্র প্রিন্ট</button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+function generateCertificate(id) {
+  const s = allStudents.find(x => x.id === id);
+  if (!s) return;
+
+  const todayStr = new Date().toLocaleDateString('bn-BD', {year:'numeric', month:'long', day:'numeric'});
+
+  document.getElementById('certPrintContainer').innerHTML = `
+    <div class="certificate">
+      <div class="cert-header">
+        <h2>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</h2>
+        <p>স্থাপিত: ২০২১ ইং · ইলিয়টগঞ্জ, দাউদকান্দি, কুমিল্লা, বাংলাদেশ</p>
+      </div>
+      <div class="cert-title">প্রশংসাপত্র</div>
+      <div class="cert-body">
+        এই মর্মে প্রত্যয়ন করা যাচ্ছে যে, <strong>${s.name}</strong>, পিতা: <strong>${s.guardian || 'অজ্ঞাত'}</strong>, অত্র ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসার <strong>${s.className || 'সাধারণ'}</strong> বিভাগের একজন নিয়মিত ছাত্র। সে অত্র মাদ্রাসা থেকে নিয়মিত শিক্ষা সমাপ্ত করেছে এবং তাহার আচার-ব্যবহার সন্তোষজনক। আমার জানামতে সে দেশবিরোধী বা শৃঙ্খলাবিরোধী কোনো কাজের সহিত জড়িত নহে। 
+        <br><br>
+        আমি তাহার সর্বাঙ্গীন উন্নতি ও জীবনের উত্তরোত্তর সাফল্য কামনা করি।
+      </div>
+      <div class="cert-footer">
+        <div style="color:#667874;">তারিখ: ${todayStr}</div>
+        <div class="cert-sig" style="font-weight:bold;color:#0A3F36;">অধ্যক্ষের স্বাক্ষর</div>
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => window.print(), 300);
+}
+
+loadStudents();
+</script>
+</body></html>

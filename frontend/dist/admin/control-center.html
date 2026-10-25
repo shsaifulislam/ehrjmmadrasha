@@ -1,0 +1,182 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>কন্ট্রোল সেন্টার — Admin Control Center</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.hub-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:24px}
+.hub-card {background:#fff;border:1px solid var(--border,#D9E1DD);border-radius:18px;padding:22px;text-align:center;transition:transform 0.2s, box-shadow 0.2s;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hub-card:hover {transform:translateY(-5px);box-shadow:0 12px 28px rgba(10,63,54,0.1);border-color:var(--primary,#0F5C4D)}
+.hub-icon {font-size:36px;margin-bottom:12px}
+.hub-card h3 {margin:0 0 8px;font-size:16px;color:var(--deep,#0A3F36)}
+.hub-card p {margin:0;font-size:13px;color:#667874;line-height:1.4}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>🎛️ প্রশাসনিক কন্ট্রোল সেন্টার (ERP Hub)</h1>
+    <p>মাদ্রাসার সমস্ত মডিউল ও কার্যক্রমে দ্রুত প্রবেশ করতে নিচের শর্টকাটগুলো ব্যবহার করুন।</p>
+  </section>
+
+  <div class="hub-grid">
+    <!-- Academics Section -->
+    <div class="hub-card" onclick="location.href='/admin/students'">
+      <div class="hub-icon">👨‍🎓</div>
+      <h3>শিক্ষার্থী ব্যবস্থাপনা</h3>
+      <p>ছাত্রদের তালিকা, ভর্তি ও বকেয়া ফি নিয়ন্ত্রণ</p>
+    </div>
+    
+    <div class="hub-card" onclick="location.href='/admin/teachers'">
+      <div class="hub-icon">👨‍🏫</div>
+      <h3>শিক্ষক ব্যবস্থাপনা</h3>
+      <p>শিক্ষকদের তথ্য ও ক্লাসের দায়িত্ব বণ্টন</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/guardians'">
+      <div class="hub-icon">👥</div>
+      <h3>অভিভাবক বিবরণী</h3>
+      <p>অভিভাবকদের কন্টাক্ট ও প্রোফাইল ডাটা</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/staff'">
+      <div class="hub-icon">🛠️</div>
+      <h3>অফিস স্টাফ</h3>
+      <p>সহকারী ও সাধারণ কর্মচারীদের তালিকা</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/classes'">
+      <div class="hub-icon">🏫</div>
+      <h3>ক্লাস ও শ্রেণী</h3>
+      <p>বিভাগ নির্ধারণ ও ফি কনফিগারেশন</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/departments'">
+      <div class="hub-icon">🗂️</div>
+      <h3>বিভাগীয় প্রধান</h3>
+      <p>শিক্ষা শাখা ও প্রধানদের তথ্য</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/sessions'">
+      <div class="hub-icon">📅</div>
+      <h3>শিক্ষাবর্ষ/সেশন</h3>
+      <p>নতুন সেশন ও সক্রিয় বছর নিয়ন্ত্রণ</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/attendance'">
+      <div class="hub-icon">📝</div>
+      <h3>শিক্ষার্থী উপস্থিতি</h3>
+      <p>দৈনিক উপস্থিতি ও ক্লাসভিত্তিক লগ</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/results'">
+      <div class="hub-icon">📊</div>
+      <h3>পরীক্ষার ফলাফল</h3>
+      <p>নম্বর এন্ট্রি ও ফলাফল সীট তৈরি</p>
+    </div>
+
+    <!-- Financials Section -->
+    <div class="hub-card" onclick="location.href='/admin/finance'">
+      <div class="hub-icon">💸</div>
+      <h3>বেতন ও অর্থ আদায়</h3>
+      <p>ফি সংগ্রহ, খরচ ও ক্যাশ খাতা</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/donations'">
+      <div class="hub-icon">🤲</div>
+      <h3>দান অনুদান</h3>
+      <p>দাতাদের তালিকা ও রশিদ তৈরি</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/expenses'">
+      <div class="hub-icon">📉</div>
+      <h3>খরচ খাতা</h3>
+      <p>মাদ্রাসার দৈনিক ও মাসিক খরচ হিসাব</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/ledger'">
+      <div class="hub-icon">📒</div>
+      <h3>আর্থিক লেজার</h3>
+      <p>সম্পূর্ণ আয়-ব্যয়ের হিসাব বিবরণী</p>
+    </div>
+
+    <!-- General Tools Section -->
+    <div class="hub-card" onclick="location.href='/admin/notices'">
+      <div class="hub-icon">📌</div>
+      <h3>নোটিশ বোর্ড</h3>
+      <p>নতুন নোটিশ ও সাধারণ ঘোষণা প্রকাশ</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/documents'">
+      <div class="hub-icon">📄</div>
+      <h3>ডকুমেন্ট ও সার্টিফিকেট</h3>
+      <p>প্রশংসাপত্র ও প্রত্যয়নপত্র তৈরি</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/id-cards'">
+      <div class="hub-icon">🪪</div>
+      <h3>আইডি কার্ড জেনারেটর</h3>
+      <p>শিক্ষার্থীদের ডিজিটাল আইডি কার্ড প্রিন্ট</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/reports'">
+      <div class="hub-icon">📄</div>
+      <h3>রিপোর্ট ও বিবরণী</h3>
+      <p>রিপোর্ট জেনারেট ও এক্সপোর্ট</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/analytics'">
+      <div class="hub-icon">📈</div>
+      <h3>অ্যানালিটিক্স</h3>
+      <p>লেনদেন ও শিক্ষার্থীর গ্রাফিক্যাল চার্ট</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/ai-assistant'">
+      <div class="hub-icon">🤖</div>
+      <h3>এআই অ্যাসিস্ট্যান্ট</h3>
+      <p>প্রশ্নোত্তর ও চ্যাটবট সাহায্যকারী</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/whatsapp-help'">
+      <div class="hub-icon">💬</div>
+      <h3>হোয়াটসঅ্যাপ সার্ভিস</h3>
+      <p>মেসেজ টেমপ্লেট ও নোটিফিকেশন লিংক</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/backup-restore'">
+      <div class="hub-icon">💾</div>
+      <h3>ব্যাকআপ ও রিস্টোর</h3>
+      <p>ডাটা ফাইল ডাউনলোড ও সিস্টেম রিস্টোর</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/activity-log'">
+      <div class="hub-icon">📜</div>
+      <h3>কার্যক্রম লগ</h3>
+      <p>অ্যাডমিনদের কার্যক্রমের রেকর্ড লগ</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/roles-permissions'">
+      <div class="hub-icon">🔑</div>
+      <h3>পারমিশন কন্ট্রোল</h3>
+      <p>ভূমিকা নির্ধারণ ও অ্যাক্সেস কনফিগার</p>
+    </div>
+
+    <div class="hub-card" onclick="location.href='/admin/settings'">
+      <div class="hub-icon">⚙️</div>
+      <h3>মাদ্রাসা সেটিংস</h3>
+      <p>মাদ্রাসার বেসিক প্রোফাইল ও তথ্য</p>
+    </div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+</body></html>

@@ -1,0 +1,248 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>শিক্ষাবর্ষ/সেশন ব্যবস্থাপনা — Admin Sessions</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input,.modal select{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-danger{background:#DC2626;color:#fff;border:0}
+.btn-success{background:#15803D;color:#fff;border:0}
+.loader{text-align:center;padding:40px;color:#667874}
+.empty-state{text-align:center;padding:40px;color:#667874;font-size:16px}
+.error-state{text-align:center;padding:40px;color:#DC2626;font-size:16px}
+.badge{padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;display:inline-block}
+.badge.active{background:#DCFCE7;color:#15803D}
+.badge.inactive{background:#F3F4F6;color:#4B5563}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي رحمة الله زميرية</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📅 শিক্ষাবর্ষ/সেশন ব্যবস্থাপনা</h1>
+    <p>মাদ্রাসার অ্যাকাডেমিক শিক্ষাবর্ষ নির্ধারণ, শুরুর ও শেষের তারিখ এবং বর্তমান সক্রিয় সেশন নিয়ন্ত্রণ করুন।</p>
+  </section>
+
+  <!-- Toolbar: Search, Add New -->
+  <section class="toolbar">
+    <input id="searchBox" placeholder="🔍 সেশন বা বছর দিয়ে খুঁজুন..." oninput="filterSessions()">
+    <button onclick="openAddModal()" id="btnAddSession">➕ নতুন সেশন যোগ</button>
+    <button onclick="exportCSV()" class="btn-cancel">📥 CSV এক্সপোর্ট</button>
+    <button onclick="window.print()" class="btn-cancel">🖨️ প্রিন্ট</button>
+  </section>
+
+  <!-- Table Area -->
+  <div id="tableArea">
+    <div class="loader">📋 সেশন তালিকা লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-overlay" id="sessionModal">
+  <div class="modal">
+    <h2 id="modalTitle">➕ নতুন সেশন যোগ</h2>
+    <input type="hidden" id="sessionIdField">
+    
+    <label>সেশনের নাম (Bangla)</label>
+    <input id="sesName" placeholder="যেমন: ২০২৬">
+    
+    <label>বছর (Year)</label>
+    <input id="sesYear" type="number" placeholder="যেমন: 2026">
+
+    <label>শুরুর তারিখ</label>
+    <input id="sesStart" type="date">
+
+    <label>শেষের তারিখ</label>
+    <input id="sesEnd" type="date">
+
+    <label>অবস্থা (Status)</label>
+    <select id="sesActive">
+      <option value="true">সক্রিয় (Active)</option>
+      <option value="false">নিষ্ক্রিয় (Inactive)</option>
+    </select>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('sessionModal')">বাতিল</button>
+      <button class="btn-success" onclick="saveSession()" id="btnSaveSession">✅ সংরক্ষণ করুন</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%8體%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let allSessions = [];
+let isEditMode = false;
+
+async function loadData() {
+  try {
+    const sessions = await API('/api/sessions');
+    if (sessions.error) {
+      document.getElementById('tableArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন। <a href="/admin/login.html">Login</a></div>';
+      return;
+    }
+
+    allSessions = Array.isArray(sessions) ? sessions : [];
+    renderTable();
+  } catch(e) {
+    document.getElementById('tableArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderTable() {
+  let rows = [...allSessions];
+  const q = (document.getElementById('searchBox').value || '').toLowerCase();
+  if (q) {
+    rows = rows.filter(s => 
+      (s.name || '').toLowerCase().includes(q) || 
+      (String(s.year) || '').includes(q)
+    );
+  }
+
+  if (rows.length === 0) {
+    document.getElementById('tableArea').innerHTML = '<div class="empty-state">📭 কোনো সেশন পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('tableArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>আইডি</th><th>শিক্ষাবর্ষ/সেশন</th><th>বছর</th><th>শুরুর তারিখ</th><th>শেষের তারিখ</th><th>অবস্থা</th><th>Action</th>
+      </tr></thead>
+      <tbody>${rows.map(s => `<tr>
+        <td>${s.id}</td>
+        <td><strong>${s.name}</strong></td>
+        <td>${s.year}</td>
+        <td>${s.startDate || '-'}</td>
+        <td>${s.endDate || '-'}</td>
+        <td>
+          <span class="badge ${s.active ? 'active' : 'inactive'}">
+            ${s.active ? 'সক্রিয়' : 'নিষ্ক্রিয়'}
+          </span>
+        </td>
+        <td>
+          <button onclick="openEditModal('${s.id}')" style="font-size:12px;padding:6px 10px">✏️ সম্পাদনা</button>
+          <button onclick="deleteSession('${s.id}')" style="font-size:12px;padding:6px 10px;background:#DC2626">🗑️ মুছুন</button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+function filterSessions() { renderTable(); }
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openAddModal() {
+  isEditMode = false;
+  document.getElementById('modalTitle').textContent = '➕ নতুন সেশন যোগ';
+  document.getElementById('sessionIdField').value = '';
+  document.getElementById('sesName').value = '';
+  document.getElementById('sesYear').value = new Date().getFullYear();
+  document.getElementById('sesStart').value = '';
+  document.getElementById('sesEnd').value = '';
+  document.getElementById('sesActive').value = 'true';
+  openModal('sessionModal');
+}
+
+function openEditModal(id) {
+  isEditMode = true;
+  const s = allSessions.find(x => x.id === id);
+  if (!s) return;
+
+  document.getElementById('modalTitle').textContent = '✏️ সেশনের তথ্য সংশোধন';
+  document.getElementById('sessionIdField').value = s.id;
+  document.getElementById('sesName').value = s.name || '';
+  document.getElementById('sesYear').value = s.year || '';
+  document.getElementById('sesStart').value = s.startDate || '';
+  document.getElementById('sesEnd').value = s.endDate || '';
+  document.getElementById('sesActive').value = s.active ? 'true' : 'false';
+
+  openModal('sessionModal');
+}
+
+async function saveSession() {
+  const id = document.getElementById('sessionIdField').value;
+  const name = document.getElementById('sesName').value;
+  const year = parseInt(document.getElementById('sesYear').value);
+  const startDate = document.getElementById('sesStart').value;
+  const endDate = document.getElementById('sesEnd').value;
+  const active = document.getElementById('sesActive').value === 'true';
+
+  if (!name || !year) { alert('সেশনের নাম এবং বছর দিতে হবে!'); return; }
+
+  const payload = { name, year, startDate, endDate, active };
+
+  try {
+    let result;
+    if (isEditMode) {
+      result = await API('/api/sessions/' + id, {
+        method: 'PUT',
+        body: JSON.stringify(payload)
+      });
+    } else {
+      result = await API('/api/sessions', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+    }
+
+    if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+    alert(isEditMode ? '✅ সেশনের তথ্য সংশোধন সফল!' : '✅ নতুন সেশন যোগ সফল!');
+    closeModal('sessionModal');
+    loadData();
+  } catch(e) {
+    alert('❌ সংরক্ষণ ব্যর্থ হয়েছে।');
+  }
+}
+
+async function deleteSession(id) {
+  if (!confirm('আপনি কি নিশ্চিতভাবে এই সেশনটি মুছতে চান?')) return;
+  try {
+    const result = await API('/api/sessions/' + id, { method: 'DELETE' });
+    if (result.error) { alert('❌ ত্রুটি: ' + result.error); return; }
+    alert('✅ সেশনটি মুছে ফেলা হয়েছে।');
+    loadData();
+  } catch(e) {
+    alert('❌ মুছতে সমস্যা হয়েছে।');
+  }
+}
+
+function exportCSV() {
+  let csv = 'ID,Session Name,Year,Start Date,End Date,Active\n';
+  allSessions.forEach(s => {
+    csv += `"${s.id}","${s.name}",${s.year},"${s.startDate || ''}","${s.endDate || ''}",${s.active}\n`;
+  });
+  const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'sessions_report.csv';
+  link.click();
+}
+
+loadData();
+</script>
+</body></html>

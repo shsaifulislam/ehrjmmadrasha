@@ -1,0 +1,286 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>রিপোর্ট ও বিবরণী — Admin Reports</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.report-controls {background:#fff;border:1px solid var(--border,#D9E1DD);border-radius:18px;padding:22px;margin-bottom:20px}
+.controls-row {display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
+.control-group {display:flex;flex-direction:column;gap:6px;flex:1;min-width:180px}
+.control-group label {font-weight:600;font-size:14px;color:var(--deep,#0A3F36)}
+.control-group select, .control-group input {padding:10px;border:1px solid var(--border,#D9E1DD);border-radius:10px;font-family:inherit;min-height:44px}
+.loader {text-align:center;padding:40px;color:#667874}
+.empty-state {text-align:center;padding:40px;color:#667874}
+.report-title-header {text-align:center;margin:20px 0;display:none}
+.report-title-header h2 {margin:0;color:var(--deep,#0A3F36)}
+@media print {
+  .topbar, .site-header, .report-controls, .wa, footer, button, .btn-cancel {display:none !important}
+  .container {max-width:100% !important;padding:0 !important}
+  .report-title-header {display:block !important}
+}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📄 রিপোর্ট ও বিবরণী জেনারেটর</h1>
+    <p>মাদ্রাসার আয়-ব্যয়, শিক্ষার্থীদের বকেয়া এবং উপস্থিতি সংক্রান্ত কাস্টম রিপোর্ট তৈরি ও প্রিন্ট করুন।</p>
+  </section>
+
+  <!-- Controls -->
+  <div class="report-controls">
+    <div class="controls-row">
+      <div class="control-group">
+        <label>রিপোর্টের ধরণ</label>
+        <select id="reportType" onchange="handleReportTypeChange()">
+          <option value="ledger">আর্থিক লেজার রিপোর্ট (Financial Ledger)</option>
+          <option value="dues">ছাত্র বকেয়া রিপোর্ট (Student Due Report)</option>
+          <option value="attendance">শিক্ষক ও স্টাফ তালিকা (Teachers & Staff)</option>
+        </select>
+      </div>
+      
+      <div class="control-group" id="grpStart">
+        <label>শুরুর তারিখ</label>
+        <input type="date" id="startDate">
+      </div>
+
+      <div class="control-group" id="grpEnd">
+        <label>শেষের তারিখ</label>
+        <input type="date" id="endDate">
+      </div>
+
+      <div style="display:flex;gap:10px">
+        <button onclick="generateReport()">🔍 রিপোর্ট দেখুন</button>
+        <button onclick="exportCSV()" class="btn-cancel">📥 CSV এক্সপোর্ট</button>
+        <button onclick="window.print()" class="btn-cancel">🖨️ প্রিন্ট করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Print Header -->
+  <div class="report-title-header" id="printHeader">
+    <h2>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</h2>
+    <p>ঠিকানা: ইলিয়টগঞ্জ, দাউদকান্দি, কুমিল্লা | ফোন: 01845-162664</p>
+    <h3 id="printReportTitle">রিপোর্ট</h3>
+    <hr>
+  </div>
+
+  <!-- Report Output Area -->
+  <div id="reportOutput">
+    <div class="empty-state">👉 অনুগ্রহ করে একটি রিপোর্ট টাইপ নির্বাচন করে "রিপোর্ট দেখুন" বাটনে ক্লিক করুন।</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+const taka = n => new Intl.NumberFormat('bn-BD').format(n||0) + ' ৳';
+
+// Set default dates
+document.getElementById('startDate').value = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().slice(0, 10);
+document.getElementById('endDate').value = new Date().toISOString().slice(0, 10);
+
+let currentReportData = [];
+
+function handleReportTypeChange() {
+  const t = document.getElementById('reportType').value;
+  const start = document.getElementById('grpStart');
+  const end = document.getElementById('grpEnd');
+  
+  if (t === 'ledger') {
+    start.style.display = 'block';
+    end.style.display = 'block';
+  } else {
+    start.style.display = 'none';
+    end.style.display = 'none';
+  }
+}
+
+async function generateReport() {
+  const type = document.getElementById('reportType').value;
+  const out = document.getElementById('reportOutput');
+  out.innerHTML = '<div class="loader">📊 রিপোর্ট জেনারেট হচ্ছে...</div>';
+  
+  try {
+    if (type === 'ledger') {
+      const start = document.getElementById('startDate').value;
+      const end = document.getElementById('endDate').value;
+      
+      const txns = await API('/api/finance/transactions');
+      if (txns.error) {
+        out.innerHTML = '<div style="color:red;padding:20px;text-align:center">❌ ডাটা লোড করতে সমস্যা হয়েছে।</div>';
+        return;
+      }
+
+      // Filter by date
+      let filtered = txns.filter(t => t.status !== 'voided');
+      if (start) filtered = filtered.filter(t => t.date >= start);
+      if (end) filtered = filtered.filter(t => t.date <= end);
+
+      currentReportData = filtered;
+      document.getElementById('printReportTitle').innerText = `আর্থিক বিবরণী রিপোর্ট (${start} থেকে ${end})`;
+
+      if (filtered.length === 0) {
+        out.innerHTML = '<div class="empty-state">কোনো লেনদেন পাওয়া যায়নি।</div>';
+        return;
+      }
+
+      out.innerHTML = `
+        <div class="table-wrap"><table>
+          <thead><tr>
+            <th>তারিখ</th><th>লেনদেন আইডি</th><th>খাত</th><th>বিবরণ/নাম</th><th>আয় (টাকা)</th><th>ব্যয় (টাকা)</th>
+          </tr></thead>
+          <tbody>${filtered.map(t => {
+            const isExp = t.type === 'expense';
+            return `<tr>
+              <td>${t.date}</td>
+              <td>${t.id}</td>
+              <td><strong>${t.type === 'fee' ? 'বেতন আদায়' : t.type === 'donation' ? 'দান' : 'খরচ'}</strong></td>
+              <td>${t.studentName || t.donorName || t.title || '-'}</td>
+              <td style="color:#15803D">${!isExp ? taka(t.amount) : '-'}</td>
+              <td style="color:#DC2626">${isExp ? taka(t.amount) : '-'}</td>
+            </tr>`;
+          }).join('')}</tbody>
+        </table></div>
+      `;
+    } 
+    else if (type === 'dues') {
+      const students = await API('/api/students');
+      if (students.error) {
+        out.innerHTML = '<div style="color:red;padding:20px;text-align:center">❌ ডাটা লোড করতে সমস্যা হয়েছে।</div>';
+        return;
+      }
+
+      const dueStudents = students.filter(s => s.due > 0);
+      currentReportData = dueStudents;
+      document.getElementById('printReportTitle').innerText = 'শিক্ষার্থী বকেয়া ফি রিপোর্ট';
+
+      if (dueStudents.length === 0) {
+        out.innerHTML = '<div class="empty-state">🎉 চমৎকার! কোনো শিক্ষার্থীর বেতন বকেয়া নেই।</div>';
+        return;
+      }
+
+      out.innerHTML = `
+        <div class="table-wrap"><table>
+          <thead><tr>
+            <th>আইডি</th><th>শিক্ষার্থীর নাম</th><th>বিভাগ</th><th>রোল</th><th>ফোন নম্বর</th><th>বকেয়া বেতন (টাকা)</th>
+          </tr></thead>
+          <tbody>${dueStudents.map(s => `<tr>
+            <td>${s.id}</td>
+            <td><strong>${s.name}</strong></td>
+            <td>${s.className || '-'}</td>
+            <td>${s.roll || '-'}</td>
+            <td>${s.phone || '-'}</td>
+            <td style="color:#DC2626;font-weight:bold">${taka(s.due)}</td>
+          </tr>`).join('')}</tbody>
+        </table></div>
+      `;
+    }
+    else if (type === 'attendance') {
+      const [teachers, staff] = await Promise.all([
+        API('/api/teachers'),
+        API('/api/staff')
+      ]);
+
+      if (teachers.error || staff.error) {
+        out.innerHTML = '<div style="color:red;padding:20px;text-align:center">❌ ডাটা লোড করতে সমস্যা হয়েছে।</div>';
+        return;
+      }
+
+      currentReportData = { teachers, staff };
+      document.getElementById('printReportTitle').innerText = 'শিক্ষক ও স্টাফ প্রোফাইল রিপোর্ট';
+
+      out.innerHTML = `
+        <h3>👨‍🏫 শিক্ষকবৃন্দ (${teachers.length} জন)</h3>
+        <div class="table-wrap" style="margin-bottom:20px"><table>
+          <thead><tr>
+            <th>আইডি</th><th>শিক্ষকের নাম</th><th>পদবি/বিষয়</th><th>ফোন নম্বর</th><th>অবস্থা</th>
+          </tr></thead>
+          <tbody>${teachers.map(t => `<tr>
+            <td>${t.id}</td>
+            <td><strong>${t.name}</strong></td>
+            <td>${t.subject || '-'}</td>
+            <td>${t.phone || '-'}</td>
+            <td>${t.status === 'active' ? 'সক্রিয়' : 'নিষ্ক্রিয়'}</td>
+          </tr>`).join('')}</tbody>
+        </table></div>
+
+        <h3>🛠️ স্টাফবৃন্দ (${staff.length} জন)</h3>
+        <div class="table-wrap"><table>
+          <thead><tr>
+            <th>আইডি</th><th>নাম</th><th>ভূমিকা/পদবি</th><th>ফোন নম্বর</th><th>অবস্থা</th>
+          </tr></thead>
+          <tbody>${staff.map(s => `<tr>
+            <td>${s.id}</td>
+            <td><strong>${s.name}</strong></td>
+            <td>${s.role || '-'}</td>
+            <td>${s.phone || '-'}</td>
+            <td>${s.status === 'active' ? 'সক্রিয়' : 'নিষ্ক্রিয়'}</td>
+          </tr>`).join('')}</tbody>
+        </table></div>
+      `;
+    }
+  } catch(e) {
+    out.innerHTML = '<div style="color:red;padding:20px;text-align:center">❌ নেটওয়ার্ক ত্রুটি ঘটেছে।</div>';
+  }
+}
+
+function exportCSV() {
+  const type = document.getElementById('reportType').value;
+  if (!currentReportData || currentReportData.length === 0) {
+    alert('রপ্তানি করার মতো কোনো ডাটা নেই! অনুগ্রহ করে আগে রিপোর্ট দেখুন।');
+    return;
+  }
+
+  let csv = '';
+  let filename = '';
+
+  if (type === 'ledger') {
+    csv = 'Date,Transaction ID,Category,Name,Income,Expense\n';
+    currentReportData.forEach(t => {
+      const isExp = t.type === 'expense';
+      csv += `"${t.date}","${t.id}","${t.type}","${t.studentName || t.donorName || t.title}",${!isExp ? t.amount : 0},${isExp ? t.amount : 0}\n`;
+    });
+    filename = 'financial_report.csv';
+  } 
+  else if (type === 'dues') {
+    csv = 'Student ID,Name,Class,Roll,Phone,Due Amount\n';
+    currentReportData.forEach(s => {
+      csv += `"${s.id}","${s.name}","${s.className}",${s.roll},"${s.phone}",${s.due}\n`;
+    });
+    filename = 'student_dues_report.csv';
+  }
+  else if (type === 'attendance') {
+    csv = 'Type,ID,Name,Role/Subject,Phone,Status\n';
+    currentReportData.teachers.forEach(t => {
+      csv += `"Teacher","${t.id}","${t.name}","${t.subject}","${t.phone}","${t.status}"\n`;
+    });
+    currentReportData.staff.forEach(s => {
+      csv += `"Staff","${s.id}","${s.name}","${s.role}","${s.phone}","${s.status}"\n`;
+    });
+    filename = 'teachers_staff_list.csv';
+  }
+
+  const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  link.click();
+}
+</script>
+</body></html>

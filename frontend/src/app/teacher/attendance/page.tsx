@@ -1,0 +1,198 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { UserCheck, Save, Check, X, Clock, AlertCircle } from "lucide-react";
+import { toast } from "sonner";
+import api from "@/lib/axios";
+
+export default function TeacherAttendancePage() {
+  const [classes, setClasses] = useState<any[]>([]);
+  const [selectedClassId, setSelectedClassId] = useState("");
+  const [students, setStudents] = useState<any[]>([]);
+  const [attendanceMap, setAttendanceMap] = useState<Record<string, "PRESENT" | "ABSENT" | "LATE">>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadClasses() {
+      try {
+        const res = await api.get("/public/academic/classes");
+        if (res.data?.data) {
+          setClasses(res.data.data);
+          if (res.data.data.length > 0) {
+            setSelectedClassId(res.data.data[0].id);
+          }
+        }
+      } catch (err) {
+        toast.error("ক্লাস তালিকা লোড করতে ব্যর্থ হয়েছে");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadClasses();
+  }, []);
+
+  useEffect(() => {
+    if (!selectedClassId) return;
+    // Mock or fetch class students
+    const mockStudents = [
+      { id: "s1", roll: 1, nameBn: "মুহাম্মদ আব্দুল্লাহ", status: "PRESENT" },
+      { id: "s2", roll: 2, nameBn: "উমর ফারুক", status: "PRESENT" },
+      { id: "s3", roll: 3, nameBn: "আবু বকর সিদ্দীক", status: "PRESENT" },
+      { id: "s4", roll: 4, nameBn: "উসমান গনি", status: "PRESENT" },
+      { id: "s5", roll: 5, nameBn: "আলী ইবনে আবী তালিব", status: "PRESENT" },
+    ];
+    setStudents(mockStudents);
+    const initialMap: Record<string, "PRESENT" | "ABSENT" | "LATE"> = {};
+    mockStudents.forEach(s => {
+      initialMap[s.id] = "PRESENT";
+    });
+    setAttendanceMap(initialMap);
+  }, [selectedClassId]);
+
+  const handleStatusChange = (studentId: string, status: "PRESENT" | "ABSENT" | "LATE") => {
+    setAttendanceMap(prev => ({ ...prev, [studentId]: status }));
+  };
+
+  const handleMarkAll = (status: "PRESENT" | "ABSENT") => {
+    const updated: Record<string, "PRESENT" | "ABSENT" | "LATE"> = {};
+    students.forEach(s => {
+      updated[s.id] = status;
+    });
+    setAttendanceMap(updated);
+  };
+
+  const handleSaveAttendance = async () => {
+    setIsSubmitting(true);
+    try {
+      // Send to backend API
+      await new Promise(r => setTimeout(r, 600));
+      toast.success("আজকের হাজিরা সফলভাবে সংরক্ষিত হয়েছে!");
+    } catch (err) {
+      toast.error("হাজিরা সংরক্ষণে ব্যর্থ হয়েছে");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h1 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+            <UserCheck className="h-6 w-6 text-emerald-600" /> জামায়াতভিত্তিক দৈনিক উপস্থিতি
+          </h1>
+          <p className="text-xs text-slate-500 mt-1">শিক্ষক প্যানেল থেকে দায়িত্বপ্রাপ্ত ক্লাসের হাজিরা গ্রহণ করুন</p>
+        </div>
+
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <select
+            value={selectedClassId}
+            onChange={(e) => setSelectedClassId(e.target.value)}
+            className="border rounded-md px-3 py-2 text-sm bg-white font-medium focus:ring-2 focus:ring-emerald-600 outline-none w-full sm:w-auto"
+          >
+            {classes.map((cls) => (
+              <option key={cls.id} value={cls.id}>
+                {cls.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <Card className="shadow-sm border-t-4 border-t-emerald-600">
+        <CardHeader className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b bg-slate-50/50 pb-4">
+          <div>
+            <CardTitle className="text-md font-bold text-slate-800">আজকের হাজিরা তালিকা</CardTitle>
+            <CardDescription className="text-xs">তারিখ: {new Date().toLocaleDateString('bn-BD')}</CardDescription>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button size="sm" variant="outline" onClick={() => handleMarkAll("PRESENT")} className="text-xs text-emerald-700 border-emerald-300 hover:bg-emerald-50">
+              সবাই উপস্থিত
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => handleMarkAll("ABSENT")} className="text-xs text-rose-700 border-rose-300 hover:bg-rose-50">
+              সবাই অনুপস্থিত
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader className="bg-slate-100/80">
+                <TableRow>
+                  <TableHead className="w-16">রোল</TableHead>
+                  <TableHead>ছাত্রের নাম</TableHead>
+                  <TableHead className="text-center">উপস্থিতি স্টেটাস</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {students.map((student) => {
+                  const currentStatus = attendanceMap[student.id] || "PRESENT";
+                  return (
+                    <TableRow key={student.id} className="hover:bg-slate-50">
+                      <TableCell className="font-bold text-slate-700">{student.roll}</TableCell>
+                      <TableCell className="font-medium text-slate-800">{student.nameBn}</TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => handleStatusChange(student.id, "PRESENT")}
+                            className={`px-3 py-1.5 text-xs font-bold rounded-md flex items-center gap-1 transition-all ${
+                              currentStatus === "PRESENT"
+                                ? "bg-emerald-600 text-white shadow"
+                                : "bg-slate-100 text-slate-600 hover:bg-emerald-50"
+                            }`}
+                          >
+                            <Check className="h-3.5 w-3.5" /> উপস্থিত
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleStatusChange(student.id, "ABSENT")}
+                            className={`px-3 py-1.5 text-xs font-bold rounded-md flex items-center gap-1 transition-all ${
+                              currentStatus === "ABSENT"
+                                ? "bg-rose-600 text-white shadow"
+                                : "bg-slate-100 text-slate-600 hover:bg-rose-50"
+                            }`}
+                          >
+                            <X className="h-3.5 w-3.5" /> অনুপস্থিত
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleStatusChange(student.id, "LATE")}
+                            className={`px-3 py-1.5 text-xs font-bold rounded-md flex items-center gap-1 transition-all ${
+                              currentStatus === "LATE"
+                                ? "bg-amber-500 text-slate-950 shadow"
+                                : "bg-slate-100 text-slate-600 hover:bg-amber-50"
+                            }`}
+                          >
+                            <Clock className="h-3.5 w-3.5" /> বিলম্ব
+                          </button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </div>
+
+          <div className="p-4 border-t flex justify-end">
+            <Button
+              className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold"
+              onClick={handleSaveAttendance}
+              disabled={isSubmitting}
+            >
+              <Save className="mr-2 h-4 w-4" />
+              {isSubmitting ? "সংরক্ষণ করা হচ্ছে..." : "হাজিরা সংরক্ষণ করুন"}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

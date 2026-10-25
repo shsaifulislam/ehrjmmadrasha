@@ -1,0 +1,129 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>সিস্টেম সেটিংস — Admin Settings</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.settings-section {background:#fff;border:1px solid #D9E1DD;border-radius:14px;padding:24px;margin-bottom:20px}
+.settings-section h3 {margin-top:0;color:#0A3F36;border-bottom:2px solid #D9E1DD;padding-bottom:10px}
+.form-group {margin-bottom:16px}
+.form-group label {display:block;margin-bottom:6px;font-weight:600;font-size:14px}
+.form-group input, .form-group select {width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;font-size:15px;font-family:inherit;background:#FAFAFA}
+.info-row {display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #F0F0F0;font-size:15px}
+.info-row strong {color:#667874}
+.loader {text-align:center;padding:40px;color:#667874}
+.error-state {text-align:center;padding:40px;color:#DC2626}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي رحمة الله زميرية</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings" style="background:#0F5C4D;color:#fff;border-radius:10px">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>⚙️ সিস্টেম সেটিংস</h1>
+    <p>মাদ্রাসার মৌলিক তথ্য ও ERP সিস্টেমের কনফিগারেশন পরিবর্তন করুন।</p>
+  </section>
+
+  <div id="settingsArea">
+    <div class="loader">⚙️ সেটিংস লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+async function loadSettings() {
+  try {
+    const data = await API('/api/settings');
+    if (data.error) {
+      document.getElementById('settingsArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন। <a href="/admin/login.html">Login</a></div>';
+      return;
+    }
+
+    const inst = data.institution || {};
+    const sets = data.settings || {};
+
+    document.getElementById('settingsArea').innerHTML = `
+      <!-- Institutional Identity (Read-only configuration) -->
+      <div class="settings-section">
+        <h3>🏢 প্রতিষ্ঠানের মূল পরিচিতি (Default Config)</h3>
+        <div class="info-row"><strong>বাংলা নাম:</strong> <span>${inst.nameBn || 'ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা'}</span></div>
+        <div class="info-row"><strong>ইংরেজি নাম:</strong> <span>${inst.nameEn || 'Eliotganj Hazi Rohmatollah Jamiria Madrasha'}</span></div>
+        <div class="info-row"><strong>আরবি নাম:</strong> <span>${inst.nameAr || 'مدرسة إليوتغانج حاجي رحمة الله زميرية'}</span></div>
+        <div class="info-row"><strong>ঠিকানা:</strong> <span>${inst.address || 'Eliotganj, Daudkandi, Comilla'}</span></div>
+        <div class="info-row"><strong>প্রধান শিক্ষক:</strong> <span>${inst.principal || 'মাওলানা মহা. আবুল কালাম সরকার'}</span></div>
+        <div class="info-row"><strong>স্থাপিত:</strong> <span>${inst.established || '2021'}</span></div>
+        <div class="info-row"><strong>ফোনের নাম্বারসমূহ:</strong> <span>${inst.phones ? inst.phones.join(', ') : '01845-162664'}</span></div>
+      </div>
+
+      <!-- ERP Configurations (Editable settings) -->
+      <div class="settings-section">
+        <h3>🔧 ERP সিস্টেম কনফিগারেশন</h3>
+        <div class="form-group">
+          <label>সিস্টেম ইমেইল</label>
+          <input id="sysEmail" value="${sets.systemEmail || 'info@ehrjmadrasha.com'}">
+        </div>
+        <div class="form-group">
+          <label>সিস্টেম ফোন নম্বর</label>
+          <input id="sysPhone" value="${sets.systemPhone || '01845162664'}">
+        </div>
+        <div class="form-group">
+          <label>কারেন্সি প্রতীক</label>
+          <input id="currencySymbol" value="${sets.currencySymbol || '৳'}">
+        </div>
+        <div class="form-group">
+          <label>ভর্তি কার্যক্রম কি সচল?</label>
+          <select id="admissionOpen">
+            <option value="true" ${sets.admissionOpen === 'true' || sets.admissionOpen === true ? 'selected' : ''}>সচল (Admission Open)</option>
+            <option value="false" ${sets.admissionOpen === 'false' || sets.admissionOpen === false ? 'selected' : ''}>বন্ধ (Admission Closed)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>চলতি শিক্ষাবর্ষ</label>
+          <input id="currentYear" type="number" value="${sets.currentYear || '2026'}">
+        </div>
+        <button class="btn primary" onclick="saveSettings()" id="btnSaveSettings" style="width:100%;padding:14px;font-size:16px;">💾 সেটিংস সংরক্ষণ করুন</button>
+      </div>
+    `;
+  } catch(e) {
+    document.getElementById('settingsArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+async function saveSettings() {
+  const systemEmail = document.getElementById('sysEmail').value;
+  const systemPhone = document.getElementById('sysPhone').value;
+  const currencySymbol = document.getElementById('currencySymbol').value;
+  const admissionOpen = document.getElementById('admissionOpen').value === 'true';
+  const currentYear = parseInt(document.getElementById('currentYear').value) || 2026;
+
+  try {
+    const res = await API('/api/settings', {
+      method: 'POST',
+      body: JSON.stringify({ systemEmail, systemPhone, currencySymbol, admissionOpen, currentYear })
+    });
+
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ সিস্টেম সেটিংস সফলভাবে আপডেট করা হয়েছে!');
+    loadSettings();
+  } catch(e) {
+    alert('❌ সেটিংস সংরক্ষণ করতে ব্যর্থ হয়েছে।');
+  }
+}
+
+loadSettings();
+</script>
+</body></html>

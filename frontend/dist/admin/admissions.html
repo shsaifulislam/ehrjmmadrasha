@@ -1,0 +1,90 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ভর্তি আবেদনসমূহ — Admin Admissions</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.empty-state{text-align:center;padding:40px;color:#667874}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📝 ভর্তি আবেদনসমূহ</h1>
+    <p>মাদ্রাসায় নতুন ভর্তির আবেদনসমূহের তালিকা ও তাদের পেমেন্ট কনফার্মেশন স্ট্যাটাস ট্র্যাক করুন।</p>
+  </section>
+
+  <!-- Admissions list area -->
+  <div id="admissionsArea">
+    <div class="loader">📋 তালিকা লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%8體%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+const taka = n => new Intl.NumberFormat('bn-BD').format(n||0) + ' ৳';
+
+async function loadAdmissions() {
+  try {
+    const [adms, students, classes] = await Promise.all([
+      API('/api/admissions'),
+      API('/api/students'),
+      API('/api/classes')
+    ]);
+
+    if (adms.error) {
+      document.getElementById('admissionsArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন।</div>';
+      return;
+    }
+
+    if (adms.length === 0) {
+      document.getElementById('admissionsArea').innerHTML = '<div class="empty-state">📭 কোনো আবেদন পাওয়া যায়নি।</div>';
+      return;
+    }
+
+    document.getElementById('admissionsArea').innerHTML = `
+      <div class="table-wrap"><table>
+        <thead><tr>
+          <th>আবেদন আইডি</th><th>আবেদনের তারিখ</th><th>ছাত্রের নাম</th><th>শ্রেণী/বিভাগ</th><th>ভর্তি ফি পরিশোধ</th><th>Status</th>
+        </tr></thead>
+        <tbody>${adms.map(a => {
+          const s = students.find(x => x.id === a.studentId) || {};
+          const c = classes.find(x => x.id === a.classId) || {};
+          return `<tr>
+            <td>${a.id}</td>
+            <td>${a.date}</td>
+            <td style="font-weight:bold">${s.name || 'মুহাম্মদ আব্দুল্লাহ'}</td>
+            <td>${c.name || 'হিফজ বিভাগ'}</td>
+            <td style="font-weight:bold;color:#15803D">${taka(a.feesPaid)}</td>
+            <td><span class="badge" style="background:#e8f5e9;color:#15803D">${a.status === 'confirmed' ? '✅ কনফার্মড' : '⏳ পেন্ডিং'}</span></td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table></div>
+    `;
+
+  } catch(e) {
+    document.getElementById('admissionsArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+loadAdmissions();
+</script>
+</body></html>

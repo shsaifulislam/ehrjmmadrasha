@@ -1,0 +1,214 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>আইডি কার্ড জেনারেটর — Admin ID Cards</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.id-card-print-container {
+  display: none;
+}
+.id-card {
+  width: 320px;
+  height: 480px;
+  border: 4px solid #0F5C4D;
+  border-radius: 12px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  position: relative;
+  background: #FFF;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+.id-card-header {
+  border-bottom: 2px solid #C79A2B;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+.id-card-header h3 {
+  margin: 0;
+  font-size: 13px;
+  color: #0A3F36;
+}
+.id-card-header p {
+  margin: 2px 0 0;
+  font-size: 10px;
+  color: #667874;
+}
+.id-card-title {
+  background: #0F5C4D;
+  color: #fff;
+  padding: 4px 0;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+.id-card-photo {
+  width: 90px;
+  height: 100px;
+  border: 2px solid #D9E1DD;
+  margin: 0 auto 12px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.id-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.id-card-details {
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+.id-card-details tr td:first-child {
+  font-weight: bold;
+  color: #667874;
+  width: 90px;
+}
+.id-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 15px;
+  left: 25px;
+  right: 25px;
+  font-size: 10px;
+}
+.id-card-sig {
+  text-align: center;
+  border-top: 1px solid #999;
+  width: 90px;
+  padding-top: 4px;
+}
+@media print {
+  body > *:not(.id-card-print-container) {
+    display: none !important;
+  }
+  .id-card-print-container {
+    display: block !important;
+  }
+}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents" style="background:#0F5C4D;color:#fff;border-radius:10px">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>🪪 আইডি কার্ড জেনারেটর</h1>
+    <p>শিক্ষার্থীদের আইডি কার্ড জেনারেট ও প্রিন্ট করুন।</p>
+  </section>
+
+  <!-- Student Table for Card Generation -->
+  <div id="studentsArea">
+    <div class="loader">📋 তথ্য লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- Printable ID Card Container (Hidden in browser, visible on print) -->
+<div class="id-card-print-container" id="idCardPrintContainer"></div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let allStudents = [];
+
+async function loadStudents() {
+  try {
+    const data = await API('/api/students');
+    if (data.error) {
+      document.getElementById('studentsArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন।</div>';
+      return;
+    }
+    allStudents = Array.isArray(data) ? data : [];
+    renderStudents();
+  } catch(e) {
+    document.getElementById('studentsArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderStudents() {
+  if (allStudents.length === 0) {
+    document.getElementById('studentsArea').innerHTML = '<div class="empty-state">📭 কোনো ছাত্র পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('studentsArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>আইডি</th><th>নাম</th><th>বিভাগ</th><th>রোল</th><th>ফোন</th><th>Action</th>
+      </tr></thead>
+      <tbody>${allStudents.map(s => `<tr>
+        <td>${s.id}</td>
+        <td>${s.name}</td>
+        <td>${s.className || '-'}</td>
+        <td>${s.roll || '-'}</td>
+        <td>${s.phone || '-'}</td>
+        <td>
+          <button onclick="generateCard('${s.id}')">🖨️ আইডি কার্ড প্রিন্ট</button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+function generateCard(id) {
+  const s = allStudents.find(x => x.id === id);
+  if (!s) return;
+
+  document.getElementById('idCardPrintContainer').innerHTML = `
+    <div class="id-card">
+      <div class="id-card-header">
+        <h3>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</h3>
+        <p>Eliotganj, Daudkandi, Comilla</p>
+      </div>
+      <div class="id-card-title">ছাত্র পরিচয়পত্র</div>
+      <div class="id-card-photo">
+        <img src="${s.photo || '/assets/img/logo.png'}" onerror="this.src='/assets/img/logo.png'">
+      </div>
+      <table class="id-card-details">
+        <tr><td>নাম:</td><td>${s.name}</td></tr>
+        <tr><td>আইডি নং:</td><td>${s.id}</td></tr>
+        <tr><td>শ্রেণী:</td><td>${s.className}</td></tr>
+        <tr><td>রোল নং:</td><td>${s.roll}</td></tr>
+        <tr><td>অভিভাবক:</td><td>${s.guardian || '-'}</td></tr>
+        <tr><td>ফোন:</td><td>${s.phone || '-'}</td></tr>
+        <tr><td>রক্তের গ্রুপ:</td><td>O+</td></tr>
+      </table>
+      <div class="id-card-footer">
+        <div class="id-card-sig" style="color:#667874;">ছাত্রের স্বাক্ষর</div>
+        <div class="id-card-sig" style="font-weight:bold;color:#0A3F36;">অধ্যক্ষের স্বাক্ষর</div>
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => window.print(), 300);
+}
+
+loadStudents();
+</script>
+</body></html>

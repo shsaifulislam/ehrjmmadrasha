@@ -1,0 +1,78 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>নোটিশ বোর্ড — Teacher Notices</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader {text-align:center;padding:40px;color:#667874}
+.error-state {text-align:center;padding:40px;color:#DC2626}
+.notice-card {background:#fff;border:1px solid var(--border,#D9E1DD);border-radius:14px;padding:20px;margin-bottom:14px;box-shadow:0 4px 10px rgba(0,0,0,0.02)}
+.notice-header {display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;color:#667874;font-weight:bold}
+.notice-card h3 {margin:0 0 10px;color:var(--deep,#0A3F36);font-size:18px}
+.notice-card p {margin:0;line-height:1.5;color:var(--text,#1E2F2B)}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/teacher/dashboard">Dashboard</a>
+    <a href="/teacher/students">শিক্ষার্থী তালিকা</a>
+    <a href="/teacher/attendance-entry">উপস্থিতি এন্ট্রি</a>
+    <a href="/teacher/marks-entry">মার্কস এন্ট্রি</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📌 শিক্ষক নোটিশ বোর্ড (Notices)</h1>
+    <p>মাদ্রাসার অভ্যন্তরীণ গুরুত্বপূর্ণ নোটিশ ও ঘোষণাসমূহ নিচে দেওয়া হলো।</p>
+  </section>
+
+  <!-- Notice Board List -->
+  <div id="noticesArea">
+    <div class="loader">📋 নোটিশ লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%Bাসার%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%8%E0%A6%BF%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+async function loadNotices() {
+  try {
+    const data = await API('/api/notices');
+    if (data.error) {
+      document.getElementById('noticesArea').innerHTML = '<div class="error-state">❌ নোটিশ লোড করতে সমস্যা হয়েছে। অনুগ্রহ করে আগে লগইন করুন।</div>';
+      return;
+    }
+
+    const rows = Array.isArray(data) ? data : [];
+    if (rows.length === 0) {
+      document.getElementById('noticesArea').innerHTML = '<div style="text-align:center;padding:40px;color:#667874">কোনো নোটিশ বোর্ড পাওয়া যায়নি।</div>';
+      return;
+    }
+
+    // Sort recent first
+    rows.reverse();
+
+    document.getElementById('noticesArea').innerHTML = rows.map(n => `
+      <div class="notice-card">
+        <div class="notice-header">
+          <span>📌 নোটিশ আইডি: ${n.id}</span>
+          <span>📅 তারিখ: ${n.date || '-'}</span>
+        </div>
+        <h3>${n.title || 'শিরোনামহীন নোটিশ'}</h3>
+        <p>${n.body || ''}</p>
+      </div>
+    `).join('');
+  } catch(e) {
+    document.getElementById('noticesArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না।</div>';
+  }
+}
+
+loadNotices();
+</script>
+</body></html>

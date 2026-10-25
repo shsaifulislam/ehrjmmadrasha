@@ -1,0 +1,177 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>সিস্টেম ব্যাকআপ ও রিস্টোর — Admin Backup/Restore</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.backup-grid {display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+@media (max-width: 768px) {
+  .backup-grid {grid-template-columns:1fr}
+}
+.card h3 {margin-top:0;color:var(--deep,#0A3F36)}
+.alert-warning {background:#FEF3C7;color:#92400E;padding:14px;border-radius:10px;margin:12px 0;font-size:14px;border:1px solid #F59E0B}
+.file-upload-box {border:2px dashed var(--border,#D9E1DD);padding:24px;border-radius:12px;text-align:center;background:#F9FAFB;cursor:pointer;margin:16px 0}
+.file-upload-box:hover {border-color:var(--primary,#0F5C4D);background:#F0FDF4}
+.file-upload-box input {display:none}
+.loader {text-align:center;padding:20px;color:#667874}
+.badge {padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;display:inline-block}
+.badge.success {background:#DCFCE7;color:#15803D}
+.badge.danger {background:#FEE2E2;color:#991B1B}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي رحمة الله زميرية</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>💾 ডাটাবেজ ব্যাকআপ ও রিস্টোর</h1>
+    <p>মাদ্রাসার সমস্ত তথ্য (ছাত্র, শিক্ষক, হিসাব ও নোটিশ) নিরাপদ রাখতে ব্যাকআপ ডাউনলোড করুন এবং প্রয়োজন হলে পূর্বের ব্যাকআপ ফাইল থেকে রিস্টোর করুন।</p>
+  </section>
+
+  <div class="backup-grid">
+    <!-- Download Backup -->
+    <div class="card">
+      <h3>📥 সিস্টেম ব্যাকআপ তৈরি করুন</h3>
+      <p>ডাটাবেজের সব তথ্যের একটি নিরাপদ ফাইল ডাউনলোড করতে নিচের বাটনে ক্লিক করুন। এটি আপনার ডিভাইসে একটি <code>.json</code> ফাইল হিসেবে সংরক্ষিত হবে।</p>
+      <button onclick="createBackup()" id="btnDownloadBackup" style="width:100%;margin-top:20px">💾 ব্যাকআপ ফাইল ডাউনলোড করুন</button>
+    </div>
+
+    <!-- Restore Backup -->
+    <div class="card">
+      <h3>📤 ব্যাকআপ রিস্টোর করুন</h3>
+      <div class="alert-warning">
+        ⚠️ <strong>সতর্কতা:</strong> ব্যাকআপ ফাইল রিস্টোর করলে বর্তমানের সকল তথ্য মুছে ফাইলটির তথ্য দিয়ে প্রতিস্থাপিত হবে!
+      </div>
+      <label class="file-upload-box" id="uploadArea">
+        <span id="uploadText">📁 ব্যাকআপ ফাইল (.json) নির্বাচন করুন</span>
+        <input type="file" id="backupFile" accept=".json" onchange="handleFileSelect(event)">
+      </label>
+      <button onclick="restoreBackup()" id="btnRestoreBackup" style="width:100%;background:#DC2626" disabled>✅ রিস্টোর নিশ্চিত করুন</button>
+    </div>
+  </div>
+
+  <!-- Backup Logs -->
+  <div class="card">
+    <h3>📜 পূর্ববর্তী ব্যাকআপ ও রিস্টোর লগ</h3>
+    <div id="logsArea">
+      <div class="loader">লগ লোড হচ্ছে...</div>
+    </div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let selectedBackupData = null;
+
+async function loadLogs() {
+  try {
+    const data = await API('/api/backup/logs');
+    if (data.error) {
+      document.getElementById('logsArea').innerHTML = '<div style="color:red">❌ লগ দেখতে সমস্যা হয়েছে। অনুগ্রহ করে লগইন করুন।</div>';
+      return;
+    }
+
+    const rows = Array.isArray(data) ? data : [];
+    if (rows.length === 0) {
+      document.getElementById('logsArea').innerHTML = '<p style="color:#667874;text-align:center">কোনো ব্যাকআপ বা রিস্টোরের তথ্য পাওয়া যায়নি।</p>';
+      return;
+    }
+
+    document.getElementById('logsArea').innerHTML = `
+      <div class="table-wrap"><table>
+        <thead><tr>
+          <th>আইডি</th><th>তারিখ</th><th>অপারেশন প্রকার</th><th>অবস্থা</th>
+        </tr></thead>
+        <tbody>${rows.map(x => `<tr>
+          <td>${x.id}</td>
+          <td>${x.date}</td>
+          <td><strong>${x.type === 'manual' ? '📥 ব্যাকআপ ডাউনলোড' : '📤 রিস্টোর'}</strong></td>
+          <td><span class="badge ${x.status === 'success' ? 'success' : 'danger'}">${x.status === 'success' ? 'সফল' : 'ব্যর্থ'}</span></td>
+        </tr>`).join('')}</tbody>
+      </table></div>
+    `;
+  } catch(e) {
+    document.getElementById('logsArea').innerHTML = '<div style="color:red">❌ সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না।</div>';
+  }
+}
+
+async function createBackup() {
+  try {
+    const res = await API('/api/backup');
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    
+    const jsonStr = JSON.stringify(res.data, null, 2);
+    const blob = new Blob([jsonStr], {type: 'application/json'});
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `ehrj_backup_${new Date().toISOString().slice(0,10)}.json`;
+    link.click();
+    alert('✅ ব্যাকআপ ফাইল সফলভাবে ডাউনলোড হয়েছে!');
+    loadLogs();
+  } catch(e) {
+    alert('❌ ব্যাকআপ ডাউনলোড ব্যর্থ হয়েছে।');
+  }
+}
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      selectedBackupData = JSON.parse(e.target.result);
+      document.getElementById('uploadText').innerText = `✅ নির্বাচিত ফাইল: ${file.name}`;
+      document.getElementById('btnRestoreBackup').disabled = false;
+    } catch(err) {
+      alert('❌ ভুল ফাইল ফরম্যাট! দয়া করে সঠিক JSON ব্যাকআপ ফাইল দিন।');
+      selectedBackupData = null;
+      document.getElementById('uploadText').innerText = '📁 ব্যাকআপ ফাইল (.json) নির্বাচন করুন';
+      document.getElementById('btnRestoreBackup').disabled = true;
+    }
+  };
+  reader.readAsText(file);
+}
+
+async function restoreBackup() {
+  if (!selectedBackupData) return;
+  if (!confirm('⚠️ আপনি কি নিশ্চিতভাবে এই ব্যাকআপ ফাইলটি রিস্টোর করতে চান? আপনার বর্তমান সমস্ত ডাটা ওভাররাইট হয়ে যাবে!')) return;
+
+  try {
+    const res = await API('/api/backup', {
+      method: 'POST',
+      body: JSON.stringify({ data: selectedBackupData })
+    });
+
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ ডাটাবেজ সফলভাবে রিস্টোর করা হয়েছে!');
+    
+    // Clear and disable button
+    selectedBackupData = null;
+    document.getElementById('backupFile').value = '';
+    document.getElementById('uploadText').innerText = '📁 ব্যাকআপ ফাইল (.json) নির্বাচন করুন';
+    document.getElementById('btnRestoreBackup').disabled = true;
+    
+    loadLogs();
+  } catch(e) {
+    alert('❌ রিস্টোর অপারেশন ব্যর্থ হয়েছে।');
+  }
+}
+
+loadLogs();
+</script>
+</body></html>

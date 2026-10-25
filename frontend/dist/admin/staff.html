@@ -1,0 +1,140 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>স্টাফ ব্যবস্থাপনা — Admin Staff</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.empty-state{text-align:center;padding:40px;color:#667874}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-success{background:#15803D;color:#fff;border:0}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance" style="background:#0F5C4D;color:#fff;border-radius:10px">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>💼 স্টাফ ব্যবস্থাপনা</h1>
+    <p>মাদ্রাসার অফিস সহকারী, বাবুর্চি ও অন্যান্য স্টাফদের তালিকা এবং তথ্য পরিচালনা করুন।</p>
+  </section>
+
+  <!-- Toolbar: Add Staff -->
+  <section class="toolbar">
+    <button onclick="openModal('staffModal')" id="btnAddStaff">➕ নতুন স্টাফ যোগ</button>
+  </section>
+
+  <!-- Staff Table -->
+  <div id="staffArea">
+    <div class="loader">📋 স্টাফ তালিকা ও বিবরণ লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- ADD STAFF MODAL -->
+<div class="modal-overlay" id="staffModal">
+  <div class="modal">
+    <h2>➕ নতুন স্টাফ যোগ</h2>
+    <label>স্টাফের নাম</label>
+    <input id="sfName" placeholder="যেমন: মো. সাইফুল">
+    <label>দায়িত্ব/পদবি</label>
+    <input id="sfRole" placeholder="যেমন: অফিস সহকারী, বাবুর্চি, দারোয়ান">
+    <label>ফোন নম্বর</label>
+    <input id="sfPhone" placeholder="যেমন: 01826416696">
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('staffModal')">বাতিল</button>
+      <button class="btn-success" onclick="saveStaff()" id="btnSubmitStaff">✅ সংরক্ষণ করুন</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%8體%E0%A6%AE%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let allStaff = [];
+
+async function loadStaff() {
+  try {
+    const data = await API('/api/staff');
+    if (data.error) {
+      document.getElementById('staffArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন।</div>';
+      return;
+    }
+
+    if (data.length === 0) {
+      document.getElementById('staffArea').innerHTML = '<div class="empty-state">📭 কোনো স্টাফের তথ্য পাওয়া যায়নি।</div>';
+      return;
+    }
+
+    document.getElementById('staffArea').innerHTML = `
+      <div class="table-wrap"><table>
+        <thead><tr>
+          <th>স্টাফ আইডি</th><th>নাম</th><th>পদবি/দায়িত্ব</th><th>ফোন নম্বর</th><th>Status</th>
+        </tr></thead>
+        <tbody>${data.map(s => `<tr>
+          <td>${s.id}</td>
+          <td style="font-weight:bold">${s.name}</td>
+          <td>${s.role || '-'}</td>
+          <td>${s.phone || '-'}</td>
+          <td style="color:#15803D;font-weight:bold">${s.status === 'active' ? '✅ কর্মরত' : '❌ অব্যাহতি'}</td>
+        </tr>`).join('')}</tbody>
+      </table></div>
+    `;
+
+  } catch(e) {
+    document.getElementById('staffArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+async function saveStaff() {
+  const name = document.getElementById('sfName').value;
+  const role = document.getElementById('sfRole').value;
+  const phone = document.getElementById('sfPhone').value;
+
+  if (!name || !role) { alert('নাম এবং দায়িত্ব দিতে হবে!'); return; }
+
+  try {
+    const res = await API('/api/staff', {
+      method: 'POST',
+      body: JSON.stringify({ name, role, phone })
+    });
+
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ স্টাফ সফলভাবে যোগ করা হয়েছে!');
+    closeModal('staffModal');
+    document.getElementById('sfName').value = '';
+    document.getElementById('sfRole').value = '';
+    document.getElementById('sfPhone').value = '';
+    loadStaff();
+  } catch(e) {
+    alert('❌ সংরক্ষণ ব্যর্থ হয়েছে।');
+  }
+}
+
+loadStaff();
+</script>
+</body></html>

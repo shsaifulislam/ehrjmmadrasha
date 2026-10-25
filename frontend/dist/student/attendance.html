@@ -1,0 +1,100 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>আমার উপস্থিতি — Student Attendance</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.stat-box {display:flex;gap:14px;margin-bottom:20px}
+.stat-card {background:#fff;border:1px solid var(--border,#D9E1DD);border-radius:12px;padding:16px;flex:1;text-align:center}
+.stat-card h4 {margin:0;color:#667874;font-size:13px}
+.stat-card .val {font-size:24px;font-weight:700;color:var(--primary,#0F5C4D);margin-top:6px}
+.badge {padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold}
+.badge.present {background:#DCFCE7;color:#15803D}
+.badge.absent {background:#FEE2E2;color:#991B1B}
+.loader {text-align:center;padding:40px;color:#667874}
+.error-state {text-align:center;padding:40px;color:#DC2626}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/student/dashboard">Dashboard</a>
+    <a href="/student/profile">প্রোফাইল</a>
+    <a href="/student/fees">বেতন ও বকেয়া</a>
+    <a href="/student/results">ফলাফল</a>
+    <a href="/student/id-card">আইডি কার্ড</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📝 আমার ক্লাসের উপস্থিতি বিবরণী</h1>
+    <p>আপনার ক্লাসভিত্তিক উপস্থিতি ও অনুপস্থিতির বিবরণ দেখুন।</p>
+  </section>
+
+  <!-- Statistics -->
+  <div class="stat-box" id="statArea">
+    <div class="stat-card"><h4>মোট ক্লাস</h4><div class="val" id="totalDays">-</div></div>
+    <div class="stat-card"><h4>উপস্থিত দিন</h4><div class="val" id="presentDays" style="color:#15803D">-</div></div>
+    <div class="stat-card"><h4>অনুপস্থিত দিন</h4><div class="val" id="absentDays" style="color:#DC2626">-</div></div>
+  </div>
+
+  <!-- Attendance Table -->
+  <div id="attendanceArea">
+    <div class="loader">📋 উপস্থিতি বিবরণী লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+async function loadAttendance() {
+  try {
+    const data = await API('/api/student/attendance');
+    if (data.error) {
+      document.getElementById('attendanceArea').innerHTML = '<div class="error-state">❌ তথ্য লোড করতে সমস্যা হয়েছে। দয়া করে পুনরায় লগইন করুন।</div>';
+      return;
+    }
+
+    const rows = Array.isArray(data) ? data : [];
+    if (rows.length === 0) {
+      document.getElementById('attendanceArea').innerHTML = '<div style="text-align:center;padding:40px;color:#667874">কোনো উপস্থিতির রেকর্ড পাওয়া যায়নি।</div>';
+      return;
+    }
+
+    // Stats
+    const total = rows.length;
+    const present = rows.filter(r => r.status === 'present').length;
+    const absent = total - present;
+
+    document.getElementById('totalDays').innerText = `${total} দিন`;
+    document.getElementById('presentDays').innerText = `${present} দিন`;
+    document.getElementById('absentDays').innerText = `${absent} দিন`;
+
+    document.getElementById('attendanceArea').innerHTML = `
+      <div class="table-wrap"><table>
+        <thead><tr>
+          <th>তারিখ</th><th>অবস্থা (Status)</th>
+        </tr></thead>
+        <tbody>${rows.map(r => `<tr>
+          <td>${r.date}</td>
+          <td>
+            <span class="badge ${r.status === 'present' ? 'present' : 'absent'}">
+              ${r.status === 'present' ? 'উপস্থিত (Present)' : 'অনুপস্থিত (Absent)'}
+            </span>
+          </td>
+        </tr>`).join('')}</tbody>
+      </table></div>
+    `;
+  } catch(e) {
+    document.getElementById('attendanceArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না।</div>';
+  }
+}
+
+loadAttendance();
+</script>
+</body></html>

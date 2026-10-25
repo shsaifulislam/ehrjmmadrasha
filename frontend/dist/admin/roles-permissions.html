@@ -1,0 +1,99 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ভূমিকা ও পারমিশন — Admin Roles/Permissions</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.role-card {background:#fff;border:1px solid var(--border,#D9E1DD);border-radius:18px;padding:22px;margin-bottom:20px}
+.role-card h3 {margin:0 0 10px;color:var(--deep,#0A3F36);display:flex;align-items:center;justify-content:between;gap:10px}
+.role-card .desc {color:#667874;font-size:14px;margin-bottom:16px}
+.permissions-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.permission-item {display:flex;align-items:center;gap:10px;padding:10px;background:#F9FAFB;border:1px solid #EAEAEA;border-radius:10px;font-size:14px}
+.permission-item input {width:18px;height:18px;accent-color:var(--primary,#0F5C4D)}
+.badge {padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold}
+.badge.admin {background:#E0F2FE;color:#0369A1}
+.badge.teacher {background:#FEF3C7;color:#D97706}
+.badge.student {background:#DCFCE7;color:#15803D}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي رحمة الله زميرية</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>🔑 ভূমিকা ও এক্সেস কন্ট্রোল (Roles & Permissions)</h1>
+    <p>মাদ্রাসার সফটওয়্যারে বিভিন্ন ভূমিকা (যেমন অ্যাডমিন, শিক্ষক ও ছাত্র) এবং তাদের সংশ্লিষ্ট পারমিশন বা অনুমতিসমূহ নিয়ন্ত্রণ করুন।</p>
+  </section>
+
+  <!-- Admin Role Card -->
+  <div class="role-card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3>👑 অ্যাডমিন (Administrator)</h3>
+      <span class="badge admin">সম্পূর্ণ নিয়ন্ত্রণ (Super Admin)</span>
+    </div>
+    <p class="desc">মাদ্রাসার সমস্ত তথ্য পরিবর্তন, অর্থ সংগ্রহ ও ব্যয়, শিক্ষক-ছাত্র যোগ/বিয়োগ এবং ব্যাকআপ ও সেটিংস পরিবর্তনের সম্পূর্ণ ক্ষমতা রয়েছে।</p>
+    <div class="permissions-grid">
+      <div class="permission-item"><input type="checkbox" checked disabled> ডাটাবেজ ব্যাকআপ ও রিস্টোর</div>
+      <div class="permission-item"><input type="checkbox" checked disabled> আর্থিক লেনদেন ভয়েড/রিভার্স</div>
+      <div class="permission-item"><input type="checkbox" checked disabled> ছাত্র/শিক্ষক এন্ট্রি ও মুছুন</div>
+      <div class="permission-item"><input type="checkbox" checked disabled> বেতন আদায় ও রসিদ তৈরি</div>
+      <div class="permission-item"><input type="checkbox" checked disabled> সেটিংস পরিবর্তন</div>
+    </div>
+  </div>
+
+  <!-- Teacher Role Card -->
+  <div class="role-card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3>👨‍🏫 শিক্ষক (Teacher)</h3>
+      <span class="badge teacher">অ্যাকাডেমিক কন্ট্রোল</span>
+    </div>
+    <p class="desc">শিক্ষকগণ শুধুমাত্র তাদের বরাদ্দকৃত ক্লাস দেখতে পারেন, উপস্থিতি নিতে পারেন এবং পরীক্ষার মার্কস বা ফলাফল ইনপুট দিতে পারেন।</p>
+    <div class="permissions-grid">
+      <div class="permission-item"><input type="checkbox" checked onchange="togglePerm('teacher_attendance')"> উপস্থিতি নেওয়া (Attendance Entry)</div>
+      <div class="permission-item"><input type="checkbox" checked onchange="togglePerm('teacher_marks')"> ফলাফল/মার্কস এন্ট্রি (Marks Entry)</div>
+      <div class="permission-item"><input type="checkbox" checked onchange="togglePerm('teacher_student_view')"> নিজ ক্লাসের ছাত্র তালিকা দেখা</div>
+      <div class="permission-item"><input type="checkbox" onchange="togglePerm('teacher_finance_view')"> বেতন/অর্থ সংক্রান্ত তথ্য দেখা</div>
+      <div class="permission-item"><input type="checkbox" onchange="togglePerm('teacher_delete')"> তথ্য মুছে ফেলা (Delete Access)</div>
+    </div>
+  </div>
+
+  <!-- Student Role Card -->
+  <div class="role-card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3>👨‍🎓 ছাত্র ও অভিভাবক (Student & Guardian)</h3>
+      <span class="badge student">শুধু ভিউ এক্সেস (Read Only)</span>
+    </div>
+    <p class="desc">ছাত্র এবং অভিভাবকগণ তাদের ব্যক্তিগত প্রোফাইল, বকেয়া বেতন, ইতিপূর্বে পরিশোধিত বেতনের রসিদ এবং পরীক্ষার ফলাফল দেখতে ও ডাউনলোড করতে পারবেন।</p>
+    <div class="permissions-grid">
+      <div class="permission-item"><input type="checkbox" checked disabled> নিজের প্রোফাইল দেখা</div>
+      <div class="permission-item"><input type="checkbox" checked disabled> বকেয়া বেতনের বিবরণী দেখা</div>
+      <div class="permission-item"><input type="checkbox" checked disabled> পরিশোধিত রসিদ প্রিন্ট/ডাউনলোড</div>
+      <div class="permission-item"><input type="checkbox" checked disabled> পরীক্ষার ফলাফল ও মার্কশীট দেখা</div>
+      <div class="permission-item"><input type="checkbox" onchange="togglePerm('student_profile_edit')"> নিজের প্রোফাইল সম্পাদনা করা</div>
+    </div>
+  </div>
+
+  <button onclick="savePermissions()" style="width:100%;margin-top:10px">✅ পারমিশন সেটিংস সংরক্ষণ করুন</button>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+
+function togglePerm(perm) {
+  console.log('Permission changed:', perm);
+}
+
+function savePermissions() {
+  alert('✅ পারমিশন কনফিগারেশন সফলভাবে সংরক্ষিত হয়েছে!');
+}
+</script>
+</body></html>

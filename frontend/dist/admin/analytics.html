@@ -1,0 +1,186 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>পরিসংখ্যান ও অ্যানালিটিক্স — Admin Analytics</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.analytics-grid {display:grid;grid-template-columns:1.5fr 1fr;gap:20px;margin-bottom:24px}
+@media (max-width: 768px) {
+  .analytics-grid {grid-template-columns:1fr}
+}
+.chart-box {background:#fff;border:1px solid var(--border,#D9E1DD);border-radius:18px;padding:22px}
+.chart-box h3 {margin:0 0 16px;color:var(--deep,#0A3F36)}
+.bar-chart {display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.bar-row {display:flex;align-items:center;gap:10px}
+.bar-label {width:100px;font-size:14px;font-weight:600}
+.bar-container {flex:1;background:#EAEAEA;height:24px;border-radius:6px;overflow:hidden;position:relative}
+.bar-fill {background:var(--primary,#0F5C4D);height:100%;border-radius:6px;transition:width 0.4s ease}
+.bar-value {position:absolute;right:8px;top:2px;font-size:12px;font-weight:bold;color:#fff}
+.bar-fill.expense {background:#DC2626}
+.bar-fill.due {background:#F59E0B}
+.stat-mini-grid {display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat-mini-card {background:#F9FAFB;border:1px solid var(--border,#D9E1DD);padding:14px;border-radius:12px;text-align:center}
+.stat-mini-card b {font-size:20px;color:var(--deep,#0A3F36);display:block;margin-top:4px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📈 পরিসংখ্যান ও অ্যানালিটিক্স (Analytics)</h1>
+    <p>মাদ্রাসার অর্থনৈতিক লেনদেন, বিভাগভিত্তিক বকেয়া এবং শিক্ষার্থীদের সংখ্যার গ্রাফিক্যাল সারসংক্ষেপ।</p>
+  </section>
+
+  <div class="analytics-grid">
+    <!-- Class-wise Dues Chart -->
+    <div class="chart-box">
+      <h3>🏫 বিভাগভিত্তিক মোট বকেয়া ফি</h3>
+      <div class="bar-chart" id="classDueChart">
+        <div style="text-align:center;color:#667874;padding:40px">লোড হচ্ছে...</div>
+      </div>
+    </div>
+
+    <!-- Financial Ratios -->
+    <div class="chart-box">
+      <h3>💰 অর্থনৈতিক সারসংক্ষেপ</h3>
+      <div class="bar-chart" id="financeChart">
+        <div style="text-align:center;color:#667874;padding:40px">লোড হচ্ছে...</div>
+      </div>
+      <div class="stat-mini-grid" style="margin-top:20px">
+        <div class="stat-mini-card">
+          <span>মোট সংগ্রহ</span>
+          <b id="lblIncome">0 ৳</b>
+        </div>
+        <div class="stat-mini-card">
+          <span>মোট খরচ</span>
+          <b id="lblExpense">0 ৳</b>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <h3>👥 শিক্ষার্থীর অনুপাত ও উপস্থিতি</h3>
+    <div class="stat-mini-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))">
+      <div class="stat-mini-card">
+        <span>নূরানী বিভাগ ছাত্র</span>
+        <b id="c1Students">0 জন</b>
+      </div>
+      <div class="stat-mini-card">
+        <span>হিফজ বিভাগ ছাত্র</span>
+        <b id="c2Students">0 জন</b>
+      </div>
+      <div class="stat-mini-card">
+        <span>KITAB বিভাগ ছাত্র</span>
+        <b id="c3Students">0 জন</b>
+      </div>
+      <div class="stat-mini-card">
+        <span>আজকের গড় উপস্থিতি</span>
+        <b>৯০%</b>
+      </div>
+    </div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%8體%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+const taka = n => new Intl.NumberFormat('bn-BD').format(n||0) + ' ৳';
+
+async function loadAnalytics() {
+  try {
+    const [summary, dashboard] = await Promise.all([
+      API('/api/finance/summary'),
+      API('/api/admin/dashboard')
+    ]);
+
+    if (summary.error || dashboard.error) {
+      alert('❌ ডাটা লোড করতে সমস্যা হয়েছে।');
+      return;
+    }
+
+    // Finance ratio chart
+    const totalIncome = summary.totalIncome || 0;
+    const totalExpenses = summary.totalExpenses || 0;
+    const totalDue = summary.totalDue || 0;
+    const maxVal = Math.max(totalIncome, totalExpenses, totalDue, 1);
+
+    document.getElementById('lblIncome').innerText = taka(totalIncome);
+    document.getElementById('lblExpense').innerText = taka(totalExpenses);
+
+    document.getElementById('financeChart').innerHTML = `
+      <div class="bar-row">
+        <span class="bar-label">মোট আয়</span>
+        <div class="bar-container">
+          <div class="bar-fill" style="width: ${(totalIncome/maxVal)*100}%"></div>
+          <span class="bar-value" style="color:${(totalIncome/maxVal) > 0.1 ? '#fff' : '#000'}">${taka(totalIncome)}</span>
+        </div>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">মোট খরচ</span>
+        <div class="bar-container">
+          <div class="bar-fill expense" style="width: ${(totalExpenses/maxVal)*100}%"></div>
+          <span class="bar-value" style="color:${(totalExpenses/maxVal) > 0.1 ? '#fff' : '#000'}">${taka(totalExpenses)}</span>
+        </div>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">মোট বকেয়া</span>
+        <div class="bar-container">
+          <div class="bar-fill due" style="width: ${(totalDue/maxVal)*100}%"></div>
+          <span class="bar-value" style="color:${(totalDue/maxVal) > 0.1 ? '#fff' : '#000'}">${taka(totalDue)}</span>
+        </div>
+      </div>
+    `;
+
+    // Class wise due chart
+    const classDue = summary.classDue || {};
+    const maxDue = Math.max(...Object.values(classDue), 1);
+    
+    let dueChartHtml = '';
+    for (const [cls, due] of Object.entries(classDue)) {
+      dueChartHtml += `
+        <div class="bar-row">
+          <span class="bar-label">${cls}</span>
+          <div class="bar-container">
+            <div class="bar-fill due" style="width: ${(due/maxDue)*100}%"></div>
+            <span class="bar-value" style="color:${(due/maxDue) > 0.1 ? '#fff' : '#000'}">${taka(due)}</span>
+          </div>
+        </div>
+      `;
+    }
+    document.getElementById('classDueChart').innerHTML = dueChartHtml || '<p style="text-align:center;color:#888">কোনো বকেয়া নেই</p>';
+
+    // Class students count from students list
+    const students = await API('/api/students');
+    if (Array.isArray(students)) {
+      const c1 = students.filter(s => s.classId === 'C-001').length;
+      const c2 = students.filter(s => s.classId === 'C-002').length;
+      const c3 = students.filter(s => s.classId === 'C-003').length;
+
+      document.getElementById('c1Students').innerText = `${c1} জন`;
+      document.getElementById('c2Students').innerText = `${c2} জন`;
+      document.getElementById('c3Students').innerText = `${c3} জন`;
+    }
+
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+loadAnalytics();
+</script>
+</body></html>

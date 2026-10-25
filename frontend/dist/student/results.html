@@ -1,0 +1,94 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>আমার পরীক্ষার ফলাফল — Student Results</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.result-card{background:#fff;border:1px solid #D9E1DD;border-radius:18px;padding:24px;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,0.05)}
+.result-header{display:flex;justify-content:space-between;border-bottom:2px solid #D9E1DD;padding-bottom:12px;margin-bottom:16px;align-items:center}
+.result-header h3{margin:0;color:#0A3F36}
+.grade-badge{background:#e8f5e9;color:#15803D;font-size:18px;font-weight:bold;padding:6px 14px;border-radius:8px}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Student Portal</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/student/dashboard">Dashboard</a>
+    <a href="/student/profile">প্রোফাইল</a>
+    <a href="/student/fees">বেতন ও ফি</a>
+    <a href="/student/results" style="background:#0F5C4D;color:#fff;border-radius:10px">ফলাফল</a>
+    <a href="/student/notices">নোটিশ</a>
+    <a href="/student/id-card">আইডি কার্ড</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>🎓 আমার পরীক্ষার ফলাফল</h1>
+    <p>আপনার বিভিন্ন পরীক্ষার বিষয়ভিত্তিক নম্বর ও জিপিএ গ্রেডশীট বিবরণী নিচে দেয়া হলো।</p>
+  </section>
+
+  <div id="resultsArea">
+    <div class="loader">🎓 ফলাফল লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%8體%E0%A6%AE%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+async function loadResults() {
+  try {
+    const results = await API('/api/student/results');
+    if (results.error) {
+      document.getElementById('resultsArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Student Login করুন।</div>';
+      return;
+    }
+
+    if (results.length === 0) {
+      document.getElementById('resultsArea').innerHTML = '<div style="text-align:center;padding:40px;color:#888;">কোনো পরীক্ষার ফলাফল এখনও প্রকাশ করা হয়নি।</div>';
+      return;
+    }
+
+    document.getElementById('resultsArea').innerHTML = results.map(r => `
+      <div class="result-card">
+        <div class="result-header">
+          <div>
+            <h3>${r.exam}</h3>
+            <span style="font-size:12px;color:#667874">শিক্ষাবর্ষ: ${r.session || '২০২৬'} | বিভাগ: ${r.className}</span>
+          </div>
+          <div class="grade-badge">গ্রেড: ${r.grade}</div>
+        </div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>বিষয়</th><th>নম্বর</th><th>মোট নম্বর</th></tr></thead>
+          <tbody>${r.subjects.map(sub => `
+            <tr>
+              <td style="font-weight:bold">${sub.name}</td>
+              <td style="font-weight:bold;color:#0F5C4D">${sub.marks}</td>
+              <td>${sub.total}</td>
+            </tr>
+          `).join('')}</tbody>
+          <tfoot>
+            <tr style="background:#F0F8F5;font-weight:bold;">
+              <td>সর্বমোট</td>
+              <td style="color:#0F5C4D">${r.total}</td>
+              <td>${r.outOf}</td>
+            </tr>
+          </tfoot>
+        </table></div>
+      </div>
+    `).join('');
+
+  } catch(e) {
+    document.getElementById('resultsArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+loadResults();
+</script>
+</body></html>

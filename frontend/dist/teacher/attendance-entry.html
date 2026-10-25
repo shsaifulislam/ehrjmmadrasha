@@ -1,0 +1,132 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>হাজিরা এন্ট্রি — Teacher Attendance Entry</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.loader{text-align:center;padding:40px;color:#667874}
+.error-state{text-align:center;padding:40px;color:#DC2626}
+.attendance-opt {display:flex;gap:15px}
+.attendance-opt label {font-weight:bold;cursor:pointer}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Teacher Portal</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/teacher/dashboard">Dashboard</a>
+    <a href="/teacher/students">ছাত্র তালিকা</a>
+    <a href="/teacher/attendance-entry" style="background:#0F5C4D;color:#fff;border-radius:10px">হাজিরা এন্ট্রি</a>
+    <a href="/teacher/marks-entry">নম্বর এন্ট্রি</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📅 দৈনিক হাজিরা এন্ট্রি (Attendance Entry)</h1>
+    <p>বিভাগ এবং তারিখ সিলেক্ট করে শিক্ষার্থীদের উপস্থিতি/অনুপস্থিতি রেজিস্টার করুন।</p>
+  </section>
+
+  <!-- Class & Date Select -->
+  <section class="toolbar">
+    <input type="date" id="attDate" onchange="loadStudents()">
+    <select id="attClass" onchange="loadStudents()">
+      <option value="C-001">নূরানী বিভাগ</option>
+      <option value="C-002" selected>হিফজ বিভাগ</option>
+      <option value="C-003">কিতাব বিভাগ</option>
+    </select>
+  </section>
+
+  <!-- Students List for Attendance -->
+  <div id="attendanceEntryArea">
+    <div class="loader">📋 তথ্য লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+// Set default date to today
+document.getElementById('attDate').value = new Date().toISOString().slice(0,10);
+
+let students = [];
+
+async function loadStudents() {
+  const classId = document.getElementById('attClass').value;
+  if (!classId) return;
+
+  document.getElementById('attendanceEntryArea').innerHTML = '<div class="loader">📋 ছাত্র তালিকা লোড হচ্ছে...</div>';
+
+  try {
+    const list = await API('/api/teacher/students');
+    if (list.error) {
+      document.getElementById('attendanceEntryArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Teacher Login করুন।</div>';
+      return;
+    }
+
+    // Filter students by selected classId
+    students = list.filter(s => s.classId === classId);
+
+    if (students.length === 0) {
+      document.getElementById('attendanceEntryArea').innerHTML = '<div style="text-align:center;padding:30px;color:#888;">এই বিভাগে কোনো শিক্ষার্থী বরাদ্দ নেই।</div>';
+      return;
+    }
+
+    document.getElementById('attendanceEntryArea').innerHTML = `
+      <div class="table-wrap"><table>
+        <thead><tr>
+          <th>রোল</th><th>নাম</th><th>আইডি</th><th>হাজিরা স্ট্যাটাস</th>
+        </tr></thead>
+        <tbody>${students.map(s => `<tr>
+          <td>${s.roll}</td>
+          <td style="font-weight:bold">${s.name}</td>
+          <td>${s.id}</td>
+          <td>
+            <div class="attendance-opt">
+              <label style="color:#15803D"><input type="radio" name="status_${s.id}" value="present" checked> উপস্থিত (P)</label>
+              <label style="color:#DC2626"><input type="radio" name="status_${s.id}" value="absent"> অনুপস্থিত (A)</label>
+            </div>
+          </td>
+        </tr>`).join('')}</tbody>
+      </table></div>
+      <button class="btn primary" onclick="submitAttendance()" id="btnSubmitAttendance" style="width:100%;margin-top:20px;padding:14px;font-size:16px;">💾 হাজিরা সংরক্ষণ করুন</button>
+    `;
+
+  } catch(e) {
+    document.getElementById('attendanceEntryArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+async function submitAttendance() {
+  const date = document.getElementById('attDate').value;
+  const classId = document.getElementById('attClass').value;
+
+  const records = students.map(s => {
+    const opts = document.getElementsByName('status_' + s.id);
+    let status = 'present';
+    for (const opt of opts) {
+      if (opt.checked) status = opt.value;
+    }
+    return { studentId: s.id, status };
+  });
+
+  try {
+    const res = await API('/api/attendance', {
+      method: 'POST',
+      body: JSON.stringify({ classId, date, records })
+    });
+
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ হাজিরা রেজিস্টার সফলভাবে সংরক্ষণ করা হয়েছে!');
+    loadStudents();
+  } catch(e) {
+    alert('❌ হাজিরা সংরক্ষণ করতে ব্যর্থ হয়েছে।');
+  }
+}
+
+loadStudents();
+</script>
+</body></html>

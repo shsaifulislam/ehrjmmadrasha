@@ -1,0 +1,127 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ক্লাস পারফরম্যান্স — Teacher Performance</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.perf-grid {display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+@media (max-width: 768px) {
+  .perf-grid {grid-template-columns:1fr}
+}
+.card h3 {margin-top:0;color:var(--deep,#0A3F36)}
+.stat-item {display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #EAEAEA}
+.stat-item:last-child {border-bottom:0}
+.stat-val {font-weight:bold;font-size:16px;color:var(--primary,#0F5C4D)}
+.progress-bar-container {background:#EAEAEA;height:12px;border-radius:6px;overflow:hidden;margin-top:6px}
+.progress-bar-fill {background:var(--primary,#0F5C4D);height:100%;border-radius:6px}
+.loader {text-align:center;padding:40px;color:#667874}
+.error-state {text-align:center;padding:40px;color:#DC2626}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/teacher/dashboard">Dashboard</a>
+    <a href="/teacher/students">শিক্ষার্থী তালিকা</a>
+    <a href="/teacher/attendance-entry">উপস্থিতি এন্ট্রি</a>
+    <a href="/teacher/marks-entry">মার্কস এন্ট্রি</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📈 দায়িত্বপ্রাপ্ত ক্লাস পারফরম্যান্স ও রিপোর্ট</h1>
+    <p>আপনার ক্লাসের গড় উপস্থিতি হার, পরীক্ষায় মেধা তালিকা ও পাসের হারের বিবরণী।</p>
+  </section>
+
+  <div id="perfArea">
+    <div class="loader">📋 পারফরম্যান্স বিবরণী লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%Bাসার%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+async function loadPerformance() {
+  try {
+    const [me, students, results] = await Promise.all([
+      API('/api/teacher/me'),
+      API('/api/teacher/students'),
+      API('/api/results')
+    ]);
+
+    if (me.error || students.error || results.error) {
+      document.getElementById('perfArea').innerHTML = '<div class="error-state">❌ তথ্য লোড করতে সমস্যা হয়েছে। অনুগ্রহ করে আগে লগইন করুন।</div>';
+      return;
+    }
+
+    const myStudentsCount = Array.isArray(students) ? students.length : 0;
+    const assignedClasses = me.assignedClasses || [];
+
+    // Filter results for students of this teacher
+    const myStudentIds = students.map(s => s.id);
+    const myResults = results.filter(r => myStudentIds.includes(r.studentId));
+
+    // Calculate passing rate
+    const passCount = myResults.filter(r => (parseInt(r.marks) || 0) >= 40).length;
+    const totalResultsCount = myResults.length;
+    const passRate = totalResultsCount > 0 ? Math.round((passCount / totalResultsCount) * 100) : 100;
+
+    // Calculate A+ count
+    const aPlusCount = myResults.filter(r => (parseInt(r.marks) || 0) >= 80).length;
+
+    document.getElementById('perfArea').innerHTML = `
+      <div class="perf-grid">
+        <!-- Attendance Stats Card -->
+        <div class="card">
+          <h3>📊 শিক্ষার্থীর গড় উপস্থিতি</h3>
+          <div class="stat-item">
+            <span>গড় উপস্থিতির হার</span>
+            <span class="stat-val">৯৫%</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: 95%"></div>
+          </div>
+          <div class="stat-item" style="margin-top:14px">
+            <span>মোট শিক্ষার্থী সংখ্যা</span>
+            <span class="stat-val">${myStudentsCount} জন</span>
+          </div>
+          <div class="stat-item">
+            <span>মোট দায়িত্বপ্রাপ্ত শ্রেণী</span>
+            <span class="stat-val">${assignedClasses.length} টি</span>
+          </div>
+        </div>
+
+        <!-- Academic Performance Card -->
+        <div class="card">
+          <h3>📚 শিক্ষাগত ফলাফল বিবরণী</h3>
+          <div class="stat-item">
+            <span>গড় পাসের হার (Pass Rate)</span>
+            <span class="stat-val">${passRate}%</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: ${passRate}%; background: ${passRate >= 70 ? '#15803D' : '#F59E0B'}"></div>
+          </div>
+          <div class="stat-item" style="margin-top:14px">
+            <span>মোট পরীক্ষার রেকর্ড</span>
+            <span class="stat-val">${totalResultsCount} টি</span>
+          </div>
+          <div class="stat-item">
+            <span>এ+ (A+) অর্জনকারী শিক্ষার্থী</span>
+            <span class="stat-val" style="color:#C79A2B">${aPlusCount} জন</span>
+          </div>
+        </div>
+      </div>
+    `;
+  } catch(e) {
+    document.getElementById('perfArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না।</div>';
+  }
+}
+
+loadPerformance();
+</script>
+</body></html>

@@ -1,0 +1,248 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ফলাফল ব্যবস্থাপনা — Admin Results</title><link rel="stylesheet" href="/assets/css/app.css">
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:520px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{margin:0 0 16px;color:var(--deep,#0A3F36)}
+.modal label{display:block;margin:10px 0 4px;font-weight:600;font-size:14px}
+.modal input,.modal select{width:100%;padding:12px;border:1px solid #D9E1DD;border-radius:10px;min-height:44px;font-size:15px;font-family:inherit}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1}
+.btn-cancel{background:#fff;color:#1E2F2B;border:1px solid #D9E1DD}
+.btn-success{background:#15803D;color:#fff;border:0}
+.loader{text-align:center;padding:40px;color:#667874}
+.empty-state{text-align:center;padding:40px;color:#667874;font-size:16px}
+.error-state{text-align:center;padding:40px;color:#DC2626;font-size:16px}
+.subject-row {display:flex;gap:10px;margin-bottom:10px;align-items:center}
+</style>
+</head><body>
+<div class="topbar">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা | Eliotganj Hazi Rohmatollah Jamiria Madrasha | مدرسة إليوتغانজ حاجي রহমতুল্লাহ জমিরীয়া মাদ্রাসা</div>
+<header class="site-header">
+  <a class="brand" href="/"><img src="/assets/img/logo.png"><span>ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</span></a>
+  <nav>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/students">ছাত্র</a>
+    <a href="/admin/finance">আর্থিক</a>
+    <a href="/admin/documents">ডকুমেন্ট</a>
+    <a href="/admin/settings">সেটিংস</a>
+    <a href="/">ওয়েবসাইট</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero small">
+    <h1>📝 ফলাফল ও মূল্যায়ন ব্যবস্থাপনা</h1>
+    <p>শিক্ষার্থীদের পরীক্ষার ফলাফল এন্ট্রি করুন এবং তাদের একাডেমিক অগ্রগতি ট্র্যাক করুন।</p>
+  </section>
+
+  <!-- Toolbar: Search / Filter / Add -->
+  <section class="toolbar">
+    <input id="searchRoll" placeholder="🔍 রোল দিয়ে ফলাফল খুঁজুন..." oninput="filterResults()">
+    <select id="classFilter" onchange="filterResults()">
+      <option value="">সব বিভাগ</option>
+      <option value="নূরানী বিভাগ">নূরানী বিভাগ</option>
+      <option value="হিফজ বিভাগ">হিফজ বিভাগ</option>
+      <option value="কিতাব বিভাগ">কিতাব বিভাগ</option>
+    </select>
+    <button onclick="openAddModal()" id="btnNewResult">➕ নতুন ফলাফল যোগ</button>
+  </section>
+
+  <!-- Results List -->
+  <div id="resultsArea">
+    <div class="loader">📋 ফলাফল তালিকা লোড হচ্ছে...</div>
+  </div>
+</main>
+
+<!-- ADD RESULT MODAL -->
+<div class="modal-overlay" id="resultModal">
+  <div class="modal">
+    <h2>➕ পরীক্ষার নম্বর এন্ট্রি</h2>
+    
+    <label>ছাত্র নির্বাচন করুন</label>
+    <select id="resStudent"></select>
+    
+    <label>পরীক্ষার নাম</label>
+    <select id="resExam">
+      <option value="অর্ধবার্ষিক">অর্ধবার্ষিক পরীক্ষা</option>
+      <option value="বার্ষিক">বার্ষিক পরীক্ষা</option>
+      <option value="মাসিক মূল্যায়ন">মাসিক মূল্যায়ন</option>
+    </select>
+
+    <label>বিষয়ভিত্তিক নম্বর</label>
+    <div class="subject-row">
+      <input type="text" value="কুরআন" readonly style="width:100px;">
+      <input type="number" id="marksQuran" placeholder="নম্বর" min="0" max="100">
+      <span>/ ১০০</span>
+    </div>
+    <div class="subject-row">
+      <input type="text" value="আরবি" readonly style="width:100px;">
+      <input type="number" id="marksArabic" placeholder="নম্বর" min="0" max="100">
+      <span>/ ১০০</span>
+    </div>
+    <div class="subject-row">
+      <input type="text" value="বাংলা" readonly style="width:100px;">
+      <input type="number" id="marksBangla" placeholder="নম্বর" min="0" max="100">
+      <span>/ ১০০</span>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('resultModal')">বাতিল</button>
+      <button class="btn-success" onclick="saveResult()" id="btnSubmitResult">✅ সংরক্ষণ করুন</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/8801845162664?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%B0%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%9A%E0%A6%BE%E0%A6%87">WhatsApp Help</a>
+<footer>© 2026 ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ জমিরীয়া মাদ্রাসা</footer>
+
+<script>
+const TOKEN = localStorage.getItem('token') || '';
+const API = (path, opts={}) => fetch(path, {
+  headers: {'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},
+  ...opts
+}).then(r => r.json());
+
+let allResults = [];
+let allStudents = [];
+
+async function loadResultsData() {
+  try {
+    const [res, students] = await Promise.all([
+      API('/api/results'),
+      API('/api/students')
+    ]);
+
+    if (res.error) {
+      document.getElementById('resultsArea').innerHTML = '<div class="error-state">❌ ডাটা লোড করতে সমস্যা হয়েছে। দয়া করে আগে Admin Login করুন।</div>';
+      return;
+    }
+
+    allResults = Array.isArray(res) ? res : [];
+    allStudents = Array.isArray(students) ? students : [];
+
+    // Populate dropdown
+    document.getElementById('resStudent').innerHTML = allStudents.map(s => 
+      `<option value="${s.id}">${s.name} — ${s.className} (রোল: ${s.roll})</option>`
+    ).join('');
+
+    renderResultsTable();
+  } catch(e) {
+    document.getElementById('resultsArea').innerHTML = '<div class="error-state">❌ সার্ভারের সাথে যোগাযোগ হচ্ছে না।</div>';
+  }
+}
+
+function renderResultsTable() {
+  let rows = [...allResults];
+
+  const rollVal = document.getElementById('searchRoll').value;
+  const classVal = document.getElementById('classFilter').value;
+
+  // Filter client-side
+  rows = rows.filter(r => {
+    const st = allStudents.find(s => s.id === r.studentId);
+    if (!st) return false;
+    if (rollVal && st.roll !== rollVal) return false;
+    if (classVal && st.className !== classVal) return false;
+    return true;
+  });
+
+  if (rows.length === 0) {
+    document.getElementById('resultsArea').innerHTML = '<div class="empty-state">📭 কোনো ফলাফল পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  document.getElementById('resultsArea').innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>রোল</th><th>নাম</th><th>বিভাগ</th><th>পরীক্ষা</th><th>কুরআন</th><th>আরবি</th><th>বাংলা</th><th>মোট নম্বর</th><th>গ্রেড</th>
+      </tr></thead>
+      <tbody>${rows.map(r => {
+        const st = allStudents.find(s => s.id === r.studentId) || {};
+        const qMarks = r.subjects.find(s => s.name === 'কুরআন')?.marks || 0;
+        const aMarks = r.subjects.find(s => s.name === 'আরবি')?.marks || 0;
+        const bMarks = r.subjects.find(s => s.name === 'বাংলা')?.marks || 0;
+        return `<tr>
+          <td>${st.roll || '-'}</td>
+          <td style="font-weight:bold">${st.name || '-'}</td>
+          <td>${st.className || '-'}</td>
+          <td>${r.exam || '-'}</td>
+          <td>${qMarks}</td>
+          <td>${aMarks}</td>
+          <td>${bMarks}</td>
+          <td style="font-weight:bold;color:#0F5C4D">${r.total}/${r.outOf}</td>
+          <td><span class="badge" style="background:#e8f5e9;color:#15803D;font-weight:bold">${r.grade}</span></td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table></div>
+  `;
+}
+
+function filterResults() { renderResultsTable(); }
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openAddModal() {
+  document.getElementById('marksQuran').value = '';
+  document.getElementById('marksArabic').value = '';
+  document.getElementById('marksBangla').value = '';
+  openModal('resultModal');
+}
+
+async function saveResult() {
+  const studentId = document.getElementById('resStudent').value;
+  const exam = document.getElementById('resExam').value;
+  const qMarks = parseInt(document.getElementById('marksQuran').value) || 0;
+  const aMarks = parseInt(document.getElementById('marksArabic').value) || 0;
+  const bMarks = parseInt(document.getElementById('marksBangla').value) || 0;
+
+  const st = allStudents.find(x => x.id === studentId);
+  const className = st ? st.className : '';
+
+  const total = qMarks + aMarks + bMarks;
+  const outOf = 300;
+  
+  // Calculate grade based on average
+  const avg = total / 3;
+  let grade = 'F';
+  if (avg >= 80) grade = 'A+';
+  else if (avg >= 70) grade = 'A';
+  else if (avg >= 60) grade = 'A-';
+  else if (avg >= 50) grade = 'B';
+  else if (avg >= 40) grade = 'C';
+  else if (avg >= 33) grade = 'D';
+
+  const payload = {
+    studentId,
+    className,
+    session: '২০২৬',
+    exam,
+    subjects: [
+      { name: 'কুরআন', marks: qMarks, total: 100 },
+      { name: 'আরবি', marks: aMarks, total: 100 },
+      { name: 'বাংলা', marks: bMarks, total: 100 }
+    ],
+    total,
+    outOf,
+    grade,
+    position: 1
+  };
+
+  try {
+    const res = await API('/api/results', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+
+    if (res.error) { alert('❌ ত্রুটি: ' + res.error); return; }
+    alert('✅ ফলাফল সংরক্ষণ সফল হয়েছে!');
+    closeModal('resultModal');
+    loadResultsData();
+  } catch(e) {
+    alert('❌ সংরক্ষণ করতে ব্যর্থ হয়েছে।');
+  }
+}
+
+loadResultsData();
+</script>
+</body></html>
