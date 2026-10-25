@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
  */
 export async function GET(req: NextRequest) {
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     const { searchParams } = new URL(req.url);
     const studentId = searchParams.get("studentId");
     const sessionId = searchParams.get("sessionId");
@@ -140,6 +140,12 @@ export async function GET(req: NextRequest) {
         id: r.id,
         date: r.date.toISOString().split("T")[0],
         status: r.status,
+        checkInTime: r.checkInTime,
+        checkOutTime: r.checkOutTime,
+        entryMethod: r.entryMethod,
+        exitMethod: r.exitMethod,
+        checkInSmsSent: r.checkInSmsSent,
+        checkOutSmsSent: r.checkOutSmsSent,
         leaveReason: r.leaveReason,
         remarks: r.remarks,
         classNameBn: r.jamatClass.nameBn,

@@ -20,21 +20,48 @@ import {
   Heart,
   Landmark,
   ShieldAlert,
+  Printer,
+  RefreshCw,
+  Briefcase,
+  Check,
+  Trash2,
+  X,
+  CreditCard,
+  Download,
+  QrCode,
+  Edit3,
+  Sliders,
+  ToggleLeft,
+  ToggleRight,
+  Copy,
+  Sparkles,
+  ShieldCheck,
+  Zap,
+  UserCheck,
+  CheckCircle2,
 } from "lucide-react";
+import OfficialReceiptModal, { ReceiptData } from "@/components/finance/OfficialReceiptModal";
 
-export default function AdminFinanceHub() {
+
+interface AdminFinanceHubProps {
+  initialOpenTxModal?: boolean;
+}
+
+export default function AdminFinanceHub({ initialOpenTxModal = false }: AdminFinanceHubProps = {}) {
   const [activeSubTab, setActiveSubTab] = useState<
     | "OVERVIEW"
+    | "QUICK_COUNTER"
     | "STRUCTURES"
     | "INVOICES"
     | "MONTHLY_BILLING"
     | "PAYMENTS"
     | "CASHBOOK"
     | "TRANSACTIONS"
+    | "PAYMENT_METHODS"
     | "ASSISTANCE"
     | "SCHOLARSHIPS"
     | "PAYROLL"
-  >("OVERVIEW");
+  >(initialOpenTxModal ? "TRANSACTIONS" : "OVERVIEW");
 
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState<{ text: string; type: "success" | "error" } | null>(null);
@@ -52,11 +79,61 @@ export default function AdminFinanceHub() {
   const [scholarships, setScholarships] = useState<any[]>([]);
   const [payrolls, setPayrolls] = useState<any[]>([]);
   const [teachers, setTeachers] = useState<any[]>([]);
+  const [staffList, setStaffList] = useState<any[]>([]);
+  const [payrollMonth, setPayrollMonth] = useState(`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}`);
+  const [payrollStatusFilter, setPayrollStatusFilter] = useState<"ALL" | "PAID" | "APPROVED" | "DRAFT">("ALL");
+  const [payrollSearch, setPayrollSearch] = useState("");
+  const [payrollSummary, setPayrollSummary] = useState<any>({ totalNetSalary: 0, totalPaid: 0, totalPending: 0, totalCount: 0 });
+  const [payrollFunds, setPayrollFunds] = useState<any[]>([]);
+  const [selectedPayslip, setSelectedPayslip] = useState<any | null>(null);
 
   // Selected filters
   const [selectedSessionId, setSelectedSessionId] = useState("");
   const [selectedClassId, setSelectedClassId] = useState("");
   const [invoiceSearch, setInvoiceSearch] = useState("");
+  const [invoiceStatusFilter, setInvoiceStatusFilter] = useState("ALL");
+  const [paymentSearch, setPaymentSearch] = useState("");
+  const [paymentMethodFilter, setPaymentMethodFilter] = useState("ALL");
+
+  // Payment Methods Console State
+  const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
+  const [loadingMethods, setLoadingMethods] = useState(false);
+  const [showMethodModal, setShowMethodModal] = useState(false);
+  const [editingMethod, setEditingMethod] = useState<any | null>(null);
+  const [methodForm, setMethodForm] = useState({
+    type: "BKASH",
+    nameBn: "",
+    accountNumber: "",
+    accountType: "MERCHANT",
+    bankName: "",
+    branchName: "",
+    accountHolderName: "",
+    routingNumber: "",
+    instructions: "",
+    isEnabled: true,
+    apiMode: "SANDBOX",
+    apiKey: "",
+    apiSecret: "",
+    merchantId: "",
+  });
+
+  // Quick Spot Fee Counter State
+  const [quickStudentSearch, setQuickStudentSearch] = useState("");
+  const [quickStudentsList, setQuickStudentsList] = useState<any[]>([]);
+  const [searchingQuickStudents, setSearchingQuickStudents] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState<any | null>(null);
+  const [studentPendingInvoices, setStudentPendingInvoices] = useState<any[]>([]);
+  const [loadingStudentInvoices, setLoadingStudentInvoices] = useState(false);
+  const [quickFeeMode, setQuickFeeMode] = useState<"INVOICES" | "SPOT">("INVOICES");
+  const [spotFeeForm, setSpotFeeForm] = useState({
+    feeType: "MONTHLY",
+    title: "",
+    amount: "",
+    paymentMethod: "CASH",
+    transactionId: "",
+    notes: "",
+  });
+  const [submittingQuickFee, setSubmittingQuickFee] = useState(false);
 
   // Modals & forms
   const [showAddStructure, setShowAddStructure] = useState(false);
@@ -87,7 +164,18 @@ export default function AdminFinanceHub() {
     refundMethod: "CASH",
   });
 
-  const [showTxModal, setShowTxModal] = useState(false);
+  // Official Receipt Modal State
+  const [selectedReceiptData, setSelectedReceiptData] = useState<ReceiptData | null>(null);
+  const [showReceiptModal, setShowReceiptModal] = useState(false);
+
+  const [showTxModal, setShowTxModal] = useState(initialOpenTxModal);
+
+  useEffect(() => {
+    if (initialOpenTxModal) {
+      setShowTxModal(true);
+      setActiveSubTab("TRANSACTIONS");
+    }
+  }, [initialOpenTxModal]);
   const [txForm, setTxForm] = useState({
     fundCode: "GENERAL",
     type: "INCOME",
@@ -103,10 +191,15 @@ export default function AdminFinanceHub() {
 
   const [payrollForm, setPayrollForm] = useState({
     userId: "",
+    employeeId: "",
     month: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}`,
     baseSalary: "",
-    allowances: 0,
-    deductions: 0,
+    allowances: "0",
+    deductions: "0",
+    advanceDeduction: "0",
+    paymentMethod: "CASH",
+    fundCode: "GENERAL",
+    notes: "",
   });
 
   // Initial load
@@ -130,7 +223,7 @@ export default function AdminFinanceHub() {
       if (fData.funds) setFunds(fData.funds);
       if (sessData.sessions) {
         setSessions(sessData.sessions);
-        const curr = sessData.sessions.find((s: any) => s.isCurrent) || sessData.sessions[0];
+        const curr = sessData.sessions.find((s: any) => s.isCurrent || s.status === "ACTIVE" || s.isActive) || sessData.sessions[0];
         if (curr) setSelectedSessionId(curr.id);
       }
       if (clsData.classes) setClasses(clsData.classes);
@@ -149,8 +242,189 @@ export default function AdminFinanceHub() {
     if (activeSubTab === "CASHBOOK") fetchCashbook();
     if (activeSubTab === "ASSISTANCE") fetchAssistances();
     if (activeSubTab === "SCHOLARSHIPS") fetchScholarships();
-    if (activeSubTab === "PAYROLL") fetchPayrolls();
-  }, [activeSubTab, selectedSessionId, selectedClassId]);
+    if (activeSubTab === "PAYROLL") fetchPayrolls(payrollMonth);
+    if (activeSubTab === "PAYMENT_METHODS") fetchPaymentMethods();
+  }, [activeSubTab, selectedSessionId, selectedClassId, payrollMonth, invoiceStatusFilter, paymentMethodFilter]);
+
+  const fetchPaymentMethods = async () => {
+    setLoadingMethods(true);
+    try {
+      const res = await fetch("/api/admin/finance/payment-methods");
+      const data = await res.json();
+      if (data.methods) setPaymentMethods(data.methods);
+    } catch (err) {
+      console.error("Failed to load payment methods", err);
+    } finally {
+      setLoadingMethods(false);
+    }
+  };
+
+  const handleSaveMethod = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        ...methodForm,
+        id: editingMethod?.id,
+      };
+      const res = await fetch("/api/admin/finance/payment-methods", {
+        method: editingMethod ? "PUT" : "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setMsg({ text: editingMethod ? "পেমেন্ট মাধ্যম সফলভাবে আপডেট হয়েছে!" : "নতুন পেমেন্ট মাধ্যম সফলভাবে যুক্ত হয়েছে!", type: "success" });
+        setShowMethodModal(false);
+        setEditingMethod(null);
+        fetchPaymentMethods();
+      } else {
+        setMsg({ text: data.error || "পেমেন্ট মাধ্যম সংরক্ষণে ত্রুটি", type: "error" });
+      }
+    } catch (err: any) {
+      setMsg({ text: err.message || "সার্ভার এরর", type: "error" });
+    }
+  };
+
+  const handleToggleMethod = async (method: any) => {
+    try {
+      const res = await fetch("/api/admin/finance/payment-methods", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: method.id, isEnabled: !method.isEnabled }),
+      });
+      if (res.ok) {
+        fetchPaymentMethods();
+      }
+    } catch (err) {
+      console.error("Toggle failed", err);
+    }
+  };
+
+  const handleDeleteMethod = async (id: string, name: string) => {
+    if (!confirm(`আপনি কি নিশ্চিত যে "${name}" পেমেন্ট মেথডটি মুছে ফেলতে চান?`)) return;
+    try {
+      const res = await fetch(`/api/admin/finance/payment-methods?id=${id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setMsg({ text: "পেমেন্ট মাধ্যম মুছে ফেলা হয়েছে!", type: "success" });
+        fetchPaymentMethods();
+      } else {
+        setMsg({ text: data.error || "মুছে ফেলা সম্ভব হয়নি", type: "error" });
+      }
+    } catch (err: any) {
+      setMsg({ text: err.message || "সার্ভার এরর", type: "error" });
+    }
+  };
+
+  // Quick Spot Fee Counter Handlers
+  const handleSearchQuickStudents = async (query: string) => {
+    setQuickStudentSearch(query);
+    if (!query.trim() || query.length < 1) {
+      setQuickStudentsList([]);
+      return;
+    }
+    setSearchingQuickStudents(true);
+    try {
+      const res = await fetch(`/api/admin/students?q=${encodeURIComponent(query)}&take=10`);
+      const data = await res.json();
+      if (data.students) setQuickStudentsList(data.students);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSearchingQuickStudents(false);
+    }
+  };
+
+  const handleSelectQuickStudent = async (student: any) => {
+    setSelectedStudent(student);
+    setQuickStudentsList([]);
+    setQuickStudentSearch(`${student.fullNameBn || student.fullNameEn} (${student.studentIdNumber || ""})`);
+    setLoadingStudentInvoices(true);
+    try {
+      const res = await fetch(`/api/admin/finance/invoices?studentId=${student.id}&status=UNPAID,PARTIALLY_PAID`);
+      const data = await res.json();
+      if (data.invoices) {
+        setStudentPendingInvoices(data.invoices);
+        if (data.invoices.length > 0) {
+          setQuickFeeMode("INVOICES");
+        } else {
+          setQuickFeeMode("SPOT");
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingStudentInvoices(false);
+    }
+  };
+
+  const handleQuickSpotFeeSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedStudent) {
+      setMsg({ text: "অনুগ্রহ করে শিক্ষার্থী নির্বাচন করুন", type: "error" });
+      return;
+    }
+    if (!spotFeeForm.amount || Number(spotFeeForm.amount) <= 0) {
+      setMsg({ text: "টাকার পরিমাণ সঠিকভাবে দিন", type: "error" });
+      return;
+    }
+
+    setSubmittingQuickFee(true);
+    try {
+      const res = await fetch("/api/admin/finance/quick-collection", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          studentId: selectedStudent.id,
+          feeType: spotFeeForm.feeType,
+          title: spotFeeForm.title || "তাৎক্ষণিক ফি কালেকশন",
+          amount: Number(spotFeeForm.amount),
+          paymentMethod: spotFeeForm.paymentMethod,
+          transactionId: spotFeeForm.transactionId,
+          notes: spotFeeForm.notes,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setMsg({ text: "তাৎক্ষণিক ফি সফলভাবে আদায় হয়েছে ও রসিদ তৈরি হয়েছে!", type: "success" });
+        if (data.receipt) {
+          setSelectedReceiptData(data.receipt);
+          setShowReceiptModal(true);
+        }
+        // Reset form
+        setSpotFeeForm({
+          feeType: "MONTHLY",
+          title: "",
+          amount: "",
+          paymentMethod: "CASH",
+          transactionId: "",
+          notes: "",
+        });
+        if (selectedStudent) {
+          handleSelectQuickStudent(selectedStudent);
+        }
+      } else {
+        setMsg({ text: data.error || "ফি আদায়ে ত্রুটি ঘটেছে", type: "error" });
+      }
+    } catch (err: any) {
+      setMsg({ text: err.message || "সার্ভার এরর", type: "error" });
+    } finally {
+      setSubmittingQuickFee(false);
+    }
+  };
+
+  const handlePayExistingPendingInvoice = (inv: any) => {
+    setSelectedInvoice(inv);
+    setPaymentForm({
+      amount: String(inv.amount - inv.paidAmount),
+      paymentMethod: "CASH",
+      transactionId: "",
+      notes: "কাউন্টার থেকে আদায়",
+    });
+    setShowPaymentModal(true);
+  };
 
   const fetchStructures = async () => {
     try {
@@ -167,6 +441,7 @@ export default function AdminFinanceHub() {
       let url = `/api/admin/finance/invoices?sessionId=${selectedSessionId}`;
       if (selectedClassId) url += `&classId=${selectedClassId}`;
       if (invoiceSearch) url += `&search=${encodeURIComponent(invoiceSearch)}`;
+      if (invoiceStatusFilter && invoiceStatusFilter !== "ALL") url += `&status=${invoiceStatusFilter}`;
       const res = await fetch(url);
       const data = await res.json();
       if (data.invoices) setInvoices(data.invoices);
@@ -178,7 +453,12 @@ export default function AdminFinanceHub() {
 
   const fetchPayments = async () => {
     try {
-      const res = await fetch("/api/admin/finance/payments");
+      let url = "/api/admin/finance/payments";
+      const params: string[] = [];
+      if (paymentMethodFilter && paymentMethodFilter !== "ALL") params.push(`paymentMethod=${paymentMethodFilter}`);
+      if (paymentSearch) params.push(`search=${encodeURIComponent(paymentSearch)}`);
+      if (params.length > 0) url += `?${params.join("&")}`;
+      const res = await fetch(url);
       const data = await res.json();
       if (data.payments) setPayments(data.payments);
     } catch (err) {
@@ -216,12 +496,15 @@ export default function AdminFinanceHub() {
     }
   };
 
-  const fetchPayrolls = async () => {
+  const fetchPayrolls = async (targetMonth = payrollMonth) => {
     try {
-      const res = await fetch("/api/admin/finance/payroll");
+      const res = await fetch(`/api/admin/finance/payroll?month=${targetMonth}`);
       const data = await res.json();
       if (data.payrolls) setPayrolls(data.payrolls);
+      if (data.staffList) setStaffList(data.staffList);
       if (data.teachers) setTeachers(data.teachers);
+      if (data.funds) setPayrollFunds(data.funds);
+      if (data.summary) setPayrollSummary(data.summary);
     } catch (err) {
       console.error(err);
     }
@@ -269,6 +552,26 @@ export default function AdminFinanceHub() {
       if (res.ok) {
         setMsg({ text: data.message || "পেমেন্ট সফলভাবে সংরক্ষিত হয়েছে!", type: "success" });
         setShowPaymentModal(false);
+        if (data.receipt) {
+          const enrollment = selectedInvoice.student?.enrollments?.[0];
+          setSelectedReceiptData({
+            receiptNumber: data.receipt.receiptNumber,
+            invoiceNumber: data.invoice?.invoiceNumber || selectedInvoice.invoiceNumber,
+            receiptDate: data.receipt.receiptDate || new Date().toISOString(),
+            studentIdNumber: selectedInvoice.student?.studentIdNumber || "",
+            studentNameBn: selectedInvoice.student?.fullNameBn || "শিক্ষার্থী",
+            className: enrollment?.jamatClass?.nameBn || "মাদরাসা শাখা",
+            sectionName: enrollment?.section?.nameBn,
+            rollNumber: enrollment?.rollNumber || "—",
+            title: selectedInvoice.title || "একাডেমিক ফি",
+            amount: Number(paymentForm.amount),
+            paymentMethod: paymentForm.paymentMethod,
+            transactionId: paymentForm.transactionId,
+            receivedBy: "হিসাব বিভাগ",
+            qrCodeToken: data.receipt.qrCodeToken,
+          });
+          setShowReceiptModal(true);
+        }
         fetchInvoices();
         fetchInitialData();
       } else {
@@ -277,6 +580,70 @@ export default function AdminFinanceHub() {
     } catch (err: any) {
       setMsg({ text: err.message, type: "error" });
     }
+  };
+
+  const exportInvoicesToCSV = () => {
+    if (!invoices || invoices.length === 0) {
+      alert("কোনো ইনভয়েস তথ্য পাওয়া যায়নি।");
+      return;
+    }
+    const headers = ["ইনভয়েস নং", "শিক্ষার্থীর নাম", "আইডি", "ফি টাইপ", "বিবরণ", "মোট ধার্য (টাকা)", "পরিশোধিত", "বকেয়া", "স্ট্যাটাস"];
+    const rows = invoices.map((inv) => [
+      inv.invoiceNumber,
+      `"${(inv.student?.fullNameBn || "").replace(/"/g, '""')}"`,
+      inv.student?.studentIdNumber || "",
+      inv.feeType || "",
+      `"${(inv.title || "").replace(/"/g, '""')}"`,
+      inv.netAmount,
+      inv.paidAmount,
+      inv.dueAmount,
+      inv.status,
+    ]);
+
+    const csvContent = "\uFEFF" + [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `EHRJ_Invoices_Report_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const exportPaymentsToCSV = () => {
+    if (!payments || payments.length === 0) {
+      alert("কোনো পেমেন্ট তথ্য পাওয়া যায়নি।");
+      return;
+    }
+    const headers = ["রসিদ নং", "তারিখ", "শিক্ষার্থীর নাম", "আইডি", "রোল", "জামাত", "ইনভয়েস নং", "ফি বিবরণ", "পেমেন্ট মাধ্যম", "পরিমাণ (টাকা)"];
+    const rows = payments.map((p) => {
+      const enrollment = p.student?.enrollments?.[0];
+      return [
+        p.receiptNumber,
+        new Date(p.receiptDate).toLocaleDateString("bn-BD"),
+        `"${(p.student?.fullNameBn || "").replace(/"/g, '""')}"`,
+        p.student?.studentIdNumber || "",
+        enrollment?.rollNumber || "",
+        `"${(enrollment?.jamatClass?.nameBn || "").replace(/"/g, '""')}"`,
+        p.invoice?.invoiceNumber || "",
+        `"${(p.invoice?.title || "").replace(/"/g, '""')}"`,
+        p.paymentMethod || "",
+        p.amount,
+      ];
+    });
+
+    const csvContent = "\uFEFF" + [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `EHRJ_Payment_Receipts_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   const handleProcessRefund = async (e: React.FormEvent) => {
@@ -371,24 +738,118 @@ export default function AdminFinanceHub() {
     }
   };
 
-  const handleSavePayroll = async (action: "DRAFT" | "PAY") => {
+  const handleSelectStaffForPayroll = (identifier: string) => {
+    const found = staffList.find((s) => s.id === identifier || s.userId === identifier || s.employeeId === identifier);
+    if (found) {
+      setPayrollForm((prev) => ({
+        ...prev,
+        userId: found.userId || found.id,
+        employeeId: found.employeeId || "",
+        baseSalary: found.baseSalary ? String(found.baseSalary) : prev.baseSalary,
+      }));
+    } else {
+      setPayrollForm((prev) => ({ ...prev, userId: identifier }));
+    }
+  };
+
+  const handleSavePayroll = async (action: "DRAFT" | "APPROVE" | "PAY") => {
+    if (!payrollForm.userId) {
+      setMsg({ text: "অনুগ্রহ করে শিক্ষক বা স্টাফ নির্বাচন করুন।", type: "error" });
+      return;
+    }
+    if (!payrollForm.baseSalary || Number(payrollForm.baseSalary) <= 0) {
+      setMsg({ text: "সঠিক মূল বেতনের পরিমাণ লিখুন।", type: "error" });
+      return;
+    }
+
     try {
+      setLoading(true);
       const res = await fetch("/api/admin/finance/payroll", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payrollForm, action }),
+        body: JSON.stringify({
+          ...payrollForm,
+          baseSalary: Number(payrollForm.baseSalary),
+          allowances: Number(payrollForm.allowances) || 0,
+          deductions: Number(payrollForm.deductions) || 0,
+          advanceDeduction: Number(payrollForm.advanceDeduction) || 0,
+          action,
+        }),
       });
       const data = await res.json();
       if (res.ok) {
         setMsg({ text: data.message, type: "success" });
-        fetchPayrolls();
+        fetchPayrolls(payrollMonth);
         fetchInitialData();
       } else {
         setMsg({ text: data.error, type: "error" });
       }
     } catch (err: any) {
       setMsg({ text: err.message, type: "error" });
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const handleQuickPayVoucher = async (voucher: any) => {
+    const staffName = voucher.employee?.nameBn || voucher.user?.name || "কর্মীর";
+    if (!confirm(`${staffName}-এর ${voucher.month} মাসের বেতন ৳ ${voucher.netSalary} পরিশোধ করতে চান?`)) return;
+    try {
+      setLoading(true);
+      const res = await fetch("/api/admin/finance/payroll", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: voucher.userId,
+          employeeId: voucher.employeeId,
+          month: voucher.month,
+          baseSalary: voucher.baseSalary,
+          allowances: voucher.allowances,
+          deductions: voucher.deductions,
+          advanceDeduction: voucher.advanceDeduction,
+          paymentMethod: voucher.paymentMethod || "CASH",
+          fundCode: voucher.fundCode || "GENERAL",
+          action: "PAY",
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setMsg({ text: data.message, type: "success" });
+        fetchPayrolls(payrollMonth);
+        fetchInitialData();
+      } else {
+        setMsg({ text: data.error, type: "error" });
+      }
+    } catch (err: any) {
+      setMsg({ text: err.message, type: "error" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeletePayroll = async (id: string) => {
+    if (!confirm("আপনি কি নিশ্চিত যে এই খসড়া বেতন ভাউচারটি মুছে ফেলতে চান?")) return;
+    try {
+      setLoading(true);
+      const res = await fetch(`/api/admin/finance/payroll?id=${id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setMsg({ text: data.message, type: "success" });
+        fetchPayrolls(payrollMonth);
+      } else {
+        setMsg({ text: data.error, type: "error" });
+      }
+    } catch (err: any) {
+      setMsg({ text: err.message, type: "error" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatBanglaCurrency = (num: number) => {
+    return Number(num || 0).toLocaleString("bn-BD");
   };
 
   const fundIcons: Record<string, any> = {
@@ -485,12 +946,14 @@ export default function AdminFinanceHub() {
       <div className="flex items-center gap-1 overflow-x-auto border-b border-gray-200 pb-2 text-xs font-semibold">
         {[
           { key: "OVERVIEW", label: "সারসংক্ষেপ" },
+          { key: "QUICK_COUNTER", label: "⚡ দ্রুত ফি আদায় (Counter)" },
           { key: "STRUCTURES", label: "ফি কাঠামো" },
           { key: "INVOICES", label: "ইনভয়েস তালিকা" },
           { key: "MONTHLY_BILLING", label: "মাসিক বিল জেনারেশন" },
           { key: "PAYMENTS", label: "পেমেন্ট ও রসিদ" },
           { key: "CASHBOOK", label: "দৈনিক ক্যাশবুক" },
           { key: "TRANSACTIONS", label: "আয়/ব্যয় ভাউচার" },
+          { key: "PAYMENT_METHODS", label: "💳 পেমেন্ট গেটওয়ে / মাধ্যম" },
           { key: "ASSISTANCE", label: "আর্থিক সহায়তা ও মওকুফ" },
           { key: "SCHOLARSHIPS", label: "মেধাবৃত্তি" },
           { key: "PAYROLL", label: "শিক্ষক/কর্মী বেতন" },
@@ -498,7 +961,7 @@ export default function AdminFinanceHub() {
           <button
             key={tab.key}
             onClick={() => setActiveSubTab(tab.key as any)}
-            className={`px-3.5 py-2 rounded-lg whitespace-nowrap transition ${
+            className={`px-3.5 py-2 rounded-lg whitespace-nowrap transition flex items-center gap-1.5 ${
               activeSubTab === tab.key
                 ? "bg-[#0D5C3A] text-white shadow-sm"
                 : "text-gray-600 hover:bg-gray-100"
@@ -704,12 +1167,22 @@ export default function AdminFinanceHub() {
                 className="w-full pl-9 pr-3 py-1.5 border rounded-lg text-xs outline-none"
               />
             </div>
-            <button
-              onClick={fetchInvoices}
-              className="bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold"
-            >
-              রিফ্রেশ
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={exportInvoicesToCSV}
+                className="bg-emerald-50 hover:bg-emerald-100 text-[#0D5C3A] border border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition"
+                title="সকল ইনভয়েস এক্সেলে ডাউনলোড করুন"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>এক্সেল / CSV</span>
+              </button>
+              <button
+                onClick={fetchInvoices}
+                className="bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold"
+              >
+                রিফ্রেশ
+              </button>
+            </div>
           </div>
 
           <div className="overflow-x-auto">
@@ -828,9 +1301,19 @@ export default function AdminFinanceHub() {
         <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-bold text-gray-900">গৃহীত পেমেন্ট ও রসিদ তালিকা</h3>
-            <button onClick={fetchPayments} className="text-xs text-[#0D5C3A] font-semibold hover:underline">
-              রিফ্রেশ
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={exportPaymentsToCSV}
+                className="bg-emerald-50 hover:bg-emerald-100 text-[#0D5C3A] border border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition"
+                title="সকল আদায়কৃত রসিদ এক্সেলে ডাউনলোড করুন"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>রসিদ তালিকা এক্সেল / CSV</span>
+              </button>
+              <button onClick={fetchPayments} className="text-xs text-[#0D5C3A] font-semibold hover:underline">
+                রিফ্রেশ
+              </button>
+            </div>
           </div>
 
           <div className="overflow-x-auto">
@@ -856,16 +1339,46 @@ export default function AdminFinanceHub() {
                     <td className="p-3">{p.paymentMethod}</td>
                     <td className="p-3 font-mono font-bold text-[#0D5C3A]">৳ {p.amount}</td>
                     <td className="p-3">
-                      <button
-                        onClick={() => {
-                          setSelectedPayment(p);
-                          setRefundForm({ amount: String(p.amount), reason: "", refundMethod: "CASH" });
-                          setShowRefundModal(true);
-                        }}
-                        className="text-red-600 hover:text-red-800 text-[11px] font-semibold flex items-center gap-1"
-                      >
-                        <RotateCcw className="w-3.5 h-3.5" /> রিফান্ড
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => {
+                            const enrollment = p.student?.enrollments?.[0];
+                            setSelectedReceiptData({
+                              receiptNumber: p.receiptNumber,
+                              invoiceNumber: p.invoice?.invoiceNumber,
+                              receiptDate: p.receiptDate,
+                              studentIdNumber: p.student?.studentIdNumber || "",
+                              studentNameBn: p.student?.fullNameBn || "",
+                              className: enrollment?.jamatClass?.nameBn || "মাদরাসা বিভাগ",
+                              sectionName: enrollment?.section?.nameBn,
+                              rollNumber: enrollment?.rollNumber || "—",
+                              title: p.invoice?.title || "একাডেমিক ফি",
+                              amount: p.amount,
+                              paymentMethod: p.paymentMethod,
+                              transactionId: p.transactionId,
+                              receivedBy: "হিসাব বিভাগ",
+                              qrCodeToken: p.qrCodeToken,
+                            });
+                            setShowReceiptModal(true);
+                          }}
+                          className="bg-emerald-50 hover:bg-emerald-100 text-[#0D5C3A] border border-emerald-200 text-[11px] font-bold px-2 py-1 rounded-lg flex items-center gap-1 transition"
+                          title="অফিসিয়াল রসিদ প্রিন্ট করুন"
+                        >
+                          <Printer className="w-3.5 h-3.5" />
+                          <span>রসিদ</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedPayment(p);
+                            setRefundForm({ amount: String(p.amount), reason: "", refundMethod: "CASH" });
+                            setShowRefundModal(true);
+                          }}
+                          className="text-red-600 hover:text-red-800 text-[11px] font-semibold flex items-center gap-1"
+                        >
+                          <RotateCcw className="w-3.5 h-3.5" />
+                          <span>রিফান্ড</span>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -1050,69 +1563,175 @@ export default function AdminFinanceHub() {
 
       {/* SUBTAB 8: ASSISTANCE */}
       {activeSubTab === "ASSISTANCE" && (
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-gray-900">দরিদ্র ও এতিম ছাত্র আর্থিক সহায়তা পর্যালোচনা</h3>
+        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-4">
+            <div>
+              <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
+                <span>দরিদ্র ও এতিম ছাত্র আর্থিক সহায়তা ও মুহতামিম কনসেশন</span>
+                <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">
+                  স্বয়ংক্রিয় সিঙ্কড
+                </span>
+              </h3>
+              <p className="text-xs text-gray-500 mt-0.5">
+                মুহতামিম কর্তৃক নির্ধারিত কাস্টম বেতন, লিল্লাহ ১০০% ফ্রি বৃত্তি ও সাধারণ ছাড়ের পূর্ণাঙ্গ রেজিস্টার।
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => window.print()}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 text-xs font-semibold shadow-sm"
+              >
+                <Printer className="w-3.5 h-3.5 text-gray-500" />
+                প্রিন্ট রিপোর্ট
+              </button>
+              <button
+                onClick={fetchAssistances}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold shadow-sm"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+                রিফ্রেশ
+              </button>
+            </div>
           </div>
 
-          <div className="overflow-x-auto">
+          {/* Quick Metrics */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="p-3 bg-stone-50 rounded-lg border border-stone-200">
+              <div className="text-[11px] text-gray-500">মোট কনসেশন রেকর্ড</div>
+              <div className="text-lg font-bold text-gray-900">{assistances.length} টি</div>
+            </div>
+            <div className="p-3 bg-emerald-50/60 rounded-lg border border-emerald-200">
+              <div className="text-[11px] text-emerald-700 font-medium">নিবন্ধিত এতিম শিক্ষার্থী</div>
+              <div className="text-lg font-bold text-emerald-800">
+                {assistances.filter((a) => a.isOrphan || a.student?.isOrphan).length} জন
+              </div>
+            </div>
+            <div className="p-3 bg-blue-50/60 rounded-lg border border-blue-200">
+              <div className="text-[11px] text-blue-700 font-medium">১০০% পূর্ণ ফ্রি বৃত্তি</div>
+              <div className="text-lg font-bold text-blue-800">
+                {assistances.filter((a) => a.waiverPercentage === 100 && a.status === "APPROVED").length} জন
+              </div>
+            </div>
+            <div className="p-3 bg-purple-50/60 rounded-lg border border-purple-200">
+              <div className="text-[11px] text-purple-700 font-medium">আংশিক / কাস্টম ফি ছাড়</div>
+              <div className="text-lg font-bold text-purple-800">
+                {assistances.filter((a) => a.waiverPercentage > 0 && a.waiverPercentage < 100 && a.status === "APPROVED").length} জন
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto rounded-lg border border-gray-100">
             <table className="w-full text-xs text-left">
-              <thead className="bg-gray-50 border-b">
+              <thead className="bg-gray-50 border-b text-gray-600">
                 <tr>
-                  <th className="p-3">শিক্ষার্থী</th>
-                  <th className="p-3">কারণ / পরিবার অবস্থা</th>
-                  <th className="p-3">এতিম?</th>
-                  <th className="p-3">মওকুফ হার</th>
-                  <th className="p-3">স্ট্যাটাস</th>
+                  <th className="p-3">শিক্ষার্থী ও জামাত</th>
+                  <th className="p-3">কারণ / নথিসূত্র</th>
+                  <th className="p-3">এতিম স্ট্যাটাস</th>
+                  <th className="p-3">মওকুফ হার / কাস্টম ফি</th>
+                  <th className="p-3">অনুমোদন উৎস ও স্ট্যাটাস</th>
                   <th className="p-3">অ্যাকশন</th>
                 </tr>
               </thead>
               <tbody className="divide-y">
-                {assistances.map((a) => (
-                  <tr key={a.id} className="hover:bg-gray-50">
-                    <td className="p-3 font-semibold">{a.student.fullNameBn}</td>
-                    <td className="p-3">{a.reason}</td>
-                    <td className="p-3">{a.isOrphan ? "হ্যাঁ (এতিম)" : "না"}</td>
-                    <td className="p-3 font-bold font-mono">{a.waiverPercentage}%</td>
-                    <td className="p-3">
-                      <span
-                        className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                          a.status === "APPROVED"
-                            ? "bg-green-100 text-green-800"
-                            : a.status === "REJECTED"
-                            ? "bg-red-100 text-red-800"
-                            : "bg-amber-100 text-amber-800"
-                        }`}
-                      >
-                        {a.status}
-                      </span>
-                    </td>
-                    <td className="p-3 flex items-center gap-1.5">
-                      {a.status === "PENDING" && (
-                        <>
-                          <button
-                            onClick={() => handleAssistanceDecision(a.id, "APPROVE", 100)}
-                            className="bg-emerald-600 text-white px-2 py-0.5 rounded text-[10px] font-bold"
-                          >
-                            ১০০% অনুমোদন
-                          </button>
-                          <button
-                            onClick={() => handleAssistanceDecision(a.id, "APPROVE", 50)}
-                            className="bg-blue-600 text-white px-2 py-0.5 rounded text-[10px] font-bold"
-                          >
-                            ৫০% অনুমোদন
-                          </button>
-                          <button
-                            onClick={() => handleAssistanceDecision(a.id, "REJECT")}
-                            className="bg-red-600 text-white px-2 py-0.5 rounded text-[10px] font-bold"
-                          >
-                            বাতিল
-                          </button>
-                        </>
-                      )}
+                {assistances.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="p-6 text-center text-gray-400">
+                      কোনো আর্থিক সহায়তা বা ছাড়ের রেকর্ড পাওয়া যায়নি।
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  assistances.map((a) => (
+                    <tr key={a.id} className="hover:bg-gray-50/80">
+                      <td className="p-3 font-semibold text-gray-900">
+                        <div>{a.student?.fullNameBn || "শিক্ষার্থী"}</div>
+                        <div className="text-[11px] text-gray-500 font-normal">
+                          আইডি: {a.student?.studentIdNumber || "N/A"}
+                          {a.student?.enrollments?.[0]?.jamatClass?.nameBn && (
+                            <span className="ml-1 text-emerald-700 font-medium">
+                              • {a.student.enrollments[0].jamatClass.nameBn}
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="p-3 max-w-[200px]">
+                        <div className="text-gray-800 line-clamp-2">{a.reason || "অসচ্ছলতা"}</div>
+                        {a.familyCondition && (
+                          <div className="text-[10px] text-gray-500 mt-0.5">{a.familyCondition}</div>
+                        )}
+                      </td>
+                      <td className="p-3">
+                        {a.isOrphan || a.student?.isOrphan ? (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900">
+                            ★ এতিম (লিল্লাহ ফান্ড)
+                          </span>
+                        ) : (
+                          <span className="text-gray-500">সাধারণ</span>
+                        )}
+                      </td>
+                      <td className="p-3 font-mono">
+                        <div className="font-bold text-emerald-700 text-sm">
+                          {a.waiverPercentage === 100 ? "১০০% ফুল-ফ্রি" : `${a.waiverPercentage}% ছাড়`}
+                        </div>
+                        {a.waiverAmount > 0 && (
+                          <div className="text-[10px] text-gray-600">
+                            মওকুফ অংক: ৳ {a.waiverAmount.toLocaleString()}
+                          </div>
+                        )}
+                      </td>
+                      <td className="p-3">
+                        <div className="flex flex-col gap-1 items-start">
+                          <span
+                            className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                              a.status === "APPROVED"
+                                ? "bg-emerald-100 text-emerald-800"
+                                : a.status === "REJECTED"
+                                ? "bg-red-100 text-red-800"
+                                : "bg-amber-100 text-amber-800"
+                            }`}
+                          >
+                            {a.status === "APPROVED"
+                              ? "অনুমোদিত"
+                              : a.status === "REJECTED"
+                              ? "প্রত্যাখ্যাত"
+                              : "বিবেচনাধীন"}
+                          </span>
+                          {a.status === "APPROVED" && (
+                            <span className="text-[10px] text-emerald-700 font-medium">
+                              মুহতামিম ডেস্ক সিঙ্কড
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="p-3">
+                        {a.status === "PENDING" && (
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              onClick={() => handleAssistanceDecision(a.id, "APPROVE", 100)}
+                              className="bg-emerald-600 hover:bg-emerald-700 text-white px-2 py-1 rounded text-[10px] font-bold shadow-xs"
+                            >
+                              ১০০% অনুমোদন
+                            </button>
+                            <button
+                              onClick={() => handleAssistanceDecision(a.id, "APPROVE", 50)}
+                              className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-[10px] font-bold shadow-xs"
+                            >
+                              ৫০% অনুমোদন
+                            </button>
+                            <button
+                              onClick={() => handleAssistanceDecision(a.id, "REJECT")}
+                              className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded text-[10px] font-bold shadow-xs"
+                            >
+                              বাতিল
+                            </button>
+                          </div>
+                        )}
+                        {a.status === "APPROVED" && (
+                          <span className="text-[11px] text-gray-400 font-medium">কার্যকর রয়েছে</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -1157,100 +1776,451 @@ export default function AdminFinanceHub() {
 
       {/* SUBTAB 10: PAYROLL */}
       {activeSubTab === "PAYROLL" && (
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-gray-900">শিক্ষক ও স্টাফ বেতন স্লিপ</h3>
-          </div>
+        <div className="space-y-6">
+          {/* PAYROLL KPI STATS CARDS */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+              <div>
+                <p className="text-xs text-gray-500 font-medium">মোট নির্ধারিত বেতন ({payrollMonth})</p>
+                <h4 className="text-xl font-bold text-gray-900 mt-1">৳ {formatBanglaCurrency(payrollSummary.totalNetSalary)}</h4>
+                <p className="text-[11px] text-gray-400 mt-0.5">মোট ভাউচার: {payrollSummary.totalCount} টি</p>
+              </div>
+              <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
+                <Receipt className="w-5 h-5" />
+              </div>
+            </div>
 
-          <div className="p-4 bg-gray-50 rounded-xl border space-y-3 text-xs">
-            <h4 className="font-bold text-gray-800">নতুন বেতন স্লিপ নির্ধারণ</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+            <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
               <div>
-                <label className="block font-semibold mb-1">শিক্ষক / স্টাফ *</label>
-                <select
-                  value={payrollForm.userId}
-                  onChange={(e) => setPayrollForm({ ...payrollForm, userId: e.target.value })}
-                  className="w-full p-2 border rounded bg-white"
-                >
-                  <option value="">নির্বাচন করুন</option>
-                  {teachers.map((t) => (
-                    <option key={t.id} value={t.id}>
-                      {t.name} ({t.phone || t.email})
-                    </option>
-                  ))}
-                </select>
+                <p className="text-xs text-gray-500 font-medium">পরিশোধিত বেতন</p>
+                <h4 className="text-xl font-bold text-[#0D5C3A] mt-1">৳ {formatBanglaCurrency(payrollSummary.totalPaid)}</h4>
+                <p className="text-[11px] text-emerald-600 mt-0.5">তহবিল থেকে ছাড়কৃত</p>
               </div>
+              <div className="w-10 h-10 rounded-lg bg-emerald-100 text-[#0D5C3A] flex items-center justify-center">
+                <CheckCircle className="w-5 h-5" />
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
               <div>
-                <label className="block font-semibold mb-1">মাস *</label>
-                <input
-                  type="text"
-                  value={payrollForm.month}
-                  onChange={(e) => setPayrollForm({ ...payrollForm, month: e.target.value })}
-                  className="w-full p-2 border rounded bg-white font-mono"
-                />
+                <p className="text-xs text-gray-500 font-medium">বকেয়া / খসড়া বেতন</p>
+                <h4 className="text-xl font-bold text-amber-600 mt-1">৳ {formatBanglaCurrency(payrollSummary.totalPending)}</h4>
+                <p className="text-[11px] text-amber-600 mt-0.5">অনুমোদন বা বিতরণ বাকি</p>
               </div>
+              <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+                <AlertTriangle className="w-5 h-5" />
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
               <div>
-                <label className="block font-semibold mb-1">মূল বেতন (৳) *</label>
-                <input
-                  type="number"
-                  min="0"
-                  value={payrollForm.baseSalary}
-                  onChange={(e) => setPayrollForm({ ...payrollForm, baseSalary: e.target.value })}
-                  className="w-full p-2 border rounded bg-white"
-                />
+                <p className="text-xs text-gray-500 font-medium">সাধারণ তহবিল ব্যালেন্স</p>
+                <h4 className="text-xl font-bold text-indigo-700 mt-1">
+                  ৳ {formatBanglaCurrency(funds.find((f) => f.code === "GENERAL")?.currentBalance || 0)}
+                </h4>
+                <p className="text-[11px] text-gray-400 mt-0.5">ক্যাশ বা ব্যাংক স্থিতি</p>
               </div>
-              <div className="flex items-end gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleSavePayroll("DRAFT")}
-                  className="bg-gray-700 text-white px-3 py-2 rounded font-semibold w-full"
-                >
-                  খসড়া সংরক্ষণ
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSavePayroll("PAY")}
-                  className="bg-[#0D5C3A] text-white px-3 py-2 rounded font-semibold w-full"
-                >
-                  বেতন প্রদান
-                </button>
+              <div className="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center">
+                <Landmark className="w-5 h-5" />
               </div>
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-xs text-left">
-              <thead className="bg-gray-50 border-b">
-                <tr>
-                  <th className="p-3">ভাউচার নং</th>
-                  <th className="p-3">শিক্ষক নাম</th>
-                  <th className="p-3">মাস</th>
-                  <th className="p-3">মূল বেতন</th>
-                  <th className="p-3">নিট প্রদেয়</th>
-                  <th className="p-3">স্ট্যাটাস</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {payrolls.map((p) => (
-                  <tr key={p.id} className="hover:bg-gray-50">
-                    <td className="p-3 font-mono font-bold">{p.voucherNumber}</td>
-                    <td className="p-3 font-semibold">{p.user?.name}</td>
-                    <td className="p-3 font-mono">{p.month}</td>
-                    <td className="p-3 font-mono">৳ {p.baseSalary}</td>
-                    <td className="p-3 font-mono font-bold text-[#0D5C3A]">৳ {p.netSalary}</td>
-                    <td className="p-3">
-                      <span
-                        className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                          p.status === "PAID" ? "bg-green-100 text-green-800" : "bg-amber-100 text-amber-800"
-                        }`}
-                      >
-                        {p.status}
-                      </span>
-                    </td>
+          {/* SALARY CREATION & DISBURSEMENT PANEL */}
+          <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-4">
+              <div>
+                <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
+                  <Briefcase className="w-5 h-5 text-[#0D5C3A]" />
+                  নতুন বেতন স্লিপ নির্ধারণ ও অনুমোদন
+                </h3>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  উস্তাদ ও কর্মকর্তা-কর্মচারীদের মাসিক মূল বেতন, বাড়িভাড়া/চিকিৎসা ভাতা, সাধারণ কর্তন ও অগ্রিম সমন্বয় হিসাব
+                </p>
+              </div>
+
+              {/* Month Selector */}
+              <div className="flex items-center gap-2 bg-gray-50 p-1.5 rounded-lg border">
+                <span className="text-xs font-semibold text-gray-600 pl-2">বেতন মাস:</span>
+                <input
+                  type="month"
+                  value={payrollMonth}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setPayrollMonth(val);
+                    setPayrollForm((prev) => ({ ...prev, month: val }));
+                    fetchPayrolls(val);
+                  }}
+                  className="p-1 text-xs border rounded bg-white font-mono font-semibold"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const now = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}`;
+                    setPayrollMonth(now);
+                    setPayrollForm((prev) => ({ ...prev, month: now }));
+                    fetchPayrolls(now);
+                  }}
+                  className="px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded font-medium text-gray-700"
+                >
+                  বর্তমান মাস
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
+              {/* Staff Select */}
+              <div className="md:col-span-2">
+                <label className="block font-semibold mb-1 text-gray-700">শিক্ষক / কর্মকর্তা-কর্মচারী *</label>
+                <select
+                  value={payrollForm.userId || payrollForm.employeeId}
+                  onChange={(e) => handleSelectStaffForPayroll(e.target.value)}
+                  className="w-full p-2 border rounded-lg bg-white font-medium focus:ring-1 focus:ring-[#0D5C3A]"
+                >
+                  <option value="">কর্মকর্তা বা শিক্ষক নির্বাচন করুন</option>
+                  {staffList.map((st) => (
+                    <option key={st.id} value={st.id}>
+                      {st.name} — {st.designation} ({st.code})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Base Salary */}
+              <div>
+                <label className="block font-semibold mb-1 text-gray-700">মূল বেতন (৳) *</label>
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="0"
+                  value={payrollForm.baseSalary}
+                  onChange={(e) => setPayrollForm({ ...payrollForm, baseSalary: e.target.value })}
+                  className="w-full p-2 border rounded-lg bg-white font-mono font-bold"
+                />
+              </div>
+
+              {/* Allowances */}
+              <div>
+                <label className="block font-semibold mb-1 text-gray-700">ভাতা (বাড়ি/চিকিৎসা) ৳</label>
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="0"
+                  value={payrollForm.allowances}
+                  onChange={(e) => setPayrollForm({ ...payrollForm, allowances: e.target.value })}
+                  className="w-full p-2 border rounded-lg bg-white font-mono text-emerald-700 font-semibold"
+                />
+              </div>
+
+              {/* Deductions */}
+              <div>
+                <label className="block font-semibold mb-1 text-gray-700">সাধারণ কর্তন (৳)</label>
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="0"
+                  value={payrollForm.deductions}
+                  onChange={(e) => setPayrollForm({ ...payrollForm, deductions: e.target.value })}
+                  className="w-full p-2 border rounded-lg bg-white font-mono text-red-600 font-semibold"
+                />
+              </div>
+
+              {/* Advance Deductions */}
+              <div>
+                <label className="block font-semibold mb-1 text-gray-700">অগ্রিম বেতন সমন্বয় (৳)</label>
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="0"
+                  value={payrollForm.advanceDeduction}
+                  onChange={(e) => setPayrollForm({ ...payrollForm, advanceDeduction: e.target.value })}
+                  className="w-full p-2 border rounded-lg bg-white font-mono text-amber-700 font-semibold"
+                />
+              </div>
+
+              {/* Payment Method */}
+              <div>
+                <label className="block font-semibold mb-1 text-gray-700">পরিশোধের মাধ্যম</label>
+                <select
+                  value={payrollForm.paymentMethod}
+                  onChange={(e) => setPayrollForm({ ...payrollForm, paymentMethod: e.target.value })}
+                  className="w-full p-2 border rounded-lg bg-white font-medium"
+                >
+                  <option value="CASH">ক্যাশ (CASH)</option>
+                  <option value="BANK">ব্যাংক স্থানান্তর (BANK)</option>
+                  <option value="BKASH">বিকাশ (bKash)</option>
+                  <option value="NAGAD">নগদ (Nagad)</option>
+                </select>
+              </div>
+
+              {/* Cash Fund */}
+              <div>
+                <label className="block font-semibold mb-1 text-gray-700">পরিশোধের তহবিল</label>
+                <select
+                  value={payrollForm.fundCode}
+                  onChange={(e) => setPayrollForm({ ...payrollForm, fundCode: e.target.value })}
+                  className="w-full p-2 border rounded-lg bg-white font-medium"
+                >
+                  {funds.map((f) => (
+                    <option key={f.id} value={f.code}>
+                      {f.nameBn || f.name || f.code} (স্থিতি: ৳ {formatBanglaCurrency(f.currentBalance)})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Notes */}
+              <div className="md:col-span-2">
+                <label className="block font-semibold mb-1 text-gray-700">মন্তব্য / রেফারেন্স</label>
+                <input
+                  type="text"
+                  placeholder="যেমন: মার্চ মাসের নিয়মিত বেতন ও বার্ষিক উৎসব সম্মানী..."
+                  value={payrollForm.notes}
+                  onChange={(e) => setPayrollForm({ ...payrollForm, notes: e.target.value })}
+                  className="w-full p-2 border rounded-lg bg-white"
+                />
+              </div>
+
+              {/* Real-time Calculation Summary & Actions */}
+              <div className="md:col-span-2 flex items-center justify-between bg-emerald-50/80 p-2.5 rounded-lg border border-emerald-200">
+                <div>
+                  <span className="text-[11px] text-gray-600 block">প্রদেয় নিট বেতন:</span>
+                  <span className="text-lg font-black text-[#0D5C3A] font-mono">
+                    ৳ {formatBanglaCurrency(
+                      Math.max(
+                        0,
+                        (Number(payrollForm.baseSalary) || 0) +
+                          (Number(payrollForm.allowances) || 0) -
+                          (Number(payrollForm.deductions) || 0) -
+                          (Number(payrollForm.advanceDeduction) || 0)
+                      )
+                    )}
+                  </span>
+                </div>
+                <div className="text-[10px] text-gray-500 text-right">
+                  <span>ভাতা: +৳ {Number(payrollForm.allowances) || 0}</span>
+                  <br />
+                  <span>কর্তন: -৳ {(Number(payrollForm.deductions) || 0) + (Number(payrollForm.advanceDeduction) || 0)}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center justify-end gap-2 pt-2 border-t">
+              <button
+                type="button"
+                disabled={loading}
+                onClick={() => handleSavePayroll("DRAFT")}
+                className="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-semibold text-xs flex items-center gap-1.5 transition-colors"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                খসড়া সংরক্ষণ (DRAFT)
+              </button>
+
+              <button
+                type="button"
+                disabled={loading}
+                onClick={() => handleSavePayroll("APPROVE")}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold text-xs flex items-center gap-1.5 transition-colors"
+              >
+                <Check className="w-3.5 h-3.5" />
+                অনুমোদন করুন (APPROVE)
+              </button>
+
+              <button
+                type="button"
+                disabled={loading}
+                onClick={() => handleSavePayroll("PAY")}
+                className="bg-[#0D5C3A] hover:bg-[#0b4b2f] text-white px-5 py-2 rounded-lg font-bold text-xs flex items-center gap-1.5 shadow-sm transition-colors"
+              >
+                <DollarSign className="w-3.5 h-3.5" />
+                তাৎক্ষণিক বেতন প্রদান ও তহবিল আপডেট (PAY)
+              </button>
+            </div>
+          </div>
+
+          {/* VOUCHERS LIST TABLE */}
+          <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h3 className="text-sm font-bold text-gray-900">
+                  {payrollMonth} মাসের বেতন ভাউচার ও পে-রোল রেজিস্টার
+                </h3>
+                <p className="text-xs text-gray-500">অনুমোদিত ও পরিশোধিত বেতন ভাউচারসমূহ এবং প্রিন্ট স্লিপ</p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                {/* Search */}
+                <div className="relative">
+                  <Search className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="নাম বা ভাউচার খুঁজুন..."
+                    value={payrollSearch}
+                    onChange={(e) => setPayrollSearch(e.target.value)}
+                    className="pl-8 pr-3 py-1.5 text-xs border rounded-lg bg-gray-50 focus:bg-white focus:ring-1 focus:ring-[#0D5C3A]"
+                  />
+                </div>
+
+                {/* Status Filter */}
+                <div className="flex rounded-lg border bg-gray-50 p-0.5 text-xs">
+                  {(["ALL", "PAID", "APPROVED", "DRAFT"] as const).map((st) => (
+                    <button
+                      key={st}
+                      type="button"
+                      onClick={() => setPayrollStatusFilter(st)}
+                      className={`px-2.5 py-1 rounded-md font-semibold text-[11px] transition-colors ${
+                        payrollStatusFilter === st
+                          ? "bg-white text-gray-900 shadow-sm"
+                          : "text-gray-500 hover:text-gray-900"
+                      }`}
+                    >
+                      {st === "ALL" ? "সব" : st === "PAID" ? "পরিশোধিত" : st === "APPROVED" ? "অনুমোদিত" : "খসড়া"}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => fetchPayrolls(payrollMonth)}
+                  className="p-1.5 text-gray-500 hover:text-gray-800 rounded-lg hover:bg-gray-100"
+                  title="রিফ্রেশ"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs text-left">
+                <thead className="bg-gray-50 text-gray-600 border-b">
+                  <tr>
+                    <th className="p-3">ভাউচার নং</th>
+                    <th className="p-3">শিক্ষক / কর্মকর্তা</th>
+                    <th className="p-3">পদবী ও বিভাগ</th>
+                    <th className="p-3 text-right">মূল বেতন</th>
+                    <th className="p-3 text-right">ভাতা / কর্তন</th>
+                    <th className="p-3 text-right">নিট প্রদেয়</th>
+                    <th className="p-3 text-center">তহবিল ও মাধ্যম</th>
+                    <th className="p-3 text-center">স্ট্যাটাস</th>
+                    <th className="p-3 text-center">অ্যাকশন</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y">
+                  {payrolls
+                    .filter((p) => {
+                      if (payrollStatusFilter !== "ALL" && p.status !== payrollStatusFilter) return false;
+                      if (payrollSearch.trim()) {
+                        const q = payrollSearch.toLowerCase();
+                        const name = (p.employee?.nameBn || p.user?.name || "").toLowerCase();
+                        const vNum = (p.voucherNumber || "").toLowerCase();
+                        return name.includes(q) || vNum.includes(q);
+                      }
+                      return true;
+                    })
+                    .map((p) => (
+                      <tr key={p.id} className="hover:bg-gray-50/80 transition-colors">
+                        <td className="p-3 font-mono font-bold text-gray-900">{p.voucherNumber}</td>
+                        <td className="p-3">
+                          <div className="font-semibold text-gray-900">
+                            {p.employee?.nameBn || p.user?.name}
+                          </div>
+                          <div className="text-[11px] text-gray-500">
+                            {p.employee?.mobile || p.user?.phone || p.user?.email}
+                          </div>
+                        </td>
+                        <td className="p-3">
+                          <span className="font-medium text-gray-800">
+                            {p.employee?.designation?.nameBn || p.user?.role || "শিক্ষক"}
+                          </span>
+                          <span className="text-[11px] text-gray-500 block">
+                            {p.employee?.department?.nameBn || "একাডেমিক শাখা"}
+                          </span>
+                        </td>
+                        <td className="p-3 font-mono text-right font-medium text-gray-700">
+                          ৳ {formatBanglaCurrency(p.baseSalary)}
+                        </td>
+                        <td className="p-3 text-right text-[11px]">
+                          <span className="text-emerald-700 block">+৳ {formatBanglaCurrency(p.allowances)}</span>
+                          <span className="text-red-600 block">
+                            -৳ {formatBanglaCurrency(p.deductions + (p.advanceDeduction || 0))}
+                          </span>
+                        </td>
+                        <td className="p-3 font-mono font-black text-right text-sm text-[#0D5C3A]">
+                          ৳ {formatBanglaCurrency(p.netSalary)}
+                        </td>
+                        <td className="p-3 text-center">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-100 text-gray-700 block">
+                            {p.paymentMethod}
+                          </span>
+                          <span className="text-[10px] text-gray-500">তহবিল: {p.fundCode}</span>
+                        </td>
+                        <td className="p-3 text-center">
+                          <span
+                            className={`px-2.5 py-1 rounded-full text-[10px] font-bold inline-block ${
+                              p.status === "PAID"
+                                ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
+                                : p.status === "APPROVED"
+                                ? "bg-blue-100 text-blue-800 border border-blue-300"
+                                : "bg-amber-100 text-amber-800 border border-amber-300"
+                            }`}
+                          >
+                            {p.status === "PAID" ? "পরিশোধিত" : p.status === "APPROVED" ? "অনুমোদিত" : "খসড়া"}
+                          </span>
+                        </td>
+                        <td className="p-3 text-center">
+                          <div className="flex items-center justify-center gap-1.5">
+                            {/* Print Payslip button */}
+                            <button
+                              type="button"
+                              onClick={() => setSelectedPayslip(p)}
+                              className="px-2 py-1 bg-gray-100 hover:bg-[#0D5C3A] hover:text-white rounded text-gray-700 font-medium transition-colors flex items-center gap-1"
+                              title="বেতন রসিদ / পে-স্লিপ প্রিন্ট"
+                            >
+                              <Printer className="w-3.5 h-3.5" />
+                              <span className="hidden sm:inline">স্লিপ</span>
+                            </button>
+
+                            {/* Quick Pay if not paid */}
+                            {p.status !== "PAID" && (
+                              <button
+                                type="button"
+                                onClick={() => handleQuickPayVoucher(p)}
+                                className="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded font-medium transition-colors flex items-center gap-1"
+                                title="তাৎক্ষণিক পরিশোধ করুন"
+                              >
+                                <Check className="w-3.5 h-3.5" />
+                                <span className="hidden sm:inline">পরিশোধ</span>
+                              </button>
+                            )}
+
+                            {/* Delete if DRAFT */}
+                            {p.status !== "PAID" && (
+                              <button
+                                type="button"
+                                onClick={() => handleDeletePayroll(p.id)}
+                                className="p-1 hover:bg-red-50 text-red-500 hover:text-red-700 rounded transition-colors"
+                                title="মুছে ফেলুন"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+
+                  {payrolls.length === 0 && (
+                    <tr>
+                      <td colSpan={9} className="text-center py-12 text-gray-400">
+                        <Receipt className="w-8 h-8 mx-auto mb-2 opacity-40" />
+                        এই মাসের জন্য কোনো বেতন ভাউচার পাওয়া যায়নি। উপরে ফরম থেকে নতুন ভাউচার তৈরি করুন।
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}
@@ -1371,6 +2341,220 @@ export default function AdminFinanceHub() {
           </div>
         </div>
       )}
+
+      {/* OFFICIAL STAFF PAYSLIP PRINT MODAL */}
+      {selectedPayslip && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl border my-auto">
+            {/* Modal Controls (Hidden in Print) */}
+            <div className="flex items-center justify-between border-b pb-3 print:hidden">
+              <div className="flex items-center gap-2">
+                <Receipt className="w-5 h-5 text-[#0D5C3A]" />
+                <h3 className="text-sm font-bold text-gray-900">অফিসিয়াল বেতন স্লিপ ও ক্যাশ ভাউচার</h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="bg-[#0D5C3A] hover:bg-[#0b4b2f] text-white px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition-colors"
+                >
+                  <Printer className="w-3.5 h-3.5" />
+                  প্রিন্ট করুন
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedPayslip(null)}
+                  className="p-1.5 text-gray-400 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* PRINTABLE SLIP CONTENT */}
+            <div id="printable-staff-payslip" className="space-y-6 text-gray-900 bg-white p-2">
+              {/* Institutional Header */}
+              <div className="text-center space-y-1 border-b-2 border-[#0D5C3A] pb-4">
+                <p className="text-[11px] font-semibold tracking-wider text-emerald-800">বিসমিল্লাহির রাহমানির রাহিম</p>
+                <h2 className="text-xl sm:text-2xl font-black text-[#0D5C3A] tracking-tight">
+                  ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা
+                </h2>
+                <p className="text-xs text-gray-600 font-medium">
+                  স্থাপিত: ২০২১ ইং (ESTD 2021) | ডাকঘর: ইলিয়টগঞ্জ, উপজেলা: দাউদকান্দি, জেলা: কুমিল্লা
+                </p>
+                <div className="pt-2">
+                  <span className="inline-block bg-[#0D5C3A] text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                    মাসিক বেতন ও পারিশ্রমিক ভাউচার / STAFF PAYSLIP
+                  </span>
+                </div>
+              </div>
+
+              {/* Voucher Meta Info Grid */}
+              <div className="grid grid-cols-2 gap-4 text-xs bg-gray-50/80 p-3.5 rounded-xl border border-gray-200">
+                <div className="space-y-1.5">
+                  <div>
+                    <span className="text-gray-500 font-medium">ভাউচার নং: </span>
+                    <span className="font-mono font-bold text-gray-900">{selectedPayslip.voucherNumber}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 font-medium">কর্মীর নাম: </span>
+                    <span className="font-bold text-gray-900">
+                      {selectedPayslip.employee?.nameBn || selectedPayslip.user?.name}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 font-medium">পদবী ও বিভাগ: </span>
+                    <span className="font-medium text-gray-800">
+                      {selectedPayslip.employee?.designation?.nameBn || selectedPayslip.user?.role || "শিক্ষক"} (
+                      {selectedPayslip.employee?.department?.nameBn || "একাডেমিক শাখা"})
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 font-medium">মোবাইল নম্বর: </span>
+                    <span className="font-mono text-gray-800">
+                      {selectedPayslip.employee?.mobile || selectedPayslip.user?.phone || "N/A"}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5 text-right">
+                  <div>
+                    <span className="text-gray-500 font-medium">বেতন মাস: </span>
+                    <span className="font-bold font-mono text-[#0D5C3A]">{selectedPayslip.month}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 font-medium">প্রদানের তারিখ: </span>
+                    <span className="font-medium text-gray-800">
+                      {selectedPayslip.paymentDate
+                        ? new Date(selectedPayslip.paymentDate).toLocaleDateString("bn-BD")
+                        : "খসড়া নির্ধারণ"}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 font-medium">পেমেন্ট মাধ্যম: </span>
+                    <span className="font-semibold text-gray-800">
+                      {selectedPayslip.paymentMethod} (তহবিল: {selectedPayslip.fundCode})
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 font-medium">স্ট্যাটাস: </span>
+                    <span
+                      className={`font-bold px-2 py-0.5 rounded text-[10px] ${
+                        selectedPayslip.status === "PAID"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-amber-100 text-amber-800"
+                      }`}
+                    >
+                      {selectedPayslip.status === "PAID" ? "পরিশোধিত" : "অনুমোদিত / খসড়া"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Earnings & Deductions Breakdown Table */}
+              <div className="border rounded-xl overflow-hidden text-xs">
+                <div className="grid grid-cols-2 bg-gray-100 font-bold border-b text-gray-700">
+                  <div className="p-2.5 border-r">উপার্জন বিবরণী (EARNINGS)</div>
+                  <div className="p-2.5">কর্তন বিবরণী (DEDUCTIONS)</div>
+                </div>
+
+                <div className="grid grid-cols-2 divide-x">
+                  {/* Earnings */}
+                  <div className="p-3 space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">মূল বেতন (Basic Salary):</span>
+                      <span className="font-mono font-semibold">৳ {formatBanglaCurrency(selectedPayslip.baseSalary)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">বাড়িভাড়া ও বিশেষ ভাতা:</span>
+                      <span className="font-mono font-semibold text-emerald-700">
+                        +৳ {formatBanglaCurrency(selectedPayslip.allowances)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between border-t pt-1.5 font-bold">
+                      <span>মোট উপার্জন:</span>
+                      <span className="font-mono">
+                        ৳ {formatBanglaCurrency(selectedPayslip.baseSalary + selectedPayslip.allowances)}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Deductions */}
+                  <div className="p-3 space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">সাধারণ কর্তন / তহবিল:</span>
+                      <span className="font-mono font-semibold text-red-600">
+                        -৳ {formatBanglaCurrency(selectedPayslip.deductions)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">অগ্রিম বেতন সমন্বয়:</span>
+                      <span className="font-mono font-semibold text-amber-700">
+                        -৳ {formatBanglaCurrency(selectedPayslip.advanceDeduction || 0)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between border-t pt-1.5 font-bold">
+                      <span>মোট কর্তন:</span>
+                      <span className="font-mono text-red-600">
+                        -৳ {formatBanglaCurrency(selectedPayslip.deductions + (selectedPayslip.advanceDeduction || 0))}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Net Salary Highlight */}
+                <div className="bg-[#0D5C3A]/10 border-t-2 border-[#0D5C3A] p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div>
+                    <span className="font-bold text-[#0D5C3A] text-sm">সর্বমোট নিট প্রদেয় বেতন (NET PAYABLE):</span>
+                    {selectedPayslip.notes && (
+                      <p className="text-[11px] text-gray-500 mt-0.5">নোট: {selectedPayslip.notes}</p>
+                    )}
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xl font-black font-mono text-[#0D5C3A]">
+                      ৳ {formatBanglaCurrency(selectedPayslip.netSalary)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Signatures Section */}
+              <div className="grid grid-cols-3 gap-6 pt-10 text-center text-xs">
+                <div className="space-y-1">
+                  <div className="border-t border-gray-400 pt-1.5 font-bold text-gray-800">
+                    হিসাবরক্ষক / প্রস্তুতকারী
+                  </div>
+                  <p className="text-[10px] text-gray-400">স্বাক্ষর ও তারিখ</p>
+                </div>
+                <div className="space-y-1">
+                  <div className="border-t border-gray-400 pt-1.5 font-bold text-gray-800">
+                    নাযেম / পরীক্ষা সচিব
+                  </div>
+                  <p className="text-[10px] text-gray-400">স্বাক্ষর ও তারিখ</p>
+                </div>
+                <div className="space-y-1">
+                  <div className="border-t border-gray-400 pt-1.5 font-bold text-gray-800">
+                    মুহতামিম / অধ্যক্ষ
+                  </div>
+                  <p className="text-[10px] text-gray-400">সিল ও স্বাক্ষর</p>
+                </div>
+              </div>
+
+              {/* Slip Footer */}
+              <div className="text-center border-t pt-3 text-[10px] text-gray-400">
+                ডিজিটাল ক্যাম্পাস ম্যানেজমেন্ট সিস্টেম | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা (স্থাপিত: ২০২১)
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Official Fee Receipt Modal */}
+      <OfficialReceiptModal
+        isOpen={showReceiptModal}
+        onClose={() => setShowReceiptModal(false)}
+        receipt={selectedReceiptData}
+      />
     </div>
   );
 }

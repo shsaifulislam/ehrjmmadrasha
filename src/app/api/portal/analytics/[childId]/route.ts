@@ -6,8 +6,8 @@ export const dynamic = "force-dynamic";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { childId: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ childId: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "GUARDIAN") {

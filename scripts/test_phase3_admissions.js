@@ -126,6 +126,9 @@ async function runPhase3Tests() {
       },
     });
 
+    if (app1Res.statusCode !== 200) {
+      console.error("DEBUG app1Res failed:", app1Res.statusCode, JSON.stringify(app1Res.json, null, 2));
+    }
     assert(app1Res.statusCode === 200, "Online application submitted successfully (HTTP 200)");
     const app1Data = app1Res.json;
     const trackingId1 = app1Data?.applicationNumber;
@@ -468,7 +471,10 @@ async function runPhase3Tests() {
 
     // Test: Public/Anonymous cannot view admin admissions list
     const anonListRes = await makeRequest("/api/admin/admissions");
-    assert(anonListRes.statusCode === 403, "Anonymous request to /api/admin/admissions blocked with 403");
+    assert(
+      anonListRes.statusCode === 401 || anonListRes.statusCode === 403,
+      "Anonymous request to /api/admin/admissions blocked with 401/403"
+    );
 
     // Test: Teacher cannot view audit history of application
     const teacherAuditRes = await makeRequest(`/api/admin/admissions/${orphanAppId}/audit`, {

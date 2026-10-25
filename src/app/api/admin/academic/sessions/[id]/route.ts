@@ -6,10 +6,10 @@ export const dynamic = "force-dynamic";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
     }
@@ -39,10 +39,10 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user || user.role !== "ADMIN") {
       return NextResponse.json({ error: "কেবলমাত্র অ্যাডমিন এই কাজ করতে পারেন।" }, { status: 403 });
     }
@@ -89,10 +89,10 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user || user.role !== "ADMIN") {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
     }

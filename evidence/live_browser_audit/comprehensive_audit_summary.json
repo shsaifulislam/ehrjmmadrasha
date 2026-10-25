@@ -1,0 +1,166 @@
+{
+  "timestamp": "2026-10-23T08:20:27.600Z",
+  "testedPublicPages": [
+    {
+      "name": "Home",
+      "path": "/",
+      "status": 200,
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus",
+      "passed": true,
+      "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\public_home.png"
+    },
+    {
+      "name": "About",
+      "path": "/about",
+      "status": 200,
+      "title": "পরিচিতি ও ঐতিহ্য | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা",
+      "passed": true,
+      "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\public_about.png"
+    },
+    {
+      "name": "Academic",
+      "path": "/academic",
+      "status": 200,
+      "title": "শিক্ষা কার্যক্রম ও অনুষদসমূহ | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা",
+      "passed": true,
+      "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\public_academic.png"
+    },
+    {
+      "name": "Admission",
+      "path": "/admission",
+      "status": 200,
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus",
+      "passed": true,
+      "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\public_admission.png"
+    },
+    {
+      "name": "Notices",
+      "path": "/notices",
+      "status": 200,
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus",
+      "passed": true,
+      "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\public_notices.png"
+    },
+    {
+      "name": "Results",
+      "path": "/results",
+      "status": 200,
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus",
+      "passed": true,
+      "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\public_results.png"
+    },
+    {
+      "name": "Contact",
+      "path": "/contact",
+      "status": 200,
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus",
+      "passed": true,
+      "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\public_contact.png"
+    },
+    {
+      "name": "Gallery",
+      "path": "/gallery",
+      "status": 200,
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus",
+      "passed": true,
+      "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\public_gallery.png"
+    },
+    {
+      "name": "Guardian_Portal",
+      "path": "/guardian",
+      "status": 200,
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus",
+      "passed": true,
+      "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\public_guardian_portal.png"
+    }
+  ],
+  "adminAudit": {
+    "loginPassed": true,
+    "dashboardScreenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\admin_dashboard_full_loaded.png",
+    "tabs": [
+      {
+        "name": "Teachers Hub",
+        "passed": true,
+        "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\admin_tab_teachers hub.png"
+      },
+      {
+        "name": "Students Master",
+        "passed": true,
+        "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\admin_tab_students master.png"
+      },
+      {
+        "name": "Finance Hub",
+        "passed": true,
+        "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\admin_tab_finance hub.png"
+      },
+      {
+        "name": "Attendance Cockpit",
+        "passed": true,
+        "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\admin_tab_attendance cockpit.png"
+      },
+      {
+        "name": "Examinations",
+        "passed": true,
+        "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\admin_tab_examinations.png"
+      }
+    ]
+  },
+  "teacherAudit": {
+    "loginPassed": true,
+    "landedUrl": "http://localhost:3000/teacher",
+    "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\teacher_portal_dashboard.png",
+    "passed": true,
+    "rbacTest": {
+      "target": "/admin",
+      "resultUrl": "http://localhost:3000/admin",
+      "blockedFromAdmin": false
+    }
+  },
+  "guardianAudit": {
+    "passed": true,
+    "screenshot": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\live_browser_audit\\guardian_portal_search.png"
+  },
+  "consoleErrors": [
+    {
+      "text": "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s https://react.dev/link/hydration-mismatch \n\n  ...\n    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>\n      <RedirectBoundary>\n        <RedirectErrorBoundary router={{...}}>\n          <InnerLayoutRouter url=\"/academic\" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>\n            <SegmentViewNode type=\"page\" pagePath=\"academic/p...\">\n              <SegmentTrieNode>\n              <AcademicPage>\n                <div className=\"min-h-scre...\">\n                  <Navbar>\n                  <div>\n                  <section>\n                  <main className=\"max-w-7xl ...\">\n                    <div>\n                    <div>\n                    <div>\n                    <section>\n                    <section className=\"space-y-4\">\n                      <div>\n                      <ClassDirectory initialClasses={[...]}>\n                        <div className=\"bg-white r...\">\n                          <div className=\"flex flex-...\">\n                            <div>\n                            <div className=\"flex flex-...\">\n                              <div className=\"relative f...\">\n                                <Search>\n                                <input\n                                  type=\"text\"\n                                  value=\"\"\n                                  onChange={function onChange}\n                                  placeholder=\"শ্রেণি বা কোড খুঁজুন...\"\n                                  className=\"w-full pl-8 pr-3 py-2 border border-slate-300 rounded-xl text-xs outline-...\"\n-                                 style={{caret-color:\"transparent\"}}\n                                >\n                              ...\n                          ...\n                  ...\n            ...\n          ...\n",
+      "location": {
+        "url": "webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js",
+        "line": 56,
+        "column": 31,
+        "lineNumber": 56,
+        "columnNumber": 31
+      }
+    },
+    {
+      "text": "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s https://react.dev/link/hydration-mismatch \n\n  ...\n    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>\n      <LoadingBoundary loading={null}>\n        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>\n          <RedirectBoundary>\n            <RedirectErrorBoundary router={{...}}>\n              <InnerLayoutRouter url=\"/notices\" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>\n                <SegmentViewNode type=\"page\" pagePath=\"notices/pa...\">\n                  <SegmentTrieNode>\n                  <ClientPageRoot Component={function NoticesPage} searchParams={{}} params={{}}>\n                    <NoticesPage params={Promise} searchParams={Promise}>\n                      <div className=\"min-h-scre...\">\n                        <Navbar>\n                        <PageHeaderBanner>\n                        <main className=\"max-w-7xl ...\">\n                          <div>\n                          <div className=\"bg-white p...\">\n                            <div>\n                            <div className=\"relative w...\">\n                              <Search>\n                              <input\n                                type=\"text\"\n                                value=\"\"\n                                onChange={function onChange}\n                                placeholder=\"শিরোনাম বা বিষয়বস্তু দিয়ে খুঁজুন...\"\n                                className=\"w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-xl text-xs outline...\"\n-                               style={{caret-color:\"transparent\"}}\n                              >\n                          ...\n                        ...\n                ...\n              ...\n",
+      "location": {
+        "url": "webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js",
+        "line": 56,
+        "column": 31,
+        "lineNumber": 56,
+        "columnNumber": 31
+      }
+    },
+    {
+      "text": "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s https://react.dev/link/hydration-mismatch \n\n  ...\n    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>\n      <RedirectBoundary>\n        <RedirectErrorBoundary router={{...}}>\n          <InnerLayoutRouter url=\"/results\" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>\n            <SegmentViewNode type=\"page\" pagePath=\"results/pa...\">\n              <SegmentTrieNode>\n              <ClientPageRoot Component={function ResultsPage} searchParams={{}} params={{}}>\n                <ResultsPage params={Promise} searchParams={Promise}>\n                  <div className=\"min-h-scre...\">\n                    <Navbar>\n                    <PageHeaderBanner>\n                    <main className=\"max-w-5xl ...\">\n                      <div>\n                      <div>\n                      <div className=\"bg-white p...\">\n                        <div>\n                        <form onSubmit={function handleSearch} className=\"space-y-4\">\n                          <div className=\"grid grid-...\">\n                            <div>\n                            <div>\n                              <label>\n                              <input\n                                type=\"number\"\n                                required={true}\n                                min=\"1\"\n                                value=\"\"\n                                onChange={function onChange}\n                                placeholder=\"যেমন: ১ বা ১০\"\n                                className=\"w-full px-4 py-2.5 border border-slate-300 rounded-xl text-xs outline-none ...\"\n-                               style={{caret-color:\"transparent\"}}\n                              >\n                          ...\n                    ...\n            ...\n          ...\n",
+      "location": {
+        "url": "webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js",
+        "line": 56,
+        "column": 31,
+        "lineNumber": 56,
+        "columnNumber": 31
+      }
+    },
+    {
+      "text": "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s https://react.dev/link/hydration-mismatch \n\n  ...\n    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>\n      <RedirectBoundary>\n        <RedirectErrorBoundary router={{...}}>\n          <InnerLayoutRouter url=\"/contact\" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>\n            <SegmentViewNode type=\"page\" pagePath=\"contact/pa...\">\n              <SegmentTrieNode>\n              <ClientPageRoot Component={function ContactPage} searchParams={{}} params={{}}>\n                <ContactPage params={Promise} searchParams={Promise}>\n                  <div className=\"min-h-scre...\">\n                    <Navbar>\n                    <PageHeaderBanner>\n                    <main className=\"max-w-7xl ...\">\n                      <div>\n                      <div className=\"grid grid-...\">\n                        <div>\n                        <div className=\"lg:col-spa...\">\n                          <div className=\"bg-white r...\">\n                            <div>\n                            <form onSubmit={function handleSubmit} className=\"space-y-4\">\n                              <input\n                                type=\"text\"\n                                name=\"institution_sec_hp\"\n                                value=\"\"\n                                onChange={function onChange}\n                                className=\"hidden\"\n                                tabIndex={-1}\n                                autoComplete=\"off\"\n-                               style={{caret-color:\"transparent\"}}\n                              >\n                              <div className=\"grid grid-...\">\n                                <div>\n                                  <label>\n                                  <input\n                                    type=\"text\"\n                                    required={true}\n                                    value=\"\"\n                                    onChange={function onChange}\n                                    placeholder=\"পুরো নাম লিখুন\"\n                                    className=\"w-full px-4 py-2.5 border border-slate-300 rounded-xl text-xs outline-n...\"\n-                                   style={{caret-color:\"transparent\"}}\n                                  >\n                                <div>\n                                  <label>\n                                  <input\n                                    type=\"tel\"\n                                    required={true}\n                                    value=\"\"\n                                    onChange={function onChange}\n                                    placeholder=\"যেমন: 01845162664\"\n                                    className=\"w-full px-4 py-2.5 border border-slate-300 rounded-xl text-xs outline-n...\"\n-                                   style={{caret-color:\"transparent\"}}\n                                  >\n                              <div className=\"grid grid-...\">\n                                <div>\n                                  <label>\n                                  <input\n                                    type=\"email\"\n                                    value=\"\"\n                                    onChange={function onChange}\n                                    placeholder=\"example@mail.com\"\n                                    className=\"w-full px-4 py-2.5 border border-slate-300 rounded-xl text-xs outline-n...\"\n-                                   style={{caret-color:\"transparent\"}}\n                                  >\n                                ...\n                              <div>\n                                <label>\n                                <input\n                                  type=\"text\"\n                                  required={true}\n                                  value=\"\"\n                                  onChange={function onChange}\n                                  placeholder=\"সংক্ষেপে বিষয়টি লিখুন\"\n                                  className=\"w-full px-4 py-2.5 border border-slate-300 rounded-xl text-xs outline-non...\"\n-                                 style={{caret-color:\"transparent\"}}\n                                >\n                              <div>\n                                <label>\n                                <textarea\n                                  required={true}\n                                  rows={4}\n                                  value=\"\"\n                                  onChange={function onChange}\n                                  placeholder=\"এখানে আপনার জিজ্ঞাসা বা বার্তা স্পষ্টভাবে লিখুন...\"\n                                  className=\"w-full px-4 py-3 border border-slate-300 rounded-xl text-xs outline-none ...\"\n-                                 style={{caret-color:\"transparent\"}}\n                                >\n                              ...\n                          ...\n                    ...\n            ...\n          ...\n",
+      "location": {
+        "url": "webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js",
+        "line": 56,
+        "column": 31,
+        "lineNumber": 56,
+        "columnNumber": 31
+      }
+    }
+  ],
+  "unhandledErrors": []
+}

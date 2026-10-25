@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "check:env": "npx tsx scripts/verify-production-env.ts",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "prisma:seed": "node prisma/seed.js",
@@ -39,22 +40,23 @@
     "test:phase37": "npx tsx scratch/test_phase37_survey_engine.ts",
     "test:phase38": "npx tsx scratch/test_phase38_knowledge_engine.ts",
     "test:phase39": "npx tsx scratch/test_phase39_training_engine.ts",
+    "test:phase40": "npx tsx scratch/test_phase40_procurement_contracts.ts",
     "test:phase41": "npx tsx scratch/test_phase41_budget_engine.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "bcryptjs": "^2.4.3",
-    "clsx": "^2.1.1",
     "jose": "^5.9.6",
     "lucide-react": "^0.468.0",
-    "next": "^14.2.23",
+    "next": "15.5.28",
     "nodemailer": "^10.0.10",
     "qrcode": "^1.5.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwind-merge": "^2.5.5"
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.17.10",
     "@types/nodemailer": "^8.0.2",

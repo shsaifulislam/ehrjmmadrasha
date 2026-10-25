@@ -4,7 +4,7 @@ import { getCurrentUser } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
   try {
-    const user = await getCurrentUser();
+    const user = await getCurrentUser(req);
     if (!user) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস। অনুগ্রহ করে লগইন করুন।" }, { status: 401 });
     }
@@ -29,6 +29,21 @@ export async function GET(req: NextRequest) {
       if (!guardian || guardian.students.length === 0) {
         return NextResponse.json(
           { error: "নিরাপত্তা সতর্কতা: আপনি শুধুমাত্র আপনার নিবন্ধিত সন্তানের ফলাফল দেখার অনুমতিপ্রাপ্ত।" },
+          { status: 403 }
+        );
+      }
+    } else if (user.role === "STUDENT") {
+      const student = await prisma.student.findFirst({
+        where: {
+          OR: [
+            { studentIdNumber: user.username },
+            { id: studentId },
+          ],
+        },
+      });
+      if (!student || (student.id !== studentId && student.studentIdNumber !== user.username)) {
+        return NextResponse.json(
+          { error: "নিরাপত্তা সতর্কতা: আপনি শুধুমাত্র নিজের পরীক্ষার ফলাফল দেখার অনুমতিপ্রাপ্ত।" },
           { status: 403 }
         );
       }

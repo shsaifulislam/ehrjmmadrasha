@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getCommunicationTemplates,
   saveCommunicationTemplate,
 } from "@/lib/communications";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const templates = getCommunicationTemplates();
     return NextResponse.json({ success: true, count: templates.length, templates });
   } catch (err: any) {
@@ -18,6 +22,9 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const body = await req.json();
 
     if (!body.code || !body.nameBn || !body.category) {

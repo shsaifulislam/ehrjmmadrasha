@@ -323,10 +323,10 @@ export default function AdminContentPage() {
           <div>
             <div className="flex items-center gap-2">
               <Globe className="w-5 h-5 text-[#C59B27]" />
-              <h1 className="text-lg font-bold">পাবলিক ওয়েবসাইট ২.০ ও সিএমএস কন্ট্রোল সেন্টার</h1>
+              <h1 className="text-lg font-bold">ওয়েবসাইট ও কনটেন্ট ম্যানেজমেন্ট কন্ট্রোল প্যানেল</h1>
             </div>
             <p className="text-[11px] text-emerald-200">
-              ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা • ফেজ ৩১ ডিজিটাল এনগেজমেন্ট ইঞ্জিন
+              ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা • প্রাতিষ্ঠানিক তথ্য ও প্রকাশনা ব্যবস্থাপনা
             </p>
           </div>
         </div>
@@ -822,7 +822,7 @@ export default function AdminContentPage() {
                 <label className="block text-xs font-semibold text-gray-700 mb-1">ক্যানোনিকাল বেস ইউআরএল (Canonical Base URL)</label>
                 <input
                   type="text"
-                  value={seo.canonicalBaseUrl || "https://ehrj-madrasha.edu.bd"}
+                  value={seo.canonicalBaseUrl || "https://www.ehrjmadrasha.com"}
                   onChange={(e) => setSeo({ ...seo, canonicalBaseUrl: e.target.value })}
                   className="w-full p-2.5 border border-gray-300 rounded-lg text-xs font-mono"
                 />

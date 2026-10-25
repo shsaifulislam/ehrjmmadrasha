@@ -3,11 +3,13 @@ import { prisma } from "@/lib/prisma";
 import { getSessionUser } from "@/lib/auth";
 import { generateStudentIdNumber, getNextRollNumber } from "@/lib/studentId";
 
+import { parsePaginationParams } from "@/lib/pagination";
+
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 401 });
     }
@@ -20,9 +22,8 @@ export async function GET(req: NextRequest) {
     }
 
     const { searchParams } = new URL(req.url);
-    const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
-    const limit = Math.max(1, Math.min(100, parseInt(searchParams.get("limit") || "20", 10)));
-    const skip = (page - 1) * limit;
+    const { page, take, skip } = parsePaginationParams(searchParams, 50, 200);
+    const limit = take;
 
     const query = searchParams.get("q")?.trim();
     const sessionId = searchParams.get("sessionId");
@@ -117,6 +118,14 @@ export async function GET(req: NextRequest) {
             where: { isPrimary: true },
             take: 1,
           },
+          feeInvoices: {
+            where: {
+              status: { notIn: ["PAID", "CANCELLED", "WAIVED", "REFUNDED"] },
+            },
+            select: {
+              dueAmount: true,
+            },
+          },
           _count: {
             select: {
               documents: true,
@@ -137,6 +146,9 @@ export async function GET(req: NextRequest) {
     const formatted = students.map((s) => {
       const currentEnrollment = s.enrollments[0];
       const primaryGuardian = s.guardianLinks[0]?.guardian;
+      const totalDue = s.feeInvoices
+        ? s.feeInvoices.reduce((sum: number, inv: { dueAmount: number }) => sum + (inv.dueAmount || 0), 0)
+        : 0;
 
       return {
         id: s.id,
@@ -161,6 +173,7 @@ export async function GET(req: NextRequest) {
         primaryGuardianName: primaryGuardian?.fullNameBn || s.fatherNameBn,
         guardianPhone: primaryGuardian?.phone || s.fatherPhone,
         documentsCount: s._count.documents,
+        totalDue,
         createdAt: s.createdAt,
       };
     });

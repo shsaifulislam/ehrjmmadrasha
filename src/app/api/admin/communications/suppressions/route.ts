@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getSuppressions,
   addSuppression,
   removeSuppression,
 } from "@/lib/communications";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const list = getSuppressions();
     return NextResponse.json({ success: true, count: list.length, suppressions: list });
   } catch (err: any) {
@@ -19,6 +23,9 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const body = await req.json();
     if (!body.email) {
       return NextResponse.json(
@@ -46,6 +53,9 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const { searchParams } = new URL(req.url);
     const email = searchParams.get("email");
     if (!email) {

@@ -213,24 +213,31 @@ export interface BudgetRevision {
 export interface BudgetProject {
   id: string; // e.g. EHRJ-BPRJ-2026-001
   projectCode: string;
-  nameBn: string;
-  nameEn: string;
-  descriptionBn: string;
+  nameBn?: string;
+  titleBn?: string;
+  nameEn?: string;
+  titleEn?: string;
+  descriptionBn?: string;
+  notes?: string;
+  budgetId?: string;
   fundCode: BudgetFundCode;
   fundNameBn: string;
   
   startDate: string;
   endDate: string;
+  targetCompletionDate?: string;
   status: BudgetProjectStatus;
   
   approvedBudget: number;
   revisedBudget: number;
+  plannedBudget?: number;
   actualExpense: number;       // Sourced from Phase 6 Finance
   committedAmount: number;     // Sourced from Phase 12 POs
   remainingBudget: number;
   utilizationRate: number;     // %
   
   projectManagerName: string;
+  ownerName?: string;
   contractorVendorId?: string; // Phase 40 Vendor link
   contractorVendorName?: string;
   
@@ -253,6 +260,8 @@ export interface BudgetControlAlert {
   overrunAmount: number;
   messageBn: string;
   isAcknowledged: boolean;
+  status?: "ACTIVE" | "ACKNOWLEDGED" | "RESOLVED";
+  justificationBn?: string;
   acknowledgedBy?: string;
   acknowledgedAt?: string;
   createdAt: string;

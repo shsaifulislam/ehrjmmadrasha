@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getEventById, transitionEventStatus, getEvents, saveEvents, appendEventAudit } from "@/lib/events";
+import { getSessionUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const event = getEventById(params.id);
     if (!event) {
@@ -25,17 +26,25 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const user = await getSessionUser();
+    if (!user || !["ADMIN", "PRINCIPAL"].includes(user.role)) {
+      return NextResponse.json(
+        { success: false, error: "অননুমোদিত: শুধুমাত্র প্রশাসন ইভেন্ট সম্পাদনা করতে পারবেন।" },
+        { status: 403 }
+      );
+    }
+
     const body = await request.json();
     const event = getEventById(params.id);
     if (!event) {
       return NextResponse.json({ success: false, error: "ইভেন্টটি পাওয়া যায়নি।" }, { status: 404 });
     }
 
-    const actorId = body.actorId || "admin@ehrj.edu.bd";
-    const actorRole = body.actorRole || "ADMIN";
+    const actorId = user.email || user.username || user.userId;
+    const actorRole = user.role;
 
     // 1. If status transition requested
     if (body.targetStatus && body.targetStatus !== event.status) {

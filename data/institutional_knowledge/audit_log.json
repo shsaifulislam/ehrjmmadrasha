@@ -9,6 +9,164 @@
     "actorRole": "TEACHER",
     "notes": "User acknowledged policy EHRJ-POL-2026-TCH001 v1.1",
     "details": {
+      "ackId": "EHRJ-ACK-1790702619749-681",
+      "device": {
+        "userAgent": "PortalBrowser/Chrome",
+        "ipAddress": "10.0.0.12"
+      }
+    },
+    "id": "AUD-GOV-1790702619753-226",
+    "timestamp": "2026-09-29T17:23:39.753Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.1",
+    "action": "CREATE_NEW_VERSION",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "New version v1.1 created (Minor). Reason: কওমি কিতাব বিভাগে নতুন জামাত সংযোজন",
+    "details": {
+      "newVersion": "v1.1",
+      "isMajor": false
+    },
+    "id": "AUD-GOV-1790702619720-922",
+    "timestamp": "2026-09-29T17:23:39.720Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "TOGGLE_LEGAL_HOLD",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Legal Hold RELEASED. Reason: N/A",
+    "details": {
+      "isHoldActive": false
+    },
+    "id": "AUD-GOV-1790702619710-481",
+    "timestamp": "2026-09-29T17:23:39.710Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "TOGGLE_LEGAL_HOLD",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Legal Hold ACTIVATED. Reason: আইনি তদন্তাধীন থাকায় স্থগিত",
+    "details": {
+      "isHoldActive": true,
+      "reason": "আইনি তদন্তাধীন থাকায় স্থগিত"
+    },
+    "id": "AUD-GOV-1790702619700-32",
+    "timestamp": "2026-09-29T17:23:39.700Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "MARK_EFFECTIVE",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Status changed from PUBLISHED to EFFECTIVE",
+    "details": {
+      "previousStatus": "PUBLISHED",
+      "targetStatus": "EFFECTIVE"
+    },
+    "id": "AUD-GOV-1790702619693-361",
+    "timestamp": "2026-09-29T17:23:39.694Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "UPDATE_DRAFT",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Status changed from APPROVED to PUBLISHED",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "PUBLISHED"
+    },
+    "id": "AUD-GOV-1790702619686-360",
+    "timestamp": "2026-09-29T17:23:39.686Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "APPROVE",
+    "actorId": "pr-01",
+    "actorName": "মাওলানা আব্দুল করিম (প্রিন্সিপাল)",
+    "actorRole": "PRINCIPAL",
+    "notes": "Policy approved: গভর্নিং বডির সিদ্ধান্ত অনুযায়ী অনুমোদিত।",
+    "details": {
+      "decision": "APPROVED",
+      "auditRef": "AUD-DEC-1790702619662-310"
+    },
+    "id": "AUD-GOV-1790702619674-372",
+    "timestamp": "2026-09-29T17:23:39.674Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "UPDATE_DRAFT",
+    "actorId": "pr-01",
+    "actorName": "মাওলানা আব্দুল করিম (প্রিন্সিপাল)",
+    "actorRole": "PRINCIPAL",
+    "notes": "অনুমোদন সম্পন্ন করেছেন: মাওলানা আব্দুল করিম (প্রিন্সিপাল) (গভর্নিং বডির সিদ্ধান্ত অনুযায়ী অনুমোদিত।)",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED"
+    },
+    "id": "AUD-GOV-1790702619671-95",
+    "timestamp": "2026-09-29T17:23:39.671Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "SUBMIT_FOR_REVIEW",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Review requested",
+    "id": "AUD-GOV-1790702619659-23",
+    "timestamp": "2026-09-29T17:23:39.659Z"
+  },
+  {
+    "documentId": "EHRJ-POL-TEST-001",
+    "documentCode": "EHRJ-POL-TEST-001",
+    "version": "v1.0",
+    "action": "UPDATE_DRAFT",
+    "actorId": "admin-1",
+    "actorName": "Admin",
+    "actorRole": "ADMIN",
+    "notes": "Review requested",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "UNDER_REVIEW"
+    },
+    "id": "AUD-GOV-1790702619656-624",
+    "timestamp": "2026-09-29T17:23:39.656Z"
+  },
+  {
+    "documentId": "EHRJ-POL-2026-TCH001",
+    "documentCode": "EHRJ-POL-2026-TCH001",
+    "version": "v1.1",
+    "action": "ACKNOWLEDGE",
+    "actorId": "usr-tch-007",
+    "actorName": "মুফতি মাহমুদুল হাসান",
+    "actorRole": "TEACHER",
+    "notes": "User acknowledged policy EHRJ-POL-2026-TCH001 v1.1",
+    "details": {
       "ackId": "EHRJ-ACK-1790694235164-127",
       "device": {
         "userAgent": "PortalBrowser/Chrome",

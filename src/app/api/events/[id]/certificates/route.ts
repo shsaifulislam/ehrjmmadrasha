@@ -5,13 +5,14 @@ import {
   revokeEventCertificate,
   getEventById,
 } from "@/lib/events";
+import { getSessionUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const event = getEventById(params.id);
     if (!event) {
@@ -43,12 +44,20 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const user = await getSessionUser();
+    if (!user || !["ADMIN", "PRINCIPAL"].includes(user.role)) {
+      return NextResponse.json(
+        { success: false, error: "অননুমোদিত: শুধুমাত্র প্রশাসন ইভেন্ট সনদপত্র প্রদান করতে পারবেন।" },
+        { status: 403 }
+      );
+    }
+
     const body = await request.json();
-    const actorRole = body.actorRole || "ADMIN";
-    const actorId = body.actorId || "admin@ehrj.edu.bd";
+    const actorRole = user.role;
+    const actorId = user.email || user.username || user.userId;
 
     if (!body.studentId || !body.category) {
       return NextResponse.json(
@@ -82,14 +91,22 @@ export async function POST(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const user = await getSessionUser();
+    if (!user || !["ADMIN", "PRINCIPAL"].includes(user.role)) {
+      return NextResponse.json(
+        { success: false, error: "অননুমোদিত: শুধুমাত্র প্রশাসন সনদপত্র বাতিল করতে পারবেন।" },
+        { status: 403 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const certificateId = searchParams.get("certificateId");
     const reason = searchParams.get("reason") || "সনদপত্র প্রত্যাহার করা হলো।";
-    const actorId = searchParams.get("actorId") || "admin@ehrj.edu.bd";
-    const actorRole = searchParams.get("actorRole") || "ADMIN";
+    const actorId = user.email || user.username || user.userId;
+    const actorRole = user.role;
 
     if (!certificateId) {
       return NextResponse.json(

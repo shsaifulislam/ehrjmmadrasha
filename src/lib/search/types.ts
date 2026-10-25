@@ -37,6 +37,13 @@ export type SearchEntityType =
   | "WORKFLOW"
   | "INTEGRATION"
   | "KNOWLEDGE"
+  | "VENDOR"
+  | "RFQ"
+  | "CONTRACT"
+  | "RISK"
+  | "CONTROL"
+  | "COMPLIANCE_REQUIREMENT"
+  | "COMPLIANCE_OBLIGATION"
   | "NAVIGATION";
 
 export type SearchUserRole =

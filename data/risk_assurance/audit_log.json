@@ -1,0 +1,1643 @@
+[
+  {
+    "id": "aud-1790735120274-3rhf",
+    "timestamp": "2026-09-30T02:25:20.274Z",
+    "entityType": "REVIEW",
+    "entityId": "EHRJ-REV-2026-0007",
+    "action": "CREATE_REVIEW",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "শাসনকার্য পর্যালোচনা অধিবেশন: ২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা (SCHEDULED)",
+    "details": {
+      "reviewId": "EHRJ-REV-2026-0007",
+      "status": "SCHEDULED"
+    }
+  },
+  {
+    "id": "aud-1790735120254-mjr2",
+    "timestamp": "2026-09-30T02:25:20.254Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0008",
+    "action": "UPDATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (COMPLETED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0008",
+      "status": "COMPLETED"
+    }
+  },
+  {
+    "id": "aud-1790735120244-cywx",
+    "timestamp": "2026-09-30T02:25:20.244Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0008",
+    "action": "CREATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (PLANNED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0008",
+      "status": "PLANNED"
+    }
+  },
+  {
+    "id": "aud-1790735120234-362p",
+    "timestamp": "2026-09-30T02:25:20.222Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0007",
+    "action": "VERIFY_AND_CLOSE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "পর্যবেক্ষণ ও ত্রুটি চূড়ান্তভাবে যাচাইকৃত ও নিষ্পত্তি: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0007",
+      "closedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790735120227-tu9j",
+    "timestamp": "2026-09-30T02:25:20.227Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0007",
+    "action": "UPDATE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (CLOSED)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0007",
+      "severity": "MEDIUM",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790735120216-ueoy",
+    "timestamp": "2026-09-30T02:25:20.216Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0007",
+    "action": "RECORD_FINDING",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (OPEN)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0007",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790735120201-u72s",
+    "timestamp": "2026-09-30T02:25:20.201Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0012",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0004 (মেয়াদ: 2026-09-25)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0012",
+      "controlId": "EHRJ-CTRL-2026-0004",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790735120193-3xfx",
+    "timestamp": "2026-09-30T02:25:20.193Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0011",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0012 (মেয়াদ: 2026-10-30)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0011",
+      "controlId": "EHRJ-CTRL-2026-0012",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790735120177-5fuk",
+    "timestamp": "2026-09-30T02:25:20.177Z",
+    "entityType": "CONTROL_TEST",
+    "entityId": "EHRJ-CTEST-2026-0006",
+    "action": "RECORD_CONTROL_TEST",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ পরীক্ষা সম্পন্ন: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন -> ফলাফল: EFFECTIVE",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0012",
+      "result": "EFFECTIVE",
+      "exceptions": 0
+    }
+  },
+  {
+    "id": "aud-1790735120164-9ina",
+    "timestamp": "2026-09-30T02:25:20.164Z",
+    "entityType": "CONTROL",
+    "entityId": "EHRJ-CTRL-2026-0012",
+    "action": "CREATE_CONTROL",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অভ্যন্তরীণ নিয়ন্ত্রণ রেকর্ড তৈরি: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0012",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790735120151-4zlp",
+    "timestamp": "2026-09-30T02:25:20.145Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0012",
+    "action": "CLOSE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি সমাপ্ত ঘোষণা: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. নিষ্পত্তি নোট: পরীক্ষা সম্পন্ন এবং নতুন ডিজিটাল এনক্রিপ্টেড প্রশ্ন ব্যবস্থা সফলভাবে প্রতিস্থাপিত",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0012",
+      "closedBy": "Moulana Admin"
+    }
+  },
+  {
+    "id": "aud-1790735120148-f9gk",
+    "timestamp": "2026-09-30T02:25:20.148Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0012",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0012",
+      "residualLevel": "LOW",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790735120136-r0qk",
+    "timestamp": "2026-09-30T02:25:20.130Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0012",
+    "action": "FORMAL_RISK_ACCEPTANCE",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি আনুষ্ঠানিকভাবে গৃহীত (Accepted): পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. কারণ: মুহতামিম কর্তৃক সতর্কতামূলক তত্ত্বাবধানে সাময়িক অনুমোদন",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0012",
+      "residualLevel": "LOW",
+      "acceptedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790735120133-v5o0",
+    "timestamp": "2026-09-30T02:25:20.133Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0012",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0012",
+      "residualLevel": "LOW",
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "id": "aud-1790735120122-efb8",
+    "timestamp": "2026-09-30T02:25:20.122Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0012",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0012",
+      "residualLevel": "LOW",
+      "status": "UNDER_ASSESSMENT"
+    }
+  },
+  {
+    "id": "aud-1790735120111-xeaf",
+    "timestamp": "2026-09-30T02:25:20.111Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0012",
+    "action": "CREATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড তৈরি: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (CRITICAL)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0012",
+      "residualLevel": "CRITICAL",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790735063359-8iu2",
+    "timestamp": "2026-09-30T02:24:23.359Z",
+    "entityType": "REVIEW",
+    "entityId": "EHRJ-REV-2026-0006",
+    "action": "CREATE_REVIEW",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "শাসনকার্য পর্যালোচনা অধিবেশন: ২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা (SCHEDULED)",
+    "details": {
+      "reviewId": "EHRJ-REV-2026-0006",
+      "status": "SCHEDULED"
+    }
+  },
+  {
+    "id": "aud-1790735063315-9ob9",
+    "timestamp": "2026-09-30T02:24:23.315Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0007",
+    "action": "UPDATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (COMPLETED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0007",
+      "status": "COMPLETED"
+    }
+  },
+  {
+    "id": "aud-1790735063305-tyjn",
+    "timestamp": "2026-09-30T02:24:23.305Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0007",
+    "action": "CREATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (PLANNED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0007",
+      "status": "PLANNED"
+    }
+  },
+  {
+    "id": "aud-1790735063295-wud9",
+    "timestamp": "2026-09-30T02:24:23.288Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0006",
+    "action": "VERIFY_AND_CLOSE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "পর্যবেক্ষণ ও ত্রুটি চূড়ান্তভাবে যাচাইকৃত ও নিষ্পত্তি: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0006",
+      "closedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790735063291-u17y",
+    "timestamp": "2026-09-30T02:24:23.291Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0006",
+    "action": "UPDATE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (CLOSED)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0006",
+      "severity": "MEDIUM",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790735063280-6mtq",
+    "timestamp": "2026-09-30T02:24:23.280Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0006",
+    "action": "RECORD_FINDING",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (OPEN)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0006",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790735063266-ucnb",
+    "timestamp": "2026-09-30T02:24:23.266Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0010",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0004 (মেয়াদ: 2026-09-25)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0010",
+      "controlId": "EHRJ-CTRL-2026-0004",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790735063258-pyok",
+    "timestamp": "2026-09-30T02:24:23.258Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0009",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0011 (মেয়াদ: 2026-10-30)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0009",
+      "controlId": "EHRJ-CTRL-2026-0011",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790735063243-etl1",
+    "timestamp": "2026-09-30T02:24:23.243Z",
+    "entityType": "CONTROL_TEST",
+    "entityId": "EHRJ-CTEST-2026-0005",
+    "action": "RECORD_CONTROL_TEST",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ পরীক্ষা সম্পন্ন: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন -> ফলাফল: EFFECTIVE",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0011",
+      "result": "EFFECTIVE",
+      "exceptions": 0
+    }
+  },
+  {
+    "id": "aud-1790735063227-cao3",
+    "timestamp": "2026-09-30T02:24:23.227Z",
+    "entityType": "CONTROL",
+    "entityId": "EHRJ-CTRL-2026-0011",
+    "action": "CREATE_CONTROL",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অভ্যন্তরীণ নিয়ন্ত্রণ রেকর্ড তৈরি: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0011",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790735063213-x09z",
+    "timestamp": "2026-09-30T02:24:23.204Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0011",
+    "action": "CLOSE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি সমাপ্ত ঘোষণা: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. নিষ্পত্তি নোট: পরীক্ষা সম্পন্ন এবং নতুন ডিজিটাল এনক্রিপ্টেড প্রশ্ন ব্যবস্থা সফলভাবে প্রতিস্থাপিত",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0011",
+      "closedBy": "Moulana Admin"
+    }
+  },
+  {
+    "id": "aud-1790735063208-wed2",
+    "timestamp": "2026-09-30T02:24:23.208Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0011",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0011",
+      "residualLevel": "LOW",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790735063197-kdcd",
+    "timestamp": "2026-09-30T02:24:23.191Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0011",
+    "action": "FORMAL_RISK_ACCEPTANCE",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি আনুষ্ঠানিকভাবে গৃহীত (Accepted): পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. কারণ: মুহতামিম কর্তৃক সতর্কতামূলক তত্ত্বাবধানে সাময়িক অনুমোদন",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0011",
+      "residualLevel": "LOW",
+      "acceptedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790735063195-asaq",
+    "timestamp": "2026-09-30T02:24:23.195Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0011",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0011",
+      "residualLevel": "LOW",
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "id": "aud-1790735063182-oqhq",
+    "timestamp": "2026-09-30T02:24:23.182Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0011",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0011",
+      "residualLevel": "LOW",
+      "status": "UNDER_ASSESSMENT"
+    }
+  },
+  {
+    "id": "aud-1790735063171-bx1q",
+    "timestamp": "2026-09-30T02:24:23.172Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0011",
+    "action": "CREATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড তৈরি: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (CRITICAL)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0011",
+      "residualLevel": "CRITICAL",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790734996341-ofqm",
+    "timestamp": "2026-09-30T02:23:16.341Z",
+    "entityType": "REVIEW",
+    "entityId": "EHRJ-REV-2026-0005",
+    "action": "CREATE_REVIEW",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "শাসনকার্য পর্যালোচনা অধিবেশন: ২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা (SCHEDULED)",
+    "details": {
+      "reviewId": "EHRJ-REV-2026-0005",
+      "status": "SCHEDULED"
+    }
+  },
+  {
+    "id": "aud-1790734996316-x9ub",
+    "timestamp": "2026-09-30T02:23:16.316Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0006",
+    "action": "UPDATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (COMPLETED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0006",
+      "status": "COMPLETED"
+    }
+  },
+  {
+    "id": "aud-1790734996308-rnyk",
+    "timestamp": "2026-09-30T02:23:16.308Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0006",
+    "action": "CREATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (PLANNED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0006",
+      "status": "PLANNED"
+    }
+  },
+  {
+    "id": "aud-1790734996300-6kuc",
+    "timestamp": "2026-09-30T02:23:16.291Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0005",
+    "action": "VERIFY_AND_CLOSE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "পর্যবেক্ষণ ও ত্রুটি চূড়ান্তভাবে যাচাইকৃত ও নিষ্পত্তি: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0005",
+      "closedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790734996295-55dg",
+    "timestamp": "2026-09-30T02:23:16.295Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0005",
+    "action": "UPDATE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (CLOSED)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0005",
+      "severity": "MEDIUM",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790734996282-lc78",
+    "timestamp": "2026-09-30T02:23:16.282Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0005",
+    "action": "RECORD_FINDING",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (OPEN)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0005",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790734996269-4tph",
+    "timestamp": "2026-09-30T02:23:16.269Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0008",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0004 (মেয়াদ: 2026-09-25)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0008",
+      "controlId": "EHRJ-CTRL-2026-0004",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734996259-8g2v",
+    "timestamp": "2026-09-30T02:23:16.259Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0007",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0010 (মেয়াদ: 2026-10-30)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0007",
+      "controlId": "EHRJ-CTRL-2026-0010",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734996244-0cux",
+    "timestamp": "2026-09-30T02:23:16.244Z",
+    "entityType": "CONTROL_TEST",
+    "entityId": "EHRJ-CTEST-2026-0004",
+    "action": "RECORD_CONTROL_TEST",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ পরীক্ষা সম্পন্ন: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন -> ফলাফল: EFFECTIVE",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0010",
+      "result": "EFFECTIVE",
+      "exceptions": 0
+    }
+  },
+  {
+    "id": "aud-1790734996224-298o",
+    "timestamp": "2026-09-30T02:23:16.224Z",
+    "entityType": "CONTROL",
+    "entityId": "EHRJ-CTRL-2026-0010",
+    "action": "CREATE_CONTROL",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অভ্যন্তরীণ নিয়ন্ত্রণ রেকর্ড তৈরি: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0010",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734996209-0gj6",
+    "timestamp": "2026-09-30T02:23:16.200Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0010",
+    "action": "CLOSE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি সমাপ্ত ঘোষণা: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. নিষ্পত্তি নোট: পরীক্ষা সম্পন্ন এবং নতুন ডিজিটাল এনক্রিপ্টেড প্রশ্ন ব্যবস্থা সফলভাবে প্রতিস্থাপিত",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0010",
+      "closedBy": "Moulana Admin"
+    }
+  },
+  {
+    "id": "aud-1790734996204-awt0",
+    "timestamp": "2026-09-30T02:23:16.204Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0010",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0010",
+      "residualLevel": "LOW",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790734996194-6ejs",
+    "timestamp": "2026-09-30T02:23:16.181Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0010",
+    "action": "FORMAL_RISK_ACCEPTANCE",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি আনুষ্ঠানিকভাবে গৃহীত (Accepted): পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. কারণ: মুহতামিম কর্তৃক সতর্কতামূলক তত্ত্বাবধানে সাময়িক অনুমোদন",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0010",
+      "residualLevel": "LOW",
+      "acceptedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790734996190-e1hd",
+    "timestamp": "2026-09-30T02:23:16.191Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0010",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0010",
+      "residualLevel": "LOW",
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "id": "aud-1790734996172-hzt2",
+    "timestamp": "2026-09-30T02:23:16.172Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0010",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0010",
+      "residualLevel": "LOW",
+      "status": "UNDER_ASSESSMENT"
+    }
+  },
+  {
+    "id": "aud-1790734996157-x6wa",
+    "timestamp": "2026-09-30T02:23:16.157Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0010",
+    "action": "CREATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড তৈরি: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (CRITICAL)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0010",
+      "residualLevel": "CRITICAL",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790734909728-74ei",
+    "timestamp": "2026-09-30T02:21:49.728Z",
+    "entityType": "REVIEW",
+    "entityId": "EHRJ-REV-2026-0004",
+    "action": "CREATE_REVIEW",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "শাসনকার্য পর্যালোচনা অধিবেশন: ২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা (SCHEDULED)",
+    "details": {
+      "reviewId": "EHRJ-REV-2026-0004",
+      "status": "SCHEDULED"
+    }
+  },
+  {
+    "id": "aud-1790734909717-rkqz",
+    "timestamp": "2026-09-30T02:21:49.717Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0005",
+    "action": "UPDATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (COMPLETED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0005",
+      "status": "COMPLETED"
+    }
+  },
+  {
+    "id": "aud-1790734909711-h22v",
+    "timestamp": "2026-09-30T02:21:49.711Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0005",
+    "action": "CREATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (PLANNED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0005",
+      "status": "PLANNED"
+    }
+  },
+  {
+    "id": "aud-1790734909704-2ul2",
+    "timestamp": "2026-09-30T02:21:49.697Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0004",
+    "action": "VERIFY_AND_CLOSE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "পর্যবেক্ষণ ও ত্রুটি চূড়ান্তভাবে যাচাইকৃত ও নিষ্পত্তি: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0004",
+      "closedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790734909701-oowc",
+    "timestamp": "2026-09-30T02:21:49.701Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0004",
+    "action": "UPDATE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (CLOSED)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0004",
+      "severity": "MEDIUM",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790734909692-95kq",
+    "timestamp": "2026-09-30T02:21:49.692Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0004",
+    "action": "RECORD_FINDING",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (OPEN)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0004",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790734909682-umcr",
+    "timestamp": "2026-09-30T02:21:49.682Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0006",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0004 (মেয়াদ: 2026-09-25)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0006",
+      "controlId": "EHRJ-CTRL-2026-0004",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734909676-kftv",
+    "timestamp": "2026-09-30T02:21:49.676Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0005",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0009 (মেয়াদ: 2026-10-30)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0005",
+      "controlId": "EHRJ-CTRL-2026-0009",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734909666-81wj",
+    "timestamp": "2026-09-30T02:21:49.666Z",
+    "entityType": "CONTROL_TEST",
+    "entityId": "EHRJ-CTEST-2026-0003",
+    "action": "RECORD_CONTROL_TEST",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ পরীক্ষা সম্পন্ন: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন -> ফলাফল: EFFECTIVE",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0009",
+      "result": "EFFECTIVE",
+      "exceptions": 0
+    }
+  },
+  {
+    "id": "aud-1790734909654-e33s",
+    "timestamp": "2026-09-30T02:21:49.654Z",
+    "entityType": "CONTROL",
+    "entityId": "EHRJ-CTRL-2026-0009",
+    "action": "CREATE_CONTROL",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অভ্যন্তরীণ নিয়ন্ত্রণ রেকর্ড তৈরি: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0009",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734909645-7fvk",
+    "timestamp": "2026-09-30T02:21:49.639Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0009",
+    "action": "CLOSE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি সমাপ্ত ঘোষণা: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. নিষ্পত্তি নোট: পরীক্ষা সম্পন্ন এবং নতুন ডিজিটাল এনক্রিপ্টেড প্রশ্ন ব্যবস্থা সফলভাবে প্রতিস্থাপিত",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0009",
+      "closedBy": "Moulana Admin"
+    }
+  },
+  {
+    "id": "aud-1790734909642-g6zs",
+    "timestamp": "2026-09-30T02:21:49.642Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0009",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0009",
+      "residualLevel": "LOW",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790734909634-pya9",
+    "timestamp": "2026-09-30T02:21:49.630Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0009",
+    "action": "FORMAL_RISK_ACCEPTANCE",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি আনুষ্ঠানিকভাবে গৃহীত (Accepted): পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. কারণ: মুহতামিম কর্তৃক সতর্কতামূলক তত্ত্বাবধানে সাময়িক অনুমোদন",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0009",
+      "residualLevel": "LOW",
+      "acceptedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790734909632-9smv",
+    "timestamp": "2026-09-30T02:21:49.632Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0009",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0009",
+      "residualLevel": "LOW",
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "id": "aud-1790734909622-dyj7",
+    "timestamp": "2026-09-30T02:21:49.622Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0009",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0009",
+      "residualLevel": "LOW",
+      "status": "UNDER_ASSESSMENT"
+    }
+  },
+  {
+    "id": "aud-1790734909611-d5xi",
+    "timestamp": "2026-09-30T02:21:49.611Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0009",
+    "action": "CREATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড তৈরি: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (CRITICAL)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0009",
+      "residualLevel": "CRITICAL",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790734818546-0v9t",
+    "timestamp": "2026-09-30T02:20:18.546Z",
+    "entityType": "REVIEW",
+    "entityId": "EHRJ-REV-2026-0003",
+    "action": "CREATE_REVIEW",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "শাসনকার্য পর্যালোচনা অধিবেশন: ২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা (SCHEDULED)",
+    "details": {
+      "reviewId": "EHRJ-REV-2026-0003",
+      "status": "SCHEDULED"
+    }
+  },
+  {
+    "id": "aud-1790734818532-xxqs",
+    "timestamp": "2026-09-30T02:20:18.532Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0004",
+    "action": "UPDATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (COMPLETED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0004",
+      "status": "COMPLETED"
+    }
+  },
+  {
+    "id": "aud-1790734818525-qrl4",
+    "timestamp": "2026-09-30T02:20:18.525Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0004",
+    "action": "CREATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (PLANNED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0004",
+      "status": "PLANNED"
+    }
+  },
+  {
+    "id": "aud-1790734818519-38ri",
+    "timestamp": "2026-09-30T02:20:18.514Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0003",
+    "action": "VERIFY_AND_CLOSE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "পর্যবেক্ষণ ও ত্রুটি চূড়ান্তভাবে যাচাইকৃত ও নিষ্পত্তি: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0003",
+      "closedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790734818517-aum6",
+    "timestamp": "2026-09-30T02:20:18.517Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0003",
+    "action": "UPDATE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (CLOSED)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0003",
+      "severity": "MEDIUM",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790734818508-uli4",
+    "timestamp": "2026-09-30T02:20:18.508Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0003",
+    "action": "RECORD_FINDING",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (OPEN)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0003",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790734818498-a9x2",
+    "timestamp": "2026-09-30T02:20:18.498Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0004",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0004 (মেয়াদ: 2026-09-25)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0004",
+      "controlId": "EHRJ-CTRL-2026-0004",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734818491-8i9x",
+    "timestamp": "2026-09-30T02:20:18.491Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0003",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0008 (মেয়াদ: 2026-10-30)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0003",
+      "controlId": "EHRJ-CTRL-2026-0008",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734818481-7fj0",
+    "timestamp": "2026-09-30T02:20:18.481Z",
+    "entityType": "CONTROL_TEST",
+    "entityId": "EHRJ-CTEST-2026-0002",
+    "action": "RECORD_CONTROL_TEST",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ পরীক্ষা সম্পন্ন: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন -> ফলাফল: EFFECTIVE",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0008",
+      "result": "EFFECTIVE",
+      "exceptions": 0
+    }
+  },
+  {
+    "id": "aud-1790734818470-x5qk",
+    "timestamp": "2026-09-30T02:20:18.470Z",
+    "entityType": "CONTROL",
+    "entityId": "EHRJ-CTRL-2026-0008",
+    "action": "CREATE_CONTROL",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অভ্যন্তরীণ নিয়ন্ত্রণ রেকর্ড তৈরি: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0008",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734818460-hwvq",
+    "timestamp": "2026-09-30T02:20:18.454Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0008",
+    "action": "CLOSE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি সমাপ্ত ঘোষণা: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. নিষ্পত্তি নোট: পরীক্ষা সম্পন্ন এবং নতুন ডিজিটাল এনক্রিপ্টেড প্রশ্ন ব্যবস্থা সফলভাবে প্রতিস্থাপিত",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0008",
+      "closedBy": "Moulana Admin"
+    }
+  },
+  {
+    "id": "aud-1790734818457-kv5d",
+    "timestamp": "2026-09-30T02:20:18.457Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0008",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0008",
+      "residualLevel": "LOW",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790734818447-3cml",
+    "timestamp": "2026-09-30T02:20:18.439Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0008",
+    "action": "FORMAL_RISK_ACCEPTANCE",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি আনুষ্ঠানিকভাবে গৃহীত (Accepted): পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. কারণ: মুহতামিম কর্তৃক সতর্কতামূলক তত্ত্বাবধানে সাময়িক অনুমোদন",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0008",
+      "residualLevel": "LOW",
+      "acceptedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790734818442-nntv",
+    "timestamp": "2026-09-30T02:20:18.442Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0008",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0008",
+      "residualLevel": "LOW",
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "id": "aud-1790734818430-2bfc",
+    "timestamp": "2026-09-30T02:20:18.430Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0008",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0008",
+      "residualLevel": "LOW",
+      "status": "UNDER_ASSESSMENT"
+    }
+  },
+  {
+    "id": "aud-1790734818416-jocj",
+    "timestamp": "2026-09-30T02:20:18.416Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0008",
+    "action": "CREATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড তৈরি: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (CRITICAL)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0008",
+      "residualLevel": "CRITICAL",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790734764591-wkvo",
+    "timestamp": "2026-09-30T02:19:24.591Z",
+    "entityType": "REVIEW",
+    "entityId": "EHRJ-REV-2026-0002",
+    "action": "CREATE_REVIEW",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "শাসনকার্য পর্যালোচনা অধিবেশন: ২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা (SCHEDULED)",
+    "details": {
+      "reviewId": "EHRJ-REV-2026-0002",
+      "status": "SCHEDULED"
+    }
+  },
+  {
+    "id": "aud-1790734764569-upp9",
+    "timestamp": "2026-09-30T02:19:24.569Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0003",
+    "action": "UPDATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (COMPLETED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0003",
+      "status": "COMPLETED"
+    }
+  },
+  {
+    "id": "aud-1790734764563-1hek",
+    "timestamp": "2026-09-30T02:19:24.563Z",
+    "entityType": "ACTION",
+    "entityId": "EHRJ-ACT-2026-0003",
+    "action": "CREATE_ACTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "সংশোধনমূলক ব্যবস্থা (CAPA) রেকর্ড: জেনারেটর জ্বালানি ব্যয়ের জন্য ডিজিটাল লগ ফরম বাধ্য... (PLANNED)",
+    "details": {
+      "actionId": "EHRJ-ACT-2026-0003",
+      "status": "PLANNED"
+    }
+  },
+  {
+    "id": "aud-1790734764557-ju7h",
+    "timestamp": "2026-09-30T02:19:24.550Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0002",
+    "action": "VERIFY_AND_CLOSE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "পর্যবেক্ষণ ও ত্রুটি চূড়ান্তভাবে যাচাইকৃত ও নিষ্পত্তি: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0002",
+      "closedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790734764555-76j5",
+    "timestamp": "2026-09-30T02:19:24.555Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0002",
+    "action": "UPDATE_FINDING",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (CLOSED)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0002",
+      "severity": "MEDIUM",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790734764545-7eu4",
+    "timestamp": "2026-09-30T02:19:24.545Z",
+    "entityType": "FINDING",
+    "entityId": "EHRJ-FND-2026-0002",
+    "action": "RECORD_FINDING",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অডিট/নিয়ন্ত্রণ পর্যবেক্ষণ রেকর্ড: বিদ্যুৎ জেনারেটরের মাসিক জ্বালানি লগ খাতায় ৩ দিনের এন্ট্রি অসম্পূর্ণ (OPEN)",
+    "details": {
+      "findingId": "EHRJ-FND-2026-0002",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790734764532-etob",
+    "timestamp": "2026-09-30T02:19:24.532Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0002",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0004 (মেয়াদ: 2026-09-25)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0002",
+      "controlId": "EHRJ-CTRL-2026-0004",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734764523-jxyk",
+    "timestamp": "2026-09-30T02:19:24.523Z",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-2026-0001",
+    "action": "RECORD_EXCEPTION",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ ব্যতিক্রম অনুমোদন: EHRJ-CTRL-2026-0007 (মেয়াদ: 2026-10-30)",
+    "details": {
+      "exceptionId": "EHRJ-EXC-2026-0001",
+      "controlId": "EHRJ-CTRL-2026-0007",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734764509-uqqk",
+    "timestamp": "2026-09-30T02:19:24.509Z",
+    "entityType": "CONTROL_TEST",
+    "entityId": "EHRJ-CTEST-2026-0001",
+    "action": "RECORD_CONTROL_TEST",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "নিয়ন্ত্রণ পরীক্ষা সম্পন্ন: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন -> ফলাফল: EFFECTIVE",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0007",
+      "result": "EFFECTIVE",
+      "exceptions": 0
+    }
+  },
+  {
+    "id": "aud-1790734764493-gls7",
+    "timestamp": "2026-09-30T02:19:24.493Z",
+    "entityType": "CONTROL",
+    "entityId": "EHRJ-CTRL-2026-0007",
+    "action": "CREATE_CONTROL",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অভ্যন্তরীণ নিয়ন্ত্রণ রেকর্ড তৈরি: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0007",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734764485-9iqo",
+    "timestamp": "2026-09-30T02:19:24.479Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0007",
+    "action": "CLOSE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি সমাপ্ত ঘোষণা: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. নিষ্পত্তি নোট: পরীক্ষা সম্পন্ন এবং নতুন ডিজিটাল এনক্রিপ্টেড প্রশ্ন ব্যবস্থা সফলভাবে প্রতিস্থাপিত",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0007",
+      "closedBy": "Moulana Admin"
+    }
+  },
+  {
+    "id": "aud-1790734764482-d8g2",
+    "timestamp": "2026-09-30T02:19:24.482Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0007",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0007",
+      "residualLevel": "LOW",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790734764473-jwry",
+    "timestamp": "2026-09-30T02:19:24.466Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0007",
+    "action": "FORMAL_RISK_ACCEPTANCE",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি আনুষ্ঠানিকভাবে গৃহীত (Accepted): পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. কারণ: মুহতামিম কর্তৃক সতর্কতামূলক তত্ত্বাবধানে সাময়িক অনুমোদন",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0007",
+      "residualLevel": "LOW",
+      "acceptedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790734764469-7ehl",
+    "timestamp": "2026-09-30T02:19:24.469Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0007",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0007",
+      "residualLevel": "LOW",
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "id": "aud-1790734764458-njgt",
+    "timestamp": "2026-09-30T02:19:24.458Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0007",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0007",
+      "residualLevel": "LOW",
+      "status": "UNDER_ASSESSMENT"
+    }
+  },
+  {
+    "id": "aud-1790734764448-362h",
+    "timestamp": "2026-09-30T02:19:24.448Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0007",
+    "action": "CREATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড তৈরি: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (CRITICAL)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0007",
+      "residualLevel": "CRITICAL",
+      "status": "OPEN"
+    }
+  },
+  {
+    "id": "aud-1790734558860-ijjv",
+    "timestamp": "2026-09-30T02:15:58.860Z",
+    "entityType": "CONTROL",
+    "entityId": "EHRJ-CTRL-2026-0006",
+    "action": "CREATE_CONTROL",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "অভ্যন্তরীণ নিয়ন্ত্রণ রেকর্ড তৈরি: শিক্ষার্থী হোস্টেল ফি আদায়ের দৈনিক ব্যাংক জমার রিকনসিলিয়েশন",
+    "details": {
+      "controlId": "EHRJ-CTRL-2026-0006",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "id": "aud-1790734558852-6m78",
+    "timestamp": "2026-09-30T02:15:58.847Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0006",
+    "action": "CLOSE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি সমাপ্ত ঘোষণা: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. নিষ্পত্তি নোট: পরীক্ষা সম্পন্ন এবং নতুন ডিজিটাল এনক্রিপ্টেড প্রশ্ন ব্যবস্থা সফলভাবে প্রতিস্থাপিত",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0006",
+      "closedBy": "Moulana Admin"
+    }
+  },
+  {
+    "id": "aud-1790734558850-kzmo",
+    "timestamp": "2026-09-30T02:15:58.850Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0006",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0006",
+      "residualLevel": "LOW",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790734558843-hyro",
+    "timestamp": "2026-09-30T02:15:58.838Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0006",
+    "action": "CLOSE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি সমাপ্ত ঘোষণা: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. নিষ্পত্তি নোট: ",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0006",
+      "closedBy": "Moulana Admin"
+    }
+  },
+  {
+    "id": "aud-1790734558840-39df",
+    "timestamp": "2026-09-30T02:15:58.840Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0006",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0006",
+      "residualLevel": "LOW",
+      "status": "CLOSED"
+    }
+  },
+  {
+    "id": "aud-1790734558834-5mtu",
+    "timestamp": "2026-09-30T02:15:58.829Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0006",
+    "action": "FORMAL_RISK_ACCEPTANCE",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি আনুষ্ঠানিকভাবে গৃহীত (Accepted): পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি. কারণ: মুহতামিম কর্তৃক সতর্কতামূলক তত্ত্বাবধানে সাময়িক অনুমোদন",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0006",
+      "residualLevel": "LOW",
+      "acceptedBy": "Muhtamim Principal"
+    }
+  },
+  {
+    "id": "aud-1790734558832-h72a",
+    "timestamp": "2026-09-30T02:15:58.832Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0006",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_principal_001",
+    "actorName": "Muhtamim Principal",
+    "actorRole": "PRINCIPAL",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0006",
+      "residualLevel": "LOW",
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "id": "aud-1790734558821-noek",
+    "timestamp": "2026-09-30T02:15:58.821Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0006",
+    "action": "UPDATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড হালনাগাদ: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (LOW)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0006",
+      "residualLevel": "LOW",
+      "status": "UNDER_ASSESSMENT"
+    }
+  },
+  {
+    "id": "aud-1790734558813-lgg7",
+    "timestamp": "2026-09-30T02:15:58.813Z",
+    "entityType": "RISK",
+    "entityId": "EHRJ-RISK-2026-0006",
+    "action": "CREATE_RISK",
+    "actorId": "usr_admin_001",
+    "actorName": "Moulana Admin",
+    "actorRole": "ADMIN",
+    "notes": "ঝুঁকি রেজিস্টার রেকর্ড তৈরি: পরীক্ষা প্রশ্নপত্র ফাঁস ও বিতরণ অনিয়ম ঝুঁকি (CRITICAL)",
+    "details": {
+      "riskId": "EHRJ-RISK-2026-0006",
+      "residualLevel": "CRITICAL",
+      "status": "OPEN"
+    }
+  }
+]

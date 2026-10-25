@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import {
   MessageSquareHeart,
   ClipboardCheck,
@@ -34,8 +36,10 @@ export default function PublicSurveysPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto space-y-10">
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans text-slate-900 selection:bg-[#0D5C3A] selection:text-white">
+      <Navbar />
+
+      <main className="flex-1 max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8 w-full space-y-10">
         {/* Hero Header */}
         <div className="text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-sm font-medium">
@@ -211,7 +215,9 @@ export default function PublicSurveysPage() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }

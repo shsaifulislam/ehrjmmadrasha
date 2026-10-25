@@ -1,0 +1,27 @@
+# Production Dockerignore for EHRJ Digital Campus & ERP
+# Exclude sensitive environment files, secrets, version control, and temporary artifacts
+
+.env
+.env*.local
+.git
+.gitignore
+.next
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database files & local journals
+prisma/*.db
+prisma/*.db-journal
+dev.db
+dev.db-journal
+backups
+data/security/revoked_tokens.json
+data/security/lockout_records.json
+scratch
+
+# Documentation & IDE
+docs
+.vscode
+.idea

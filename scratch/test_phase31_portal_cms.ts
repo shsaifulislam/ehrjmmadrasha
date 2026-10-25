@@ -57,7 +57,7 @@ async function runPhase31Tests() {
   const profile = getInstitutionalProfile();
   assert(profile.nameBn === "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা", "Official Bangla name verified");
   assert(profile.nameEn === "Eliotganj Hazi Rohmatollah Jamiria Madrasha", "Official English name verified");
-  assert(profile.established === "২০২১", "Established year verified (2021)");
+  assert(profile.established === "২০২৫", "Established year verified (2025)");
   assert(profile.primaryPhone.length > 5, "Primary phone number present");
   assert(profile.email.includes("@"), "Official email present");
 
@@ -249,7 +249,8 @@ async function runPhase31Tests() {
   assert(site && site.potentialAction["@type"] === "SearchAction", "WebSite SearchAction schema present");
 
   const canonicalUrl = buildCanonicalUrl("/admission");
-  assert(canonicalUrl === "https://ehrj-madrasha.edu.bd/admission", "Canonical URL generated correctly");
+  const expectedBase = getSeoConfig().canonicalBaseUrl;
+  assert(canonicalUrl === `${expectedBase}/admission`, "Canonical URL generated correctly");
 
   // -------------------------------------------------------------
   // TEST GROUP 10: CMS Audit Trail

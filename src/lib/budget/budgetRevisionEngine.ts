@@ -242,3 +242,12 @@ export function approveBudgetRevision(
 
   return { success: true, budget, revision };
 }
+
+export function reviewBudgetRevision(
+  revisionId: string,
+  actor: ActorContext,
+  reason?: string
+) {
+  return updateRevisionStatus(revisionId, "UNDER_REVIEW", actor, reason);
+}
+

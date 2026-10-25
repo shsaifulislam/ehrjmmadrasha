@@ -16,6 +16,7 @@ import {
   BudgetLine,
   BudgetRevision,
   BudgetProject,
+  BudgetFundCode,
   BudgetControlAlert,
   BudgetAuditEntry,
   BudgetDashboardStats,
@@ -444,6 +445,71 @@ export function savePeriod(period: BudgetPeriod): void {
   safeAtomicWrite(PERIODS_FILE, periods);
 }
 
+export function createPeriod(
+  data: {
+    fiscalYear: string;
+    nameBn: string;
+    nameEn: string;
+    startDate: string;
+    endDate: string;
+    notes?: string;
+  },
+  actor: { actorId: string; actorName: string; actorRole: string }
+): BudgetPeriod {
+  const periodCode = `FY-${data.fiscalYear}`;
+  const id = `EHRJ-BPR-${data.fiscalYear}`;
+  const period: BudgetPeriod = {
+    id,
+    periodCode,
+    titleBn: data.nameBn,
+    titleEn: data.nameEn,
+    periodType: "FINANCIAL_YEAR",
+    startDate: data.startDate,
+    endDate: data.endDate,
+    status: "PLANNED",
+    isLocked: false,
+    notes: data.notes,
+    createdBy: actor.actorName,
+    createdAt: new Date().toISOString(),
+  };
+  savePeriod(period);
+  recordBudgetAudit({
+    budgetId: "GLOBAL",
+    action: "CREATE_BUDGET",
+    actorId: actor.actorId,
+    actorName: actor.actorName,
+    actorRole: actor.actorRole,
+    notes: `নতুন বাজেট অর্থবছর তৈরি: ${period.titleBn} (${period.periodCode})`,
+    details: { periodId: period.id, fiscalYear: data.fiscalYear },
+  });
+  return period;
+}
+
+export function lockPeriod(
+  periodId: string,
+  actor: { actorId: string; actorName: string; actorRole: string },
+  notes?: string
+): BudgetPeriod | null {
+  const period = getPeriodById(periodId);
+  if (!period) return null;
+  period.isLocked = true;
+  period.status = "CLOSED";
+  period.lockedAt = new Date().toISOString();
+  if (notes) period.notes = `${period.notes ? period.notes + "; " : ""}${notes}`;
+  savePeriod(period);
+  recordBudgetAudit({
+    budgetId: "GLOBAL",
+    action: "UPDATE_BUDGET",
+    actorId: actor.actorId,
+    actorName: actor.actorName,
+    actorRole: actor.actorRole,
+    notes: `বাজেট অর্থবছর লক করা হয়েছে: ${period.titleBn}. কারণ: ${notes || "অডিট লক"}`,
+    details: { periodId: period.id },
+  });
+  return period;
+}
+
+
 export function getAllBudgets(): Budget[] {
   ensureDirectoryExists();
   if (!fs.existsSync(BUDGETS_FILE)) {
@@ -531,6 +597,67 @@ export function saveProject(project: BudgetProject): void {
     projs.unshift(project);
   }
   safeAtomicWrite(PROJECTS_FILE, projs);
+}
+
+export function createProject(
+  data: Partial<BudgetProject> & {
+    projectCode: string;
+    titleBn?: string;
+    nameBn?: string;
+    fundCode: BudgetFundCode;
+    budgetId?: string;
+    plannedBudget?: number;
+    approvedBudget?: number;
+  },
+  actor?: { actorId: string; actorName: string; actorRole: string }
+): BudgetProject {
+  const approvedBudget = data.approvedBudget ?? data.plannedBudget ?? 0;
+  const project: BudgetProject = {
+    id: `EHRJ-PRJ-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
+    projectCode: data.projectCode,
+    titleBn: data.titleBn || data.nameBn || data.projectCode,
+    nameBn: data.nameBn || data.titleBn || data.projectCode,
+    titleEn: data.titleEn || data.nameEn || data.projectCode,
+    nameEn: data.nameEn || data.titleEn || data.projectCode,
+    descriptionBn: data.descriptionBn || data.notes || "",
+    notes: data.notes,
+    fundCode: data.fundCode,
+    fundNameBn: data.fundNameBn || (data.fundCode === "CONSTRUCTION" ? "নির্মাণ ও উন্নয়ন ফান্ড" : "সাধারণ ফান্ড"),
+    budgetId: data.budgetId || "EHRJ-BUD-2026-0001",
+    startDate: data.startDate || new Date().toISOString().split("T")[0],
+    endDate: data.endDate || data.targetCompletionDate || new Date().toISOString().split("T")[0],
+    targetCompletionDate: data.targetCompletionDate || data.endDate,
+    status: data.status || "PLANNED",
+    approvedBudget,
+    revisedBudget: approvedBudget,
+    plannedBudget: data.plannedBudget ?? approvedBudget,
+    actualExpense: data.actualExpense || 0,
+    committedAmount: data.committedAmount || 0,
+    remainingBudget: approvedBudget - ((data.actualExpense || 0) + (data.committedAmount || 0)),
+    utilizationRate: 0,
+    projectManagerName: data.ownerName || data.projectManagerName || "প্রশাসনিক কর্মকর্তা",
+    ownerName: data.ownerName || data.projectManagerName,
+    contractorVendorId: data.contractorVendorId,
+    contractorVendorName: data.contractorVendorName,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  saveProject(project);
+
+  if (actor) {
+    recordBudgetAudit({
+      budgetId: project.budgetId || "EHRJ-BUD-2026-0001",
+      action: "CREATE_BUDGET",
+      actorId: actor.actorId,
+      actorName: actor.actorName,
+      actorRole: actor.actorRole,
+      notes: `ক্যাপিটাল প্রজেক্ট তৈরি: ${project.titleBn} (${project.projectCode})`,
+      details: { projectId: project.id, projectCode: project.projectCode },
+    });
+  }
+
+  return project;
 }
 
 export function getAllAlerts(): BudgetControlAlert[] {

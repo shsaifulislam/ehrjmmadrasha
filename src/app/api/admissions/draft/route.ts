@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { saveDraftApplication, resumeDraftApplication } from "@/lib/admissions/draftApplicationEngine";
 
+import { getSessionUser } from "@/lib/auth";
+
 export const dynamic = "force-dynamic";
 
 /**
@@ -9,6 +11,14 @@ export const dynamic = "force-dynamic";
  */
 export async function POST(req: NextRequest) {
   try {
+    const sessionUser = await getSessionUser(req);
+    if (!sessionUser) {
+      return NextResponse.json(
+        { error: "ড্রাফট সংরক্ষণের জন্য অভিভাবক অ্যাকাউন্টে লগইন আবশ্যক।", requiresAuth: true },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
     const result = await saveDraftApplication(body);
 

@@ -2,15 +2,20 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import PageHeaderBanner from "@/components/PageHeaderBanner";
 import {
   Calendar as CalendarIcon,
   Clock,
   MapPin,
   Download,
   Filter,
-  CheckCircle,
+  CheckCircle2,
   Building,
   GraduationCap,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 import { CalendarEvent, InstitutionalHoliday } from "@/lib/calendar/types";
 import { INSTITUTION_INFO } from "@/lib/constants";
@@ -43,41 +48,47 @@ export default function PublicCalendarPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50/40 via-white to-gray-50 text-gray-800">
-      {/* Header Banner */}
-      <section className="bg-[#083B25] text-white py-12 px-4 md:px-8 border-b border-emerald-800 shadow-sm relative overflow-hidden">
-        <div className="max-w-6xl mx-auto relative z-10 text-center space-y-3">
-          <span className="inline-flex items-center gap-1.5 bg-emerald-800/80 border border-emerald-600/50 text-[#C59B27] text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
-            <CalendarIcon className="w-3.5 h-3.5" />
-            ২০২৬ শিক্ষাবর্ষ
-          </span>
-          <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight">
-            প্রাতিষ্ঠানিক ও একাডেমিক ক্যালেন্ডার
-          </h1>
-          <p className="text-sm md:text-base text-emerald-100 max-w-2xl mx-auto font-light leading-relaxed">
-            {INSTITUTION_INFO.nameBn}-এর বার্ষিক শিক্ষা কার্যক্রম, সরকারি ও ধর্মীয় ছুটির দিনপঞ্জি এবং পাবলিক ইভেন্ট সূচি
-          </p>
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans text-slate-900 selection:bg-[#0D5C3A] selection:text-white">
+      <Navbar />
 
-          <div className="pt-2 flex justify-center">
-            <a
-              href="/api/calendar/export?role=PUBLIC&title=EHRJ_Public_Calendar"
-              className="inline-flex items-center gap-2 bg-[#C59B27] hover:bg-[#b08920] text-gray-950 font-bold text-xs px-4 py-2.5 rounded-lg shadow-md transition"
-            >
-              <Download className="w-4 h-4" />
-              <span>ক্যালেন্ডার সাবস্ক্রিপশন (iCal / ICS)</span>
-            </a>
+      {/* 1. OFFICIAL PAGE HEADER BANNER WITH BREADCRUMB */}
+      <PageHeaderBanner
+        title="প্রাতিষ্ঠানিক ও একাডেমিক ক্যালেন্ডার ২০২৬"
+        subtitle={`${INSTITUTION_INFO.nameBn}-এর বার্ষিক শিক্ষা কার্যক্রম, সরকারি ও ধর্মীয় ছুটির দিনপঞ্জি এবং পাবলিক ইভেন্ট সূচি`}
+        badge="বার্ষিক দিনপঞ্জি • শিক্ষাবর্ষ ২০২৬"
+        breadcrumbs={[{ label: "একাডেমিক ক্যালেন্ডার" }]}
+      />
+
+      {/* 2. EXPORT & DOWNLOAD STRIP */}
+      <section className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+        <div className="bg-white rounded-3xl border border-slate-200 shadow-md p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-1 text-center sm:text-left">
+            <h2 className="text-base font-bold font-display text-slate-900">
+              ডিজিটাল ক্যালেন্ডার সাবস্ক্রিপশন ও ডাউনলোড
+            </h2>
+            <p className="text-xs text-slate-500">
+              আপনার গুগল ক্যালেন্ডার বা অ্যাপল ক্যালেন্ডারে প্রাতিষ্ঠানিক ছুটির দিনপঞ্জি যুক্ত করুন
+            </p>
           </div>
+
+          <a
+            href="/api/calendar/export?role=PUBLIC&title=EHRJ_Public_Calendar"
+            className="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow"
+          >
+            <Download className="w-4 h-4" />
+            <span>iCal / ICS ডাউনলোড</span>
+          </a>
         </div>
       </section>
 
-      {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-8 space-y-8">
+      {/* 3. MAIN CALENDAR SECTION */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 flex-1 w-full">
         {/* Filter bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
           <div className="flex items-center gap-2 text-xs">
-            <Filter className="w-4 h-4 text-emerald-700" />
-            <span className="font-semibold text-gray-700">ক্যাটাগরি:</span>
-            <div className="flex items-center gap-1">
+            <Filter className="w-4 h-4 text-[#0D5C3A]" />
+            <span className="font-bold text-slate-700">ক্যাটাগরি ফিল্টার:</span>
+            <div className="flex items-center gap-1.5">
               {[
                 { id: "ALL", label: "সকল সূচি" },
                 { id: "HOLIDAY", label: "ছুটির দিনপঞ্জি" },
@@ -86,10 +97,10 @@ export default function PublicCalendarPage() {
                 <button
                   key={btn.id}
                   onClick={() => setFilterType(btn.id as any)}
-                  className={`px-3 py-1.5 rounded-lg font-medium transition ${
+                  className={`px-3.5 py-1.5 rounded-xl font-bold transition ${
                     filterType === btn.id
-                      ? "bg-[#0D5C3A] text-white shadow-sm"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                      ? "bg-[#0D5C3A] text-white shadow-md shadow-emerald-950/20"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
                 >
                   {btn.label}
@@ -98,74 +109,86 @@ export default function PublicCalendarPage() {
             </div>
           </div>
 
-          <div className="text-xs text-gray-500">
-            মোট তালিকাভুক্ত আইটেম: <strong>{filteredEvents.length} টি</strong>
+          <div className="text-xs text-slate-500">
+            মোট তালিকাভুক্ত আইটেম: <strong className="text-slate-900 font-mono">{filteredEvents.length}</strong> টি
           </div>
         </div>
 
         {/* Calendar Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {loading ? (
-            <div className="col-span-full py-16 text-center text-xs text-gray-500">
+            <div className="col-span-full py-16 text-center text-xs text-slate-500 bg-white rounded-3xl border border-slate-200">
+              <div className="w-8 h-8 border-2 border-[#0D5C3A] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
               ক্যালেন্ডার তথ্য লোড হচ্ছে...
             </div>
           ) : filteredEvents.length === 0 ? (
-            <div className="col-span-full bg-white p-8 rounded-xl border text-center text-xs text-gray-500">
-              এই ক্যাটাগরিতে কোনো নির্ধারিত ইভেন্ট নেই।
+            <div className="col-span-full bg-white p-12 rounded-3xl border border-slate-200 text-center text-xs text-slate-500">
+              এই ক্যাটাগরিতে বর্তমানে কোনো নির্ধারিত ইভেন্ট নেই।
             </div>
           ) : (
-            filteredEvents.map((evt) => (
-              <div
-                key={evt.id}
-                className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-emerald-500 transition p-5 flex flex-col justify-between space-y-3 border-t-4 border-t-[#0D5C3A]"
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-[11px]">
-                    <span className="bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200">
-                      {evt.allDay ? "ছুটি / বিশেষ দিবস" : evt.eventType}
-                    </span>
-                    <span className="text-gray-500 font-mono">
-                      {new Date(evt.startAt).toLocaleDateString("bn-BD", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </span>
+            filteredEvents.map((evt) => {
+              const parsedDate = new Date(evt.startAt);
+              const eDate = isNaN(parsedDate.getTime()) && evt.startAt
+                ? new Date(evt.startAt.split("T")[0])
+                : parsedDate;
+              const formattedDate = isNaN(eDate.getTime())
+                ? "তারিখ নির্ধারিত"
+                : eDate.toLocaleDateString("bn-BD", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  });
+              return (
+                <div
+                  key={evt.id}
+                  className="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 p-6 flex flex-col justify-between space-y-4 border-t-4 border-t-[#0D5C3A] group"
+                >
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="bg-emerald-50 text-[#0D5C3A] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
+                        {evt.allDay ? "ছুটি / বিশেষ দিবস" : evt.eventType}
+                      </span>
+                      <span className="text-slate-400 font-mono text-xs">
+                        {formattedDate}
+                      </span>
+                    </div>
+
+                    <h3 className="text-base font-bold font-display text-slate-900 leading-snug group-hover:text-[#0D5C3A] transition">
+                      {evt.title}
+                    </h3>
+
+                    {evt.description && (
+                      <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+                        {evt.description}
+                      </p>
+                    )}
                   </div>
 
-                  <h3 className="text-sm font-bold text-gray-900 leading-snug">
-                    {evt.title}
-                  </h3>
-
-                  {evt.description && (
-                    <p className="text-xs text-gray-600 line-clamp-3 leading-relaxed">
-                      {evt.description}
-                    </p>
-                  )}
-                </div>
-
-                <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500">
-                  <span className="flex items-center gap-1 text-emerald-800 font-medium">
-                    <Clock className="w-3.5 h-3.5" />
-                    {evt.allDay
-                      ? "সারাদিন"
-                      : new Date(evt.startAt).toLocaleTimeString("bn-BD", {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                  </span>
-                  {evt.location && (
-                    <span className="flex items-center gap-1 truncate max-w-[150px] text-gray-600">
-                      <MapPin className="w-3.5 h-3.5 text-amber-600" />
-                      {evt.location}
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                    <span className="flex items-center gap-1 font-mono">
+                      <Clock className="w-3.5 h-3.5 text-[#D4AF37]" />
+                      {evt.allDay
+                        ? "সারাদিন"
+                        : eDate.toLocaleTimeString("bn-BD", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
                     </span>
-                  )}
+                    {evt.location && (
+                      <span className="flex items-center gap-1 truncate max-w-[150px] text-slate-600">
+                        <MapPin className="w-3.5 h-3.5 text-emerald-600" />
+                        {evt.location}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

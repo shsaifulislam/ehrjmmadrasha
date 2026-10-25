@@ -5,14 +5,15 @@ import { calculateSurveyAnalytics } from "@/lib/surveys";
 export const dynamic = "force-dynamic";
 
 interface RouteParams {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 /**
  * GET /api/surveys/[id]/analytics
  * Returns quantitative distributions, completion rates, and bounded AI qualitative themes.
  */
-export async function GET(req: NextRequest, { params }: RouteParams) {
+export async function GET(req: NextRequest, { params: paramsPromise }: RouteParams) {
+  const params = await paramsPromise;
   try {
     const session = await getSessionUser();
     const isAdmin =

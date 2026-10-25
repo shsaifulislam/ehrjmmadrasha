@@ -11,6 +11,7 @@
 import fs from "fs";
 import path from "path";
 import { prisma } from "@/lib/prisma";
+import { atomicWriteFileSync } from "@/lib/storageUtils";
 
 const AI_DATA_DIR = path.join(process.cwd(), "data", "ai");
 
@@ -85,20 +86,20 @@ export function getAIFeatureFlags(): AIFeatureFlags {
       toggledBy: "System Baseline",
       toggleReason: "Initial Phase 21 Activation",
     };
-    fs.writeFileSync(FLAGS_FILE, JSON.stringify(defaultFlags, null, 2), "utf8");
+    atomicWriteFileSync(FLAGS_FILE, JSON.stringify(defaultFlags, null, 2));
     return defaultFlags;
   }
   try {
     return JSON.parse(fs.readFileSync(FLAGS_FILE, "utf8"));
   } catch {
     return {
-      masterEnabled: true,
-      academicAi: true,
-      financeAi: true,
-      admissionAi: true,
-      helpdeskAi: true,
-      documentAi: true,
-      arabicNameAi: true,
+      masterEnabled: false, // Fail-closed security default: keep AI disabled on corruption
+      academicAi: false,
+      financeAi: false,
+      admissionAi: false,
+      helpdeskAi: false,
+      documentAi: false,
+      arabicNameAi: false,
       lastToggledAt: new Date().toISOString(),
     };
   }
@@ -118,7 +119,7 @@ export async function toggleAIFeatureFlags(
     toggleReason: reason || "Administrative policy update",
   };
 
-  fs.writeFileSync(FLAGS_FILE, JSON.stringify(updated, null, 2), "utf8");
+  atomicWriteFileSync(FLAGS_FILE, JSON.stringify(updated, null, 2));
 
   if (actorUserId) {
     try {

@@ -7,7 +7,8 @@ import { recordAuditLog } from "@/lib/security";
  * GET /api/admin/library/copies/[id]
  * Get physical copy details, condition history, and circulation history
  */
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
@@ -57,7 +58,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
  * PUT /api/admin/library/copies/[id]
  * Update copy details
  */
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

@@ -4,7 +4,8 @@ import { updateHelpdeskCategory } from "@/lib/helpdeskEngine";
 
 export const dynamic = "force-dynamic";
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

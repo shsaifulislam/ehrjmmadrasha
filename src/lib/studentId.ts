@@ -9,16 +9,18 @@ import { prisma } from "@/lib/prisma";
  * 2. Independent of class roll number.
  * 3. Never reused.
  */
-export async function generateStudentIdNumber(targetYear?: number): Promise<string> {
+export async function generateStudentIdNumber(targetYear?: number, client: any = prisma): Promise<string> {
   const year = targetYear || new Date().getFullYear();
   const prefix = `EHRJ-${year}-`;
 
-  // Find all existing IDs with this year's prefix
-  const students = await prisma.student.findMany({
+  const latestStudent = await client.student.findFirst({
     where: {
       studentIdNumber: {
         startsWith: prefix,
       },
+    },
+    orderBy: {
+      studentIdNumber: "desc",
     },
     select: {
       studentIdNumber: true,
@@ -26,17 +28,18 @@ export async function generateStudentIdNumber(targetYear?: number): Promise<stri
   });
 
   let maxSeq = 0;
-  for (const s of students) {
-    const rest = s.studentIdNumber.slice(prefix.length);
+  if (latestStudent?.studentIdNumber) {
+    const rest = latestStudent.studentIdNumber.slice(prefix.length);
     if (/^\d+$/.test(rest)) {
-      const num = parseInt(rest, 10);
-      if (num > maxSeq) {
-        maxSeq = num;
-      }
+      maxSeq = parseInt(rest, 10);
     }
   }
 
-  const nextSequence = maxSeq + 1;
+  const count = await client.student.count({
+    where: { studentIdNumber: { startsWith: prefix } },
+  });
+
+  const nextSequence = Math.max(maxSeq + 1, count + 1);
   const paddedSeq = String(nextSequence).padStart(4, "0");
   return `${prefix}${paddedSeq}`;
 }
@@ -47,9 +50,10 @@ export async function generateStudentIdNumber(targetYear?: number): Promise<stri
 export async function getNextRollNumber(
   sessionId: string,
   classId: string,
-  sectionId?: string | null
+  sectionId?: string | null,
+  client: any = prisma
 ): Promise<number> {
-  const latestEnrollment = await prisma.enrollment.findFirst({
+  const latestEnrollment = await client.enrollment.findFirst({
     where: {
       sessionId,
       classId,

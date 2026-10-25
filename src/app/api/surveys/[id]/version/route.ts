@@ -5,7 +5,7 @@ import { createNewSurveyVersion } from "@/lib/surveys";
 export const dynamic = "force-dynamic";
 
 interface RouteParams {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 /**
@@ -13,7 +13,8 @@ interface RouteParams {
  * Duplicates a published survey into a new editable DRAFT version (e.g. v1 -> v2)
  * Preserving historical responses and question immutability.
  */
-export async function POST(req: NextRequest, { params }: RouteParams) {
+export async function POST(req: NextRequest, { params: paramsPromise }: RouteParams) {
+  const params = await paramsPromise;
   try {
     const session = await getSessionUser();
     if (

@@ -22,7 +22,7 @@ export const dynamic = "force-dynamic";
  */
 export async function GET(req: NextRequest) {
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user || (user.role !== "TEACHER" && user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
       return NextResponse.json(
         { error: "অননুমোদিত অ্যাক্সেস। শুধুমাত্র অনুমোদিত শিক্ষক বা অ্যাডমিন হাজিরা দেখতে পারেন।" },
@@ -181,7 +181,7 @@ export async function GET(req: NextRequest) {
  */
 export async function POST(req: NextRequest) {
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user || (user.role !== "TEACHER" && user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
       return NextResponse.json(
         { error: "অননুমোদিত অ্যাক্সেস। শুধুমাত্র শিক্ষক বা অ্যাডমিন হাজিরা সংরক্ষণ করতে পারেন।" },

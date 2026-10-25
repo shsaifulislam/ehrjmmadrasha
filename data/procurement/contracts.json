@@ -1,0 +1,1120 @@
+[
+  {
+    "id": "EHRJ-CON-2026-0001",
+    "contractCode": "CON-2026-0001",
+    "vendorId": "EHRJ-VEN-2026-0002",
+    "vendorNameBn": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+    "titleBn": "লিল্লাহ বোর্ডিং ও এতিমখানা বার্ষিক খাদ্যশস্য সরবরাহ চুক্তি ২০২৬-২৭",
+    "titleEn": "Annual Food & Grain Supply Contract for Lillah Boarding 2026-27",
+    "contractType": "SUPPLY",
+    "status": "ACTIVE",
+    "currentVersion": 1,
+    "startDate": "2026-01-01",
+    "endDate": "2026-12-31",
+    "renewalDate": "2026-11-30",
+    "totalContractValue": 2400000,
+    "currency": "BDT",
+    "paymentTermsBn": "প্রতি মাসের চালানের বিপরীতে মাসিক বিল সমন্বয়ের মাধ্যমে পরিশোধ।",
+    "deliverables": [
+      {
+        "id": "dlv-1",
+        "titleBn": "মাসিক চাল সরবরাহ (নাজিরশাইল ও মিনিকেট)",
+        "milestoneDescription": "প্রতি মাসে ৮০ বস্তা উৎকৃষ্ট মানের চাল সরবরাহ",
+        "targetDate": "2026-12-31",
+        "allocatedValueBdt": 1600000,
+        "isCompleted": false
+      },
+      {
+        "id": "dlv-2",
+        "titleBn": "মাসিক ডাল, তেল ও মশলা সরবরাহ",
+        "milestoneDescription": "পবিত্র ও স্বাস্থ্যসম্মত নিত্যপ্রয়োজনীয় রান্না সামগ্রী",
+        "targetDate": "2026-12-31",
+        "allocatedValueBdt": 800000,
+        "isCompleted": false
+      }
+    ],
+    "obligations": [
+      {
+        "id": "obg-1",
+        "obligationType": "DELIVERY",
+        "titleBn": "প্রতি মাসের ১ থেকে ৫ তারিখের মধ্যে খাদ্যগুদামে আনলোড সম্পন্ন করা",
+        "dueDate": "প্রতি মাসের ৫ তারিখ",
+        "status": "PENDING"
+      },
+      {
+        "id": "obg-2",
+        "obligationType": "COMPLIANCE",
+        "titleBn": "পণ্যের মান ও ওজনে হেরফের না করার অঙ্গীকার",
+        "dueDate": "2026-12-31",
+        "status": "PENDING"
+      }
+    ],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-01-01",
+        "changeReason": "প্রাথমিক অনুমোদিত বার্ষিক চুক্তি সম্পাদন",
+        "totalContractValue": 2400000,
+        "paymentTerms": "মাসিক বিল সমন্বয়ের মাধ্যমে পরিশোধ।",
+        "approvedBy": "principal",
+        "approvedAt": "2025-12-28T10:00:00Z",
+        "createdAt": "2025-12-28T10:00:00Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-10-01",
+        "isTriggered": true,
+        "triggeredAt": "2026-10-05T21:14:58.679Z"
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-11-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2026-12-01",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "MATCHED",
+    "ownerName": "মুফতি মোহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "notes": "মাদরাসার লিল্লাহ বোর্ডিংয়ের শিক্ষার্থীদের নির্বিঘ্ন পুষ্টি নিশ্চিতকরণে সম্পাদিত চুক্তি।",
+    "createdBy": "admin",
+    "createdAt": "2025-12-28T10:00:00Z",
+    "approvedBy": "principal",
+    "approvedAt": "2025-12-28T12:00:00Z",
+    "updatedBy": "admin",
+    "updatedAt": "2026-10-05T21:14:58.680Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0002",
+    "contractCode": "CON-2026-0002",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0002",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790701268404-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T17:01:08.521Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:01:08.404Z",
+        "createdAt": "2026-09-29T17:01:08.404Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:01:08.484Z",
+        "createdAt": "2026-09-29T17:01:08.484Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T17:01:08.472Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:01:11.272Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0003",
+    "contractCode": "CON-2026-0003",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0003",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790701421742-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T17:03:41.754Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:03:41.742Z",
+        "createdAt": "2026-09-29T17:03:41.742Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:03:41.749Z",
+        "createdAt": "2026-09-29T17:03:41.749Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T17:03:41.746Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:03:41.932Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0004",
+    "contractCode": "CON-2026-0004",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0004",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790701497502-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T17:04:57.513Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:04:57.502Z",
+        "createdAt": "2026-09-29T17:04:57.502Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:04:57.507Z",
+        "createdAt": "2026-09-29T17:04:57.507Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T17:04:57.504Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:04:57.659Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0005",
+    "contractCode": "CON-2026-0005",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0005",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790701514874-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T17:05:14.885Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:05:14.874Z",
+        "createdAt": "2026-09-29T17:05:14.874Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:05:14.878Z",
+        "createdAt": "2026-09-29T17:05:14.878Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T17:05:14.874Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:05:14.933Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0006",
+    "contractCode": "CON-2026-0006",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0006",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790701533547-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T17:05:33.559Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:05:33.547Z",
+        "createdAt": "2026-09-29T17:05:33.547Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:05:33.553Z",
+        "createdAt": "2026-09-29T17:05:33.553Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T17:05:33.548Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:05:33.626Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0007",
+    "contractCode": "CON-2026-0007",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0007",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790702019466-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T17:13:39.487Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:13:39.466Z",
+        "createdAt": "2026-09-29T17:13:39.466Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:13:39.475Z",
+        "createdAt": "2026-09-29T17:13:39.475Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T17:13:39.467Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:13:39.540Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0008",
+    "contractCode": "CON-2026-0008",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0008",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790702608468-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T17:23:28.505Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:23:28.468Z",
+        "createdAt": "2026-09-29T17:23:28.468Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:23:28.475Z",
+        "createdAt": "2026-09-29T17:23:28.475Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T17:23:28.469Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:23:28.563Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0009",
+    "contractCode": "CON-2026-0009",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0009",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790704608745-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T17:56:48.761Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:56:48.745Z",
+        "createdAt": "2026-09-29T17:56:48.745Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T17:56:48.752Z",
+        "createdAt": "2026-09-29T17:56:48.752Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T17:56:48.746Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:56:48.931Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0010",
+    "contractCode": "CON-2026-0010",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0010",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790705136158-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T18:05:36.179Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T18:05:36.158Z",
+        "createdAt": "2026-09-29T18:05:36.158Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T18:05:36.165Z",
+        "createdAt": "2026-09-29T18:05:36.165Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T18:05:36.159Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T18:05:36.344Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0011",
+    "contractCode": "CON-2026-0011",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0011",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790705194755-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T18:06:34.772Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T18:06:34.755Z",
+        "createdAt": "2026-09-29T18:06:34.755Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T18:06:34.762Z",
+        "createdAt": "2026-09-29T18:06:34.762Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T18:06:34.756Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T18:06:34.940Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0012",
+    "contractCode": "CON-2026-0012",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0012",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790705654873-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T18:14:14.888Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T18:14:14.873Z",
+        "createdAt": "2026-09-29T18:14:14.873Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T18:14:14.879Z",
+        "createdAt": "2026-09-29T18:14:14.879Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T18:14:14.874Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T18:14:18.775Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0013",
+    "contractCode": "CON-2026-0013",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0013",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "dueDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "id": "dlv-1790706164737-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-29T18:22:44.752Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T18:22:44.737Z",
+        "createdAt": "2026-09-29T18:22:44.737Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-29",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-29T18:22:44.744Z",
+        "createdAt": "2026-09-29T18:22:44.744Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-29T18:22:44.738Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T18:22:45.173Z"
+  },
+  {
+    "id": "EHRJ-CON-2026-0014",
+    "contractCode": "CON-2026-0014",
+    "vendorId": "EHRJ-VEN-2026-0001",
+    "vendorNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "rfqId": "EHRJ-RFQ-2026-0014",
+    "titleBn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "titleEn": "বার্ষিক ডায়েরি ও খাতা সরবরাহ চুক্তি ২০২৬",
+    "contractType": "SUPPLY",
+    "status": "DRAFT",
+    "currentVersion": 2,
+    "startDate": "2026-06-01",
+    "endDate": "2027-01-31",
+    "renewalDate": "2026-12-31",
+    "totalContractValue": 73500,
+    "currency": "BDT",
+    "paymentTermsBn": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+    "deliverables": [
+      {
+        "titleBn": "প্রথম ব্যাচ ডায়েরি সরবরাহ (৫০০ কপি)",
+        "targetDate": "2026-06-15",
+        "milestoneDescription": "হিফজ বিভাগের ছাত্রদের জন্য",
+        "allocatedValueBdt": 52500,
+        "id": "dlv-1790741448321-1",
+        "isCompleted": true,
+        "completedAt": "2026-09-30T04:10:48.338Z"
+      }
+    ],
+    "obligations": [],
+    "versions": [
+      {
+        "versionNumber": 1,
+        "effectiveDate": "2026-06-01",
+        "changeReason": "প্রাথমিক অনুমোদিত চুক্তি সম্পাদন",
+        "totalContractValue": 52500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-30T04:10:48.320Z",
+        "createdAt": "2026-09-30T04:10:48.320Z"
+      },
+      {
+        "versionNumber": 2,
+        "effectiveDate": "2026-09-30",
+        "changeReason": "হিফজ বিভাগে নতুন ছাত্র ভর্তি বৃদ্ধি পাওয়ায় অতিরিক্ত ২০০ কপি ডায়েরি অর্ডার ও বাজেট বৃদ্ধি।",
+        "totalContractValue": 73500,
+        "paymentTerms": "পণ্য গ্রহণ ও গুণমান যাচাই সাপেক্ষে সম্পূর্ণ বিল পরিশোধ।",
+        "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+        "approvedAt": "2026-09-30T04:10:48.328Z",
+        "createdAt": "2026-09-30T04:10:48.328Z"
+      }
+    ],
+    "renewalReminders": [
+      {
+        "reminderDays": 90,
+        "targetDate": "2026-11-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 60,
+        "targetDate": "2026-12-02",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 30,
+        "targetDate": "2027-01-01",
+        "isTriggered": false
+      },
+      {
+        "reminderDays": 7,
+        "targetDate": "2027-01-24",
+        "isTriggered": false
+      }
+    ],
+    "threeWayMatchStatus": "PENDING",
+    "ownerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "createdBy": "principal-test-01",
+    "createdAt": "2026-09-30T04:10:48.322Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-30T04:10:48.533Z"
+  }
+]

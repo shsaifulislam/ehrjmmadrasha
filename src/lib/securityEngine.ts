@@ -159,17 +159,70 @@ interface FailedAttemptTracker {
   lockedUntil?: number;
 }
 
+const LOCKOUT_FILE = path.join(SECURITY_DIR, "lockout_records.json");
 const failedLoginsMap = new Map<string, FailedAttemptTracker>();
 
+function loadLockoutStore(): Map<string, FailedAttemptTracker> {
+  try {
+    ensureSecurityStore();
+    if (fs.existsSync(LOCKOUT_FILE)) {
+      const content = fs.readFileSync(LOCKOUT_FILE, "utf-8");
+      const data: Record<string, FailedAttemptTracker> = JSON.parse(content || "{}");
+      const now = Date.now();
+      Object.keys(data).forEach((k) => {
+        const v = data[k];
+        if (now - v.lastAttempt < 60 * 60 * 1000) {
+          failedLoginsMap.set(k, v);
+        }
+      });
+    }
+  } catch (e) {
+    console.error("[SecurityEngine] Failed to load lockout store:", e);
+  }
+  return failedLoginsMap;
+}
+
+// Initial load
+loadLockoutStore();
+
+function persistLockoutStore() {
+  try {
+    ensureSecurityStore();
+    const obj: Record<string, FailedAttemptTracker> = {};
+    const now = Date.now();
+    failedLoginsMap.forEach((v, k) => {
+      if (now - v.lastAttempt < 60 * 60 * 1000) {
+        obj[k] = v;
+      } else {
+        failedLoginsMap.delete(k);
+      }
+    });
+
+    // Enforce maximum capacity of 5000 to prevent unbounded memory growth
+    while (failedLoginsMap.size > 5000) {
+      const oldestKey = failedLoginsMap.keys().next().value;
+      if (!oldestKey) break;
+      failedLoginsMap.delete(oldestKey);
+      delete obj[oldestKey];
+    }
+
+    fs.writeFileSync(LOCKOUT_FILE, JSON.stringify(obj, null, 2), "utf-8");
+  } catch (e) {
+    console.error("[SecurityEngine] Failed to persist lockout store:", e);
+  }
+}
+
 /**
- * Check if identifier or IP is locked
+ * Check if identifier from IP is locked
+ * Composite key prevents attacker from remotely locking an admin from a different IP
  */
 export function checkAccountLockout(
   identifier: string,
   ip: string
 ): { isLocked: boolean; remainingMinutes?: number } {
   const now = Date.now();
-  const key = `user:${identifier.toLowerCase()}`;
+  const normalizedId = identifier.trim().toLowerCase();
+  const key = `lock:${normalizedId}::${ip}`;
   const record = failedLoginsMap.get(key);
 
   if (record && record.lockedUntil && now < record.lockedUntil) {
@@ -181,7 +234,7 @@ export function checkAccountLockout(
 }
 
 /**
- * Record a failed login attempt
+ * Record a failed login attempt with composite key throttling and durable persistence
  */
 export async function handleFailedLoginAttempt(
   identifier: string,
@@ -189,7 +242,8 @@ export async function handleFailedLoginAttempt(
   userAgent: string
 ): Promise<{ isLocked: boolean; remainingAttempts: number }> {
   const now = Date.now();
-  const key = `user:${identifier.toLowerCase()}`;
+  const normalizedId = identifier.trim().toLowerCase();
+  const key = `lock:${normalizedId}::${ip}`;
   let tracker = failedLoginsMap.get(key);
 
   const windowMs = 10 * 60 * 1000; // 10 minutes
@@ -207,63 +261,40 @@ export async function handleFailedLoginAttempt(
   if (tracker.count >= maxAttempts) {
     tracker.lockedUntil = now + lockoutMs;
     failedLoginsMap.set(key, tracker);
+    persistLockoutStore();
 
     // Record high security event
     await recordSecurityEvent({
       eventType: "SUSPICIOUS_LOGIN_ATTEMPTS",
       severity: "CRITICAL",
-      username: identifier,
+      username: normalizedId,
       ipAddress: ip,
       userAgent,
       details: {
         failedCount: tracker.count,
         lockoutDurationMinutes: 15,
+        targetIdentifier: normalizedId,
       },
     });
-
-    // If matching user exists, temporarily lock user account in DB
-    try {
-      const user = await prisma.user.findFirst({
-        where: {
-          OR: [
-            { username: identifier },
-            { email: identifier.toLowerCase() },
-            { phone: identifier },
-          ],
-        },
-      });
-
-      if (user && user.status === "ACTIVE") {
-        await prisma.user.update({
-          where: { id: user.id },
-          data: { status: "LOCKED" },
-        });
-
-        await recordSecurityEvent({
-          eventType: "ACCOUNT_LOCKED",
-          severity: "HIGH",
-          userId: user.id,
-          username: user.username,
-          details: { reason: "স্বয়ংক্রিয় ব্রুট-ফোর্স লক (৫ বার ভুল পাসওয়ার্ড)" },
-        });
-      }
-    } catch (dbErr) {
-      console.error("[SecurityEngine] Failed to set user status to LOCKED:", dbErr);
-    }
 
     return { isLocked: true, remainingAttempts: 0 };
   }
 
   failedLoginsMap.set(key, tracker);
+  persistLockoutStore();
   return { isLocked: false, remainingAttempts: maxAttempts - tracker.count };
 }
 
 /**
  * Clear failed attempts after successful login
  */
-export function clearFailedLoginAttempts(identifier: string) {
-  const key = `user:${identifier.toLowerCase()}`;
-  failedLoginsMap.delete(key);
+export function clearFailedLoginAttempts(identifier: string, ip?: string) {
+  const normalizedId = identifier.trim().toLowerCase();
+  if (ip) {
+    failedLoginsMap.delete(`lock:${normalizedId}::${ip}`);
+  }
+  failedLoginsMap.delete(`user:${normalizedId}`);
+  persistLockoutStore();
 }
 
 // -------------------------------------------------------------

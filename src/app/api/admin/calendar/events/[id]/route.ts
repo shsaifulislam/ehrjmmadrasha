@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getCalendarEvents,
   saveCalendarEvents,
@@ -7,9 +8,12 @@ import {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const events = getCalendarEvents();
     const event = events.find((e) => e.id === params.id);
     if (!event) {
@@ -29,9 +33,12 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const body = await request.json();
     const events = getCalendarEvents();
     const index = events.findIndex((e) => e.id === params.id);
@@ -95,9 +102,12 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const { searchParams } = new URL(request.url);
     const cancelReason = searchParams.get("reason") || "প্রশাসনিক সিদ্ধান্ত";
     const actorId = searchParams.get("actorId") || "admin";

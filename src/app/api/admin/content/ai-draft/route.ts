@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import { INSTITUTION_INFO } from "@/lib/constants";
 
 export const dynamic = "force-dynamic";
@@ -10,6 +11,9 @@ export const dynamic = "force-dynamic";
  */
 export async function POST(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const { task, topic, context } = await req.json();
 
     if (!task || !topic) {

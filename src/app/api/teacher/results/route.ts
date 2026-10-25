@@ -10,7 +10,7 @@ import {
 
 export async function GET(req: NextRequest) {
   try {
-    const user = await getCurrentUser();
+    const user = await getCurrentUser(req);
     if (!user || (user.role !== "TEACHER" && user.role !== "ADMIN")) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস। শুধুমাত্র শিক্ষক বা অ্যাডমিন প্রবেশ করতে পারেন।" }, { status: 401 });
     }
@@ -150,7 +150,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const user = await getCurrentUser();
+    const user = await getCurrentUser(req);
     if (!user || (user.role !== "TEACHER" && user.role !== "ADMIN")) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 401 });
     }

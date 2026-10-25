@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
+import { getDatabaseFilePath } from "@/lib/env";
 
 // Application and Engine Constants
 export const APP_VERSION = "1.0.0";
@@ -9,7 +10,7 @@ export const SCHEMA_VERSION = "2026-PHASE16";
 export const DB_TYPE = "SQLite 3";
 
 const PROJECT_ROOT = process.cwd();
-const DB_PATH = path.join(PROJECT_ROOT, "prisma", "dev.db");
+const DB_PATH = getDatabaseFilePath();
 const BACKUP_DIR = path.join(PROJECT_ROOT, "backups");
 const UPLOAD_DIR = path.join(PROJECT_ROOT, "public", "uploads");
 
@@ -91,8 +92,9 @@ export async function getSystemHealth(scope: "PUBLIC" | "ADMIN" | "PRINCIPAL" = 
     await prisma.$queryRawUnsafe("SELECT 1;");
     const latency = Date.now() - startDb;
 
+    const isPg = process.env.DATABASE_PROVIDER === "postgresql" || process.env.USE_POSTGRES_STAGING === "true";
     let dbSizeBytes = 0;
-    if (fs.existsSync(DB_PATH)) {
+    if (!isPg && fs.existsSync(DB_PATH)) {
       const stat = fs.statSync(DB_PATH);
       dbSizeBytes = stat.size;
     }
@@ -102,9 +104,10 @@ export async function getSystemHealth(scope: "PUBLIC" | "ADMIN" | "PRINCIPAL" = 
       latencyMs: latency,
       message: latency > 1000 ? "High database latency detected" : "Database queries executing cleanly",
       details: {
+        engine: isPg ? "PostgreSQL" : "SQLite",
         latencyMs: latency,
-        sizeMb: Math.round((dbSizeBytes / (1024 * 1024)) * 100) / 100,
-        dbPath: "prisma/dev.db",
+        sizeMb: isPg ? undefined : Math.round((dbSizeBytes / (1024 * 1024)) * 100) / 100,
+        dbPath: isPg ? "isolated:ehrj_staging" : path.relative(PROJECT_ROOT, DB_PATH).replace(/\\/g, "/"),
       },
       lastChecked: timestamp,
     };
@@ -342,10 +345,13 @@ export async function getSystemHealth(scope: "PUBLIC" | "ADMIN" | "PRINCIPAL" = 
   }
 
   if (scope === "PUBLIC") {
+    const isPg = process.env.DATABASE_PROVIDER === "postgresql" || process.env.USE_POSTGRES_STAGING === "true";
     return {
       status: overallStatus,
       timestamp,
       version: APP_VERSION,
+      environment: process.env.NEXT_PUBLIC_APP_ENV || (isPg ? "staging" : "development"),
+      databaseProvider: isPg ? "postgresql" : "sqlite",
       maintenance: maintenanceState.isActive ? { isActive: true, messageBn: maintenanceState.messageBn } : { isActive: false },
     };
   }
@@ -392,6 +398,34 @@ export async function getSystemHealth(scope: "PUBLIC" | "ADMIN" | "PRINCIPAL" = 
   };
 }
 
+function computeFileSha256(filePath: string): Promise<{ checksum: string; sizeBytes: number }> {
+  return new Promise((resolve, reject) => {
+    let sizeBytes = 0;
+    const hash = crypto.createHash("sha256");
+    const stream = fs.createReadStream(filePath);
+    stream.on("data", (chunk: string | Buffer) => {
+      const buf = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+      sizeBytes += buf.length;
+      hash.update(buf);
+    });
+    stream.on("end", () => {
+      resolve({ checksum: hash.digest("hex"), sizeBytes });
+    });
+    stream.on("error", (err) => reject(err));
+  });
+}
+
+function readFirst16Bytes(filePath: string): string {
+  const fd = fs.openSync(filePath, "r");
+  try {
+    const buf = Buffer.alloc(16);
+    fs.readSync(fd, buf, 0, 16, 0);
+    return buf.toString("utf8");
+  } finally {
+    fs.closeSync(fd);
+  }
+}
+
 // -------------------------------------------------------------
 // 2. BACKUP MANAGEMENT ENGINE
 // -------------------------------------------------------------
@@ -414,12 +448,8 @@ export async function createDatabaseBackup(
   // Perform atomic binary copy of SQLite database file
   fs.copyFileSync(DB_PATH, targetFilePath);
 
-  // Compute SHA-256 checksum and size
-  const fileBuffer = fs.readFileSync(targetFilePath);
-  const hashSum = crypto.createHash("sha256");
-  hashSum.update(fileBuffer);
-  const checksum = hashSum.digest("hex");
-  const sizeBytes = fileBuffer.length;
+  // Compute SHA-256 checksum and size using streaming to prevent heap exhaustion
+  const { checksum, sizeBytes } = await computeFileSha256(targetFilePath);
 
   const backupRecord = await prisma.systemBackup.create({
     data: {
@@ -480,11 +510,8 @@ export async function verifyDatabaseBackup(backupId: string, performedById?: str
     throw new Error(`Backup file missing from storage: ${backup.storagePath}`);
   }
 
-  // 1. Checksum verification
-  const fileBuffer = fs.readFileSync(fullPath);
-  const hashSum = crypto.createHash("sha256");
-  hashSum.update(fileBuffer);
-  const currentChecksum = hashSum.digest("hex");
+  // 1. Checksum verification via stream
+  const { checksum: currentChecksum, sizeBytes } = await computeFileSha256(fullPath);
 
   if (backup.checksum && currentChecksum !== backup.checksum) {
     await prisma.systemBackup.update({
@@ -498,8 +525,8 @@ export async function verifyDatabaseBackup(backupId: string, performedById?: str
     throw new Error("Checksum verification failed: hash mismatch");
   }
 
-  // 2. Structural verification (SQLite 3 header validation)
-  const header = fileBuffer.slice(0, 16).toString("utf8");
+  // 2. Structural verification (SQLite 3 header validation via bounded read)
+  const header = readFirst16Bytes(fullPath);
   if (!header.startsWith("SQLite format 3")) {
     await prisma.systemBackup.update({
       where: { id: backupId },
@@ -517,7 +544,7 @@ export async function verifyDatabaseBackup(backupId: string, performedById?: str
     data: {
       verificationStatus: "VERIFIED",
       verifiedAt: new Date(),
-      verificationDetails: `Integrity verified. Size: ${fileBuffer.length} bytes, SHA-256: ${currentChecksum.slice(0, 12)}..., SQLite 3 Header Confirmed.`,
+      verificationDetails: `Integrity verified. Size: ${sizeBytes} bytes, SHA-256: ${currentChecksum.slice(0, 12)}..., SQLite 3 Header Confirmed.`,
       failureReason: null,
     },
   });
@@ -792,13 +819,18 @@ export async function runRecoveryDrill(backupId: string, conductedById?: string)
       throw new Error("Drill restored file is empty");
     }
 
-    // Verify SQLite Header
+    // Verify SQLite Header with guaranteed file descriptor cleanup
     const fd = fs.openSync(isolatedDbPath, "r");
-    const buffer = Buffer.alloc(16);
-    fs.readSync(fd, buffer, 0, 16, 0);
-    fs.closeSync(fd);
+    let isValidHeader = false;
+    try {
+      const buffer = Buffer.alloc(16);
+      fs.readSync(fd, buffer, 0, 16, 0);
+      isValidHeader = buffer.toString("utf8").startsWith("SQLite format 3");
+    } finally {
+      fs.closeSync(fd);
+    }
 
-    if (!buffer.toString("utf8").startsWith("SQLite format 3")) {
+    if (!isValidHeader) {
       throw new Error("Drill restored file has invalid SQLite format");
     }
 

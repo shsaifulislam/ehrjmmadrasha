@@ -6,6 +6,7 @@ import {
   calculateCandidateResult,
   generateResultVerificationCode,
 } from "@/lib/resultCalculationService";
+import { emitDomainEvent, processSingleOutboxEvent } from "@/lib/communicationEngine";
 
 export async function POST(req: NextRequest) {
   try {
@@ -124,6 +125,7 @@ export async function POST(req: NextRequest) {
 
     const publishedAt = new Date();
     let publishedCount = 0;
+    const queuedOutboxIds: string[] = [];
 
     await prisma.$transaction(async (tx) => {
       for (const en of enrollments) {
@@ -244,6 +246,25 @@ export async function POST(req: NextRequest) {
           },
         });
 
+        // Queue student-specific result published notification
+        const outbox = await emitDomainEvent({
+          eventType: "RESULT_PUBLISHED",
+          entityType: "Result",
+          entityId: `${examId}_${en.student.id}`,
+          payload: {
+            studentId: en.student.id,
+            studentNameBn: en.student.fullNameBn,
+            roll: en.rollNumber,
+            examId,
+            examName: exam.nameBn,
+            classId: en.classId,
+            sessionId: exam.sessionId,
+          },
+          idempotencyKey: `result-published-${examId}-${en.student.id}`,
+          tx,
+        });
+        queuedOutboxIds.push(outbox.id);
+
         publishedCount++;
       }
 
@@ -257,6 +278,15 @@ export async function POST(req: NextRequest) {
         },
       });
     });
+
+    // Post-commit async processing for result published notifications
+    if (queuedOutboxIds.length > 0) {
+      for (const outboxId of queuedOutboxIds) {
+        processSingleOutboxEvent(outboxId).catch((err) =>
+          console.error("Result publication outbox processing caught error:", err)
+        );
+      }
+    }
 
     await recordAuditLog({
       userId: user.userId,

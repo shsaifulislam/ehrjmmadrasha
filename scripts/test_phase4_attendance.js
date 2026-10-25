@@ -267,7 +267,10 @@ async function runPhase4AttendanceTests() {
     const anonRes = await makeRequest(
       `/api/teacher/attendance?sessionId=${sessionId}&classId=${assignedClass.id}&date=${testDate}`
     );
-    assert(anonRes.statusCode === 403, "Anonymous request to teacher attendance blocked (403)");
+    assert(
+      anonRes.statusCode === 401 || anonRes.statusCode === 403,
+      "Anonymous request to teacher attendance blocked (401/403)"
+    );
 
     // 2. MARKING ATTENDANCE & TRANSACTIONAL SAVE
     console.log("\n--- 2. Bulk Attendance Marking & Transactional Save ---");

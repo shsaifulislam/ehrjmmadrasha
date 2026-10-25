@@ -6,6 +6,7 @@
 
 import fs from "fs";
 import path from "path";
+import { atomicWriteFileSync } from "@/lib/storageUtils";
 import {
   AlumniProfile,
   AlumniGroup,
@@ -55,10 +56,7 @@ function safeRead<T>(filePath: string, fallback: T): T {
 
 function safeWrite<T>(filePath: string, data: T): void {
   try {
-    ensureDirectory();
-    const tempFile = `${filePath}.tmp.${Date.now()}.${Math.random().toString(36).substring(2, 6)}`;
-    fs.writeFileSync(tempFile, JSON.stringify(data, null, 2), "utf-8");
-    fs.renameSync(tempFile, filePath);
+    atomicWriteFileSync(filePath, JSON.stringify(data, null, 2));
   } catch (err) {
     console.error(`[AlumniStore] Write error on ${filePath}:`, err);
   }

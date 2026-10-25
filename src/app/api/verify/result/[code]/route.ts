@@ -3,8 +3,8 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { code: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ code: string }> }) {
+  const params = await paramsPromise;
   try {
     const code = params.code?.trim().toUpperCase();
 
@@ -54,6 +54,39 @@ export async function GET(
       } catch {}
     }
 
+    let classNameBn = snapshotData?.academic?.classNameBn || null;
+    if (!classNameBn) {
+      const enrollment = await prisma.enrollment.findFirst({
+        where: { studentId: result.studentId },
+        include: { jamatClass: true },
+      });
+      classNameBn = enrollment?.jamatClass?.nameBn || "নির্ধারিত জামাত";
+    }
+
+    let subjects = snapshotData?.result?.subjects?.map((s: any) => ({
+      subjectNameBn: s.subjectNameBn,
+      fullMarks: s.fullMarks,
+      obtainedMarks: s.marksObtained,
+      gradeBn: s.gradeBn,
+      isPassed: s.isPassed,
+    })) || [];
+
+    if (subjects.length === 0) {
+      const examMarks = await prisma.examMark.findMany({
+        where: { examId: result.examId, studentId: result.studentId },
+        include: { subject: true },
+      });
+      if (examMarks.length > 0) {
+        subjects = examMarks.map((em) => ({
+          subjectNameBn: em.subject?.nameBn || "বিষয়",
+          fullMarks: em.subject?.fullMarks || 100,
+          obtainedMarks: em.marksObtained,
+          gradeBn: em.letterGrade || (em.marksObtained !== null && em.marksObtained >= 40 ? "মাকবুল" : "রাসিব"),
+          isPassed: !em.isAbsent && em.marksObtained !== null && em.marksObtained >= 40,
+        }));
+      }
+    }
+
     const verificationInfo = {
       isValid: true,
       verificationCode: result.verificationCode,
@@ -62,7 +95,7 @@ export async function GET(
       studentNameEn: result.student.fullNameEn,
       studentIdNumber: result.student.studentIdNumber,
       rollNumber: result.rollNumber || snapshotData?.academic?.rollNumber || null,
-      classNameBn: snapshotData?.academic?.classNameBn || "নির্ধারিত",
+      classNameBn,
       examNameBn: result.exam.nameBn,
       examNameEn: result.exam.nameEn,
       sessionYear: result.exam.session.name,
@@ -71,14 +104,7 @@ export async function GET(
       finalGradeBn: result.finalGradeBn,
       finalGradeEn: result.finalGradeEn,
       publishedAt: result.publishedAt,
-      // Minimal academic subject breakdown for authentic verification (without financial/guardian links)
-      subjects: snapshotData?.result?.subjects?.map((s: any) => ({
-        subjectNameBn: s.subjectNameBn,
-        fullMarks: s.fullMarks,
-        obtainedMarks: s.marksObtained,
-        gradeBn: s.gradeBn,
-        isPassed: s.isPassed,
-      })) || [],
+      subjects,
     };
 
     return NextResponse.json({ verification: verificationInfo });

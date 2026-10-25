@@ -5,7 +5,8 @@ import { chunkDocument } from "@/lib/knowledge/knowledgeEngine";
 
 export const dynamic = "force-dynamic";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
@@ -30,7 +31,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {

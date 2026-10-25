@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export async function POST(req: NextRequest) {
   try {
     const user = await getSessionUser();
-    if (!user || user.role !== "ADMIN") {
+    if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
     }
 

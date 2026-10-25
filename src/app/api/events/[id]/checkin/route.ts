@@ -1,26 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { recordEventAttendance, getEventAttendance, getEventById } from "@/lib/events";
+import { getSessionUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
-    const event = getEventById(params.id);
-    if (!event) {
-      return NextResponse.json({ success: false, error: "ইভেন্টটি পাওয়া যায়নি।" }, { status: 404 });
-    }
-
-    const { searchParams } = new URL(request.url);
-    const role = searchParams.get("role") || "TEACHER";
-
-    if (role === "PUBLIC") {
+    const user = await getSessionUser();
+    if (!user || !["ADMIN", "PRINCIPAL", "TEACHER"].includes(user.role)) {
       return NextResponse.json(
         { success: false, error: "উপস্থিতি বিবরণ শুধুমাত্র অনুমোদিত শিক্ষক ও প্রশাসনের জন্য।" },
         { status: 403 }
       );
+    }
+
+    const event = getEventById(params.id);
+    if (!event) {
+      return NextResponse.json({ success: false, error: "ইভেন্টটি পাওয়া যায়নি।" }, { status: 404 });
     }
 
     const records = getEventAttendance(params.id);
@@ -41,9 +40,17 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const user = await getSessionUser();
+    if (!user || !["ADMIN", "PRINCIPAL", "TEACHER"].includes(user.role)) {
+      return NextResponse.json(
+        { success: false, error: "অননুমোদিত: শুধুমাত্র শিক্ষক ও প্রশাসন উপস্থিতি রেকর্ড করতে পারেন।" },
+        { status: 403 }
+      );
+    }
+
     const body = await request.json();
 
     if (!body.studentIdOrCode) {
@@ -57,8 +64,8 @@ export async function POST(
       eventId: params.id,
       studentIdOrCode: body.studentIdOrCode,
       status: body.status || "PRESENT",
-      recordedByTeacherId: body.teacherId || "STAFF-01",
-      recordedByTeacherName: body.teacherName || "সহকারী শিক্ষক",
+      recordedByTeacherId: user.email || user.username || user.userId,
+      recordedByTeacherName: user.name || "সহকারী শিক্ষক",
       recordedMethod: body.recordedMethod || "QR_SCAN",
       notes: body.notes,
     });

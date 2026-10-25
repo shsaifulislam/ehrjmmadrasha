@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getCommunicationCampaigns,
   createCampaign,
@@ -6,6 +7,9 @@ import {
 
 export async function GET(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const { searchParams } = new URL(req.url);
     const status = searchParams.get("status");
     let campaigns = getCommunicationCampaigns();
@@ -25,6 +29,9 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const body = await req.json();
 
     if (!body.title || !body.subject || !body.body || !body.audienceType) {

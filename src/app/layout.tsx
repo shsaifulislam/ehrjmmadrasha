@@ -2,6 +2,12 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import PwaProvider from "@/components/pwa/PwaProvider";
 import MobileBottomNav from "@/components/mobile/MobileBottomNav";
+import CommandPalette from "@/components/search/CommandPalette";
+import { LanguageProvider } from "@/context/LanguageContext";
+import FloatingAppDock from "@/components/common/FloatingAppDock";
+import { generateInstitutionalJsonLd } from "@/lib/cms";
+import { INSTITUTION_INFO } from "@/lib/constants";
+import { getAppUrl } from "@/lib/env";
 
 export const viewport: Viewport = {
   themeColor: "#0D5C3A",
@@ -10,11 +16,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-import { generateInstitutionalJsonLd } from "@/lib/cms";
-import { INSTITUTION_INFO } from "@/lib/constants";
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ehrj-madrasha.edu.bd"),
+  metadataBase: new URL(getAppUrl()),
   title: {
     default: `${INSTITUTION_INFO.nameBn} | EHRJ Digital Campus`,
     template: `%s | ${INSTITUTION_INFO.nameBn}`,
@@ -40,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${INSTITUTION_INFO.nameBn} | অফিসিয়াল ডিজিটাল ক্যাম্পাস`,
     description: "কুমিল্লার দাউদকান্দির ঐতিহ্যবাহী দ্বীনি শিক্ষাপ্রতিষ্ঠান ও এতিমখানা কমপ্লেক্স।",
-    url: "https://ehrj-madrasha.edu.bd",
+    url: getAppUrl(),
     siteName: INSTITUTION_INFO.nameBn,
     images: [
       {
@@ -61,8 +64,6 @@ export const metadata: Metadata = {
   },
 };
 
-import CommandPalette from "@/components/search/CommandPalette";
-
 export default function RootLayout({
   children,
 }: {
@@ -73,17 +74,26 @@ export default function RootLayout({
   return (
     <html lang="bn" dir="ltr">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="antialiased min-h-screen flex flex-col bg-[#F9F8F3] text-[#0B1914] pb-14 md:pb-0">
-        <PwaProvider>
-          {children}
-          <CommandPalette />
-          <MobileBottomNav />
-        </PwaProvider>
+        <LanguageProvider>
+          <PwaProvider>
+            {children}
+            <CommandPalette />
+            <FloatingAppDock />
+            <MobileBottomNav />
+          </PwaProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

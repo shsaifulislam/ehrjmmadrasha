@@ -45,23 +45,6 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Fallback for default test certificates
-    if (trimmed === "EHRJ-CERT-2026-0001" || trimmed === "EHRJ-CERT-0001") {
-      return NextResponse.json({
-        success: true,
-        verified: true,
-        certificate: {
-          certificateNumber: "EHRJ-CERT-2026-0001",
-          type: "হিফজুল কুরআন সমাপ্তি সনদ (Certificate of Quran Hifz Completion)",
-          studentName: "মুহাম্মদ আব্দুল্লাহ আল মামুন",
-          studentId: "EHRJ-2026-0001",
-          className: "তাহফীজুল কুরআন (হিফজ বিভাগ)",
-          issueDate: new Date().toISOString(),
-          isRevoked: false,
-        },
-      });
-    }
-
     return NextResponse.json({
       success: false,
       error: "প্রদত্ত সনদপত্র বা কোডটি আমাদের ডাটাবেজে পাওয়া যায়নি। অনুগ্রহ করে সঠিক নম্বর দিন।",

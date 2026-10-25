@@ -4,10 +4,12 @@ import { getSessionUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
+import { validateDocumentEligibility } from "@/lib/documentFactory";
+
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user) {
@@ -32,6 +34,43 @@ export async function GET(
           orderBy: { enrolledAt: "desc" },
         },
         documents: {
+          orderBy: { createdAt: "desc" },
+        },
+        certificates: {
+          orderBy: { issueDate: "desc" },
+        },
+        results: {
+          include: {
+            exam: {
+              include: {
+                session: true,
+              },
+            },
+          },
+          orderBy: { createdAt: "desc" },
+        },
+        examMarks: {
+          include: {
+            subject: true,
+            exam: true,
+          },
+          orderBy: { createdAt: "desc" },
+          take: 30,
+        },
+        feeInvoices: {
+          orderBy: { createdAt: "desc" },
+        },
+        paymentReceipts: {
+          orderBy: { receiptDate: "desc" },
+        },
+        attendances: {
+          orderBy: { date: "desc" },
+          take: 35,
+        },
+        documentRequests: {
+          orderBy: { createdAt: "desc" },
+        },
+        supportRequests: {
           orderBy: { createdAt: "desc" },
         },
       },
@@ -78,6 +117,54 @@ export async function GET(
       }
     }
 
+    // Compute Attendance Summary Metrics
+    const totalAttendanceDays = student.attendances.length;
+    const presentDays = student.attendances.filter((a) => a.status === "PRESENT").length;
+    const absentDays = student.attendances.filter((a) => a.status === "ABSENT").length;
+    const lateDays = student.attendances.filter((a) => a.status === "LATE").length;
+    const leaveDays = student.attendances.filter((a) => a.status === "LEAVE").length;
+    const attendanceRate = totalAttendanceDays > 0 ? Math.round((presentDays / totalAttendanceDays) * 100) : 100;
+
+    // Compute Financial Summary Metrics
+    const totalInvoiced = student.feeInvoices.reduce((acc, inv) => acc + inv.totalAmount, 0);
+    const totalPaid = student.feeInvoices.reduce((acc, inv) => acc + inv.paidAmount, 0);
+    const totalDue = student.feeInvoices.reduce((acc, inv) => acc + inv.dueAmount, 0);
+
+    // Compute Document Eligibility Matrix for Canonical Document Types
+    const canonicalDocTypes = [
+      "STUDENT_ID",
+      "ADMISSION_CONFIRMATION",
+      "STUDY_CERTIFICATE",
+      "PRATYAYAN_PATRA",
+      "CHARACTER_CERTIFICATE",
+      "TESTIMONIAL",
+      "TRANSFER_CERTIFICATE",
+      "STUDENT_STATUS",
+      "HIFZ_CERTIFICATE",
+      "MISHKAT_CERTIFICATE",
+      "DAWRA_CERTIFICATE",
+      "ADMIT_CARD",
+      "RESULT_MARKSHEET",
+    ];
+
+    const documentEligibility: Record<string, any> = {};
+    for (const dType of canonicalDocTypes) {
+      try {
+        const evalResult = await validateDocumentEligibility(student.id, dType);
+        // Find if already issued
+        const alreadyIssued = student.certificates.find(
+          (c) => c.certificateType === dType && !c.isRevoked && c.status === "ISSUED"
+        );
+        documentEligibility[dType] = {
+          eligible: evalResult.eligible,
+          reason: evalResult.reason || null,
+          issuedDoc: alreadyIssued || evalResult.activeDocument || null,
+        };
+      } catch {
+        documentEligibility[dType] = { eligible: false, reason: "যাচাইকরণে ত্রুটি", issuedDoc: null };
+      }
+    }
+
     // Fetch related audit logs for this student
     const auditLogs = await prisma.auditLog.findMany({
       where: {
@@ -88,12 +175,26 @@ export async function GET(
         user: { select: { name: true, role: true } },
       },
       orderBy: { createdAt: "desc" },
-      take: 20,
+      take: 25,
     });
 
     return NextResponse.json({
       success: true,
       student,
+      attendanceStats: {
+        totalDays: totalAttendanceDays,
+        presentDays,
+        absentDays,
+        lateDays,
+        leaveDays,
+        attendanceRate,
+      },
+      financeStats: {
+        totalInvoiced,
+        totalPaid,
+        totalDue,
+      },
+      documentEligibility,
       auditLogs,
     });
   } catch (error: any) {
@@ -104,8 +205,8 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {
@@ -254,8 +355,8 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

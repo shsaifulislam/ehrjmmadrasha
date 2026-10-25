@@ -1,13 +1,36 @@
 import nodemailer from "nodemailer";
 
-// Initialize Nodemailer transporter with institution Gmail App Password credentials
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.SMTP_USER || "ehrjmadrasha@gmail.com",
-    pass: process.env.SMTP_PASS || "",
-  },
-});
+const smtpHost = process.env.SMTP_HOST?.trim();
+const smtpPort = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT, 10) : 587;
+const smtpUser = process.env.SMTP_USER || "ehrjmadrasha@gmail.com";
+const smtpPass = process.env.SMTP_PASS || "";
+
+// Initialize Nodemailer transporter with support for custom SMTP relay or Gmail App Password
+const transporter = nodemailer.createTransport(
+  smtpHost
+    ? {
+        host: smtpHost,
+        port: smtpPort,
+        secure: smtpPort === 465,
+        auth: {
+          user: smtpUser,
+          pass: smtpPass,
+        },
+        connectionTimeout: 8000,
+        greetingTimeout: 8000,
+        socketTimeout: 15000,
+      }
+    : {
+        service: "gmail",
+        auth: {
+          user: smtpUser,
+          pass: smtpPass,
+        },
+        connectionTimeout: 8000,
+        greetingTimeout: 8000,
+        socketTimeout: 15000,
+      }
+);
 
 interface EmailPayload {
   to: string;
@@ -17,7 +40,7 @@ interface EmailPayload {
 }
 
 /**
- * Send an email using institutional Gmail SMTP
+ * Send an email using institutional SMTP
  */
 export async function sendInstitutionalEmail({
   to,
@@ -30,8 +53,17 @@ export async function sendInstitutionalEmail({
       return { success: false, error: "Invalid recipient email" };
     }
 
+    if (process.env.SMTP_MOCK === "true") {
+      const mockId = `mock-test-email-${Date.now()}`;
+      console.log(`[SMTP Test Mock] Email to ${to} simulated successfully. ID: ${mockId}`);
+      return { success: true, messageId: mockId };
+    }
+
+    const defaultFrom = `"ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা" <${smtpUser}>`;
+    const fromAddress = process.env.SMTP_FROM || defaultFrom;
+
     const info = await transporter.sendMail({
-      from: `"ইলিয়টগঞ্জ হাজী রহমত উল্লাহ জামিয়া মাদ্রাসা" <${process.env.SMTP_USER || "ehrjmadrasha@gmail.com"}>`,
+      from: fromAddress,
       to,
       subject,
       text: text || "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা নোটিফিকেশন",
@@ -123,15 +155,35 @@ export async function sendAdmissionApprovalEmail({
   studentIdNumber,
   className,
   rollNumber,
+  portalUsername,
+  defaultPassword,
+  guardianPhone,
 }: {
   to: string;
   studentName: string;
   studentIdNumber: string;
   className: string;
   rollNumber: number;
+  portalUsername?: string;
+  defaultPassword?: string;
+  guardianPhone?: string;
 }) {
+  const credentialsHtml = defaultPassword
+    ? `
+      <div style="background-color: #fefce8; border: 1.5px solid #facc15; border-radius: 6px; padding: 16px; margin: 16px 0; color: #1e293b;">
+        <p style="margin: 0 0 8px; font-weight: bold; color: #854d0e;">মাদরাসা অনলাইন পোর্টাল লগইন একাউন্ট তথ্য:</p>
+        <p style="margin: 4px 0; font-size: 13px;">লগইন প্রবেশদ্বার: <strong>অভিভাবক ও শিক্ষার্থী পোর্টাল</strong></p>
+        <p style="margin: 4px 0; font-size: 13px;">ইউজার আইডি / মোবাইল: <strong style="color: #0D5C3A;">${guardianPhone || portalUsername || to}</strong></p>
+        <p style="margin: 4px 0; font-size: 13px;">প্রাথমিক ডিফল্ট পাসওয়ার্ড: <strong style="color: #b91c1c; font-family: monospace; font-size: 15px; background: #fff; padding: 2px 6px; border: 1px solid #fde047; border-radius: 4px;">${defaultPassword}</strong></p>
+        <p style="margin: 8px 0 0; font-size: 12px; color: #713f12; line-height: 1.4;">
+          * এই অ্যাকাউন্ট ব্যবহার করে আপনি শিক্ষার্থীর পরীক্ষার ফলাফল, উপস্থিতি, ফি পরিশোধের হিসাব এবং মাদরাসার যাবতীয় আপডেট দেখতে পারবেন। প্রথমবার লগইনের পর আপনার সুবিধাজনক নতুন পাসওয়ার্ড পরিবর্তন করে নিন।
+        </p>
+      </div>
+    `
+    : "";
+
   const html = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; background-color: #ffffff;">
       <div style="background-color: #0D5C3A; color: #ffffff; padding: 24px; text-align: center;">
         <h2 style="margin: 0; font-size: 20px;">ভর্তি আবেদন অনুমোদিত হয়েছে! (মোবারকবাদ)</h2>
         <p style="margin: 4px 0 0; font-size: 13px; color: #fef08a;">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা</p>
@@ -147,8 +199,10 @@ export async function sendAdmissionApprovalEmail({
           <p style="margin: 4px 0; font-size: 14px;">ক্লাস রোল: <strong>${rollNumber}</strong></p>
         </div>
 
+        ${credentialsHtml}
+
         <p style="font-size: 13px; color: #475569;">
-          অভিভাবক বা শিক্ষার্থী যে কোনো সময় অনলাইন পোর্টাল থেকে কোনো পাসওয়ার্ড ছাড়াই শুধুমাত্র জামাত ও রোল নম্বর প্রদান করে পরীক্ষার ফলাফল ও ফি বিবরণী দেখতে পারবেন।
+          ভর্তি সংক্রান্ত যে কোনো তথ্যের জন্য যোগাযোগ করুন: <strong>01845-162664</strong> | ইমেইল: <strong>ehrjmadrasha@gmail.com</strong>
         </p>
       </div>
       <div style="background-color: #f1f5f9; padding: 12px 24px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;">
@@ -159,7 +213,7 @@ export async function sendAdmissionApprovalEmail({
 
   return sendInstitutionalEmail({
     to,
-    subject: `ভর্তি অনুমোদন ও স্থায়ী আইডি প্রদান - ${studentIdNumber} | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা`,
+    subject: `ভর্তি অনুমোদন ও পোর্টাল লগইন তথ্য - ${studentIdNumber} | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা`,
     html,
   });
 }
@@ -204,11 +258,11 @@ export async function sendPasswordResetOtpEmail({
         </div>
 
         <p style="font-size: 13px; color: #475569; margin-top: 20px;">
-          জরুরি যোগাযোগ: <strong>01845-162664</strong> | ইমেইল: <strong>adminehrjmadrasha@gmail.com</strong>
+          জরুরি যোগাযোগ: <strong>01845-162664</strong> | ইমেইল: <strong>ehrjmadrasha@gmail.com</strong>
         </p>
       </div>
       <div style="background-color: #f1f5f9; padding: 12px 24px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;">
-        ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা ডিজিটাল ক্যাম্পাস ও ইনফরমেশন সিস্টেম
+        ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা অনলাইন ইনফরমেশন সিস্টেম
       </div>
     </div>
   `;
@@ -250,7 +304,7 @@ export async function sendPasswordResetSuccessEmail({
         </p>
       </div>
       <div style="background-color: #f1f5f9; padding: 12px 24px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;">
-        ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | সাপোর্ট: adminehrjmadrasha@gmail.com
+        ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | সাপোর্ট: ehrjmadrasha@gmail.com
       </div>
     </div>
   `;

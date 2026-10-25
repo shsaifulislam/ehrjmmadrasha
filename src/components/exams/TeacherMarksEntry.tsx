@@ -34,6 +34,18 @@ export default function TeacherMarksEntry() {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasUnsavedChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [hasUnsavedChanges]);
 
   useEffect(() => {
     loadFilters();
@@ -42,8 +54,8 @@ export default function TeacherMarksEntry() {
   const loadFilters = async () => {
     try {
       const [resExams, resClasses] = await Promise.all([
-        fetch("/api/admin/exams").then((r) => r.json()),
-        fetch("/api/academic/classes").then((r) => r.json()),
+        fetch("/api/teacher/exams").then((r) => r.json()),
+        fetch("/api/teacher/classes").then((r) => r.json()),
       ]);
 
       if (resExams.exams && resExams.exams.length > 0) {
@@ -66,7 +78,7 @@ export default function TeacherMarksEntry() {
 
   const loadSubjectsForClass = async (classId: string) => {
     try {
-      const res = await fetch(`/api/admin/subjects?classId=${classId}`);
+      const res = await fetch(`/api/teacher/subjects?classId=${classId}`);
       const data = await res.json();
       if (data.subjects && data.subjects.length > 0) {
         setSubjects(data.subjects);
@@ -120,6 +132,7 @@ export default function TeacherMarksEntry() {
           };
         }
         setMarksState(initialMap);
+        setHasUnsavedChanges(false);
       } else {
         setMessage({ text: data.error || "শিক্ষার্থীদের তালিকা লোড করা যায়নি।", type: "error" });
       }
@@ -140,6 +153,7 @@ export default function TeacherMarksEntry() {
         isExempt: false,
       },
     }));
+    setHasUnsavedChanges(true);
   };
 
   const handleAbsentToggle = (studentId: string) => {
@@ -156,6 +170,7 @@ export default function TeacherMarksEntry() {
         },
       };
     });
+    setHasUnsavedChanges(true);
   };
 
   const handleExemptToggle = (studentId: string) => {
@@ -172,6 +187,7 @@ export default function TeacherMarksEntry() {
         },
       };
     });
+    setHasUnsavedChanges(true);
   };
 
   const handleSave = async (action: "DRAFT" | "SUBMIT") => {
@@ -211,6 +227,7 @@ export default function TeacherMarksEntry() {
 
       const data = await res.json();
       if (res.ok) {
+        setHasUnsavedChanges(false);
         setMessage({ text: data.message, type: "success" });
         await loadStudentMarks();
       } else {
@@ -227,24 +244,24 @@ export default function TeacherMarksEntry() {
   const isPublished = examData?.isPublished;
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-100 gap-3">
+    <div className="bg-white rounded-3xl border-2 border-slate-200/90 p-6 sm:p-8 shadow-xl space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
         <div>
-          <span className="text-[10px] font-bold text-[#C59B27] uppercase tracking-wider block">
+          <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wider block">
             উস্তাদ পরীক্ষা ও মূল্যায়ন প্যানেল
           </span>
-          <h2 className="text-lg font-bold text-[#083B25] flex items-center gap-2">
+          <h2 className="text-lg font-black text-slate-900 font-display flex items-center gap-2">
             <Award className="w-5 h-5 text-[#0D5C3A]" />
             শ্রেণিভিত্তিক নম্বর এন্ট্রি ও দাখিল
           </h2>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-slate-500 mt-0.5">
             রোল ক্রমানুসারে প্রাপ্ত নম্বর, অনুপস্থিত বা অব্যাহতি চিহ্নিত করে দাখিল করুন।
           </p>
         </div>
 
         {isPublished && (
-          <div className="flex items-center gap-1.5 bg-amber-50 text-amber-800 border border-amber-200 px-3 py-1 rounded-lg text-xs font-semibold">
-            <Lock className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-1.5 bg-amber-50 text-amber-900 border border-[#D4AF37] px-3.5 py-1.5 rounded-xl text-xs font-bold shadow-sm">
+            <Lock className="w-3.5 h-3.5 text-amber-700" />
             ফলাফল ইতিমধ্যে প্রকাশিত / লকড
           </div>
         )}
@@ -453,7 +470,14 @@ export default function TeacherMarksEntry() {
               * পরীক্ষার নম্বর এন্ট্রি সম্পন্ন হলে প্রথমে খসড়া সংরক্ষণ করুন, অতঃপর দাখিল করুন।
             </p>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              {hasUnsavedChanges && (
+                <span className="text-[11px] bg-amber-50 text-amber-800 font-bold px-2.5 py-1 rounded-full border border-amber-300 flex items-center gap-1.5 shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+                  অসংরক্ষিত নম্বর রয়েছে
+                </span>
+              )}
+
               <button
                 type="button"
                 disabled={saving || isPublished}

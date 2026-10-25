@@ -1,0 +1,156 @@
+[
+  {
+    "id": "EHRJ-REV-2026-0001",
+    "periodTitleBn": "২০২৬ শিক্ষাবর্ষের ৩য় প্রান্তিক প্রাতিষ্ঠানিক ঝুঁকি ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা",
+    "reviewDate": "2026-09-20",
+    "leadReviewerName": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "leadReviewerRole": "PRINCIPAL",
+    "participatingRoles": [
+      "HEAD_OF_SHARIAH",
+      "CONTROLLER_OF_EXAMINATIONS",
+      "HEAD_OF_ADMIN",
+      "IT_ADMIN"
+    ],
+    "risksReviewedCount": 5,
+    "controlsReviewedCount": 5,
+    "findingsReviewedCount": 1,
+    "exceptionsReviewedCount": 0,
+    "summaryDecisionsBn": "শরীয়াহ ফান্ড নিয়ন্ত্রণ যথাযথ পাওয়া গেছে। কিতাব সরবরাহকারী নির্ভরতা কমাতে আগামী মাসে নতুন আরএফকিউ খোলার সিদ্ধান্ত অনুমোদিত হয়েছে।",
+    "actionItemsCount": 2,
+    "status": "COMPLETED",
+    "createdAt": "2026-09-20T00:00:00.000Z",
+    "updatedAt": "2026-09-20T00:00:00.000Z"
+  },
+  {
+    "id": "EHRJ-REV-2026-0002",
+    "periodTitleBn": "২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা",
+    "reviewDate": "2026-10-20",
+    "leadReviewerName": "মুহতামিম ও গভর্নিং বডি সভাপতি",
+    "leadReviewerRole": "GOVERNING_BODY",
+    "participatingRoles": [
+      "HEAD_OF_SHARIAH",
+      "CONTROLLER_OF_EXAMINATIONS",
+      "HEAD_OF_ADMIN",
+      "IT_ADMIN"
+    ],
+    "risksReviewedCount": 7,
+    "controlsReviewedCount": 7,
+    "findingsReviewedCount": 2,
+    "exceptionsReviewedCount": 2,
+    "summaryDecisionsBn": "সকল হিসাব ত্রৈমাসিক এক্সটার্নাল অডিটর দ্বারা সম্পাদন করতে হবে",
+    "actionItemsCount": 0,
+    "status": "SCHEDULED",
+    "createdAt": "2026-09-30T02:19:24.586Z",
+    "updatedAt": "2026-09-30T02:19:24.586Z"
+  },
+  {
+    "id": "EHRJ-REV-2026-0003",
+    "periodTitleBn": "২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা",
+    "reviewDate": "2026-10-20",
+    "leadReviewerName": "মুহতামিম ও গভর্নিং বডি সভাপতি",
+    "leadReviewerRole": "GOVERNING_BODY",
+    "participatingRoles": [
+      "HEAD_OF_SHARIAH",
+      "CONTROLLER_OF_EXAMINATIONS",
+      "HEAD_OF_ADMIN",
+      "IT_ADMIN"
+    ],
+    "risksReviewedCount": 8,
+    "controlsReviewedCount": 8,
+    "findingsReviewedCount": 3,
+    "exceptionsReviewedCount": 4,
+    "summaryDecisionsBn": "সকল হিসাব ত্রৈমাসিক এক্সটার্নাল অডিটর দ্বারা সম্পাদন করতে হবে",
+    "actionItemsCount": 0,
+    "status": "SCHEDULED",
+    "createdAt": "2026-09-30T02:20:18.540Z",
+    "updatedAt": "2026-09-30T02:20:18.540Z"
+  },
+  {
+    "id": "EHRJ-REV-2026-0004",
+    "periodTitleBn": "২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা",
+    "reviewDate": "2026-10-20",
+    "leadReviewerName": "মুহতামিম ও গভর্নিং বডি সভাপতি",
+    "leadReviewerRole": "GOVERNING_BODY",
+    "participatingRoles": [
+      "HEAD_OF_SHARIAH",
+      "CONTROLLER_OF_EXAMINATIONS",
+      "HEAD_OF_ADMIN",
+      "IT_ADMIN"
+    ],
+    "risksReviewedCount": 9,
+    "controlsReviewedCount": 9,
+    "findingsReviewedCount": 4,
+    "exceptionsReviewedCount": 6,
+    "summaryDecisionsBn": "সকল হিসাব ত্রৈমাসিক এক্সটার্নাল অডিটর দ্বারা সম্পাদন করতে হবে",
+    "actionItemsCount": 0,
+    "status": "SCHEDULED",
+    "createdAt": "2026-09-30T02:21:49.724Z",
+    "updatedAt": "2026-09-30T02:21:49.724Z"
+  },
+  {
+    "id": "EHRJ-REV-2026-0005",
+    "periodTitleBn": "২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা",
+    "reviewDate": "2026-10-20",
+    "leadReviewerName": "মুহতামিম ও গভর্নিং বডি সভাপতি",
+    "leadReviewerRole": "GOVERNING_BODY",
+    "participatingRoles": [
+      "HEAD_OF_SHARIAH",
+      "CONTROLLER_OF_EXAMINATIONS",
+      "HEAD_OF_ADMIN",
+      "IT_ADMIN"
+    ],
+    "risksReviewedCount": 10,
+    "controlsReviewedCount": 10,
+    "findingsReviewedCount": 5,
+    "exceptionsReviewedCount": 8,
+    "summaryDecisionsBn": "সকল হিসাব ত্রৈমাসিক এক্সটার্নাল অডিটর দ্বারা সম্পাদন করতে হবে",
+    "actionItemsCount": 0,
+    "status": "SCHEDULED",
+    "createdAt": "2026-09-30T02:23:16.329Z",
+    "updatedAt": "2026-09-30T02:23:16.329Z"
+  },
+  {
+    "id": "EHRJ-REV-2026-0006",
+    "periodTitleBn": "২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা",
+    "reviewDate": "2026-10-20",
+    "leadReviewerName": "মুহতামিম ও গভর্নিং বডি সভাপতি",
+    "leadReviewerRole": "GOVERNING_BODY",
+    "participatingRoles": [
+      "HEAD_OF_SHARIAH",
+      "CONTROLLER_OF_EXAMINATIONS",
+      "HEAD_OF_ADMIN",
+      "IT_ADMIN"
+    ],
+    "risksReviewedCount": 11,
+    "controlsReviewedCount": 11,
+    "findingsReviewedCount": 6,
+    "exceptionsReviewedCount": 10,
+    "summaryDecisionsBn": "সকল হিসাব ত্রৈমাসিক এক্সটার্নাল অডিটর দ্বারা সম্পাদন করতে হবে",
+    "actionItemsCount": 0,
+    "status": "SCHEDULED",
+    "createdAt": "2026-09-30T02:24:23.353Z",
+    "updatedAt": "2026-09-30T02:24:23.353Z"
+  },
+  {
+    "id": "EHRJ-REV-2026-0007",
+    "periodTitleBn": "২০২৬ শিক্ষাবর্ষের শরৎকালীন সুশাসন ও অভ্যন্তরীণ নিয়ন্ত্রণ পর্যালোচনা",
+    "reviewDate": "2026-10-20",
+    "leadReviewerName": "মুহতামিম ও গভর্নিং বডি সভাপতি",
+    "leadReviewerRole": "GOVERNING_BODY",
+    "participatingRoles": [
+      "HEAD_OF_SHARIAH",
+      "CONTROLLER_OF_EXAMINATIONS",
+      "HEAD_OF_ADMIN",
+      "IT_ADMIN"
+    ],
+    "risksReviewedCount": 12,
+    "controlsReviewedCount": 12,
+    "findingsReviewedCount": 7,
+    "exceptionsReviewedCount": 12,
+    "summaryDecisionsBn": "সকল হিসাব ত্রৈমাসিক এক্সটার্নাল অডিটর দ্বারা সম্পাদন করতে হবে",
+    "actionItemsCount": 0,
+    "status": "SCHEDULED",
+    "createdAt": "2026-09-30T02:25:20.268Z",
+    "updatedAt": "2026-09-30T02:25:20.268Z"
+  }
+]

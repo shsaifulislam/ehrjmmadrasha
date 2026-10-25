@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getSessionUser } from "@/lib/auth";
 import { recordAuditLog } from "@/lib/security";
 import { calculateStudentFee, generateNextInvoiceNumber } from "@/lib/feeCalculationService";
+import { emitDomainEvent } from "@/lib/communicationEngine";
 
 export const dynamic = "force-dynamic";
 
@@ -131,6 +132,21 @@ export async function POST(req: NextRequest) {
 
       invoicesCreated.push(createdInv);
       createdCount++;
+
+      // Emit outbox notification for bulk generated invoice
+      await emitDomainEvent({
+        eventType: "INVOICE_CREATED",
+        entityType: "FeeInvoice",
+        entityId: createdInv.id,
+        payload: {
+          studentId: student.id,
+          studentNameBn: student.fullNameBn,
+          invoiceNumber: createdInv.invoiceNumber,
+          amount: createdInv.netAmount,
+          invoiceId: createdInv.id,
+        },
+        idempotencyKey: `invoice-created-${createdInv.id}`,
+      });
     }
 
     await recordAuditLog({

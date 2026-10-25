@@ -1,20 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getEventFeedbacks, saveEventFeedbacks, getEventById } from "@/lib/events";
+import { getSessionUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const event = getEventById(params.id);
     if (!event) {
       return NextResponse.json({ success: false, error: "ইভেন্টটি পাওয়া যায়নি।" }, { status: 404 });
     }
 
-    const { searchParams } = new URL(request.url);
-    const role = searchParams.get("role") || "PUBLIC";
+    const sessionUser = await getSessionUser(request);
+    const role = sessionUser?.role || "PUBLIC";
 
     const feedbacks = getEventFeedbacks().filter((f) => f.eventId === params.id);
 
@@ -50,8 +51,8 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const body = await request.json();
     const event = getEventById(params.id);

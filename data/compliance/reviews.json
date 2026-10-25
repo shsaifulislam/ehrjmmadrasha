@@ -1,0 +1,79 @@
+[
+  {
+    "id": "EHRJ-REV-CMP-2026-0003",
+    "obligationId": "EHRJ-COMP-2026-0005",
+    "requirementId": "EHRJ-REQ-CMP-2026-0006",
+    "reviewerId": "EMP-0001",
+    "reviewerName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "reviewerRole": "PRINCIPAL",
+    "reviewDate": "2026-09-30",
+    "evidenceReviewed": [
+      "EHRJ-EVD-CMP-2026-0005"
+    ],
+    "checklistAnswers": {
+      "requirementExists": true,
+      "evidenceAvailable": true,
+      "responsibleAssigned": true,
+      "deadlineMet": true,
+      "requiredDocumentValid": true,
+      "requiredApprovalObtained": true,
+      "requiredReportSubmitted": true
+    },
+    "decision": "COMPLIANT",
+    "findingsNotes": "বোর্ড স্বীকৃতি নবায়ন চালান ও প্রমাণপত্র শতভাগ সন্তোষজনক।",
+    "remediationRequired": false,
+    "nextReviewDate": "2027-01-10",
+    "createdAt": "2026-09-30T02:50:17.919Z"
+  },
+  {
+    "id": "EHRJ-REV-CMP-2026-0002",
+    "obligationId": "EHRJ-COMP-2026-0004",
+    "requirementId": "EHRJ-REQ-CMP-2026-0005",
+    "reviewerId": "EMP-0001",
+    "reviewerName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "reviewerRole": "PRINCIPAL",
+    "reviewDate": "2026-09-30",
+    "evidenceReviewed": [
+      "EHRJ-EVD-CMP-2026-0004"
+    ],
+    "checklistAnswers": {
+      "requirementExists": true,
+      "evidenceAvailable": true,
+      "responsibleAssigned": true,
+      "deadlineMet": true,
+      "requiredDocumentValid": true,
+      "requiredApprovalObtained": true,
+      "requiredReportSubmitted": true
+    },
+    "decision": "COMPLIANT",
+    "findingsNotes": "বোর্ড স্বীকৃতি নবায়ন চালান ও প্রমাণপত্র শতভাগ সন্তোষজনক।",
+    "remediationRequired": false,
+    "nextReviewDate": "2027-01-10",
+    "createdAt": "2026-09-30T02:44:20.100Z"
+  },
+  {
+    "id": "EHRJ-REV-CMP-2026-0001",
+    "obligationId": "EHRJ-COMP-2026-0002",
+    "requirementId": "EHRJ-REQ-CMP-2026-0002",
+    "reviewerId": "EMP-0001",
+    "reviewerName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "reviewerRole": "PRINCIPAL",
+    "reviewDate": "2026-06-25",
+    "evidenceReviewed": [
+      "EHRJ-EVD-CMP-2026-0002"
+    ],
+    "checklistAnswers": {
+      "requirementExists": true,
+      "evidenceAvailable": true,
+      "responsibleAssigned": true,
+      "deadlineMet": true,
+      "requiredDocumentValid": true,
+      "requiredApprovalObtained": true
+    },
+    "decision": "COMPLIANT",
+    "findingsNotes": "যাকাত তহবিল শতভাগ শরিয়াহ্ সম্মতভাবে সংরক্ষিত। কোনো ব্যত্যয় পাওয়া যায়নি।",
+    "remediationRequired": false,
+    "nextReviewDate": "2026-12-31",
+    "createdAt": "2026-06-25T11:45:00.000Z"
+  }
+]

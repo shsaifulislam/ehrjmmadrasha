@@ -51,6 +51,8 @@ export type EventSourceModule =
   | "HELPDESK"
   | "CMS"
   | "WORKFLOW"
+  | "GOVERNANCE"
+  | "COMPLIANCE"
   | "MANUAL";
 
 export type ConflictType =

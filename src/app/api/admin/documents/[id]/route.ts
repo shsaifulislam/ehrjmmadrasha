@@ -6,7 +6,8 @@ import { getSessionUser } from "@/lib/auth";
  * GET /api/admin/documents/[id]
  * Get full document details, parsed data snapshot, and history
  */
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {

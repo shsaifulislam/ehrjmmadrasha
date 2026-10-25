@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getCalendarEvents,
   saveCalendarEvents,
@@ -8,6 +9,9 @@ import { CalendarEvent } from "@/lib/calendar/types";
 
 export async function GET(request: NextRequest) {
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const events = getCalendarEvents();
     return NextResponse.json({
       success: true,
@@ -25,6 +29,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const body = await request.json();
     const {
       title,

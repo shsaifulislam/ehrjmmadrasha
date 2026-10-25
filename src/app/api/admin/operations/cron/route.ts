@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSessionUser } from "@/lib/auth";
 import { executeMasterCronRegistry } from "@/lib/schedulerEngine";
 
+import { getCronSecret } from "@/lib/env";
+
 export const dynamic = "force-dynamic";
 
 /**
@@ -12,10 +14,10 @@ export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   try {
     const authHeader = req.headers.get("authorization");
-    const cronSecret = process.env.CRON_SECRET || "ehrj-internal-cron-token";
+    const cronSecret = getCronSecret();
 
     let isAuthorized = false;
-    if (authHeader && authHeader === `Bearer ${cronSecret}`) {
+    if (cronSecret && authHeader && authHeader === `Bearer ${cronSecret}`) {
       isAuthorized = true;
     } else {
       const user = await getSessionUser();

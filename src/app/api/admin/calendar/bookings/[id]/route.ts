@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   approveResourceBooking,
   rejectResourceBooking,
@@ -7,9 +8,12 @@ import {
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const body = await request.json();
     const { action, actorId, notes, reason } = body;
 

@@ -261,29 +261,49 @@ export default function AdminAdmissionReviewPage() {
 
           {/* APPROVED SUCCESS BANNER */}
           {isApproved && application.createdStudent && (
-            <div className="bg-emerald-50 border-2 border-emerald-400 rounded-xl p-5 shadow-sm space-y-2">
+            <div className="bg-emerald-50 border-2 border-emerald-400 rounded-xl p-5 shadow-sm space-y-3">
               <div className="flex items-center gap-2 text-emerald-900 font-bold text-base">
                 <CheckCircle2 className="w-6 h-6 text-emerald-600" />
                 শিক্ষার্থী ভর্তি সফলভাবে অনুমোদিত ও তালিকাভুক্ত হয়েছে!
               </div>
-              <div className="text-xs text-emerald-800 space-y-1">
-                <p>
-                  স্থায়ী শিক্ষার্থী আইডি:{" "}
-                  <strong className="font-mono text-stone-900">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs bg-white/80 p-3.5 rounded-lg border border-emerald-200">
+                <div>
+                  <span className="text-stone-500 block">স্থায়ী শিক্ষার্থী আইডি:</span>
+                  <strong className="font-mono text-base text-[#0D5C3A]">
                     {application.createdStudent.studentIdNumber}
                   </strong>
-                </p>
-                <p>
-                  তালিকাভুক্ত জামাত:{" "}
-                  <strong>{application.desiredClass?.nameBn}</strong>
-                </p>
+                </div>
+                <div>
+                  <span className="text-stone-500 block">নির্ধারিত রোল নম্বর:</span>
+                  <strong className="font-mono text-base text-indigo-700">
+                    রোল #{application.createdStudent.enrollments?.[0]?.rollNumber || 1}
+                  </strong>
+                </div>
+                <div>
+                  <span className="text-stone-500 block">তালিকাভুক্ত জামাত ও শাখা:</span>
+                  <strong className="text-stone-900">
+                    {application.desiredClass?.nameBn} ({application.createdStudent.enrollments?.[0]?.section?.nameBn || "ক-শাখা"})
+                  </strong>
+                </div>
+                <div>
+                  <span className="text-stone-500 block">ভর্তি ফি ইনভয়েস:</span>
+                  <strong className="font-mono text-stone-800">
+                    {application.createdStudent.feeInvoices?.[0]?.invoiceNumber || application.createdStudent.invoices?.[0]?.invoiceNumber || "EHRJ-INV-GEN"}
+                  </strong>
+                </div>
               </div>
-              <div className="pt-2">
+              <div className="flex items-center gap-2 pt-1">
                 <Link
                   href="/admin/students"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0D5C3A] hover:bg-[#158052] text-white rounded text-xs font-semibold shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0D5C3A] hover:bg-[#158052] text-white rounded text-xs font-semibold shadow-sm transition-colors"
                 >
                   শিক্ষার্থী প্রোফাইল দেখুন →
+                </Link>
+                <Link
+                  href="/admin/finance"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-700 hover:bg-stone-800 text-white rounded text-xs font-semibold shadow-sm transition-colors"
+                >
+                  ফি ইনভয়েস ও কালেকশন →
                 </Link>
               </div>
             </div>

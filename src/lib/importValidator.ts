@@ -292,8 +292,29 @@ export async function commitStudentImportBatch(
 }
 
 // -------------------------------------------------------------
-// 2. GUARDIAN CORRECTION REQUEST PIPELINE
 // -------------------------------------------------------------
+// 2. GUARDIAN CORRECTION REQUEST PIPELINE (SQLite Prisma Model)
+// -------------------------------------------------------------
+export async function getAllCorrectionRequestsAsync(): Promise<GuardianCorrectionRequest[]> {
+  const reqs = await prisma.dataCorrectionRequest.findMany({
+    orderBy: { createdAt: "desc" }
+  });
+  return reqs.map(r => ({
+    id: r.id,
+    guardianId: r.guardianId || "",
+    studentId: r.studentId || r.legacyStudentId || "",
+    studentIdNumber: r.studentIdNumber,
+    guardianNameBn: r.guardianNameBn || "",
+    requestedFields: typeof r.requestedFields === "string" ? JSON.parse(r.requestedFields) : r.requestedFields,
+    reasonBn: r.reasonBn,
+    status: r.status as any,
+    submittedAt: r.createdAt.toISOString(),
+    reviewedBy: r.reviewedBy || undefined,
+    reviewedAt: r.reviewedAt ? r.reviewedAt.toISOString() : undefined,
+    reviewNotes: r.reviewNotes || undefined
+  }));
+}
+
 export function getAllCorrectionRequests(): GuardianCorrectionRequest[] {
   ensureCorrectionFile();
   try {
@@ -334,10 +355,56 @@ export async function submitGuardianCorrectionRequest(
     throw new Error("আপনি এই শিক্ষার্থীর নিবন্ধিত অভিভাবক নন। তথ্য সংশোধনের আবেদন বাতিল করা হলো।");
   }
 
-  const allReqs = getAllCorrectionRequests();
   const year = new Date().getFullYear();
-  const newReq: GuardianCorrectionRequest = {
-    id: `REQ-CORR-${year}-${Math.floor(10000 + Math.random() * 90000)}`,
+  const reqId = `REQ-CORR-${year}-${Math.floor(10000 + Math.random() * 90000)}`;
+
+  const created = await prisma.dataCorrectionRequest.create({
+    data: {
+      id: reqId,
+      guardianId,
+      studentId,
+      studentIdNumber: student.studentIdNumber,
+      guardianNameBn: guardian.fullNameBn,
+      requestedFields: JSON.stringify(requestedFields),
+      reasonBn,
+      status: "SUBMITTED"
+    }
+  });
+
+  // Log audit
+  await prisma.auditLog.create({
+    data: {
+      action: "GUARDIAN_SUBMIT_CORRECTION_REQUEST",
+      entityType: "DataCorrectionRequest",
+      entityId: created.id,
+      detailsJson: JSON.stringify({
+        requestId: created.id,
+        studentId: student.id,
+        studentIdNumber: student.studentIdNumber,
+        fields: Object.keys(requestedFields)
+      })
+    }
+  }).catch(() => {});
+
+  // Sync JSON backup
+  try {
+    const allJson = getAllCorrectionRequests();
+    allJson.unshift({
+      id: created.id,
+      guardianId,
+      studentId,
+      studentIdNumber: student.studentIdNumber,
+      guardianNameBn: guardian.fullNameBn,
+      requestedFields,
+      reasonBn,
+      status: "SUBMITTED",
+      submittedAt: created.createdAt.toISOString()
+    });
+    saveAllCorrectionRequests(allJson);
+  } catch {}
+
+  return {
+    id: created.id,
     guardianId,
     studentId,
     studentIdNumber: student.studentIdNumber,
@@ -345,13 +412,8 @@ export async function submitGuardianCorrectionRequest(
     requestedFields,
     reasonBn,
     status: "SUBMITTED",
-    submittedAt: new Date().toISOString()
+    submittedAt: created.createdAt.toISOString()
   };
-
-  allReqs.unshift(newReq);
-  saveAllCorrectionRequests(allReqs);
-
-  return newReq;
 }
 
 export async function reviewGuardianCorrectionRequest(
@@ -360,21 +422,33 @@ export async function reviewGuardianCorrectionRequest(
   actorId: string,
   notes: string
 ): Promise<GuardianCorrectionRequest> {
-  const allReqs = getAllCorrectionRequests();
-  const req = allReqs.find(r => r.id === requestId);
+  const req = await prisma.dataCorrectionRequest.findUnique({
+    where: { id: requestId }
+  });
   if (!req) {
-    throw new Error(`Correction request '${requestId}' not found.`);
+    throw new Error(`Correction request '${requestId}' not found in database.`);
   }
 
-  req.status = decision;
-  req.reviewedBy = actorId;
-  req.reviewedAt = new Date().toISOString();
-  req.reviewNotes = notes;
+  const parsedFields =
+    typeof req.requestedFields === "string"
+      ? JSON.parse(req.requestedFields)
+      : req.requestedFields;
 
-  if (decision === "APPROVED") {
+  const now = new Date();
+  const updated = await prisma.dataCorrectionRequest.update({
+    where: { id: requestId },
+    data: {
+      status: decision,
+      reviewedBy: actorId,
+      reviewedAt: now,
+      reviewNotes: notes
+    }
+  });
+
+  if (decision === "APPROVED" && req.studentId) {
     // Apply updates safely to Student Master
     const updateData: Record<string, any> = {};
-    for (const [key, change] of Object.entries(req.requestedFields)) {
+    for (const [key, change] of Object.entries(parsedFields as Record<string, any>)) {
       // Whitelist safe editable fields
       if (["fullNameBn", "fullNameEn", "fatherNameBn", "motherNameBn", "presentAddress", "permanentAddress", "bloodGroup"].includes(key)) {
         updateData[key] = change.requestedValue;
@@ -407,6 +481,31 @@ export async function reviewGuardianCorrectionRequest(
     }
   }
 
-  saveAllCorrectionRequests(allReqs);
-  return req;
+  // Sync JSON backup
+  try {
+    const allJson = getAllCorrectionRequests();
+    const jsonReq = allJson.find(r => r.id === requestId);
+    if (jsonReq) {
+      jsonReq.status = decision;
+      jsonReq.reviewedBy = actorId;
+      jsonReq.reviewedAt = now.toISOString();
+      jsonReq.reviewNotes = notes;
+      saveAllCorrectionRequests(allJson);
+    }
+  } catch {}
+
+  return {
+    id: updated.id,
+    guardianId: updated.guardianId || "",
+    studentId: updated.studentId || req.legacyStudentId || "",
+    studentIdNumber: updated.studentIdNumber,
+    guardianNameBn: updated.guardianNameBn || "",
+    requestedFields: parsedFields,
+    reasonBn: updated.reasonBn,
+    status: updated.status as any,
+    submittedAt: updated.createdAt.toISOString(),
+    reviewedBy: updated.reviewedBy || undefined,
+    reviewedAt: updated.reviewedAt ? updated.reviewedAt.toISOString() : undefined,
+    reviewNotes: updated.reviewNotes || undefined
+  };
 }

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getClassRoutineSlots,
   saveClassRoutineSlots,
@@ -7,9 +8,12 @@ import {
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const { searchParams } = new URL(request.url);
     const actorId = searchParams.get("actorId") || "admin";
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getEvents, getEventTypes, createEvent } from "@/lib/events";
+import { getSessionUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -59,15 +60,15 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const actorRole = body.actorRole || "ADMIN";
-
-    if (!["ADMIN", "PRINCIPAL"].includes(actorRole)) {
+    const user = await getSessionUser();
+    if (!user || !["ADMIN", "PRINCIPAL"].includes(user.role)) {
       return NextResponse.json(
-        { success: false, error: "অননুমোদিত: শুধুমাত্র অ্যাডমিন নতুন ইভেন্ট তৈরি করতে পারবেন।" },
+        { success: false, error: "অননুমোদিত: শুধুমাত্র অ্যাডমিন বা অধ্যক্ষ নতুন ইভেন্ট তৈরি করতে পারবেন।" },
         { status: 403 }
       );
     }
+
+    const body = await request.json();
 
     const result = createEvent({
       typeCode: body.typeCode || "OTHER",
@@ -99,8 +100,8 @@ export async function POST(request: NextRequest) {
       contactEmail: body.contactEmail,
       hasFee: Boolean(body.hasFee),
       feeAmount: body.feeAmount ? Number(body.feeAmount) : 0,
-      createdBy: body.createdBy || "admin@ehrj.edu.bd",
-      updatedBy: body.createdBy || "admin@ehrj.edu.bd",
+      createdBy: user.email || user.username || user.userId,
+      updatedBy: user.email || user.username || user.userId,
     });
 
     if (!result.success) {

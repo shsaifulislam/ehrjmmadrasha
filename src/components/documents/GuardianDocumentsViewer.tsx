@@ -16,13 +16,28 @@ import {
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 
-export default function GuardianDocumentsViewer() {
+interface GuardianDocumentsViewerProps {
+  selectedStudentId?: string;
+  onSelectStudent?: (id: string) => void;
+}
+
+export default function GuardianDocumentsViewer({
+  selectedStudentId,
+  onSelectStudent,
+}: GuardianDocumentsViewerProps = {}) {
   const [children, setChildren] = useState<any[]>([]);
-  const [selectedChildId, setSelectedChildId] = useState<string>("");
+  const [selectedChildId, setSelectedChildId] = useState<string>(selectedStudentId || "");
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+
+  // Sync with parent selectedStudentId
+  useEffect(() => {
+    if (selectedStudentId && selectedStudentId !== selectedChildId) {
+      setSelectedChildId(selectedStudentId);
+    }
+  }, [selectedStudentId]);
 
   // Request modal state
   const [showRequestModal, setShowRequestModal] = useState(false);
@@ -42,7 +57,9 @@ export default function GuardianDocumentsViewer() {
       .then((json) => {
         if (json.success && json.children?.length > 0) {
           setChildren(json.children);
-          setSelectedChildId(json.children[0].id);
+          if (!selectedStudentId && !selectedChildId) {
+            setSelectedChildId(json.children[0].id);
+          }
         } else {
           setLoading(false);
         }
@@ -53,23 +70,48 @@ export default function GuardianDocumentsViewer() {
       });
   }, []);
 
-  // Fetch documents for selected child
+  // Fetch documents for selected child with AbortController
   useEffect(() => {
     if (!selectedChildId) return;
+
+    const controller = new AbortController();
+    let isCurrent = true;
+
     setLoading(true);
     setErrorMsg("");
+    // Clear previous documents data immediately during child switch
+    setData(null);
 
-    fetch(`/api/portal/documents?studentId=${selectedChildId}`)
+    fetch(`/api/portal/documents?studentId=${selectedChildId}`, {
+      signal: controller.signal,
+    })
       .then((res) => res.json())
       .then((json) => {
+        if (!isCurrent) return;
         if (json.success) {
           setData(json);
         } else {
           setErrorMsg(json.error || "প্রত্যয়নপত্র তথ্য লোড করা যায়নি।");
         }
       })
-      .catch(() => setErrorMsg("সার্ভার সংযোগে সমস্যা হয়েছে।"))
-      .finally(() => setLoading(false));
+      .catch((err) => {
+        if (err.name === "AbortError" || controller.signal.aborted) {
+          return;
+        }
+        if (isCurrent) {
+          setErrorMsg("সার্ভার সংযোগে সমস্যা হয়েছে।");
+        }
+      })
+      .finally(() => {
+        if (isCurrent) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isCurrent = false;
+      controller.abort();
+    };
   }, [selectedChildId]);
 
   // Submit Request
@@ -135,7 +177,10 @@ export default function GuardianDocumentsViewer() {
               <span className="text-xs font-semibold text-gray-700">সন্তান নির্বাচন:</span>
               <select
                 value={selectedChildId}
-                onChange={(e) => setSelectedChildId(e.target.value)}
+                onChange={(e) => {
+                  setSelectedChildId(e.target.value);
+                  onSelectStudent?.(e.target.value);
+                }}
                 className="p-1.5 border border-gray-300 rounded-lg text-xs font-semibold outline-none focus:ring-1 focus:ring-[#0D5C3A]"
               >
                 {children.map((c) => (

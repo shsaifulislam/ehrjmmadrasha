@@ -9,13 +9,14 @@ import {
   isAttendanceLocked,
   saveAttendanceSheetTransaction,
 } from "@/lib/attendanceService";
+import { parsePaginationParams } from "@/lib/pagination";
 
 export const dynamic = "force-dynamic";
 
 /**
  * GET /api/admin/attendance
  * Admin multi-filter attendance cockpit.
- * Query params: sessionId, classId, sectionId, date, status, search.
+ * Query params: sessionId, classId, sectionId, date, status, search, take, page.
  */
 export async function GET(req: NextRequest) {
   try {
@@ -28,6 +29,7 @@ export async function GET(req: NextRequest) {
     }
 
     const { searchParams } = new URL(req.url);
+    const { page, take, skip } = parsePaginationParams(searchParams, 50, 200);
     const sessionId = searchParams.get("sessionId");
     const classId = searchParams.get("classId");
     const sectionId = searchParams.get("sectionId") || undefined;
@@ -72,6 +74,8 @@ export async function GET(req: NextRequest) {
         orderBy: {
           rollNumber: "asc",
         },
+        skip,
+        take,
         include: {
           student: {
             select: {
@@ -127,6 +131,12 @@ export async function GET(req: NextRequest) {
           sectionNameBn: e.section?.nameBn || null,
           attendanceId: att?.id || null,
           status: att?.status || "UNMARKED",
+          checkInTime: att?.checkInTime || null,
+          checkOutTime: att?.checkOutTime || null,
+          entryMethod: att?.entryMethod || null,
+          exitMethod: att?.exitMethod || null,
+          checkInSmsSent: att?.checkInSmsSent || false,
+          checkOutSmsSent: att?.checkOutSmsSent || false,
           leaveReason: att?.leaveReason || null,
           remarks: att?.remarks || null,
           correctionReason: att?.correctionReason || null,
@@ -199,13 +209,16 @@ export async function GET(req: NextRequest) {
         { jamatClass: { sortOrder: "asc" } },
         { student: { studentIdNumber: "asc" } },
       ],
-      take: 200,
+      skip,
+      take,
     });
 
     const broadStats = calculateAttendanceStats(broadAttendance);
 
     return NextResponse.json({
       success: true,
+      page,
+      take,
       date: normalizedDate.toISOString().split("T")[0],
       sessionId: targetSessionId,
       summary: broadStats,
@@ -221,6 +234,12 @@ export async function GET(req: NextRequest) {
         classNameBn: a.jamatClass.nameBn,
         sectionNameBn: a.section?.nameBn || null,
         status: a.status,
+        checkInTime: a.checkInTime,
+        checkOutTime: a.checkOutTime,
+        entryMethod: a.entryMethod,
+        exitMethod: a.exitMethod,
+        checkInSmsSent: a.checkInSmsSent,
+        checkOutSmsSent: a.checkOutSmsSent,
         leaveReason: a.leaveReason,
         remarks: a.remarks,
         correctionReason: a.correctionReason,

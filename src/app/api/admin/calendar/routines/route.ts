@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getClassRoutineSlots,
   saveClassRoutineSlots,
@@ -9,6 +10,9 @@ import { ClassRoutineSlot } from "@/lib/calendar/types";
 
 export async function GET(request: NextRequest) {
   try {
+    const auth = await requireAdminAuth(request, ["ADMIN", "PRINCIPAL", "TEACHER"]);
+    if (!auth.authorized) return auth.response;
+
     const { searchParams } = new URL(request.url);
     const classId = searchParams.get("classId");
     const sectionId = searchParams.get("sectionId");
@@ -16,14 +20,31 @@ export async function GET(request: NextRequest) {
 
     let slots = getClassRoutineSlots().filter((s) => s.status === "ACTIVE");
 
-    if (classId) {
-      slots = slots.filter((s) => s.classId === classId);
-    }
-    if (sectionId) {
-      slots = slots.filter((s) => s.sectionId === sectionId);
-    }
-    if (teacherId) {
-      slots = slots.filter((s) => s.teacherId === teacherId);
+    if (auth.user?.role === "TEACHER") {
+      // Teacher-scoped routine filtering: show assigned routines for this teacher
+      if (teacherId) {
+        slots = slots.filter((s) => s.teacherId === teacherId);
+      } else {
+        const teacherAssignedSlots = slots.filter(
+          (s) =>
+            s.teacherId === auth.user?.userId ||
+            (auth.user?.name && s.teacherName?.toLowerCase() === auth.user.name.toLowerCase())
+        );
+        // If specific assigned slots exist, return them; otherwise return all active class routines
+        if (teacherAssignedSlots.length > 0) {
+          slots = teacherAssignedSlots;
+        }
+      }
+    } else {
+      if (classId) {
+        slots = slots.filter((s) => s.classId === classId);
+      }
+      if (sectionId) {
+        slots = slots.filter((s) => s.sectionId === sectionId);
+      }
+      if (teacherId) {
+        slots = slots.filter((s) => s.teacherId === teacherId);
+      }
     }
 
     // Sort by dayOfWeek and startTime
@@ -48,6 +69,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const body = await request.json();
     const {
       sessionId,

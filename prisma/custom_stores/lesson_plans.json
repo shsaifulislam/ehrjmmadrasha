@@ -1,0 +1,50 @@
+[
+  {
+    "id": "LP-560324",
+    "teacherId": "67aba9ec-aedc-4d8e-ae3c-2db5adb18f6c",
+    "teacherName": "মাওলানা আহমাদ উল্লাহ (সিনিয়র উস্তাদ)",
+    "classId": "general",
+    "classNameBn": "শিশু শ্রেণি",
+    "sectionNameBn": "ক শাখা",
+    "subjectNameBn": "কুরআন মাজীদ ও তাজবীদ",
+    "lessonDate": "2026-10-10",
+    "topicTitleBn": "সূরা আল-ওয়াক্বিয়াহ্ (১-২০ আয়াত) ও শানে নুযূল তাফসীর",
+    "homeworkBn": "১-২০ আয়াত তাজবীদ সহকারে তিলাওয়াত ও মুখস্থ শুনানো",
+    "status": "COMPLETED",
+    "notes": "",
+    "createdAt": "2026-10-10T17:32:40.324Z",
+    "updatedAt": "2026-10-10T17:32:40.324Z"
+  },
+  {
+    "id": "LP-2026-001",
+    "teacherId": "67aba9ec-aedc-4d8e-ae3c-2db5adb18f6c",
+    "teacherName": "মাওলানা আহমাদ উল্লাহ",
+    "classId": "cls-hifz",
+    "classNameBn": "হিফজুল কুরআন বিভাগ",
+    "sectionNameBn": "ক শাখা",
+    "subjectNameBn": "কুরআন মাজীদ ও তাজবীদ",
+    "lessonDate": "2026-10-10",
+    "topicTitleBn": "সূরা আল-মুলক (১-১৫ আয়াত) সহীহ মাখরাজ ও সিফাত সহ তিলাওয়াত",
+    "homeworkBn": "সূরা আল-মুলক ১-১৫ আয়াত মুখস্থ শুনানো এবং মাখরাজ অনুশীলন",
+    "status": "COMPLETED",
+    "notes": "সকল শিক্ষার্থী সবক সুন্দরভাবে আদায় করেছে।",
+    "createdAt": "2026-10-10T17:30:52.922Z",
+    "updatedAt": "2026-10-10T17:30:52.922Z"
+  },
+  {
+    "id": "LP-2026-002",
+    "teacherId": "67aba9ec-aedc-4d8e-ae3c-2db5adb18f6c",
+    "teacherName": "মাওলানা আহমাদ উল্লাহ",
+    "classId": "cls-dawra",
+    "classNameBn": "দাওরায়ে হাদীস জামাত",
+    "sectionNameBn": "সাধারণ শাখা",
+    "subjectNameBn": "সহীহুল বুখারী (১ম খণ্ড)",
+    "lessonDate": "2026-10-10",
+    "topicTitleBn": "কিতাবুল ঈমান — 'বনুয়াল ইসলামু আলা খামসিন' হাদীসের তাশরীহ",
+    "homeworkBn": "উক্ত হাদীসের সনদের রাবীগণের পরিচয় ও শরহে নুযূল তামরীন খাতায় নোট করা",
+    "status": "COMPLETED",
+    "notes": "দাওরায়ে হাদীসের ছাত্রদের সক্রিয় অংশগ্রহণ ও ইশকাল নিরসন।",
+    "createdAt": "2026-10-10T17:30:52.922Z",
+    "updatedAt": "2026-10-10T17:30:52.922Z"
+  }
+]

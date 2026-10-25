@@ -441,7 +441,7 @@ export default function AdminSurveyDetailPage() {
               <h3 className="text-lg font-bold text-slate-900">
                 প্রশ্নভিত্তিক প্রতিক্রিয়া ও বিতরণ
               </h3>
-              {analytics?.questions.map((q, idx) => (
+              {(analytics?.questions || []).map((q, idx) => (
                 <div key={q.questionId} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex items-center gap-2">

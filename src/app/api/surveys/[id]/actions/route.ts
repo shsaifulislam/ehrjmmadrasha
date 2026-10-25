@@ -10,14 +10,15 @@ import {
 export const dynamic = "force-dynamic";
 
 interface RouteParams {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 /**
  * GET /api/surveys/[id]/actions
  * List improvement actions for this survey
  */
-export async function GET(req: NextRequest, { params }: RouteParams) {
+export async function GET(req: NextRequest, { params: paramsPromise }: RouteParams) {
+  const params = await paramsPromise;
   try {
     const session = await getSessionUser();
     const isAdmin =
@@ -53,7 +54,8 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
  * POST /api/surveys/[id]/actions
  * Create improvement action, update action status, or convert to Helpdesk Ticket
  */
-export async function POST(req: NextRequest, { params }: RouteParams) {
+export async function POST(req: NextRequest, { params: paramsPromise }: RouteParams) {
+  const params = await paramsPromise;
   try {
     const session = await getSessionUser();
     if (

@@ -19,15 +19,41 @@ export default function PwaProvider({ children }: { children: React.ReactNode })
       updatePendingCount();
 
       // Service Worker Registration
-      if ("serviceWorker" in navigator && process.env.NODE_ENV !== "test") {
-        navigator.serviceWorker
-          .register("/sw.js")
-          .then((reg) => {
-            console.log("EHRJ Service Worker registered:", reg.scope);
-          })
-          .catch((err) => {
-            console.warn("Service Worker registration failed:", err);
+      if ("serviceWorker" in navigator) {
+        if (process.env.NODE_ENV === "production") {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((reg) => {
+              console.log("EHRJ Service Worker registered:", reg.scope);
+            })
+            .catch((err) => {
+              console.warn("Service Worker registration failed:", err);
+            });
+        } else {
+          // In development mode, ensure any stale EHRJ service worker is unregistered
+          // and EHRJ caches are cleared to prevent stale chunk caching and Webpack runtime TypeErrors
+          navigator.serviceWorker.getRegistrations().then((registrations) => {
+            for (const registration of registrations) {
+              const swUrl =
+                registration.active?.scriptURL ||
+                registration.waiting?.scriptURL ||
+                registration.installing?.scriptURL ||
+                "";
+              if (swUrl.endsWith("/sw.js") || swUrl.includes("/sw.js")) {
+                registration.unregister();
+              }
+            }
           });
+          if (typeof caches !== "undefined") {
+            caches.keys().then((keys) => {
+              for (const key of keys) {
+                if (key.startsWith("ehrj-")) {
+                  caches.delete(key);
+                }
+              }
+            });
+          }
+        }
       }
 
       // Event Listeners for Network changes

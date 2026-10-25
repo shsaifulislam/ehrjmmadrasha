@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
  */
 export async function GET(req: NextRequest) {
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user || user.role !== "TEACHER") {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস। শুধুমাত্র শিক্ষকদের জন্য প্রযোজ্য।" }, { status: 403 });
     }

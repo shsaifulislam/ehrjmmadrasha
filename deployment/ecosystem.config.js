@@ -5,9 +5,10 @@ module.exports = {
       name: "ehrj-digital-campus",
       script: "node_modules/next/dist/bin/next",
       args: "start -p 3000",
-      cwd: "/var/www/ehrj-app",
-      instances: "max", // Cluster mode across all CPU cores
-      exec_mode: "cluster",
+      // SQLite safety: use single-instance fork mode to prevent SQLITE_BUSY write locks.
+      // (Set instances: "max", exec_mode: "cluster" only when using external PostgreSQL)
+      instances: 1,
+      exec_mode: "fork",
       max_memory_restart: "1G",
       env_production: {
         NODE_ENV: "production",

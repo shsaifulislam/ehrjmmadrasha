@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import { resolveAudienceRecipients } from "@/lib/communications";
 
 export async function POST(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const body = await req.json();
     const audienceType = body.audienceType || "ALL_GUARDIANS";
     const filter = body.audienceFilter || {};

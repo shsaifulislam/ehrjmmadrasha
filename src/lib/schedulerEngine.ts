@@ -11,6 +11,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { createDatabaseBackup, applyBackupRetention, triggerOperationalAlert } from "@/lib/operationsEngine";
+import { processSingleOutboxEvent } from "@/lib/communicationEngine";
 
 export interface ScheduledJobResult {
   jobKey: string;
@@ -48,15 +49,7 @@ export async function processNotificationOutboxQueue(): Promise<ScheduledJobResu
 
     let processedCount = 0;
     for (const evt of pendingEvents) {
-      // Simulate/trigger delivery dispatch
-      await prisma.notificationOutbox.update({
-        where: { id: evt.id },
-        data: {
-          status: "SENT",
-          attempts: { increment: 1 },
-          processedAt: new Date(),
-        },
-      });
+      await processSingleOutboxEvent(evt.id);
       processedCount++;
     }
 
@@ -197,6 +190,43 @@ export async function scanExpiringDocumentsJob(): Promise<ScheduledJobResult> {
 }
 
 /**
+ * 5. Purge Expired Auth Sessions & Old OTP Records
+ */
+export async function purgeExpiredSessionsJob(): Promise<ScheduledJobResult> {
+  const startTime = Date.now();
+  const jobKey = "PURGE_EXPIRED_SESSIONS";
+  const jobName = "মেয়াদোত্তীর্ণ সেশন ও ওটিপি পরিচ্ছন্নতা (Purge Expired Sessions & OTPs)";
+
+  try {
+    const [deletedSessions, deletedOtps] = await Promise.all([
+      prisma.session.deleteMany({
+        where: { expiresAt: { lt: new Date() } },
+      }),
+      prisma.passwordResetOtp.deleteMany({
+        where: { expiresAt: { lt: new Date(Date.now() - 24 * 60 * 60 * 1000) } },
+      }),
+    ]);
+
+    return {
+      jobKey,
+      jobName,
+      status: "SUCCESS",
+      executionTimeMs: Date.now() - startTime,
+      details: `Purged ${deletedSessions.count} expired sessions and ${deletedOtps.count} expired OTP records.`,
+    };
+  } catch (err: any) {
+    return {
+      jobKey,
+      jobName,
+      status: "FAILED",
+      executionTimeMs: Date.now() - startTime,
+      details: "Expired sessions cleanup failed.",
+      error: err.message,
+    };
+  }
+}
+
+/**
  * Master Scheduled Jobs Execution Registry
  */
 export async function executeMasterCronRegistry(targetJobKey?: string): Promise<MasterCronExecutionReport> {
@@ -205,6 +235,7 @@ export async function executeMasterCronRegistry(targetJobKey?: string): Promise<
     { key: "DAILY_DATABASE_BACKUP", fn: runAutomatedDailyBackup },
     { key: "DAILY_ATTENDANCE_MONITOR", fn: runDailyAttendanceMonitor },
     { key: "EXPIRING_DOCUMENTS_SCANNER", fn: scanExpiringDocumentsJob },
+    { key: "PURGE_EXPIRED_SESSIONS", fn: purgeExpiredSessionsJob },
   ];
 
   const results: ScheduledJobResult[] = [];

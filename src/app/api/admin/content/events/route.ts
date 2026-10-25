@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import { getCmsEvents, saveCmsEvent, archiveCmsEvent } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const events = getCmsEvents(false);
     return NextResponse.json({ success: true, events });
   } catch (error) {
@@ -15,6 +19,9 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const body = await req.json();
     const event = saveCmsEvent(body, "ADMIN");
     return NextResponse.json({
@@ -30,6 +37,9 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
     if (!id) {

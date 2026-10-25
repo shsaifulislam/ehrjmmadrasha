@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
     const status = searchParams.get("status") || "";
     const sessionId = searchParams.get("sessionId") || "";
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
-    const limit = Math.max(1, parseInt(searchParams.get("limit") || "15", 10));
+    const limit = Math.max(1, parseInt(searchParams.get("limit") || "20", 10));
     const skip = (page - 1) * limit;
 
     const where: any = {};
@@ -119,7 +119,19 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { studentId, documentType, sessionId, templateId, requestId, customNotes } = body;
+    const {
+      studentId,
+      documentType,
+      sessionId,
+      templateId,
+      requestId,
+      customNotes,
+      selectedExamId,
+      selectedReceiptId,
+      selectedInvoiceId,
+      transferReason,
+      adminConductConfirmed,
+    } = body;
 
     if (!studentId || !documentType) {
       return NextResponse.json(
@@ -138,6 +150,11 @@ export async function POST(req: NextRequest) {
       requestId,
       issuedByUserId: user.userId,
       customNotes,
+      selectedExamId,
+      selectedReceiptId,
+      selectedInvoiceId,
+      transferReason,
+      adminConductConfirmed: adminConductConfirmed ?? true,
     });
 
     await recordAuditLog({

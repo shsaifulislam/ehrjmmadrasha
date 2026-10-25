@@ -46,6 +46,12 @@ interface AdmissionItem {
   createdAt: string;
   desiredClass?: { nameBn: string };
   session?: { name: string };
+  createdStudentId?: string | null;
+  createdStudent?: {
+    id: string;
+    studentIdNumber: string;
+    enrollments?: { rollNumber: number; section?: { nameBn: string } }[];
+  } | null;
 }
 
 export default function AdminAdmissionsPage() {
@@ -91,6 +97,42 @@ export default function AdminAdmissionsPage() {
     isOrphan: false,
     isFinanciallyWeak: false,
   });
+
+  // Approval state
+  const [approvingId, setApprovingId] = useState<string | null>(null);
+  const [actionToast, setActionToast] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  const handleApprove = async (appId: string, studentName: string) => {
+    if (!confirm(`আপনি কি "${studentName}" এর ভর্তি আবেদনটি অনুমোদন করে মাদরাসার স্থায়ী শিক্ষার্থী হিসেবে তালিকাভুক্ত করতে চান?`)) {
+      return;
+    }
+    setApprovingId(appId);
+    setActionToast(null);
+    try {
+      const res = await fetch("/api/admissions/approve", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ applicationId: appId }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setActionToast({
+          type: "success",
+          text: data.message || "শিক্ষার্থী সফলভাবে অনুমোদন ও মাদরাসায় তালিকাভুক্ত হয়েছে!",
+        });
+        fetchAdmissions();
+      } else {
+        setActionToast({
+          type: "error",
+          text: data.error || "অনুমোদন ব্যর্থ হয়েছে।",
+        });
+      }
+    } catch (err: any) {
+      setActionToast({ type: "error", text: err.message || "সার্ভার এরর।" });
+    } finally {
+      setApprovingId(null);
+    }
+  };
 
   const fetchAdmissions = async () => {
     setLoading(true);
@@ -309,6 +351,32 @@ export default function AdminAdmissionsPage() {
         </form>
       </div>
 
+      {/* Action Toast Notification */}
+      {actionToast && (
+        <div
+          className={`p-4 rounded-xl border flex items-center justify-between text-xs font-semibold animate-in fade-in ${
+            actionToast.type === "success"
+              ? "bg-emerald-50 text-emerald-900 border-emerald-300"
+              : "bg-rose-50 text-rose-900 border-rose-300"
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            {actionToast.type === "success" ? (
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            ) : (
+              <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
+            )}
+            <span>{actionToast.text}</span>
+          </div>
+          <button
+            onClick={() => setActionToast(null)}
+            className="text-stone-400 hover:text-stone-700 text-xs px-2 py-0.5"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {/* Applications Data Table */}
       <div className="bg-white border border-stone-200 rounded-xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
@@ -373,18 +441,49 @@ export default function AdminAdmissionsPage() {
                     </td>
                     <td className="p-3.5">
                       {getStatusBadge(app.status)}
+                      {app.status === "APPROVED" && app.createdStudent && (
+                        <div className="mt-1 text-[11px] font-mono text-[#0D5C3A] font-bold">
+                          <span>{app.createdStudent.studentIdNumber}</span>
+                          {app.createdStudent.enrollments?.[0]?.rollNumber !== undefined && (
+                            <span className="text-indigo-700 ml-1">
+                              (রোল #{app.createdStudent.enrollments[0].rollNumber})
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </td>
                     <td className="p-3.5 font-mono text-stone-500 text-[11px]">
                       {new Date(app.createdAt).toLocaleDateString("bn-BD")}
                     </td>
-                    <td className="p-3.5 text-right">
+                    <td className="p-3.5 text-right whitespace-nowrap space-x-1.5">
                       <Link
                         href={`/admin/admissions/${app.id}`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-stone-100 hover:bg-[#0D5C3A] hover:text-white text-stone-700 rounded text-xs font-semibold transition"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-stone-100 hover:bg-[#0D5C3A] hover:text-white text-stone-700 rounded text-xs font-semibold transition"
+                        title="সম্পূর্ণ বিস্তারিত ও সংযুক্তি"
                       >
                         <Eye className="w-3.5 h-3.5" />
-                        নিরীক্ষা করুন
+                        <span>নিরীক্ষা</span>
                       </Link>
+                      {app.status !== "APPROVED" && app.status !== "REJECTED" ? (
+                        <button
+                          type="button"
+                          onClick={() => handleApprove(app.id, app.studentNameBn)}
+                          disabled={approvingId === app.id}
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded text-xs font-bold transition shadow-sm disabled:opacity-50"
+                          title="এক ক্লিকে অনুমোদন ও শিক্ষার্থী আইডি প্রদান"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-200" />
+                          <span>{approvingId === app.id ? "অনুমোদন হচ্ছে..." : "অনুমোদন ও তালিকাভুক্ত"}</span>
+                        </button>
+                      ) : app.status === "APPROVED" && app.createdStudent ? (
+                        <Link
+                          href="/admin?tab=STUDENTS"
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100 rounded text-xs font-bold transition"
+                        >
+                          <Users className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>প্রোফাইল দেখুন</span>
+                        </Link>
+                      ) : null}
                     </td>
                   </tr>
                 ))

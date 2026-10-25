@@ -9,14 +9,15 @@ import {
 export const dynamic = "force-dynamic";
 
 interface RouteParams {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 /**
  * GET /api/surveys/[id]/responses
  * Returns privacy-sanitized list of responses for the survey.
  */
-export async function GET(req: NextRequest, { params }: RouteParams) {
+export async function GET(req: NextRequest, { params: paramsPromise }: RouteParams) {
+  const params = await paramsPromise;
   try {
     const session = await getSessionUser();
     const isAdmin =

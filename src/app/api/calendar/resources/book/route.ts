@@ -1,22 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requestResourceBooking } from "@/lib/calendar/resourceBookingEngine";
+import { getSessionUser } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
   try {
+    const user = await getSessionUser();
+    if (!user || !["ADMIN", "PRINCIPAL", "TEACHER"].includes(user.role)) {
+      return NextResponse.json(
+        { success: false, error: "অননুমোদিত: রিসোর্স বুকিং করার জন্য শিক্ষক বা প্রশাসনিক অ্যাকাউন্টে লগইন করুন।" },
+        { status: 403 }
+      );
+    }
+
     const body = await request.json();
     const {
       resourceId,
       title,
       purpose,
-      requestedBy,
-      requestedByName,
-      requestedByRole,
       startAt,
       endAt,
       participantCount,
     } = body;
 
-    if (!resourceId || !title || !startAt || !endAt || !requestedBy) {
+    if (!resourceId || !title || !startAt || !endAt) {
       return NextResponse.json(
         { success: false, error: "রিসোর্স, শিরোনাম, শুরুর সময় এবং শেষ সময় আবশ্যক।" },
         { status: 400 }
@@ -27,9 +33,9 @@ export async function POST(request: NextRequest) {
       resourceId,
       title,
       purpose: purpose || "প্রাতিষ্ঠানিক অনুষ্ঠান বা পাঠদান",
-      requestedBy,
-      requestedByName: requestedByName || "মাদরাসা ব্যবহারকারী",
-      requestedByRole: requestedByRole || "TEACHER",
+      requestedBy: user.email || user.userId,
+      requestedByName: user.name || "মাদরাসা ব্যবহারকারী",
+      requestedByRole: user.role,
       startAt,
       endAt,
       participantCount: Number(participantCount) || 1,

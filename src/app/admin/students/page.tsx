@@ -25,9 +25,13 @@ import {
   Check,
   ChevronRight,
   Shield,
+  Download,
+  Printer,
+  FileSpreadsheet,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 import { suggestArabicName } from "@/lib/arabicNames";
+import UpdateGuardianModal from "@/components/students/UpdateGuardianModal";
 
 interface StudentListItem {
   id: string;
@@ -85,6 +89,25 @@ export default function AdminStudentsPage() {
   const [sessions, setSessions] = useState<any[]>([]);
   const [classes, setClasses] = useState<any[]>([]);
   const [sections, setSections] = useState<any[]>([]);
+
+  // Bulk Selection & Operations
+  const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const [showBulkAssignModal, setShowBulkAssignModal] = useState(false);
+  const [bulkAssignSession, setBulkAssignSession] = useState("");
+  const [bulkAssignClass, setBulkAssignClass] = useState("");
+  const [bulkAssignSection, setBulkAssignSection] = useState("");
+  const [showBulkResModal, setShowBulkResModal] = useState(false);
+  const [bulkResidentialStatus, setBulkResidentialStatus] = useState("RESIDENTIAL");
+
+  // Guardian Edit Modal Target
+  const [guardianEditTarget, setGuardianEditTarget] = useState<{
+    id: string;
+    name: string;
+    idNumber: string;
+    guardianName?: string;
+    phone?: string;
+  } | null>(null);
 
   // Admission Modal State
   const [showAddModal, setShowAddModal] = useState(false);
@@ -189,6 +212,167 @@ export default function AdminStudentsPage() {
     selectedStatus,
     filterOrphan,
   ]);
+
+  // Bulk selection toggles
+  const handleToggleSelectAll = () => {
+    if (selectedStudentIds.length === students.length) {
+      setSelectedStudentIds([]);
+    } else {
+      setSelectedStudentIds(students.map((s) => s.id));
+    }
+  };
+
+  const handleToggleStudent = (id: string) => {
+    setSelectedStudentIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  // Bulk Change Residential Status
+  const handleExecuteBulkResidential = async () => {
+    if (selectedStudentIds.length === 0) return;
+    setBulkLoading(true);
+    try {
+      const res = await fetch("/api/admin/students/bulk", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "CHANGE_RESIDENTIAL_STATUS",
+          studentIds: selectedStudentIds,
+          payload: { residentialStatus: bulkResidentialStatus },
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setBanner({ text: data.message, type: "success" });
+        setShowBulkResModal(false);
+        setSelectedStudentIds([]);
+        fetchStudents();
+      } else {
+        setBanner({ text: data.error || "পরিবর্তন সম্পন্ন করা যায়নি।", type: "error" });
+      }
+    } catch {
+      setBanner({ text: "নেটওয়ার্ক ত্রুটি।", type: "error" });
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
+  // Bulk Assign Class & Section
+  const handleExecuteBulkAssign = async () => {
+    if (selectedStudentIds.length === 0 || !bulkAssignSession || !bulkAssignClass) {
+      setBanner({ text: "সেশন এবং জামাত নির্বাচন আবশ্যক।", type: "error" });
+      return;
+    }
+    setBulkLoading(true);
+    try {
+      const res = await fetch("/api/admin/students/bulk", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "ASSIGN_CLASS_SECTION",
+          studentIds: selectedStudentIds,
+          payload: {
+            sessionId: bulkAssignSession,
+            classId: bulkAssignClass,
+            sectionId: bulkAssignSection || null,
+          },
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setBanner({ text: data.message, type: "success" });
+        setShowBulkAssignModal(false);
+        setSelectedStudentIds([]);
+        fetchStudents();
+      } else {
+        setBanner({ text: data.error || "বরাদ্দ সম্পন্ন করা যায়নি।", type: "error" });
+      }
+    } catch {
+      setBanner({ text: "নেটওয়ার্ক ত্রুটি।", type: "error" });
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
+  // Bulk Export to CSV
+  const handleBulkExportCsv = async () => {
+    if (selectedStudentIds.length === 0) return;
+    setBulkLoading(true);
+    try {
+      const res = await fetch("/api/admin/students/bulk", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "EXPORT_DATA",
+          studentIds: selectedStudentIds,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success && data.students) {
+        const rows = data.students;
+        const headers = ["আইডি", "নাম (বাংলা)", "নাম (ইংরেজি)", "জামাত", "শাখা", "রোল", "আবাসিক অবস্থা", "অভিভাবক", "মোবাইল", "ঠিকানা"];
+        const csvContent = [
+          headers.join(","),
+          ...rows.map((r: any) =>
+            [
+              `"${r.studentIdNumber}"`,
+              `"${r.fullNameBn}"`,
+              `"${r.fullNameEn}"`,
+              `"${r.className}"`,
+              `"${r.sectionName}"`,
+              `"${r.rollNumber}"`,
+              `"${r.residentialStatus}"`,
+              `"${r.guardianName}"`,
+              `"${r.guardianPhone}"`,
+              `"${r.address}"`,
+            ].join(",")
+          ),
+        ].join("\n");
+
+        const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `EHRJ_Students_Export_${new Date().toISOString().slice(0, 10)}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setBanner({ text: `${rows.length} জন শিক্ষার্থীর তথ্য CSV ফাইলে ডাউনলোড হয়েছে।`, type: "success" });
+      }
+    } catch {
+      setBanner({ text: "এক্সপোর্ট করতে সমস্যা হয়েছে।", type: "error" });
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
+  // Bulk Generate Batch ID Cards
+  const handleBulkGenerateIdCards = async () => {
+    if (selectedStudentIds.length === 0) return;
+    setBulkLoading(true);
+    try {
+      const res = await fetch("/api/admin/documents/batch", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          studentIds: selectedStudentIds,
+          documentType: "EHRJ-ID",
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setBanner({ text: `${data.message} সনদ ও প্রত্যয়নপত্র কনসোলে গিয়ে প্রিন্ট করতে পারেন।`, type: "success" });
+        setSelectedStudentIds([]);
+      } else {
+        setBanner({ text: data.error || "আইডি কার্ড ব্যাচ জেনারেট করা যায়নি।", type: "error" });
+      }
+    } catch {
+      setBanner({ text: "নেটওয়ার্ক ত্রুটি।", type: "error" });
+    } finally {
+      setBulkLoading(false);
+    }
+  };
 
   // Arabic Name Assistance Handler
   const handleArabicSuggestion = () => {
@@ -498,12 +682,76 @@ export default function AdminStudentsPage() {
           </div>
         </div>
 
+        {/* Bulk Action Floating Toolbar */}
+        {selectedStudentIds.length > 0 && (
+          <div className="bg-[#052216] text-white p-4 rounded-xl shadow-xl border border-emerald-600/40 flex flex-wrap items-center justify-between gap-3 animate-in fade-in slide-in-from-top-2">
+            <div className="flex items-center gap-2.5">
+              <span className="bg-amber-400 text-slate-950 font-bold px-3 py-1 rounded-full text-xs">
+                {selectedStudentIds.length} জন নির্বাচিত
+              </span>
+              <span className="text-xs text-emerald-200 font-medium">যৌথ অ্যাকশন সম্পাদন করুন:</span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => setShowBulkAssignModal(true)}
+                disabled={bulkLoading}
+                className="bg-emerald-800 hover:bg-emerald-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition border border-emerald-600/40"
+              >
+                <GraduationCap className="w-3.5 h-3.5 text-amber-300" />
+                <span>জামাত/শাখা বরাদ্দ</span>
+              </button>
+
+              <button
+                onClick={() => setShowBulkResModal(true)}
+                disabled={bulkLoading}
+                className="bg-emerald-800 hover:bg-emerald-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition border border-emerald-600/40"
+              >
+                <Home className="w-3.5 h-3.5 text-blue-300" />
+                <span>আবাসিক স্থিতি</span>
+              </button>
+
+              <button
+                onClick={handleBulkGenerateIdCards}
+                disabled={bulkLoading}
+                className="bg-emerald-800 hover:bg-emerald-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition border border-emerald-600/40"
+              >
+                <Printer className="w-3.5 h-3.5 text-purple-300" />
+                <span>আইডি কার্ড ব্যাচ</span>
+              </button>
+
+              <button
+                onClick={handleBulkExportCsv}
+                disabled={bulkLoading}
+                className="bg-emerald-800 hover:bg-emerald-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition border border-emerald-600/40"
+              >
+                <FileSpreadsheet className="w-3.5 h-3.5 text-green-300" />
+                <span>এক্সপোর্ট CSV</span>
+              </button>
+
+              <button
+                onClick={() => setSelectedStudentIds([])}
+                className="bg-white/10 hover:bg-white/20 px-2.5 py-1.5 rounded-lg text-xs font-medium transition"
+              >
+                বাতিল
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Student Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden relative">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs sm:text-sm">
+            <table className="w-full text-left text-xs sm:text-sm min-w-[800px]">
               <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold">
                 <tr>
+                  <th className="py-3 px-3 w-10 text-center">
+                    <input
+                      type="checkbox"
+                      checked={students.length > 0 && selectedStudentIds.length === students.length}
+                      onChange={handleToggleSelectAll}
+                      className="rounded text-[#0D5C3A] focus:ring-[#0D5C3A] w-4 h-4 cursor-pointer"
+                    />
+                  </th>
                   <th className="py-3 px-4">আইডি নম্বর</th>
                   <th className="py-3 px-4">শিক্ষার্থীর নাম</th>
                   <th className="py-3 px-4">জামাত ও শাখা</th>
@@ -511,27 +759,37 @@ export default function AdminStudentsPage() {
                   <th className="py-3 px-4">পিতা / অভিভাবক ও যোগাযোগ</th>
                   <th className="py-3 px-4">আবাসিক অবস্থা</th>
                   <th className="py-3 px-4">অবস্থা</th>
-                  <th className="py-3 px-4 text-center">অ্যাকশন</th>
+                  <th className="py-3 px-4 text-center sticky right-0 bg-slate-50 z-10 shadow-[-4px_0_6px_-2px_rgba(0,0,0,0.05)]">
+                    অ্যাকশন
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {loading ? (
                   <tr>
-                    <td colSpan={8} className="py-12 text-center text-slate-400">
+                    <td colSpan={9} className="py-12 text-center text-slate-400">
                       <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-emerald-600" />
                       <span>তথ্য লোড হচ্ছে...</span>
                     </td>
                   </tr>
                 ) : students.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="py-12 text-center text-slate-400">
+                    <td colSpan={9} className="py-12 text-center text-slate-400">
                       <Users className="w-8 h-8 mx-auto mb-2 text-slate-300" />
                       <span>কোনো শিক্ষার্থীর তথ্য পাওয়া যায়নি।</span>
                     </td>
                   </tr>
                 ) : (
                   students.map((student) => (
-                    <tr key={student.id} className="hover:bg-slate-50/80 transition-colors">
+                    <tr key={student.id} className="hover:bg-slate-50/80 transition-colors group">
+                      <td className="py-3 px-3 text-center">
+                        <input
+                          type="checkbox"
+                          checked={selectedStudentIds.includes(student.id)}
+                          onChange={() => handleToggleStudent(student.id)}
+                          className="rounded text-[#0D5C3A] focus:ring-[#0D5C3A] w-4 h-4 cursor-pointer"
+                        />
+                      </td>
                       <td className="py-3 px-4">
                         <span className="font-mono font-bold text-xs bg-emerald-50 text-emerald-800 border border-emerald-200/60 px-2 py-0.5 rounded inline-block">
                           {student.studentIdNumber}
@@ -560,11 +818,37 @@ export default function AdminStudentsPage() {
                         </span>
                       </td>
                       <td className="py-3 px-4 text-xs">
-                        <div className="font-medium text-slate-800">{student.primaryGuardianName || student.fatherNameBn}</div>
-                        <div className="text-slate-500 flex items-center gap-1 font-mono text-[11px]">
-                          <Phone className="w-3 h-3 text-slate-400" />
-                          <span>{student.guardianPhone || student.fatherPhone || "যোগাযোগ নেই"}</span>
-                        </div>
+                        {(!student.primaryGuardianName || student.primaryGuardianName === "অজানা") &&
+                        (!student.fatherNameBn || student.fatherNameBn === "অজানা") ? (
+                          <div className="space-y-1">
+                            <span className="inline-block text-[10px] font-semibold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded">
+                              অভিভাবকের তথ্য অনুপস্থিত
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setGuardianEditTarget({
+                                  id: student.id,
+                                  name: student.fullNameBn,
+                                  idNumber: student.studentIdNumber,
+                                  guardianName: student.primaryGuardianName || student.fatherNameBn,
+                                  phone: student.guardianPhone || student.fatherPhone,
+                                })
+                              }
+                              className="text-[11px] font-bold text-[#0D5C3A] hover:underline flex items-center gap-1"
+                            >
+                              [ তথ্য আপডেট করুন ]
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <div className="font-medium text-slate-800">{student.primaryGuardianName || student.fatherNameBn}</div>
+                            <div className="text-slate-500 flex items-center gap-1 font-mono text-[11px]">
+                              <Phone className="w-3 h-3 text-slate-400" />
+                              <span>{student.guardianPhone || student.fatherPhone || "যোগাযোগ নেই"}</span>
+                            </div>
+                          </>
+                        )}
                       </td>
                       <td className="py-3 px-4">
                         {student.residentialStatus === "RESIDENTIAL" ? (
@@ -594,7 +878,7 @@ export default function AdminStudentsPage() {
                           </span>
                         )}
                       </td>
-                      <td className="py-3 px-4 text-center">
+                      <td className="py-3 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 z-10 shadow-[-4px_0_6px_-2px_rgba(0,0,0,0.05)]">
                         <Link
                           href={`/admin/students/${student.id}`}
                           className="px-2.5 py-1.5 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 text-slate-700 rounded-lg text-xs font-semibold inline-flex items-center gap-1 transition-colors border border-slate-200"
@@ -1090,6 +1374,176 @@ export default function AdminStudentsPage() {
             </form>
           </div>
         </div>
+      )}
+
+      {/* Bulk Assign Modal */}
+      {showBulkAssignModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 animate-in fade-in zoom-in-95">
+            <div className="flex justify-between items-center pb-3 border-b mb-4">
+              <h3 className="font-bold text-slate-800 text-lg flex items-center gap-2">
+                <Layers className="w-5 h-5 text-indigo-600" />
+                একযোগে জামাত ও শাখা বরাদ্দ
+              </h3>
+              <button
+                onClick={() => setShowBulkAssignModal(false)}
+                className="text-slate-400 hover:text-slate-600 font-bold p-1"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-600 mb-4 bg-indigo-50 p-2.5 rounded-lg border border-indigo-100">
+              নির্বাচিত <span className="font-bold text-indigo-700">{selectedStudentIds.length}</span> জন শিক্ষার্থীকে নতুন সেশন, জামাত ও শাখায় বরাদ্দ দেওয়া হবে।
+            </p>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">শিক্ষাবর্ষ / সেশন *</label>
+                <select
+                  value={bulkAssignSession}
+                  onChange={(e) => setBulkAssignSession(e.target.value)}
+                  className="w-full text-sm p-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">সেশন নির্বাচন করুন</option>
+                  {sessions.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.name} {s.isCurrent ? "(চলতি সেশন)" : ""}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">জামাত / শ্রেণি *</label>
+                <select
+                  value={bulkAssignClass}
+                  onChange={(e) => setBulkAssignClass(e.target.value)}
+                  className="w-full text-sm p-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">জামাত নির্বাচন করুন</option>
+                  {classes.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.nameBn}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">শাখা (ঐচ্ছিক)</label>
+                <select
+                  value={bulkAssignSection}
+                  onChange={(e) => setBulkAssignSection(e.target.value)}
+                  className="w-full text-sm p-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">সাধারণ / শাখা নির্বাচন</option>
+                  {sections
+                    .filter((s) => !bulkAssignClass || s.classId === bulkAssignClass)
+                    .map((sec) => (
+                      <option key={sec.id} value={sec.id}>
+                        {sec.nameBn}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-4 border-t">
+                <button
+                  type="button"
+                  onClick={() => setShowBulkAssignModal(false)}
+                  className="px-4 py-2 text-sm border rounded-lg hover:bg-slate-50 text-slate-700 font-medium"
+                >
+                  বাতিল
+                </button>
+                <button
+                  type="button"
+                  disabled={bulkLoading || !bulkAssignSession || !bulkAssignClass}
+                  onClick={handleExecuteBulkAssign}
+                  className="px-5 py-2 text-sm bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white rounded-lg font-bold flex items-center gap-1.5 shadow"
+                >
+                  {bulkLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
+                  বরাদ্দ নিশ্চিত করুন
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Bulk Residential Status Modal */}
+      {showBulkResModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 animate-in fade-in zoom-in-95">
+            <div className="flex justify-between items-center pb-3 border-b mb-4">
+              <h3 className="font-bold text-slate-800 text-lg flex items-center gap-2">
+                <Home className="w-5 h-5 text-emerald-600" />
+                আবাসিক অবস্থা পরিবর্তন
+              </h3>
+              <button
+                onClick={() => setShowBulkResModal(false)}
+                className="text-slate-400 hover:text-slate-600 font-bold p-1"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-600 mb-4 bg-emerald-50 p-2.5 rounded-lg border border-emerald-100">
+              নির্বাচিত <span className="font-bold text-emerald-700">{selectedStudentIds.length}</span> জন শিক্ষার্থীর আবাসিক অবস্থা পরিবর্তন করা হবে।
+            </p>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">নতুন আবাসিক ধরন *</label>
+                <select
+                  value={bulkResidentialStatus}
+                  onChange={(e) => setBulkResidentialStatus(e.target.value)}
+                  className="w-full text-sm p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500 font-medium"
+                >
+                  <option value="NON_RESIDENTIAL">অনাবাসিক (Non-Residential)</option>
+                  <option value="RESIDENTIAL">আবাসিক (Residential)</option>
+                  <option value="DAY_CARE">ডে-কেয়ার (Day Care - খাদ্য বিলমুক্ত)</option>
+                </select>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-4 border-t">
+                <button
+                  type="button"
+                  onClick={() => setShowBulkResModal(false)}
+                  className="px-4 py-2 text-sm border rounded-lg hover:bg-slate-50 text-slate-700 font-medium"
+                >
+                  বাতিল
+                </button>
+                <button
+                  type="button"
+                  disabled={bulkLoading}
+                  onClick={handleExecuteBulkResidential}
+                  className="px-5 py-2 text-sm bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 text-white rounded-lg font-bold flex items-center gap-1.5 shadow"
+                >
+                  {bulkLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
+                  সংরক্ষণ করুন
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Guardian Edit Modal */}
+      {guardianEditTarget && (
+        <UpdateGuardianModal
+          isOpen={!!guardianEditTarget}
+          studentId={guardianEditTarget.id}
+          studentName={guardianEditTarget.name}
+          studentIdNumber={guardianEditTarget.idNumber}
+          initialGuardianName={guardianEditTarget.guardianName}
+          initialPhone={guardianEditTarget.phone}
+          onClose={() => setGuardianEditTarget(null)}
+          onSuccess={() => {
+            setBanner({ text: "অভিভাবকের তথ্য সফলভাবে আপডেট ও অডিট লগ সংরক্ষিত হয়েছে।", type: "success" });
+            fetchStudents();
+          }}
+        />
       )}
     </div>
   );

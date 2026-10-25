@@ -1,12 +1,12 @@
 {
   "masterEnabled": true,
   "academicAi": true,
-  "financeAi": true,
+  "financeAi": false,
   "admissionAi": true,
   "helpdeskAi": true,
   "documentAi": true,
   "arabicNameAi": true,
-  "lastToggledAt": "2026-09-28T20:01:59.653Z",
+  "lastToggledAt": "2026-10-04T08:33:21.918Z",
   "toggledBy": "8f2ff11f-0782-42de-aaaf-6fe242822864",
   "toggleReason": "Re-enabling master AI"
 }

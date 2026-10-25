@@ -60,6 +60,17 @@ export default function TeacherAttendanceManager() {
   const [searchQuery, setSearchQuery] = useState("");
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasUnsavedChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [hasUnsavedChanges]);
+
   // 1. Fetch Teacher Assignments on load
   useEffect(() => {
     async function loadAssignments() {
@@ -420,30 +431,36 @@ export default function TeacherAttendanceManager() {
       )}
 
       {/* 3. Live Stats Counters Bar */}
-      <div className="grid grid-cols-2 sm:grid-cols-6 gap-3">
-        <div className="bg-white p-3 rounded-xl border border-gray-200 text-center shadow-sm">
-          <span className="text-[11px] text-gray-500 font-semibold block">মোট ছাত্র</span>
-          <span className="text-lg font-bold font-mono text-gray-900">{totalStudents}</span>
+      <div className="grid grid-cols-2 sm:grid-cols-6 gap-3 perspective-1000">
+        <div className="card-3d bg-white p-3.5 rounded-2xl border-2 border-slate-200/90 hover:border-[#D4AF37] text-center shadow-md transition-all duration-300 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-slate-400" />
+          <span className="text-[11px] text-slate-500 font-bold block pt-1">মোট ছাত্র</span>
+          <span className="text-xl font-black font-mono text-slate-900 mt-1 block">{totalStudents}</span>
         </div>
-        <div className="bg-white p-3 rounded-xl border border-emerald-200 text-center shadow-sm bg-emerald-50/40">
-          <span className="text-[11px] text-emerald-800 font-semibold block">উপস্থিত</span>
-          <span className="text-lg font-bold font-mono text-emerald-700">{presentCount}</span>
+        <div className="card-3d bg-white p-3.5 rounded-2xl border-2 border-emerald-200 hover:border-[#D4AF37] text-center shadow-md transition-all duration-300 relative overflow-hidden bg-gradient-to-b from-emerald-50/50 to-white">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-emerald-500" />
+          <span className="text-[11px] text-emerald-800 font-bold block pt-1">উপস্থিত</span>
+          <span className="text-xl font-black font-mono text-emerald-700 mt-1 block">{presentCount}</span>
         </div>
-        <div className="bg-white p-3 rounded-xl border border-red-200 text-center shadow-sm bg-red-50/40">
-          <span className="text-[11px] text-red-800 font-semibold block">অনুপস্থিত</span>
-          <span className="text-lg font-bold font-mono text-red-700">{absentCount}</span>
+        <div className="card-3d bg-white p-3.5 rounded-2xl border-2 border-rose-200 hover:border-[#D4AF37] text-center shadow-md transition-all duration-300 relative overflow-hidden bg-gradient-to-b from-rose-50/50 to-white">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-rose-500" />
+          <span className="text-[11px] text-rose-800 font-bold block pt-1">অনুপস্থিত</span>
+          <span className="text-xl font-black font-mono text-rose-700 mt-1 block">{absentCount}</span>
         </div>
-        <div className="bg-white p-3 rounded-xl border border-amber-200 text-center shadow-sm bg-amber-50/40">
-          <span className="text-[11px] text-amber-800 font-semibold block">দেরি (Late)</span>
-          <span className="text-lg font-bold font-mono text-amber-700">{lateCount}</span>
+        <div className="card-3d bg-white p-3.5 rounded-2xl border-2 border-amber-200 hover:border-[#D4AF37] text-center shadow-md transition-all duration-300 relative overflow-hidden bg-gradient-to-b from-amber-50/50 to-white">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-amber-500" />
+          <span className="text-[11px] text-amber-800 font-bold block pt-1">দেরি (Late)</span>
+          <span className="text-xl font-black font-mono text-amber-700 mt-1 block">{lateCount}</span>
         </div>
-        <div className="bg-white p-3 rounded-xl border border-blue-200 text-center shadow-sm bg-blue-50/40">
-          <span className="text-[11px] text-blue-800 font-semibold block">ছুটি (Leave)</span>
-          <span className="text-lg font-bold font-mono text-blue-700">{leaveCount}</span>
+        <div className="card-3d bg-white p-3.5 rounded-2xl border-2 border-blue-200 hover:border-[#D4AF37] text-center shadow-md transition-all duration-300 relative overflow-hidden bg-gradient-to-b from-blue-50/50 to-white">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-blue-500" />
+          <span className="text-[11px] text-blue-800 font-bold block pt-1">ছুটি (Leave)</span>
+          <span className="text-xl font-black font-mono text-blue-700 mt-1 block">{leaveCount}</span>
         </div>
-        <div className="bg-white p-3 rounded-xl border border-gray-200 text-center shadow-sm">
-          <span className="text-[11px] text-gray-500 font-semibold block">উপস্থিতির হার</span>
-          <span className="text-lg font-bold font-mono text-[#0D5C3A]">
+        <div className="card-3d bg-white p-3.5 rounded-2xl border-2 border-emerald-200 hover:border-[#D4AF37] text-center shadow-md transition-all duration-300 relative overflow-hidden bg-gradient-to-b from-emerald-50/60 to-white">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-600 to-amber-500" />
+          <span className="text-[11px] text-emerald-900 font-bold block pt-1">উপস্থিতির হার</span>
+          <span className="text-xl font-black font-mono text-[#0D5C3A] mt-1 block">
             {attendanceRate.toFixed(1)}%
           </span>
         </div>
@@ -631,7 +648,7 @@ export default function TeacherAttendanceManager() {
             </div>
 
             {/* Sticky Save Bar */}
-            <div className="p-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
+            <div className="p-4 bg-gray-50 border-t border-gray-200 flex flex-wrap items-center justify-between gap-3">
               <span className="text-xs text-gray-500">
                 তারিখ: <strong className="font-mono">{date}</strong> | চিহ্নিত ছাত্র:{" "}
                 <strong className="text-[#0D5C3A] font-mono">
@@ -639,14 +656,23 @@ export default function TeacherAttendanceManager() {
                 </strong>
               </span>
 
-              <button
-                type="submit"
-                disabled={saving || !canEdit || isLocked}
-                className="bg-[#0D5C3A] hover:bg-[#158052] disabled:opacity-50 text-white px-6 py-2 rounded-lg text-xs font-bold shadow-md transition flex items-center gap-1.5"
-              >
-                <Save className="w-4 h-4" />
-                {saving ? "সংরক্ষণ হচ্ছে..." : "হাজিরা সংরক্ষণ করুন"}
-              </button>
+              <div className="flex items-center gap-2.5">
+                {hasUnsavedChanges && (
+                  <span className="text-[11px] bg-amber-50 text-amber-800 font-bold px-2.5 py-1 rounded-full border border-amber-300 flex items-center gap-1.5 shadow-xs">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+                    অসংরক্ষিত পরিবর্তন রয়েছে
+                  </span>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={saving || !canEdit || isLocked}
+                  className="bg-[#0D5C3A] hover:bg-[#158052] disabled:opacity-50 text-white px-6 py-2 rounded-lg text-xs font-bold shadow-md transition flex items-center gap-1.5"
+                >
+                  <Save className="w-4 h-4" />
+                  {saving ? "সংরক্ষণ হচ্ছে..." : "হাজিরা সংরক্ষণ করুন"}
+                </button>
+              </div>
             </div>
           </form>
         )}

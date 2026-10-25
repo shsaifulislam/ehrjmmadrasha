@@ -308,6 +308,28 @@ export async function askAIAssistant(params: {
     evidence.push("System Health & Database WAL Mode: NORMAL");
   }
 
+  // Check granular feature flags
+  if (module === "FINANCE" && !flags.financeAi) {
+    return {
+      answer: "আর্থিক AI সহকারী সেবা বর্তমানে প্রশাসনিক নীতি অনুযায়ী সাময়িকভাবে নিষ্ক্রিয় আছে।",
+      evidence: ["Feature Flag: financeAi is disabled"],
+      module: "FINANCE",
+      provider: "SYSTEM_GOVERNANCE",
+      latencyMs: Date.now() - startTime,
+      tokens: 0,
+    };
+  }
+  if (module === "ACADEMIC" && !flags.academicAi) {
+    return {
+      answer: "একাডেমিক AI সহকারী সেবা বর্তমানে প্রশাসনিক নীতি অনুযায়ী সাময়িকভাবে নিষ্ক্রিয় আছে।",
+      evidence: ["Feature Flag: academicAi is disabled"],
+      module: "ACADEMIC",
+      provider: "SYSTEM_GOVERNANCE",
+      latencyMs: Date.now() - startTime,
+      tokens: 0,
+    };
+  }
+
   const generated = await provider.generateText(cleanQuery, contextData);
 
   logAIUsage({
@@ -350,6 +372,15 @@ export async function detectFinancialAnomalies(): Promise<{
     humanReviewStatus: string;
   }[];
 }> {
+  const flags = getAIFeatureFlags();
+  if (!flags.masterEnabled || !flags.financeAi) {
+    return {
+      timestamp: new Date().toISOString(),
+      anomaliesDetected: 0,
+      anomalies: [],
+    };
+  }
+
   const anomalies: any[] = [];
 
   // 1. Scan for identical invoice amounts created for the same student on the same day
@@ -441,8 +472,9 @@ export function evaluateAdmissionApplication(params: {
   if (params.hasBirthCertDoc) score += 10;
   else missingItems.push("জন্মসনদ ডকুমেন্টের কপি");
 
-  const arabicName = suggestArabicName(params.fullNameBn || "");
-  const arabicFatherName = suggestArabicName(params.fatherNameBn || "");
+  const flags = getAIFeatureFlags();
+  const arabicName = flags.masterEnabled && flags.arabicNameAi ? suggestArabicName(params.fullNameBn || "") : "";
+  const arabicFatherName = flags.masterEnabled && flags.arabicNameAi ? suggestArabicName(params.fatherNameBn || "") : "";
 
   const recommendationNote =
     score >= 90
@@ -467,6 +499,16 @@ export function classifyHelpdeskTicket(subject: string, message: string): {
   draftResponseBn: string;
   requiresHumanApproval: boolean;
 } {
+  const flags = getAIFeatureFlags();
+  if (!flags.masterEnabled || !flags.helpdeskAi) {
+    return {
+      suggestedCategory: "GENERAL",
+      suggestedPriority: "MEDIUM",
+      draftResponseBn: "আপনার বার্তার জন্য ধন্যবাদ। বিষয়টি মাদরাসা কর্তৃপক্ষ গুরুত্বসহকারে পর্যালোচনা করছে।",
+      requiresHumanApproval: true,
+    };
+  }
+
   const combined = `${subject} ${message}`.toLowerCase();
 
   let category: "ACADEMIC" | "FINANCE" | "TECHNICAL" | "GENERAL" = "GENERAL";

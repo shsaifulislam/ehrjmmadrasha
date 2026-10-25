@@ -1,22 +1,14 @@
 import { prisma } from "../src/lib/prisma";
-import { SignJWT } from "jose";
-
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "ehrj-madrasa-digital-campus-secure-production-jwt-secret-key-2026"
-);
+import { createSessionToken } from "../src/lib/auth";
 
 async function createAuthToken(user: { id: string; username: string; role: string; email: string; name: string }) {
-  return new SignJWT({
+  return createSessionToken({
     userId: user.id,
     username: user.username,
     role: user.role,
     email: user.email,
     name: user.name,
-  })
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime("7d")
-    .sign(JWT_SECRET);
+  });
 }
 
 async function runPhase13HttpEndpointTests() {
@@ -63,9 +55,9 @@ async function runPhase13HttpEndpointTests() {
   // TEST 1: Unauthenticated request should be blocked
   console.log("\n[TEST 1] Testing Unauthenticated Access Rejection...");
   const resUnauth = await fetch(`${BASE_URL}/api/admin/hr/stats`);
-  console.log(`✅ Unauthenticated /api/admin/hr/stats Status: ${resUnauth.status} (Expected: 403)`);
-  if (resUnauth.status !== 403) {
-    throw new Error(`Expected 403 for unauthenticated request, got ${resUnauth.status}`);
+  console.log(`✅ Unauthenticated /api/admin/hr/stats Status: ${resUnauth.status} (Expected: 401/403)`);
+  if (resUnauth.status !== 401 && resUnauth.status !== 403) {
+    throw new Error(`Expected 401 or 403 for unauthenticated request, got ${resUnauth.status}`);
   }
 
   // TEST 2: RBAC Protection - Guardian blocked from HR admin endpoints

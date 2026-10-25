@@ -1181,5 +1181,41 @@
     "latencyMs": 16,
     "id": "aud-1790687134920-i1hh",
     "timestamp": "2026-09-29T13:05:34.920Z"
+  },
+  {
+    "query": "test",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 0,
+    "latencyMs": 47,
+    "id": "aud-1791213829518-9nxl",
+    "timestamp": "2026-10-05T15:23:49.518Z"
+  },
+  {
+    "query": "test",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 0,
+    "latencyMs": 14,
+    "id": "aud-1791232009821-qc7h",
+    "timestamp": "2026-10-05T20:26:49.822Z"
+  },
+  {
+    "query": "test",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 0,
+    "latencyMs": 22,
+    "id": "aud-1791232636803-59ea",
+    "timestamp": "2026-10-05T20:37:16.803Z"
+  },
+  {
+    "query": "test",
+    "userRole": "PUBLIC",
+    "searchType": "SEMANTIC",
+    "resultsCount": 0,
+    "latencyMs": 6,
+    "id": "aud-1791232692185-aj9o",
+    "timestamp": "2026-10-05T20:38:12.185Z"
   }
 ]

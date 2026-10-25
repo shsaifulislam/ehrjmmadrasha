@@ -98,11 +98,15 @@ export function validateFundAllocationRule(
 export function updateBudgetLineActuals(
   budgetId: string,
   lineId: string,
-  updates: {
-    actualAmount?: number;
-    committedAmount?: number;
-    forecastAmount?: number;
-  }
+  updatesOrActual:
+    | {
+        actualAmount?: number;
+        committedAmount?: number;
+        forecastAmount?: number;
+      }
+    | number,
+  committedAmountArg?: number,
+  forecastAmountArg?: number
 ): { success: boolean; line?: BudgetLine; budget?: Budget; error?: string } {
   const budget = getBudgetById(budgetId);
   if (!budget) {
@@ -112,6 +116,22 @@ export function updateBudgetLineActuals(
   const line = budget.lines.find((l) => l.id === lineId);
   if (!line) {
     return { success: false, error: "বাজেট লাইন পাওয়া যায়নি।" };
+  }
+
+  let updates: {
+    actualAmount?: number;
+    committedAmount?: number;
+    forecastAmount?: number;
+  } = {};
+
+  if (typeof updatesOrActual === "number") {
+    updates = {
+      actualAmount: updatesOrActual,
+      committedAmount: committedAmountArg,
+      forecastAmount: forecastAmountArg,
+    };
+  } else if (updatesOrActual) {
+    updates = updatesOrActual;
   }
 
   if (updates.actualAmount !== undefined) {
@@ -249,6 +269,8 @@ export function getFundBudgetSummaries(budgetId: string): FundBudgetSummary[] {
     return f;
   });
 }
+
+export const calculateFundSummaries = getFundBudgetSummaries;
 
 /**
  * Generates comprehensive Variance Report

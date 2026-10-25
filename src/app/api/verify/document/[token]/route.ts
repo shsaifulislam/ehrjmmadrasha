@@ -6,7 +6,8 @@ import { INSTITUTION_INFO } from "@/lib/constants";
  * GET /api/verify/document/[token]
  * Public Privacy-Safe Document & Certificate Verification Endpoint
  */
-export async function GET(req: NextRequest, { params }: { params: { token: string } }) {
+export async function GET(req: NextRequest, { params: paramsPromise }: { params: Promise<{ token: string }> }) {
+  const params = await paramsPromise;
   try {
     const rawToken = params?.token;
     if (!rawToken || !rawToken.trim()) {
@@ -60,10 +61,12 @@ export async function GET(req: NextRequest, { params }: { params: { token: strin
       }
     }
 
+    const isRevoked = Boolean(cert.isRevoked || cert.status === "REVOKED");
+
     // Return strictly privacy-safe verification data
     return NextResponse.json({
       success: true,
-      verified: !cert.isRevoked,
+      verified: !isRevoked,
       document: {
         certificateNumber: cert.certificateNumber,
         verificationCode: cert.verificationCode,
@@ -76,9 +79,9 @@ export async function GET(req: NextRequest, { params }: { params: { token: strin
         sessionName: cert.session?.name || parsedSnapshot?.session?.name || "বর্তমান শিক্ষাবর্ষ",
         issueDate: cert.issueDate,
         version: cert.version,
-        isRevoked: cert.isRevoked,
-        status: cert.isRevoked ? "REVOKED" : "VALID",
-        revocationNotice: cert.isRevoked ? "সতর্কতা: এই সনদপত্রটি মাদরাসা কর্তৃপক্ষ কর্তৃক আনুষ্ঠানিকভাবে বাতিল (REVOKED) করা হয়েছে।" : null,
+        isRevoked,
+        status: isRevoked ? "REVOKED" : "VALID",
+        revocationNotice: isRevoked ? "সতর্কতা: এই সনদপত্রটি মাদরাসা কর্তৃপক্ষ কর্তৃক আনুষ্ঠানিকভাবে বাতিল (REVOKED) করা হয়েছে।" : null,
         institution: {
           nameBn: INSTITUTION_INFO.nameBn,
           nameEn: INSTITUTION_INFO.nameEn,

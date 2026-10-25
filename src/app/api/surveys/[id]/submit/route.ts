@@ -5,14 +5,15 @@ import { submitSurveyResponse } from "@/lib/surveys";
 export const dynamic = "force-dynamic";
 
 interface RouteParams {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 /**
  * POST /api/surveys/[id]/submit
  * Submits response to survey with eligibility, duplicate, and question validation.
  */
-export async function POST(req: NextRequest, { params }: RouteParams) {
+export async function POST(req: NextRequest, { params: paramsPromise }: RouteParams) {
+  const params = await paramsPromise;
   try {
     const session = await getSessionUser();
     const body = await req.json();

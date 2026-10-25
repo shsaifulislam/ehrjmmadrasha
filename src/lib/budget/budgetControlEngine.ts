@@ -184,7 +184,8 @@ export function scanAndGenerateBudgetAlerts(budgetId: string): BudgetControlAler
  */
 export function acknowledgeAlert(
   alertId: string,
-  actor: ActorContext
+  actor: ActorContext,
+  justificationBn?: string
 ): { success: boolean; alert?: BudgetControlAlert; error?: string } {
   const alerts = getAllAlerts();
   const alert = alerts.find((a) => a.id === alertId);
@@ -193,6 +194,8 @@ export function acknowledgeAlert(
   }
 
   alert.isAcknowledged = true;
+  alert.status = "ACKNOWLEDGED";
+  alert.justificationBn = justificationBn;
   alert.acknowledgedBy = actor.actorName;
   alert.acknowledgedAt = new Date().toISOString();
 
@@ -204,12 +207,16 @@ export function acknowledgeAlert(
     actorId: actor.actorId,
     actorName: actor.actorName,
     actorRole: actor.actorRole,
-    notes: `সতর্কবার্তা গৃহীত হয়েছে: ${alert.categoryNameBn} (${alert.alertLevel})`,
-    details: { alertId: alert.id, alertLevel: alert.alertLevel },
+    notes: `সতর্কবার্তা গৃহীত হয়েছে: ${alert.categoryNameBn} (${alert.alertLevel})${
+      justificationBn ? ` | যুক্তি: ${justificationBn}` : ""
+    }`,
+    details: { alertId: alert.id, alertLevel: alert.alertLevel, justificationBn },
   });
 
   return { success: true, alert };
 }
 
 export const scanBudgetForThresholdAlerts = scanAndGenerateBudgetAlerts;
+export const scanBudgetAndGenerateAlerts = scanAndGenerateBudgetAlerts;
 export const acknowledgeControlAlert = acknowledgeAlert;
+

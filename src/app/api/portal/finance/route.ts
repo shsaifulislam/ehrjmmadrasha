@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
  */
 export async function GET(req: NextRequest) {
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user) {
       return NextResponse.json({ error: "লগইন করা আবশ্যক।" }, { status: 401 });
     }
@@ -45,7 +45,7 @@ export async function GET(req: NextRequest) {
           { status: 403 }
         );
       }
-    } else if (user.role !== "ADMIN" && user.role !== "PRINCIPAL") {
+    } else if (user.role !== "ADMIN" && user.role !== "PRINCIPAL" && user.role !== "ACCOUNTANT") {
       // Teachers and others are forbidden from student finance
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
     }

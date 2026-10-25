@@ -236,9 +236,9 @@ export async function calculateStudentFee(
  * Generate Next Unique Concurrency-Safe Invoice Number
  * Format: EHRJ-INV-YYYY-XXXXX
  */
-export async function generateNextInvoiceNumber(): Promise<string> {
+export async function generateNextInvoiceNumber(client: any = prisma): Promise<string> {
   const currentYear = new Date().getFullYear();
-  const latest = await prisma.feeInvoice.findFirst({
+  const latest = await client.feeInvoice.findFirst({
     where: { invoiceNumber: { startsWith: `EHRJ-INV-${currentYear}-` } },
     orderBy: { invoiceNumber: "desc" },
     select: { invoiceNumber: true },
@@ -249,7 +249,9 @@ export async function generateNextInvoiceNumber(): Promise<string> {
     const num = parseInt(parts[parts.length - 1], 10);
     if (!isNaN(num)) maxSeq = num;
   }
-  const count = await prisma.feeInvoice.count();
+  const count = await client.feeInvoice.count({
+    where: { invoiceNumber: { startsWith: `EHRJ-INV-${currentYear}-` } },
+  });
   const nextSeq = Math.max(maxSeq + 1, count + 1);
   return `EHRJ-INV-${currentYear}-${String(nextSeq).padStart(5, "0")}`;
 }
@@ -258,9 +260,9 @@ export async function generateNextInvoiceNumber(): Promise<string> {
  * Generate Next Unique Concurrency-Safe Receipt Number
  * Format: EHRJ-RCP-YYYY-XXXXX
  */
-export async function generateNextReceiptNumber(): Promise<string> {
+export async function generateNextReceiptNumber(client: any = prisma): Promise<string> {
   const currentYear = new Date().getFullYear();
-  const latest = await prisma.paymentReceipt.findFirst({
+  const latest = await client.paymentReceipt.findFirst({
     where: { receiptNumber: { startsWith: `EHRJ-RCP-${currentYear}-` } },
     orderBy: { receiptNumber: "desc" },
     select: { receiptNumber: true },
@@ -271,7 +273,9 @@ export async function generateNextReceiptNumber(): Promise<string> {
     const num = parseInt(parts[parts.length - 1], 10);
     if (!isNaN(num)) maxSeq = num;
   }
-  const count = await prisma.paymentReceipt.count();
+  const count = await client.paymentReceipt.count({
+    where: { receiptNumber: { startsWith: `EHRJ-RCP-${currentYear}-` } },
+  });
   const nextSeq = Math.max(maxSeq + 1, count + 1);
   return `EHRJ-RCP-${currentYear}-${String(nextSeq).padStart(5, "0")}`;
 }
@@ -280,21 +284,40 @@ export async function generateNextReceiptNumber(): Promise<string> {
  * Generate Next Unique Concurrency-Safe Refund Number
  * Format: EHRJ-RFD-YYYY-XXXXX
  */
-export async function generateNextRefundNumber(): Promise<string> {
+export async function generateNextRefundNumber(client: any = prisma): Promise<string> {
   const currentYear = new Date().getFullYear();
-  const latest = await prisma.refund.findFirst({
-    where: { refundNumber: { startsWith: `EHRJ-RFD-${currentYear}-` } },
-    orderBy: { refundNumber: "desc" },
-    select: { refundNumber: true },
-  });
+  const [latestRefund, latestTx] = await Promise.all([
+    client.refund.findFirst({
+      where: { refundNumber: { startsWith: `EHRJ-RFD-${currentYear}-` } },
+      orderBy: { refundNumber: "desc" },
+      select: { refundNumber: true },
+    }),
+    client.cashTransaction.findFirst({
+      where: { receiptOrVoucherNo: { startsWith: `EHRJ-RFD-${currentYear}-` } },
+      orderBy: { receiptOrVoucherNo: "desc" },
+      select: { receiptOrVoucherNo: true },
+    }),
+  ]);
   let maxSeq = 0;
-  if (latest?.refundNumber) {
-    const parts = latest.refundNumber.split("-");
+  if (latestRefund?.refundNumber) {
+    const parts = latestRefund.refundNumber.split("-");
     const num = parseInt(parts[parts.length - 1], 10);
-    if (!isNaN(num)) maxSeq = num;
+    if (!isNaN(num)) maxSeq = Math.max(maxSeq, num);
   }
-  const count = await prisma.refund.count();
-  const nextSeq = Math.max(maxSeq + 1, count + 1);
+  if (latestTx?.receiptOrVoucherNo) {
+    const parts = latestTx.receiptOrVoucherNo.split("-");
+    const num = parseInt(parts[parts.length - 1], 10);
+    if (!isNaN(num)) maxSeq = Math.max(maxSeq, num);
+  }
+  const [refundCount, txCount] = await Promise.all([
+    client.refund.count({
+      where: { refundNumber: { startsWith: `EHRJ-RFD-${currentYear}-` } },
+    }),
+    client.cashTransaction.count({
+      where: { receiptOrVoucherNo: { startsWith: `EHRJ-RFD-${currentYear}-` } },
+    }),
+  ]);
+  const nextSeq = Math.max(maxSeq + 1, refundCount + 1, txCount + 1);
   return `EHRJ-RFD-${currentYear}-${String(nextSeq).padStart(5, "0")}`;
 }
 
@@ -302,15 +325,15 @@ export async function generateNextRefundNumber(): Promise<string> {
  * Generate Next Unique Concurrency-Safe Payroll Voucher Number
  * Format: EHRJ-PAY-YYYY-XXXXX
  */
-export async function generateNextPayrollVoucherNumber(): Promise<string> {
+export async function generateNextPayrollVoucherNumber(client: any = prisma): Promise<string> {
   const currentYear = new Date().getFullYear();
   const [latestPayroll, latestTx] = await Promise.all([
-    prisma.payrollRecord.findFirst({
+    client.payrollRecord.findFirst({
       where: { voucherNumber: { startsWith: `EHRJ-PAY-${currentYear}-` } },
       orderBy: { voucherNumber: "desc" },
       select: { voucherNumber: true },
     }),
-    prisma.cashTransaction.findFirst({
+    client.cashTransaction.findFirst({
       where: { receiptOrVoucherNo: { startsWith: `EHRJ-PAY-${currentYear}-` } },
       orderBy: { receiptOrVoucherNo: "desc" },
       select: { receiptOrVoucherNo: true },
@@ -327,7 +350,9 @@ export async function generateNextPayrollVoucherNumber(): Promise<string> {
     const num = parseInt(parts[parts.length - 1], 10);
     if (!isNaN(num) && num > maxSeq) maxSeq = num;
   }
-  const count = await prisma.payrollRecord.count();
+  const count = await client.payrollRecord.count({
+    where: { voucherNumber: { startsWith: `EHRJ-PAY-${currentYear}-` } },
+  });
   const nextSeq = Math.max(maxSeq + 1, count + 1);
   return `EHRJ-PAY-${currentYear}-${String(nextSeq).padStart(5, "0")}`;
 }

@@ -1,0 +1,237 @@
+{
+  "timestamp": "2026-10-23T10:03:29.101Z",
+  "testedPages": [
+    {
+      "id": "Page 1",
+      "name": "Homepage (প্রচ্ছদ)",
+      "requestedPath": "/",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 2",
+      "name": "About (পরিচিতি ও ইতিহাস)",
+      "path": "/about",
+      "status": "ERROR",
+      "error": "page.goto: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/about\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "id": "Page 3",
+      "name": "Wings Info (শাখা ও রুটিন)",
+      "requestedPath": "/wings-info",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/about",
+      "title": "পরিচিতি ও ঐতিহ্য | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা"
+    },
+    {
+      "id": "Page 4",
+      "name": "Departments (বিভাগ ও সিলেবাস)",
+      "requestedPath": "/departments",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/academic",
+      "title": "শিক্ষা কার্যক্রম ও অনুষদসমূহ | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা"
+    },
+    {
+      "id": "Page 5",
+      "name": "Teachers (উস্তাদ ও কর্মকর্তা)",
+      "requestedPath": "/teachers",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/about",
+      "title": "পরিচিতি ও ঐতিহ্য | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা"
+    },
+    {
+      "id": "Page 6",
+      "name": "Admission (ভর্তি আবেদন)",
+      "requestedPath": "/admission",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/admission",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 7",
+      "name": "Admission Status (ভর্তি ট্র্যাকিং)",
+      "requestedPath": "/admission-status",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/admission/track",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 8",
+      "name": "Admit Card (প্রবেশপত্র ডাউনলোড)",
+      "requestedPath": "/admit-card",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/downloads",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 9",
+      "name": "Results (অনলাইন ফলাফল)",
+      "requestedPath": "/results",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/results",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 10",
+      "name": "Pay Fees (অনলাইন বেতন)",
+      "requestedPath": "/pay-fees",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/login?redirect=%2Fportal&tab=guardian",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 11",
+      "name": "Donation (অনলাইন দান ও যাকাত)",
+      "requestedPath": "/donation",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/donate",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 12",
+      "name": "Seasonal Campaign (কুরবানি ও রমজান)",
+      "requestedPath": "/seasonal-campaign",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/donate",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 13",
+      "name": "Verify (সনদ ও রশিদ যাচাই)",
+      "requestedPath": "/verify",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/verify",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 14",
+      "name": "Alumni (ফারেগীন ডাটাবেস)",
+      "requestedPath": "/alumni",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/alumni",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 15",
+      "name": "Fatwa & Blog (দারুল ইফতা)",
+      "requestedPath": "/fatwa-blog",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/knowledge",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 16",
+      "name": "Career (নিয়োগ বিজ্ঞপ্তি)",
+      "requestedPath": "/career",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/about",
+      "title": "পরিচিতি ও ঐতিহ্য | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা"
+    },
+    {
+      "id": "Page 17",
+      "name": "Gallery (ফটো ও ভিডিও)",
+      "requestedPath": "/gallery",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/gallery",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    },
+    {
+      "id": "Page 18",
+      "name": "Contact (যোগাযোগ ও হটলাইন)",
+      "requestedPath": "/contact",
+      "status": 200,
+      "finalUrl": "http://localhost:3000/contact",
+      "title": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা | EHRJ Digital Campus"
+    }
+  ],
+  "testedForms": [
+    {
+      "form": "Verify Search",
+      "status": "SUCCESS"
+    },
+    {
+      "form": "Donation Buttons",
+      "status": "SUCCESS",
+      "buttonCount": 6
+    }
+  ],
+  "adminModules": [
+    {
+      "tab": "TEACHERS",
+      "status": "VERIFIED"
+    },
+    {
+      "tab": "STUDENTS",
+      "status": "VERIFIED"
+    },
+    {
+      "tab": "FINANCE",
+      "status": "VERIFIED"
+    },
+    {
+      "tab": "ATTENDANCE",
+      "status": "VERIFIED"
+    },
+    {
+      "tab": "EXAMS",
+      "status": "VERIFIED"
+    },
+    {
+      "route": "/admin/students",
+      "name": "Admin Students Hub",
+      "status": "ERROR",
+      "error": "page.goto: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/admin/students\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "route": "/admin/teachers",
+      "name": "Admin Teachers Hub",
+      "status": 200
+    },
+    {
+      "route": "/admin/finance",
+      "name": "Admin Finance Hub",
+      "status": 200
+    },
+    {
+      "route": "/admin/attendance",
+      "name": "Admin Attendance Hub",
+      "status": "ERROR",
+      "error": "page.goto: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/admin/attendance\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "route": "/admin/exams",
+      "name": "Admin Exams Hub",
+      "status": "ERROR",
+      "error": "page.goto: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/admin/exams\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "route": "/admin/admissions",
+      "name": "Admin Admissions Hub",
+      "status": "ERROR",
+      "error": "page.goto: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/admin/admissions\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "route": "/admin/settings",
+      "name": "Admin Settings",
+      "status": "ERROR",
+      "error": "page.goto: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/admin/settings\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "route": "/admin/reports",
+      "name": "Admin Reports",
+      "status": 200
+    }
+  ],
+  "teacherModules": [],
+  "consoleErrors": [],
+  "unhandledErrors": [],
+  "screenshots": [
+    {
+      "name": "admin_full_dashboard",
+      "path": "D:\\Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Aplication\\evidence\\phase32_master_audit\\admin_full_dashboard.png"
+    }
+  ],
+  "teacherAuditError": "page.goto: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/login\", waiting until \"domcontentloaded\"\u001b[22m\n",
+  "guardianAuditError": "page.goto: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/portal\", waiting until \"domcontentloaded\"\u001b[22m\n"
+}

@@ -244,5 +244,266 @@
       "amount": 1500,
       "timestamp": 1790666122402
     }
+  },
+  {
+    "webhookId": "WH-IN-1791102640577-13493C",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:30:40.578Z",
+    "payloadHash": "ae2ac0da72bc4125d511846965af4679b03acd3d15b78e56df6b7f5c3ab3ac23",
+    "signatureStatus": "VERIFIED",
+    "processingStatus": "PROCESSED",
+    "attemptCount": 1,
+    "processedAt": "2026-10-04T08:30:40.578Z",
+    "correlationId": "corr_6b1dff639ea622a7",
+    "idempotencyKey": "test_inbound_idemp_1791102640576",
+    "sanitizedPayload": {
+      "paymentId": "BKASH-TXN-998877",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1791102640574
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791102640580-2265C6",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:30:40.580Z",
+    "payloadHash": "2b3d0e7841d6456bb450ecfa5177bccda7ffa1d6e5b77d3135c92211c0b8032a",
+    "signatureStatus": "INVALID",
+    "processingStatus": "DEAD_LETTER",
+    "attemptCount": 1,
+    "errorCode": "REPLAY_PROTECTION_FAILED",
+    "errorMessage": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "correlationId": "corr_ca4dc4e2970b561b",
+    "idempotencyKey": "stale_attack_key_1791102640576",
+    "sanitizedPayload": {
+      "paymentId": "STALE-TXN-1791102640576",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1791102640574
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791102668074-E39E77",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:31:08.074Z",
+    "payloadHash": "1a9dd7d4ed0a8ff5a0be7b603738db6163018542620eb9dd40ef584becc7a780",
+    "signatureStatus": "MISSING",
+    "processingStatus": "FAILED",
+    "attemptCount": 1,
+    "errorCode": "SIGNATURE_VERIFICATION_FAILED",
+    "errorMessage": "Missing required cryptographic HMAC signature header",
+    "correlationId": "corr_0fc0204679ed87e3",
+    "idempotencyKey": "inbound_BKASH_PGW_PAYMENT_COMPLETED_1a9dd7d4ed0a8ff5",
+    "sanitizedPayload": {
+      "invoiceId": "INV-TEST-001",
+      "amount": 500,
+      "transactionId": "TXN-TEST-001"
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791102720687-6B98A6",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:32:00.687Z",
+    "payloadHash": "0115df016ba1b301be46eeeea79b5aebda8c29588b8cdd42bef9bd61203cfaf2",
+    "signatureStatus": "MISSING",
+    "processingStatus": "FAILED",
+    "attemptCount": 1,
+    "errorCode": "SIGNATURE_VERIFICATION_FAILED",
+    "errorMessage": "Missing required cryptographic HMAC signature header",
+    "correlationId": "corr_c654484241b67ad8",
+    "idempotencyKey": "inbound_BKASH_PGW_PAYMENT_COMPLETED_0115df016ba1b301",
+    "sanitizedPayload": {
+      "invoiceId": "INV-1791102720686-A",
+      "amount": 500,
+      "transactionId": "TXN-1791102720686-A"
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791102720696-3DFFDA",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:32:00.697Z",
+    "payloadHash": "ff084fa52c4944775a225076c12310d6298d8906732cc3c92d889da071bb9286",
+    "signatureStatus": "INVALID",
+    "processingStatus": "FAILED",
+    "attemptCount": 1,
+    "errorCode": "SIGNATURE_VERIFICATION_FAILED",
+    "errorMessage": "Invalid cryptographic HMAC signature",
+    "correlationId": "corr_bb53d3bb638dd9fa",
+    "idempotencyKey": "inbound_BKASH_PGW_PAYMENT_COMPLETED_ff084fa52c494477",
+    "sanitizedPayload": {
+      "invoiceId": "INV-1791102720686-B",
+      "amount": 500,
+      "transactionId": "TXN-1791102720686-B"
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791102720701-0BF1CC",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:32:00.701Z",
+    "payloadHash": "52d9bf9ff66cd30248be8629d34dbd42ef3f3e73e96b289bf663adf6e9372d2c",
+    "signatureStatus": "VERIFIED",
+    "processingStatus": "PROCESSED",
+    "attemptCount": 1,
+    "processedAt": "2026-10-04T08:32:00.701Z",
+    "correlationId": "corr_b5ef2aa8e47a3021",
+    "idempotencyKey": "valid_idemp_1791102720686",
+    "sanitizedPayload": {
+      "invoiceId": "INV-1791102720686-C",
+      "amount": 500,
+      "transactionId": "TXN-1791102720686-C"
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791102769011-080C16",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:32:49.011Z",
+    "payloadHash": "daa09dc7f32c94c67973ff193108dacac5cf427027f570b6fbc0a0d6410d22c4",
+    "signatureStatus": "MISSING",
+    "processingStatus": "FAILED",
+    "attemptCount": 1,
+    "errorCode": "SIGNATURE_VERIFICATION_FAILED",
+    "errorMessage": "Missing required cryptographic HMAC signature header",
+    "correlationId": "corr_0a8c949ce0693234",
+    "idempotencyKey": "inbound_BKASH_PGW_PAYMENT_COMPLETED_daa09dc7f32c94c6",
+    "sanitizedPayload": {
+      "invoiceId": "INV-1791102769010-A",
+      "amount": 500,
+      "transactionId": "TXN-1791102769010-A"
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791102769015-9E6B46",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:32:49.016Z",
+    "payloadHash": "ea15c51e438732b52c5ceeb28093282163b50c8dd268f3e8f21bc09485d9cefd",
+    "signatureStatus": "INVALID",
+    "processingStatus": "FAILED",
+    "attemptCount": 1,
+    "errorCode": "SIGNATURE_VERIFICATION_FAILED",
+    "errorMessage": "Invalid cryptographic HMAC signature",
+    "correlationId": "corr_c6d4c1599b225f25",
+    "idempotencyKey": "inbound_BKASH_PGW_PAYMENT_COMPLETED_ea15c51e438732b5",
+    "sanitizedPayload": {
+      "invoiceId": "INV-1791102769010-B",
+      "amount": 500,
+      "transactionId": "TXN-1791102769010-B"
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791102769019-7A2D02",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:32:49.019Z",
+    "payloadHash": "cdbb491b6e123ead8d3e8c7a1b3e5ff9883a6cf23661edd3c19f7512dbdaafb3",
+    "signatureStatus": "VERIFIED",
+    "processingStatus": "PROCESSED",
+    "attemptCount": 1,
+    "processedAt": "2026-10-04T08:32:49.019Z",
+    "correlationId": "corr_26e368d43d303e65",
+    "idempotencyKey": "valid_idemp_1791102769010",
+    "sanitizedPayload": {
+      "invoiceId": "INV-1791102769010-C",
+      "amount": 500,
+      "transactionId": "TXN-1791102769010-C"
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791102782548-3BB1C2",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:33:02.548Z",
+    "payloadHash": "a0a17455d835a08fb85f94cac8b98323d84dbd2c28394a735b6e99012397068b",
+    "signatureStatus": "VERIFIED",
+    "processingStatus": "PROCESSED",
+    "attemptCount": 1,
+    "processedAt": "2026-10-04T08:33:02.548Z",
+    "correlationId": "corr_174b5153d174dca0",
+    "idempotencyKey": "test_inbound_idemp_1791102782547",
+    "sanitizedPayload": {
+      "paymentId": "BKASH-TXN-998877",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1791102782546
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791102782551-A5E472",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:33:02.551Z",
+    "payloadHash": "c0f5af411a39057bbe162d4cd7f6bb05af94f4f2e128e8d80f94b94d531ca3aa",
+    "signatureStatus": "INVALID",
+    "processingStatus": "DEAD_LETTER",
+    "attemptCount": 1,
+    "errorCode": "REPLAY_PROTECTION_FAILED",
+    "errorMessage": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "correlationId": "corr_be45023ee2b4a389",
+    "idempotencyKey": "stale_attack_key_1791102782547",
+    "sanitizedPayload": {
+      "paymentId": "STALE-TXN-1791102782547",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1791102782546
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791103409206-35964A",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:43:29.206Z",
+    "payloadHash": "19250cd64d0313c65482643aa357770244860ce546d029846339c37cdefbd9be",
+    "signatureStatus": "VERIFIED",
+    "processingStatus": "PROCESSED",
+    "attemptCount": 1,
+    "processedAt": "2026-10-04T08:43:29.206Z",
+    "correlationId": "corr_80769387cc97d9eb",
+    "idempotencyKey": "test_inbound_idemp_1791103409205",
+    "sanitizedPayload": {
+      "paymentId": "BKASH-TXN-998877",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1791103409202
+    }
+  },
+  {
+    "webhookId": "WH-IN-1791103409209-8F1241",
+    "integrationCode": "BKASH_PGW",
+    "eventType": "PAYMENT_COMPLETED",
+    "provider": "BKASH",
+    "receivedAt": "2026-10-04T08:43:29.209Z",
+    "payloadHash": "99a4e16ac9d9f29f1bdfc72f846c9422d381727335c0933399ce545516a1588b",
+    "signatureStatus": "INVALID",
+    "processingStatus": "DEAD_LETTER",
+    "attemptCount": 1,
+    "errorCode": "REPLAY_PROTECTION_FAILED",
+    "errorMessage": "Replay attack protection: Timestamp delta (400s) exceeds 300s window",
+    "correlationId": "corr_557b64e19d4bda98",
+    "idempotencyKey": "stale_attack_key_1791103409205",
+    "sanitizedPayload": {
+      "paymentId": "STALE-TXN-1791103409205",
+      "invoiceId": "INV-TEST-001",
+      "amount": 1500,
+      "timestamp": 1791103409202
+    }
   }
 ]

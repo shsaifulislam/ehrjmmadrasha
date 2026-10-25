@@ -9,7 +9,7 @@ import { getSessionUser } from "@/lib/auth";
  */
 export async function GET(req: NextRequest) {
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user || user.role !== "TEACHER") {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস। কেবলমাত্র শিক্ষক এই তথ্য দেখতে পারেন।" }, { status: 403 });
     }

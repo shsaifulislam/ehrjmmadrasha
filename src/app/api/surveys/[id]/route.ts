@@ -10,14 +10,15 @@ import {
 export const dynamic = "force-dynamic";
 
 interface RouteParams {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 /**
  * GET /api/surveys/[id]
  * Fetch single survey definition
  */
-export async function GET(req: NextRequest, { params }: RouteParams) {
+export async function GET(req: NextRequest, { params: paramsPromise }: RouteParams) {
+  const params = await paramsPromise;
   try {
     const { id } = params;
     const surveys = getSurveys();
@@ -61,7 +62,8 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
  * PATCH /api/surveys/[id]
  * Update survey definition or metadata (Guards against modifying questions on locked versions)
  */
-export async function PATCH(req: NextRequest, { params }: RouteParams) {
+export async function PATCH(req: NextRequest, { params: paramsPromise }: RouteParams) {
+  const params = await paramsPromise;
   try {
     const session = await getSessionUser();
     if (
@@ -102,7 +104,8 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
  * DELETE /api/surveys/[id]
  * Cancels or archives the survey
  */
-export async function DELETE(req: NextRequest, { params }: RouteParams) {
+export async function DELETE(req: NextRequest, { params: paramsPromise }: RouteParams) {
+  const params = await paramsPromise;
   try {
     const session = await getSessionUser();
     if (!session || (session.role !== "ADMIN" && session.role !== "SUPER_ADMIN")) {

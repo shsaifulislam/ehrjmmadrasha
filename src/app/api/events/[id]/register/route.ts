@@ -5,36 +5,39 @@ import {
   getRegistrations,
   getEventById,
 } from "@/lib/events";
+import { getSessionUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const user = await getSessionUser(request);
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: "অননুমোদিত: অনুগ্রহ করে লগইন করুন।" },
+        { status: 401 }
+      );
+    }
+
     const event = getEventById(params.id);
     if (!event) {
       return NextResponse.json({ success: false, error: "ইভেন্টটি পাওয়া যায়নি।" }, { status: 404 });
     }
 
-    const { searchParams } = new URL(request.url);
-    const role = searchParams.get("role") || "ADMIN";
-
-    // Public cannot view all private participant data
-    if (role === "PUBLIC") {
-      return NextResponse.json(
-        { success: false, error: "অংশগ্রহণকারীদের ব্যক্তিগত তালিকা শুধুমাত্র অনুমোদিত ব্যবহারকারীদের জন্য।" },
-        { status: 403 }
-      );
-    }
-
     const registrations = getRegistrations().filter((r) => r.eventId === params.id);
+
+    // If GUARDIAN, filter to their student registrations
+    const filtered = user.role === "GUARDIAN"
+      ? registrations.filter(r => r.registeredByUserId === user.userId || r.guardianId === user.userId)
+      : registrations;
 
     return NextResponse.json({
       success: true,
-      count: registrations.length,
-      data: registrations,
+      count: filtered.length,
+      data: filtered,
     });
   } catch (error: any) {
     console.error("[API /api/events/[id]/register] GET Error:", error);
@@ -47,9 +50,17 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const user = await getSessionUser(request);
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: "অননুমোদিত: ইভেন্টে নিবন্ধনের জন্য লগইন আবশ্যক।" },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
 
     if (!body.studentId) {
@@ -59,9 +70,9 @@ export async function POST(
     const result = await registerStudentForEvent({
       eventId: params.id,
       studentId: body.studentId,
-      registeredByRole: body.registeredByRole || "GUARDIAN",
-      registeredByUserId: body.registeredByUserId || "portal_user",
-      guardianId: body.guardianId,
+      registeredByRole: (user.role === "PRINCIPAL" ? "ADMIN" : user.role) as any,
+      registeredByUserId: user.userId,
+      guardianId: user.role === "GUARDIAN" ? user.userId : body.guardianId,
       consentGiven: Boolean(body.consentGiven),
       notes: body.notes,
     });
@@ -82,14 +93,20 @@ export async function POST(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const user = await getSessionUser(request);
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: "অননুমোদিত: নিবন্ধন বাতিলের জন্য লগইন আবশ্যক।" },
+        { status: 401 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const registrationId = searchParams.get("registrationId");
     const reason = searchParams.get("reason") || "আবেদনকারী কর্তৃক বাতিল";
-    const actorId = searchParams.get("actorId") || "system";
-    const actorRole = searchParams.get("actorRole") || "GUARDIAN";
 
     if (!registrationId) {
       return NextResponse.json({ success: false, error: "রেজিস্ট্রেশন আইডি আবশ্যক।" }, { status: 400 });
@@ -97,8 +114,8 @@ export async function DELETE(
 
     const result = await cancelEventRegistration({
       registrationId,
-      actorId,
-      actorRole,
+      actorId: user.userId,
+      actorRole: (user.role === "PRINCIPAL" ? "ADMIN" : user.role) as any,
       reason,
     });
 
@@ -115,3 +132,4 @@ export async function DELETE(
     );
   }
 }
+

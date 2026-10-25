@@ -5,6 +5,7 @@
 
 import fs from "fs";
 import path from "path";
+import { atomicWriteFileSync } from "@/lib/storageUtils";
 import {
   TrainingProgram,
   TrainingSession,
@@ -36,10 +37,11 @@ function ensureDirectoryExists() {
 }
 
 function safeAtomicWrite(filePath: string, data: any) {
-  ensureDirectoryExists();
-  const tempPath = `${filePath}.tmp.${Date.now()}`;
-  fs.writeFileSync(tempPath, JSON.stringify(data, null, 2), "utf8");
-  fs.renameSync(tempPath, filePath);
+  try {
+    atomicWriteFileSync(filePath, JSON.stringify(data, null, 2));
+  } catch (err) {
+    console.error(`[TrainingStore] Write error on ${filePath}:`, err);
+  }
 }
 
 // -------------------------------------------------------------
@@ -465,7 +467,7 @@ function generateSeedCertificates(): TrainingCertificate[] {
       designation: "সিনিয়র হিফজ শিক্ষক",
       department: "হিফজ বিভাগ",
       verificationToken: "VER-TRN-2026-9872",
-      qrCodeToken: "https://ehrj.edu.bd/verify/document/VER-TRN-2026-9872",
+      qrCodeToken: "https://www.ehrjmadrasha.com/verify/document/VER-TRN-2026-9872",
       certificateType: "MANDATORY_COMPLIANCE",
       issueDate: "2026-08-15",
       validFrom: "2026-08-15",
@@ -491,7 +493,7 @@ function generateSeedCertificates(): TrainingCertificate[] {
       designation: "হোস্টেল সুপার",
       department: "আবাসিক শাখা",
       verificationToken: "VER-TRN-2026-9873",
-      qrCodeToken: "https://ehrj.edu.bd/verify/document/VER-TRN-2026-9873",
+      qrCodeToken: "https://www.ehrjmadrasha.com/verify/document/VER-TRN-2026-9873",
       certificateType: "MANDATORY_COMPLIANCE",
       issueDate: "2026-08-15",
       validFrom: "2026-08-15",

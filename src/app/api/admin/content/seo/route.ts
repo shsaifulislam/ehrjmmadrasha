@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import { getSeoConfig, saveSeoConfig } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const seo = getSeoConfig();
     return NextResponse.json({ success: true, seo });
   } catch (error) {
@@ -15,6 +19,9 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const body = await req.json();
     const updated = saveSeoConfig(body, "ADMIN");
     return NextResponse.json({

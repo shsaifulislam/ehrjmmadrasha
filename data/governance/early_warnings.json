@@ -1,5 +1,26 @@
 [
   {
+    "warningId": "EHRJ-EW-2026-279570",
+    "ruleCode": "EW-OPS-001",
+    "domain": "HELPDESK",
+    "severity": "WARNING",
+    "status": "DETECTED",
+    "titleBn": "জরুরি সেবা টিকিটের সময়োত্তীর্ণতা",
+    "messageBn": "1টি জরুরি সহায়তা বা অভিযোগ টিকিট ৪৮ ঘণ্টার অধিক সময় ধরে অমীমাংসিত রয়েছে।",
+    "targetEntity": "SupportRequestQueue:URGENT",
+    "entityId": "URGENT-QUEUE",
+    "observableMetric": "OverdueUrgentTicketsCount",
+    "observedValue": 1,
+    "thresholdValue": 0,
+    "evidence": {
+      "ticketCount": 1,
+      "sampleTickets": [
+        "EHRJ-REQ-2026-000043"
+      ]
+    },
+    "detectedAt": "2026-10-15T16:21:19.470Z"
+  },
+  {
     "warningId": "EHRJ-EW-2026-816049",
     "ruleCode": "EW-FIN-002",
     "domain": "FINANCE",

@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { normalizeAttendanceDate, isWithinCorrectionWindow, DEFAULT_CORRECTION_WINDOW_HOURS } from "./attendanceCalculations";
+import { emitDomainEvent, processSingleOutboxEvent } from "./communicationEngine";
 
 export interface AttendanceEntryInput {
   studentId: string;
@@ -146,6 +147,7 @@ export async function saveAttendanceSheetTransaction(input: SaveAttendanceSheetI
       studentId: true,
       rollNumber: true,
       student: { select: { id: true, fullNameBn: true, status: true } },
+      jamatClass: { select: { id: true, nameBn: true } },
     },
   });
 
@@ -162,10 +164,12 @@ export async function saveAttendanceSheetTransaction(input: SaveAttendanceSheetI
   }
 
   // 5. Execute atomic transaction
-  return await prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     let createdCount = 0;
     let updatedCount = 0;
     const statusChanges: any[] = [];
+    const queuedOutboxIds: string[] = [];
+    const formattedDate = normalizedDate.toISOString().split("T")[0];
 
     for (const item of validRecords) {
       const existing = await tx.attendance.findUnique({
@@ -199,9 +203,30 @@ export async function saveAttendanceSheetTransaction(input: SaveAttendanceSheetI
             },
           });
           updatedCount++;
+
+          // Alert on transition to ABSENT
+          if (item.status === "ABSENT" && existing.status !== "ABSENT") {
+            const enr = eligibleStudentMap.get(item.studentId);
+            const outbox = await emitDomainEvent({
+              eventType: "ATTENDANCE_ABSENT_ALERT",
+              entityType: "Attendance",
+              entityId: existing.id,
+              payload: {
+                studentId: item.studentId,
+                studentNameBn: enr?.student.fullNameBn || "শিক্ষার্থী",
+                className: enr?.jamatClass?.nameBn || "জামাত",
+                roll: enr?.rollNumber || "",
+                date: formattedDate,
+                attendanceId: existing.id,
+              },
+              idempotencyKey: `attendance-absent-${item.studentId}-${formattedDate}`,
+              tx,
+            });
+            queuedOutboxIds.push(outbox.id);
+          }
         }
       } else {
-        await tx.attendance.create({
+        const created = await tx.attendance.create({
           data: {
             studentId: item.studentId,
             sessionId,
@@ -216,6 +241,27 @@ export async function saveAttendanceSheetTransaction(input: SaveAttendanceSheetI
           },
         });
         createdCount++;
+
+        // Alert on new ABSENT
+        if (item.status === "ABSENT") {
+          const enr = eligibleStudentMap.get(item.studentId);
+          const outbox = await emitDomainEvent({
+            eventType: "ATTENDANCE_ABSENT_ALERT",
+            entityType: "Attendance",
+            entityId: created.id,
+            payload: {
+              studentId: item.studentId,
+              studentNameBn: enr?.student.fullNameBn || "শিক্ষার্থী",
+              className: enr?.jamatClass?.nameBn || "জামাত",
+              roll: enr?.rollNumber || "",
+              date: formattedDate,
+              attendanceId: created.id,
+            },
+            idempotencyKey: `attendance-absent-${item.studentId}-${formattedDate}`,
+            tx,
+          });
+          queuedOutboxIds.push(outbox.id);
+        }
       }
     }
 
@@ -225,12 +271,12 @@ export async function saveAttendanceSheetTransaction(input: SaveAttendanceSheetI
         userId: actorUserId,
         action: existingRecords.length > 0 ? "ATTENDANCE_UPDATE" : "ATTENDANCE_CREATE",
         entityType: "AttendanceSheet",
-        entityId: `${sessionId}_${classId}_${sectionId || "ALL"}_${normalizedDate.toISOString().split("T")[0]}`,
+        entityId: `${sessionId}_${classId}_${sectionId || "ALL"}_${formattedDate}`,
         detailsJson: JSON.stringify({
           sessionId,
           classId,
           sectionId,
-          date: normalizedDate.toISOString().split("T")[0],
+          date: formattedDate,
           createdCount,
           updatedCount,
           totalRecords: validRecords.length,
@@ -243,13 +289,32 @@ export async function saveAttendanceSheetTransaction(input: SaveAttendanceSheetI
 
     return {
       success: true,
-      date: normalizedDate.toISOString().split("T")[0],
+      date: formattedDate,
       totalStudents: validRecords.length,
       createdCount,
       updatedCount,
       statusChanges,
+      queuedOutboxIds,
     };
   });
+
+  // Post-commit outbox processing (failsafe, non-blocking)
+  if (result.queuedOutboxIds && result.queuedOutboxIds.length > 0) {
+    for (const outboxId of result.queuedOutboxIds) {
+      processSingleOutboxEvent(outboxId).catch((err) =>
+        console.error("Attendance outbox processing caught error:", err)
+      );
+    }
+  }
+
+  return {
+    success: result.success,
+    date: result.date,
+    totalStudents: result.totalStudents,
+    createdCount: result.createdCount,
+    updatedCount: result.updatedCount,
+    statusChanges: result.statusChanges,
+  };
 }
 
 /**
@@ -278,8 +343,9 @@ export async function adminCorrectAttendanceRecord(input: {
   }
 
   const oldStatus = existing.status;
+  const formattedDate = existing.date.toISOString().split("T")[0];
 
-  return await prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const updated = await tx.attendance.update({
       where: { id: attendanceId },
       data: {
@@ -291,6 +357,26 @@ export async function adminCorrectAttendanceRecord(input: {
       },
     });
 
+    let outboxId: string | null = null;
+    if (newStatus === "ABSENT" && oldStatus !== "ABSENT") {
+      const outbox = await emitDomainEvent({
+        eventType: "ATTENDANCE_ABSENT_ALERT",
+        entityType: "Attendance",
+        entityId: attendanceId,
+        payload: {
+          studentId: existing.studentId,
+          studentNameBn: existing.student.fullNameBn,
+          className: existing.jamatClass?.nameBn || "জামাত",
+          roll: "",
+          date: formattedDate,
+          attendanceId,
+        },
+        idempotencyKey: `attendance-absent-${existing.studentId}-${formattedDate}`,
+        tx,
+      });
+      outboxId = outbox.id;
+    }
+
     await tx.auditLog.create({
       data: {
         userId: adminUserId,
@@ -300,7 +386,7 @@ export async function adminCorrectAttendanceRecord(input: {
         detailsJson: JSON.stringify({
           studentId: existing.studentId,
           studentName: existing.student.fullNameBn,
-          date: existing.date.toISOString().split("T")[0],
+          date: formattedDate,
           oldStatus,
           newStatus,
           correctionReason: correctionReason.trim(),
@@ -308,8 +394,16 @@ export async function adminCorrectAttendanceRecord(input: {
       },
     });
 
-    return updated;
+    return { updated, outboxId };
   });
+
+  if (result.outboxId) {
+    processSingleOutboxEvent(result.outboxId).catch((err) =>
+      console.error("Admin attendance correction outbox processing error:", err)
+    );
+  }
+
+  return result.updated;
 }
 
 /**

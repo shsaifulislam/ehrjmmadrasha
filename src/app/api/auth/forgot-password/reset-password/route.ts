@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { hashPassword } from "@/lib/auth";
+import { hashPassword, revokeAllUserSessions } from "@/lib/auth";
 import { sendPasswordResetSuccessEmail } from "@/lib/mail";
 
 export async function POST(req: NextRequest) {
@@ -91,6 +91,9 @@ export async function POST(req: NextRequest) {
         },
       }),
     ]);
+
+    // Authoritative session revocation across all devices
+    await revokeAllUserSessions(user.id, "PASSWORD_RESET");
 
     // Send confirmation email
     try {

@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { trackingId: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ trackingId: string }> }) {
+  const params = await paramsPromise;
   return await handleTracking(params.trackingId);
 }

@@ -29,6 +29,8 @@ export const DEFAULT_INSTITUTIONAL_PROFILE: InstitutionalProfileData = {
   primaryPhone: INSTITUTION_INFO.primaryPhone,
   email: INSTITUTION_INFO.email,
   adminEmail: INSTITUTION_INFO.adminEmail,
+  domain: INSTITUTION_INFO.domain,
+  website: INSTITUTION_INFO.website,
   socialLinks: {
     facebook: INSTITUTION_INFO.facebook,
     youtube: INSTITUTION_INFO.youtube,

@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user || (user.role !== "TEACHER" && user.role !== "ADMIN")) {
       return NextResponse.json({ error: "অননুমোদিত শিক্ষক অ্যাক্সেস।" }, { status: 403 });
     }

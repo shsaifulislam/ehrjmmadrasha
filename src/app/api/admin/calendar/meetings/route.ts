@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getInternalMeetings,
   saveInternalMeetings,
@@ -9,6 +10,9 @@ import { InternalMeeting } from "@/lib/calendar/types";
 
 export async function GET(request: NextRequest) {
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const meetings = getInternalMeetings();
     return NextResponse.json({
       success: true,
@@ -26,6 +30,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const body = await request.json();
     const {
       title,

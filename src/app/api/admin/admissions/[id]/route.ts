@@ -12,8 +12,8 @@ export const dynamic = "force-dynamic";
  */
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {
@@ -60,6 +60,10 @@ export async function GET(
               enrollments: {
                 where: { status: "ACTIVE" },
                 include: { jamatClass: true, section: true, session: true },
+              },
+              feeInvoices: {
+                take: 1,
+                orderBy: { createdAt: "desc" },
               },
             },
           })
@@ -123,8 +127,8 @@ export async function GET(
  */
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

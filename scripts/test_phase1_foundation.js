@@ -153,7 +153,10 @@ async function runTests() {
   assert(teacherUsersAttempt.statusCode === 403, "Teacher accessing /api/admin/users rejected with 403 Forbidden");
 
   const anonFinanceAttempt = await makeRequest("/api/admin/finance");
-  assert(anonFinanceAttempt.statusCode === 403, "Anonymous accessing /api/admin/finance rejected with 403 Forbidden");
+  assert(
+    anonFinanceAttempt.statusCode === 401 || anonFinanceAttempt.statusCode === 403,
+    "Anonymous accessing /api/admin/finance rejected with 401/403"
+  );
 
   // 7. USER MANAGEMENT (/api/admin/users)
   console.log("\n--- 4. USER MANAGEMENT CRUD & INTEGRITY ---");

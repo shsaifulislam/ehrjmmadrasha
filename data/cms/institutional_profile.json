@@ -3,8 +3,8 @@
   "nameEn": "Eliotganj Hazi Rohmatollah Jamiria Madrasha",
   "nameAr": "الجامعة الإسلامية رحمة الله إليوت غنج",
   "code": "EHRJ",
-  "established": "২০২১",
-  "establishedEn": "2021",
+  "established": "২০২৫",
+  "establishedEn": "2025",
   "founder": "হাজী রহমাতুল্লাহ্ (রহ.)",
   "principal": "মাওলানা মহা. আবুল কালাম সরকার",
   "principalDesignationBn": "প্রতিষ্ঠাতা মুহতামিম ও পরিচালক",
@@ -19,7 +19,9 @@
   ],
   "primaryPhone": "01845-162664",
   "email": "ehrjmadrasha@gmail.com",
-  "adminEmail": "adminehrjmadrasha@gmail.com",
+  "adminEmail": "admin@ehrjmadrasha.com",
+  "domain": "www.ehrjmadrasha.com",
+  "website": "https://www.ehrjmadrasha.com",
   "socialLinks": {
     "facebook": "https://www.facebook.com/ehrjmadrasda",
     "youtube": "https://www.youtube.com/@ehrjmadrasha",
@@ -29,7 +31,7 @@
   "missionEn": "Promoting pure Islamic knowledge based on Quran and Sunnah, standard Hifz education, and developing righteous citizens.",
   "visionBn": "একটি পূর্ণাঙ্গ ইসলামি বিশ্ববিদ্যালয় ও এতিমখানা কমপ্লেক্স হিসেবে সমকালীন চ্যালেঞ্জ মোকাবেলায় সক্ষম মুত্তাকী উম্মাহ গঠন।",
   "visionEn": "To establish a comprehensive Islamic campus and orphan care complex nurturing pious leaders.",
-  "historyBn": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা ২০২১ খ্রিস্টাব্দে কুমিল্লার দাউদকান্দি উপজেলার ঐতিহ্যবাহী ইলিয়টগঞ্জ পূর্ব লক্ষ্মীপুর গ্রামে প্রতিষ্ঠিত হয়। প্রতিষ্ঠালগ্ন থেকেই প্রতিষ্ঠানটি সহীহ কুরআন তিলাওয়াত, তাজবীদ, দরসে নেযামী ও কিতাব বিভাগের পাশাপাশি সাধারণ শিক্ষা প্রদানে নিরলস কাজ করে যাচ্ছে।",
+  "historyBn": "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা ২০২৫ খ্রিস্টাব্দে কুমিল্লার দাউদকান্দি উপজেলার ঐতিহ্যবাহী ইলিয়টগঞ্জ পূর্ব লক্ষ্মীপুর গ্রামে প্রতিষ্ঠিত হয়। প্রতিষ্ঠালগ্ন থেকেই প্রতিষ্ঠানটি সহীহ কুরআন তিলাওয়াত, তাজবীদ, দরসে নেযামী ও কিতাব বিভাগের পাশাপাশি সাধারণ শিক্ষা প্রদানে নিরলস কাজ করে যাচ্ছে।",
   "facilities": [
     {
       "titleBn": "হিফজুল কুরআন ও নাযেরা অনুষদ",
@@ -61,7 +63,7 @@
   },
   "logoUrl": "/images/logo.jpg",
   "principalPhotoUrl": "/images/principal.jpg",
-  "version": 10,
-  "updatedAt": "2026-09-29T12:38:44.400Z",
+  "version": 14,
+  "updatedAt": "2026-10-08T15:34:12.009Z",
   "updatedBy": "TEST_ADMIN"
 }

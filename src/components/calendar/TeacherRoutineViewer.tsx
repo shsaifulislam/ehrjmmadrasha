@@ -9,8 +9,8 @@ export default function TeacherRoutineViewer() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/admin/calendar/routines")
-      .then((res) => (res.ok ? res.json() : null))
+    fetch("/api/teacher/calendar/routines")
+      .then((res) => (res.ok ? res.json() : fetch("/api/admin/calendar/routines").then((r) => r.json())))
       .then((data) => {
         if (data?.data) setRoutines(data.data);
       })
@@ -40,39 +40,60 @@ export default function TeacherRoutineViewer() {
       </div>
 
       {loading ? (
-        <div className="py-6 text-center text-gray-500">রুটিন লোড হচ্ছে...</div>
+        <div className="py-12 text-center text-slate-500 text-xs">রুটিন লোড হচ্ছে...</div>
       ) : routines.length === 0 ? (
-        <div className="space-y-3">
-          <div className="p-3 bg-gray-50 rounded border border-gray-200">
-            <p className="font-bold text-gray-800">সকাল ৮:০০ - ৯:০০ (রবিবার - বৃহস্পতিবার)</p>
-            <p className="text-gray-600">নূরানী বিভাগ - বিশুদ্ধ কুরআন তিলাওয়াত ও ক্বিরাআত (কক্ষ: ১০১)</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 perspective-1000">
+          <div className="card-3d p-4 bg-white rounded-2xl border-2 border-slate-200/90 hover:border-[#D4AF37] shadow-md space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-xs bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-full border border-emerald-200">
+                রবিবার - বৃহস্পতিবার
+              </span>
+              <span className="font-mono text-xs font-bold text-slate-700">সকাল ৮:০০ - ৯:০০</span>
+            </div>
+            <p className="font-black text-sm text-slate-900">নূরানী বিভাগ - বিশুদ্ধ কুরআন তিলাওয়াত ও ক্বিরাআত</p>
+            <p className="text-xs text-slate-500 flex items-center gap-1">
+              <MapPin className="w-3.5 h-3.5 text-amber-600" />
+              কক্ষ: ১০১
+            </p>
           </div>
-          <div className="p-3 bg-gray-50 rounded border border-gray-200">
-            <p className="font-bold text-gray-800">সকাল ৯:১৫ - ১০:১৫ (রবিবার - বৃহস্পতিবার)</p>
-            <p className="text-gray-600">হিফজুল কুরআন বিভাগ - দৈনন্দিন নতুন সবক গ্রহণ ও ইয়াদ (কক্ষ: ১০২)</p>
+          <div className="card-3d p-4 bg-white rounded-2xl border-2 border-slate-200/90 hover:border-[#D4AF37] shadow-md space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-xs bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-full border border-emerald-200">
+                রবিবার - বৃহস্পতিবার
+              </span>
+              <span className="font-mono text-xs font-bold text-slate-700">সকাল ৯:১৫ - ১০:১৫</span>
+            </div>
+            <p className="font-black text-sm text-slate-900">হিফজুল কুরআন বিভাগ - দৈনন্দিন নতুন সবক গ্রহণ ও ইয়াদ</p>
+            <p className="text-xs text-slate-500 flex items-center gap-1">
+              <MapPin className="w-3.5 h-3.5 text-amber-600" />
+              কক্ষ: ১০২
+            </p>
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 perspective-1000">
           {routines.map((r) => (
             <div
               key={r.id}
-              className="p-3 bg-emerald-50/50 rounded-lg border border-emerald-200/80 space-y-1"
+              className="card-3d p-4 bg-white rounded-2xl border-2 border-slate-200/90 hover:border-[#D4AF37] hover:shadow-xl transition-all duration-300 space-y-2 relative overflow-hidden"
             >
-              <div className="flex items-center justify-between font-bold text-emerald-900">
-                <span>{getDayName(r.dayOfWeek)}</span>
-                <span className="font-mono text-emerald-700">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-600 via-[#D4AF37] to-emerald-600" />
+              <div className="flex items-center justify-between font-bold text-slate-900 pt-1">
+                <span className="text-xs bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-full border border-emerald-200">
+                  {getDayName(r.dayOfWeek)}
+                </span>
+                <span className="font-mono text-xs text-[#0D5C3A] bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">
                   {r.startTime} - {r.endTime}
                 </span>
               </div>
-              <p className="font-semibold text-gray-900">
+              <p className="font-black text-sm text-slate-900">
                 {r.classNameBn} — {r.subjectNameBn}
               </p>
-              <div className="flex items-center justify-between text-[11px] text-gray-500 pt-1">
-                <span>উস্তাদ: {r.teacherName}</span>
+              <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100">
+                <span>উস্তাদ: <strong className="text-slate-700">{r.teacherName}</strong></span>
                 {r.roomNo && (
-                  <span className="flex items-center gap-1 text-amber-700">
-                    <MapPin className="w-3 h-3" />
+                  <span className="flex items-center gap-1 text-amber-800 font-bold bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                    <MapPin className="w-3 h-3 text-amber-600" />
                     কক্ষ: {r.roomNo}
                   </span>
                 )}

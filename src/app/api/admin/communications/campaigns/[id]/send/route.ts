@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import { executeCampaign, sendTestMessage } from "@/lib/communications";
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const body = await req.json().catch(() => ({}));
     const { dryRun, testSend, adminEmail, adminName, actorId } = body;
 

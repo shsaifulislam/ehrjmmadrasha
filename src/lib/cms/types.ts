@@ -39,6 +39,8 @@ export interface InstitutionalProfileData {
   primaryPhone: string;
   email: string;
   adminEmail: string;
+  domain?: string;
+  website?: string;
   socialLinks: {
     facebook: string;
     youtube: string;
@@ -184,7 +186,7 @@ export interface PublicContactPayload {
 
 export interface CmsAuditEntry {
   id: string;
-  action: "CREATE" | "UPDATE" | "PUBLISH" | "UNPUBLISH" | "ARCHIVE" | "DELETE_BLOCKED";
+  action: "CREATE" | "UPDATE" | "PUBLISH" | "UNPUBLISH" | "ARCHIVE" | "DELETE" | "DELETE_BLOCKED";
   contentType: "PROFILE" | "EVENT" | "FAQ" | "DOWNLOAD" | "GALLERY" | "HOMEPAGE" | "SEO";
   contentId: string;
   details: string;

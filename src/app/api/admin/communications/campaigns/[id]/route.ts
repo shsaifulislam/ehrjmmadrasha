@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getCommunicationCampaignById,
   saveCommunicationCampaign,
@@ -8,9 +9,12 @@ import {
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const auth = await requireAdminAuth(_req);
+    if (!auth.authorized) return auth.response;
+
     const campaign = getCommunicationCampaignById(params.id);
     if (!campaign) {
       return NextResponse.json(
@@ -32,9 +36,12 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const campaign = getCommunicationCampaignById(params.id);
     if (!campaign) {
       return NextResponse.json(
@@ -79,9 +86,12 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const campaign = getCommunicationCampaignById(params.id);
     if (!campaign) {
       return NextResponse.json(

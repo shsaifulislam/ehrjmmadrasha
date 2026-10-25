@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getInstitutionalProfile,
   getCmsEvents,
@@ -13,8 +14,11 @@ import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const [profile, events, faqs, downloads, gallery, homepage, seo, auditLogs, totalNotices] =
       await Promise.all([
         getInstitutionalProfile(),

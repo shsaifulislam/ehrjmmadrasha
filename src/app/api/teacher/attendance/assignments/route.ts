@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
  */
 export async function GET(req: NextRequest) {
   try {
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user || (user.role !== "TEACHER" && user.role !== "ADMIN")) {
       return NextResponse.json(
         { error: "অননুমোদিত অ্যাক্সেস। শুধুমাত্র শিক্ষক এই তথ্য দেখতে পারেন।" },

@@ -19,8 +19,23 @@ import {
 } from "lucide-react";
 import { SearchResultItem } from "@/lib/search/types";
 
-export default function CommandPalette() {
-  const [isOpen, setIsOpen] = useState(false);
+export interface CommandPaletteProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export default function CommandPalette({
+  isOpen: controlledOpen,
+  onClose: controlledClose,
+}: CommandPaletteProps = {}) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
+  const setIsOpen = (val: boolean | ((p: boolean) => boolean)) => {
+    if (controlledClose && typeof val === "boolean" && !val) {
+      controlledClose();
+    }
+    setInternalOpen(val);
+  };
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResultItem[]>([]);
   const [loading, setLoading] = useState(false);

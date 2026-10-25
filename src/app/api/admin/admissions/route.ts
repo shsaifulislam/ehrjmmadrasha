@@ -120,13 +120,30 @@ export async function GET(req: NextRequest) {
       }),
     ]);
 
+    // Enrich admissions with created student details (student ID & roll number)
+    const studentIds = admissions.map((a) => a.createdStudentId).filter(Boolean) as string[];
+    const createdStudents = studentIds.length > 0 ? await prisma.student.findMany({
+      where: { id: { in: studentIds } },
+      select: {
+        id: true,
+        studentIdNumber: true,
+        enrollments: {
+          where: { status: "ACTIVE" },
+          select: { rollNumber: true, section: { select: { nameBn: true } } },
+          take: 1,
+        },
+      },
+    }) : [];
+
     const classMap = new Map(classes.map((c) => [c.id, c]));
     const sessionMap = new Map(sessions.map((s) => [s.id, s]));
+    const studentMap = new Map(createdStudents.map((s) => [s.id, s]));
 
     const enrichedAdmissions = admissions.map((app) => ({
       ...app,
       desiredClass: classMap.get(app.desiredClassId) || null,
       session: app.sessionId ? sessionMap.get(app.sessionId) || null : null,
+      createdStudent: app.createdStudentId ? studentMap.get(app.createdStudentId) || null : null,
     }));
 
     return NextResponse.json({

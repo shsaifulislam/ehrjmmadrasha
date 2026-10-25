@@ -1,5 +1,151 @@
 [
   {
+    "id": "EHRJ-BREV-2026-5200",
+    "revisionCode": "EHRJ-BREV-2026-5200",
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "budgetTitleBn": "খাতভিত্তিক যাচাই বাজেট",
+    "previousVersion": 1,
+    "targetVersion": 2,
+    "titleBn": "শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা",
+    "reasonBn": "নতুন শিক্ষক যোগদান ও শিক্ষাবর্ষের মাঝামাঝি ভাতা বৃদ্ধি",
+    "lineDiffs": [
+      {
+        "budgetLineId": "BLN-2026-5438",
+        "categoryNameBn": "শিক্ষক ও স্টাফ বেতন",
+        "fundCode": "GENERAL",
+        "previousAmount": 800000,
+        "proposedAmount": 950000,
+        "amountDifference": 150000,
+        "justificationBn": "শিক্ষক বৃদ্ধি ও সরকারি মহার্ঘ ভাতা সমন্বয়"
+      }
+    ],
+    "netExpenseAdjustment": 150000,
+    "netIncomeAdjustment": 0,
+    "status": "APPROVED",
+    "requestedBy": "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    "requestedAt": "2026-09-29T17:24:30.787Z",
+    "reviewedBy": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "reviewedAt": "2026-09-29T17:24:30.795Z",
+    "approvedBy": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:24:30.811Z"
+  },
+  {
+    "id": "EHRJ-BREV-2026-1041",
+    "revisionCode": "EHRJ-BREV-2026-1041",
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "budgetTitleBn": "খাতভিত্তিক যাচাই বাজেট",
+    "previousVersion": 1,
+    "targetVersion": 2,
+    "titleBn": "শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা",
+    "reasonBn": "নতুন শিক্ষক যোগদান ও শিক্ষাবর্ষের মাঝামাঝি ভাতা বৃদ্ধি",
+    "lineDiffs": [
+      {
+        "budgetLineId": "BLN-2026-4976",
+        "categoryNameBn": "শিক্ষক ও স্টাফ বেতন",
+        "fundCode": "GENERAL",
+        "previousAmount": 800000,
+        "proposedAmount": 950000,
+        "amountDifference": 150000,
+        "justificationBn": "শিক্ষক বৃদ্ধি ও সরকারি মহার্ঘ ভাতা সমন্বয়"
+      }
+    ],
+    "netExpenseAdjustment": 150000,
+    "netIncomeAdjustment": 0,
+    "status": "APPROVED",
+    "requestedBy": "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    "requestedAt": "2026-09-29T17:23:09.050Z",
+    "reviewedBy": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "reviewedAt": "2026-09-29T17:23:09.055Z",
+    "approvedBy": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:23:09.076Z"
+  },
+  {
+    "id": "EHRJ-BREV-2026-9822",
+    "revisionCode": "EHRJ-BREV-2026-9822",
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "budgetTitleBn": "খাতভিত্তিক যাচাই বাজেট",
+    "previousVersion": 1,
+    "targetVersion": 2,
+    "titleBn": "শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা",
+    "reasonBn": "নতুন শিক্ষক যোগদান ও শিক্ষাবর্ষের মাঝামাঝি ভাতা বৃদ্ধি",
+    "lineDiffs": [
+      {
+        "budgetLineId": "BLN-2026-5303",
+        "categoryNameBn": "শিক্ষক ও স্টাফ বেতন",
+        "fundCode": "GENERAL",
+        "previousAmount": 800000,
+        "proposedAmount": 950000,
+        "amountDifference": 150000,
+        "justificationBn": "শিক্ষক বৃদ্ধি ও সরকারি মহার্ঘ ভাতা সমন্বয়"
+      }
+    ],
+    "netExpenseAdjustment": 150000,
+    "netIncomeAdjustment": 0,
+    "status": "APPROVED",
+    "requestedBy": "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    "requestedAt": "2026-09-29T17:13:31.430Z",
+    "reviewedBy": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "reviewedAt": "2026-09-29T17:13:31.435Z",
+    "approvedBy": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:13:31.444Z"
+  },
+  {
+    "id": "EHRJ-BREV-2026-1076",
+    "revisionCode": "EHRJ-BREV-2026-1076",
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "budgetTitleBn": "খাতভিত্তিক যাচাই বাজেট",
+    "previousVersion": 1,
+    "targetVersion": 2,
+    "titleBn": "শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা",
+    "reasonBn": "নতুন শিক্ষক যোগদান ও শিক্ষাবর্ষের মাঝামাঝি ভাতা বৃদ্ধি",
+    "lineDiffs": [
+      {
+        "budgetLineId": "BLN-2026-8653",
+        "categoryNameBn": "শিক্ষক ও স্টাফ বেতন",
+        "fundCode": "GENERAL",
+        "previousAmount": 800000,
+        "proposedAmount": 950000,
+        "amountDifference": 150000,
+        "justificationBn": "শিক্ষক বৃদ্ধি ও সরকারি মহার্ঘ ভাতা সমন্বয়"
+      }
+    ],
+    "netExpenseAdjustment": 150000,
+    "netIncomeAdjustment": 0,
+    "status": "APPROVED",
+    "requestedBy": "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    "requestedAt": "2026-09-29T17:13:14.196Z",
+    "reviewedBy": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "reviewedAt": "2026-09-29T17:13:14.201Z",
+    "approvedBy": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:13:14.207Z"
+  },
+  {
+    "id": "EHRJ-BREV-2026-2913",
+    "revisionCode": "EHRJ-BREV-2026-2913",
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "budgetTitleBn": "খাতভিত্তিক যাচাই বাজেট",
+    "previousVersion": 1,
+    "targetVersion": 2,
+    "titleBn": "শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা",
+    "reasonBn": "নতুন শিক্ষক যোগদান ও শিক্ষাবর্ষের মাঝামাঝি ভাতা বৃদ্ধি",
+    "lineDiffs": [
+      {
+        "budgetLineId": "BLN-2026-4792",
+        "categoryNameBn": "শিক্ষক ও স্টাফ বেতন",
+        "fundCode": "GENERAL",
+        "previousAmount": 800000,
+        "proposedAmount": 950000,
+        "amountDifference": 150000,
+        "justificationBn": "শিক্ষক বৃদ্ধি ও সরকারি মহার্ঘ ভাতা সমন্বয়"
+      }
+    ],
+    "netExpenseAdjustment": 150000,
+    "netIncomeAdjustment": 0,
+    "status": "SUBMITTED",
+    "requestedBy": "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    "requestedAt": "2026-09-29T17:12:40.873Z"
+  },
+  {
     "id": "EHRJ-BREV-2026-2410",
     "revisionCode": "EHRJ-BREV-2026-2410",
     "budgetId": "EHRJ-BUD-2026-8566",

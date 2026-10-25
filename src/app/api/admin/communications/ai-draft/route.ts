@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import { getInstitutionalProfile } from "@/lib/cms/institutionalProfile";
 
 export async function POST(req: NextRequest) {
   try {
+    const auth = await requireAdminAuth(req);
+    if (!auth.authorized) return auth.response;
+
     const body = await req.json();
     const { actionType, title, audienceType, rawNotes, language = "bn" } = body;
 

@@ -159,7 +159,7 @@ export default function AdminTransportHub() {
       if (requestsRes.success) setRequests(requestsRes.requests);
 
       // Fetch sessions
-      const sessRes = await fetch("/api/academic-sessions").then((r) => r.json()).catch(() => null);
+      const sessRes = await fetch("/api/academic/sessions").then((r) => r.json()).catch(() => null);
       if (sessRes && sessRes.sessions) {
         setSessions(sessRes.sessions);
         const curr = sessRes.sessions.find((s: any) => s.isCurrent);
@@ -188,7 +188,7 @@ export default function AdminTransportHub() {
     }
     setSearchingStudent(true);
     try {
-      const res = await fetch(`/api/students?search=${encodeURIComponent(val)}&limit=6`);
+      const res = await fetch(`/api/admin/students?search=${encodeURIComponent(val)}&limit=6`);
       const data = await res.json();
       if (data.students) {
         setStudentSearchResults(data.students);

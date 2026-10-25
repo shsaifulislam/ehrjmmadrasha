@@ -100,5 +100,56 @@
     },
     "errorCode": "PROVIDER_ERROR",
     "errorMessage": "fetch failed"
+  },
+  {
+    "id": "LOG-1791102642013-2e5b9c",
+    "integrationCode": "DATA_IMPORT_EXPORT",
+    "operation": "POST https://mock-bmeb-board.gov.bd/api/v1/sync",
+    "timestamp": "2026-10-04T08:30:42.013Z",
+    "requestId": "req_3ec417f23033",
+    "correlationId": "EVT-2026-000015",
+    "status": "FAILURE",
+    "durationMs": 1415,
+    "sanitizedMetadata": {
+      "method": "POST",
+      "attempts": 3,
+      "circuitFailures": 1
+    },
+    "errorCode": "PROVIDER_ERROR",
+    "errorMessage": "fetch failed"
+  },
+  {
+    "id": "LOG-1791102783962-afccdf",
+    "integrationCode": "DATA_IMPORT_EXPORT",
+    "operation": "POST https://mock-bmeb-board.gov.bd/api/v1/sync",
+    "timestamp": "2026-10-04T08:33:03.963Z",
+    "requestId": "req_c6641521d553",
+    "correlationId": "EVT-2026-000016",
+    "status": "FAILURE",
+    "durationMs": 1396,
+    "sanitizedMetadata": {
+      "method": "POST",
+      "attempts": 3,
+      "circuitFailures": 1
+    },
+    "errorCode": "PROVIDER_ERROR",
+    "errorMessage": "fetch failed"
+  },
+  {
+    "id": "LOG-1791103410623-22f992",
+    "integrationCode": "DATA_IMPORT_EXPORT",
+    "operation": "POST https://mock-bmeb-board.gov.bd/api/v1/sync",
+    "timestamp": "2026-10-04T08:43:30.623Z",
+    "requestId": "req_d254787b7d78",
+    "correlationId": "EVT-2026-000017",
+    "status": "FAILURE",
+    "durationMs": 1399,
+    "sanitizedMetadata": {
+      "method": "POST",
+      "attempts": 3,
+      "circuitFailures": 1
+    },
+    "errorCode": "PROVIDER_ERROR",
+    "errorMessage": "fetch failed"
   }
 ]

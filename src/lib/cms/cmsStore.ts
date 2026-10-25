@@ -254,7 +254,7 @@ const DEFAULT_FAQS: CmsFaq[] = [
     id: "FAQ-004",
     questionBn: "অনলাইনে কি যাকাত ও দান পাঠানো সম্ভব?",
     answerBn:
-      "হ্যাঁ, আমাদের অফিসিয়াল ইসলামী ব্যাংক হিসাব অথবা বিকাশ/নগদ মার্চেন্ট নম্বরে সরাসরি যাকাত ও সাধারণ অনুদান প্রদান করা যায়। দান করার পর রশিদ প্রিন্ট বা সংরক্ষণ করা সম্ভব।",
+      "হ্যাঁ, আমাদের অফিসিয়াল অনলাইন ডোনেশন গেটওয়ে অথবা অনুমোদিত ডিজিটাল চ্যানেলের মাধ্যমে সরাসরি যেকোনো পরিমাণ যাকাত ও সাধারণ অনুদান প্রদান করা যায়। দান সম্পন্ন করার পর তাৎক্ষণিক ডিজিটাল রশিদ সংরক্ষণ করা সম্ভব।",
     category: "FEES",
     order: 4,
     status: "PUBLISHED",
@@ -644,7 +644,7 @@ const DEFAULT_SEO_CONFIG: SeoConfig = {
   defaultTitleEn: `${INSTITUTION_INFO.nameEn} | Official Digital Campus`,
   defaultDescriptionBn:
     "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা — কুমিল্লা জেলার অন্যতম শীর্ষস্থানীয় কওমি ও হাফিজিয়া দ্বীনি শিক্ষাপ্রতিষ্ঠান, এতিমখানা এবং ডিজিটাল ক্যাম্পাস।",
-  canonicalBaseUrl: "https://ehrj-madrasha.edu.bd",
+  canonicalBaseUrl: "https://www.ehrjmadrasha.com",
   ogImageUrl: "/images/student-banner.jpg",
   twitterCard: "summary_large_image",
   siteKeywords: [
@@ -685,3 +685,99 @@ export function saveSeoConfig(config: Partial<SeoConfig>, performedBy: string): 
 
   return updated;
 }
+
+// -------------------------------------------------------------
+// 8. DELETION & TOGGLE HELPERS
+// -------------------------------------------------------------
+export function deleteCmsEvent(id: string, performedBy: string): boolean {
+  const events = getCmsEvents(false);
+  const idx = events.findIndex((e) => e.id === id);
+  if (idx === -1) return false;
+
+  const [removed] = events.splice(idx, 1);
+  writeJsonFile("events.json", events);
+
+  recordCmsAudit({
+    action: "DELETE",
+    contentType: "EVENT",
+    contentId: id,
+    details: `Deleted event: ${removed.titleBn}`,
+    performedBy,
+  });
+  return true;
+}
+
+export function deleteCmsFaq(id: string, performedBy: string): boolean {
+  const faqs = getCmsFaqs(false);
+  const idx = faqs.findIndex((f) => f.id === id);
+  if (idx === -1) return false;
+
+  const [removed] = faqs.splice(idx, 1);
+  writeJsonFile("faqs.json", faqs);
+
+  recordCmsAudit({
+    action: "DELETE",
+    contentType: "FAQ",
+    contentId: id,
+    details: `Deleted FAQ: ${removed.questionBn}`,
+    performedBy,
+  });
+  return true;
+}
+
+export function toggleFaqApproval(id: string, performedBy: string): CmsFaq | null {
+  const faqs = getCmsFaqs(false);
+  const faq = faqs.find((f) => f.id === id);
+  if (!faq) return null;
+
+  faq.isApproved = !faq.isApproved;
+  faq.status = faq.isApproved ? "PUBLISHED" : "DRAFT";
+  faq.updatedAt = new Date().toISOString();
+  writeJsonFile("faqs.json", faqs);
+
+  recordCmsAudit({
+    action: "UPDATE",
+    contentType: "FAQ",
+    contentId: id,
+    details: `Toggled FAQ approval to: ${faq.isApproved}`,
+    performedBy,
+  });
+  return faq;
+}
+
+export function deleteCmsDownload(id: string, performedBy: string): boolean {
+  const downloads = getCmsDownloads(false);
+  const idx = downloads.findIndex((d) => d.id === id);
+  if (idx === -1) return false;
+
+  const [removed] = downloads.splice(idx, 1);
+  writeJsonFile("downloads.json", downloads);
+
+  recordCmsAudit({
+    action: "DELETE",
+    contentType: "DOWNLOAD",
+    contentId: id,
+    details: `Deleted download item: ${removed.titleBn}`,
+    performedBy,
+  });
+  return true;
+}
+
+export function deleteCmsGalleryItem(id: string, performedBy: string): boolean {
+  const gallery = getCmsGallery(false);
+  const idx = gallery.findIndex((g) => g.id === id);
+  if (idx === -1) return false;
+
+  const [removed] = gallery.splice(idx, 1);
+  writeJsonFile("gallery.json", gallery);
+
+  recordCmsAudit({
+    action: "DELETE",
+    contentType: "GALLERY",
+    contentId: id,
+    details: `Deleted gallery image: ${removed.titleBn}`,
+    performedBy,
+  });
+  return true;
+}
+

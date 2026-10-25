@@ -1,0 +1,513 @@
+[
+  {
+    "id": "EHRJ-EVAL-2026-0001",
+    "rfqId": "EHRJ-RFQ-2026-0002",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0003",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T17:01:08.394Z",
+    "updatedAt": "2026-09-29T17:01:08.398Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:01:08.398Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0002",
+    "rfqId": "EHRJ-RFQ-2026-0003",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0006",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T17:03:41.720Z",
+    "updatedAt": "2026-09-29T17:03:41.730Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:03:41.729Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0003",
+    "rfqId": "EHRJ-RFQ-2026-0004",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0009",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T17:04:57.482Z",
+    "updatedAt": "2026-09-29T17:04:57.489Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:04:57.489Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0004",
+    "rfqId": "EHRJ-RFQ-2026-0005",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0012",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T17:05:14.852Z",
+    "updatedAt": "2026-09-29T17:05:14.858Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:05:14.857Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0005",
+    "rfqId": "EHRJ-RFQ-2026-0006",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0015",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T17:05:33.526Z",
+    "updatedAt": "2026-09-29T17:05:33.534Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:05:33.533Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0006",
+    "rfqId": "EHRJ-RFQ-2026-0007",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0018",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T17:13:39.439Z",
+    "updatedAt": "2026-09-29T17:13:39.449Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:13:39.449Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0007",
+    "rfqId": "EHRJ-RFQ-2026-0008",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0021",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T17:23:28.390Z",
+    "updatedAt": "2026-09-29T17:23:28.424Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:23:28.423Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0008",
+    "rfqId": "EHRJ-RFQ-2026-0009",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0024",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T17:56:48.716Z",
+    "updatedAt": "2026-09-29T17:56:48.725Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T17:56:48.724Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0009",
+    "rfqId": "EHRJ-RFQ-2026-0010",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0027",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T18:05:36.131Z",
+    "updatedAt": "2026-09-29T18:05:36.141Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T18:05:36.141Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0010",
+    "rfqId": "EHRJ-RFQ-2026-0011",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0030",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T18:06:34.725Z",
+    "updatedAt": "2026-09-29T18:06:34.735Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T18:06:34.735Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0011",
+    "rfqId": "EHRJ-RFQ-2026-0012",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0033",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T18:14:14.842Z",
+    "updatedAt": "2026-09-29T18:14:14.853Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T18:14:14.853Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0012",
+    "rfqId": "EHRJ-RFQ-2026-0013",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-29",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "priceScore": 95,
+        "technicalScore": 90,
+        "totalScore": 92.5,
+        "rank": 1
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "priceScore": 85,
+        "technicalScore": 88,
+        "totalScore": 86.5,
+        "rank": 2
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0036",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-29T18:22:44.712Z",
+    "updatedAt": "2026-09-29T18:22:44.720Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-29T18:22:44.719Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  },
+  {
+    "id": "EHRJ-EVAL-2026-0013",
+    "rfqId": "EHRJ-RFQ-2026-0014",
+    "rfqTitleBn": "হিফজুল কুরআন বিভাগ - বার্ষিক ডায়েরি ও খাতা সরবরাহ ২০২৬",
+    "evaluatorId": "admin-test-01",
+    "evaluatorName": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+    "evaluatorRole": "ADMIN",
+    "evaluationDate": "2026-09-30",
+    "vendorScores": [
+      {
+        "vendorId": "EHRJ-VEN-2026-0001",
+        "vendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+        "quotationId": "EHRJ-QUO-2026-0039",
+        "criterionScores": [
+          {
+            "criterionId": "PRICE",
+            "criterionName": "মূল্য",
+            "weight": 0.6,
+            "rawScore": 95,
+            "weightedScore": 57
+          },
+          {
+            "criterionId": "DELIVERY",
+            "criterionName": "ডেলিভারি সময়",
+            "weight": 0.4,
+            "rawScore": 90,
+            "weightedScore": 36
+          }
+        ],
+        "totalWeightedScore": 93,
+        "factualObservationsBn": "সর্বনিম্ন দর ও দ্রুততম ডেলিভারি"
+      },
+      {
+        "vendorId": "EHRJ-VEN-2026-0002",
+        "vendorName": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+        "quotationId": "EHRJ-QUO-2026-0040",
+        "criterionScores": [
+          {
+            "criterionId": "PRICE",
+            "criterionName": "মূল্য",
+            "weight": 0.6,
+            "rawScore": 85,
+            "weightedScore": 51
+          },
+          {
+            "criterionId": "DELIVERY",
+            "criterionName": "ডেলিভারি সময়",
+            "weight": 0.4,
+            "rawScore": 88,
+            "weightedScore": 35.2
+          }
+        ],
+        "totalWeightedScore": 86.2,
+        "factualObservationsBn": "তুলনামূলক বেশি দর"
+      }
+    ],
+    "recommendedVendorId": "EHRJ-VEN-2026-0001",
+    "recommendedVendorName": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "recommendedQuotationId": "EHRJ-QUO-2026-0039",
+    "recommendationJustificationBn": "কুমিল্লা মডার্ন প্রেসের দর সর্বনিম্ন এবং সরবরাহ দ্রুততম (১০ দিন)।",
+    "decisionStatus": "APPROVED",
+    "createdAt": "2026-09-30T04:10:48.291Z",
+    "updatedAt": "2026-09-30T04:10:48.300Z",
+    "approvedBy": "মুহতামিম সাহেব (অধ্যক্ষ)",
+    "approvedAt": "2026-09-30T04:10:48.300Z",
+    "decisionNotes": "মাদরাসা পরিচালনা কমিটি ও মুহতামিমের উপস্থিতিতে দরপত্র চূড়ান্তভাবে গৃহীত ও অনুমোদিত।"
+  }
+]

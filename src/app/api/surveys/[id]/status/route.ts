@@ -5,14 +5,15 @@ import { transitionSurveyStatus, SurveyStatus } from "@/lib/surveys";
 export const dynamic = "force-dynamic";
 
 interface RouteParams {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 /**
  * POST /api/surveys/[id]/status
  * Transitions survey status through the validated state machine.
  */
-export async function POST(req: NextRequest, { params }: RouteParams) {
+export async function POST(req: NextRequest, { params: paramsPromise }: RouteParams) {
+  const params = await paramsPromise;
   try {
     const session = await getSessionUser();
     if (

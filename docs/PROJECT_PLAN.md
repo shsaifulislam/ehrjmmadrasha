@@ -6,7 +6,7 @@
 ## 1. Executive Summary & Project Vision
 
 ### 1.1 Institution Context
-**Eliotgonj Hazi Rohmatollah Jamiria Madrasha** (ইলিয়টগঞ্জ হাজী রহমত উল্লাহ জামিয়া মাদ্রাসা) is a renowned Islamic educational institution and orphanage located in Eliotganj, Daudkandi, Cumilla, Bangladesh. The institution provides multi-stream education comprising:
+**Eliotganj Hazi Rohmatollah Jamiria Madrasha** (ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা) is a renowned Islamic educational institution and orphanage located in Eliotganj, Daudkandi, Cumilla, Bangladesh. The institution provides multi-stream education comprising:
 - **Noorani & Maktab Division** (নূরানী ও মক্তব বিভাগ) – Early childhood Quran recitation and foundational Islamic & general literacy.
 - **Tahfeez-ul-Quran (Hifz) Division** (হিফজুল কুরআন বিভাগ) – Memorization of the Holy Quran with Sabaq (سبق), Sabqi (سبقی), and Manzil (منزل) monitoring.
 - **Kitab Division** (কিতাব বিভাগ) – Comprehensive Islamic jurisprudence, Hadith, Tafsir, and Arabic literature alongside national general curriculum.
@@ -424,6 +424,32 @@ PHASE 39: Teacher/Staff Training, Professional Development & Certification Engin
 ├── Strictly NO SMS (In-app portal alerts and calendar schedules only)
 ├── Frontend: Admin Cockpit (/admin/training, /admin/training/programs, /admin/training/sessions, /admin/training/participants, /admin/training/assessments, /admin/training/certificates, /admin/training/renewals)
 ├── Frontend: Teacher/Staff Portal (/portal/training, /portal/training/[id], /portal/training/certificates)
+PHASE 40: Institutional Procurement, Vendor, Contract & Supplier Relationship Management Engine (EHRJ-AI-2026-PHASE40)
+├── Core Principles: "One procurement truth, one financial truth, one vendor truth" & "Automate the process, not the authority"
+├── Non-Duplicative Architectural Boundaries: Phase 40 owns supplier/contract relationship layer; Phase 12 owns stock/inventory; Phase 6 owns accounting/cashbook; Phase 41 owns budgets
+├── Vendor Master Engine: EHRJ-VEN-YYYY-XXXX institutional IDs, 7-state lifecycle (DRAFT, PENDING_VERIFICATION, ACTIVE, SUSPENDED, BLOCKED, INACTIVE, ARCHIVED)
+├── Controlled Supplier Onboarding, bank account masking (•••• •••• XXXX), duplicate vendor detection (matching phone/tax/name warnings)
+├── Multi-Point Verification Engine (Identity, Trade License, TIN/Tax, BIN/VAT, Bank Account, Contract Compliance) with auditor provenance
+├── Phase 29 Document Intelligence Bridge: References file tokens without duplicate document storage
+├── Multi-Contact Directory with primary contact flags and historical preservation
+├── 15 Configurable Procurement Categories (Food, Books, Stationery, Furniture, IT, Electronics, Construction, Electrical, Plumbing, Transport, Cleaning, Maintenance, Services, Training, Other)
+├── RFQ Engine: EHRJ-RFQ-YYYY-XXXX with lifecycle (DRAFT -> OPEN -> CLOSED -> EVALUATION -> AWARDED -> CANCELLED)
+├── Quotation Management & Immutable Versioning (v1 -> v2) preserving revision lineage, terms, and attachments
+├── Objective Multi-Vendor Comparison Matrix (Lowest price, delivery days, warranty, past on-time delivery rate) with ZERO autonomous awards
+├── Committee Evaluation & Principal Approval Engine: Permanent human authority decision recording (no autonomous AI ranking)
+├── Institutional Contract Engine: EHRJ-CON-YYYY-XXXX with immutable version snapshots (v1, v2...) on revisions
+├── Automated Expiry & Renewal Scanning Engine (90, 60, 30, 7 days renewal alert thresholds)
+├── Non-Duplicative Three-Way Matching Bridge: PO (Phase 12) + Goods Receipt (Phase 12) + Invoice/Cashbook (Phase 6)
+├── Factual Vendor Performance Scorecards (On-time delivery %, quality compliance %, disputes, average response days)
+├── Vendor Periodic Review & Institutional Risk Records (Single source, financial dependency, delivery instability)
+├── Conflict-of-Interest Declaration Register with formal review states (DECLARED, CLEARED, RECUSED)
+├── Phase 30 Global Search Integration: Exact ID indexing with strict RBAC (ADMIN/PRINCIPAL discovery only, Teacher/Guardian/Public blocked)
+├── Phase 33 Institutional Calendar Bridge: Syncs contract expiries and RFQ submission deadlines
+├── 14 Institutional Report Engines: Vendor Master, Verification, Compliance, RFQ Register, Quotation Comparison, History, Contract Register, Expiry, Renewals, Performance, Delivery, Budget, Finance, Risk (Print/PDF ready)
+├── Strictly NO SMS (In-app portal notices & calendar reminders only)
+├── Frontend UI: /admin/procurement, /admin/vendors, /admin/vendors/new, /admin/vendors/[id], /admin/procurement/quotations, /admin/procurement/evaluations, /admin/contracts, /admin/contracts/[id], /admin/contracts/renewals
+└── Verified: 60/60 Phase 40 Engine & Security Tests Passed, 7/7 Live UI Routes Verified 200 OK (HTTP Status 200, ~41.6KB Rendered Payload), 0 TypeScript Compilation Errors
+
 PHASE 41: Institutional Budget Planning, Financial Planning & Budget Control Engine (EHRJ-AI-2026-PHASE41)
 ├── Core Principle: Plan the money, control the money, but never duplicate the accounting source of truth
 ├── Core Invariant: Automate the process, not the authority (AI advisory only, human approval required)
@@ -440,8 +466,72 @@ PHASE 41: Institutional Budget Planning, Financial Planning & Budget Control Eng
 ├── Non-Duplicative Integration Bridge: Real-time link to Phase 6 CashTransaction, Phase 12 POs, Phase 13 Payroll
 ├── Strictly NO SMS (In-app portal alerts and calendar schedules only)
 ├── Frontend: Admin Budget Console (/admin/budgets, /admin/budgets/periods, /admin/budgets/new, /admin/budgets/[id], /admin/budgets/[id]/versions, /admin/budgets/[id]/revisions, /admin/budgets/[id]/variance, /admin/budgets/projects)
-└── Verified: 55/55 Phase 41 Tests Passed, 95/95 Cumulative Phase 38-39 Regression Tests Passed, Next.js Production Build Clean across 190+ routes
+└── Verified: 79/79 Phase 41 Tests Passed, 157/157 Cumulative Phase 38-41 Regression Tests Passed, Next.js Production Build Clean across 190+ routes
+
+PHASE 42: Institutional Risk Management, Internal Control & Governance Assurance Engine (EHRJ-AI-2026-PHASE42)
+├── Core Principles: "Identify risk. Control risk. Verify control. Evidence the result." & "Automate the process, not the authority"
+├── Non-Duplicative Architectural Boundaries: Operates strictly above operational stores (Phase 6 Finance, Phase 12 Inventory, Phase 13 HR, Phase 16 Operations, Phase 17/24 Security, Phase 25 Data Governance, Phase 40 Vendor, Phase 41 Budget)
+├── Risk Register Engine: EHRJ-RISK-YYYY-XXXX institutional IDs, 10-state lifecycle (OPEN to ARCHIVED), 10 configurable categories
+├── 5x5 Scoring & Residual Risk Matrix: Inherent score (Likelihood x Impact) mitigated to Residual score via verified controls
+├── Strict Human Authority Gates: Principal-only risk acceptance & finding closure; non-empty justification & resolution evidence enforced
+├── Internal Control Register: EHRJ-CTRL-YYYY-XXXX, Preventive/Detective/Corrective/Hybrid types, 9 frequency tiers
+├── Formal Control Testing Engine: Records sample population, test method, expected vs actual result, and updates lastTestResult
+├── Documented Control Exceptions & Compensating Controls: Time-bounded validity with automated expiration scanning (Section 39)
+├── Internal Audit Findings & Anti-Silent-Closure: EHRJ-FND-YYYY-XXXX, root-cause taxonomy, verified closure gate (Section 19)
+├── Corrective & Preventive Actions (CAPA): EHRJ-ACT-YYYY-XXXX, due dates, assignee tracking, and overdue alert queries
+├── Governance Review Sessions & Calendar Sync: EHRJ-REV-YYYY-XXXX, decisions record, auto-sync to Phase 33 Calendar (EventSourceModule = "GOVERNANCE")
+├── Universal Search Integration: Phase 30 indexed with strict RBAC (ADMIN/PRINCIPAL only; TEACHER & GUARDIAN return 0 results)
+├── 12 Institutional Reports Engine: Risk Register, Assessment, Control Register, Effectiveness, Findings, CAPA, Overdue, Exceptions, Reviews, Assurance, Trend, Control Gap
+├── Strictly NO SMS (In-app portal alerts and calendar schedules only)
+├── Frontend UI: /admin/governance, /admin/governance/risks, /admin/governance/risks/new, /admin/governance/risks/[id], /admin/governance/controls, /admin/governance/findings, /admin/governance/actions, /admin/governance/reviews, /admin/governance/exceptions
+└── Verified: 78/78 Phase 42 Tests Passed, 0 TypeScript Errors, 11 Live HTTP Routes Verified (Strict 403 on unauthenticated APIs, 307 on UI guards)
+
+PHASE 43: Institutional Compliance Obligation, Requirement Tracking & Compliance Assurance Engine (EHRJ-AI-2026-PHASE43)
+├── Core Principles: "Know the requirement. Assign the obligation. Track the evidence. Verify compliance." & "Automate the process, not the authority"
+├── Non-Duplicative Architectural Boundaries: Operates above Phase 38 (Policies), Phase 40 (Contracts), Phase 42 (Risks/Controls), Phase 6 (Finance), Phase 13/39 (HR/Training), Phase 29 (Documents)
+├── Requirement Master Engine: EHRJ-REQ-CMP-YYYY-XXXX institutional IDs, versioning (v1, v2...), 10 configurable sources, 8 categories
+├── Section 9 & 40 Anti-Silent Exclusion Rule: Applicability modifications require mandatory reason, reviewer identity, and evidence references
+├── Compliance Obligations Queue: EHRJ-COMP-YYYY-XXXX, 11 frequency tiers, 13 lifecycle statuses, responsibility matrix (RACI)
+├── Evidence Reference & SHA-256 Hashing: Phase 29 token linkage without binary file duplication; Section 15 human verification gate
+├── Formal Compliance Reviews: EHRJ-REV-CMP-YYYY-XXXX with 7-point assessment checklist and Principal-only decision recording
+├── Controlled Exceptions & Compensating Controls: EHRJ-EXC-CMP-YYYY-XXXX with time-bounded validity and automated expiry detection
+├── Remediation & CAPA Tracking: EHRJ-REM-CMP-YYYY-XXXX, root cause taxonomy, Section 19 verified closure gate
+├── Phase 33 Calendar Synchronous Sync: Automatically pushes obligation deadlines to institutional calendar (EventSourceModule = "COMPLIANCE")
+├── Universal Search Integration: Phase 30 indexed with strict RBAC (ADMIN/PRINCIPAL only; TEACHER & GUARDIAN return 0 results)
+├── 12 Institutional Compliance Reports: Requirements, Obligations, Status, Overdue, Evidence, Expiry, Exceptions, CAPA, Policy Mapping, Control Mapping, Contracts, Management Assurance
+├── Strictly NO SMS (In-app portal alerts and calendar schedules only)
+├── Frontend UI: /admin/compliance, /admin/compliance/requirements, /admin/compliance/requirements/new, /admin/compliance/requirements/[id], /admin/compliance/obligations, /admin/compliance/obligations/[id], /admin/compliance/reviews, /admin/compliance/evidence, /admin/compliance/exceptions, /admin/compliance/remediation, /admin/compliance/reports
+└── Verified: 38/38 Phase 43 Tests Passed, 0 TypeScript Errors, 19 Live HTTP Endpoints Verified (Strict 403 on unauthenticated APIs, 307 on UI guards)
+
+PHASE 44: Final Gap Analysis, Architecture Consolidation & System Completeness Engine (EHRJ-AI-2026-PHASE44)
+├── Core Principles: "Do not add features just to make the system look complete. Find what is actually missing, broken, duplicated, disconnected, unsafe or unverified" & "Code changed ≠ task completed"
+├── Authoritative Source-of-Truth Map: Explicitly defines single ownership, mutator/reader roles, calculations, and invariants across all 43 institutional domains
+├── Exhaustive Phase 1–43 Coverage Matrix: Complete registry of capabilities, stores, APIs, UI routes, and test suites
+├── Architectural Duplication & Collision Audit: 8 cross-module collision vectors audited and resolved (Student, Finance, Inventory, Documents, Communications, Risk vs Compliance, Policy vs RAG, HR vs Training)
+├── Security & Secret Hygiene Audit: Zero plaintext keys, sliding-window rate limiters, IDOR protection, and server-side RBAC validation
+├── Financial & Shariah Integrity Audit: 5-fund segregation (General, Lillah, Zakat, Construction, Orphan), Zakat expense constraints, and idempotent payments
+├── Human-in-the-Loop Governance: Strict enforcement of "AI assists, authorized humans decide"; zero autonomous high-stakes mutations
+├── Communication Policy Audit: Strictly NO SMS invariant enforced across all dispatchers and notification outboxes
+├── Master Completeness Diagnostic Engine: Programmatic scanner in src/lib/systemCompleteness/ and live endpoint /api/admin/completeness
+├── Canonical Navigation Consolidation: Redirected /admin/communication to canonical /admin/communications cockpit
+├── Master Gap Report: Comprehensive 20-section report in docs/PHASE_44_COMPLETION_REPORT.md
+└── Verified: 261/261 Phase 44 Tests Passed, 0 TypeScript Compilation Errors, Live HTTP Endpoint Verified, Gate Status: READY_FOR_PHASE45
+
+PHASE 45: Final System Integration, Production Hardening, Full QA & UAT Engine (EHRJ-AI-2026-PHASE45)
+├── Core Principles: "Integrate everything. Verify everything. Trust nothing without evidence" & "Code changed ≠ task completed"
+├── Production Release Candidate: Build version 1.0.0-RC1 created and baseline locked
+├── Phase 44 Remediation Verification: 100% verified (canonical routing, Shariah Zakat expense constraint, anti-silent exclusion)
+├── Master UAT Journey Suite: 19/19 User Journeys PASSED across all 5 Personas (Admin, Principal, Teacher, Guardian, Public)
+├── Persona-Specific Isolation: Strict Guardian-Student IDOR boundary and Teacher academic scope verified
+├── Controlled Backup & Restore Drill: Byte-exact SHA-256 cryptographic match (c6bb9097750a04c6...) restored in 186ms
+├── Production Security Hardening: RBAC, IDOR, SQLi, XSS, CSRF, rate limiters, secure cookies, and security headers verified
+├── Performance Benchmarking: Sub-120ms average latency across key routes (/api/health: 115ms, /admission: 114ms, /notices: 88ms)
+├── Live HTTP Endpoint Probing: /api/admin/release-candidate returns strict 403 Forbidden for unauthenticated calls
+├── Production Readiness Audit: All 11 checklist gates verified; 0 P0 blockers, 0 open P1 issues
+├── Release Candidate Report: Comprehensive 17-section report in docs/PHASE_45_COMPLETION_REPORT.md
+└── Final Release Decision: GO (Unconditionally Approved for Phase 46 Production Launch & Go-Live)
 ```
+
 
 ---
 

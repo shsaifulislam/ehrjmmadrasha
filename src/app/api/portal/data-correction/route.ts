@@ -14,18 +14,49 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "লগইন আবশ্যক।" }, { status: 401 });
     }
 
-    const allRequests = getAllCorrectionRequests();
-
     if (user.role === "GUARDIAN") {
-      // Find guardian record for user
       const guardian = await prisma.guardian.findFirst({ where: { userId: user.userId } });
       if (!guardian) {
         return NextResponse.json({ success: true, data: [] });
       }
-      const myRequests = allRequests.filter(r => r.guardianId === guardian.id);
-      return NextResponse.json({ success: true, data: myRequests });
+      const requests = await prisma.dataCorrectionRequest.findMany({
+        where: { guardianId: guardian.id },
+        orderBy: { createdAt: "desc" }
+      });
+      const data = requests.map(r => ({
+        id: r.id,
+        guardianId: r.guardianId,
+        studentId: r.studentId || r.legacyStudentId,
+        studentIdNumber: r.studentIdNumber,
+        guardianNameBn: r.guardianNameBn,
+        requestedFields: typeof r.requestedFields === "string" ? JSON.parse(r.requestedFields) : r.requestedFields,
+        reasonBn: r.reasonBn,
+        status: r.status,
+        submittedAt: r.createdAt.toISOString(),
+        reviewedBy: r.reviewedBy,
+        reviewedAt: r.reviewedAt ? r.reviewedAt.toISOString() : undefined,
+        reviewNotes: r.reviewNotes
+      }));
+      return NextResponse.json({ success: true, data });
     } else if (user.role === "ADMIN" || user.role === "PRINCIPAL") {
-      return NextResponse.json({ success: true, data: allRequests });
+      const requests = await prisma.dataCorrectionRequest.findMany({
+        orderBy: { createdAt: "desc" }
+      });
+      const data = requests.map(r => ({
+        id: r.id,
+        guardianId: r.guardianId,
+        studentId: r.studentId || r.legacyStudentId,
+        studentIdNumber: r.studentIdNumber,
+        guardianNameBn: r.guardianNameBn,
+        requestedFields: typeof r.requestedFields === "string" ? JSON.parse(r.requestedFields) : r.requestedFields,
+        reasonBn: r.reasonBn,
+        status: r.status,
+        submittedAt: r.createdAt.toISOString(),
+        reviewedBy: r.reviewedBy,
+        reviewedAt: r.reviewedAt ? r.reviewedAt.toISOString() : undefined,
+        reviewNotes: r.reviewNotes
+      }));
+      return NextResponse.json({ success: true, data });
     }
 
     return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
@@ -51,6 +82,22 @@ export async function POST(req: NextRequest) {
 
     if (!studentId || !requestedFields || !reasonBn) {
       return NextResponse.json({ error: "studentId, requestedFields এবং reasonBn আবশ্যক।" }, { status: 400 });
+    }
+
+    // Server-side Ownership / IDOR check
+    const link = await prisma.guardianStudent.findUnique({
+      where: {
+        guardianId_studentId: {
+          guardianId: guardian.id,
+          studentId
+        }
+      }
+    });
+    if (!link) {
+      return NextResponse.json(
+        { error: "অননুমোদিত অ্যাক্সেস। আপনি এই শিক্ষার্থীর নিবন্ধিত অভিভাবক নন।" },
+        { status: 403 }
+      );
     }
 
     const request = await submitGuardianCorrectionRequest(

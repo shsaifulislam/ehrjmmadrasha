@@ -8,12 +8,13 @@ export const metadata: Metadata = {
   description: "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসার অভিভাবক সেবা ও অভিযোগ ডেস্ক",
 };
 
-export default function PortalHelpdeskDetailPage({ params }: { params: { id: string } }) {
+export default async function PortalHelpdeskDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   return (
     <div className="min-h-screen bg-[#F9F8F3] flex flex-col justify-between">
       <Navbar />
       <div className="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
-        <GuardianHelpdeskHub initialTicketId={params.id} />
+        <GuardianHelpdeskHub initialTicketId={id} />
       </div>
       <Footer />
     </div>

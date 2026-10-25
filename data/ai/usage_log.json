@@ -854,5 +854,19 @@
     "status": "SUCCESS",
     "humanReviewRequired": false,
     "timestamp": "2026-09-29T13:05:34.922Z"
+  },
+  {
+    "requestId": "EHRJ-AIQ-801892",
+    "userId": "d932cf88-72ee-4076-a62e-31f86d8d3b28",
+    "userRole": "GUARDIAN",
+    "module": "ACADEMIC",
+    "queryIntent": "GUARDIAN_CHILD_SUMMARY",
+    "model": "LocalFallback-Deterministic",
+    "provider": "LOCAL_FALLBACK",
+    "estimatedTokens": 45,
+    "latencyMs": 9,
+    "status": "SUCCESS",
+    "humanReviewRequired": false,
+    "timestamp": "2026-10-04T08:33:21.892Z"
   }
 ]

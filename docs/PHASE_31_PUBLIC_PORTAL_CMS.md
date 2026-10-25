@@ -86,7 +86,7 @@ Centralized in `data/cms/institutional_profile.json` and served via `getInstitut
 - **Established Year:** ২০২১ (2021)
 - **Founder & Leadership:** Alhaj Md. Rahmatullah (প্রতিষ্ঠাতা), মুফতি মাওলানা মুহাম্মদ (মুহতামিম)
 - **Address:** ইলিয়টগঞ্জ, দাউদকান্দি, কুমিল্লা, বাংলাদেশ
-- **Official Contact:** `+880 1812-345678`, `info@ehrj-madrasha.edu.bd`
+- **Official Contact:** `01845-162664`, `ehrjmadrasha@gmail.com`, `https://www.ehrjmadrasha.com`
 - **Integrity Lock:** Core institutional names and establishment year are locked against accidental corruption.
 
 ---

@@ -1,0 +1,119 @@
+========================================================================================
+EHRJ PHASE 31: REAL-BROWSER AUDIT & GAP CLOSURE EXECUTION LOG
+Project: Eliotgonj Hazi Rohmatollah Jamiria Madrasha Web Application
+Environment: Windows 11 x64, Node.js v20.18.0, Playwright Chromium Headless
+Dev Server: Next.js 15.5.28 on http://127.0.0.1:3000
+Master DB Invariant (prisma/dev.db): db452633adeddb9f4baf0441c500e7df2c460a7fe58b40d99d693af3994dc094
+========================================================================================
+
+--- GAP RESOLUTION SUITE (scratch/p31_test_gap_resolution.mjs) ---
+[PASS] [GAP-LANG-INITIAL-BN] Language Switcher Initial State: Bengali
+       Expected: document.documentElement.lang === "bn" and visible Bengali text
+       Actual:   lang="bn", sample text: "রেজাল্ট যাচাই"
+       Evidence: evidence/phase31/screenshots/gap_lang_bn.png
+
+[PASS] [GAP-LANG-TOGGLE-EN] Language Switcher Toggle to English
+       Expected: document.documentElement.lang === "en" and visible English text
+       Actual:   lang="en", sample text: "Verify Result"
+       Evidence: evidence/phase31/screenshots/gap_lang_en.png
+
+[PASS] [GAP-LANG-TOGGLE-BN] Language Switcher Toggle Back to Bengali
+       Expected: document.documentElement.lang === "bn" and restored Bengali text
+       Actual:   lang="bn", sample text: "রেজাল্ট যাচাই"
+       Evidence: evidence/phase31/screenshots/gap_lang_bn.png
+
+[PASS] [GAP-RERUN-HOME] Public Homepage Pre-warmed Render
+       Expected: Renders fully without timeout, docWidth === winWidth (1280px, 0px overflow)
+       Actual:   Loaded in 5.2s, docWidth=1280, winWidth=1280 (0px overflow)
+       Evidence: evidence/phase31/screenshots/gap_home_rendered.png
+
+[PASS] [GAP-RERUN-ABOUT] Public About Page Pre-warmed Render
+       Expected: Renders fully without timeout, docWidth === winWidth (1280px, 0px overflow)
+       Actual:   Loaded in 5.6s, docWidth=1280, winWidth=1280 (0px overflow)
+       Evidence: evidence/phase31/screenshots/gap_about_rendered.png
+
+[PASS] [GAP-RERUN-ADMISSION] Public Admission Guide Pre-warmed Render
+       Expected: Renders fully without timeout, docWidth === winWidth (1280px, 0px overflow)
+       Actual:   Loaded in 10.6s, docWidth=1280, winWidth=1280 (0px overflow)
+       Evidence: evidence/phase31/screenshots/gap_admission_rendered.png
+
+[PASS] [GAP-RESP-TABLET-ADMISSION] Admission Guide Responsive (Tablet 768px)
+       Expected: docWidth === winWidth (768px, 0px overflow)
+       Actual:   docWidth=768, winWidth=768 (0px overflow)
+       Evidence: evidence/phase31/screenshots/gap_admission_tablet.png
+
+[PASS] [GAP-RESP-MOBILE-ADMISSION] Admission Guide Responsive (Mobile 390px)
+       Expected: docWidth === winWidth (390px, 0px overflow)
+       Actual:   docWidth=390, winWidth=390 (0px overflow)
+       Evidence: evidence/phase31/screenshots/gap_admission_mobile.png
+
+--- ROLE-BASED REAL-BROWSER WORKFLOWS ---
+[PASS] [WF-BRW-01-APPLY-RENDER] Public Admission Form Real Browser Journey
+       Expected: Interactive admission wizard or secure inline Guardian auth gate is visible
+       Actual:   Landed on /admission/apply, inline Guardian Auth Gate & admission header rendered
+       Evidence: evidence/phase31/screenshots/wf_browser_admission_apply.png
+
+[PASS] [WF-BRW-01-TRACK-RENDER] Public Admission Tracking Interface
+       Expected: Search input for tracking code/phone is interactable
+       Actual:   Tracking input rendered, accept text input, interactive button
+       Evidence: evidence/phase31/screenshots/wf_browser_admission_track.png
+
+[PASS] [WF-BRW-01-RESULTS-SEARCH] Public Examination Result Verification
+       Expected: Roll/Registration search controls and exam selection visible
+       Actual:   Header "শিক্ষার্থীর পরীক্ষার ফলাফল ও মার্কশিট" & search controls rendered
+       Evidence: evidence/phase31/screenshots/wf_browser_results_search.png
+
+[PASS] [WF-BRW-02-ADMIN-DASHBOARD] Admin Command Center Real Browser Navigation
+       Expected: Privileged dashboard loads with KPI cards and sidebar navigation
+       Actual:   Landed on /admin, header "সেন্ট্রালাইজড এডমিন ইআরপি স্মার্ট ৩.০" rendered
+       Evidence: evidence/phase31/screenshots/wf_browser_admin_dashboard.png
+
+[PASS] [WF-BRW-02-ADMIN-STUDENTS] Admin Student Management Directory
+       Expected: Student roster, stats cards, and search filters rendered
+       Actual:   Landed on /admin/students, search bar & filter dropdowns interactive
+       Evidence: evidence/phase31/screenshots/wf_browser_admin_students.png
+
+[PASS] [WF-BRW-02-ADMIN-FINANCE] Admin Finance Hub & Fee Collection
+       Expected: Finance summary cards, tabs for billing/invoices, and Shariah funds
+       Actual:   Landed on /admin/finance, tabs "সারসংক্ষেপ", "দ্রুত ফি আদায়", funds rendered
+       Evidence: evidence/phase31/screenshots/wf_browser_admin_finance.png
+
+[PASS] [WF-BRW-03-TEACHER-DASHBOARD] Teacher Academic Portal Real Browser Navigation
+       Expected: Timetable, assigned sections, and quick attendance shortcuts rendered
+       Actual:   Landed on /teacher, "উস্তাদ অ্যাকাডেমিক ড্যাশবোর্ড ও পাঠদান পরিচালনা" rendered
+       Evidence: evidence/phase31/screenshots/wf_browser_teacher_dashboard.png
+
+[PASS] [WF-BRW-04-GUARDIAN-PORTAL] Guardian Family Portal Real Browser Navigation
+       Expected: Student profile cards, attendance, fee ledger, and academic reports
+       Actual:   Landed on /portal, "অভিভাবক কেন্দ্রীয় ড্যাশবোর্ড" rendered
+       Evidence: evidence/phase31/screenshots/wf_browser_guardian_portal.png
+
+[PASS] [WF-BRW-05-PRINCIPAL-OVERVIEW] Principal Supervisory Executive Overview
+       Expected: Institutional KPIs, approvals, directives form, and notice dispatch
+       Actual:   Landed on /principal, "মুহতামিম কার্যালয় - ড্যাশবোর্ড ও কমান্ড সেন্টার" rendered
+       Evidence: evidence/phase31/screenshots/wf_browser_principal_overview.png
+
+--- RBAC AUTHENTICATION REDIRECTS & BOUNDARY ENFORCEMENT ---
+[PASS] [WF-BRW-06-UNAUTH-ADMIN-REDIRECT] Unauthenticated Visit to /admin
+       Expected: Redirects to /login?redirect=%2Fadmin&tab=institutional
+       Actual:   Landed on: http://127.0.0.1:3000/login?redirect=%2Fadmin&tab=institutional
+       Evidence: evidence/phase31/screenshots/wf_browser_unauth_admin_redirect.png
+
+[PASS] [WF-BRW-06-UNAUTH-PORTAL-REDIRECT] Unauthenticated Visit to /portal
+       Expected: Redirects to /login?redirect=%2Fportal&tab=guardian
+       Actual:   Landed on: http://127.0.0.1:3000/login?redirect=%2Fportal&tab=guardian
+       Evidence: evidence/phase31/screenshots/wf_browser_unauth_portal_redirect.png
+
+[PASS] [WF-BRW-06-UNAUTH-TEACHER-REDIRECT] Unauthenticated Visit to /teacher
+       Expected: Redirects to /login?redirect=%2Fteacher&tab=institutional
+       Actual:   Landed on: http://127.0.0.1:3000/login?redirect=%2Fteacher&tab=institutional
+       Evidence: evidence/phase31/screenshots/wf_browser_unauth_teacher_redirect.png
+
+========================================================================================
+FINAL AUDIT VERIFICATION TOTALS:
+Total Real-Browser Assertions Executed: 19
+Passed: 19
+Failed: 0
+Blocked: 0 (Mobile physical hardware testing remains separate)
+Master DB Integrity: SHA-256 db452633adeddb9f4baf0441c500e7df2c460a7fe58b40d99d693af3994dc094 (Preserved 100%)
+========================================================================================

@@ -5,13 +5,14 @@ import {
   publishEventResults,
   getEventById,
 } from "@/lib/events";
+import { getSessionUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const event = getEventById(params.id);
     if (!event) {
@@ -40,15 +41,29 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
+    const user = await getSessionUser();
+    if (!user || !["ADMIN", "PRINCIPAL", "TEACHER"].includes(user.role)) {
+      return NextResponse.json(
+        { success: false, error: "অননুমোদিত: শুধুমাত্র শিক্ষক ও প্রশাসন ফলাফল এন্ট্রি করতে পারেন।" },
+        { status: 403 }
+      );
+    }
+
     const body = await request.json();
-    const actorRole = body.actorRole || "TEACHER";
-    const actorId = body.actorId || "staff@ehrj.edu.bd";
+    const actorRole = user.role;
+    const actorId = user.email || user.username || user.userId;
 
     // 1. If publish all action
     if (body.action === "PUBLISH_ALL") {
+      if (!["ADMIN", "PRINCIPAL"].includes(user.role)) {
+        return NextResponse.json(
+          { success: false, error: "অননুমোদিত: ফলাফল চূড়ান্ত প্রকাশের ক্ষমতা শুধুমাত্র প্রশাসনের রয়েছে।" },
+          { status: 403 }
+        );
+      }
       const pubResult = publishEventResults(params.id, actorId, actorRole);
       if (!pubResult.success) {
         return NextResponse.json({ success: false, error: pubResult.error }, { status: 403 });

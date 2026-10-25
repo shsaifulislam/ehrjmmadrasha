@@ -6,8 +6,11 @@ import { recordAuditLog } from "@/lib/security";
 export async function GET(req: NextRequest) {
   try {
     const user = await getCurrentUser();
-    if (!user || user.role !== "ADMIN") {
+    if (!user) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 401 });
+    }
+    if (user.role !== "ADMIN" && user.role !== "PRINCIPAL") {
+      return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস: এই তথ্য শুধুমাত্র অ্যাডমিন বা অধ্যক্ষের জন্য সংরক্ষিত।" }, { status: 403 });
     }
 
     const { searchParams } = new URL(req.url);

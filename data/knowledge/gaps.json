@@ -102,5 +102,13 @@
     "detectedCategory": "GENERAL",
     "status": "OPEN",
     "lastSearchedAt": "2026-09-29T13:05:26.932Z"
+  },
+  {
+    "id": "gap-1791213829506",
+    "query": "test",
+    "searchCount": 4,
+    "detectedCategory": "GENERAL",
+    "status": "OPEN",
+    "lastSearchedAt": "2026-10-05T20:38:12.183Z"
   }
 ]

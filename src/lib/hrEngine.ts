@@ -3,6 +3,7 @@ import { recordAuditLog } from "./security";
 import { dispatchNotification } from "./communicationEngine";
 import QRCode from "qrcode";
 import { INSTITUTION_INFO } from "./constants";
+import { getAppUrl } from "./env";
 
 // =================================================================
 // 1. DEFAULT SEEDING & MASTER DATA INITIALIZATION
@@ -1891,7 +1892,7 @@ export async function generateEmployeeIdCardData(employeeId: string) {
 
   if (!employee) throw new Error("কর্মী পাওয়া যায়নি।");
 
-  const verifyUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/verify/employee/${encodeURIComponent(employee.qrToken)}`;
+  const verifyUrl = `${getAppUrl()}/verify/employee/${encodeURIComponent(employee.qrToken)}`;
   const qrCodeUrl = await QRCode.toDataURL(verifyUrl, {
     errorCorrectionLevel: "H",
     margin: 1,
@@ -1920,4 +1921,64 @@ export async function generateEmployeeIdCardData(employeeId: string) {
     qrCodeUrl,
     verifyUrl,
   };
+}
+
+export async function ensureEmployeeForTeacherUser(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    include: { employee: true },
+  });
+  if (!user) throw new Error("ব্যবহারকারী পাওয়া যায়নি।");
+
+  if (user.employee) {
+    return user.employee;
+  }
+
+  // Check if an employee exists with user's mobile or email
+  let employee = await prisma.employee.findFirst({
+    where: {
+      OR: [
+        { userId: user.id },
+        ...(user.phone ? [{ mobile: user.phone }] : []),
+        ...(user.email ? [{ email: user.email }] : []),
+      ],
+    },
+  });
+
+  if (employee) {
+    if (!employee.userId) {
+      employee = await prisma.employee.update({
+        where: { id: employee.id },
+        data: { userId: user.id },
+      });
+    }
+    return employee;
+  }
+
+  await ensureDefaultHrMasterData();
+
+  const dept = await prisma.employeeDepartment.findFirst({
+    where: { OR: [{ nameEn: "Academic" }, { nameBn: { contains: "শিক্ষা" } }] },
+  });
+  const desig = await prisma.employeeDesignation.findFirst({
+    where: { OR: [{ nameEn: "Teacher" }, { nameBn: { contains: "শিক্ষক" } }] },
+  });
+
+  const employeeCode = await generateNextHrSequence("EMP");
+  employee = await prisma.employee.create({
+    data: {
+      employeeId: employeeCode,
+      userId: user.id,
+      nameBn: user.name || "উস্তাদ / শিক্ষক",
+      nameEn: user.username || "Teacher",
+      mobile: user.phone || `01800${Math.floor(100000 + Math.random() * 900000)}`,
+      email: user.email || null,
+      employeeType: "TEACHER",
+      status: "ACTIVE",
+      departmentId: dept?.id || null,
+      designationId: desig?.id || null,
+    },
+  });
+
+  return employee;
 }

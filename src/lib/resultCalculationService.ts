@@ -10,11 +10,11 @@ export interface GradeDefinition {
 }
 
 export const DEFAULT_QAWMI_GRADES: GradeDefinition[] = [
-  { minPercentage: 80, gradeBn: "মুমতাজ (ممتاز)", gradeEn: "Mumtaz (A+)", letterGrade: "A+", isPassed: true },
-  { minPercentage: 65, gradeBn: "জায়্যিদ জিদ্দান (جيد جدا)", gradeEn: "Jayyid Jiddan (A)", letterGrade: "A", isPassed: true },
-  { minPercentage: 50, gradeBn: "জায়্যিদ (جيد)", gradeEn: "Jayyid (B)", letterGrade: "B", isPassed: true },
-  { minPercentage: 33, gradeBn: "মাকবুল (مقبول)", gradeEn: "Maqbool (C)", letterGrade: "C", isPassed: true },
-  { minPercentage: 0, gradeBn: "রাসিব (راسب / অকৃতকার্য)", gradeEn: "Rasib (Fail)", letterGrade: "F", isPassed: false },
+  { minPercentage: 80, gradeBn: "মুমতাজ (ممتاز)", gradeEn: "Mumtaz", letterGrade: "A+", isPassed: true },
+  { minPercentage: 70, gradeBn: "জায়্যিদ জিদ্দান (جيد جدا)", gradeEn: "Jayyid Jiddan", letterGrade: "A", isPassed: true },
+  { minPercentage: 60, gradeBn: "জায়্যিদ (جيد)", gradeEn: "Jayyid", letterGrade: "B", isPassed: true },
+  { minPercentage: 50, gradeBn: "মাকবুল (مقبول)", gradeEn: "Maqbool", letterGrade: "C", isPassed: true },
+  { minPercentage: 0, gradeBn: "রাসিব (راسب)", gradeEn: "Rasib", letterGrade: "F", isPassed: false },
 ];
 
 /**
@@ -231,7 +231,7 @@ export function calculateCandidateResult(
 
   const percentage = totalFull > 0 ? Number(((totalObt / totalFull) * 100).toFixed(2)) : 0;
   const gradeDef = calculateGradeFromPercentage(percentage, grades);
-  const overallPassed = allMandatoryPassed && percentage >= 33;
+  const overallPassed = allMandatoryPassed && percentage >= 50;
 
   return {
     studentId: candidate.studentId,

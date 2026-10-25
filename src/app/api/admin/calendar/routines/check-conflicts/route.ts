@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   validateRoutineSlotConflicts,
   validateResourceBookingConflicts,
@@ -7,6 +8,9 @@ import {
 
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const body = await request.json();
     const { type, candidateSlot, candidateBooking, candidateDate } = body;
 

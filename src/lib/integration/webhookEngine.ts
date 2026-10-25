@@ -21,6 +21,8 @@ import {
 import { executeResilientRequest, sanitizeMetadata } from "./circuitBreaker";
 import { eventBus, DomainEvent } from "@/lib/workflow/eventBus";
 import { recordAuditLog } from "@/lib/security";
+import { getWebhookSigningSecret } from "@/lib/env";
+import { atomicWriteFileSync } from "@/lib/storageUtils";
 
 const DATA_DIR = path.join(process.cwd(), "data", "integrations");
 const INBOUND_FILE = path.join(DATA_DIR, "inbound_webhooks.json");
@@ -49,7 +51,7 @@ export function loadInboundWebhooks(): InboundWebhookRecord[] {
 
 export function saveInboundWebhooks(items: InboundWebhookRecord[]): void {
   ensureDir();
-  fs.writeFileSync(INBOUND_FILE, JSON.stringify(items.slice(-500), null, 2), "utf-8");
+  atomicWriteFileSync(INBOUND_FILE, JSON.stringify(items.slice(-500), null, 2));
 }
 
 export function loadWebhookSubscriptions(): WebhookSubscription[] {
@@ -210,8 +212,8 @@ export async function processInboundWebhook(params: {
   const correlationId = params.correlationId || `corr_${crypto.randomBytes(8).toString("hex")}`;
   const webhookId = `WH-IN-${Date.now()}-${crypto.randomBytes(3).toString("hex").toUpperCase()}`;
 
-  // 1. Idempotency Check
-  const existing = inboundList.find((w) => w.idempotencyKey === effectiveIdempotencyKey);
+  // 1. Idempotency Check: prevent duplicate event processing of successfully processed events
+  const existing = inboundList.find((w) => w.idempotencyKey === effectiveIdempotencyKey && w.processingStatus === "PROCESSED");
   if (existing) {
     return {
       success: true,
@@ -269,7 +271,36 @@ export async function processInboundWebhook(params: {
 
   // 3. Cryptographic Signature Check
   let signatureStatus: "VERIFIED" | "INVALID" | "MISSING" = "MISSING";
-  if (params.signature && params.signingSecret) {
+  if (params.signingSecret) {
+    if (!params.signature) {
+      const errorMsg = "Missing required cryptographic HMAC signature header";
+      const record: InboundWebhookRecord = {
+        webhookId,
+        integrationCode: params.integrationCode,
+        eventType: params.eventType,
+        provider: params.provider,
+        receivedAt: new Date().toISOString(),
+        payloadHash,
+        signatureStatus: "MISSING",
+        processingStatus: "FAILED",
+        attemptCount: 1,
+        errorCode: "SIGNATURE_VERIFICATION_FAILED",
+        errorMessage: errorMsg,
+        correlationId,
+        idempotencyKey: effectiveIdempotencyKey,
+        sanitizedPayload: sanitizeMetadata(params.rawPayload),
+      };
+      inboundList.push(record);
+      saveInboundWebhooks(inboundList);
+
+      return {
+        success: false,
+        isDuplicate: false,
+        webhookRecord: record,
+        error: errorMsg,
+      };
+    }
+
     const valid = verifyHmacSignature(payloadString, params.signingSecret, params.signature);
     signatureStatus = valid ? "VERIFIED" : "INVALID";
     if (!valid) {
@@ -354,7 +385,8 @@ export async function dispatchOutboundWebhook(
       data: event.payload,
     };
     const payloadString = JSON.stringify(payload);
-    const signature = `t=${Date.now()},v1=${computeHmacSignature(payloadString, "ehrj_outbound_signing_secret_2026")}`;
+    const outboundSecret = getWebhookSigningSecret() || "ehrj_outbound_signing_secret_2026";
+    const signature = `t=${Date.now()},v1=${computeHmacSignature(payloadString, outboundSecret)}`;
 
     const reqResult = await executeResilientRequest({
       integrationCode: sub.integrationCode,

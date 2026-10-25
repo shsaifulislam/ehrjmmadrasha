@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   getInstitutionalHolidays,
   saveInstitutionalHolidays,
@@ -8,6 +9,9 @@ import { InstitutionalHoliday } from "@/lib/calendar/types";
 
 export async function GET(request: NextRequest) {
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const holidays = getInstitutionalHolidays();
     holidays.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
     return NextResponse.json({
@@ -25,6 +29,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireAdminAuth(request);
+    if (!auth.authorized) return auth.response;
+
     const body = await request.json();
     const {
       titleBn,

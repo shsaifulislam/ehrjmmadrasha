@@ -5,8 +5,8 @@ export const dynamic = "force-dynamic";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { token: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ token: string }> }) {
+  const params = await paramsPromise;
   try {
     const { token } = params;
     if (!token) {

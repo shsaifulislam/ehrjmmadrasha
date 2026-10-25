@@ -6,7 +6,8 @@ import { renewBookCopy } from "@/lib/libraryEngine";
  * POST /api/admin/library/issues/[id]/renew
  * Renew an issued book within policy limits
  */
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

@@ -6,7 +6,8 @@ import { markBookCopyLost } from "@/lib/libraryEngine";
  * POST /api/admin/library/copies/[id]/lost
  * Mark a copy as lost and calculate replacement charge through Phase 6 Finance
  */
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

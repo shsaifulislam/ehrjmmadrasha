@@ -1,62 +1,307 @@
 [
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjE5NjQxLCJleHAiOjE3OTEyMjQ0NDF9.XW6MuDp0HsZafx4hc1No2JOPJVHNjHJBaYvb9n11Fsc",
-    "revokedAt": "2026-09-28T18:20:41.471Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxODU2NjE3NC05ODZhLTQ4MTctYmY1OC0wN2M3ZTJmNTcyODciLCJ1c2VybmFtZSI6ImFkbWluZWhyaiIsInJvbGUiOiJBRE1JTiIsImVtYWlsIjoiYWRtaW5laHJqbWFkcmFzaGFAZ21haWwuY29tIiwibmFtZSI6IuCmquCnjeCmsOCmp-CmvuCmqCDgpoXgp43gpq_gpr7gpqHgpq7gpr_gpqggKOCmruCmvuCmpuCmsOCmvuCmuOCmviDgpqrgp43gprDgprbgpr7gprjgpqgpIiwianRpIjoiZTllODU0N2EtNGJhZS00ODVhLTkxYjUtNmVhODYxNTk5M2Y0IiwiaWF0IjoxNzkxMjcwNzUwLCJleHAiOjE3OTE4NzU1NTB9.xsEUgYdKh4RW1Kb1AVoelEUgONKmd1itnOype6qiK9w",
+    "revokedAt": "2026-10-06T07:12:42.645Z",
+    "reason": "User Logout"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjE5ODY4LCJleHAiOjE3OTEyMjQ2Njh9.bfBXGGkw-CSdJGp0VyzbKHeHBwjzFyT6jQ54hjH1-eY",
-    "revokedAt": "2026-09-28T18:24:28.989Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxODU2NjE3NC05ODZhLTQ4MTctYmY1OC0wN2M3ZTJmNTcyODciLCJ1c2VybmFtZSI6ImFkbWluZWhyaiIsInJvbGUiOiJBRE1JTiIsImVtYWlsIjoiYWRtaW5laHJqbWFkcmFzaGFAZ21haWwuY29tIiwibmFtZSI6IuCmquCnjeCmsOCmp-CmvuCmqCDgpoXgp43gpq_gpr7gpqHgpq7gpr_gpqggKOCmruCmvuCmpuCmsOCmvuCmuOCmviDgpqrgp43gprDgprbgpr7gprjgpqgpIiwianRpIjoiZTM1MGRlMjQtNmNmMS00NjU5LThiMzQtODlkMTRjNWNlOGQ4IiwiaWF0IjoxNzkxMjcxMTMyLCJleHAiOjE3OTE4NzU5MzJ9.qFn29M9j6BcXSIZ1PC9RF3UGs1yfeINCEbMsW20SP60",
+    "revokedAt": "2026-10-06T07:18:58.556Z",
+    "reason": "User Logout"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjIxMzA1LCJleHAiOjE3OTEyMjYxMDV9.TUa_Ek4jxy2k9hzkZDd3K49V554FUupmu8AriOn8wnE",
-    "revokedAt": "2026-09-28T18:48:25.864Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxODU2NjE3NC05ODZhLTQ4MTctYmY1OC0wN2M3ZTJmNTcyODciLCJ1c2VybmFtZSI6ImFkbWluZWhyaiIsInJvbGUiOiJBRE1JTiIsImVtYWlsIjoiYWRtaW5laHJqbWFkcmFzaGFAZ21haWwuY29tIiwibmFtZSI6IuCmquCnjeCmsOCmp-CmvuCmqCDgpoXgp43gpq_gpr7gpqHgpq7gpr_gpqggKOCmruCmvuCmpuCmsOCmvuCmuOCmviDgpqrgp43gprDgprbgpr7gprjgpqgpIiwianRpIjoiNzBhNzY4M2ItNDZiYi00OWQ5LWEwZDUtYmMxYTIwNWQwYzRjIiwiaWF0IjoxNzkxMjc1NjE2LCJleHAiOjE3OTE4ODA0MTZ9.31LmluVhqZe_JNhN24kXB0E8ppzf4Tn6R2pZm2g5w_U",
+    "revokedAt": "2026-10-06T08:33:40.165Z",
+    "reason": "User Logout"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjIyNDAwLCJleHAiOjE3OTEyMjcyMDB9.5TYl_i46vGkuWtvGE4Hko-qDuNgMpW9p4qaawOwM-Y0",
-    "revokedAt": "2026-09-28T19:06:40.141Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI2N2FiYTllYy1hZWRjLTRkOGUtYWUzYy0yZGI1YWRiMThmNmMiLCJ1c2VybmFtZSI6InRlYWNoZXIxIiwicm9sZSI6IlRFQUNIRVIiLCJlbWFpbCI6InRlYWNoZXJlaHJqbWFkcmFzaGFAZ21haWwuY29tIiwibmFtZSI6IuCmruCmvuCmk-CmsuCmvuCmqOCmviDgpobgprngpq7gpr7gpqYg4KaJ4Kay4KeN4Kay4Ka-4Ka5ICjgprjgpr_gpqjgpr_gp5_gprAg4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImE2ZWM5NjNlLTFlMzktNDNiNi1hODE4LThlZGNhZmEyYTZlNCIsImlhdCI6MTc5MTI3NTYyMSwiZXhwIjoxNzkxODgwNDIxfQ.9haZMerWi06qT3vVnF-MYKlP2ivteygEFUEbkiKRoP8",
+    "revokedAt": "2026-10-06T08:33:47.241Z",
+    "reason": "User Logout"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjIyNTkzLCJleHAiOjE3OTEyMjczOTN9.yuVdofTJPIdiVXSZRyXTQEwkU4r4T_3xOFnZPpBPOpE",
-    "revokedAt": "2026-09-28T19:09:53.035Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJjZWVkNjhhNy1lZTYzLTQzYzItOGExOS1mNTY5YjA5OGYyYzAiLCJ1c2VybmFtZSI6InByaW5jaXBhbDEiLCJyb2xlIjoiUFJJTkNJUEFMIiwiZW1haWwiOiJwcmluY2lwYWxAZWhyam1hZHJhc2hhLmNvbSIsIm5hbWUiOiLgpq7gp4HgprngpqTgpr7gpq7gpr_gpq4g4Kau4Ka-4KaT4Kay4Ka-4Kao4Ka-IOCmhuCmrOCnjeCmpuCngeCmsiDgppXgpr7gpofgp5_gp4Hgpq4iLCJqdGkiOiIwODA0ZTIxZi1jMDhhLTQyZWUtYmQyMC01Y2JmMDhiYmVhMmEiLCJpYXQiOjE3OTEyNzU2MjgsImV4cCI6MTc5MTg4MDQyOH0.sGFNilP_HRchr21ieRxUA8JVfuR40FMltfY07_2gApc",
+    "revokedAt": "2026-10-06T08:33:51.829Z",
+    "reason": "User Logout"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjIyNjI2LCJleHAiOjE3OTEyMjc0MjZ9.ajZ_ybUuhVMBm0sU7XKtu6sM0Q74jNFt-iXWT0DOVkA",
-    "revokedAt": "2026-09-28T19:10:26.277Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxODU2NjE3NC05ODZhLTQ4MTctYmY1OC0wN2M3ZTJmNTcyODciLCJ1c2VybmFtZSI6ImFkbWluZWhyaiIsInJvbGUiOiJBRE1JTiIsImVtYWlsIjoiYWRtaW5laHJqbWFkcmFzaGFAZ21haWwuY29tIiwibmFtZSI6IuCmquCnjeCmsOCmp-CmvuCmqCDgpoXgp43gpq_gpr7gpqHgpq7gpr_gpqggKOCmruCmvuCmpuCmsOCmvuCmuOCmviDgpqrgp43gprDgprbgpr7gprjgpqgpIiwianRpIjoiN2JkYTVjYTItYzI4Ni00ZDRmLTg2MWYtMTMzYzMxNTZjMTVhIiwiaWF0IjoxNzkxMjc1ODgxLCJleHAiOjE3OTE4ODA2ODF9.p7oerAhaNEv-nBjDmJbVKpFmse-hjURN6lC-cWQC4Ro",
+    "revokedAt": "2026-10-06T08:38:23.126Z",
+    "reason": "User Logout"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjIyNjQ1LCJleHAiOjE3OTEyMjc0NDV9.4ZU0TSnsMgHkIzEN5Mbupsv2yfXLt1muUf11eQmX0wk",
-    "revokedAt": "2026-09-28T19:10:45.969Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI2N2FiYTllYy1hZWRjLTRkOGUtYWUzYy0yZGI1YWRiMThmNmMiLCJ1c2VybmFtZSI6InRlYWNoZXIxIiwicm9sZSI6IlRFQUNIRVIiLCJlbWFpbCI6InRlYWNoZXJlaHJqbWFkcmFzaGFAZ21haWwuY29tIiwibmFtZSI6IuCmruCmvuCmk-CmsuCmvuCmqOCmviDgpobgprngpq7gpr7gpqYg4KaJ4Kay4KeN4Kay4Ka-4Ka5ICjgprjgpr_gpqjgpr_gp5_gprAg4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjcxNzgxOWE5LWRjYmEtNDQ4Mi1hNGMxLTNmNDJiN2U3Yjk1MyIsImlhdCI6MTc5MTI3NTkwNCwiZXhwIjoxNzkxODgwNzA0fQ.KKZj5iaS1rsv8vDGafW6Zc87n46ZccDKB9Esrp1HD2Y",
+    "revokedAt": "2026-10-06T08:38:34.396Z",
+    "reason": "User Logout"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjIyNzcxLCJleHAiOjE3OTEyMjc1NzF9.iwX65mB44Sx6OZyYtDEVXMnDdQPY7fULkzsw0fP2l-s",
-    "revokedAt": "2026-09-28T19:12:51.182Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI0ODRhMzE0Yy1lOGQ0LTQ3ZmQtODE2OC03NTNjYzdmZTk4MzQiLCJ1c2VybmFtZSI6Imd1YXJkaWFuX3VpX2RlbW8iLCJyb2xlIjoiR1VBUkRJQU4iLCJlbWFpbCI6Imd1YXJkaWFuX3VpX2RlbW9AZWhyai5sb2NhbCIsIm5hbWUiOiLgppzgpqjgpr7gpqwg4Kau4KeLOiDgpobgpqzgpqbgp4HgprLgp43gprLgpr7gprkg4KaG4KayIOCmruCmvuCmruCngeCmqCIsImp0aSI6IjhkNTk3ZjU2LTZjNTgtNDhkMS1iNWIxLTgzMTYzMjBjNmQxYyIsImlhdCI6MTc5MTI3NTkxNiwiZXhwIjoxNzkxODgwNzE2fQ.h1uJItCJjKVkMnctP6SOl8PCLkroPJDiLx7bms1FHec",
+    "revokedAt": "2026-10-06T08:38:45.310Z",
+    "reason": "User Logout"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjIyODMxLCJleHAiOjE3OTEyMjc2MzF9.TWK3kU3h3xPpVNzh7Y9MEd7QxkcXT1kB4Qo0Hz_TSEQ",
-    "revokedAt": "2026-09-28T19:13:51.923Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImlhdCI6MTc5MDc0Mzk4MiwiZXhwIjoxNzkxMzQ4NzgyfQ.S5jEHBXCFHSb7doUSogzj47x_XM9j1qZFgTyPWcQOuM",
+    "revokedAt": "2026-10-07T15:54:39.988Z",
+    "reason": "ADMIN_PASSWORD_RESET"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjI0MDcyLCJleHAiOjE3OTEyMjg4NzJ9.WZweQi5La_yRTgBcTwBpMFKH0YZJUmL4yyELJXUZ1zc",
-    "revokedAt": "2026-09-28T19:34:32.668Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImRjMWUzYzEzLTc1MjYtNDA1OC04MDllLTAwZDY5MTg5YjI5MSIsImlhdCI6MTc5MDc0NDA0MCwiZXhwIjoxNzkxMzQ4ODQwfQ.vfSpErEjd7TzenJSmaQXj3WpvyeeU8ucR6zgD2ptKp4",
+    "revokedAt": "2026-10-07T15:54:40.262Z",
+    "reason": "ADMIN_PASSWORD_RESET"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjI0MjQyLCJleHAiOjE3OTEyMjkwNDJ9.hTzQ5yymoHGR_FTTkrFbFRvQ0Xq3wABd83PFGIy-Y8Q",
-    "revokedAt": "2026-09-28T19:37:22.933Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjU1OGYyYzY0LWY4MjAtNDAzMi05YjhiLTcyZDJjY2NkZDc1ZSIsImlhdCI6MTc5MDc0NDA5NCwiZXhwIjoxNzkxMzQ4ODk0fQ.kn05R_NsdbAccztRS4dXxDr-t2WlNaadxJymYGfoC8w",
+    "revokedAt": "2026-10-07T15:54:40.475Z",
+    "reason": "ADMIN_PASSWORD_RESET"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI4ZjJmZjExZi0wNzgyLTQyZGUtYWFhZi02ZmUyNDI4MjI4NjQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpqrgp43gprDgpqfgpr7gpqgg4KaF4KeN4Kav4Ka-4Kah4Kau4Ka_4KaoICjgpoXgpqrgpr7gprDgp4fgprbgpqjgpr7gprIpIiwiaWF0IjoxNzkwNjI1Nzc5LCJleHAiOjE3OTEyMzA1Nzl9.zAbO69XLVLuf6vk3EDBq_IR_bjchSFEWmiLECcDpIMU",
-    "revokedAt": "2026-09-28T20:02:59.651Z",
-    "reason": "Test Remote Session Revocation"
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjI4MWU1MmM3LTMxMWMtNGViNi1hMDQxLTMxOWY4Y2VkMDJhMyIsImlhdCI6MTc5MDc0NDI3MywiZXhwIjoxNzkxMzQ5MDczfQ.-BsMPA8FLIRrvhbqm3H944XjXqlyYgIoMm4jhYgiTE0",
+    "revokedAt": "2026-10-07T15:54:40.727Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjRiNzczZGExLTAyNzAtNDhhNi05YWEwLTFmM2UyNWM4NzcwZiIsImlhdCI6MTc5MDc1NTc2NywiZXhwIjoxNzkxMzYwNTY3fQ.eNj0r8Y5Mpr6uYAmPXFJjfepIVIS8_k7It8XS2VGn3c",
+    "revokedAt": "2026-10-07T15:54:40.978Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImJhMDg1ZDM1LTIzM2EtNDk0NS04Nzg4LWRmZWE5YmJkNjZjMyIsImlhdCI6MTc5MTE4MjExNiwiZXhwIjoxNzkxNzg2OTE2fQ.zP9Nas2_rJ-4sw5c-5kxm36ExtoxO6k6Bretitxp0w0",
+    "revokedAt": "2026-10-07T15:54:41.319Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImZmMjg5MmZiLTBlODMtNDIzYy1iN2U0LTY2NGU2Mjg2ODg1OSIsImlhdCI6MTc5MTE4NDEwMywiZXhwIjoxNzkxNzg4OTAzfQ.Jn30h_k2jlxeEu0HtSyvIhzYTeRkyUYh-o_e9grc7Lc",
+    "revokedAt": "2026-10-07T15:54:41.595Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjIwZGFlMDkxLTVhMzUtNDk1Ny1iMDEzLTYyMDk2NzU3OWQwMyIsImlhdCI6MTc5MTE4NDY3OSwiZXhwIjoxNzkxNzg5NDc5fQ.uf5HjTo5l9B-gBCihyS05dYEd_Ucbchwu4AZ0Sg9pj4",
+    "revokedAt": "2026-10-07T15:54:41.855Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImUzYmMxY2VjLWM1YTItNDY5ZC05OTMxLTU0ZTY1NDZhZWYyYSIsImlhdCI6MTc5MTE4NDc3NSwiZXhwIjoxNzkxNzg5NTc1fQ.YqbpNs9OpRDWc11QBVuH05WmvmMh8mxNtP6vSpaocBo",
+    "revokedAt": "2026-10-07T15:54:42.715Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImIyM2NhY2YxLTk3ZTctNDUyOS04MzUyLTJkNDZmNmRhOGIwYSIsImlhdCI6MTc5MTE4NDgwMCwiZXhwIjoxNzkxNzg5NjAwfQ.2Ux7T3kJhFUETg2wUWLvzVNKZ-r_i01R0fxeb3LnMY0",
+    "revokedAt": "2026-10-07T15:54:43.060Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjQ3ZjZlYTIxLTg0OGQtNGIwOC1hY2M4LTllMWZkNjBhNzIyOSIsImlhdCI6MTc5MTE4NTExMywiZXhwIjoxNzkxNzg5OTEzfQ.p8ORi_ZvB8GhrU0Y7EPUVTnBZPrGcxgXYL4sAjStqow",
+    "revokedAt": "2026-10-07T15:54:43.321Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjJhMGQwZDg1LThkOGEtNDg5NC1iNDBlLWQzNGIzZDk1ODY3ZSIsImlhdCI6MTc5MTE4NTIwMSwiZXhwIjoxNzkxNzkwMDAxfQ._6HKCnjAZJFmwrZQYUZknS6rUdRO8OujX7IY-klamrQ",
+    "revokedAt": "2026-10-07T15:54:43.757Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImY5YjQxMzljLWFkY2QtNGZjZC04OTUxLTBjMTE4MzJhZjY5ZSIsImlhdCI6MTc5MTE5Mzc4OCwiZXhwIjoxNzkxNzk4NTg4fQ.MPEecOGjC0b5VgARE5eTk-icg1GsFKtpaWiyuea7-8M",
+    "revokedAt": "2026-10-07T15:54:44.091Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImJhOTE2YTNiLTU2YmUtNDg5OC1iNmE1LTE1Y2FlOTRlNTYzMSIsImlhdCI6MTc5MTE5MzkwMywiZXhwIjoxNzkxNzk4NzAzfQ.40AZ0qxGQXZw8uAhkZZq2sf4chv3eflMQGNHxJrB-B4",
+    "revokedAt": "2026-10-07T15:54:44.441Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjQ1MzFkMzE1LWUxZGYtNDBkYi1hMmEyLTA3NjBlMDdhYjNkYyIsImlhdCI6MTc5MTE5NDAyNCwiZXhwIjoxNzkxNzk4ODI0fQ.xeHUN-yYJkBNcPBvqmDoYuOpl2ukN2ObVle4R50ZgeI",
+    "revokedAt": "2026-10-07T15:54:44.545Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImIzZTUzYjc1LWM4ZWUtNDdiYi1hZGUyLTI5ZGY0ZWVjZGI2ZiIsImlhdCI6MTc5MTE5NDExNiwiZXhwIjoxNzkxNzk4OTE2fQ.m6ks_6qz9wpcVY0BxHT2zlquD6GyP-GMQTJrWlaDsnU",
+    "revokedAt": "2026-10-07T15:54:44.551Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImE2MWFhOTMwLTcxNmMtNDE1ZC1hZWFlLTk4MTI0YmJjOTcxZCIsImlhdCI6MTc5MTE5NDIxOSwiZXhwIjoxNzkxNzk5MDE5fQ.xz89m_vLqjkHhcWcxMWoXPsDoW2JnFZnefADO7jiqDM",
+    "revokedAt": "2026-10-07T15:54:44.568Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjE2MWUzZjQ2LTViMmEtNGIyMi1hOTAyLTdmYTQ5YzZjMWI1ZiIsImlhdCI6MTc5MTE5NDI4MiwiZXhwIjoxNzkxNzk5MDgyfQ.VPj5Pk3h4viFj3JXumTQhq8f15PUPj7hwgpYa9niHX4",
+    "revokedAt": "2026-10-07T15:54:44.583Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6Ijg3ZGE1ODFhLTM1ODgtNDY1Yy1hZDQ5LWNmNjk3M2I3ZmIyZCIsImlhdCI6MTc5MTE5NDMzOCwiZXhwIjoxNzkxNzk5MTM4fQ.Da7J4CEe2Tjt82XAOyj04VLQEt1mN6-hBsVBJVUqdwQ",
+    "revokedAt": "2026-10-07T15:54:44.602Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImp0aSI6IjgxMDdmZTkwLTkwZjctNGQxMS1iODgyLWU2OTkzYmI5YjA0ZSIsImlhdCI6MTc5MTE5ODEwMCwiZXhwIjoxNzkxODAyOTAwfQ.iciMISBNhAorU2Pt-yavTKPjr_O5oC679rRKlCsomw0",
+    "revokedAt": "2026-10-07T15:54:44.622Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjNmZGY2ODJmLTExYzMtNGIyOC04MzU0LTI2YTMxNDg3NzE3YyIsImlhdCI6MTc5MTE5ODIyMiwiZXhwIjoxNzkxODAzMDIyfQ.1mxaMzw2_hxuVH6S9MZXPT6h4HSyvThgomzU0wEc-z8",
+    "revokedAt": "2026-10-07T15:54:44.642Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImIyMzBmOTY5LTJjYjMtNDMzMC04NjIyLTM2MTAwYjA0MDU1NCIsImlhdCI6MTc5MTE5ODMwNSwiZXhwIjoxNzkxODAzMTA1fQ.4hJ9UUgH6AC7UC_lGe1FNGoNjNrHXcaNGjMtJpkMuhI",
+    "revokedAt": "2026-10-07T15:54:44.660Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjcwY2YyOTVmLTE5NmYtNDk5Ni1hODljLWQ1OTM0M2VkODlkMiIsImlhdCI6MTc5MTE5ODM0NywiZXhwIjoxNzkxODAzMTQ3fQ.Pip-3S4VX79i8soX9bIV6D2crj7YmLJwHVDpbsNymg0",
+    "revokedAt": "2026-10-07T15:54:44.676Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImlhdCI6MTc5MTE5ODQwNywiZXhwIjoxNzkxODAzMjA3fQ.p-70KqXERWbitVQ4L63cQZI9aX-89TGpddt3ksxwjlw",
+    "revokedAt": "2026-10-07T15:54:44.692Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImlhdCI6MTc5MTE5ODUwOCwiZXhwIjoxNzkxODAzMzA4fQ.NZMqfqd4YnL_AJ0ZSlpGcrSUeFwB7ZAGp-I2EkdQzjw",
+    "revokedAt": "2026-10-07T15:54:44.705Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjE2NGJkOWU1LTRmZTUtNDIzNS04MDViLWY1NzM1YmVlNTQxNyIsImlhdCI6MTc5MTE5OTM1NywiZXhwIjoxNzkxODA0MTU3fQ.PZNUj0VTEbtz5HYVvy35f9dte6XTq-p2oj-69wjPatM",
+    "revokedAt": "2026-10-07T15:54:44.727Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjJjOWNhYjc3LWM4NGYtNGQyYS1hZWU0LWZhZjczNjU3MzJmNCIsImlhdCI6MTc5MTE5OTQ1MSwiZXhwIjoxNzkxODA0MjUxfQ.5Y_Mh8_Fi8gMUtjiufLr2O_N2NZN4M4jHoplNZMB6Ak",
+    "revokedAt": "2026-10-07T15:54:44.740Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImNlZmU0NWIwLTI0MGUtNDNkMC1iYzI3LTMxZThmZWYyN2I3YSIsImlhdCI6MTc5MTIwMjU0OCwiZXhwIjoxNzkxODA3MzQ4fQ.CKkbJ2pWj41eQXnkU2G5thma1hElNc-5urJtkHc_3RE",
+    "revokedAt": "2026-10-07T15:54:44.756Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjkzNzQ4ZWQ3LWJlZTgtNDIwMi05MmEyLThiNWY3ZWQyZTA4NSIsImlhdCI6MTc5MTIwOTE0NSwiZXhwIjoxNzkxODEzOTQ1fQ.GCi_A3jywM0IwqSdADQpy-O5k25fHjB9DTQhsklxri4",
+    "revokedAt": "2026-10-07T15:54:44.773Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6Ijg2ZTNiZTJmLWIyZDMtNGVhYy04NGU0LWMwNGFiNjNlZjNjMiIsImlhdCI6MTc5MTIwOTE5NywiZXhwIjoxNzkxODEzOTk3fQ.A2ZDK7OzkbmSsHMVqBMMYM2CJ4gxLps5JZpzq7XYaEQ",
+    "revokedAt": "2026-10-07T15:54:44.788Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjUyMzE1ZDBhLTVhMjUtNDAzYS05ODliLTc3MjkyZGFjMWRlYSIsImlhdCI6MTc5MTIwOTI4OCwiZXhwIjoxNzkxODE0MDg4fQ.OmGI9_J1PEArjrhYE-DxS5cT5zrwvtOc1Mqd5DAIRuw",
+    "revokedAt": "2026-10-07T15:54:44.805Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImU4MTQ1MDcyLWRjN2MtNGZkMS1hZTNmLTUxZjk0ODRhZmU0MSIsImlhdCI6MTc5MTIxMTUxMiwiZXhwIjoxNzkxODE2MzEyfQ.cwBkQWd0BNsLiFwxPKMaNv3yANl72uGxgtm3ZIAcuiw",
+    "revokedAt": "2026-10-07T15:54:44.825Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjVhNmU3NWFmLTFlZjQtNDE2My04OTg5LWNjMjFmYTFkYzAxMyIsImlhdCI6MTc5MTIxMTU1OSwiZXhwIjoxNzkxODE2MzU5fQ.pFl2Gqmn3-_HoMI6MFBtvJn1zT79ebLLot0BVgzHfls",
+    "revokedAt": "2026-10-07T15:54:44.842Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6ImVjNmJhOGNiLTI1M2EtNDdiMC04YmJkLTY4ZjEwOTFlMzIwYyIsImlhdCI6MTc5MTIxMTY5NSwiZXhwIjoxNzkxODE2NDk1fQ.hxEF8olx5DlP5CpHOFYzb2JFfUv35Ysg4AWKPrx-jew",
+    "revokedAt": "2026-10-07T15:54:44.858Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6Ijg2M2M4NzVlLTFmYjktNDY5MC1iOTE5LTdlY2FkZGVmZTk4OSIsImlhdCI6MTc5MTIxMTg1NywiZXhwIjoxNzkxODE2NjU3fQ.vthmxSha4B_FPFCc4CugcQKvl5C113cRt7rl9XdbiF8",
+    "revokedAt": "2026-10-07T15:54:44.875Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjFmMTc3Mjc0LTA2YjQtNDZkMS05ZTJmLTcyNDM2ZjFkN2NiZCIsImlhdCI6MTc5MTIzMjAwMywiZXhwIjoxNzkxODM2ODAzfQ.PK8mOkWYMGQ5kaw-CXdaPDWNXtOT-5nw3-RMGZW65to",
+    "revokedAt": "2026-10-07T15:54:44.891Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6Ijk0MDFiZmI5LTIzMTctNDNlZS05YTkxLTk5MjM5NDEzZTg2MCIsImlhdCI6MTc5MTIzMjYyOSwiZXhwIjoxNzkxODM3NDI5fQ.VVZF-9Qftvdfluhyp5CykoUYG4SMacA_vOP-sYbuiaI",
+    "revokedAt": "2026-10-07T15:54:44.908Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjMyZTExYzJiLWU0YTEtNDdlZS1hZTA3LWMwM2U1MzNkMDkwMiIsImlhdCI6MTc5MTIzMjY4NiwiZXhwIjoxNzkxODM3NDg2fQ.7U2FnjVdbx76HJ7QL4dirZEW9Okff6S9deE4ZEhR4dw",
+    "revokedAt": "2026-10-07T15:54:44.925Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjQ0YjUwNThlLTVjYjItNDE5Mi05YTUxLTY4NjFiNzlmYzRhMCIsImlhdCI6MTc5MTIzMzg2NCwiZXhwIjoxNzkxODM4NjY0fQ.T9un36Eu_3iFuK8SNw0oyIF9eURvUHVCMEb_1EWEtcA",
+    "revokedAt": "2026-10-07T15:54:44.941Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjBiZDFiN2M0LTcyZmUtNGY5YS1iYzVmLTkxNDhhODcwODA0MCIsImlhdCI6MTc5MTIzNDYwMSwiZXhwIjoxNzkxODM5NDAxfQ.ibu1NgOo5xCKHrp3HoVRFgBLXrMO0App4yY5XaJ5LsU",
+    "revokedAt": "2026-10-07T15:54:44.954Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjQzYzYwMjYwLTI0Y2ItNGEzNS1iZDg3LTQyNzQ2Yjc0NmI1ZiIsImlhdCI6MTc5MTIzNDY2OCwiZXhwIjoxNzkxODM5NDY4fQ.sHp-isEHPOm_JuaSSlbSQCNmOwbiheze_V7nbG6tiIY",
+    "revokedAt": "2026-10-07T15:54:44.969Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6Ijc3MDg3OTY4LTI1OWQtNDQyNy1hMWM2LWZjZDFkMGFkN2ZkYSIsImlhdCI6MTc5MTIzNDkwOSwiZXhwIjoxNzkxODM5NzA5fQ.XCbg2415_qkdtznWPqCEhF4WgKyQGGBbpI5yX_Y5HZA",
+    "revokedAt": "2026-10-07T15:54:44.985Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjU2YTU0Y2RmLTFmYjktNDgyMS05NGZkLTNhYWQ3MWJhYjM4NSIsImlhdCI6MTc5MTIzNTQxNiwiZXhwIjoxNzkxODQwMjE2fQ.CanAbyHRwEw-c1xhg2eY5_GW9pUQ-34tjdzMg-MryOg",
+    "revokedAt": "2026-10-07T15:54:45.002Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjVkNjU4MjVhLWY0MzAtNDE1Ni05NDUzLTQxNzQyMjNjZmQ1YiIsImlhdCI6MTc5MTIzNjI5NywiZXhwIjoxNzkxODQxMDk3fQ.aB_DFQHECjUvh7MYgbVcZxi8pH6YMutoQIPaNybS0x0",
+    "revokedAt": "2026-10-07T15:54:45.022Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjRmMGNlNzJkLTY4NmQtNDk0Ni1iMDk3LTJkYzdmYmY0ZWM0MCIsImlhdCI6MTc5MTI2NzMzOSwiZXhwIjoxNzkxODcyMTM5fQ.GJh9o3nUVVhwIQ1gKr2ldFB7nsDJ_Q1dSNFERG1fUEc",
+    "revokedAt": "2026-10-07T15:54:45.038Z",
+    "reason": "ADMIN_PASSWORD_RESET"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwNDk4MjQ1My1jMDc4LTRiOWYtODMwMS1lODEyNjdiNWJjYmQiLCJ1c2VybmFtZSI6InRlYWNoZXIiLCJyb2xlIjoiVEVBQ0hFUiIsImVtYWlsIjoidGVhY2hlckBlaHJqLmVkdS5iZCIsIm5hbWUiOiLgpq7gpr7gppPgprLgpr7gpqjgpr4g4KaG4Ka54Kau4Ka-4KamIOCmieCmsuCnjeCmsuCmvuCmuSAo4KaJ4Ka44KeN4Kak4Ka-4KamKSIsImp0aSI6IjBkYmM2MDc1LTgwNzEtNDQwYS04ZWY3LTY0MzAwZTIxYzA0YyIsImlhdCI6MTc5MTM4ODQ4NSwiZXhwIjoxNzkxOTkzMjg1fQ.9YKcYNzO2Vbic0vbIZHSga1PT-PGz2Fck9UCnmmGIyQ",
+    "revokedAt": "2026-10-07T15:54:46.082Z",
+    "reason": "USER_SELF_PASSWORD_CHANGE"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI0ODRhMzE0Yy1lOGQ0LTQ3ZmQtODE2OC03NTNjYzdmZTk4MzQiLCJ1c2VybmFtZSI6Imd1YXJkaWFuX3VpX2RlbW8iLCJyb2xlIjoiR1VBUkRJQU4iLCJlbWFpbCI6Imd1YXJkaWFuX3VpX2RlbW9AZWhyai5sb2NhbCIsIm5hbWUiOiLgppzgpqjgpr7gpqwg4Kau4KeLOiDgpobgpqzgpqbgp4HgprLgp43gprLgpr7gprkg4KaG4KayIOCmruCmvuCmruCngeCmqCIsImp0aSI6IjViMDMzOGNkLWRkNjEtNGRlNS1hYTBmLTc4NmFmZWI5YTIwZSIsImlhdCI6MTc5MTQ4NTY0OCwiZXhwIjoxNzkyMDkwNDQ4fQ.bg_oUorgHY7pHcu8jQZGGx7bAYJrGJPdwylxkFl20UI",
+    "revokedAt": "2026-10-08T18:54:08.934Z",
+    "reason": "অভিভাবক কর্তৃক দূরবর্তী ডিভাইস লগআউট"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI0ODRhMzE0Yy1lOGQ0LTQ3ZmQtODE2OC03NTNjYzdmZTk4MzQiLCJ1c2VybmFtZSI6Imd1YXJkaWFuX3VpX2RlbW8iLCJyb2xlIjoiR1VBUkRJQU4iLCJlbWFpbCI6Imd1YXJkaWFuX3VpX2RlbW9AZWhyai5sb2NhbCIsIm5hbWUiOiLgppzgpqjgpr7gpqwg4Kau4KeLOiDgpobgpqzgpqbgp4HgprLgp43gprLgpr7gprkg4KaG4KayIOCmruCmvuCmruCngeCmqCIsImp0aSI6IjVjYzNiNTAxLWM2MzYtNGU0NS04ZTNiLTc0YWE5OTlmNWRiMyIsImlhdCI6MTc5MTUzNjExOSwiZXhwIjoxNzkyMTQwOTE5fQ.suwe-FLgGnl-jHojVDNrqDbWZs8ZN4TSEgFjLVIgOG0",
+    "revokedAt": "2026-10-09T08:55:21.077Z",
+    "reason": "অভিভাবক কর্তৃক দূরবর্তী ডিভাইস লগআউট"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI0ODRhMzE0Yy1lOGQ0LTQ3ZmQtODE2OC03NTNjYzdmZTk4MzQiLCJ1c2VybmFtZSI6Imd1YXJkaWFuX3VpX2RlbW8iLCJyb2xlIjoiR1VBUkRJQU4iLCJlbWFpbCI6Imd1YXJkaWFuX3VpX2RlbW9AZWhyai5sb2NhbCIsIm5hbWUiOiLgppzgpqjgpr7gpqwg4Kau4KeLOiDgpobgpqzgpqbgp4HgprLgp43gprLgpr7gprkg4KaG4KayIOCmruCmvuCmruCngeCmqCIsImp0aSI6IjE4NTVjZWMyLTcwNWMtNDk3ZC05MWQ0LTM0YmQxMDZhYjA2MiIsImlhdCI6MTc5MTUzNjI5NiwiZXhwIjoxNzkyMTQxMDk2fQ.pCKdGhPkRjTQWw3fILxLyKdXBiUKZVC6hLAXEpcrxTg",
+    "revokedAt": "2026-10-09T08:58:18.952Z",
+    "reason": "অভিভাবক কর্তৃক দূরবর্তী ডিভাইস লগআউট"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI0ODRhMzE0Yy1lOGQ0LTQ3ZmQtODE2OC03NTNjYzdmZTk4MzQiLCJ1c2VybmFtZSI6Imd1YXJkaWFuX3VpX2RlbW8iLCJyb2xlIjoiR1VBUkRJQU4iLCJlbWFpbCI6Imd1YXJkaWFuX3VpX2RlbW9AZWhyai5sb2NhbCIsIm5hbWUiOiLgppzgpqjgpr7gpqwg4Kau4KeLOiDgpobgpqzgpqbgp4HgprLgp43gprLgpr7gprkg4KaG4KayIOCmruCmvuCmruCngeCmqCIsImp0aSI6ImY1MWIxM2M3LTZhNjgtNGNiZS04OWMwLWNjNDAxNmU1NGE4NiIsImlhdCI6MTc5MTUzNjczNSwiZXhwIjoxNzkyMTQxNTM1fQ.j3AdKUioWfvbNWeJWOOJTFIhuGvaXPyzDiYYoUyEN0s",
+    "revokedAt": "2026-10-09T09:05:35.325Z",
+    "reason": "অভিভাবক কর্তৃক দূরবর্তী ডিভাইস লগআউট"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI0ODRhMzE0Yy1lOGQ0LTQ3ZmQtODE2OC03NTNjYzdmZTk4MzQiLCJ1c2VybmFtZSI6Imd1YXJkaWFuX3VpX2RlbW8iLCJyb2xlIjoiR1VBUkRJQU4iLCJlbWFpbCI6Imd1YXJkaWFuX3VpX2RlbW9AZWhyai5sb2NhbCIsIm5hbWUiOiLgppzgpqjgpr7gpqwg4Kau4KeLOiDgpobgpqzgpqbgp4HgprLgp43gprLgpr7gprkg4KaG4KayIOCmruCmvuCmruCngeCmqCIsImp0aSI6IjIzNTFlOWVkLTgyZTQtNDIxZC1iMzBiLTE2ODJkN2MwZjE1MCIsImlhdCI6MTc5MTUzNzU2MSwiZXhwIjoxNzkyMTQyMzYxfQ.rxmzmf2N4CTVdnvdvWqc-5lRvWSHHRfUtJhcU3_LaYc",
+    "revokedAt": "2026-10-09T09:19:22.932Z",
+    "reason": "অভিভাবক কর্তৃক দূরবর্তী ডিভাইস লগআউট"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxODU2NjE3NC05ODZhLTQ4MTctYmY1OC0wN2M3ZTJmNTcyODciLCJ1c2VybmFtZSI6ImFkbWluZWhyaiIsInJvbGUiOiJBRE1JTiIsImVtYWlsIjoiYWRtaW5laHJqbWFkcmFzaGFAZ21haWwuY29tIiwibmFtZSI6IuCmquCnjeCmsOCmp-CmvuCmqCDgpoXgp43gpq_gpr7gpqHgpq7gpr_gpqggKOCmruCmvuCmpuCmsOCmvuCmuOCmviDgpqrgp43gprDgprbgpr7gprjgpqgpIiwianRpIjoiZWMwOWI4MzgtMGMyNy00YjI3LWJiN2QtZDdiNWY5ZmE2OTU2IiwiaWF0IjoxNzkxMzE5ODEyLCJleHAiOjE3OTE5MjQ2MTJ9.3Hsby289IqtmrBjnUFgtNuSwC2Yz1JR0Qjfnk-ZoX6U",
+    "revokedAt": "2026-10-09T17:40:21.523Z",
+    "reason": "User Logout"
+  },
+  {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJjZWVkNjhhNy1lZTYzLTQzYzItOGExOS1mNTY5YjA5OGYyYzAiLCJ1c2VybmFtZSI6InByaW5jaXBhbDEiLCJyb2xlIjoiUFJJTkNJUEFMIiwiZW1haWwiOiJwcmluY2lwYWxAZWhyam1hZHJhc2hhLmNvbSIsIm5hbWUiOiLgpq7gp4HgprngpqTgpr7gpq7gpr_gpq4g4Kau4Ka-4KaT4Kay4Ka-4Kao4Ka-IOCmhuCmrOCnjeCmpuCngeCmsiDgppXgpr7gpofgp5_gp4Hgpq4iLCJqdGkiOiJhYzc1YWUzYy0wNmI5LTRlMGEtOTlkZS00ZDYwMTljOGU2NzIiLCJpYXQiOjE3OTE2MzA1NzgsImV4cCI6MTc5MjIzNTM3OH0.7t30N7BYn0U3YnNeF-f-dxL9xNTKMbogUEZCAJKmXSA",
+    "revokedAt": "2026-10-10T15:08:06.462Z",
+    "reason": "User Logout"
   }
 ]

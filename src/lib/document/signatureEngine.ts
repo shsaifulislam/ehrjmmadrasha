@@ -16,6 +16,7 @@ import crypto from "crypto";
 import { DocumentSignatureRecord } from "./types";
 import { getArchiveDocumentById } from "./archiveEngine";
 import { logDocumentAccess } from "./accessLogger";
+import { getJwtSecretBytes } from "@/lib/env";
 
 const SIGNATURES_FILE = path.join(process.cwd(), "data", "documents", "signatures.json");
 const ARCHIVE_FILE = path.join(process.cwd(), "data", "documents", "archive.json");
@@ -70,7 +71,7 @@ export async function signDocumentDigitally(params: {
   const now = new Date().toISOString();
 
   // Create HMAC-based digital cryptographic token binding the file hash, documentId, and signer
-  const secretKey = process.env.JWT_SECRET || "EHRJ_INSTITUTIONAL_DIGITAL_KEY_2026";
+  const secretKey = Buffer.from(getJwtSecretBytes());
   const signaturePayload = `${doc.id}:${version}:${doc.fileHash}:${params.signer.userId}:${now}`;
   const signatureToken = crypto.createHmac("sha256", secretKey).update(signaturePayload).digest("hex");
 

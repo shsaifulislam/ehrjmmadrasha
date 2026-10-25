@@ -9,6 +9,9 @@ export async function GET(req: NextRequest) {
     if (!user) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 401 });
     }
+    if (user.role !== "ADMIN" && user.role !== "PRINCIPAL") {
+      return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস: এই তথ্য শুধুমাত্র অ্যাডমিন বা অধ্যক্ষের জন্য সংরক্ষিত।" }, { status: 403 });
+    }
 
     const { searchParams } = new URL(req.url);
     const classId = searchParams.get("classId");
@@ -147,3 +150,66 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: error.message || "সার্ভার এরর" }, { status: 500 });
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const user = await getCurrentUser();
+    if (!user || user.role !== "ADMIN") {
+      return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ error: "বিষয় আইডি আবশ্যক।" }, { status: 400 });
+    }
+
+    const existing = await prisma.subject.findUnique({
+      where: { id },
+      include: {
+        _count: {
+          select: {
+            examMarks: true,
+            examSubjects: true,
+            examRoutines: true,
+          },
+        },
+      },
+    });
+
+    if (!existing) {
+      return NextResponse.json({ error: "বিষয়টি পাওয়া যায়নি।" }, { status: 404 });
+    }
+
+    if (existing._count.examMarks > 0) {
+      return NextResponse.json(
+        { error: "এই বিষয়ে ইতিমধ্যে পরীক্ষার প্রাপ্ত নম্বর সংরক্ষিত রয়েছে। এটি মুছে ফেলা সম্ভব নয়।" },
+        { status: 400 }
+      );
+    }
+
+    // Clean up dependent exam subjects/routines if safe
+    if (existing._count.examSubjects > 0) {
+      await prisma.examSubject.deleteMany({ where: { subjectId: id } });
+    }
+    if (existing._count.examRoutines > 0) {
+      await prisma.examRoutine.deleteMany({ where: { subjectId: id } });
+    }
+
+    await prisma.subject.delete({ where: { id } });
+
+    await recordAuditLog({
+      userId: user.userId,
+      action: "SUBJECT_DELETED",
+      entityType: "Subject",
+      entityId: id,
+      details: { nameBn: existing.nameBn, code: existing.code },
+    });
+
+    return NextResponse.json({ message: "বিষয় সফলভাবে অপসারিত হয়েছে।" });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message || "সার্ভার এরর" }, { status: 500 });
+  }
+}
+

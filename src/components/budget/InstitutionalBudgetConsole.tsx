@@ -27,7 +27,10 @@ import {
   ChevronRight,
   Sparkles,
   Calendar,
+  Printer,
+  Download,
 } from "lucide-react";
+import { INSTITUTION_INFO } from "@/lib/constants";
 import {
   Budget,
   BudgetLine,
@@ -39,6 +42,11 @@ import {
   BudgetFundCode,
   BudgetLifecycleStatus,
 } from "@/lib/budget/types";
+
+function safeMoney(val: any): string {
+  if (val === null || val === undefined || isNaN(Number(val))) return "০";
+  return Number(val).toLocaleString("bn-BD");
+}
 
 interface Props {
   initialTab?: "OVERVIEW" | "LINES" | "VERSIONS" | "REVISIONS" | "PROJECTS" | "VARIANCE" | "PERIODS";
@@ -74,6 +82,8 @@ export default function InstitutionalBudgetConsole({
   const [showRevisionModal, setShowRevisionModal] = useState(false);
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [showPeriodModal, setShowPeriodModal] = useState(false);
+  const [showBudgetPrintModal, setShowBudgetPrintModal] = useState(false);
+  const [budgetToPrint, setBudgetToPrint] = useState<Budget | null>(null);
 
   // Forms
   const [newBudgetForm, setNewBudgetForm] = useState({
@@ -127,6 +137,53 @@ export default function InstitutionalBudgetConsole({
   const showToast = (msg: string) => {
     setToastMsg(msg);
     setTimeout(() => setToastMsg(null), 4000);
+  };
+
+  const exportBudgetLinesToCSV = (targetBudget?: Budget | null) => {
+    const b = targetBudget || selectedBudget;
+    if (!b || !b.lines || b.lines.length === 0) {
+      alert("কোনো বাজেট লাইন বা তথ্য পাওয়া যায়নি।");
+      return;
+    }
+
+    const headers = [
+      "বাজেট কোড",
+      "অর্থবছর",
+      "তহবিল",
+      "ধরন",
+      "খাতের নাম",
+      "দপ্তর / বিভাগ",
+      "পরিকল্পিত বরাদ্দ (টাকা)",
+      "প্রকৃত ব্যয় (টাকা)",
+      "কমিটেড ব্যয় (টাকা)",
+      "অবশিষ্ট বরাদ্দ (টাকা)",
+      "ব্যবহার হার (%)",
+    ];
+
+    const rows = b.lines.map((l) => [
+      b.budgetCode,
+      b.fiscalYear,
+      `"${(l.fundNameBn || l.fundCode).replace(/"/g, '""')}"`,
+      l.categoryType === "INCOME" ? "আয়" : "ব্যয়",
+      `"${(l.categoryNameBn || l.categoryCode).replace(/"/g, '""')}"`,
+      `"${(l.departmentNameBn || "").replace(/"/g, '""')}"`,
+      l.plannedAmount,
+      l.actualAmount || 0,
+      l.committedAmount || 0,
+      l.remainingAmount || 0,
+      `${l.utilizationRate || 0}%`,
+    ]);
+
+    const csvContent = "\uFEFF" + [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `EHRJ_Budget_${b.budgetCode}_Lines.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   const handleCreatePeriod = async (e: React.FormEvent) => {
@@ -662,12 +719,12 @@ export default function InstitutionalBudgetConsole({
                     <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-100 text-xs">
                       <div className="p-2.5 bg-slate-50 rounded-lg">
                         <div className="text-slate-400 text-[10px]">পরিকল্পিত ব্যয়</div>
-                        <div className="font-bold text-slate-800">৳{b.totalExpensePlanned.toLocaleString("bn-BD")}</div>
+                        <div className="font-bold text-slate-800">৳{safeMoney(b.totalExpensePlanned)}</div>
                       </div>
                       <div className="p-2.5 bg-slate-50 rounded-lg">
                         <div className="text-slate-400 text-[10px]">প্রকৃত + কমিটেড</div>
                         <div className="font-bold text-teal-700">
-                          ৳{(b.totalExpenseActual + b.totalExpenseCommitted).toLocaleString("bn-BD")}
+                          ৳{safeMoney((b.totalExpenseActual || 0) + (b.totalExpenseCommitted || 0))}
                         </div>
                       </div>
                     </div>
@@ -693,10 +750,35 @@ export default function InstitutionalBudgetConsole({
                   </div>
 
                   <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                    <span className="text-emerald-700 font-semibold flex items-center gap-1">
-                      <Eye className="w-3.5 h-3.5" />
-                      <span>{isSelected ? "বর্তমানে নির্বাচিত" : "নির্বাচন করুন"}</span>
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-emerald-700 font-semibold flex items-center gap-1">
+                        <Eye className="w-3.5 h-3.5" />
+                        <span>{isSelected ? "বর্তমানে নির্বাচিত" : "নির্বাচন করুন"}</span>
+                      </span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setBudgetToPrint(b);
+                          setShowBudgetPrintModal(true);
+                        }}
+                        className="bg-emerald-50 hover:bg-emerald-100 text-[#0D5C3A] border border-emerald-200 px-2 py-1 rounded text-[11px] font-bold flex items-center gap-1 transition"
+                        title="অফিসিয়াল বাজেট বিবরণী প্রিন্ট করুন"
+                      >
+                        <Printer className="w-3 h-3" />
+                        <span>প্রিন্ট ভিউ</span>
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          exportBudgetLinesToCSV(b);
+                        }}
+                        className="bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 px-2 py-1 rounded text-[11px] font-medium flex items-center gap-1 transition"
+                        title="এক্সেল / CSV ডাউনলোড করুন"
+                      >
+                        <Download className="w-3 h-3" />
+                        <span>CSV</span>
+                      </button>
+                    </div>
 
                     {/* Lifecycle action buttons */}
                     <div className="flex items-center gap-1">
@@ -778,6 +860,25 @@ export default function InstitutionalBudgetConsole({
             </div>
             <div className="flex items-center gap-2">
               <button
+                onClick={() => {
+                  setBudgetToPrint(selectedBudget);
+                  setShowBudgetPrintModal(true);
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0D5C3A] hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg shadow"
+                title="অফিসিয়াল বাজেট কপি প্রিন্ট করুন"
+              >
+                <Printer className="w-3.5 h-3.5" />
+                <span>বাজেট প্রিন্ট ভিউ</span>
+              </button>
+              <button
+                onClick={() => exportBudgetLinesToCSV(selectedBudget)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-[#0D5C3A] border border-emerald-200 text-xs font-semibold rounded-lg shadow-sm"
+                title="বাজেট লাইনসমূহ এক্সেলে এক্সপোর্ট করুন"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>এক্সেল / CSV</span>
+              </button>
+              <button
                 onClick={() => setShowLineModal(true)}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg shadow"
               >
@@ -834,16 +935,16 @@ export default function InstitutionalBudgetConsole({
                       </span>
                     </td>
                     <td className="py-3 px-4 text-right font-bold text-slate-800">
-                      ৳{line.revisedAmount.toLocaleString("bn-BD")}
+                      ৳{safeMoney(line.revisedAmount)}
                     </td>
                     <td className="py-3 px-4 text-right text-teal-700 font-semibold">
-                      ৳{line.actualAmount.toLocaleString("bn-BD")}
+                      ৳{safeMoney(line.actualAmount)}
                     </td>
                     <td className="py-3 px-4 text-right text-indigo-700 font-semibold">
-                      ৳{line.committedAmount.toLocaleString("bn-BD")}
+                      ৳{safeMoney(line.committedAmount)}
                     </td>
                     <td className="py-3 px-4 text-right font-bold text-emerald-700">
-                      ৳{line.remainingAmount.toLocaleString("bn-BD")}
+                      ৳{safeMoney(line.remainingAmount)}
                     </td>
                     <td className="py-3 px-4 text-center">
                       <span
@@ -900,15 +1001,15 @@ export default function InstitutionalBudgetConsole({
                 <div className="grid grid-cols-3 gap-3 text-xs bg-slate-50 p-3 rounded-lg border border-slate-100">
                   <div>
                     <span className="text-slate-400 text-[10px]">পরিকল্পিত আয়</span>
-                    <div className="font-bold text-slate-800">৳{v.totalPlannedIncome.toLocaleString("bn-BD")}</div>
+                    <div className="font-bold text-slate-800">৳{safeMoney(v.totalPlannedIncome)}</div>
                   </div>
                   <div>
                     <span className="text-slate-400 text-[10px]">পরিকল্পিত ব্যয়</span>
-                    <div className="font-bold text-slate-800">৳{v.totalPlannedExpense.toLocaleString("bn-BD")}</div>
+                    <div className="font-bold text-slate-800">৳{safeMoney(v.totalPlannedExpense)}</div>
                   </div>
                   <div>
                     <span className="text-slate-400 text-[10px]">প্রাক্কলিত উদ্বৃত্ত</span>
-                    <div className="font-bold text-emerald-700">৳{v.totalPlannedSurplusDeficit.toLocaleString("bn-BD")}</div>
+                    <div className="font-bold text-emerald-700">৳{safeMoney(v.totalPlannedSurplusDeficit)}</div>
                   </div>
                 </div>
 
@@ -985,9 +1086,9 @@ export default function InstitutionalBudgetConsole({
                             {d.categoryNameBn} ({d.fundCode}):
                           </span>
                           <span className="font-mono">
-                            ৳{d.previousAmount.toLocaleString("bn-BD")} ➔ ৳{d.newRequestedAmount.toLocaleString("bn-BD")} (
+                            ৳{safeMoney(d.previousAmount)} ➔ ৳{safeMoney(d.newRequestedAmount)} (
                             {d.amountDifference >= 0 ? "+" : ""}
-                            ৳{d.amountDifference.toLocaleString("bn-BD")})
+                            ৳{safeMoney(d.amountDifference)})
                           </span>
                         </div>
                       ))}
@@ -1048,17 +1149,17 @@ export default function InstitutionalBudgetConsole({
                 <div className="grid grid-cols-3 gap-2 bg-slate-50 p-3 rounded-lg border border-slate-100 text-xs">
                   <div>
                     <div className="text-slate-400 text-[10px]">বরাদ্দ</div>
-                    <div className="font-bold text-slate-800">৳{prj.approvedBudget.toLocaleString("bn-BD")}</div>
+                    <div className="font-bold text-slate-800">৳{safeMoney(prj.approvedBudget)}</div>
                   </div>
                   <div>
                     <div className="text-slate-400 text-[10px]">ব্যয় + কমিটেড</div>
                     <div className="font-bold text-teal-700">
-                      ৳{(prj.actualExpense + prj.committedAmount).toLocaleString("bn-BD")}
+                      ৳{safeMoney((prj.actualExpense || 0) + (prj.committedAmount || 0))}
                     </div>
                   </div>
                   <div>
                     <div className="text-slate-400 text-[10px]">অবশিষ্ট</div>
-                    <div className="font-bold text-emerald-700">৳{prj.remainingBudget.toLocaleString("bn-BD")}</div>
+                    <div className="font-bold text-emerald-700">৳{safeMoney(prj.remainingBudget)}</div>
                   </div>
                 </div>
 
@@ -1139,13 +1240,13 @@ export default function InstitutionalBudgetConsole({
                     <td className="py-3 px-4 font-semibold text-slate-900">{v.categoryNameBn}</td>
                     <td className="py-3 px-4 font-medium text-slate-600">{v.fundCode}</td>
                     <td className="py-3 px-4 text-right font-bold text-slate-800">
-                      ৳{v.planned.toLocaleString("bn-BD")}
+                      ৳{safeMoney(v.planned)}
                     </td>
-                    <td className="py-3 px-4 text-right text-teal-700">৳{v.actual.toLocaleString("bn-BD")}</td>
-                    <td className="py-3 px-4 text-right text-indigo-700">৳{v.committed.toLocaleString("bn-BD")}</td>
+                    <td className="py-3 px-4 text-right text-teal-700">৳{safeMoney(v.actual)}</td>
+                    <td className="py-3 px-4 text-right text-indigo-700">৳{safeMoney(v.committed)}</td>
                     <td className="py-3 px-4 text-right font-bold">
                       <span className={v.variance >= 0 ? "text-emerald-700" : "text-rose-700"}>
-                        {v.variance >= 0 ? "+" : ""}৳{v.variance.toLocaleString("bn-BD")}
+                        {v.variance >= 0 ? "+" : ""}৳{safeMoney(v.variance)}
                       </span>
                     </td>
                     <td className="py-3 px-4 text-center">
@@ -1769,6 +1870,156 @@ export default function InstitutionalBudgetConsole({
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL 6: OFFICIAL INSTITUTIONAL BUDGET PRINT PREVIEW */}
+      {showBudgetPrintModal && budgetToPrint && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto print:p-0 print:bg-white print:static">
+          <div className="bg-white rounded-3xl max-w-4xl w-full p-6 shadow-2xl border border-slate-100 my-8 print:shadow-none print:border-none print:m-0 print:p-0">
+            {/* Modal Controls Bar */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 print:hidden">
+              <div className="flex items-center gap-2">
+                <span className="p-1.5 bg-emerald-100 text-[#0D5C3A] rounded-lg">
+                  <Printer className="w-4 h-4" />
+                </span>
+                <span className="text-xs font-bold text-slate-800">
+                  অফিসিয়াল প্রাতিষ্ঠানিক বাজেট বিবরণী ও বরাদ্দ রেজিস্টার
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => exportBudgetLinesToCSV(budgetToPrint)}
+                  className="bg-emerald-50 hover:bg-emerald-100 text-[#0D5C3A] border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>এক্সেল ডাউনলোড</span>
+                </button>
+                <button
+                  onClick={() => window.print()}
+                  className="bg-[#0D5C3A] hover:bg-emerald-800 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 shadow"
+                >
+                  <Printer className="w-3.5 h-3.5" />
+                  <span>প্রিন্ট করুন</span>
+                </button>
+                <button
+                  onClick={() => setShowBudgetPrintModal(false)}
+                  className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Print Document */}
+            <div className="p-6 sm:p-8 border-2 border-[#0D5C3A] rounded-2xl bg-[#FCFAF6] relative overflow-hidden mt-3 print:border-2 print:border-black print:m-0 print:p-6 print:rounded-none">
+              {/* Header */}
+              <div className="text-center pb-3 border-b-2 border-[#0D5C3A]/30">
+                <p className="text-xs text-[#063320] font-serif mb-1 font-bold tracking-wider">
+                  بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+                </p>
+                <h1 className="text-xl sm:text-2xl font-black text-[#041F14] font-display">
+                  {INSTITUTION_INFO.nameBn}
+                </h1>
+                <p className="text-[11px] text-slate-700 font-medium">
+                  {INSTITUTION_INFO.addressBn} • ফোন: {INSTITUTION_INFO.primaryPhone}
+                </p>
+                <p className="text-[10px] text-emerald-800 font-bold mt-0.5">
+                  স্থাপিত: ২০২১ ইং (ESTD 2021) • বার্ষিক ও প্রাতিষ্ঠানিক বাজেট নিয়ন্ত্রণ রেজিস্টার
+                </p>
+                <div className="inline-flex items-center gap-2 bg-[#0D5C3A] text-white text-[11px] font-bold px-4 py-0.5 rounded-full mt-2 shadow-sm">
+                  <span>{budgetToPrint.titleBn} ({budgetToPrint.fiscalYear})</span>
+                </div>
+              </div>
+
+              {/* Meta Row */}
+              <div className="grid grid-cols-3 gap-2 text-xs py-3 border-b border-dashed border-slate-300">
+                <div>
+                  <span className="text-slate-500 block text-[10px]">বাজেট রেফারেন্স:</span>
+                  <span className="font-mono font-bold text-[#0D5C3A]">{budgetToPrint.budgetCode}</span>
+                </div>
+                <div className="text-center">
+                  <span className="text-slate-500 block text-[10px]">কার্যকাল / মেয়াদ:</span>
+                  <span className="font-semibold">{budgetToPrint.startDate} হতে {budgetToPrint.endDate}</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-slate-500 block text-[10px]">স্ট্যাটাস ও সংস্করণ:</span>
+                  <span className="font-bold text-slate-900">{budgetToPrint.status} (v{budgetToPrint.currentVersion})</span>
+                </div>
+              </div>
+
+              {/* Summary Cards */}
+              <div className="grid grid-cols-3 gap-3 my-4">
+                <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+                  <span className="text-[10px] text-emerald-800 block font-semibold">প্রস্তাবিত মোট আয়</span>
+                  <span className="text-base font-bold font-mono text-emerald-950 mt-0.5 block">
+                    ৳{safeMoney(budgetToPrint.totalIncomePlanned)}
+                  </span>
+                </div>
+                <div className="p-3 bg-rose-50 rounded-xl border border-rose-200">
+                  <span className="text-[10px] text-rose-800 block font-semibold">অনুমোদিত মোট বরাদ্দ (ব্যয়)</span>
+                  <span className="text-base font-bold font-mono text-rose-950 mt-0.5 block">
+                    ৳{safeMoney(budgetToPrint.totalExpensePlanned)}
+                  </span>
+                </div>
+                <div className="p-3 bg-blue-50 rounded-xl border border-blue-200">
+                  <span className="text-[10px] text-blue-800 block font-semibold">প্রকৃত ব্যয় ও দায়বদ্ধতা</span>
+                  <span className="text-base font-bold font-mono text-blue-950 mt-0.5 block">
+                    ৳{safeMoney((budgetToPrint.totalExpenseActual || 0) + (budgetToPrint.totalExpenseCommitted || 0))}
+                  </span>
+                </div>
+              </div>
+
+              {/* Lines Table */}
+              <div className="overflow-x-auto my-3 border rounded-xl bg-white">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-slate-50 border-b text-[10px] font-bold text-slate-600 uppercase">
+                    <tr>
+                      <th className="p-2.5">তহবিল</th>
+                      <th className="p-2.5">খাতের নাম</th>
+                      <th className="p-2.5">দপ্তর / বিভাগ</th>
+                      <th className="p-2.5 text-right">পরিকল্পিত বরাদ্দ (৳)</th>
+                      <th className="p-2.5 text-right">প্রকৃত ব্যয় (৳)</th>
+                      <th className="p-2.5 text-right">অবশিষ্ট স্থিতি (৳)</th>
+                      <th className="p-2.5 text-center">ব্যবহার (%)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y text-[11px]">
+                    {budgetToPrint.lines.map((l) => (
+                      <tr key={l.id} className="hover:bg-slate-50">
+                        <td className="p-2 font-medium">{l.fundNameBn || l.fundCode}</td>
+                        <td className="p-2 font-semibold text-slate-900">{l.categoryNameBn || l.categoryCode}</td>
+                        <td className="p-2 text-slate-600">{l.departmentNameBn || "—"}</td>
+                        <td className="p-2 text-right font-mono font-bold">৳{safeMoney(l.plannedAmount)}</td>
+                        <td className="p-2 text-right font-mono text-rose-700">৳{safeMoney(l.actualAmount || 0)}</td>
+                        <td className="p-2 text-right font-mono text-emerald-700 font-semibold">৳{safeMoney(l.remainingAmount || 0)}</td>
+                        <td className="p-2 text-center font-mono font-bold">{l.utilizationRate || 0}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Triple Signatures */}
+              <div className="pt-10 flex items-end justify-between text-xs text-slate-700">
+                <div className="text-center">
+                  <div className="w-36 border-b border-slate-400 mb-1" />
+                  <span className="text-[10px] text-slate-600 block">হিসাব ও বাজেট প্রস্তুতকারী</span>
+                  <span className="text-[9px] text-slate-400">হিসাব বিভাগ</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-36 border-b border-slate-400 mb-1" />
+                  <span className="text-[10px] font-bold text-slate-800 block">বাজেট ও অর্থ উপকমিটি</span>
+                  <span className="text-[9px] text-slate-500">আহ্বায়ক / সদস্য সচিব</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-36 border-b border-slate-400 mb-1" />
+                  <span className="text-[10px] font-bold text-slate-800 block">{INSTITUTION_INFO.principal}</span>
+                  <span className="text-[9px] text-slate-500 block">মুহতামিম / অধ্যক্ষ</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

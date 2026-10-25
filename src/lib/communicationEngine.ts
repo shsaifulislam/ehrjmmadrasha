@@ -758,9 +758,36 @@ export async function dispatchNotification(params: DispatchNotificationParams) {
   } = params;
 
   // 1. Resolve Template
-  const template = await prisma.notificationTemplate.findUnique({
+  let template = await prisma.notificationTemplate.findUnique({
     where: { code: templateCode },
   });
+
+  if (!template) {
+    const defaultTpl = DEFAULT_NOTIFICATION_TEMPLATES.find((t) => t.code === templateCode);
+    if (defaultTpl) {
+      try {
+        template = await prisma.notificationTemplate.upsert({
+          where: { code: defaultTpl.code },
+          update: {},
+          create: {
+            code: defaultTpl.code,
+            nameBn: defaultTpl.nameBn,
+            category: defaultTpl.category,
+            subjectTemplateBn: defaultTpl.subjectTemplateBn,
+            bodyTemplateBn: defaultTpl.bodyTemplateBn,
+            channels: defaultTpl.channels,
+            isMandatory: defaultTpl.isMandatory,
+            isActive: true,
+          },
+        });
+      } catch (e) {
+        // If race condition, fetch again
+        template = await prisma.notificationTemplate.findUnique({
+          where: { code: templateCode },
+        });
+      }
+    }
+  }
 
   const title = customTitle || (template ? interpolateNotificationTemplate(template.subjectTemplateBn, variables) : "বিজ্ঞপ্তি");
   const body = customBody || (template ? interpolateNotificationTemplate(template.bodyTemplateBn, variables) : "");
@@ -901,7 +928,7 @@ async function sendNotificationEmailAsync({
           actionUrl
             ? `
           <div style="margin: 24px 0 16px; text-align: center;">
-            <a href="https://ehrjmadrasha.com${actionUrl}" style="background-color: #0D5C3A; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 13px; display: inline-block;">
+            <a href="https://www.ehrjmadrasha.com${actionUrl}" style="background-color: #0D5C3A; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 13px; display: inline-block;">
               বিস্তারিত দেখুন ও পোর্টালে যান
             </a>
           </div>
@@ -1201,16 +1228,19 @@ export async function emitDomainEvent({
   entityId,
   payload,
   idempotencyKey,
+  tx,
 }: {
   eventType: string;
   entityType: string;
   entityId: string;
   payload: Record<string, any>;
   idempotencyKey?: string;
+  tx?: any;
 }) {
+  const client = tx || prisma;
   const key = idempotencyKey || `event_${eventType}_${entityId}_${Date.now()}`;
 
-  const outbox = await prisma.notificationOutbox.upsert({
+  const outbox = await client.notificationOutbox.upsert({
     where: { idempotencyKey: key },
     update: {},
     create: {
@@ -1223,10 +1253,12 @@ export async function emitDomainEvent({
     },
   });
 
-  // Process outbox entry immediately without blocking caller
-  processSingleOutboxEvent(outbox.id).catch((err) =>
-    console.error(`Outbox event processing caught error (${eventType}):`, err)
-  );
+  // Process outbox entry immediately without blocking caller (only when outside open transaction)
+  if (!tx) {
+    processSingleOutboxEvent(outbox.id).catch((err) =>
+      console.error(`Outbox event processing caught error (${eventType}):`, err)
+    );
+  }
 
   return outbox;
 }
@@ -1259,7 +1291,25 @@ export async function processSingleOutboxEvent(outboxId: string) {
           },
           relatedEntityType: "AdmissionApplication",
           relatedEntityId: payload.applicationId,
-          actionUrl: "/portal/children",
+          actionUrl: "/portal?tab=CHILDREN",
+          idempotencyBaseKey: `outbox:${event.id}`,
+        });
+        break;
+      }
+
+      case "INVOICE_CREATED": {
+        await dispatchNotification({
+          templateCode: "INVOICE_CREATED",
+          target: { audience: "STUDENT", studentId: payload.studentId },
+          variables: {
+            "guardian.name": payload.guardianName || "সম্মানিত অভিভাবক",
+            "student.nameBn": payload.studentNameBn,
+            "invoice.number": payload.invoiceNumber,
+            "invoice.amount": payload.amount,
+          },
+          relatedEntityType: "FeeInvoice",
+          relatedEntityId: payload.invoiceId,
+          actionUrl: "/portal?tab=FINANCE",
           idempotencyBaseKey: `outbox:${event.id}`,
         });
         break;
@@ -1270,14 +1320,14 @@ export async function processSingleOutboxEvent(outboxId: string) {
           templateCode: "PAYMENT_SUCCESSFUL",
           target: { audience: "STUDENT", studentId: payload.studentId },
           variables: {
-            "guardian.name": payload.guardianName,
+            "guardian.name": payload.guardianName || "সম্মানিত অভিভাবক",
             "student.nameBn": payload.studentNameBn,
             "payment.amount": payload.amount,
             "receipt.number": payload.receiptNumber,
           },
           relatedEntityType: "PaymentReceipt",
           relatedEntityId: payload.receiptId,
-          actionUrl: "/portal/finance",
+          actionUrl: "/portal?tab=FINANCE",
           idempotencyBaseKey: `outbox:${event.id}`,
         });
         break;
@@ -1295,22 +1345,29 @@ export async function processSingleOutboxEvent(outboxId: string) {
           },
           relatedEntityType: "Certificate",
           relatedEntityId: payload.certificateId,
-          actionUrl: "/portal/documents",
+          actionUrl: "/portal?tab=DOCUMENTS",
           idempotencyBaseKey: `outbox:${event.id}`,
         });
         break;
       }
 
       case "RESULT_PUBLISHED": {
+        const target = payload.studentId
+          ? { audience: "STUDENT" as const, studentId: payload.studentId }
+          : { audience: "CLASS" as const, classId: payload.classId, sessionId: payload.sessionId };
+
         await dispatchNotification({
           templateCode: "RESULT_PUBLISHED",
-          target: { audience: "CLASS", classId: payload.classId, sessionId: payload.sessionId },
+          target,
           variables: {
+            "guardian.name": payload.guardianName || "সম্মানিত অভিভাবক",
+            "student.nameBn": payload.studentNameBn,
+            roll: payload.roll,
             "exam.name": payload.examName,
           },
           relatedEntityType: "Exam",
           relatedEntityId: payload.examId,
-          actionUrl: "/portal/results",
+          actionUrl: "/portal?tab=RESULTS",
           idempotencyBaseKey: `outbox:${event.id}`,
         });
         break;
@@ -1321,7 +1378,7 @@ export async function processSingleOutboxEvent(outboxId: string) {
           templateCode: "ATTENDANCE_ABSENT_ALERT",
           target: { audience: "STUDENT", studentId: payload.studentId },
           variables: {
-            "guardian.name": payload.guardianName,
+            "guardian.name": payload.guardianName || "সম্মানিত অভিভাবক",
             "student.nameBn": payload.studentNameBn,
             "class.name": payload.className,
             roll: payload.roll,
@@ -1329,7 +1386,7 @@ export async function processSingleOutboxEvent(outboxId: string) {
           },
           relatedEntityType: "Attendance",
           relatedEntityId: payload.attendanceId,
-          actionUrl: "/portal/attendance",
+          actionUrl: "/portal?tab=ATTENDANCE",
           idempotencyBaseKey: `outbox:${event.id}`,
         });
         break;

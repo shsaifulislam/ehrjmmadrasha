@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   BookOpen,
@@ -54,34 +55,50 @@ export default function PublicLibraryCatalogPage() {
     <div className="min-h-screen bg-[#FDFBF7] flex flex-col text-[#0B1914]">
       <Navbar />
 
-      {/* Hero Banner */}
-      <section className="bg-gradient-to-b from-[#083B25] to-[#0D5C3A] text-white py-12 px-4 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto text-center space-y-3 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-800/80 border border-emerald-600/30 text-emerald-200 text-xs font-semibold">
-            <BookOpen className="w-3.5 h-3.5" /> কেন্দ্রীয় দারুল কুতুব ও ই-লাইব্রেরি ক্যাটালগ
+      {/* 1. HERO SECTION */}
+      <section className="page-hero py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
+        <div className="absolute inset-0 page-hero-grid opacity-20 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#D4AF37]/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto relative z-10 space-y-5">
+          <div className="inline-flex items-center gap-2 bg-black/40 border border-[#D4AF37]/50 px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+            <span className="text-amber-200 text-xs font-semibold">
+              কেন্দ্রীয় দারুল কুতুব ও ই-লাইব্রেরি ক্যাটালগ
+            </span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-bold font-display">
-            ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা লাইব্রেরি
+
+          <div className="font-arabic text-[#D4AF37] text-2xl sm:text-3xl tracking-widest drop-shadow-sm">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black font-display text-white tracking-tight leading-tight">
+            ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া{" "}
+            <span className="gold-gradient-text inline-block">
+              মাদরাসা লাইব্রেরি
+            </span>
           </h1>
-          <p className="text-xs sm:text-sm text-emerald-100 max-w-2xl mx-auto font-light leading-relaxed">
-            কুরআন, হাদীস, ফিক্বহ, তাফসীর, আরবি সাহিত্য ও জেনারেল শিক্ষার সমৃদ্ধ কিতাব সম্ভার। শিক্ষক, শিক্ষার্থী ও গবেষকদের জন্য উন্মুক্ত ক্যাটালগ অনুসন্ধান।
+
+          <p className="text-sm sm:text-base lg:text-lg text-emerald-100/90 max-w-2xl mx-auto font-light leading-relaxed">
+            কুরআন, হাদিস, ফিক্বহ, তাফসির, আরবি সাহিত্য ও জেনারেল শিক্ষার সমৃদ্ধ কিতাব সম্ভার। শিক্ষক, শিক্ষার্থী ও গবেষকদের জন্য উন্মুক্ত ক্যাটালগ।
           </p>
 
           {/* Search Box */}
-          <div className="max-w-2xl mx-auto pt-4">
-            <div className="flex items-center bg-white rounded-xl shadow-lg p-1.5 border border-emerald-600/30">
-              <Search className="w-5 h-5 text-gray-400 ml-3 shrink-0" />
+          <div className="max-w-2xl mx-auto pt-3">
+            <div className="flex items-center bg-white rounded-2xl shadow-2xl p-2 border-2 border-[#D4AF37]/60">
+              <Search className="w-5 h-5 text-slate-400 ml-3 shrink-0" />
               <input
                 type="text"
                 placeholder="কিতাবের নাম, লেখক, বিষয় বা প্রকাশনী দিয়ে অনুসন্ধান করুন..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && fetchCatalog()}
-                className="w-full px-3 py-2 text-xs sm:text-sm text-gray-800 focus:outline-none placeholder-gray-400"
+                className="w-full px-3 py-2 text-xs sm:text-sm text-slate-900 focus:outline-none placeholder-slate-400 bg-transparent font-medium"
               />
               <button
                 onClick={fetchCatalog}
-                className="bg-[#0D5C3A] hover:bg-emerald-800 text-white px-5 py-2.5 rounded-lg text-xs font-bold transition shrink-0"
+                className="btn-gold px-6 py-3 rounded-xl text-xs font-black transition shrink-0 shadow-md"
               >
                 অনুসন্ধান
               </button>
@@ -92,6 +109,27 @@ export default function PublicLibraryCatalogPage() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-6xl mx-auto px-4 py-8 w-full space-y-6">
+        {/* OFFICIAL PANORAMIC LIBRARY & CAMPUS FACILITIES BANNER */}
+        <div className="relative rounded-2xl overflow-hidden border-2 border-emerald-600/30 shadow-md group">
+          <div className="relative aspect-[21/9] sm:aspect-[24/8] w-full">
+            <Image
+              src="/images/banners/hostel-dining-library-banner.png"
+              alt="আবাসিক, খাবার ও লাইব্রেরি সুবিধা | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা"
+              fill
+              className="object-cover group-hover:scale-[1.01] transition duration-500"
+              priority
+            />
+          </div>
+          <div className="p-3 bg-gradient-to-r from-[#041F14] via-[#063321] to-[#0A482D] text-white flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <span className="font-semibold text-amber-300">
+              সমৃদ্ধ লাইব্রেরি ও কিতাব সম্ভার • শিক্ষার্থীদের পাঠ্য ও ইসলামী জ্ঞানচর্চার সুযোগ
+            </span>
+            <span className="text-emerald-100/90 text-xs font-mono">
+              অনলাইন ক্যাটালগ সার্চ
+            </span>
+          </div>
+        </div>
+
         {/* Category Pills Filter */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 text-xs">
           <button

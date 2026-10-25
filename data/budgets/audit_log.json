@@ -1,5 +1,1893 @@
 [
   {
+    "budgetId": "EHRJ-BUD-2026-0001",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "ক্যাপিটাল প্রজেক্ট তৈরি: মাদরাসা মসজিদ ও একাডেমিক ভবন সম্প্রসারণ (PRJ-2027-MOSQUE-EXT)",
+    "details": {
+      "projectId": "EHRJ-PRJ-2026-4332",
+      "projectCode": "PRJ-2027-MOSQUE-EXT"
+    },
+    "id": "EHRJ-BAUD-1790702670831-302",
+    "timestamp": "2026-09-29T17:24:30.831Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "APPROVE_REVISION",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "রিভিশন অনুমোদিত: শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা (বাজেট সংস্করণ উন্নীত: v2)",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-5200",
+      "newVersionNumber": 2,
+      "approvalReference": "ম্যানেজিং কমিটি ও অধ্যক্ষ কর্তৃক চূড়ান্ত অনুমোদন",
+      "totalExpensePlanned": 1350000
+    },
+    "id": "EHRJ-BAUD-1790702670820-211",
+    "timestamp": "2026-09-29T17:24:30.820Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "রিভিশন EHRJ-BREV-2026-5200 স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-5200",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "অর্থ কমিটি দ্বারা প্রাথমিক অনুমোদন"
+    },
+    "id": "EHRJ-BAUD-1790702670801-794",
+    "timestamp": "2026-09-29T17:24:30.801Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "REQUEST_REVISION",
+    "actorId": "usr-acc-002",
+    "actorName": "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    "actorRole": "ACCOUNTANT",
+    "notes": "বাজেট রিভিশন প্রস্তাব পেশ: শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা (সংস্করণ v1 -> v2)",
+    "details": {
+      "revisionCode": "EHRJ-BREV-2026-5200",
+      "netExpenseAdjustment": 150000,
+      "netIncomeAdjustment": 0,
+      "diffCount": 1
+    },
+    "id": "EHRJ-BAUD-1790702670791-360",
+    "timestamp": "2026-09-29T17:24:30.791Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: N/A",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702670773-155",
+    "timestamp": "2026-09-29T17:24:30.773Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: N/A",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702670760-328",
+    "timestamp": "2026-09-29T17:24:30.760Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: N/A",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702670744-547",
+    "timestamp": "2026-09-29T17:24:30.744Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: N/A",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702670731-196",
+    "timestamp": "2026-09-29T17:24:30.731Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "ACKNOWLEDGE_ALERT",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "সতর্কবার্তা গৃহীত হয়েছে: শিক্ষক ও স্টাফ বেতন (CRITICAL) | যুক্তি: রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন",
+    "details": {
+      "alertId": "EHRJ-BALT-2026-4113",
+      "alertLevel": "CRITICAL",
+      "justificationBn": "রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন"
+    },
+    "id": "EHRJ-BAUD-1790702670715-427",
+    "timestamp": "2026-09-29T17:24:30.715Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং আহার্য ও পুষ্টি (বরাদ্দ: ৳250000)",
+    "details": {
+      "lineId": "BLN-2026-7583",
+      "category": "FOOD_BOARDING_MEALS",
+      "plannedAmount": 250000
+    },
+    "id": "EHRJ-BAUD-1790702670651-985",
+    "timestamp": "2026-09-29T17:24:30.651Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: দরিদ্র ছাত্রদের পোশাক ও কিতাব (বরাদ্দ: ৳150000)",
+    "details": {
+      "lineId": "BLN-2026-1796",
+      "category": "ZAKAT_WELFARE_CLOTHING",
+      "plannedAmount": 150000
+    },
+    "id": "EHRJ-BAUD-1790702670642-83",
+    "timestamp": "2026-09-29T17:24:30.642Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: শিক্ষক ও স্টাফ বেতন (বরাদ্দ: ৳800000)",
+    "details": {
+      "lineId": "BLN-2026-5438",
+      "category": "SALARY_TEACHERS",
+      "plannedAmount": 800000
+    },
+    "id": "EHRJ-BAUD-1790702670630-341",
+    "timestamp": "2026-09-29T17:24:30.630Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: সাধারণ দান ও সদকা (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-6572",
+      "category": "DONATION_GENERAL",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790702670620-939",
+    "timestamp": "2026-09-29T17:24:30.620Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2268",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: খাতভিত্তিক যাচাই বাজেট (EHRJ-BUD-2026-2268)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-2268",
+      "fiscalYear": "FY0539"
+    },
+    "id": "EHRJ-BAUD-1790702670611-746",
+    "timestamp": "2026-09-29T17:24:30.611Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3846",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: বাজেট কার্যকর ঘোষণা",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "বাজেট কার্যকর ঘোষণা",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702670600-17",
+    "timestamp": "2026-09-29T17:24:30.600Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3846",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702670591-803",
+    "timestamp": "2026-09-29T17:24:30.591Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3846",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: গভর্নিং বডি পর্যালোচনায় পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "গভর্নিং বডি পর্যালোচনায় পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702670581-163",
+    "timestamp": "2026-09-29T17:24:30.581Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3846",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: বাজেট খসড়া প্রণয়ন শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "বাজেট খসড়া প্রণয়ন শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702670569-21",
+    "timestamp": "2026-09-29T17:24:30.569Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3846",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: প্রাতিষ্ঠানিক বার্ষিক বাজেট ২০২৭-২৮ (EHRJ-BUD-2026-3846)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-3846",
+      "fiscalYear": "FY0539"
+    },
+    "id": "EHRJ-BAUD-1790702670558-850",
+    "timestamp": "2026-09-29T17:24:30.558Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট অর্থবছর লক করা হয়েছে: অর্থবছর FY0539 (পরীক্ষামূলক). কারণ: অডিট প্রস্তুতের জন্য মেয়াদ লক করা হয়েছে",
+    "details": {
+      "periodId": "EHRJ-BPR-FY0539"
+    },
+    "id": "EHRJ-BAUD-1790702670548-352",
+    "timestamp": "2026-09-29T17:24:30.548Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট অর্থবছর তৈরি: অর্থবছর FY0539 (পরীক্ষামূলক) (FY-FY0539)",
+    "details": {
+      "periodId": "EHRJ-BPR-FY0539",
+      "fiscalYear": "FY0539"
+    },
+    "id": "EHRJ-BAUD-1790702670543-513",
+    "timestamp": "2026-09-29T17:24:30.543Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-0001",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "ক্যাপিটাল প্রজেক্ট তৈরি: মাদরাসা মসজিদ ও একাডেমিক ভবন সম্প্রসারণ (PRJ-2027-MOSQUE-EXT)",
+    "details": {
+      "projectId": "EHRJ-PRJ-2026-9976",
+      "projectCode": "PRJ-2027-MOSQUE-EXT"
+    },
+    "id": "EHRJ-BAUD-1790702589089-155",
+    "timestamp": "2026-09-29T17:23:09.089Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "APPROVE_REVISION",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "রিভিশন অনুমোদিত: শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা (বাজেট সংস্করণ উন্নীত: v2)",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-1041",
+      "newVersionNumber": 2,
+      "approvalReference": "ম্যানেজিং কমিটি ও অধ্যক্ষ কর্তৃক চূড়ান্ত অনুমোদন",
+      "totalExpensePlanned": 1350000
+    },
+    "id": "EHRJ-BAUD-1790702589082-549",
+    "timestamp": "2026-09-29T17:23:09.082Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "রিভিশন EHRJ-BREV-2026-1041 স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-1041",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "অর্থ কমিটি দ্বারা প্রাথমিক অনুমোদন"
+    },
+    "id": "EHRJ-BAUD-1790702589071-284",
+    "timestamp": "2026-09-29T17:23:09.071Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "REQUEST_REVISION",
+    "actorId": "usr-acc-002",
+    "actorName": "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    "actorRole": "ACCOUNTANT",
+    "notes": "বাজেট রিভিশন প্রস্তাব পেশ: শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা (সংস্করণ v1 -> v2)",
+    "details": {
+      "revisionCode": "EHRJ-BREV-2026-1041",
+      "netExpenseAdjustment": 150000,
+      "netIncomeAdjustment": 0,
+      "diffCount": 1
+    },
+    "id": "EHRJ-BAUD-1790702589053-910",
+    "timestamp": "2026-09-29T17:23:09.053Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: N/A",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702589041-240",
+    "timestamp": "2026-09-29T17:23:09.041Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: N/A",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702589033-993",
+    "timestamp": "2026-09-29T17:23:09.033Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: N/A",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702589026-478",
+    "timestamp": "2026-09-29T17:23:09.026Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: N/A",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702589017-980",
+    "timestamp": "2026-09-29T17:23:09.017Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "ACKNOWLEDGE_ALERT",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "সতর্কবার্তা গৃহীত হয়েছে: শিক্ষক ও স্টাফ বেতন (CRITICAL) | যুক্তি: রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন",
+    "details": {
+      "alertId": "EHRJ-BALT-2026-7798",
+      "alertLevel": "CRITICAL",
+      "justificationBn": "রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন"
+    },
+    "id": "EHRJ-BAUD-1790702589006-585",
+    "timestamp": "2026-09-29T17:23:09.006Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং আহার্য ও পুষ্টি (বরাদ্দ: ৳250000)",
+    "details": {
+      "lineId": "BLN-2026-3623",
+      "category": "FOOD_BOARDING_MEALS",
+      "plannedAmount": 250000
+    },
+    "id": "EHRJ-BAUD-1790702588959-544",
+    "timestamp": "2026-09-29T17:23:08.959Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: দরিদ্র ছাত্রদের পোশাক ও কিতাব (বরাদ্দ: ৳150000)",
+    "details": {
+      "lineId": "BLN-2026-1086",
+      "category": "ZAKAT_WELFARE_CLOTHING",
+      "plannedAmount": 150000
+    },
+    "id": "EHRJ-BAUD-1790702588949-320",
+    "timestamp": "2026-09-29T17:23:08.949Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: শিক্ষক ও স্টাফ বেতন (বরাদ্দ: ৳800000)",
+    "details": {
+      "lineId": "BLN-2026-4976",
+      "category": "SALARY_TEACHERS",
+      "plannedAmount": 800000
+    },
+    "id": "EHRJ-BAUD-1790702588939-336",
+    "timestamp": "2026-09-29T17:23:08.939Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: সাধারণ দান ও সদকা (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-9665",
+      "category": "DONATION_GENERAL",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790702588930-215",
+    "timestamp": "2026-09-29T17:23:08.930Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3854",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: খাতভিত্তিক যাচাই বাজেট (EHRJ-BUD-2026-3854)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-3854",
+      "fiscalYear": "FY8848"
+    },
+    "id": "EHRJ-BAUD-1790702588920-732",
+    "timestamp": "2026-09-29T17:23:08.920Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5185",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: বাজেট কার্যকর ঘোষণা",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "বাজেট কার্যকর ঘোষণা",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702588911-267",
+    "timestamp": "2026-09-29T17:23:08.911Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5185",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702588902-650",
+    "timestamp": "2026-09-29T17:23:08.902Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5185",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: গভর্নিং বডি পর্যালোচনায় পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "গভর্নিং বডি পর্যালোচনায় পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702588891-492",
+    "timestamp": "2026-09-29T17:23:08.891Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5185",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: বাজেট খসড়া প্রণয়ন শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "বাজেট খসড়া প্রণয়ন শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702588881-467",
+    "timestamp": "2026-09-29T17:23:08.881Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5185",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: প্রাতিষ্ঠানিক বার্ষিক বাজেট ২০২৭-২৮ (EHRJ-BUD-2026-5185)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-5185",
+      "fiscalYear": "FY8848"
+    },
+    "id": "EHRJ-BAUD-1790702588868-488",
+    "timestamp": "2026-09-29T17:23:08.868Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট অর্থবছর লক করা হয়েছে: অর্থবছর FY8848 (পরীক্ষামূলক). কারণ: অডিট প্রস্তুতের জন্য মেয়াদ লক করা হয়েছে",
+    "details": {
+      "periodId": "EHRJ-BPR-FY8848"
+    },
+    "id": "EHRJ-BAUD-1790702588859-696",
+    "timestamp": "2026-09-29T17:23:08.859Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট অর্থবছর তৈরি: অর্থবছর FY8848 (পরীক্ষামূলক) (FY-FY8848)",
+    "details": {
+      "periodId": "EHRJ-BPR-FY8848",
+      "fiscalYear": "FY8848"
+    },
+    "id": "EHRJ-BAUD-1790702588853-193",
+    "timestamp": "2026-09-29T17:23:08.853Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-0001",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "ক্যাপিটাল প্রজেক্ট তৈরি: মাদরাসা মসজিদ ও একাডেমিক ভবন সম্প্রসারণ (PRJ-2027-MOSQUE-EXT)",
+    "details": {
+      "projectId": "EHRJ-PRJ-2026-2503",
+      "projectCode": "PRJ-2027-MOSQUE-EXT"
+    },
+    "id": "EHRJ-BAUD-1790702011456-234",
+    "timestamp": "2026-09-29T17:13:31.456Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "APPROVE_REVISION",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "রিভিশন অনুমোদিত: শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা (বাজেট সংস্করণ উন্নীত: v2)",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-9822",
+      "newVersionNumber": 2,
+      "approvalReference": "ম্যানেজিং কমিটি ও অধ্যক্ষ কর্তৃক চূড়ান্ত অনুমোদন",
+      "totalExpensePlanned": 1350000
+    },
+    "id": "EHRJ-BAUD-1790702011450-823",
+    "timestamp": "2026-09-29T17:13:31.450Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "রিভিশন EHRJ-BREV-2026-9822 স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-9822",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "অর্থ কমিটি দ্বারা প্রাথমিক অনুমোদন"
+    },
+    "id": "EHRJ-BAUD-1790702011438-968",
+    "timestamp": "2026-09-29T17:13:31.438Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "REQUEST_REVISION",
+    "actorId": "usr-acc-002",
+    "actorName": "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    "actorRole": "ACCOUNTANT",
+    "notes": "বাজেট রিভিশন প্রস্তাব পেশ: শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা (সংস্করণ v1 -> v2)",
+    "details": {
+      "revisionCode": "EHRJ-BREV-2026-9822",
+      "netExpenseAdjustment": 150000,
+      "netIncomeAdjustment": 0,
+      "diffCount": 1
+    },
+    "id": "EHRJ-BAUD-1790702011432-360",
+    "timestamp": "2026-09-29T17:13:31.432Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: N/A",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702011423-340",
+    "timestamp": "2026-09-29T17:13:31.423Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: N/A",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702011415-22",
+    "timestamp": "2026-09-29T17:13:31.415Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: N/A",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702011406-220",
+    "timestamp": "2026-09-29T17:13:31.406Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: N/A",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702011398-276",
+    "timestamp": "2026-09-29T17:13:31.398Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "ACKNOWLEDGE_ALERT",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "সতর্কবার্তা গৃহীত হয়েছে: শিক্ষক ও স্টাফ বেতন (CRITICAL) | যুক্তি: রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন",
+    "details": {
+      "alertId": "EHRJ-BALT-2026-9589",
+      "alertLevel": "CRITICAL",
+      "justificationBn": "রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন"
+    },
+    "id": "EHRJ-BAUD-1790702011389-594",
+    "timestamp": "2026-09-29T17:13:31.389Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং আহার্য ও পুষ্টি (বরাদ্দ: ৳250000)",
+    "details": {
+      "lineId": "BLN-2026-9911",
+      "category": "FOOD_BOARDING_MEALS",
+      "plannedAmount": 250000
+    },
+    "id": "EHRJ-BAUD-1790702011335-348",
+    "timestamp": "2026-09-29T17:13:31.335Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: দরিদ্র ছাত্রদের পোশাক ও কিতাব (বরাদ্দ: ৳150000)",
+    "details": {
+      "lineId": "BLN-2026-1911",
+      "category": "ZAKAT_WELFARE_CLOTHING",
+      "plannedAmount": 150000
+    },
+    "id": "EHRJ-BAUD-1790702011327-576",
+    "timestamp": "2026-09-29T17:13:31.327Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: শিক্ষক ও স্টাফ বেতন (বরাদ্দ: ৳800000)",
+    "details": {
+      "lineId": "BLN-2026-5303",
+      "category": "SALARY_TEACHERS",
+      "plannedAmount": 800000
+    },
+    "id": "EHRJ-BAUD-1790702011317-933",
+    "timestamp": "2026-09-29T17:13:31.317Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: সাধারণ দান ও সদকা (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-4664",
+      "category": "DONATION_GENERAL",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790702011309-700",
+    "timestamp": "2026-09-29T17:13:31.309Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6580",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: খাতভিত্তিক যাচাই বাজেট (EHRJ-BUD-2026-6580)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-6580",
+      "fiscalYear": "FY1236"
+    },
+    "id": "EHRJ-BAUD-1790702011302-984",
+    "timestamp": "2026-09-29T17:13:31.302Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6040",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: বাজেট কার্যকর ঘোষণা",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "বাজেট কার্যকর ঘোষণা",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702011292-399",
+    "timestamp": "2026-09-29T17:13:31.292Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6040",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702011283-389",
+    "timestamp": "2026-09-29T17:13:31.283Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6040",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: গভর্নিং বডি পর্যালোচনায় পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "গভর্নিং বডি পর্যালোচনায় পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702011274-782",
+    "timestamp": "2026-09-29T17:13:31.274Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6040",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: বাজেট খসড়া প্রণয়ন শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "বাজেট খসড়া প্রণয়ন শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790702011265-999",
+    "timestamp": "2026-09-29T17:13:31.265Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-6040",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: প্রাতিষ্ঠানিক বার্ষিক বাজেট ২০২৭-২৮ (EHRJ-BUD-2026-6040)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-6040",
+      "fiscalYear": "FY1236"
+    },
+    "id": "EHRJ-BAUD-1790702011254-320",
+    "timestamp": "2026-09-29T17:13:31.254Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট অর্থবছর লক করা হয়েছে: অর্থবছর FY1236 (পরীক্ষামূলক). কারণ: অডিট প্রস্তুতের জন্য মেয়াদ লক করা হয়েছে",
+    "details": {
+      "periodId": "EHRJ-BPR-FY1236"
+    },
+    "id": "EHRJ-BAUD-1790702011246-280",
+    "timestamp": "2026-09-29T17:13:31.246Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট অর্থবছর তৈরি: অর্থবছর FY1236 (পরীক্ষামূলক) (FY-FY1236)",
+    "details": {
+      "periodId": "EHRJ-BPR-FY1236",
+      "fiscalYear": "FY1236"
+    },
+    "id": "EHRJ-BAUD-1790702011239-421",
+    "timestamp": "2026-09-29T17:13:31.239Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-0001",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "ক্যাপিটাল প্রজেক্ট তৈরি: মাদরাসা মসজিদ ও একাডেমিক ভবন সম্প্রসারণ (PRJ-2027-MOSQUE-EXT)",
+    "details": {
+      "projectId": "EHRJ-PRJ-2026-9496",
+      "projectCode": "PRJ-2027-MOSQUE-EXT"
+    },
+    "id": "EHRJ-BAUD-1790701994219-362",
+    "timestamp": "2026-09-29T17:13:14.219Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "APPROVE_REVISION",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "রিভিশন অনুমোদিত: শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা (বাজেট সংস্করণ উন্নীত: v2)",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-1076",
+      "newVersionNumber": 2,
+      "approvalReference": "ম্যানেজিং কমিটি ও অধ্যক্ষ কর্তৃক চূড়ান্ত অনুমোদন",
+      "totalExpensePlanned": 1350000
+    },
+    "id": "EHRJ-BAUD-1790701994213-185",
+    "timestamp": "2026-09-29T17:13:14.213Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "রিভিশন EHRJ-BREV-2026-1076 স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW",
+    "details": {
+      "revisionId": "EHRJ-BREV-2026-1076",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "অর্থ কমিটি দ্বারা প্রাথমিক অনুমোদন"
+    },
+    "id": "EHRJ-BAUD-1790701994203-492",
+    "timestamp": "2026-09-29T17:13:14.203Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "REQUEST_REVISION",
+    "actorId": "usr-acc-002",
+    "actorName": "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    "actorRole": "ACCOUNTANT",
+    "notes": "বাজেট রিভিশন প্রস্তাব পেশ: শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা (সংস্করণ v1 -> v2)",
+    "details": {
+      "revisionCode": "EHRJ-BREV-2026-1076",
+      "netExpenseAdjustment": 150000,
+      "netIncomeAdjustment": 0,
+      "diffCount": 1
+    },
+    "id": "EHRJ-BAUD-1790701994198-870",
+    "timestamp": "2026-09-29T17:13:14.198Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: N/A",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701994190-995",
+    "timestamp": "2026-09-29T17:13:14.190Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: N/A",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701994183-624",
+    "timestamp": "2026-09-29T17:13:14.183Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: N/A",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701994175-894",
+    "timestamp": "2026-09-29T17:13:14.175Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: N/A",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701994168-320",
+    "timestamp": "2026-09-29T17:13:14.168Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "ACKNOWLEDGE_ALERT",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "সতর্কবার্তা গৃহীত হয়েছে: শিক্ষক ও স্টাফ বেতন (CRITICAL) | যুক্তি: রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন",
+    "details": {
+      "alertId": "EHRJ-BALT-2026-1362",
+      "alertLevel": "CRITICAL",
+      "justificationBn": "রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন"
+    },
+    "id": "EHRJ-BAUD-1790701994160-414",
+    "timestamp": "2026-09-29T17:13:14.160Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং আহার্য ও পুষ্টি (বরাদ্দ: ৳250000)",
+    "details": {
+      "lineId": "BLN-2026-8733",
+      "category": "FOOD_BOARDING_MEALS",
+      "plannedAmount": 250000
+    },
+    "id": "EHRJ-BAUD-1790701994105-899",
+    "timestamp": "2026-09-29T17:13:14.105Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: দরিদ্র ছাত্রদের পোশাক ও কিতাব (বরাদ্দ: ৳150000)",
+    "details": {
+      "lineId": "BLN-2026-6102",
+      "category": "ZAKAT_WELFARE_CLOTHING",
+      "plannedAmount": 150000
+    },
+    "id": "EHRJ-BAUD-1790701994098-263",
+    "timestamp": "2026-09-29T17:13:14.099Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: শিক্ষক ও স্টাফ বেতন (বরাদ্দ: ৳800000)",
+    "details": {
+      "lineId": "BLN-2026-8653",
+      "category": "SALARY_TEACHERS",
+      "plannedAmount": 800000
+    },
+    "id": "EHRJ-BAUD-1790701994087-823",
+    "timestamp": "2026-09-29T17:13:14.087Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: সাধারণ দান ও সদকা (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-3621",
+      "category": "DONATION_GENERAL",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790701994080-1",
+    "timestamp": "2026-09-29T17:13:14.080Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9788",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: খাতভিত্তিক যাচাই বাজেট (EHRJ-BUD-2026-9788)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-9788",
+      "fiscalYear": "FY4008"
+    },
+    "id": "EHRJ-BAUD-1790701994072-570",
+    "timestamp": "2026-09-29T17:13:14.072Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3543",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: বাজেট কার্যকর ঘোষণা",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "বাজেট কার্যকর ঘোষণা",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701994065-370",
+    "timestamp": "2026-09-29T17:13:14.065Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3543",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701994058-210",
+    "timestamp": "2026-09-29T17:13:14.058Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3543",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: গভর্নিং বডি পর্যালোচনায় পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "গভর্নিং বডি পর্যালোচনায় পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701994048-316",
+    "timestamp": "2026-09-29T17:13:14.048Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3543",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: বাজেট খসড়া প্রণয়ন শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "বাজেট খসড়া প্রণয়ন শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701994040-157",
+    "timestamp": "2026-09-29T17:13:14.040Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-3543",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: প্রাতিষ্ঠানিক বার্ষিক বাজেট ২০২৭-২৮ (EHRJ-BUD-2026-3543)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-3543",
+      "fiscalYear": "FY4008"
+    },
+    "id": "EHRJ-BAUD-1790701994027-584",
+    "timestamp": "2026-09-29T17:13:14.027Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট অর্থবছর লক করা হয়েছে: অর্থবছর FY4008 (পরীক্ষামূলক). কারণ: অডিট প্রস্তুতের জন্য মেয়াদ লক করা হয়েছে",
+    "details": {
+      "periodId": "EHRJ-BPR-FY4008"
+    },
+    "id": "EHRJ-BAUD-1790701994019-308",
+    "timestamp": "2026-09-29T17:13:14.019Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট অর্থবছর তৈরি: অর্থবছর FY4008 (পরীক্ষামূলক) (FY-FY4008)",
+    "details": {
+      "periodId": "EHRJ-BPR-FY4008",
+      "fiscalYear": "FY4008"
+    },
+    "id": "EHRJ-BAUD-1790701994013-645",
+    "timestamp": "2026-09-29T17:13:14.013Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "REQUEST_REVISION",
+    "actorId": "usr-acc-002",
+    "actorName": "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    "actorRole": "ACCOUNTANT",
+    "notes": "বাজেট রিভিশন প্রস্তাব পেশ: শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা (সংস্করণ v1 -> v2)",
+    "details": {
+      "revisionCode": "EHRJ-BREV-2026-2913",
+      "netExpenseAdjustment": 150000,
+      "netIncomeAdjustment": 0,
+      "diffCount": 1
+    },
+    "id": "EHRJ-BAUD-1790701960875-565",
+    "timestamp": "2026-09-29T17:12:40.875Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: N/A",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701960866-306",
+    "timestamp": "2026-09-29T17:12:40.866Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: N/A",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701960860-43",
+    "timestamp": "2026-09-29T17:12:40.860Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: N/A",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701960853-78",
+    "timestamp": "2026-09-29T17:12:40.853Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: N/A",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701960845-635",
+    "timestamp": "2026-09-29T17:12:40.845Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "ACKNOWLEDGE_ALERT",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "সতর্কবার্তা গৃহীত হয়েছে: শিক্ষক ও স্টাফ বেতন (CRITICAL) | যুক্তি: রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন",
+    "details": {
+      "alertId": "EHRJ-BALT-2026-2627",
+      "alertLevel": "CRITICAL",
+      "justificationBn": "রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন"
+    },
+    "id": "EHRJ-BAUD-1790701960834-421",
+    "timestamp": "2026-09-29T17:12:40.837Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং আহার্য ও পুষ্টি (বরাদ্দ: ৳250000)",
+    "details": {
+      "lineId": "BLN-2026-5509",
+      "category": "FOOD_BOARDING_MEALS",
+      "plannedAmount": 250000
+    },
+    "id": "EHRJ-BAUD-1790701960777-460",
+    "timestamp": "2026-09-29T17:12:40.777Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: দরিদ্র ছাত্রদের পোশাক ও কিতাব (বরাদ্দ: ৳150000)",
+    "details": {
+      "lineId": "BLN-2026-4555",
+      "category": "ZAKAT_WELFARE_CLOTHING",
+      "plannedAmount": 150000
+    },
+    "id": "EHRJ-BAUD-1790701960771-770",
+    "timestamp": "2026-09-29T17:12:40.771Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: শিক্ষক ও স্টাফ বেতন (বরাদ্দ: ৳800000)",
+    "details": {
+      "lineId": "BLN-2026-4792",
+      "category": "SALARY_TEACHERS",
+      "plannedAmount": 800000
+    },
+    "id": "EHRJ-BAUD-1790701960762-907",
+    "timestamp": "2026-09-29T17:12:40.762Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: সাধারণ দান ও সদকা (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-6044",
+      "category": "DONATION_GENERAL",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790701960755-77",
+    "timestamp": "2026-09-29T17:12:40.755Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-5319",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: খাতভিত্তিক যাচাই বাজেট (EHRJ-BUD-2026-5319)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-5319",
+      "fiscalYear": "FY0676"
+    },
+    "id": "EHRJ-BAUD-1790701960749-321",
+    "timestamp": "2026-09-29T17:12:40.749Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-4375",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: বাজেট কার্যকর ঘোষণা",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "বাজেট কার্যকর ঘোষণা",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701960741-674",
+    "timestamp": "2026-09-29T17:12:40.741Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-4375",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701960729-114",
+    "timestamp": "2026-09-29T17:12:40.729Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-4375",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: গভর্নিং বডি পর্যালোচনায় পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "গভর্নিং বডি পর্যালোচনায় পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701960716-394",
+    "timestamp": "2026-09-29T17:12:40.716Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-4375",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: বাজেট খসড়া প্রণয়ন শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "বাজেট খসড়া প্রণয়ন শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701960707-441",
+    "timestamp": "2026-09-29T17:12:40.707Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-4375",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: প্রাতিষ্ঠানিক বার্ষিক বাজেট ২০২৭-২৮ (EHRJ-BUD-2026-4375)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-4375",
+      "fiscalYear": "FY0676"
+    },
+    "id": "EHRJ-BAUD-1790701960693-58",
+    "timestamp": "2026-09-29T17:12:40.693Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট অর্থবছর লক করা হয়েছে: অর্থবছর FY0676 (পরীক্ষামূলক). কারণ: অডিট প্রস্তুতের জন্য মেয়াদ লক করা হয়েছে",
+    "details": {
+      "periodId": "EHRJ-BPR-FY0676"
+    },
+    "id": "EHRJ-BAUD-1790701960683-37",
+    "timestamp": "2026-09-29T17:12:40.683Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট অর্থবছর তৈরি: অর্থবছর FY0676 (পরীক্ষামূলক) (FY-FY0676)",
+    "details": {
+      "periodId": "EHRJ-BPR-FY0676",
+      "fiscalYear": "FY0676"
+    },
+    "id": "EHRJ-BAUD-1790701960680-659",
+    "timestamp": "2026-09-29T17:12:40.680Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9369",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং আহার্য ও পুষ্টি (বরাদ্দ: ৳250000)",
+    "details": {
+      "lineId": "BLN-2026-6200",
+      "category": "FOOD_BOARDING_MEALS",
+      "plannedAmount": 250000
+    },
+    "id": "EHRJ-BAUD-1790701845199-365",
+    "timestamp": "2026-09-29T17:10:45.199Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9369",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: দরিদ্র ছাত্রদের পোশাক ও কিতাব (বরাদ্দ: ৳150000)",
+    "details": {
+      "lineId": "BLN-2026-5170",
+      "category": "ZAKAT_WELFARE_CLOTHING",
+      "plannedAmount": 150000
+    },
+    "id": "EHRJ-BAUD-1790701845192-504",
+    "timestamp": "2026-09-29T17:10:45.192Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9369",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: শিক্ষক ও স্টাফ বেতন (বরাদ্দ: ৳800000)",
+    "details": {
+      "lineId": "BLN-2026-4016",
+      "category": "SALARY_TEACHERS",
+      "plannedAmount": 800000
+    },
+    "id": "EHRJ-BAUD-1790701845183-322",
+    "timestamp": "2026-09-29T17:10:45.183Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9369",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: সাধারণ দান ও সদকা (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-4032",
+      "category": "DONATION_GENERAL",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790701845176-176",
+    "timestamp": "2026-09-29T17:10:45.176Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9369",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: খাতভিত্তিক যাচাই বাজেট (EHRJ-BUD-2026-9369)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-9369",
+      "fiscalYear": "FY5103"
+    },
+    "id": "EHRJ-BAUD-1790701845169-260",
+    "timestamp": "2026-09-29T17:10:45.169Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8402",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: বাজেট কার্যকর ঘোষণা",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "বাজেট কার্যকর ঘোষণা",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701845159-744",
+    "timestamp": "2026-09-29T17:10:45.160Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8402",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701845152-40",
+    "timestamp": "2026-09-29T17:10:45.152Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8402",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: গভর্নিং বডি পর্যালোচনায় পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "গভর্নিং বডি পর্যালোচনায় পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701845144-531",
+    "timestamp": "2026-09-29T17:10:45.144Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8402",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: বাজেট খসড়া প্রণয়ন শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "বাজেট খসড়া প্রণয়ন শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701845135-191",
+    "timestamp": "2026-09-29T17:10:45.135Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-8402",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: প্রাতিষ্ঠানিক বার্ষিক বাজেট ২০২৭-২৮ (EHRJ-BUD-2026-8402)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-8402",
+      "fiscalYear": "FY5103"
+    },
+    "id": "EHRJ-BAUD-1790701845124-601",
+    "timestamp": "2026-09-29T17:10:45.124Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট অর্থবছর লক করা হয়েছে: অর্থবছর FY5103 (পরীক্ষামূলক). কারণ: অডিট প্রস্তুতের জন্য মেয়াদ লক করা হয়েছে",
+    "details": {
+      "periodId": "EHRJ-BPR-FY5103"
+    },
+    "id": "EHRJ-BAUD-1790701845115-465",
+    "timestamp": "2026-09-29T17:10:45.115Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট অর্থবছর তৈরি: অর্থবছর FY5103 (পরীক্ষামূলক) (FY-FY5103)",
+    "details": {
+      "periodId": "EHRJ-BPR-FY5103",
+      "fiscalYear": "FY5103"
+    },
+    "id": "EHRJ-BAUD-1790701845109-202",
+    "timestamp": "2026-09-29T17:10:45.109Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2377",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: লিল্লাহ বোর্ডিং আহার্য ও পুষ্টি (বরাদ্দ: ৳250000)",
+    "details": {
+      "lineId": "BLN-2026-3610",
+      "category": "FOOD_BOARDING_MEALS",
+      "plannedAmount": 250000
+    },
+    "id": "EHRJ-BAUD-1790701779022-698",
+    "timestamp": "2026-09-29T17:09:39.022Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2377",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: দরিদ্র ছাত্রদের পোশাক ও কিতাব (বরাদ্দ: ৳150000)",
+    "details": {
+      "lineId": "BLN-2026-8289",
+      "category": "ZAKAT_WELFARE_CLOTHING",
+      "plannedAmount": 150000
+    },
+    "id": "EHRJ-BAUD-1790701779015-544",
+    "timestamp": "2026-09-29T17:09:39.015Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2377",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: শিক্ষক ও স্টাফ বেতন (বরাদ্দ: ৳800000)",
+    "details": {
+      "lineId": "BLN-2026-3048",
+      "category": "SALARY_TEACHERS",
+      "plannedAmount": 800000
+    },
+    "id": "EHRJ-BAUD-1790701779005-87",
+    "timestamp": "2026-09-29T17:09:39.005Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2377",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট লাইন সংরক্ষিত: সাধারণ দান ও সদকা (বরাদ্দ: ৳1200000)",
+    "details": {
+      "lineId": "BLN-2026-9398",
+      "category": "DONATION_GENERAL",
+      "plannedAmount": 1200000
+    },
+    "id": "EHRJ-BAUD-1790701778998-817",
+    "timestamp": "2026-09-29T17:09:38.998Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-2377",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: খাতভিত্তিক যাচাই বাজেট (EHRJ-BUD-2026-2377)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-2377",
+      "fiscalYear": "FY8926"
+    },
+    "id": "EHRJ-BAUD-1790701778988-951",
+    "timestamp": "2026-09-29T17:09:38.988Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9376",
+    "action": "ACTIVATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: APPROVED -> ACTIVE. কারণ: বাজেট কার্যকর ঘোষণা",
+    "details": {
+      "previousStatus": "APPROVED",
+      "targetStatus": "ACTIVE",
+      "reason": "বাজেট কার্যকর ঘোষণা",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701778980-58",
+    "timestamp": "2026-09-29T17:09:38.980Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9376",
+    "action": "APPROVE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: UNDER_REVIEW -> APPROVED. কারণ: গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+    "details": {
+      "previousStatus": "UNDER_REVIEW",
+      "targetStatus": "APPROVED",
+      "reason": "গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701778971-963",
+    "timestamp": "2026-09-29T17:09:38.971Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9376",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: PREPARATION -> UNDER_REVIEW. কারণ: গভর্নিং বডি পর্যালোচনায় পেশ",
+    "details": {
+      "previousStatus": "PREPARATION",
+      "targetStatus": "UNDER_REVIEW",
+      "reason": "গভর্নিং বডি পর্যালোচনায় পেশ",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701778964-258",
+    "timestamp": "2026-09-29T17:09:38.964Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9376",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট স্ট্যাটাস পরিবর্তিত: DRAFT -> PREPARATION. কারণ: বাজেট খসড়া প্রণয়ন শুরু",
+    "details": {
+      "previousStatus": "DRAFT",
+      "targetStatus": "PREPARATION",
+      "reason": "বাজেট খসড়া প্রণয়ন শুরু",
+      "version": 1
+    },
+    "id": "EHRJ-BAUD-1790701778956-300",
+    "timestamp": "2026-09-29T17:09:38.956Z"
+  },
+  {
+    "budgetId": "EHRJ-BUD-2026-9376",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট খসড়া তৈরি: প্রাতিষ্ঠানিক বার্ষিক বাজেট ২০২৭-২৮ (EHRJ-BUD-2026-9376)",
+    "details": {
+      "budgetCode": "EHRJ-BUD-2026-9376",
+      "fiscalYear": "FY8926"
+    },
+    "id": "EHRJ-BAUD-1790701778944-139",
+    "timestamp": "2026-09-29T17:09:38.944Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "UPDATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "বাজেট অর্থবছর লক করা হয়েছে: অর্থবছর FY8926 (পরীক্ষামূলক). কারণ: অডিট প্রস্তুতের জন্য মেয়াদ লক করা হয়েছে",
+    "details": {
+      "periodId": "EHRJ-BPR-FY8926"
+    },
+    "id": "EHRJ-BAUD-1790701778938-646",
+    "timestamp": "2026-09-29T17:09:38.938Z"
+  },
+  {
+    "budgetId": "GLOBAL",
+    "action": "CREATE_BUDGET",
+    "actorId": "usr-admin-001",
+    "actorName": "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    "actorRole": "ADMIN",
+    "notes": "নতুন বাজেট অর্থবছর তৈরি: অর্থবছর FY8926 (পরীক্ষামূলক) (FY-FY8926)",
+    "details": {
+      "periodId": "EHRJ-BPR-FY8926",
+      "fiscalYear": "FY8926"
+    },
+    "id": "EHRJ-BAUD-1790701778933-620",
+    "timestamp": "2026-09-29T17:09:38.933Z"
+  },
+  {
     "budgetId": "EHRJ-BUD-2026-8566",
     "action": "STATUS_CHANGE",
     "actorId": "USR-ADM-001",

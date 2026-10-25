@@ -14,6 +14,7 @@ import {
   GraduationCap,
   Bell,
   Sliders,
+  Smartphone,
 } from "lucide-react";
 
 export default function MobileBottomNav() {
@@ -38,7 +39,7 @@ export default function MobileBottomNav() {
     navItems = [
       { label: "হোম", href: "/portal", icon: Home },
       { label: "হাজিরা", href: "/portal", icon: Calendar },
-      { label: "ফলাফল", href: "/portal", icon: Award },
+      { label: "ওয়েব অ্যাপ", href: "/app", icon: Smartphone },
       { label: "ফি বিবরণী", href: "/portal", icon: DollarSign },
       { label: "সার্চ", href: "/search", icon: Search },
     ];
@@ -46,16 +47,16 @@ export default function MobileBottomNav() {
     navItems = [
       { label: "হোম", href: "/teacher", icon: Home },
       { label: "হাজিরা", href: "/teacher", icon: Calendar },
+      { label: "ওয়েব অ্যাপ", href: "/app", icon: Smartphone },
       { label: "মার্কস", href: "/teacher", icon: Award },
       { label: "নোটিশ", href: "/notices", icon: Bell },
-      { label: "সার্চ", href: "/search", icon: Search },
     ];
   } else if (userRole === "ADMIN" || userRole === "PRINCIPAL") {
     navItems = [
       { label: "ড্যাশবোর্ড", href: "/admin", icon: Home },
       { label: "শিক্ষার্থী", href: "/admin", icon: Users },
+      { label: "ওয়েব অ্যাপ", href: "/app", icon: Smartphone },
       { label: "হিসাব", href: "/admin", icon: DollarSign },
-      { label: "জ্ঞানভান্ডার", href: "/admin/knowledge", icon: BookOpen },
       { label: "সার্চ", href: "/search", icon: Search },
     ];
   } else {
@@ -63,7 +64,7 @@ export default function MobileBottomNav() {
     navItems = [
       { label: "হোম", href: "/", icon: Home },
       { label: "ভর্তি", href: "/admission", icon: GraduationCap },
-      { label: "নোটিশ", href: "/notices", icon: Bell },
+      { label: "ওয়েব অ্যাপ", href: "/app", icon: Smartphone },
       { label: "রেজাল্ট", href: "/results", icon: Award },
       { label: "সার্চ", href: "/search", icon: Search },
     ];
@@ -75,6 +76,31 @@ export default function MobileBottomNav() {
         {navItems.map((item, idx) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
+          const isCenterApp = item.href === "/app";
+
+          if (isCenterApp) {
+            return (
+              <Link
+                key={idx}
+                href={item.href}
+                className="flex flex-col items-center justify-center -mt-4 relative group"
+              >
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center shadow-xl border-2 border-[#D4AF37] transition-transform active:scale-95 ${
+                    isActive
+                      ? "bg-[#041F14] text-[#D4AF37]"
+                      : "bg-gradient-to-tr from-[#041F14] to-[#0D5C3A] text-white"
+                  }`}
+                >
+                  <Icon className="w-6 h-6 stroke-[2.2]" />
+                </div>
+                <span className="text-[9px] font-bold mt-0.5 text-emerald-950 tracking-tight">
+                  {item.label}
+                </span>
+              </Link>
+            );
+          }
+
           return (
             <Link
               key={idx}

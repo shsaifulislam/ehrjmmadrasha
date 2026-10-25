@@ -7,7 +7,8 @@ import { INSTITUTION_INFO } from "@/lib/constants";
  * Public QR Verification for a physical book copy
  * Privacy-safe: exposes NO borrower or student information
  */
-export async function GET(req: NextRequest, { params }: { params: { token: string } }) {
+export async function GET(req: NextRequest, { params: paramsPromise }: { params: Promise<{ token: string }> }) {
+  const params = await paramsPromise;
   try {
     const { token } = params;
 

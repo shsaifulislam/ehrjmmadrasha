@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getSessionUser } from "@/lib/auth";
 import { recordAuditLog } from "@/lib/security";
 import { calculateStudentFee, generateNextInvoiceNumber } from "@/lib/feeCalculationService";
+import { emitDomainEvent } from "@/lib/communicationEngine";
 
 export const dynamic = "force-dynamic";
 
@@ -220,6 +221,26 @@ export async function POST(req: NextRequest) {
         netAmount,
         fundCode: calc.fundCode,
       },
+    });
+
+    // Emit outbox notification using persisted invoice identity and net amount
+    const student = await prisma.student.findUnique({
+      where: { id: studentId },
+      select: { fullNameBn: true },
+    });
+
+    await emitDomainEvent({
+      eventType: "INVOICE_CREATED",
+      entityType: "FeeInvoice",
+      entityId: invoice.id,
+      payload: {
+        studentId,
+        studentNameBn: student?.fullNameBn || "শিক্ষার্থী",
+        invoiceNumber: invoice.invoiceNumber,
+        amount: invoice.netAmount,
+        invoiceId: invoice.id,
+      },
+      idempotencyKey: `invoice-created-${invoice.id}`,
     });
 
     return NextResponse.json({

@@ -5,10 +5,10 @@ import { recordAuditLog } from "@/lib/security";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const user = await getSessionUser();
-    if (!user || user.role !== "ADMIN") {
+    const user = await getSessionUser(req);
+    if (!user || (user.role !== "ADMIN" && user.role !== "ACCOUNTANT" && user.role !== "PRINCIPAL")) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
     }
 
@@ -38,8 +38,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const user = await getSessionUser();
-    if (!user || user.role !== "ADMIN") {
+    const user = await getSessionUser(req);
+    if (!user || (user.role !== "ADMIN" && user.role !== "ACCOUNTANT")) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
     }
 

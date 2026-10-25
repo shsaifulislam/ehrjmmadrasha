@@ -20,6 +20,9 @@ import {
 } from "./types";
 import { normalizeSearchTerm, isFuzzyMatch } from "./searchNormalization";
 import { getPermittedCommands } from "./commandShortcuts";
+import { ProcurementStore } from "@/lib/procurement";
+import { RiskAssuranceStore } from "@/lib/riskAssurance";
+import { ComplianceStore } from "@/lib/compliance";
 
 /**
  * Perform RBAC-governed Global Search across all authoritative EHRJ modules
@@ -142,6 +145,41 @@ export async function executeGlobalSearch(
   // 10. NOTICES & ANNOUNCEMENTS (All authenticated roles)
   if (filterType === "ALL" || filterType === "NOTICE") {
     searchPromises.push(searchNotices(rawTerm, normalized));
+  }
+
+  // 11. VENDORS & SUPPLIERS (Admin, Principal only - Phase 40)
+  if ((filterType === "ALL" || filterType === "VENDOR") && (user.role === "ADMIN" || user.role === "PRINCIPAL")) {
+    searchPromises.push(searchVendors(rawTerm, normalized));
+  }
+
+  // 12. RFQS & TENDERS (Admin, Principal only - Phase 40)
+  if ((filterType === "ALL" || filterType === "RFQ") && (user.role === "ADMIN" || user.role === "PRINCIPAL")) {
+    searchPromises.push(searchRfqs(rawTerm, normalized));
+  }
+
+  // 13. CONTRACTS & AGREEMENTS (Admin, Principal only - Phase 40)
+  if ((filterType === "ALL" || filterType === "CONTRACT") && (user.role === "ADMIN" || user.role === "PRINCIPAL")) {
+    searchPromises.push(searchContracts(rawTerm, normalized));
+  }
+
+  // 14. INSTITUTIONAL RISKS (Admin, Principal only - Phase 42)
+  if ((filterType === "ALL" || filterType === "RISK") && (user.role === "ADMIN" || user.role === "PRINCIPAL")) {
+    searchPromises.push(searchRisks(rawTerm, normalized));
+  }
+
+  // 15. INTERNAL CONTROLS (Admin, Principal only - Phase 42)
+  if ((filterType === "ALL" || filterType === "CONTROL") && (user.role === "ADMIN" || user.role === "PRINCIPAL")) {
+    searchPromises.push(searchControls(rawTerm, normalized));
+  }
+
+  // 16. COMPLIANCE REQUIREMENTS (Admin, Principal only - Phase 43)
+  if ((filterType === "ALL" || filterType === "COMPLIANCE_REQUIREMENT") && (user.role === "ADMIN" || user.role === "PRINCIPAL")) {
+    searchPromises.push(searchComplianceRequirements(rawTerm, normalized));
+  }
+
+  // 17. COMPLIANCE OBLIGATIONS (Admin, Principal only - Phase 43)
+  if ((filterType === "ALL" || filterType === "COMPLIANCE_OBLIGATION") && (user.role === "ADMIN" || user.role === "PRINCIPAL")) {
+    searchPromises.push(searchComplianceObligations(rawTerm, normalized));
   }
 
   const moduleResults = await Promise.all(searchPromises);
@@ -653,3 +691,323 @@ async function searchNotices(term: string, normalized: string): Promise<SearchRe
     quickActions: [{ labelBn: "পড়ুন", labelEn: "Read", url: `/notice` }],
   }));
 }
+
+/* ========================================================================= */
+/* PHASE 40: VENDORS, RFQS & CONTRACTS SEARCH ADAPTERS                       */
+/* ========================================================================= */
+
+async function searchVendors(term: string, normalized: string): Promise<SearchResultItem[]> {
+  try {
+    const termLower = term.toLowerCase();
+    const vendors = ProcurementStore.getVendors();
+
+    const matches = vendors.filter((v) => {
+      return (
+        v.id.toLowerCase().includes(termLower) ||
+        v.vendorCode?.toLowerCase().includes(termLower) ||
+        v.legalNameBn.includes(term) ||
+        v.legalNameEn?.toLowerCase().includes(termLower) ||
+        v.displayName?.includes(term) ||
+        v.phone.includes(term) ||
+        v.categoryCode.toLowerCase().includes(termLower) ||
+        v.contacts?.some((c) => c.name.includes(term) || c.phone.includes(term))
+      );
+    });
+
+    return matches.slice(0, 8).map((v) => {
+      const isExactId = v.id.toLowerCase() === termLower || v.vendorCode?.toLowerCase() === termLower;
+      return {
+        id: v.id,
+        entityType: "VENDOR",
+        entityId: v.id,
+        displayTitleBn: v.legalNameBn,
+        displayTitleEn: v.legalNameEn || v.displayName || v.id,
+        subtitle: `আইডি: ${v.id} | ধরণ: ${v.vendorType} | ক্যাটাগরি: ${v.categoryCode} | অবস্থা: ${v.status}`,
+        status: v.status,
+        url: `/admin/vendors/${encodeURIComponent(v.id)}`,
+        relevanceScore: isExactId ? 1.0 : v.legalNameBn.includes(term) ? 0.88 : 0.75,
+        matchType: isExactId ? "EXACT_ID" : "NORMALIZED",
+        matchedField: isExactId ? "id" : "legalNameBn",
+        sourceModule: "ভেন্ডর ও সরবরাহকারী মাস্টার",
+        lastUpdated: v.updatedAt,
+        quickActions: [
+          { labelBn: "ভেন্ডর প্রোফাইল", labelEn: "Profile", url: `/admin/vendors/${v.id}` },
+          { labelBn: "চুক্তিপত্র", labelEn: "Contracts", url: `/admin/contracts?vendorId=${v.id}` },
+        ],
+      };
+    });
+  } catch (err) {
+    console.warn("Error in searchVendors:", err);
+    return [];
+  }
+}
+
+async function searchRfqs(term: string, normalized: string): Promise<SearchResultItem[]> {
+  try {
+    const termLower = term.toLowerCase();
+    const rfqs = ProcurementStore.getRFQs();
+
+    const matches = rfqs.filter((r) => {
+      return (
+        r.id.toLowerCase().includes(termLower) ||
+        r.rfqCode?.toLowerCase().includes(termLower) ||
+        (r.titleBn || "").includes(term) ||
+        (r.descriptionBn || "").includes(term) ||
+        (r.categoryCode || "").toLowerCase().includes(termLower) ||
+        (r.items || []).some((i) => (i.nameBn || (i as any).itemName || "").includes(term))
+      );
+    });
+
+    return matches.slice(0, 8).map((r) => {
+      const isExactId = r.id.toLowerCase() === termLower || r.rfqCode?.toLowerCase() === termLower;
+      return {
+        id: r.id,
+        entityType: "RFQ",
+        entityId: r.id,
+        displayTitleBn: r.titleBn,
+        displayTitleEn: r.rfqCode || r.id,
+        subtitle: `আইডি: ${r.id} | অবস্থা: ${r.status} | আইটেম: ${r.items?.length || 0} টি | ডেডলাইন: ${r.submissionDeadline}`,
+        status: r.status,
+        url: `/admin/procurement/rfqs`,
+        relevanceScore: isExactId ? 1.0 : 0.82,
+        matchType: isExactId ? "EXACT_ID" : "NORMALIZED",
+        matchedField: isExactId ? "id" : "titleBn",
+        sourceModule: "প্রকিউরমেন্ট ও দরপত্র (RFQ)",
+        lastUpdated: r.updatedAt,
+        quickActions: [
+          { labelBn: "দরপত্র দেখুন", labelEn: "View RFQ", url: `/admin/procurement/rfqs` },
+        ],
+      };
+    });
+  } catch (err) {
+    console.warn("Error in searchRfqs:", err);
+    return [];
+  }
+}
+
+async function searchContracts(term: string, normalized: string): Promise<SearchResultItem[]> {
+  try {
+    const termLower = term.toLowerCase();
+    const contracts = ProcurementStore.getContracts();
+
+    const matches = contracts.filter((c) => {
+      const vendorName = c.vendorNameBn || (c as any).vendorName || "";
+      return (
+        c.id.toLowerCase().includes(termLower) ||
+        (c.contractCode || "").toLowerCase().includes(termLower) ||
+        (c.titleBn || "").includes(term) ||
+        vendorName.includes(term) ||
+        (c.vendorId || "").toLowerCase().includes(termLower) ||
+        (c.contractType || "").toLowerCase().includes(termLower)
+      );
+    });
+
+    return matches.slice(0, 8).map((c) => {
+      const isExactId = c.id.toLowerCase() === termLower || (c.contractCode || "").toLowerCase() === termLower;
+      const vendorName = c.vendorNameBn || (c as any).vendorName || c.vendorId;
+      return {
+        id: c.id,
+        entityType: "CONTRACT",
+        entityId: c.id,
+        displayTitleBn: c.titleBn,
+        displayTitleEn: `${vendorName} (${c.contractCode || c.id})`,
+        subtitle: `আইডি: ${c.id} | সরবরাহকারী: ${vendorName} | মূল্য: ৳${(c.totalContractValue || 0).toLocaleString("bn-BD")} | অবস্থা: ${c.status}`,
+        status: c.status,
+        url: `/admin/contracts/${encodeURIComponent(c.id)}`,
+        relevanceScore: isExactId ? 1.0 : 0.85,
+        matchType: isExactId ? "EXACT_ID" : "NORMALIZED",
+        matchedField: isExactId ? "id" : "titleBn",
+        sourceModule: "প্রাতিষ্ঠানিক চুক্তি ব্যবস্থাপনা",
+        lastUpdated: c.updatedAt,
+        quickActions: [
+          { labelBn: "চুক্তি বিবরণ", labelEn: "Contract Details", url: `/admin/contracts/${c.id}` },
+        ],
+      };
+    });
+  } catch (err) {
+    console.warn("Error in searchContracts:", err);
+    return [];
+  }
+}
+
+/* ========================================================================= */
+/* PHASE 42: RISKS & INTERNAL CONTROLS SEARCH ADAPTERS                       */
+/* ========================================================================= */
+
+async function searchRisks(term: string, normalized: string): Promise<SearchResultItem[]> {
+  try {
+    const termLower = term.toLowerCase();
+    const risks = RiskAssuranceStore.getRisks();
+
+    const matches = risks.filter((r) => {
+      return (
+        r.id.toLowerCase().includes(termLower) ||
+        r.riskCode?.toLowerCase().includes(termLower) ||
+        (r.titleBn || "").includes(term) ||
+        (r.titleEn || "").toLowerCase().includes(termLower) ||
+        (r.descriptionBn || "").includes(term) ||
+        (r.riskCategory || "").toLowerCase().includes(termLower) ||
+        (r.residualLevel || "").toLowerCase().includes(termLower) ||
+        (r.sourceModule || "").toLowerCase().includes(termLower)
+      );
+    });
+
+    return matches.slice(0, 8).map((r) => {
+      const isExactId = r.id.toLowerCase() === termLower || r.riskCode?.toLowerCase() === termLower;
+      return {
+        id: r.id,
+        entityType: "RISK",
+        entityId: r.id,
+        displayTitleBn: r.titleBn,
+        displayTitleEn: r.titleEn || r.riskCode || r.id,
+        subtitle: `আইডি: ${r.id} | মাত্রা: ${r.residualLevel} | ক্যাটাগরি: ${r.riskCategory} | অবস্থা: ${r.status}`,
+        status: r.status,
+        url: `/admin/governance/risks/${encodeURIComponent(r.id)}`,
+        relevanceScore: isExactId ? 1.0 : r.titleBn.includes(term) ? 0.9 : 0.8,
+        matchType: isExactId ? "EXACT_ID" : "NORMALIZED",
+        matchedField: isExactId ? "id" : "titleBn",
+        sourceModule: "প্রাতিষ্ঠানিক ঝুঁকি রেজিস্টার",
+        lastUpdated: r.updatedAt,
+        quickActions: [
+          { labelBn: "ঝুঁকি বিবরণ", labelEn: "Risk Profile", url: `/admin/governance/risks/${r.id}` },
+        ],
+      };
+    });
+  } catch (err) {
+    console.warn("Error in searchRisks:", err);
+    return [];
+  }
+}
+
+async function searchControls(term: string, normalized: string): Promise<SearchResultItem[]> {
+  try {
+    const termLower = term.toLowerCase();
+    const controls = RiskAssuranceStore.getControls();
+
+    const matches = controls.filter((c) => {
+      return (
+        c.id.toLowerCase().includes(termLower) ||
+        c.controlCode?.toLowerCase().includes(termLower) ||
+        (c.nameBn || "").includes(term) ||
+        (c.nameEn || "").toLowerCase().includes(termLower) ||
+        (c.descriptionBn || "").includes(term) ||
+        (c.controlObjectiveBn || "").includes(term) ||
+        (c.category || "").toLowerCase().includes(termLower) ||
+        (c.controlType || "").toLowerCase().includes(termLower)
+      );
+    });
+
+    return matches.slice(0, 8).map((c) => {
+      const isExactId = c.id.toLowerCase() === termLower || c.controlCode?.toLowerCase() === termLower;
+      return {
+        id: c.id,
+        entityType: "CONTROL",
+        entityId: c.id,
+        displayTitleBn: c.nameBn,
+        displayTitleEn: c.nameEn || c.controlCode || c.id,
+        subtitle: `আইডি: ${c.id} | ধরণ: ${c.controlType} | কার্যকরিতা: ${c.lastTestResult || "পরীক্ষিত নয়"} | অবস্থা: ${c.status}`,
+        status: c.status,
+        url: `/admin/governance/controls`,
+        relevanceScore: isExactId ? 1.0 : c.nameBn.includes(term) ? 0.88 : 0.78,
+        matchType: isExactId ? "EXACT_ID" : "NORMALIZED",
+        matchedField: isExactId ? "id" : "nameBn",
+        sourceModule: "অভ্যন্তরীণ নিয়ন্ত্রণ রেজিস্টার",
+        lastUpdated: c.updatedAt,
+        quickActions: [
+          { labelBn: "নিয়ন্ত্রণসমূহ", labelEn: "Controls", url: `/admin/governance/controls` },
+        ],
+      };
+    });
+  } catch (err) {
+    console.warn("Error in searchControls:", err);
+    return [];
+  }
+}
+
+async function searchComplianceRequirements(term: string, normalized: string): Promise<SearchResultItem[]> {
+  try {
+    const termLower = term.toLowerCase();
+    const reqs = ComplianceStore.getRequirements();
+
+    const matches = reqs.filter((r) => {
+      return (
+        r.id.toLowerCase().includes(termLower) ||
+        r.title.toLowerCase().includes(termLower) ||
+        r.description.toLowerCase().includes(termLower) ||
+        r.jurisdiction.toLowerCase().includes(termLower) ||
+        r.sourceReference.toLowerCase().includes(termLower) ||
+        r.category.toLowerCase().includes(termLower)
+      );
+    });
+
+    return matches.slice(0, 8).map((r) => {
+      const isExactId = r.id.toLowerCase() === termLower;
+      return {
+        id: r.id,
+        entityType: "COMPLIANCE_REQUIREMENT",
+        entityId: r.id,
+        displayTitleBn: r.title,
+        displayTitleEn: r.id,
+        subtitle: `আইডি: ${r.id} | উৎস: ${r.source} | এখতিয়ার: ${r.jurisdiction} | অবস্থা: ${r.status}`,
+        status: r.status,
+        url: `/admin/compliance/requirements/${encodeURIComponent(r.id)}`,
+        relevanceScore: isExactId ? 1.0 : r.title.includes(term) ? 0.9 : 0.8,
+        matchType: isExactId ? "EXACT_ID" : "NORMALIZED",
+        matchedField: isExactId ? "id" : "title",
+        sourceModule: "কমপ্লায়েন্স প্রয়োজনীয়তা রেজিস্টার",
+        lastUpdated: r.updatedAt,
+        quickActions: [
+          { labelBn: "প্রয়োজনীয়তা বিবরণ", labelEn: "Requirement Details", url: `/admin/compliance/requirements/${r.id}` },
+        ],
+      };
+    });
+  } catch (err) {
+    console.warn("Error in searchComplianceRequirements:", err);
+    return [];
+  }
+}
+
+async function searchComplianceObligations(term: string, normalized: string): Promise<SearchResultItem[]> {
+  try {
+    const termLower = term.toLowerCase();
+    const obligations = ComplianceStore.getObligations();
+
+    const matches = obligations.filter((o) => {
+      return (
+        o.id.toLowerCase().includes(termLower) ||
+        o.requirementId.toLowerCase().includes(termLower) ||
+        o.title.toLowerCase().includes(termLower) ||
+        o.description.toLowerCase().includes(termLower) ||
+        o.ownerName.toLowerCase().includes(termLower) ||
+        o.deadlineSource.toLowerCase().includes(termLower) ||
+        o.status.toLowerCase().includes(termLower)
+      );
+    });
+
+    return matches.slice(0, 8).map((o) => {
+      const isExactId = o.id.toLowerCase() === termLower;
+      return {
+        id: o.id,
+        entityType: "COMPLIANCE_OBLIGATION",
+        entityId: o.id,
+        displayTitleBn: o.title,
+        displayTitleEn: o.id,
+        subtitle: `আইডি: ${o.id} | কর্মকর্তা: ${o.ownerName} | সময়সীমা: ${o.dueDate} | অবস্থা: ${o.status}`,
+        status: o.status,
+        url: `/admin/compliance/obligations/${encodeURIComponent(o.id)}`,
+        relevanceScore: isExactId ? 1.0 : o.title.includes(term) ? 0.88 : 0.78,
+        matchType: isExactId ? "EXACT_ID" : "NORMALIZED",
+        matchedField: isExactId ? "id" : "title",
+        sourceModule: "কমপ্লায়েন্স দায় ও অঙ্গীকার",
+        lastUpdated: o.updatedAt,
+        quickActions: [
+          { labelBn: "দায় বিবরণ", labelEn: "Obligation Details", url: `/admin/compliance/obligations/${o.id}` },
+        ],
+      };
+    });
+  } catch (err) {
+    console.warn("Error in searchComplianceObligations:", err);
+    return [];
+  }
+}
+

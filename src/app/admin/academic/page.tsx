@@ -20,6 +20,8 @@ import {
   Check,
   Building,
   History,
+  Edit3,
+  Trash2,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
 
@@ -50,6 +52,11 @@ export default function AdminAcademicPage() {
   const [classSortOrder, setClassSortOrder] = useState(0);
   const [submittingClass, setSubmittingClass] = useState(false);
 
+  // Edit Class State
+  const [editingClass, setEditingClass] = useState<any | null>(null);
+  const [showEditClassModal, setShowEditClassModal] = useState(false);
+  const [submittingEditClass, setSubmittingEditClass] = useState(false);
+
   // Sections State
   const [sections, setSections] = useState<any[]>([]);
   const [selectedClassForSection, setSelectedClassForSection] = useState("");
@@ -60,6 +67,11 @@ export default function AdminAcademicPage() {
   const [sectionRoomNo, setSectionRoomNo] = useState("");
   const [sectionCapacity, setSectionCapacity] = useState(60);
   const [submittingSection, setSubmittingSection] = useState(false);
+
+  // Edit Section State
+  const [editingSection, setEditingSection] = useState<any | null>(null);
+  const [showEditSectionModal, setShowEditSectionModal] = useState(false);
+  const [submittingEditSection, setSubmittingEditSection] = useState(false);
 
   // Promotion State
   const [promoFromSession, setPromoFromSession] = useState("");
@@ -119,8 +131,13 @@ export default function AdminAcademicPage() {
 
   const loadAll = async () => {
     setLoading(true);
-    await Promise.all([fetchSessions(), fetchClasses(), fetchSections(), fetchPromotionHistory()]);
-    setLoading(false);
+    try {
+      await Promise.all([fetchSessions(), fetchClasses(), fetchSections(), fetchPromotionHistory()]);
+    } catch (err) {
+      console.error("loadAll error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -246,6 +263,157 @@ export default function AdminAcademicPage() {
       setBanner({ text: err.message, type: "error" });
     } finally {
       setSubmittingSection(false);
+    }
+  };
+
+  // Open Edit Class
+  const handleOpenEditClass = (cls: any) => {
+    setEditingClass({
+      id: cls.id,
+      nameBn: cls.nameBn,
+      nameEn: cls.nameEn || "",
+      nameAr: cls.nameAr || "",
+      code: cls.code,
+      genderType: cls.genderType,
+      sortOrder: cls.sortOrder ?? 0,
+      isActive: cls.isActive,
+    });
+    setShowEditClassModal(true);
+  };
+
+  // Submit Update Class
+  const handleUpdateClass = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingClass) return;
+    setSubmittingEditClass(true);
+    try {
+      const res = await fetch(`/api/admin/academic/classes/${editingClass.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nameBn: editingClass.nameBn,
+          nameEn: editingClass.nameEn,
+          nameAr: editingClass.nameAr,
+          code: editingClass.code,
+          genderType: editingClass.genderType,
+          sortOrder: Number(editingClass.sortOrder),
+          isActive: editingClass.isActive,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "শ্রেণি আপডেট করতে ব্যর্থ হয়েছে");
+
+      setBanner({ text: `জামাত '${editingClass.nameBn}' সফলভাবে আপডেট হয়েছে।`, type: "success" });
+      setShowEditClassModal(false);
+      setEditingClass(null);
+      fetchClasses();
+    } catch (err: any) {
+      setBanner({ text: err.message, type: "error" });
+    } finally {
+      setSubmittingEditClass(false);
+    }
+  };
+
+  // Delete Class (if 0 enrollments)
+  const handleDeleteClass = async (cls: any) => {
+    if (cls._count?.enrollments > 0) {
+      alert(
+        `এই জামাতে ${cls._count.enrollments} জন শিক্ষার্থীর সক্রিয় ভর্তি রেকর্ড রয়েছে। ঐতিহাসিক ডেটা সুরক্ষার জন্য এটি মুছে ফেলা যাবে না; প্রয়োজনে নিষ্ক্রিয় করুন।`
+      );
+      return;
+    }
+    if (!confirm(`আপনি কি নিশ্চিত যে '${cls.nameBn}' জামাতটি স্থায়ীভাবে মুছে ফেলতে চান?`)) return;
+    try {
+      const res = await fetch(`/api/admin/academic/classes/${cls.id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "মুছে ফেলতে ব্যর্থ হয়েছে");
+      setBanner({ text: data.message || "শ্রেণি মুছে ফেলা হয়েছে।", type: "success" });
+      fetchClasses();
+    } catch (err: any) {
+      setBanner({ text: err.message, type: "error" });
+    }
+  };
+
+  // Toggle Class Active Status
+  const handleToggleClassActive = async (cls: any) => {
+    try {
+      const res = await fetch(`/api/admin/academic/classes/${cls.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          isActive: !cls.isActive,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "স্ট্যাটাস পরিবর্তন ব্যর্থ হয়েছে");
+      setBanner({ text: `'${cls.nameBn}' এর স্ট্যাটাস সফলভাবে পরিবর্তন হয়েছে।`, type: "success" });
+      fetchClasses();
+    } catch (err: any) {
+      setBanner({ text: err.message, type: "error" });
+    }
+  };
+
+  // Open Edit Section
+  const handleOpenEditSection = (sec: any) => {
+    setEditingSection({
+      id: sec.id,
+      nameBn: sec.nameBn,
+      nameEn: sec.nameEn || "",
+      roomNo: sec.roomNo || "",
+      maxCapacity: sec.maxCapacity ?? 60,
+    });
+    setShowEditSectionModal(true);
+  };
+
+  // Submit Update Section
+  const handleUpdateSection = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingSection) return;
+    setSubmittingEditSection(true);
+    try {
+      const res = await fetch(`/api/admin/academic/sections/${editingSection.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nameBn: editingSection.nameBn,
+          nameEn: editingSection.nameEn,
+          roomNo: editingSection.roomNo,
+          maxCapacity: Number(editingSection.maxCapacity),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "শাখা আপডেট ব্যর্থ হয়েছে");
+
+      setBanner({ text: `শাখা '${editingSection.nameBn}' সফলভাবে আপডেট হয়েছে।`, type: "success" });
+      setShowEditSectionModal(false);
+      setEditingSection(null);
+      fetchSections(selectedClassForSection);
+    } catch (err: any) {
+      setBanner({ text: err.message, type: "error" });
+    } finally {
+      setSubmittingEditSection(false);
+    }
+  };
+
+  // Delete Section
+  const handleDeleteSection = async (sec: any) => {
+    if (sec._count?.enrollments > 0) {
+      alert(`এই শাখায় ${sec._count.enrollments} জন শিক্ষার্থীর রেকর্ড সংরক্ষিত রয়েছে। এটি মুছে ফেলা সম্ভব নয়।`);
+      return;
+    }
+    if (!confirm(`আপনি কি নিশ্চিত যে '${sec.nameBn}' শাখাটি মুছে ফেলতে চান?`)) return;
+    try {
+      const res = await fetch(`/api/admin/academic/sections/${sec.id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "মুছে ফেলতে ব্যর্থ হয়েছে");
+      setBanner({ text: data.message || "শাখা মুছে ফেলা হয়েছে।", type: "success" });
+      fetchSections(selectedClassForSection);
+    } catch (err: any) {
+      setBanner({ text: err.message, type: "error" });
     }
   };
 
@@ -441,8 +609,33 @@ export default function AdminAcademicPage() {
           </button>
         </div>
 
-        {/* TAB 1: SESSIONS MANAGEMENT */}
-        {activeTab === "SESSIONS" && (
+        {/* Loading Skeleton */}
+        {loading ? (
+          <div className="space-y-4 animate-pulse">
+            <div className="bg-white p-5 rounded-xl border border-slate-200 flex flex-wrap justify-between items-center gap-4">
+              <div className="space-y-2">
+                <div className="h-5 bg-slate-200 rounded w-48" />
+                <div className="h-3 bg-slate-100 rounded w-72" />
+              </div>
+              <div className="h-9 bg-slate-200 rounded-lg w-36" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[1, 2, 3, 4, 5, 6].map((idx) => (
+                <div key={idx} className="bg-white rounded-xl border border-slate-200 p-5 space-y-4 shadow-sm">
+                  <div className="flex justify-between items-center">
+                    <div className="h-5 bg-slate-200 rounded w-32" />
+                    <div className="h-5 bg-slate-200 rounded-full w-20" />
+                  </div>
+                  <div className="h-14 bg-slate-100 rounded-lg" />
+                  <div className="h-8 bg-slate-200 rounded w-28" />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* TAB 1: SESSIONS MANAGEMENT */}
+            {activeTab === "SESSIONS" && (
           <div className="space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200">
               <div>
@@ -574,6 +767,7 @@ export default function AdminAcademicPage() {
                     <th className="py-3 px-4">শাখা সমূহ</th>
                     <th className="py-3 px-4">ছাত্র সংখ্যা</th>
                     <th className="py-3 px-4 text-center">অবস্থা</th>
+                    <th className="py-3 px-4 text-right">কার্যক্রম</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -615,17 +809,46 @@ export default function AdminAcademicPage() {
                       </td>
                       <td className="py-3 px-4 font-bold text-slate-800">{cls._count?.enrollments || 0} জন</td>
                       <td className="py-3 px-4 text-center">
-                        {cls.isActive ? (
-                          <span className="inline-flex items-center gap-1 text-emerald-700 font-medium text-xs">
-                            <Check className="w-3.5 h-3.5" />
-                            সক্রিয়
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1 text-slate-400 font-medium text-xs">
-                            <XCircle className="w-3.5 h-3.5" />
-                            নিষ্ক্রিয়
-                          </span>
-                        )}
+                        <button
+                          type="button"
+                          onClick={() => handleToggleClassActive(cls)}
+                          title="স্ট্যাটাস পরিবর্তন করতে ক্লিক করুন"
+                          className="inline-flex items-center gap-1 text-xs cursor-pointer hover:underline"
+                        >
+                          {cls.isActive ? (
+                            <span className="text-emerald-700 font-medium inline-flex items-center gap-1">
+                              <Check className="w-3.5 h-3.5" />
+                              সক্রিয়
+                            </span>
+                          ) : (
+                            <span className="text-slate-400 font-medium inline-flex items-center gap-1">
+                              <XCircle className="w-3.5 h-3.5" />
+                              নিষ্ক্রিয়
+                            </span>
+                          )}
+                        </button>
+                      </td>
+                      <td className="py-3 px-4 text-right">
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => handleOpenEditClass(cls)}
+                            className="p-1.5 bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 rounded transition"
+                            title="সম্পাদনা করুন"
+                          >
+                            <Edit3 className="w-3.5 h-3.5" />
+                          </button>
+                          {(!cls._count?.enrollments || cls._count.enrollments === 0) && (
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteClass(cls)}
+                              className="p-1.5 bg-slate-100 hover:bg-rose-100 text-slate-700 hover:text-rose-800 rounded transition"
+                              title="মুছে ফেলুন"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -648,46 +871,86 @@ export default function AdminAcademicPage() {
                   প্রতিটি জামাতের অধীনস্থ শাখা, ধারণক্ষমতা এবং রুম নম্বর ব্যবস্থাপনা।
                 </p>
               </div>
-              <button
-                onClick={() => {
-                  if (classes.length > 0) setSectionClassId(classes[0].id);
-                  setShowSectionModal(true);
-                }}
-                className="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
-              >
-                <PlusCircle className="w-4 h-4" />
-                <span>নতুন শাখা যুক্ত করুন</span>
-              </button>
+              <div className="flex flex-wrap items-center gap-2">
+                <select
+                  value={selectedClassForSection}
+                  onChange={(e) => {
+                    setSelectedClassForSection(e.target.value);
+                    fetchSections(e.target.value);
+                  }}
+                  className="px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold bg-white"
+                >
+                  <option value="">-- সকল জামাত --</option>
+                  {classes.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.nameBn}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  onClick={() => {
+                    if (classes.length > 0) setSectionClassId(classes[0].id);
+                    setShowSectionModal(true);
+                  }}
+                  className="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
+                >
+                  <PlusCircle className="w-4 h-4" />
+                  <span>নতুন শাখা যুক্ত করুন</span>
+                </button>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {sections.map((sec) => (
                 <div
                   key={sec.id}
-                  className="bg-white rounded-xl border border-slate-200 p-4 space-y-3 hover:shadow-sm transition-shadow"
+                  className="bg-white rounded-xl border border-slate-200 p-4 space-y-3 hover:shadow-sm transition-shadow flex flex-col justify-between"
                 >
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60 inline-block mb-1">
-                        {sec.jamatClass?.nameBn || "জামাতহীন"}
+                  <div className="space-y-2">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60 inline-block mb-1">
+                          {sec.jamatClass?.nameBn || "জামাতহীন"}
+                        </span>
+                        <h3 className="text-base font-bold text-slate-900">{sec.nameBn}</h3>
+                        <p className="text-xs text-slate-500">{sec.nameEn}</p>
+                      </div>
+                      <span className="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded">
+                        {sec._count?.enrollments || 0} ছাত্র
                       </span>
-                      <h3 className="text-base font-bold text-slate-900">{sec.nameBn}</h3>
-                      <p className="text-xs text-slate-500">{sec.nameEn}</p>
                     </div>
-                    <span className="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded">
-                      {sec._count?.enrollments || 0} ছাত্র
-                    </span>
+
+                    <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-2.5 rounded-lg">
+                      <div>
+                        <span className="text-slate-400 block text-[10px]">ধারণক্ষমতা:</span>
+                        <span className="font-semibold text-slate-700">{sec.maxCapacity} জন</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 block text-[10px]">রুম / কক্ষ:</span>
+                        <span className="font-semibold text-slate-700">{sec.roomNo || "নির্ধারিত নেই"}</span>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-2.5 rounded-lg">
-                    <div>
-                      <span className="text-slate-400 block text-[10px]">ধারণক্ষমতা:</span>
-                      <span className="font-semibold text-slate-700">{sec.maxCapacity} জন</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-400 block text-[10px]">রুম / কক্ষ:</span>
-                      <span className="font-semibold text-slate-700">{sec.roomNo || "নির্ধারিত নেই"}</span>
-                    </div>
+                  <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => handleOpenEditSection(sec)}
+                      className="px-2.5 py-1 bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 rounded font-semibold transition flex items-center gap-1"
+                    >
+                      <Edit3 className="w-3 h-3" />
+                      <span>সম্পাদনা</span>
+                    </button>
+                    {(!sec._count?.enrollments || sec._count.enrollments === 0) && (
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteSection(sec)}
+                        className="px-2.5 py-1 bg-slate-100 hover:bg-rose-100 text-slate-700 hover:text-rose-800 rounded font-semibold transition flex items-center gap-1"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                        <span>মুছুন</span>
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -930,7 +1193,9 @@ export default function AdminAcademicPage() {
             </div>
           </div>
         )}
-      </main>
+      </>
+    )}
+  </main>
 
       {/* CREATE SESSION MODAL */}
       {showSessionModal && (
@@ -1207,6 +1472,244 @@ export default function AdminAcademicPage() {
                   className="px-5 py-2 bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 text-white rounded-lg font-bold"
                 >
                   {submittingSection ? "সংরক্ষণ হচ্ছে..." : "শাখা সংরক্ষণ করুন"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* EDIT CLASS MODAL */}
+      {showEditClassModal && editingClass && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6 space-y-4">
+            <div className="flex items-center justify-between border-b pb-3">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <Edit3 className="w-5 h-5 text-emerald-600" />
+                <span>জামাত / শ্রেণি সম্পাদনা (Edit Class)</span>
+              </h3>
+              <button
+                onClick={() => {
+                  setShowEditClassModal(false);
+                  setEditingClass(null);
+                }}
+                className="text-slate-400 hover:text-slate-600"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+            <form onSubmit={handleUpdateClass} className="space-y-3.5 text-xs">
+              <div>
+                <label className="block font-semibold text-slate-700 mb-1">
+                  জামাত / শ্রেণির নাম (বাংলা) *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={editingClass.nameBn}
+                  onChange={(e) =>
+                    setEditingClass({ ...editingClass, nameBn: e.target.value })
+                  }
+                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">ইংরেজি নাম</label>
+                  <input
+                    type="text"
+                    value={editingClass.nameEn}
+                    onChange={(e) =>
+                      setEditingClass({ ...editingClass, nameEn: e.target.value })
+                    }
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">আরবি নাম</label>
+                  <input
+                    type="text"
+                    value={editingClass.nameAr}
+                    onChange={(e) =>
+                      setEditingClass({ ...editingClass, nameAr: e.target.value })
+                    }
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800 font-arabic"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">ইউনিক কোড *</label>
+                  <input
+                    type="text"
+                    required
+                    value={editingClass.code}
+                    onChange={(e) =>
+                      setEditingClass({ ...editingClass, code: e.target.value.toUpperCase() })
+                    }
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800 uppercase font-mono"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">ক্রম নম্বর (সর্টিং)</label>
+                  <input
+                    type="number"
+                    value={editingClass.sortOrder}
+                    onChange={(e) =>
+                      setEditingClass({ ...editingClass, sortOrder: parseInt(e.target.value, 10) })
+                    }
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">জেন্ডার কাঠামো</label>
+                  <select
+                    value={editingClass.genderType}
+                    onChange={(e) =>
+                      setEditingClass({ ...editingClass, genderType: e.target.value })
+                    }
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800"
+                  >
+                    <option value="COMBINED">COMBINED (যৌথ)</option>
+                    <option value="BOYS">BOYS (শুধুমাত্র ছাত্র)</option>
+                    <option value="GIRLS">GIRLS (শুধুমাত্র ছাত্রী)</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">সক্রিয় অবস্থা</label>
+                  <select
+                    value={editingClass.isActive ? "true" : "false"}
+                    onChange={(e) =>
+                      setEditingClass({ ...editingClass, isActive: e.target.value === "true" })
+                    }
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800"
+                  >
+                    <option value="true">সক্রিয় (Active)</option>
+                    <option value="false">নিষ্ক্রিয় (Inactive)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="pt-3 flex justify-end gap-2 border-t">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowEditClassModal(false);
+                    setEditingClass(null);
+                  }}
+                  className="px-4 py-2 border rounded-lg text-slate-600 hover:bg-slate-50 font-medium"
+                >
+                  বাতিল
+                </button>
+                <button
+                  type="submit"
+                  disabled={submittingEditClass}
+                  className="px-5 py-2 bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 text-white rounded-lg font-bold shadow"
+                >
+                  {submittingEditClass ? "আপডেট হচ্ছে..." : "আপডেট নিশ্চিত করুন"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* EDIT SECTION MODAL */}
+      {showEditSectionModal && editingSection && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
+            <div className="flex items-center justify-between border-b pb-3">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <Edit3 className="w-5 h-5 text-emerald-600" />
+                <span>শাখা সম্পাদনা (Edit Section)</span>
+              </h3>
+              <button
+                onClick={() => {
+                  setShowEditSectionModal(false);
+                  setEditingSection(null);
+                }}
+                className="text-slate-400 hover:text-slate-600"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+            <form onSubmit={handleUpdateSection} className="space-y-3.5 text-xs">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">
+                    শাখার নাম (বাংলা) *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={editingSection.nameBn}
+                    onChange={(e) =>
+                      setEditingSection({ ...editingSection, nameBn: e.target.value })
+                    }
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">ইংরেজি নাম</label>
+                  <input
+                    type="text"
+                    value={editingSection.nameEn}
+                    onChange={(e) =>
+                      setEditingSection({ ...editingSection, nameEn: e.target.value })
+                    }
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">
+                    ধারণক্ষমতা (সর্বোচ্চ)
+                  </label>
+                  <input
+                    type="number"
+                    value={editingSection.maxCapacity}
+                    onChange={(e) =>
+                      setEditingSection({
+                        ...editingSection,
+                        maxCapacity: parseInt(e.target.value, 10),
+                      })
+                    }
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold text-slate-700 mb-1">রুম / কক্ষ নম্বর</label>
+                  <input
+                    type="text"
+                    value={editingSection.roomNo}
+                    onChange={(e) =>
+                      setEditingSection({ ...editingSection, roomNo: e.target.value })
+                    }
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-800"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-3 flex justify-end gap-2 border-t">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowEditSectionModal(false);
+                    setEditingSection(null);
+                  }}
+                  className="px-4 py-2 border rounded-lg text-slate-600 hover:bg-slate-50 font-medium"
+                >
+                  বাতিল
+                </button>
+                <button
+                  type="submit"
+                  disabled={submittingEditSection}
+                  className="px-5 py-2 bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 text-white rounded-lg font-bold shadow"
+                >
+                  {submittingEditSection ? "আপডেট হচ্ছে..." : "আপডেট নিশ্চিত করুন"}
                 </button>
               </div>
             </form>

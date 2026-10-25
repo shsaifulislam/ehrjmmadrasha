@@ -6,8 +6,8 @@ import Footer from "@/components/Footer";
 import { INSTITUTION_INFO } from "@/lib/constants";
 import { prisma } from "@/lib/prisma";
 
-export default async function CopyVerificationPage({ params }: { params: { token: string } }) {
-  const { token } = params;
+export default async function CopyVerificationPage({ params }: { params: Promise<{ token: string }> }) {
+  const { token } = await params;
 
   const copy = await prisma.libraryBookCopy.findUnique({
     where: { qrToken: token },

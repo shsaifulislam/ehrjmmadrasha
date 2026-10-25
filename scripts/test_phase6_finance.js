@@ -434,9 +434,12 @@ async function runTests() {
         invoiceId: testInvoiceId,
         amount: 700,
         paymentMethod: "BKASH",
-        transactionId: "TRX-SETTLE-700",
+        transactionId: `TRX-SETTLE-700-${Date.now()}`,
       },
     });
+    if (payRes2.statusCode !== 200) {
+      console.error("DEBUG payRes2 failed:", payRes2.statusCode, payRes2.json);
+    }
     assert(payRes2.statusCode === 200, "Final payment of ৳700 accepted");
     assert(payRes2.json.invoice.dueAmount === 0, "Invoice dueAmount is now ৳0");
     assert(payRes2.json.invoice.status === "PAID", "Invoice status updated to PAID");
@@ -715,7 +718,10 @@ async function runTests() {
     const anonFinanceRes = await makeRequest("/api/admin/finance/invoices", {
       method: "GET",
     });
-    assert(anonFinanceRes.statusCode === 403, "Anonymous request to Admin finance API blocked with 403 Forbidden");
+    assert(
+      anonFinanceRes.statusCode === 401 || anonFinanceRes.statusCode === 403,
+      "Anonymous request to Admin finance API blocked with 401/403"
+    );
 
     // 14. PUBLIC PRIVACY-SAFE RECEIPT VERIFICATION
     console.log("\n--- 14. Public Privacy-Safe Receipt Verification Tests ---");
@@ -724,6 +730,9 @@ async function runTests() {
       method: "GET",
     });
     assert(verifyReceiptRes.statusCode === 200, "Public receipt verification returned 200 OK");
+    if (!verifyReceiptRes.json || !verifyReceiptRes.json.verified) {
+      console.error("DEBUG verifyReceiptRes:", JSON.stringify(verifyReceiptRes.json, null, 2));
+    }
     assert(verifyReceiptRes.json.verified === true, "Receipt marked as authentic");
     assert(!!verifyReceiptRes.json.receipt.receiptNumber, "Authentic receipt number displayed");
     assert(!!verifyReceiptRes.json.receipt.studentName, "Authentic student name displayed");

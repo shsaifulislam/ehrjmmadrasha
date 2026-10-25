@@ -10,11 +10,11 @@ import { prisma } from "@/lib/prisma";
  * 3. Immutable after creation.
  * 4. Distinct from Student ID and roll number.
  */
-export async function generateApplicationNumber(targetYear?: number): Promise<string> {
+export async function generateApplicationNumber(targetYear?: number, client: any = prisma): Promise<string> {
   const year = targetYear || new Date().getFullYear();
   const prefix = `EHRJ-ADM-${year}-`;
 
-  const latestApp = await prisma.application.findFirst({
+  const latestApp = await client.application.findFirst({
     where: {
       applicationNumber: {
         startsWith: prefix,
@@ -39,6 +39,15 @@ export async function generateApplicationNumber(targetYear?: number): Promise<st
     }
   }
 
-  const paddedSeq = String(nextSequence).padStart(4, "0");
+  const count = await client.application.count({
+    where: {
+      applicationNumber: {
+        startsWith: prefix,
+      },
+    },
+  });
+
+  const finalSequence = Math.max(nextSequence, count + 1);
+  const paddedSeq = String(finalSequence).padStart(4, "0");
   return `${prefix}${paddedSeq}`;
 }

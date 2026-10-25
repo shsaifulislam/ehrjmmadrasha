@@ -1,592 +1,487 @@
 /**
- * EHRJ MADRASHA ERP — PHASE 41
- * Complete Automated Verification & Testing Suite
+ * EHRJ MADRASHA DIGITAL CAMPUS & ERP
+ * PHASE 41 — Institutional Budget Planning, Financial Planning & Budget Control Engine
  * Checkpoint: EHRJ-AI-2026-PHASE41
+ * 
+ * Comprehensive Automated Verification Test Suite
  */
 
 import {
+  getAllPeriods,
   getAllBudgets,
   getBudgetById,
   saveBudget,
-  getAllPeriods,
-  getPeriodById,
-  savePeriod,
   getAllRevisions,
-  getRevisionById,
-  saveRevision,
   getAllProjects,
-  getProjectById,
-  saveProject,
   getAllAlerts,
-  getAlertById,
-  saveAlert,
-  getBudgetDashboardStats,
-  recordBudgetAudit,
+  getAllAuditLogs,
+  createPeriod,
+  lockPeriod,
   createBudget,
   transitionBudgetStatus,
   canTransitionBudget,
   addOrUpdateBudgetLine,
   recalculateBudgetTotals,
   validateFundAllocationRule,
-  updateBudgetLineActuals,
-  getFundBudgetSummaries,
+  calculateFundSummaries,
   generateVarianceReport,
-  scanBudgetForThresholdAlerts,
+  updateBudgetLineActuals,
+  checkBudgetControl,
+  scanBudgetAndGenerateAlerts,
   acknowledgeAlert,
   requestBudgetRevision,
-  updateRevisionStatus,
+  reviewBudgetRevision,
   approveBudgetRevision,
-  reconcileBudgetIntegrations,
+  createProject,
+  syncBudgetWithAuthoritativeSystems,
+  getBudgetForecastProjection,
   ActorContext,
-  Budget,
-  BudgetLine,
-  BudgetPeriod,
-  BudgetFundCode,
+  BudgetRevisionLineDiff,
 } from "../src/lib/budget";
 
-async function runPhase41Tests() {
-  console.log("================================================================================");
-  console.log("       EHRJ MADRASHA ERP — PHASE 41 TEST SUITE");
-  console.log("       Institutional Budget Planning, Financial Planning & Budget Control Engine");
-  console.log("       Checkpoint: EHRJ-AI-2026-PHASE41");
-  console.log("================================================================================\n");
+// Test counters
+let totalTests = 0;
+let passedTests = 0;
+let failedTests = 0;
 
-  let passedTests = 0;
-  let totalTests = 0;
-
-  function assert(condition: boolean, testName: string, detail?: string) {
-    totalTests++;
-    if (condition) {
-      passedTests++;
-      console.log(`  [PASS] Test ${totalTests}: ${testName}`);
-    } else {
-      console.error(`  [FAIL] Test ${totalTests}: ${testName}`);
-      if (detail) console.error(`         Detail: ${detail}`);
-    }
-  }
-
-  const actorAdmin: ActorContext = {
-    actorId: "USR-ADM-001",
-    actorName: "মুফতি মোহাম্মদুল্লাহ (এডমিন)",
-    actorRole: "ADMIN",
-  };
-
-  const actorPrincipal: ActorContext = {
-    actorId: "USR-PRN-001",
-    actorName: "মুহতামিম মাওলানা আব্দুল বাতেন",
-    actorRole: "PRINCIPAL",
-  };
-
-  // -------------------------------------------------------------------------
-  // TEST GROUP 1: BUDGET PERIOD MANAGEMENT & LOCKING
-  // -------------------------------------------------------------------------
-  console.log("--> Testing Budget Period Management & Lock Controls...");
-
-  const testPeriod: BudgetPeriod = {
-    id: "EHRJ-BPR-TEST-2026",
-    periodCode: "FY-2026-2027-TEST",
-    titleBn: "পরীক্ষামূলক অর্থবছর ২০২৬-২০২৭",
-    titleEn: "Test Financial Year 2026-2027",
-    periodType: "FINANCIAL_YEAR",
-    startDate: "2026-07-01",
-    endDate: "2027-06-30",
-    status: "PLANNED",
-    isLocked: false,
-    notes: "টেস্টিংয়ের জন্য প্রস্তুতকৃত আর্থিক মেয়াদ",
-    createdBy: actorAdmin.actorName,
-    createdAt: new Date().toISOString(),
-  };
-
-  savePeriod(testPeriod);
-  const fetchedPeriod = getPeriodById("EHRJ-BPR-TEST-2026");
-  assert(fetchedPeriod !== null, "Budget period can be saved and retrieved by ID");
-  assert(fetchedPeriod?.isLocked === false, "Newly created budget period is unlocked by default");
-  assert(fetchedPeriod?.periodType === "FINANCIAL_YEAR", "Period type is properly retained");
-
-  // Lock and activate the period
-  if (fetchedPeriod) {
-    fetchedPeriod.isLocked = true;
-    fetchedPeriod.lockedAt = new Date().toISOString();
-    fetchedPeriod.status = "ACTIVE";
-    savePeriod(fetchedPeriod);
-  }
-  const lockedPeriod = getPeriodById("EHRJ-BPR-TEST-2026");
-  assert(lockedPeriod?.isLocked === true && lockedPeriod.status === "ACTIVE", "Budget period can be locked and activated");
-
-  // -------------------------------------------------------------------------
-  // TEST GROUP 2: BUDGET LIFECYCLE STATE MACHINE & IMMUTABLE VERSION SNAPSHOTS
-  // -------------------------------------------------------------------------
-  console.log("\n--> Testing Budget Lifecycle State Machine & Snapshotting...");
-
-  const newBudget = createBudget(
-    {
-      titleBn: "হিফজ ও কিতাব বিভাগ বাজেট ২০২৬-২০২৭",
-      titleEn: "Hifz & Kitab Section Budget 2026-2027",
-      periodId: "EHRJ-BPR-TEST-2026",
-      periodNameBn: "পরীক্ষামূলক অর্থবছর ২০২৬-২০২৭",
-      fiscalYear: "2026-2027",
-      startDate: "2026-07-01",
-      endDate: "2027-06-30",
-      notes: "প্রাথমিক খসড়া বাজেট",
-    },
-    actorAdmin
-  );
-
-  assert(newBudget.status === "DRAFT", "New budget starts in DRAFT status");
-  assert(newBudget.currentVersion === 1, "Initial budget version defaults to v1");
-  assert(newBudget.versions.length === 0, "No snapshots exist before formal approval");
-
-  // Invalid transition check: DRAFT cannot skip directly to APPROVED
-  const invalidTransition = canTransitionBudget(newBudget.status, "APPROVED");
-  assert(!invalidTransition, "Direct jump from DRAFT to APPROVED is blocked by state machine");
-
-  // Valid transition sequence: DRAFT -> PREPARATION -> UNDER_REVIEW -> APPROVED
-  const resPrep = transitionBudgetStatus(newBudget.id, "PREPARATION", actorAdmin, "প্রস্তুতি শুরু");
-  assert(resPrep.success && resPrep.budget?.status === "PREPARATION", "Transition DRAFT -> PREPARATION succeeds");
-
-  const resReview = transitionBudgetStatus(newBudget.id, "UNDER_REVIEW", actorAdmin, "মুহতামিম পর্যালোচনার জন্য পেশ");
-  assert(resReview.success && resReview.budget?.status === "UNDER_REVIEW", "Transition PREPARATION -> UNDER_REVIEW succeeds");
-
-  // Approval by Principal
-  const resApprove = transitionBudgetStatus(newBudget.id, "APPROVED", actorPrincipal, "মুহতামিম কর্তৃক অনুমোদিত");
-  assert(resApprove.success && resApprove.budget?.status === "APPROVED", "Transition UNDER_REVIEW -> APPROVED succeeds");
-  assert(resApprove.budget?.versions.length === 1, "Approval creates an immutable v1 version snapshot");
-  assert(resApprove.budget?.versions[0].versionNumber === 1, "Snapshot versionNumber is 1");
-  assert(resApprove.budget?.versions[0].approvedBy === actorPrincipal.actorName, "Snapshot records human approver correctly");
-
-  // Transition APPROVED -> ACTIVE
-  const resActive = transitionBudgetStatus(newBudget.id, "ACTIVE", actorAdmin, "অর্থবছরের শুরুতে বাজেট কার্যকর");
-  assert(resActive.success && resActive.budget?.status === "ACTIVE", "Transition APPROVED -> ACTIVE succeeds");
-
-  // -------------------------------------------------------------------------
-  // TEST GROUP 3: BUDGET LINES & FUND RESTRICTIONS (SHARIAH & INSTITUTIONAL RULES)
-  // -------------------------------------------------------------------------
-  console.log("\n--> Testing Budget Lines & Fund Allocation Restrictions...");
-
-  // Draft budget for testing line mutations
-  const lineTestBudget = createBudget(
-    {
-      titleBn: "ফান্ড যাচাই বাজেট ২০২৬",
-      titleEn: "Fund Validation Budget 2026",
-      periodId: "EHRJ-BPR-TEST-2026",
-      periodNameBn: "পরীক্ষামূলক অর্থবছর ২০২৬-২০২৭",
-      fiscalYear: "2026-2027",
-      startDate: "2026-07-01",
-      endDate: "2027-06-30",
-    },
-    actorAdmin
-  );
-
-  // Add General Income Line
-  const incLine = addOrUpdateBudgetLine(
-    lineTestBudget.id,
-    {
-      fundCode: "GENERAL",
-      fundNameBn: "সাধারণ ফান্ড",
-      categoryType: "INCOME",
-      categoryCode: "TUITION_FEE",
-      categoryNameBn: "মাসিক বেতন ও ভর্তি ফি",
-      departmentNameBn: "শিক্ষা দপ্তর",
-      plannedAmount: 1200000,
-      revisedAmount: 1200000,
-      actualAmount: 0,
-      committedAmount: 0,
-      remainingAmount: 1200000,
-      forecastAmount: 1200000,
-      variance: -1200000,
-      utilizationRate: 0,
-      monthlyAllocations: [],
-    },
-    actorAdmin
-  );
-  assert(incLine.success, "Adding General Income Line succeeds");
-
-  // Add Zakat Expense Line (Must be strictly for eligible welfare)
-  const zakatValid = validateFundAllocationRule("ZAKAT", "STUDENT_WELFARE", "EXPENSE");
-  assert(zakatValid.isValid, "Zakat expense for eligible student welfare is permitted");
-
-  const zakatInvalid = validateFundAllocationRule("ZAKAT", "BUILDING_REPAIR", "EXPENSE");
-  assert(!zakatInvalid.isValid, "Zakat expense for building repair is strictly rejected per Shariah rule");
-
-  const zakatLine = addOrUpdateBudgetLine(
-    lineTestBudget.id,
-    {
-      fundCode: "ZAKAT",
-      fundNameBn: "যাকাত ফান্ড",
-      categoryType: "EXPENSE",
-      categoryCode: "STUDENT_WELFARE",
-      categoryNameBn: "অসহায় ও এতিম ছাত্রদের সহায়তা",
-      departmentNameBn: "সমাজকল্যাণ ও লিল্লাহ দপ্তর",
-      plannedAmount: 400000,
-      revisedAmount: 400000,
-      actualAmount: 0,
-      committedAmount: 0,
-      remainingAmount: 400000,
-      forecastAmount: 400000,
-      variance: 400000,
-      utilizationRate: 0,
-      zakatEligibleOnly: true,
-      monthlyAllocations: [],
-    },
-    actorAdmin
-  );
-  assert(zakatLine.success, "Adding compliant Zakat line to budget succeeds");
-
-  // Add Lillah Boarding Line
-  const lillahLine = addOrUpdateBudgetLine(
-    lineTestBudget.id,
-    {
-      fundCode: "LILLAH",
-      fundNameBn: "লিল্লাহ বোর্ডিং ফান্ড",
-      categoryType: "EXPENSE",
-      categoryCode: "FOOD_GROCERY",
-      categoryNameBn: "লিল্লাহ বোর্ডিং খাদ্য ও রশদ সামগ্রী",
-      departmentNameBn: "লিল্লাহ বোর্ডিং ও মেস",
-      plannedAmount: 600000,
-      revisedAmount: 600000,
-      actualAmount: 0,
-      committedAmount: 0,
-      remainingAmount: 600000,
-      forecastAmount: 600000,
-      variance: 600000,
-      utilizationRate: 0,
-      monthlyAllocations: [],
-    },
-    actorAdmin
-  );
-  assert(lillahLine.success, "Adding Lillah Boarding expense line succeeds");
-
-  // Check budget totals after line additions
-  const currentBudgetState = getBudgetById(lineTestBudget.id);
-  assert(
-    currentBudgetState?.totalIncomePlanned === 1200000 &&
-    currentBudgetState?.totalExpensePlanned === 1000000 &&
-    currentBudgetState?.netProjectedSurplus === 200000,
-    "Budget aggregations correctly sum planned income, expense, and surplus"
-  );
-
-  // -------------------------------------------------------------------------
-  // TEST GROUP 4: CALCULATION ENGINE (ACTUALS, COMMITTED, REMAINING, VARIANCE)
-  // -------------------------------------------------------------------------
-  console.log("\n--> Testing Calculation Engine: Variance, Remaining, and Utilization...");
-
-  // Update line actuals
-  const zakatLineId = zakatLine.line?.id;
-  if (zakatLineId) {
-    const updateRes = updateBudgetLineActuals(lineTestBudget.id, zakatLineId, {
-      actualAmount: 250000,
-      committedAmount: 50000,
-    });
-    assert(updateRes.success, "Line actuals and commitments updated successfully");
-    // Remaining = 400,000 - (250,000 + 50,000) = 100,000
-    assert(updateRes.line?.remainingAmount === 100000, "Remaining calculation: 400,000 - 300,000 = ৳100,000");
-    // Utilization = (300,000 / 400,000) * 100 = 75%
-    assert(updateRes.line?.utilizationRate === 75, "Utilization rate calculation: 300,000 / 400,000 = 75%");
-  }
-
-  // Generate variance report
-  const varianceItems = generateVarianceReport(lineTestBudget.id);
-  assert(varianceItems.length >= 3, "Variance report generates items for all budget lines");
-  const zakatVariance = varianceItems.find((v) => v.lineId === zakatLineId);
-  assert(zakatVariance?.status === "FAVORABLE", "Expense under allocation is classified as FAVORABLE");
-
-  // Fund-wise summaries
-  const fundSummaries = getFundBudgetSummaries(lineTestBudget.id);
-  assert(fundSummaries.length > 0, "Fund summaries generated successfully");
-  const generalSummary = fundSummaries.find((f) => f.fundCode === "GENERAL");
-  assert(generalSummary?.totalIncomePlanned === 1200000, "General fund summary reflects correct planned income");
-
-  // -------------------------------------------------------------------------
-  // TEST GROUP 5: BUDGET CONTROL ENGINE & SOFT-CONTROL THRESHOLD ALERTS
-  // -------------------------------------------------------------------------
-  console.log("\n--> Testing Control Engine Threshold Scans & Alert Triggers...");
-
-  // Create an active budget with varying utilization rates
-  const controlBudget = createBudget(
-    {
-      titleBn: "কন্ট্রোল টেস্ট বাজেট",
-      titleEn: "Control Test Budget",
-      periodId: "EHRJ-BPR-TEST-2026",
-      periodNameBn: "পরীক্ষামূলক অর্থবছর ২০২৬-২০২৭",
-      fiscalYear: "2026-2027",
-      startDate: "2026-07-01",
-      endDate: "2027-06-30",
-    },
-    actorAdmin
-  );
-
-  // Line at 82% utilization -> WARNING
-  const lineWarn: BudgetLine = {
-    id: "LN-WARN-82",
-    budgetId: controlBudget.id,
-    fundCode: "GENERAL",
-    fundNameBn: "সাধারণ ফান্ড",
-    categoryType: "EXPENSE",
-    categoryCode: "UTILITIES",
-    categoryNameBn: "বিদ্যুৎ ও ইউটিলিটি বিল",
-    departmentNameBn: "প্রশাসনিক",
-    plannedAmount: 100000,
-    revisedAmount: 100000,
-    actualAmount: 82000,
-    committedAmount: 0,
-    remainingAmount: 18000,
-    forecastAmount: 100000,
-    variance: 18000,
-    utilizationRate: 82,
-    monthlyAllocations: [],
-  };
-
-  // Line at 93% utilization -> CRITICAL
-  const lineCrit: BudgetLine = {
-    id: "LN-CRIT-93",
-    budgetId: controlBudget.id,
-    fundCode: "GENERAL",
-    fundNameBn: "সাধারণ ফান্ড",
-    categoryType: "EXPENSE",
-    categoryCode: "INTERNET",
-    categoryNameBn: "ইন্টারনেট বিল",
-    departmentNameBn: "প্রশাসনিক",
-    plannedAmount: 100000,
-    revisedAmount: 100000,
-    actualAmount: 93000,
-    committedAmount: 0,
-    remainingAmount: 7000,
-    forecastAmount: 100000,
-    variance: 7000,
-    utilizationRate: 93,
-    monthlyAllocations: [],
-  };
-
-  // Line at 105% utilization -> OVERRUN
-  const lineOver: BudgetLine = {
-    id: "LN-OVR-105",
-    budgetId: controlBudget.id,
-    fundCode: "GENERAL",
-    fundNameBn: "সাধারণ ফান্ড",
-    categoryType: "EXPENSE",
-    categoryCode: "MEDICAL",
-    categoryNameBn: "জরুরি চিকিৎসা সেবা",
-    departmentNameBn: "স্বাস্থ্য ও কল্যাণ",
-    plannedAmount: 100000,
-    revisedAmount: 100000,
-    actualAmount: 105000,
-    committedAmount: 0,
-    remainingAmount: -5000,
-    forecastAmount: 105000,
-    variance: -5000,
-    utilizationRate: 105,
-    monthlyAllocations: [],
-  };
-
-  controlBudget.lines = [lineWarn, lineCrit, lineOver];
-  controlBudget.status = "ACTIVE";
-  saveBudget(controlBudget);
-
-  const scannedAlerts = scanBudgetForThresholdAlerts(controlBudget.id);
-  assert(scannedAlerts.length >= 3, "Threshold scan detects alerts for warning, critical, and overrun lines");
-
-  const hasWarning = scannedAlerts.some((a) => a.alertLevel === "WARNING" && a.budgetLineId === "LN-WARN-82");
-  const hasCritical = scannedAlerts.some((a) => a.alertLevel === "CRITICAL" && a.budgetLineId === "LN-CRIT-93");
-  const hasOverrun = scannedAlerts.some((a) => a.alertLevel === "OVERRUN" && a.budgetLineId === "LN-OVR-105");
-
-  assert(hasWarning, "Alert Level WARNING generated for line >= 80%");
-  assert(hasCritical, "Alert Level CRITICAL generated for line >= 90%");
-  assert(hasOverrun, "Alert Level OVERRUN generated for line >= 100%");
-
-  // Acknowledge alert workflow
-  if (scannedAlerts.length > 0) {
-    const ackRes = acknowledgeAlert(scannedAlerts[0].id, actorPrincipal);
-    assert(ackRes.success && ackRes.alert?.isAcknowledged === true, "Human authority can acknowledge budget control alert");
-  }
-
-  // -------------------------------------------------------------------------
-  // TEST GROUP 6: BUDGET REVISION WORKFLOW & IMMUTABLE VERSION PROMOTION
-  // -------------------------------------------------------------------------
-  console.log("\n--> Testing Budget Revision Workflow & Version Promotion (v1 -> v2)...");
-
-  // Create an approved active budget
-  const revBudget = createBudget(
-    {
-      titleBn: "রিভিশন টেস্ট বাজেট",
-      titleEn: "Revision Test Budget",
-      periodId: "EHRJ-BPR-TEST-2026",
-      periodNameBn: "পরীক্ষামূলক অর্থবছর ২০২৬-২০২৭",
-      fiscalYear: "2026-2027",
-      startDate: "2026-07-01",
-      endDate: "2027-06-30",
-    },
-    actorAdmin
-  );
-  revBudget.lines = [
-    {
-      id: "LN-REV-01",
-      budgetId: revBudget.id,
-      fundCode: "GENERAL",
-      fundNameBn: "সাধারণ ফান্ড",
-      categoryType: "EXPENSE",
-      categoryCode: "UTILITIES",
-      categoryNameBn: "বিদ্যুৎ বিল",
-      departmentNameBn: "প্রশাসনিক",
-      plannedAmount: 200000,
-      revisedAmount: 200000,
-      actualAmount: 180000,
-      committedAmount: 0,
-      remainingAmount: 20000,
-      forecastAmount: 200000,
-      variance: 20000,
-      utilizationRate: 90,
-      monthlyAllocations: [],
-    },
-  ];
-  revBudget.status = "ACTIVE";
-  revBudget.currentVersion = 1;
-  saveBudget(revBudget);
-
-  // Submit Revision Request to increase allocation from 200,000 to 250,000
-  const revReq = requestBudgetRevision(
-    revBudget.id,
-    {
-      titleBn: "গ্রীষ্মকালীন বিদ্যুৎ বিল অতিরিক্ত বরাদ্দ প্রস্তাব",
-      reasonBn: "গ্রীষ্মকালে লোডশেডিংয়ের কারণে জেনারেটর ডিজেল ও বিদ্যুৎ খরচ বৃদ্ধি",
-      lineDiffs: [
-        {
-          budgetLineId: "LN-REV-01",
-          categoryNameBn: "বিদ্যুৎ বিল",
-          fundCode: "GENERAL",
-          previousAmount: 200000,
-          proposedAmount: 250000,
-          amountDifference: 50000,
-          justificationBn: "ডিজেল খরচ ৳৫০,০০০ বৃদ্ধি আবশ্যক",
-        },
-      ],
-    },
-    actorAdmin
-  );
-  assert(revReq.success && revReq.revision?.status === "SUBMITTED", "Budget revision request submitted successfully");
-
-  // Move Revision to UNDER_REVIEW
-  if (revReq.revision) {
-    const revReview = updateRevisionStatus(
-      revReq.revision.id,
-      "UNDER_REVIEW",
-      actorPrincipal,
-      "বাজেট কমিটির সভায় পর্যালোচনার জন্য গৃহীত"
-    );
-    assert(revReview.success && revReview.revision?.status === "UNDER_REVIEW", "Revision moves to UNDER_REVIEW");
-
-    // Human Approval by Principal
-    const revApprove = approveBudgetRevision(
-      revReq.revision.id,
-      actorPrincipal,
-      "কমিটি কর্তৃক সর্বসম্মত অনুমোদন"
-    );
-    assert(revApprove.success, "Principal approval of budget revision succeeds");
-    assert(revApprove.revision?.status === "APPROVED", "Revision status marked as APPROVED");
-
-    // Check that budget was updated to v2
-    const updatedRevBudget = getBudgetById(revBudget.id);
-    assert(updatedRevBudget?.currentVersion === 2, "Budget currentVersion promoted from v1 to v2");
-    assert(updatedRevBudget?.status === "REVISED", "Budget lifecycle status updated to REVISED");
-    assert(updatedRevBudget?.versions.length === 1, "Snapshot of v2 created and recorded in version history");
-    const updatedLine = updatedRevBudget?.lines.find((l) => l.id === "LN-REV-01");
-    assert(updatedLine?.revisedAmount === 250000, "Budget line revisedAmount updated to ৳250,000");
-  }
-
-  // -------------------------------------------------------------------------
-  // TEST GROUP 7: CAPITAL PROJECTS (CAPEX BUDGET TRACKING)
-  // -------------------------------------------------------------------------
-  console.log("\n--> Testing Development & Capital Project Budgeting (CapEx)...");
-
-  const newProject = {
-    id: "EHRJ-PRJ-2026-TEST",
-    projectCode: "PRJ-CONST-2026-001",
-    nameBn: "৩য় তলা হিফজখানা নতুন শাখা নির্মাণ",
-    nameEn: "3rd Floor Hifz Section Construction",
-    fundCode: "CONSTRUCTION" as BudgetFundCode,
-    status: "ACTIVE" as const,
-    approvedBudget: 1500000,
-    allocatedBudget: 1500000,
-    actualExpenditure: 600000,
-    committedExpenditure: 400000,
-    remainingBudget: 500000,
-    variance: 500000,
-    utilizationRate: 66.7,
-    startDate: "2026-08-01",
-    endDate: "2027-02-28",
-    projectManagerName: "ইঞ্জিনিয়ার মুস্তাফিজুর রহমান",
-    contractorVendorName: "মেসার্স আল-মদিনা বিল্ডার্স",
-    descriptionBn: "হিফজ ছাত্রদের বর্ধিত আসন সংখ্যার জন্য নতুন ফ্লোর নির্মাণ",
-    createdBy: actorAdmin.actorName,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  };
-
-  saveProject(newProject);
-  const fetchedProj = getProjectById("EHRJ-PRJ-2026-TEST");
-  assert(fetchedProj !== null, "CapEx Project saved and retrieved successfully");
-  assert(fetchedProj?.fundCode === "CONSTRUCTION", "CapEx Project strictly tagged to CONSTRUCTION fund");
-  assert(fetchedProj?.approvedBudget === 1500000, "Approved CapEx budget is ৳1,500,000");
-  assert(fetchedProj?.remainingBudget === 500000, "Remaining CapEx budget is ৳500,000");
-
-  // -------------------------------------------------------------------------
-  // TEST GROUP 8: INTEGRATION BRIDGE & SOURCE-OF-TRUTH INVARIANTS
-  // -------------------------------------------------------------------------
-  console.log("\n--> Testing Integration Bridge Non-Duplication Invariants...");
-
-  const bridgeResult = await reconcileBudgetIntegrations(revBudget.id);
-  assert(bridgeResult.success === true, "Integration bridge executes reconciliation safely");
-  assert(bridgeResult.reconciliationReport.actualsConnected === true, "Actuals reconciliation connected without duplicating Phase 6 cashbook");
-  assert(bridgeResult.reconciliationReport.commitmentsConnected === true, "Commitments reconciliation connected without duplicating Phase 12 POs");
-  assert(bridgeResult.reconciliationReport.payrollConnected === true, "Payroll reconciliation connected without duplicating Phase 13 payroll records");
-
-  // -------------------------------------------------------------------------
-  // TEST GROUP 9: SECURITY, STRICT NO-SMS, AND DASHBOARD AGGREGATION
-  // -------------------------------------------------------------------------
-  console.log("\n--> Testing Dashboard Stats, Audit Log, and Security Invariants...");
-
-  const stats = getBudgetDashboardStats();
-  assert(typeof stats.totalActiveBudgets === "number", "Dashboard stats returns totalActiveBudgets count");
-  assert(typeof stats.activeProjectsCount === "number", "Dashboard stats returns activeProjectsCount");
-  assert(typeof stats.totalPlannedExpense === "number", "Dashboard stats returns totalPlannedExpense");
-  const fundBreakdown = getFundBudgetSummaries(revBudget.id);
-  assert(Array.isArray(fundBreakdown) && fundBreakdown.length > 0, "Fund-wise breakdown summaries generated successfully");
-
-  // Audit log check
-  recordBudgetAudit({
-    budgetId: revBudget.id,
-    action: "STATUS_CHANGE",
-    actorId: actorAdmin.actorId,
-    actorName: actorAdmin.actorName,
-    actorRole: actorAdmin.actorRole,
-    notes: "সিস্টেম টেস্ট অডিট রেকর্ড",
-  });
-  assert(true, "Audit log records institutional actions with actor attribution");
-
-  // Check no SMS invariant in code
-  const fs = await import("fs");
-  const bridgeCode = fs.readFileSync("src/lib/budget/budgetIntegrationBridge.ts", "utf-8");
-  const controlCode = fs.readFileSync("src/lib/budget/budgetControlEngine.ts", "utf-8");
-  const hasSmsGateway = bridgeCode.includes("smsGateway") || controlCode.includes("smsGateway");
-  assert(!hasSmsGateway, "STRICT NO-SMS Invariant verified: Budget engine does not import or invoke SMS gateways");
-
-  // -------------------------------------------------------------------------
-  // SUMMARY
-  // -------------------------------------------------------------------------
-  console.log("\n================================================================================");
-  console.log(`  PHASE 41 VERIFICATION COMPLETE: ${passedTests} / ${totalTests} TESTS PASSED`);
-  if (passedTests === totalTests) {
-    console.log("  >>> ALL CHECKS PASSED — READY FOR CHECKPOINT EHRJ-AI-2026-PHASE41 <<<");
+function assert(condition: boolean, testName: string, detail?: any) {
+  totalTests++;
+  if (condition) {
+    passedTests++;
+    console.log(`  ✅ [PASS] ${testName}`);
   } else {
-    console.error("  >>> SOME CHECKS FAILED — REVIEW OUTPUT ABOVE <<<");
-  }
-  console.log("================================================================================\n");
-
-  if (passedTests !== totalTests) {
-    process.exit(1);
+    failedTests++;
+    console.error(`  ❌ [FAIL] ${testName}`);
+    if (detail !== undefined) {
+      console.error(`     Detail:`, detail);
+    }
   }
 }
 
-runPhase41Tests().catch((err) => {
-  console.error("Test execution failed with fatal error:", err);
-  process.exit(1);
-});
+async function runPhase41Tests() {
+  console.log("==================================================================");
+  console.log("  PHASE 41 VERIFICATION: INSTITUTIONAL BUDGET PLANNING ENGINE   ");
+  console.log("  Checkpoint: EHRJ-AI-2026-PHASE41                               ");
+  console.log("==================================================================\n");
+
+  const testActor: ActorContext = {
+    actorId: "usr-admin-001",
+    actorName: "মুফতি মুহাম্মদ সাইফুল্লাহ (অধ্যক্ষ)",
+    actorRole: "ADMIN",
+  };
+
+  const accountantActor: ActorContext = {
+    actorId: "usr-acc-002",
+    actorName: "মাওলানা আব্দুল বাতেন (হিসাবরক্ষক)",
+    actorRole: "ACCOUNTANT",
+  };
+
+  try {
+    // -------------------------------------------------------------
+    // Test Group 1: Store & Seeding Integrity
+    // -------------------------------------------------------------
+    console.log("--- GROUP 1: Store & Seeding Integrity ---");
+    const periods = getAllPeriods();
+    assert(periods.length >= 1, "Pre-seeded budget periods exist in JSON store", `Found: ${periods.length}`);
+
+    const budgets = getAllBudgets();
+    assert(budgets.length >= 1, "Pre-seeded institutional budgets exist in JSON store", `Found: ${budgets.length}`);
+
+    const seededBudget = budgets.find((b) => b.id === "EHRJ-BUD-2026-0001") || budgets[0];
+    assert(Boolean(seededBudget.id && seededBudget.budgetCode), "Seeded budget has institutional code", seededBudget.budgetCode);
+    assert(seededBudget.lines.length >= 4, "Seeded budget contains comprehensive budget lines across funds", seededBudget.lines.length);
+
+    const projects = getAllProjects();
+    assert(projects.length >= 1, "Pre-seeded capital projects exist in store", `Found: ${projects.length}`);
+
+    const alerts = getAllAlerts();
+    assert(Array.isArray(alerts), "Pre-seeded alerts store exists and is an array");
+
+    const auditLogs = getAllAuditLogs();
+    assert(Array.isArray(auditLogs) && auditLogs.length >= 1, "Audit log store is active with institutional logs");
+
+    // -------------------------------------------------------------
+    // Test Group 2: Budget Period Engine & Invariants
+    // -------------------------------------------------------------
+    console.log("\n--- GROUP 2: Budget Period Engine & Invariants ---");
+    const uniqueYear = `FY${Date.now().toString().slice(-4)}`;
+    const newPeriod = createPeriod(
+      {
+        fiscalYear: uniqueYear,
+        nameBn: `অর্থবছর ${uniqueYear} (পরীক্ষামূলক)`,
+        nameEn: `Fiscal Year ${uniqueYear} (Test)`,
+        startDate: "2027-01-01",
+        endDate: "2027-12-31",
+      },
+      testActor
+    );
+    assert(Boolean(newPeriod.id && newPeriod.status === "PLANNED"), "New budget period created in PLANNED status", newPeriod.id);
+
+    // Period locking controls
+    const lockedPeriod = lockPeriod(newPeriod.id, testActor, "অডিট প্রস্তুতের জন্য মেয়াদ লক করা হয়েছে");
+    assert(Boolean(lockedPeriod && lockedPeriod.status === "LOCKED" && lockedPeriod.isLocked), "Budget period can be locked by authorized authority");
+
+    // -------------------------------------------------------------
+    // Test Group 3: Budget Lifecycle & State Transitions
+    // -------------------------------------------------------------
+    console.log("\n--- GROUP 3: Budget Lifecycle & State Transitions ---");
+    const testBudget = createBudget(
+      {
+        titleBn: "প্রাতিষ্ঠানিক বার্ষিক বাজেট ২০২৭-২৮",
+        titleEn: "Annual Institutional Budget 2027-28",
+        periodId: newPeriod.id,
+        periodNameBn: newPeriod.nameBn,
+        fiscalYear: uniqueYear,
+        startDate: "2027-01-01",
+        endDate: "2027-12-31",
+        notes: "টেস্টিং লাইফসাইকেল ট্রানজিশন",
+      },
+      testActor
+    );
+    assert(testBudget.status === "DRAFT", "Budget created in DRAFT status", testBudget.status);
+    assert(testBudget.currentVersion === 1, "Initial budget version initialized to 1");
+
+    // Valid transitions
+    assert(canTransitionBudget("DRAFT", "PREPARATION"), "DRAFT can transition to PREPARATION");
+    assert(!canTransitionBudget("DRAFT", "APPROVED"), "DRAFT cannot skip directly to APPROVED");
+    assert(!canTransitionBudget("DRAFT", "ACTIVE"), "DRAFT cannot skip directly to ACTIVE");
+
+    const prepResult = transitionBudgetStatus(testBudget.id, "PREPARATION", testActor, "বাজেট খসড়া প্রণয়ন শুরু");
+    assert(prepResult.success && prepResult.budget?.status === "PREPARATION", "Transition DRAFT -> PREPARATION succeeds");
+
+    const reviewResult = transitionBudgetStatus(testBudget.id, "UNDER_REVIEW", testActor, "গভর্নিং বডি পর্যালোচনায় পেশ");
+    assert(reviewResult.success && reviewResult.budget?.status === "UNDER_REVIEW", "Transition PREPARATION -> UNDER_REVIEW succeeds");
+
+    // Human Approval & Snapshot Creation
+    const approveResult = transitionBudgetStatus(testBudget.id, "APPROVED", testActor, "গভর্নিং বডি কর্তৃক সর্বসম্মতিক্রমে অনুমোদিত");
+    assert(approveResult.success && approveResult.budget?.status === "APPROVED", "Transition UNDER_REVIEW -> APPROVED succeeds");
+    assert(approveResult.budget?.approvedBy === testActor.actorName, "Budget records approving authority");
+    assert(approveResult.budget?.versions.length === 1, "Approving creates Version 1 immutable snapshot", approveResult.budget?.versions.length);
+    assert(approveResult.budget?.versions[0].versionNumber === 1, "Snapshot has versionNumber 1");
+
+    // Activate
+    const activeResult = transitionBudgetStatus(testBudget.id, "ACTIVE", testActor, "বাজেট কার্যকর ঘোষণা");
+    assert(activeResult.success && activeResult.budget?.status === "ACTIVE", "Transition APPROVED -> ACTIVE succeeds");
+
+    // Block invalid backwards jump
+    const invalidJump = transitionBudgetStatus(testBudget.id, "DRAFT", testActor, "অবৈধ রূপান্তর");
+    assert(!invalidJump.success, "Direct transition from ACTIVE back to DRAFT is strictly blocked");
+
+    // -------------------------------------------------------------
+    // Test Group 4: Budget Lines & Fund Allocation Restrictions
+    // -------------------------------------------------------------
+    console.log("\n--- GROUP 4: Budget Lines & Fund Allocation Restrictions ---");
+    // Create draft budget for testing line additions
+    const draftBudget = createBudget(
+      {
+        titleBn: "খাতভিত্তিক যাচাই বাজেট",
+        titleEn: "Fund Restrictions Test Budget",
+        periodId: newPeriod.id,
+        periodNameBn: newPeriod.nameBn,
+        fiscalYear: uniqueYear,
+        startDate: "2027-01-01",
+        endDate: "2027-12-31",
+      },
+      testActor
+    );
+
+    // Add Income Line
+    const incomeLineRes = addOrUpdateBudgetLine(
+      draftBudget.id,
+      {
+        categoryCode: "DONATION_GENERAL",
+        categoryNameBn: "সাধারণ দান ও সদকা",
+        fundCode: "GENERAL",
+        categoryType: "INCOME",
+        plannedAmount: 1200000,
+        notes: "মাসিক সাধারণ দান সংগ্রহ",
+      },
+      testActor
+    );
+    assert(incomeLineRes.success && Boolean(incomeLineRes.line?.id), "Income line added to DRAFT budget successfully");
+
+    // Add Expense Line
+    const expenseLineRes = addOrUpdateBudgetLine(
+      draftBudget.id,
+      {
+        categoryCode: "SALARY_TEACHERS",
+        categoryNameBn: "শিক্ষক ও স্টাফ বেতন",
+        fundCode: "GENERAL",
+        categoryType: "EXPENSE",
+        plannedAmount: 800000,
+        notes: "মাসিক বেতন স্কেল",
+      },
+      testActor
+    );
+    assert(expenseLineRes.success && Boolean(expenseLineRes.line?.id), "Expense line added to DRAFT budget successfully");
+
+    // Shariah Invariant 1: Zakat Expenses
+    const zakatValid = validateFundAllocationRule("ZAKAT", "ZAKAT_WELFARE_ORPHANS", "EXPENSE");
+    assert(zakatValid.isValid, "Zakat expense for orphan/student welfare passes Shariah rule validation");
+
+    const zakatInvalid = validateFundAllocationRule("ZAKAT", "STAFF_OFFICE_AC", "EXPENSE");
+    assert(!zakatValid.ruleNoticeBn && !zakatInvalid.isValid, "Zakat expense for office/admin is strictly rejected by Shariah rule");
+    assert(Boolean(zakatInvalid.ruleNoticeBn?.includes("শরীয়াহ লঙ্ঘন সতর্কতা")), "Zakat rejection notice includes explicit Shariah warning");
+
+    // Shariah Invariant 2: Lillah Expenses
+    const lillahValid = validateFundAllocationRule("LILLAH", "FOOD_RICE_AND_OIL", "EXPENSE");
+    assert(lillahValid.isValid, "Lillah expense for kitchen food & grocery passes validation");
+
+    const lillahInvalid = validateFundAllocationRule("LILLAH", "BUILDING_BRICKS_CEMENT", "EXPENSE");
+    assert(!lillahInvalid.isValid, "Lillah expense for construction materials is strictly rejected");
+
+    // Add valid lines to draft budget
+    addOrUpdateBudgetLine(
+      draftBudget.id,
+      {
+        categoryCode: "ZAKAT_WELFARE_CLOTHING",
+        categoryNameBn: "দরিদ্র ছাত্রদের পোশাক ও কিতাব",
+        fundCode: "ZAKAT",
+        categoryType: "EXPENSE",
+        plannedAmount: 150000,
+      },
+      testActor
+    );
+
+    addOrUpdateBudgetLine(
+      draftBudget.id,
+      {
+        categoryCode: "FOOD_BOARDING_MEALS",
+        categoryNameBn: "লিল্লাহ বোর্ডিং আহার্য ও পুষ্টি",
+        fundCode: "LILLAH",
+        categoryType: "EXPENSE",
+        plannedAmount: 250000,
+      },
+      testActor
+    );
+
+    // Verify budget totals updated
+    const updatedDraft = getBudgetById(draftBudget.id)!;
+    assert(updatedDraft.totalIncomePlanned === 1200000, "Total planned income calculated accurately (1,200,000 BDT)", updatedDraft.totalIncomePlanned);
+    assert(updatedDraft.totalExpensePlanned === 1200000, "Total planned expense calculated accurately (1,200,000 BDT)", updatedDraft.totalExpensePlanned);
+    assert(updatedDraft.netProjectedSurplus === 0, "Balanced budget net projected surplus equals 0 BDT");
+
+    // -------------------------------------------------------------
+    // Test Group 5: Calculations, Variance & Utilization
+    // -------------------------------------------------------------
+    console.log("\n--- GROUP 5: Calculations, Variance & Utilization ---");
+    // Update actuals and commitments on a line
+    const targetLineId = updatedDraft.lines[1].id; // Teacher salary
+    const updateActualsRes = updateBudgetLineActuals(draftBudget.id, targetLineId, 500000, 100000);
+    assert(updateActualsRes.success, "Budget line actuals and commitments updated");
+
+    const updatedLine = updateActualsRes.line!;
+    assert(updatedLine.actualAmount === 500000, "Line actual amount recorded (500,000 BDT)");
+    assert(updatedLine.committedAmount === 100000, "Line committed amount recorded (100,000 BDT)");
+    assert(updatedLine.remainingAmount === 200000, "Line remaining amount accurately calculated: 800,000 - 600,000 = 200,000 BDT", updatedLine.remainingAmount);
+    assert(updatedLine.variance === 200000, "Expense variance is positive (under budget favorable): 200,000 BDT", updatedLine.variance);
+    assert(updatedLine.utilizationRate === 75, "Line utilization rate correctly computed: (600,000 / 800,000) * 100 = 75.0%", updatedLine.utilizationRate);
+
+    // Fund summaries
+    const fundSummaries = calculateFundSummaries(draftBudget.id);
+    assert(fundSummaries.length >= 3, "Fund summaries generated for General, Zakat, and Lillah funds");
+    const genFund = fundSummaries.find((f) => f.fundCode === "GENERAL");
+    assert(Boolean(genFund && genFund.totalExpensePlanned === 800000), "General fund summary reflects allocated budget correctly");
+
+    // Variance report
+    const varianceReport = generateVarianceReport(draftBudget.id);
+    assert(varianceReport.length === updatedDraft.lines.length, "Variance report itemizes all budget lines");
+    const salaryReport = varianceReport.find((v) => v.lineId === targetLineId);
+    assert(salaryReport?.status === "FAVORABLE" || salaryReport?.status === "ON_TRACK", "75% utilization categorized as ON_TRACK / FAVORABLE");
+
+    // -------------------------------------------------------------
+    // Test Group 6: Budget Control Early Warning & Overrun Engine
+    // -------------------------------------------------------------
+    console.log("\n--- GROUP 6: Budget Control Early Warning & Overrun Engine ---");
+    // Test checkBudgetControl
+    // Current on targetLine: 600,000 / 800,000 (75%)
+    // Proposed 30,000 -> Total 630,000 / 800,000 = 78.75% -> Below warning
+    const normalCheck = checkBudgetControl(draftBudget.id, targetLineId, 30000);
+    assert(!normalCheck.hasAlert && normalCheck.alertLevel === "INFO", "Safe expense under 80% produces no alert (INFO)");
+
+    // Proposed 50,000 -> Total 650,000 / 800,000 = 81.25% -> WARNING (>= 80%)
+    const warningCheck = checkBudgetControl(draftBudget.id, targetLineId, 50000);
+    assert(warningCheck.hasAlert && warningCheck.alertLevel === "WARNING", "Expense reaching 80% triggers WARNING alert", warningCheck.alertLevel);
+    assert(warningCheck.allowTransaction === true, "Soft control allows transaction with warning");
+
+    // Proposed 130,000 -> Total 730,000 / 800,000 = 91.25% -> CRITICAL (>= 90%)
+    const criticalCheck = checkBudgetControl(draftBudget.id, targetLineId, 130000);
+    assert(criticalCheck.hasAlert && criticalCheck.alertLevel === "CRITICAL", "Expense reaching 90% triggers CRITICAL alert", criticalCheck.alertLevel);
+
+    // Proposed 250,000 -> Total 850,000 / 800,000 = 106.25% -> OVERRUN (> 100%)
+    const overrunCheck = checkBudgetControl(draftBudget.id, targetLineId, 250000);
+    assert(overrunCheck.hasAlert && overrunCheck.alertLevel === "OVERRUN", "Expense exceeding 100% triggers OVERRUN alert", overrunCheck.alertLevel);
+    assert(overrunCheck.overrunAmount === 50000, "Calculates exact overrun amount (50,000 BDT)");
+
+    // Hard enforcement toggle test
+    const hardBudget = getBudgetById(draftBudget.id)!;
+    hardBudget.hardEnforcementEnabled = true;
+    saveBudget(hardBudget);
+    const blockedCheck = checkBudgetControl(draftBudget.id, targetLineId, 250000);
+    assert(blockedCheck.allowTransaction === false, "Hard enforcement blocks overrun transactions when configured");
+
+    // Restore soft control
+    hardBudget.hardEnforcementEnabled = false;
+    saveBudget(hardBudget);
+
+    // Alert generation scan
+    // Set actual amount to trigger alert in store
+    updateBudgetLineActuals(draftBudget.id, targetLineId, 650000, 100000); // 750,000 / 800,000 = 93.75%
+    const scannedAlerts = scanBudgetAndGenerateAlerts(draftBudget.id);
+    assert(scannedAlerts.length >= 1, "Budget scan automatically detects threshold breach and generates control alert");
+    const activeAlert = scannedAlerts[0];
+    assert(activeAlert.alertLevel === "CRITICAL", "Scan accurately classifies 93.75% utilization as CRITICAL");
+
+    // Acknowledge alert workflow
+    const ackResult = acknowledgeAlert(activeAlert.id, testActor, "রমজান ও ঈদুল ফিতরের বিশেষ বোনাস সমন্বয়ের জন্য বাজেট রিভিশন প্রক্রিয়াধীন");
+    assert(ackResult.success && ackResult.alert?.status === "ACKNOWLEDGED", "Human authority acknowledges alert with audit justification");
+
+    // -------------------------------------------------------------
+    // Test Group 7: Budget Revision Workflow & Version Promotion
+    // -------------------------------------------------------------
+    console.log("\n--- GROUP 7: Budget Revision Workflow & Version Promotion ---");
+    // Transition draftBudget to APPROVED and ACTIVE
+    transitionBudgetStatus(draftBudget.id, "PREPARATION", testActor);
+    transitionBudgetStatus(draftBudget.id, "UNDER_REVIEW", testActor);
+    transitionBudgetStatus(draftBudget.id, "APPROVED", testActor);
+    transitionBudgetStatus(draftBudget.id, "ACTIVE", testActor);
+
+    const approvedState = getBudgetById(draftBudget.id)!;
+    assert(approvedState.status === "ACTIVE", "Test budget is now ACTIVE");
+    assert(approvedState.currentVersion === 1, "Active budget currentVersion is v1");
+    assert(approvedState.versions.length === 1, "Active budget has v1 immutable snapshot");
+
+    // Line modification must be rejected directly in ACTIVE status
+    const directEdit = addOrUpdateBudgetLine(
+      draftBudget.id,
+      {
+        id: targetLineId,
+        categoryCode: "SALARY_TEACHERS",
+        categoryNameBn: "শিক্ষক ও স্টাফ বেতন",
+        fundCode: "GENERAL",
+        categoryType: "EXPENSE",
+        plannedAmount: 1000000,
+      },
+      testActor
+    );
+    assert(!directEdit.success, "Direct line mutation in ACTIVE status is blocked; requires revision workflow");
+
+    // Create Revision Request
+    const diffs: BudgetRevisionLineDiff[] = [
+      {
+        budgetLineId: targetLineId,
+        categoryNameBn: "শিক্ষক ও স্টাফ বেতন",
+        fundCode: "GENERAL",
+        previousAmount: 800000,
+        proposedAmount: 950000,
+        amountDifference: 150000,
+        justificationBn: "শিক্ষক বৃদ্ধি ও সরকারি মহার্ঘ ভাতা সমন্বয়",
+      },
+    ];
+
+    const revRequest = requestBudgetRevision(
+      draftBudget.id,
+      {
+        titleBn: "শিক্ষক বেতন খাতে অতিরিক্ত বরাদ্দ প্রস্তাবনা",
+        reasonBn: "নতুন শিক্ষক যোগদান ও শিক্ষাবর্ষের মাঝামাঝি ভাতা বৃদ্ধি",
+        lineDiffs: diffs,
+      },
+      accountantActor
+    );
+    assert(revRequest.success && Boolean(revRequest.revision?.id), "Budget revision request submitted successfully");
+    const revision = revRequest.revision!;
+    assert(revision.status === "SUBMITTED", "Revision initial status is SUBMITTED");
+    assert(revision.targetVersion === 2, "Revision targets version v2");
+    assert(revision.netExpenseAdjustment === 150000, "Calculates net expense adjustment (+150,000 BDT)");
+
+    // Review Revision
+    const reviewRev = reviewBudgetRevision(revision.id, testActor, "অর্থ কমিটি দ্বারা প্রাথমিক অনুমোদন");
+    assert(reviewRev.success && reviewRev.revision?.status === "UNDER_REVIEW", "Revision moves to UNDER_REVIEW");
+
+    // Approve Revision (Human Authority)
+    const approveRev = approveBudgetRevision(revision.id, testActor, "ম্যানেজিং কমিটি ও অধ্যক্ষ কর্তৃক চূড়ান্ত অনুমোদন");
+    assert(approveRev.success && approveRev.revision?.status === "APPROVED", "Revision permanently approved by human authority");
+
+    // Verify Version Promotion on Budget
+    const promotedBudget = getBudgetById(draftBudget.id)!;
+    assert(promotedBudget.currentVersion === 2, "Active budget successfully promoted to Version 2", promotedBudget.currentVersion);
+    assert(promotedBudget.status === "REVISED", "Budget status updated to REVISED");
+    assert(promotedBudget.versions.length === 2, "Budget preserves both v1 and v2 immutable snapshots", promotedBudget.versions.length);
+    assert(promotedBudget.versions[0].versionNumber === 1, "Snapshot v1 remains intact and unmodified");
+    assert(promotedBudget.versions[1].versionNumber === 2, "Snapshot v2 added with updated lines");
+
+    const revisedSalaryLine = promotedBudget.lines.find((l) => l.id === targetLineId);
+    assert(revisedSalaryLine?.revisedAmount === 950000, "Line revised amount updated to 950,000 BDT via approved revision", revisedSalaryLine?.revisedAmount);
+
+    // -------------------------------------------------------------
+    // Test Group 8: Capital Projects & Milestone Tracking
+    // -------------------------------------------------------------
+    console.log("\n--- GROUP 8: Capital Projects & Milestone Tracking ---");
+    const proj = createProject(
+      {
+        projectCode: "PRJ-2027-MOSQUE-EXT",
+        titleBn: "মাদরাসা মসজিদ ও একাডেমিক ভবন সম্প্রসারণ",
+        titleEn: "Mosque & Academic Building Extension",
+        fundCode: "CONSTRUCTION",
+        budgetId: seededBudget.id,
+        plannedBudget: 5000000,
+        startDate: "2027-01-01",
+        targetCompletionDate: "2027-12-31",
+        ownerName: "প্রকৌশলী রফিকুল ইসলাম",
+        notes: "৩ তলা বিশিষ্ট একাডেমিক ব্লক নির্মাণ",
+      },
+      testActor
+    );
+    assert(Boolean(proj.id && proj.status === "PLANNING"), "Capital project created with institutional code");
+    assert(proj.fundCode === "CONSTRUCTION", "Capital project linked strictly to CONSTRUCTION fund");
+    assert(proj.plannedBudget === 5000000, "Project planned budget allocated (5,000,000 BDT)");
+
+    // -------------------------------------------------------------
+    // Test Group 9: Non-Duplication & Authoritative Bridge Invariants
+    // -------------------------------------------------------------
+    console.log("\n--- GROUP 9: Authoritative Integration Bridge & Invariants ---");
+    const reconciliation = await syncBudgetWithAuthoritativeSystems(seededBudget.id);
+    assert(Boolean(reconciliation && reconciliation.budgetId === seededBudget.id), "SystemFinancialReconciliation executed non-destructively against DB");
+    assert(typeof reconciliation.financeActualExpense === "number", "Reconciliation safely queries Phase 6 Finance CashTransactions");
+    assert(typeof reconciliation.procurementOpenCommitments === "number", "Reconciliation safely queries Phase 12 PurchaseOrders");
+    assert(typeof reconciliation.payrollYearToDate === "number", "Reconciliation safely queries Phase 13 PayrollRecords");
+
+    // Phase 26 Forecast Projection
+    const forecast = getBudgetForecastProjection(seededBudget, seededBudget.lines[0]);
+    assert(Boolean(forecast && typeof forecast.projectedYearEndAmount === "number"), "Budget forecast projection calculated via Phase 26 bridge");
+    assert(["LOW", "MEDIUM", "HIGH"].includes(forecast.riskLevel), "Forecast risk level classified correctly");
+
+    // Invariant: Strictly NO SMS
+    const allLogs = getAllAuditLogs();
+    const smsDetected = allLogs.some((l) =>
+      JSON.stringify(l).toLowerCase().includes("sms_gateway") ||
+      JSON.stringify(l).toLowerCase().includes("sendsms") ||
+      JSON.stringify(l).toLowerCase().includes("sms_token")
+    );
+    assert(!smsDetected, "Strictly NO SMS invariant honored across all budget records");
+
+    // Invariant: AI is Advisory Only (No autonomous AI approval)
+    const autonomousAiApprovals = allLogs.filter(
+      (l) => l.action.includes("APPROVE") && (l.actorRole.toLowerCase().includes("ai") || l.actorRole.toLowerCase().includes("bot"))
+    );
+    assert(autonomousAiApprovals.length === 0, "Human authority invariant honored: No autonomous AI approvals exist");
+
+  } catch (err: any) {
+    console.error("Fatal test runner exception:", err);
+    assert(false, "Test suite crashed with unhandled exception", err?.message || err);
+  }
+
+  console.log("\n==================================================================");
+  console.log(`  PHASE 41 RESULTS: ${passedTests} / ${totalTests} TESTS PASSED`);
+  console.log("==================================================================\n");
+
+  if (failedTests > 0) {
+    console.error("⚠️ SOME TESTS FAILED.\n");
+    process.exit(1);
+  } else {
+    console.log("🎉 ALL PHASE 41 TESTS PASSED CLEANLY!\n");
+    process.exit(0);
+  }
+}
+
+runPhase41Tests();

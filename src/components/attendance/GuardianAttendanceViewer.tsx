@@ -11,6 +11,7 @@ import {
   Award,
   ChevronLeft,
   ChevronRight,
+  Smartphone,
 } from "lucide-react";
 
 interface GuardianAttendanceViewerProps {
@@ -35,6 +36,13 @@ export default function GuardianAttendanceViewer({ initialStudentId }: GuardianA
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  // Synchronize studentId when parent selected child changes
+  useEffect(() => {
+    if (initialStudentId && initialStudentId !== studentId) {
+      setStudentId(initialStudentId);
+    }
+  }, [initialStudentId, studentId]);
+
   // If studentId wasn't passed, check /api/portal/children or current search
   useEffect(() => {
     if (!studentId) {
@@ -52,10 +60,24 @@ export default function GuardianAttendanceViewer({ initialStudentId }: GuardianA
   useEffect(() => {
     if (!studentId) return;
 
+    const controller = new AbortController();
+    let isCurrent = true;
+
     async function loadAttendance() {
       try {
         setLoading(true);
         setErrorMsg(null);
+        // Clear previous child's data immediately to avoid showing stale data during transition
+        setStudentData(null);
+        setRecords([]);
+        setSummary({
+          totalEligibleStudents: 0,
+          presentCount: 0,
+          absentCount: 0,
+          lateCount: 0,
+          leaveCount: 0,
+          attendanceRate: 0,
+        });
 
         const params = new URLSearchParams({
           studentId,
@@ -63,8 +85,12 @@ export default function GuardianAttendanceViewer({ initialStudentId }: GuardianA
           year,
         });
 
-        const res = await fetch(`/api/portal/attendance?${params.toString()}`);
+        const res = await fetch(`/api/portal/attendance?${params.toString()}`, {
+          signal: controller.signal,
+        });
         const data = await res.json();
+
+        if (!isCurrent) return;
 
         if (res.ok) {
           setStudentData(data.student);
@@ -73,28 +99,50 @@ export default function GuardianAttendanceViewer({ initialStudentId }: GuardianA
         } else {
           setErrorMsg(data.error || "হাজিরা রেকর্ড লোড করতে ব্যর্থ হয়েছে।");
         }
-      } catch (err) {
-        setErrorMsg("সার্ভারে যোগাযোগ করতে সমস্যা হয়েছে।");
+      } catch (err: any) {
+        if (err.name === "AbortError" || controller.signal.aborted) {
+          return;
+        }
+        if (isCurrent) {
+          setErrorMsg("সার্ভারে যোগাযোগ করতে সমস্যা হয়েছে।");
+        }
       } finally {
-        setLoading(false);
+        if (isCurrent) {
+          setLoading(false);
+        }
       }
     }
 
     loadAttendance();
+
+    return () => {
+      isCurrent = false;
+      controller.abort();
+    };
   }, [studentId, month, year]);
 
   return (
     <div className="space-y-6">
-      {/* 1. Header & Month Selector */}
-      <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm space-y-4">
+      {/* 1. Header & Month Selector (3D Gold Elevation) */}
+      <div className="card-3d bg-white rounded-2xl border-2 border-slate-200/90 hover:border-[#D4AF37] p-5 sm:p-6 shadow-md space-y-4 relative overflow-hidden transition-all">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0D5C3A] via-[#D4AF37] to-[#0D5C3A]" />
+
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b pb-4">
           <div>
-            <h2 className="text-base font-bold text-[#083B25] flex items-center gap-2">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[10px] font-bold text-amber-800 bg-amber-50 border border-amber-300 px-2.5 py-0.5 rounded-full">
+                স্থাপিত: ২০২১ ইং
+              </span>
+              <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                বায়োমেট্রিক উপস্থিতি
+              </span>
+            </div>
+            <h2 className="text-base sm:text-lg font-black text-[#083B25] flex items-center gap-2 font-serif-bn">
               <Calendar className="w-5 h-5 text-[#0D5C3A]" />
-              সন্তানের ডিজিটাল উপস্থিতি ও হাজিরা কার্ড (Attendance Card)
+              সন্তানের ডিজিটাল উপস্থিতি ও হাজিরা কার্ড
             </h2>
-            <p className="text-xs text-gray-500">
-              দৈনিক উপস্থিতি, সময়ানুবর্তিতা ও ছুটি পর্যবেক্ষণ করুন।
+            <p className="text-xs text-slate-500 font-medium">
+              দৈনিক আগমন, প্রস্থান, সময়ানুবর্তিতা ও ছুটির রেকর্ড পর্যবেক্ষণ করুন।
             </p>
           </div>
 
@@ -103,7 +151,7 @@ export default function GuardianAttendanceViewer({ initialStudentId }: GuardianA
             <select
               value={month}
               onChange={(e) => setMonth(e.target.value)}
-              className="px-2.5 py-1.5 border border-gray-300 rounded font-semibold bg-white"
+              className="px-3 py-2 border-2 border-slate-200 rounded-xl font-bold bg-white outline-none focus:border-[#D4AF37] shadow-2xs"
             >
               {[
                 { val: "1", label: "জানুয়ারি" },
@@ -128,7 +176,7 @@ export default function GuardianAttendanceViewer({ initialStudentId }: GuardianA
             <select
               value={year}
               onChange={(e) => setYear(e.target.value)}
-              className="px-2.5 py-1.5 border border-gray-300 rounded font-semibold bg-white"
+              className="px-3 py-2 border-2 border-slate-200 rounded-xl font-bold bg-white outline-none focus:border-[#D4AF37] shadow-2xs"
             >
               <option value="2025">২০২৫</option>
               <option value="2026">২০২৬</option>
@@ -139,18 +187,18 @@ export default function GuardianAttendanceViewer({ initialStudentId }: GuardianA
 
         {/* Student Profile Info if available */}
         {studentData && (
-          <div className="flex items-center justify-between text-xs bg-gray-50 p-3 rounded-lg border border-gray-200">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs bg-gradient-to-r from-emerald-50/60 to-amber-50/40 p-4 rounded-xl border border-emerald-200/60 gap-3">
             <div>
-              <span className="font-bold text-gray-900 text-sm block">{studentData.fullNameBn}</span>
-              <span className="text-gray-500 font-mono">
+              <span className="font-black text-slate-900 text-sm block font-serif-bn">{studentData.fullNameBn}</span>
+              <span className="text-slate-600 font-mono text-[11px] mt-0.5 block">
                 আইডি: {studentData.studentIdNumber} | রোল: {studentData.rollNumber || "—"} | জামাত:{" "}
                 {studentData.currentClass} {studentData.currentSection ? `(${studentData.currentSection})` : ""}
               </span>
             </div>
 
-            <div className="text-right">
-              <span className="text-[11px] text-gray-500 block">উপস্থিতির শতকরা হার</span>
-              <span className="text-base font-bold font-mono text-[#0D5C3A]">
+            <div className="sm:text-right flex sm:flex-col items-center sm:items-end justify-between">
+              <span className="text-[11px] text-slate-500 font-bold block uppercase">উপস্থিতির হার</span>
+              <span className="text-lg font-black font-mono text-[#0D5C3A]">
                 {summary.attendanceRate?.toFixed(1) || 0}%
               </span>
             </div>
@@ -159,33 +207,33 @@ export default function GuardianAttendanceViewer({ initialStudentId }: GuardianA
       </div>
 
       {errorMsg && (
-        <div className="p-3.5 bg-red-50 border border-red-200 rounded-lg text-xs text-red-900 flex items-center gap-2">
+        <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-xs text-red-900 flex items-center gap-2">
           <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
           <span>{errorMsg}</span>
         </div>
       )}
 
-      {/* 2. Monthly Summary Metrics */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-        <div className="bg-white p-3 rounded-xl border border-gray-200 text-center shadow-sm">
-          <span className="text-[11px] text-gray-500 font-semibold block">মোট দিন</span>
-          <span className="text-lg font-bold font-mono text-gray-900">{records.length}</span>
+      {/* 2. Monthly Summary Metrics (3D Cards) */}
+      <div className="perspective-1000 grid grid-cols-2 sm:grid-cols-5 gap-3.5">
+        <div className="card-3d bg-white p-4 rounded-2xl border border-slate-200/90 hover:border-[#D4AF37] text-center shadow-sm hover:shadow-lg transition-all">
+          <span className="text-[11px] text-slate-500 font-bold block uppercase">মোট দিন</span>
+          <span className="text-xl font-black font-mono text-slate-900 mt-1 block">{records.length}</span>
         </div>
-        <div className="bg-white p-3 rounded-xl border border-emerald-200 text-center shadow-sm bg-emerald-50/40">
-          <span className="text-[11px] text-emerald-800 font-semibold block">উপস্থিত দিন</span>
-          <span className="text-lg font-bold font-mono text-emerald-700">{summary.presentCount || 0}</span>
+        <div className="card-3d bg-white p-4 rounded-2xl border border-emerald-200 hover:border-emerald-400 text-center shadow-sm hover:shadow-lg bg-emerald-50/30 transition-all">
+          <span className="text-[11px] text-emerald-800 font-bold block uppercase">উপস্থিত দিন</span>
+          <span className="text-xl font-black font-mono text-emerald-700 mt-1 block">{summary.presentCount || 0}</span>
         </div>
-        <div className="bg-white p-3 rounded-xl border border-red-200 text-center shadow-sm bg-red-50/40">
-          <span className="text-[11px] text-red-800 font-semibold block">অনুপস্থিত দিন</span>
-          <span className="text-lg font-bold font-mono text-red-700">{summary.absentCount || 0}</span>
+        <div className="card-3d bg-white p-4 rounded-2xl border border-red-200 hover:border-red-400 text-center shadow-sm hover:shadow-lg bg-red-50/30 transition-all">
+          <span className="text-[11px] text-red-800 font-bold block uppercase">অনুপস্থিত দিন</span>
+          <span className="text-xl font-black font-mono text-red-700 mt-1 block">{summary.absentCount || 0}</span>
         </div>
-        <div className="bg-white p-3 rounded-xl border border-amber-200 text-center shadow-sm bg-amber-50/40">
-          <span className="text-[11px] text-amber-800 font-semibold block">দেরি (Late)</span>
-          <span className="text-lg font-bold font-mono text-amber-700">{summary.lateCount || 0}</span>
+        <div className="card-3d bg-white p-4 rounded-2xl border border-amber-200 hover:border-amber-400 text-center shadow-sm hover:shadow-lg bg-amber-50/30 transition-all">
+          <span className="text-[11px] text-amber-800 font-bold block uppercase">দেরি (Late)</span>
+          <span className="text-xl font-black font-mono text-amber-700 mt-1 block">{summary.lateCount || 0}</span>
         </div>
-        <div className="bg-white p-3 rounded-xl border border-blue-200 text-center shadow-sm bg-blue-50/40">
-          <span className="text-[11px] text-blue-800 font-semibold block">ছুটি (Leave)</span>
-          <span className="text-lg font-bold font-mono text-blue-700">{summary.leaveCount || 0}</span>
+        <div className="card-3d bg-white p-4 rounded-2xl border border-blue-200 hover:border-blue-400 text-center shadow-sm hover:shadow-lg bg-blue-50/30 transition-all">
+          <span className="text-[11px] text-blue-800 font-bold block uppercase">ছুটি (Leave)</span>
+          <span className="text-xl font-black font-mono text-blue-700 mt-1 block">{summary.leaveCount || 0}</span>
         </div>
       </div>
 
@@ -205,6 +253,9 @@ export default function GuardianAttendanceViewer({ initialStudentId }: GuardianA
                   <th className="p-3">তারিখ</th>
                   <th className="p-3">জামাত ও শাখা</th>
                   <th className="p-3 text-center">উপস্থিতি অবস্থা</th>
+                  <th className="p-3 text-center">আগমন (Check-In)</th>
+                  <th className="p-3 text-center">প্রস্থান (Check-Out)</th>
+                  <th className="p-3 text-center">এসএমএস</th>
                   <th className="p-3">ছুটির বিবরণ / মন্তব্য</th>
                 </tr>
               </thead>
@@ -235,6 +286,58 @@ export default function GuardianAttendanceViewer({ initialStudentId }: GuardianA
                           ? "দেরি"
                           : "ছুটি"}
                       </span>
+                    </td>
+                    {/* Check-In Time */}
+                    <td className="p-3 text-center font-mono text-[11px]">
+                      {r.checkInTime ? (
+                        <div className="inline-flex flex-col items-center">
+                          <span className="text-emerald-800 font-bold">
+                            {new Date(r.checkInTime).toLocaleTimeString("en-US", {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            })}
+                          </span>
+                          <span className="text-[9px] text-emerald-600 bg-emerald-50 px-1 rounded border border-emerald-200">
+                            {r.entryMethod || "ডিজিটাল"}
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-gray-300">—</span>
+                      )}
+                    </td>
+                    {/* Check-Out Time */}
+                    <td className="p-3 text-center font-mono text-[11px]">
+                      {r.checkOutTime ? (
+                        <div className="inline-flex flex-col items-center">
+                          <span className="text-amber-800 font-bold">
+                            {new Date(r.checkOutTime).toLocaleTimeString("en-US", {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            })}
+                          </span>
+                          <span className="text-[9px] text-amber-600 bg-amber-50 px-1 rounded border border-amber-200">
+                            {r.exitMethod || "ডিজিটাল"}
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-gray-300">—</span>
+                      )}
+                    </td>
+                    {/* SMS Status */}
+                    <td className="p-3 text-center">
+                      {r.checkInSmsSent || r.checkOutSmsSent ? (
+                        <span
+                          className="inline-flex items-center gap-1 text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 font-semibold"
+                          title="অভিভাবকের মোবাইলে এসএমএস ডেলিভারি কনফার্ম"
+                        >
+                          <Smartphone className="w-3 h-3 text-emerald-600" />
+                          প্রেরিত
+                        </span>
+                      ) : (
+                        <span className="text-[10px] text-gray-400">—</span>
+                      )}
                     </td>
                     <td className="p-3 text-gray-500">
                       {r.leaveReason ? (

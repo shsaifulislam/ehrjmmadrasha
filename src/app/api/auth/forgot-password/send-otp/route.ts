@@ -1,44 +1,106 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendPasswordResetOtpEmail } from "@/lib/mail";
+import { checkRateLimit } from "@/lib/security";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { email } = body;
+    const rawForwarded = req.headers.get("x-forwarded-for");
+    const ip = rawForwarded ? rawForwarded.split(",")[0].trim() : (req.headers.get("x-real-ip") || "127.0.0.1");
 
-    if (!email || typeof email !== "string" || !email.includes("@")) {
+    // IP-level abuse protection: Max 5 OTP requests per 5 minutes per IP
+    const ipRateLimit = checkRateLimit(`forgot-otp:${ip}`, 5, 300000);
+    if (!ipRateLimit.allowed) {
       return NextResponse.json(
-        { error: "অনুগ্রহ করে সঠিক ইমেইল ঠিকানা প্রদান করুন।" },
+        { error: "খুব বেশি চেষ্টার কারণে ওটিপি প্রেরণ সাময়িকভাবে স্থগিত। ৫ মিনিট পর আবার চেষ্টা করুন।" },
+        { status: 429 }
+      );
+    }
+
+    const body = await req.json();
+    const rawInput = String(body.identifier || body.email || "").trim();
+
+    if (!rawInput) {
+      return NextResponse.json(
+        { error: "অনুগ্রহ করে আপনার নিবন্ধিত ইমেইল অথবা মোবাইল নম্বর প্রদান করুন।" },
         { status: 400 }
       );
     }
 
-    const normalizedEmail = email.trim().toLowerCase();
+    let targetEmail = "";
+    let user: any = null;
 
-    // Check if user exists in the database
-    const user = await prisma.user.findFirst({
-      where: {
-        email: normalizedEmail,
-      },
-    });
+    if (rawInput.includes("@")) {
+      targetEmail = rawInput.toLowerCase();
+      user = await prisma.user.findFirst({
+        where: { email: targetEmail },
+      });
+    } else {
+      // Input is mobile number or username - normalize phone
+      const banglaDigits: Record<string, string> = {
+        "০": "0", "১": "1", "২": "2", "৩": "3", "৪": "4",
+        "৫": "5", "৬": "6", "৭": "7", "৮": "8", "৯": "9"
+      };
+      const cleanPhoneDigits = rawInput
+        .replace(/[০-৯]/g, (d) => banglaDigits[d] || d)
+        .replace(/[\s\-\(\)\.]/g, "");
 
-    if (!user) {
+      const phoneVariants = [cleanPhoneDigits];
+      if (cleanPhoneDigits.startsWith("01")) {
+        phoneVariants.push("+88" + cleanPhoneDigits, "88" + cleanPhoneDigits);
+      } else if (cleanPhoneDigits.startsWith("+880")) {
+        phoneVariants.push("0" + cleanPhoneDigits.slice(4));
+      }
+
+      user = await prisma.user.findFirst({
+        where: {
+          OR: [
+            { username: rawInput },
+            { phone: rawInput },
+            ...phoneVariants.map(p => ({ phone: p })),
+          ],
+        },
+      });
+
+      if (!user) {
+        // Fallback: Check Guardian profile
+        const guardian = await prisma.guardian.findFirst({
+          where: {
+            OR: phoneVariants.map(p => ({ phone: p })),
+          },
+          select: { userId: true, email: true },
+        });
+
+        if (guardian?.userId) {
+          user = await prisma.user.findUnique({
+            where: { id: guardian.userId },
+          });
+        }
+      }
+
+      if (user?.email) {
+        targetEmail = user.email.toLowerCase();
+      }
+    }
+
+    if (!user || !targetEmail) {
       // Account enumeration protection: Return generic success without revealing non-existence
       return NextResponse.json({
         success: true,
-        message: "যদি এই ইমেইল ঠিকানায় কোনো সক্রিয় অ্যাকাউন্ট থাকে, তবে ভেরিফিকেশন কোড পাঠানো হয়েছে।",
+        message: "যদি এই তথ্যের সাথে কোনো সক্রিয় অ্যাকাউন্ট পাওয়া যায়, তবে ইমেইলে ভেরিফিকেশন কোড পাঠানো হয়েছে।",
       });
     }
 
     if (user.status !== "ACTIVE") {
-      return NextResponse.json(
-        { error: "আপনার অ্যাকাউন্টটি স্থগিত বা নিষ্ক্রিয়। মাদরাসা প্রশাসনের সাথে যোগাযোগ করুন।" },
-        { status: 403 }
-      );
+      return NextResponse.json({
+        success: true,
+        message: "যদি এই তথ্যের সাথে কোনো সক্রিয় অ্যাকাউন্ট পাওয়া যায়, তবে ইমেইলে ভেরিফিকেশন কোড পাঠানো হয়েছে।",
+      });
     }
+
+    const normalizedEmail = targetEmail;
 
     // Rate limiting: Check if an OTP was sent within the last 60 seconds
     const recentOtp = await prisma.passwordResetOtp.findFirst({
@@ -103,10 +165,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const [localPart, domainPart] = normalizedEmail.split("@");
+    const maskedLocal = localPart.length > 2
+      ? localPart[0] + "***" + localPart[localPart.length - 1]
+      : localPart[0] + "***";
+    const maskedEmail = `${maskedLocal}@${domainPart}`;
+
     return NextResponse.json({
       success: true,
-      message: "আপনার ইমেইলে একটি ৬-সংখ্যার ওটিপি (OTP) পাঠানো হয়েছে। অনুগ্রহ করে আপনার ইনবক্স চেক করুন।",
+      message: `আপনার নিবন্ধিত ইমেইল (${maskedEmail})-এ ৬-সংখ্যার ভেরিফিকেশন ওটিপি পাঠানো হয়েছে। অনুগ্রহ করে ইনবক্স চেক করুন।`,
       email: normalizedEmail,
+      maskedEmail,
     });
   } catch (error: any) {
     console.error("[Forgot-Password] send-otp exception:", error);

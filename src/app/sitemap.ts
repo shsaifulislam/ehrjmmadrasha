@@ -4,7 +4,7 @@ import { getSeoConfig } from "@/lib/cms";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const seo = getSeoConfig();
-  const baseUrl = seo.canonicalBaseUrl || "https://ehrj-madrasha.edu.bd";
+  const baseUrl = seo.canonicalBaseUrl || "https://www.ehrjmadrasha.com";
   const now = new Date();
 
   // 1. Static Public Pages

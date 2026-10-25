@@ -10,8 +10,8 @@ export const dynamic = "force-dynamic";
  */
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
@@ -42,11 +42,11 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
-    if (!user || user.role !== "ADMIN") {
+    if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
       return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
     }
 
@@ -139,3 +139,43 @@ export async function PATCH(
 }
 
 export const PUT = PATCH;
+
+export async function DELETE(
+  req: NextRequest,
+  { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
+  try {
+    const user = await getSessionUser();
+    if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
+      return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
+    }
+
+    const notice = await prisma.notice.findUnique({
+      where: { id: params.id },
+    });
+
+    if (!notice) {
+      return NextResponse.json({ error: "নোটিশ পাওয়া যায়নি।" }, { status: 404 });
+    }
+
+    await prisma.notice.delete({
+      where: { id: params.id },
+    });
+
+    await recordAuditLog({
+      userId: user.userId,
+      action: "DELETE_NOTICE",
+      entityType: "Notice",
+      entityId: params.id,
+      details: { titleBn: notice.titleBn },
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: "নোটিশটি সফলভাবে মুছে ফেলা হয়েছে।",
+    });
+  } catch (error: any) {
+    console.error("Admin Notice Delete Error:", error);
+    return NextResponse.json({ error: "নোটিশ মুছতে সমস্যা হয়েছে।" }, { status: 500 });
+  }
+}

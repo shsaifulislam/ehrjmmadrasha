@@ -23,6 +23,32 @@ import {
 import { expandRecurringEvent, expandRoutineSlot } from "./recurrenceEngine";
 import { getCmsEvents } from "@/lib/cms/cmsStore";
 
+function toIsoDateTime(dateStr: string, timeStr?: string, defaultHour = "09:00"): string {
+  if (!dateStr) return new Date().toISOString();
+  if (timeStr && /^\d{2}:\d{2}(:\d{2})?$/.test(timeStr)) {
+    const parts = timeStr.split(":");
+    return `${dateStr}T${parts[0]}:${parts[1]}:00.000Z`;
+  }
+  if (timeStr) {
+    const bnToEnMap: Record<string, string> = {
+      "০": "0", "১": "1", "২": "2", "৩": "3", "৪": "4",
+      "৫": "5", "৬": "6", "৭": "7", "৮": "8", "৯": "9",
+    };
+    const normalized = timeStr.replace(/[০-৯]/g, (d) => bnToEnMap[d] || d);
+    const match = normalized.match(/(\d{1,2}):(\d{2})/);
+    if (match) {
+      let hours = parseInt(match[1], 10);
+      const minutes = match[2];
+      if ((timeStr.includes("বিকাল") || timeStr.includes("সন্ধ্যা") || timeStr.includes("রাত")) && hours < 12) {
+        hours += 12;
+      }
+      const hh = hours.toString().padStart(2, "0");
+      return `${dateStr}T${hh}:${minutes}:00.000Z`;
+    }
+  }
+  return `${dateStr}T${defaultHour}:00.000Z`;
+}
+
 /**
  * Projects a unified calendar view honoring RBAC, IDOR scoping, and date window filters
  */
@@ -73,12 +99,8 @@ export async function getUnifiedCalendar(
     if (ce.status === "UPCOMING" || ce.status === "ONGOING") {
       const eDate = new Date(ce.eventDate);
       if (eDate >= startRange && eDate <= endRange) {
-        const startAt = ce.startTime
-          ? `${ce.eventDate}T${ce.startTime}:00.000Z`
-          : `${ce.eventDate}T09:00:00.000Z`;
-        const endAt = ce.endTime
-          ? `${ce.eventDate}T${ce.endTime}:00.000Z`
-          : `${ce.eventDate}T12:00:00.000Z`;
+        const startAt = toIsoDateTime(ce.eventDate, ce.startTime, "09:00");
+        const endAt = toIsoDateTime(ce.eventDate, ce.endTime, "17:00");
 
         events.push({
           id: `EVT_CMS_${ce.id}`,

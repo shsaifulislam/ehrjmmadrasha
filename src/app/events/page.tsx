@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import {
   Calendar as CalendarIcon,
   Clock,
@@ -15,6 +18,8 @@ import {
   Filter,
   CheckCircle2,
   AlertCircle,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 import { InstitutionalEvent, EventTypeConfig } from "@/lib/events/types";
 import { INSTITUTION_INFO } from "@/lib/constants";
@@ -53,31 +58,31 @@ export default function PublicEventsPage() {
     switch (status) {
       case "REGISTRATION_OPEN":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300">
-            <CheckCircle2 className="w-3 h-3" /> রেজিস্ট্রেশন চলমান
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+            <CheckCircle2 className="w-3.5 h-3.5" /> রেজিস্ট্রেশন চলমান
           </span>
         );
       case "REGISTRATION_CLOSED":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300">
-            <Clock className="w-3 h-3" /> রেজিস্ট্রেশন সমাপ্ত
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-300">
+            <Clock className="w-3.5 h-3.5" /> রেজিস্ট্রেশন সমাপ্ত
           </span>
         );
       case "IN_PROGRESS":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 border border-blue-300 animate-pulse">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 border border-blue-300 animate-pulse">
             চলমান আয়োজন
           </span>
         );
       case "COMPLETED":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-750 border border-gray-300">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-300">
             সম্পন্ন
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
             আসন্ন আয়োজন
           </span>
         );
@@ -85,71 +90,115 @@ export default function PublicEventsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50/30 via-white to-gray-50 text-gray-800">
-      {/* Banner */}
-      <section className="bg-[#083B25] text-white py-12 px-4 md:px-8 border-b border-emerald-800 shadow-sm relative overflow-hidden">
-        <div className="max-w-6xl mx-auto relative z-10 text-center space-y-3">
-          <span className="inline-flex items-center gap-1.5 bg-emerald-800/80 border border-emerald-600/50 text-[#C59B27] text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
-            <Award className="w-3.5 h-3.5" />
-            শিক্ষার্থী জীবন ও সহশিক্ষা
-          </span>
-          <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight">
-            প্রাতিষ্ঠানিক ইভেন্ট, প্রতিযোগিতা ও কার্যক্রম
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans text-slate-900 selection:bg-[#0D5C3A] selection:text-white">
+      <Navbar />
+
+      {/* 1. HERO SECTION */}
+      <section className="page-hero py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
+        <div className="absolute inset-0 page-hero-grid opacity-20 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#D4AF37]/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto relative z-10 space-y-5">
+          <div className="inline-flex items-center gap-2 bg-black/40 border border-[#D4AF37]/50 px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+            <span className="text-amber-200 text-xs font-semibold">
+              শিক্ষার্থী জীবন ও সহশিক্ষা কার্যক্রম
+            </span>
+          </div>
+
+          <div className="font-arabic text-[#D4AF37] text-2xl sm:text-3xl tracking-widest drop-shadow-sm">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black font-display text-white tracking-tight leading-tight">
+            প্রাতিষ্ঠানিক ইভেন্ট ও{" "}
+            <span className="gold-gradient-text inline-block">
+              প্রতিযোগিতাসমূহ
+            </span>
           </h1>
-          <p className="text-sm md:text-base text-emerald-100 max-w-2xl mx-auto font-light leading-relaxed">
-            {INSTITUTION_INFO.nameBn}-এর বার্ষিক কুরআন তিলাওয়াত, বিতর্ক, সেমিনার, পুরস্কার বিতরণী ও ছাত্র কার্যক্রম সূচি
+
+          <p className="text-sm sm:text-base lg:text-lg text-emerald-100/90 max-w-2xl mx-auto font-light leading-relaxed">
+            {INSTITUTION_INFO.nameBn}-এর বার্ষিক কুরআন তিলাওয়াত, বিতর্ক, সেমিনার, পুরস্কার বিতরণী ও ছাত্র কার্যক্রম সূচি।
           </p>
 
-          <div className="pt-4 flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <Link
               href="/portal/events"
-              className="inline-flex items-center gap-2 bg-[#C59B27] hover:bg-[#b0891f] text-gray-900 font-bold px-4 py-2 rounded-lg text-sm transition-all shadow-md"
+              className="btn-gold px-6 py-3 rounded-xl text-xs sm:text-sm font-black flex items-center gap-2 shadow-lg"
             >
               <Users className="w-4 h-4" />
-              অভিভাবক পোর্টাল ও রেজিস্ট্রেশন
+              <span>ইভেন্ট রেজিস্ট্রেশন করুন</span>
             </Link>
             <Link
               href="/calendar"
-              className="inline-flex items-center gap-2 bg-emerald-800/80 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-lg text-sm border border-emerald-600/60 transition-all"
+              className="btn-emerald px-6 py-3 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 backdrop-blur-md"
             >
-              <CalendarIcon className="w-4 h-4" />
-              সম্পূর্ণ ক্যালেন্ডার ভিউ
+              <CalendarIcon className="w-4 h-4 text-[#D4AF37]" />
+              <span>পূর্ণ একাডেমিক ক্যালেন্ডার</span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Filter and Content Area */}
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-8">
-        {/* Search & Categories */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-6 mb-8 space-y-4">
+      {/* 2. MAIN EVENTS SECTION */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8 flex-1 w-full">
+        {/* 2.0 FEATURED ISLAMIC MAHFIL & SPIRITUAL CONVOCATION BANNER */}
+        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-amber-500/40 shadow-xl bg-emerald-950 group">
+          <div className="relative aspect-[21/9] sm:aspect-[24/8] w-full">
+            <Image
+              src="/images/banners/islamic-mahfil-banner.png"
+              alt="ইসলামী মাহফিল ও দ্বীনি সম্মেলন | ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা"
+              fill
+              className="object-cover group-hover:scale-[1.01] transition duration-500"
+              priority
+            />
+          </div>
+          <div className="p-4 bg-gradient-to-r from-[#041F14] via-[#063321] to-[#0A482D] text-white flex flex-col sm:flex-row items-center justify-between gap-3 text-xs border-t border-[#D4AF37]/40">
+            <div className="space-y-0.5 text-center sm:text-left">
+              <span className="font-bold text-amber-300 text-sm">
+                বার্ষিক ইসলামী মাহফিল • দ্বীনি শিক্ষা, আত্মশুদ্ধি ও ইসলামী জীবন গঠন
+              </span>
+              <p className="text-emerald-100/90 text-xs">
+                কুরআন তিলাওয়াত, তাফসীর, ইসলামি আলোচনা, উপদেশ ও আখিরাতের অনন্ত পাথেয় অর্জনের পবিত্র আয়োজন
+              </p>
+            </div>
+            <Link
+              href="/contact"
+              className="btn-gold px-5 py-2 rounded-xl text-slate-950 font-bold text-xs flex-shrink-0 shadow hover:scale-105 transition"
+            >
+              মাহফিল সংক্রান্ত তথ্য
+            </Link>
+          </div>
+        </div>
+
+        {/* Search & Categories Bar */}
+        <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-5 md:p-6 space-y-4">
           <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-            {/* Search Input */}
             <div className="relative w-full md:w-80">
-              <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="ইভেন্ট বা ভেন্যু খুঁজুন..."
-                className="w-full pl-9 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
+                className="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#0D5C3A] bg-slate-50/50"
               />
             </div>
 
-            {/* Total Count */}
-            <div className="text-xs text-gray-500 font-medium">
-              মোট প্রদর্শিত ইভেন্ট: <span className="font-bold text-gray-800">{filteredEvents.length}</span> টি
+            <div className="text-xs text-slate-500 font-medium">
+              মোট প্রদর্শিত ইভেন্ট: <strong className="text-slate-900">{filteredEvents.length}</strong> টি
             </div>
           </div>
 
           {/* Type Pill Selector */}
-          <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-100">
+          <div className="flex flex-wrap gap-2 pt-3 border-t border-slate-100">
             <button
               onClick={() => setSelectedType("ALL")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition ${
                 selectedType === "ALL"
-                  ? "bg-[#083B25] text-white shadow-sm"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  ? "bg-[#0D5C3A] text-white shadow-md shadow-emerald-950/20"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
             >
               সকল আয়োজন
@@ -158,10 +207,10 @@ export default function PublicEventsPage() {
               <button
                 key={t.code}
                 onClick={() => setSelectedType(t.code)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition ${
                   selectedType === t.code
-                    ? "bg-[#083B25] text-white shadow-sm"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-[#0D5C3A] text-white shadow-md shadow-emerald-950/20"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                 }`}
               >
                 {t.nameBn}
@@ -172,21 +221,21 @@ export default function PublicEventsPage() {
 
         {/* Loading State */}
         {loading && (
-          <div className="text-center py-16">
+          <div className="text-center py-16 bg-white rounded-3xl border border-slate-200">
             <div className="inline-block w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
-            <p className="mt-3 text-sm text-gray-500">ইভেন্ট তালিকা লোড হচ্ছে...</p>
+            <p className="mt-3 text-xs text-slate-500">ইভেন্ট তালিকা লোড হচ্ছে...</p>
           </div>
         )}
 
         {/* Empty State */}
         {!loading && filteredEvents.length === 0 && (
-          <div className="bg-white rounded-xl border border-dashed border-gray-300 p-12 text-center my-8">
-            <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-3 text-emerald-700">
+          <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center my-8 space-y-3">
+            <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto text-[#0D5C3A]">
               <CalendarIcon className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-gray-800 mb-1">কোনো ইভেন্ট বর্তমানে প্রকাশিত নেই।</h3>
-            <p className="text-xs text-gray-500 max-w-sm mx-auto">
-              নতুন কোনো প্রাতিষ্ঠানিক প্রতিযোগিতা বা সেমিনার প্রকাশিত হলে তা এই পৃষ্ঠায় প্রদর্শিত হবে।
+            <h3 className="text-base font-black text-slate-800">কোনো ইভেন্ট বর্তমানে প্রকাশিত নেই</h3>
+            <p className="text-xs text-slate-500 max-w-sm mx-auto">
+              নতুন কোনো প্রাতিষ্ঠানিক প্রতিযোগিতা বা মাহফিল নির্ধারিত হলে তা এই পাতায় প্রদর্শিত হবে।
             </p>
           </div>
         )}
@@ -202,63 +251,50 @@ export default function PublicEventsPage() {
               return (
                 <div
                   key={evt.id}
-                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
+                  className="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 overflow-hidden flex flex-col justify-between group"
                 >
-                  <div className="p-5 space-y-3">
-                    <div className="flex justify-between items-start gap-2">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
-                        {evt.typeCode.replace("_", " ")}
-                      </span>
+                  <div className="p-6 space-y-4">
+                    <div className="flex items-center justify-between">
                       {getStatusBadge(evt.status)}
+                      <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2.5 py-0.5 rounded-md font-mono">
+                        {evt.typeCode}
+                      </span>
                     </div>
 
-                    <h2 className="text-base font-bold text-gray-900 group-hover:text-emerald-800 transition-colors line-clamp-2">
+                    <h2 className="font-black text-base sm:text-lg text-slate-900 group-hover:text-[#0D5C3A] transition">
                       {evt.titleBn}
                     </h2>
-                    {evt.titleEn && (
-                      <p className="text-xs text-gray-500 font-medium line-clamp-1 italic">
-                        {evt.titleEn}
-                      </p>
-                    )}
 
-                    <p className="text-xs text-gray-600 line-clamp-3 leading-relaxed">
-                      {evt.descriptionBn}
+                    <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                      {evt.descriptionBn || "ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসার প্রাতিষ্ঠানিক আয়োজন।"}
                     </p>
 
-                    <div className="pt-2 border-t border-gray-100 space-y-1.5 text-xs text-gray-600">
+                    <div className="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-500">
                       <div className="flex items-center gap-2">
-                        <CalendarIcon className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                        <CalendarIcon className="w-4 h-4 text-[#D4AF37]" />
                         <span>
                           {startDate.toLocaleDateString("bn-BD", {
-                            weekday: "long",
                             year: "numeric",
                             month: "long",
                             day: "numeric",
                           })}
                         </span>
                       </div>
+
                       <div className="flex items-center gap-2">
-                        <Clock className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                        <span>
-                          {startDate.toLocaleTimeString("bn-BD", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </span>
+                        <MapPin className="w-4 h-4 text-emerald-600" />
+                        <span>{evt.venueText}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                        <span className="truncate">{evt.venueText}</span>
-                      </div>
+
                       {evt.maxCapacity > 0 && (
                         <div className="flex items-center gap-2">
-                          <Users className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                          <Users className="w-4 h-4 text-blue-600" />
                           <span>
-                            আসন: {evt.registeredCount}/{evt.maxCapacity}{" "}
+                            আসন সংখ্যা: {evt.maxCapacity} টি{" "}
                             {remainingCapacity !== null && (
-                              <span className="text-emerald-700 font-semibold">
+                              <strong className="text-emerald-700">
                                 ({remainingCapacity} টি অবশিষ্ট)
-                              </span>
+                              </strong>
                             )}
                           </span>
                         </div>
@@ -266,15 +302,16 @@ export default function PublicEventsPage() {
                     </div>
                   </div>
 
-                  <div className="px-5 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
-                    <span className="text-[11px] text-gray-500 font-mono">
+                  <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-[11px] text-slate-400 font-mono">
                       {evt.id}
                     </span>
                     <Link
                       href={`/events/${evt.id}`}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-emerald-800 hover:text-emerald-950 group-hover:translate-x-0.5 transition-all"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0D5C3A] group-hover:translate-x-1 transition"
                     >
-                      বিস্তারিত দেখুন <ChevronRight className="w-3.5 h-3.5" />
+                      <span>বিস্তারিত দেখুন</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
                 </div>
@@ -283,6 +320,8 @@ export default function PublicEventsPage() {
           </div>
         )}
       </main>
+
+      <Footer />
     </div>
   );
 }

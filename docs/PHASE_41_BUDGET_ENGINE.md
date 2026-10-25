@@ -1,137 +1,147 @@
-# EHRJ MADRASHA ERP — PHASE 41
-## Institutional Budget Planning, Financial Planning & Budget Control Engine
+# PHASE 41 — Institutional Budget Planning, Financial Planning & Budget Control Engine
+**Institution:** Eliotganj Hazi Rohmatollah Jamiria Madrasha (ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা)  
 **Checkpoint:** `EHRJ-AI-2026-PHASE41`  
-**Institution:** Eliotganj Hazi Rohmatollah Jamiria Madrasha (ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা)
+**Engine Directory:** `src/lib/budget/`  
+**Console UI:** `src/app/admin/budgets/` & `src/components/budget/InstitutionalBudgetConsole.tsx`  
+**Verification Suite:** `scratch/test_phase41_budget_engine.ts` (79/79 Tests Passed)
 
 ---
 
-### 1. Executive Summary & Core Invariants
-Phase 41 establishes the **Institutional Budget Planning, Financial Planning & Budget Control Engine** for Eliotganj Hazi Rohmatollah Jamiria Madrasha. It provides institutional budget modeling, period and session governance, Shariah fund segregation, multi-version snapshots, revision approval workflows, soft threshold control, and capital development project tracking.
+## 1. Executive Summary & Architectural Philosophy
 
-#### Foundational Invariants:
-1. **Never Duplicate Accounting Source of Truth**:
-   - Phase 41 **PLANS** the money and **CONTROLS** the money, but never duplicates Phase 6 Finance (transactions, cashbook, fee vouchers, balances).
-   - Commitments are pulled dynamically from Phase 12 Procurement (Purchase Orders) and Phase 40 Vendor Contracts.
-   - Labor expenditures are referenced from Phase 13 HR (Payroll records).
-2. **Automate the Process, Not the Authority**:
-   - AI and automated scripts provide advisory projections, anomaly scans, and variance reports.
-   - Only human authorities (`ADMIN`, `PRINCIPAL`, Governing Body) can approve budgets, sanction revisions, or activate locked periods.
-3. **Strict Shariah & Institutional Fund Segregation**:
-   - **Zakat Fund (`ZAKAT`)**: Legally and Islamically restricted strictly for eligible student welfare, clothing, medical aid, and poor student food. Building repairs, equipment purchases, or administrative salaries from Zakat are blocked at the engine validation level.
-   - **Lillah Boarding Fund (`LILLAH`)**: Dedicated to residential student nutrition, pantry groceries, and mess operations.
-   - **Construction Fund (`CONSTRUCTION`)**: Designated for physical infrastructure, building extension, and capital expenditure (CapEx) tracking.
-   - **General Fund (`GENERAL`)**: Unrestricted tuition, institutional operations, utilities, and general maintenance.
-4. **Soft Control by Default**:
-   - 80% Utilization: **WARNING** notification.
-   - 90% Utilization: **CRITICAL** notification.
-   - 100%+ Utilization: **OVERRUN** alert requiring human justification and revision request. Does not blindly halt urgent operational payments unless hard enforcement is explicitly toggled by the Principal.
-5. **Strictly NO SMS**:
-   - Alerts and notifications are delivered exclusively through in-app portal banners, notification trays, and calendar events. No SMS gateways or third-party telecom APIs are used.
+Phase 41 delivers an institutional-grade **Budget Planning, Financial Planning & Budget Control Engine** tailored specifically for the governance of Eliotganj Hazi Rohmatollah Jamiria Madrasha.
+
+### Core Architectural Invariants
+1. **Separation of Planning vs. Execution:**  
+   > *“PLAN THE MONEY, CONTROL THE MONEY, BUT NEVER DUPLICATE THE ACCOUNTING SOURCE OF TRUTH.”*  
+   Phase 41 does **not** duplicate ledger transactions, cash vouchers, or payment journals. Actual cash inflows and outflows remain solely under the authority of **Phase 6 Finance (`CashTransaction`)**, purchase orders under **Phase 12 Procurement (`PurchaseOrder`)**, and salaries under **Phase 13 Payroll (`PayrollRecord`)**.
+2. **Automate the Process, Not the Authority:**  
+   No budget, version promotion, or revision can be approved autonomously by an AI agent or script. Formal status transitions require verified human administrative authority (`ADMIN` or `PRINCIPAL`).
+3. **Strict Shariah & Purpose-Bound Fund Restrictions:**  
+   Budget lines are partitioned across Islamic and institutional funds:
+   - **General Fund (`GENERAL`):** Operational salaries, utilities, administrative maintenance.
+   - **Lillah Boarding Fund (`LILLAH`):** Student boarding meals, grains, raw kitchen rations, cook salaries. Cannot be diverted to construction or unrelated capital assets.
+   - **Zakat Welfare Fund (`ZAKAT`):** Exclusively for eligible orphan/destitute student welfare, clothing, medical aid, and study books. Explicitly blocks administrative/office expenditure.
+   - **Construction & Development Fund (`CONSTRUCTION`):** Building construction, classroom expansion, capital renovation, plumbing, electrical infrastructure.
+   - **Orphan & Sadaqah Fund (`ORPHAN`):** Specialized orphan patronage, boarding essentials, emergency stipends.
+4. **Soft Control by Default:**  
+   - 80% Utilization: Early Warning (Yellow)
+   - 90% Utilization: Critical Warning (Orange)
+   - 100%+ Utilization: Overrun Breach (Red) requires human justification or formal budget revision request.
+5. **Strictly In-App & Calendar:**  
+   Strictly **NO SMS**. Notifications are delivered via in-app alerts and calendar milestones.
 
 ---
 
-### 2. Architecture & Domain Model
+## 2. Directory Structure & Key Modules
 
 ```
- ┌────────────────────────────────────────────────────────────────────────┐
- │                      Phase 41 Budget Engine                            │
- ├────────────────────────────────────────────────────────────────────────┤
- │                                                                        │
- │  ┌─────────────────┐       ┌─────────────────┐       ┌──────────────┐  │
- │  │  Budget Period  │◄──────┤     Budget      │──────►│ Budget Line  │  │
- │  │ (Annual/Session)│       │ (Draft/Active)  │       │ (Allocations)│  │
- │  └─────────────────┘       └────────┬────────┘       └──────┬───────┘  │
- │                                     │                       │          │
- │                 approvals create    │                       │          │
- │                                     ▼                       ▼          │
- │                            ┌─────────────────┐       ┌──────────────┐  │
- │                            │ Version Snapshot│       │Control Alerts│  │
- │                            │ (v1, v2, v3...) │       │(80%/90%/100%)│  │
- │                            └─────────────────┘       └──────────────┘  │
- │                                     ▲                                  │
- │                                     │ approves revision                │
- │                            ┌─────────────────┐                         │
- │                            │ Budget Revision │                         │
- │                            │  (Line Diffs)   │                         │
- │                            └─────────────────┘                         │
- └─────────────────────────────────────┬──────────────────────────────────┘
-                                       │ Non-duplicative integration
-                                       ▼
-     ┌───────────────────────┬───────────────────────┬───────────────────┐
-     │   Phase 6 Finance     │ Phase 12 Procurement  │    Phase 13 HR    │
-     │   Cash Transactions   │    Purchase Orders    │  Payroll Records  │
-     │       (Actuals)       │     (Commitments)     │   (Labor Costs)   │
-     └───────────────────────┴───────────────────────┴───────────────────┘
+src/lib/budget/
+├── types.ts                    # Complete TypeScript definitions & fund code schemas
+├── budgetStore.ts              # Atomic JSON persistence (periods, budgets, revisions, projects, alerts, audits)
+├── budgetLifecycleEngine.ts    # State machine (DRAFT -> PREPARATION -> UNDER_REVIEW -> APPROVED -> ACTIVE -> REVISED -> CLOSED)
+├── budgetCalculationEngine.ts  # Variance analysis, utilization %, fund summaries, Shariah rule validators
+├── budgetControlEngine.ts      # Multi-tiered threshold scanning (80%, 90%, 100%), early warnings & overruns
+├── budgetRevisionEngine.ts     # Revision request, line diffing, approval & immutable version snapshots (v1 -> v2)
+├── budgetIntegrationBridge.ts  # Read-only reconciliation with Phase 6, 12, 13, and Phase 26 forecasting
+└── index.ts                    # Barrel export
+
+src/app/api/admin/budgets/
+├── route.ts                    # GET all budgets, POST new budget
+├── [id]/route.ts               # GET budget detail with versions & lines, PATCH budget
+├── [id]/action/route.ts        # POST lifecycle actions (submit, approve, activate, lock, close)
+├── periods/route.ts            # GET/POST budget periods & lock/unlock
+├── lines/route.ts              # GET/POST budget lines (with Shariah validation)
+├── revisions/route.ts          # GET/POST revision requests & line diffs
+├── revisions/[id]/approve/route.ts # POST approve/reject revision & promote version
+├── projects/route.ts           # GET/POST capital projects linked to budget/construction
+├── alerts/route.ts             # GET/POST threshold control alerts & acknowledgments
+├── variance/route.ts           # GET budget variance calculations & utilization reports
+└── stats/route.ts              # GET institutional dashboard KPIs
+
+src/app/admin/budgets/
+├── page.tsx                    # Main Institutional Budget Cockpit
+├── periods/page.tsx            # Budget Periods Management view
+├── new/page.tsx                # New Budget wizard view
+├── projects/page.tsx           # Capital Projects tracking view
+├── [id]/page.tsx               # Budget Detail & Lines view
+├── [id]/versions/page.tsx      # Immutable Version History & Snapshots view
+├── [id]/revisions/page.tsx     # Budget Revisions & Diff Analysis view
+└── [id]/variance/page.tsx      # Variance & Threshold Early Warning view
+
+src/components/budget/
+└── InstitutionalBudgetConsole.tsx # Interactive 6-Tab Console with creation modals and real-time alerts
 ```
 
-#### Engine Modules (`src/lib/budget/`):
-- **`types.ts`**: Complete TypeScript domain models, enums, DTOs, and interface contracts.
-- **`budgetStore.ts`**: Atomic filesystem persistence in `data/budgets/` (`periods.json`, `budgets.json`, `revisions.json`, `projects.json`, `alerts.json`, `audit_log.json`) with institutional seed data for 2026-2027.
-- **`budgetLifecycleEngine.ts`**: State machine controlling transitions (`DRAFT` $\rightarrow$ `PREPARATION` $\rightarrow$ `UNDER_REVIEW` $\rightarrow$ `APPROVED` $\rightarrow$ `ACTIVE` $\rightarrow$ `REVISED` $\rightarrow$ `CLOSED` $\rightarrow$ `ARCHIVED`), line additions, and immutable snapshot generation upon approval.
-- **`budgetCalculationEngine.ts`**: Mathematical variance calculation (`Planned - (Actual + Committed)` for expenses, `Actual - Planned` for income), Shariah fund rule validators, and fund-wise budget aggregations.
-- **`budgetControlEngine.ts`**: Automated threshold scans (80% Warning, 90% Critical, 100%+ Overrun), overrun tracking, and human acknowledgment workflows.
-- **`budgetRevisionEngine.ts`**: Revision requests with line-by-line diffs (`previousAmount`, `newRequestedAmount`, `amountDifference`, `justificationBn`), Principal approval, and version promotion (`v1` $\rightarrow$ `v2`).
-- **`budgetIntegrationBridge.ts`**: Real-time cross-phase synchronization without duplication, connecting Phase 6 `prisma.cashTransaction`, Phase 12 `prisma.purchaseOrder`, and Phase 13 `prisma.payrollRecord`.
+---
+
+## 3. Budget Lifecycle & Version Snapshot Architecture
+
+```mermaid
+stateDiagram-v2
+    [*] --> DRAFT: Initial Creation (v1)
+    DRAFT --> PREPARATION: Committee Formulation
+    PREPARATION --> UNDER_REVIEW: Forward for Audit
+    UNDER_REVIEW --> APPROVED: Human Authority Approval (Admin/Principal)
+    APPROVED --> ACTIVE: Activated for Fiscal Year
+    ACTIVE --> REVISED: Formal Revision Approved (Promotes v1 -> v2)
+    REVISED --> ACTIVE: Re-activated
+    ACTIVE --> CLOSED: Year-End Reconciliation
+    CLOSED --> ARCHIVED: Historical Preservation
+    UNDER_REVIEW --> DRAFT: Returned for Revision
+```
+
+When a budget is approved, an **immutable version snapshot** is generated capturing:
+- Complete budget header metadata
+- Snapshot of all approved budget lines
+- Net planned income & expense
+- Human approver ID, name, role, and approval reference
+- Timestamp
+
+Any modifications in `ACTIVE` status are forbidden and must pass through a **Budget Revision Request** (`BudgetRevision`) with line diffs. Approval promotes the budget version (`v1` $\rightarrow$ `v2`) and archives the previous state permanently.
 
 ---
 
-### 3. API Surface
+## 4. Variance & Control Threshold Formulae
 
-| Endpoint | Method | Role | Description |
-|---|---|---|---|
-| `/api/admin/budgets` | GET | Admin/Principal | List all budgets with period, status, and search filters |
-| `/api/admin/budgets` | POST | Admin | Create a new institutional budget in DRAFT |
-| `/api/admin/budgets/[id]` | GET | Admin/Principal | Retrieve single budget with lines, versions, and projects |
-| `/api/admin/budgets/[id]` | PATCH | Admin | Update budget metadata, notes, or control thresholds |
-| `/api/admin/budgets/[id]/action` | POST | Admin/Principal | Transition lifecycle status (e.g. approve, activate, close) |
-| `/api/admin/budgets/periods` | GET / POST | Admin/Principal | Manage fiscal years and academic sessions with lock toggles |
-| `/api/admin/budgets/lines` | GET / POST | Admin | Retrieve lines or add/update line allocations |
-| `/api/admin/budgets/revisions` | GET / POST | Admin/Principal | View revision audit trail or submit new revision request |
-| `/api/admin/budgets/revisions/[id]/approve` | POST | Principal/Admin | Formally approve revision, promote version, and snapshot |
-| `/api/admin/budgets/projects` | GET / POST | Admin/Principal | Track CapEx construction and development projects |
-| `/api/admin/budgets/alerts` | GET / POST | Admin/Principal | List threshold alerts, trigger scans, or acknowledge alerts |
-| `/api/admin/budgets/variance` | GET | Admin/Principal | Generate line-by-line variance and deficit/surplus analysis |
-| `/api/admin/budgets/stats` | GET | Admin/Principal | Real-time institutional financial dashboard KPIs |
+### Expense Variance
+$$\text{Remaining} = \text{Planned Expense} - (\text{Actual Expense} + \text{Committed})$$
+$$\text{Variance} = \text{Planned Expense} - (\text{Actual Expense} + \text{Committed})$$
+$$\text{Utilization Rate (\%)} = \frac{\text{Actual Expense} + \text{Committed}}{\text{Planned Expense}} \times 100$$
 
----
+- $\text{Variance} \ge 0$: Favorable (within budget)
+- $\text{Variance} < 0$: Unfavorable / Overrun (budget exceeded)
 
-### 4. Admin User Interface & Console
+### Income Variance
+$$\text{Variance} = \text{Actual Inflow} - \text{Planned Inflow}$$
+$$\text{Achievement Rate (\%)} = \frac{\text{Actual Inflow}}{\text{Planned Inflow}} \times 100$$
 
-- **Route:** `/admin/budgets`
-- **Sub-pages:**
-  - `/admin/budgets/periods` (Fiscal Year & Session Management)
-  - `/admin/budgets/new` (Institutional Budget Drafting)
-  - `/admin/budgets/[id]` (Line Items & Monthly Allocation)
-  - `/admin/budgets/[id]/versions` (Immutable Version History & Comparison)
-  - `/admin/budgets/[id]/revisions` (Revision Proposals & Approval Flow)
-  - `/admin/budgets/[id]/variance` (Variance Analysis & Deficit Detection)
-  - `/admin/budgets/projects` (Development & Capital Project CapEx)
-- **Component:** `InstitutionalBudgetConsole.tsx`
-  - 7 interactive tabs: Overview Dashboard, Budget Lines, Version Snapshots, Revision Requests, Capital Projects, Variance & Alerts, Budget Periods.
-  - Bilingual interface (Bengali primary, English secondary).
-  - Visual status chips, utilization progress meters, threshold alert indicators, and modal workflows.
+- $\text{Variance} \ge 0$: Favorable (surplus or achieved target)
+- $\text{Variance} < 0$: Shortfall (below revenue projection)
 
 ---
 
-### 5. Verification & Test Evidence
+## 5. Automated Verification Results
 
-#### Test Suite: `scratch/test_phase41_budget_engine.ts`
-- Command: `npm run test:phase41`
-- Results: **55 / 55 tests passed (100%)**
+The test suite (`scratch/test_phase41_budget_engine.ts`) executes 79 tests across 9 functional groups:
 
-| Test Group | Tests | Result | Details |
-|---|---|---|---|
-| 1. Period Management & Locks | 4 | PASS | Period creation, lock state enforcement, activation |
-| 2. Lifecycle & Version Snapshots | 11 | PASS | State machine, invalid jump blocks, v1 immutable snapshotting |
-| 3. Budget Lines & Fund Rules | 6 | PASS | General/Lillah/Zakat lines, Zakat welfare Shariah enforcement |
-| 4. Calculation & Variance | 7 | PASS | Remaining, utilization rate, favorable/unfavorable variance |
-| 5. Control Engine & Alerts | 5 | PASS | 80% Warning, 90% Critical, 100%+ Overrun, human acknowledgment |
-| 6. Revisions & Version Promotion | 8 | PASS | Submission, review, approval, v2 promotion, line revisedAmount |
-| 7. CapEx Capital Projects | 4 | PASS | Project linking, CapEx tracking, construction fund tagging |
-| 8. Integration Bridge Invariants | 4 | PASS | Phase 6/12/13 reconciliation without ledger duplication |
-| 9. Security, NO-SMS & Dashboard | 6 | PASS | KPIs, audit logging with actor attribution, strict NO-SMS |
+| Group | Functional Area | Tests | Status |
+|:---|:---|:---:|:---:|
+| 1 | Store & Seeding Integrity | 7 | ✅ 100% Passed |
+| 2 | Budget Period Engine & Invariants | 2 | ✅ 100% Passed |
+| 3 | Budget Lifecycle & State Transitions | 13 | ✅ 100% Passed |
+| 4 | Budget Lines & Fund Allocation Restrictions | 10 | ✅ 100% Passed |
+| 5 | Calculations, Variance & Utilization | 10 | ✅ 100% Passed |
+| 6 | Budget Control Early Warning & Overrun Engine | 10 | ✅ 100% Passed |
+| 7 | Budget Revision Workflow & Version Promotion | 15 | ✅ 100% Passed |
+| 8 | Capital Projects & Milestone Tracking | 3 | ✅ 100% Passed |
+| 9 | Authoritative Integration Bridge & Invariants | 9 | ✅ 100% Passed |
+| **Total** | **All Phase 41 Test Suites** | **79** | **✅ 100% Passed** |
 
-#### Regression Verification:
-- `npm run test:phase39`: **40 / 40 passed (100%)**
-- `npm run test:phase38`: **55 / 55 passed (100%)**
-- TypeScript Check: `npx tsc --noEmit` exited 0 (clean, 0 errors).
+---
+
+## 6. Regression Testing Verification
+
+- **Phase 40 (Procurement & Contracts):** 38 / 38 Tests Passed (`npm run test:phase40`)
+- **Phase 39 (Teacher/Staff Training & Certifications):** 40 / 40 Tests Passed (`npm run test:phase39`)
+- **Strict Invariants:** Strictly 0 SMS invocations, strictly human approval authority, non-duplicative integration bridge.

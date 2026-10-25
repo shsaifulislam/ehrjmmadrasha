@@ -1,5 +1,55 @@
 [
   {
+    "id": "ATT-TRN-1790702615829-490",
+    "trainingProgramId": "EHRJ-TRN-2026-5847",
+    "sessionId": "EHRJ-TRN-SES-2026-242",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "employeeName": "উস্তাদ বোরহান উদ্দিন",
+    "status": "PRESENT",
+    "checkInTime": "2026-09-29T17:23:35.829Z",
+    "qrVerified": true,
+    "recordedBy": "এডমিন সাহেব",
+    "recordedAt": "2026-09-29T17:23:35.829Z",
+    "notes": "Verified via Institutional QR Scanner"
+  },
+  {
+    "id": "ATT-TRN-1790702615820-701",
+    "trainingProgramId": "EHRJ-TRN-2026-5847",
+    "sessionId": "EHRJ-TRN-SES-2026-242",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "employeeName": "উস্তাদ আহমদ শাকিল",
+    "status": "PRESENT",
+    "checkInTime": "2026-10-05T09:05:00.000Z",
+    "qrVerified": false,
+    "recordedBy": "এডমিন সাহেব",
+    "recordedAt": "2026-09-29T17:23:35.819Z"
+  },
+  {
+    "id": "ATT-TRN-1790702027137-296",
+    "trainingProgramId": "EHRJ-TRN-2026-5060",
+    "sessionId": "EHRJ-TRN-SES-2026-640",
+    "employeeId": "EHRJ-EMP-TEST-002",
+    "employeeName": "উস্তাদ বোরহান উদ্দিন",
+    "status": "PRESENT",
+    "checkInTime": "2026-09-29T17:13:47.137Z",
+    "qrVerified": true,
+    "recordedBy": "এডমিন সাহেব",
+    "recordedAt": "2026-09-29T17:13:47.137Z",
+    "notes": "Verified via Institutional QR Scanner"
+  },
+  {
+    "id": "ATT-TRN-1790702027130-748",
+    "trainingProgramId": "EHRJ-TRN-2026-5060",
+    "sessionId": "EHRJ-TRN-SES-2026-640",
+    "employeeId": "EHRJ-EMP-TEST-001",
+    "employeeName": "উস্তাদ আহমদ শাকিল",
+    "status": "PRESENT",
+    "checkInTime": "2026-10-05T09:05:00.000Z",
+    "qrVerified": false,
+    "recordedBy": "এডমিন সাহেব",
+    "recordedAt": "2026-09-29T17:13:47.129Z"
+  },
+  {
     "id": "ATT-TRN-1790694225747-650",
     "trainingProgramId": "EHRJ-TRN-2026-3609",
     "sessionId": "EHRJ-TRN-SES-2026-584",

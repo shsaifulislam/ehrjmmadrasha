@@ -8,7 +8,8 @@ import { issueOfficialDocument } from "@/lib/documentFactory";
  * POST /api/admin/documents/requests/[id]/issue
  * Issue the official document for an approved request
  */
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

@@ -51,10 +51,6 @@ export async function POST(req: NextRequest) {
               exam: true,
             },
           },
-          feeInvoices: {
-            orderBy: { createdAt: "desc" },
-            take: 5,
-          },
         },
       });
     } else if (!isNaN(parsedRoll)) {
@@ -84,10 +80,6 @@ export async function POST(req: NextRequest) {
                   exam: true,
                 },
               },
-              feeInvoices: {
-                orderBy: { createdAt: "desc" },
-                take: 5,
-              },
             },
           },
         },
@@ -116,9 +108,22 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Prepare clean, sanitized student response (no sensitive passwords or private system keys)
+    // Privacy-Safe Public Verification Data (Strictly NO financial dues, phone numbers, or private ledger data)
     const latestEnrollment = student.enrollments[0];
-    const totalDue = student.feeInvoices.reduce((acc, inv) => acc + inv.dueAmount, 0);
+
+    // Real Attendance Statistics
+    const attendances = await prisma.attendance.findMany({
+      where: { studentId: student.id },
+      select: { status: true },
+    });
+    const totalAttendanceDays = attendances.length;
+    const presentDays = attendances.filter(
+      (a) => a.status === "PRESENT" || a.status === "LATE"
+    ).length;
+    const attendancePercentage =
+      totalAttendanceDays > 0
+        ? Math.round((presentDays / totalAttendanceDays) * 100)
+        : null;
 
     return NextResponse.json({
       success: true,
@@ -134,26 +139,23 @@ export async function POST(req: NextRequest) {
         rollNumber: latestEnrollment?.rollNumber || 1,
         sessionName: latestEnrollment?.session?.name || "২০২৫-২০২৬",
         fatherName: student.fatherNameBn,
-        guardianPhone: student.fatherPhone ? student.fatherPhone.replace(/.(?=.{4})/g, "*") : null,
+        verificationStatus: "VERIFIED_ACTIVE",
+        attendanceStats: {
+          total: totalAttendanceDays,
+          present: presentDays,
+          percentage: attendancePercentage,
+        },
         results: student.results.map((r) => ({
+          id: r.id,
           examName: r.exam.nameBn,
           totalMarks: r.totalMarks,
           percentage: r.percentage,
           grade: r.finalGradeBn,
+          isPassed: r.isPassed,
+          rankInClass: r.rankInClass,
+          verificationCode: r.verificationCode,
           publishedAt: r.publishedAt,
         })),
-        feeDues: {
-          totalDue,
-          invoices: student.feeInvoices.map((inv) => ({
-            invoiceNumber: inv.invoiceNumber,
-            title: inv.title,
-            dueDate: inv.dueDate,
-            totalAmount: inv.totalAmount,
-            paidAmount: inv.paidAmount,
-            dueAmount: inv.dueAmount,
-            status: inv.status,
-          })),
-        },
       },
     });
   } catch (error) {

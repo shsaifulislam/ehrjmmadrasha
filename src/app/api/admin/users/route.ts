@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getSessionUser, hashPassword } from "@/lib/auth";
+import { getSessionUser, hashPassword, revokeAllUserSessions } from "@/lib/auth";
 import { recordAuditLog } from "@/lib/security";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ function errorResponse(message: string, status: number) {
  */
 export async function GET(req: NextRequest) {
   try {
-    const session = await getSessionUser();
+    const session = await getSessionUser(req);
     if (!session || session.role !== "ADMIN") {
       return errorResponse("অননুমোদিত অ্যাক্সেস। কেবলমাত্র অ্যাডমিন প্রবেশের অনুমতি রয়েছে।", 403);
     }
@@ -92,7 +92,7 @@ export async function GET(req: NextRequest) {
  */
 export async function POST(req: NextRequest) {
   try {
-    const session = await getSessionUser();
+    const session = await getSessionUser(req);
     if (!session || session.role !== "ADMIN") {
       return errorResponse("অননুমোদিত অ্যাক্সেস।", 403);
     }
@@ -189,7 +189,7 @@ export async function POST(req: NextRequest) {
  */
 export async function PATCH(req: NextRequest) {
   try {
-    const session = await getSessionUser();
+    const session = await getSessionUser(req);
     if (!session || session.role !== "ADMIN") {
       return errorResponse("অননুমোদিত অ্যাক্সেস।", 403);
     }
@@ -225,6 +225,10 @@ export async function PATCH(req: NextRequest) {
         select: { id: true, name: true, email: true, status: true, role: true },
       });
 
+      if (status !== "ACTIVE") {
+        await revokeAllUserSessions(userId, `ADMIN_STATUS_${status}`);
+      }
+
       await recordAuditLog({
         userId: session.userId,
         action: "UPDATE_USER_STATUS",
@@ -252,6 +256,8 @@ export async function PATCH(req: NextRequest) {
         data: { passwordHash },
       });
 
+      await revokeAllUserSessions(userId, "ADMIN_PASSWORD_RESET");
+
       await recordAuditLog({
         userId: session.userId,
         action: "RESET_USER_PASSWORD",
@@ -270,5 +276,103 @@ export async function PATCH(req: NextRequest) {
   } catch (error: any) {
     console.error("Admin Users PATCH Error:", error);
     return errorResponse("ইউজার আপডেট করতে সমস্যা হয়েছে।", 500);
+  }
+}
+
+/**
+ * DELETE /api/admin/users
+ * Safely deactivates or removes a user account
+ */
+export async function DELETE(req: NextRequest) {
+  try {
+    const session = await getSessionUser(req);
+    if (!session || session.role !== "ADMIN") {
+      return errorResponse("অননুমোদিত অ্যাক্সেস।", 403);
+    }
+
+    const { searchParams } = new URL(req.url);
+    let userId = searchParams.get("userId");
+
+    if (!userId) {
+      try {
+        const body = await req.json();
+        userId = body?.userId;
+      } catch {}
+    }
+
+    if (!userId) {
+      return errorResponse("ইউজার আইডি প্রদান করা আবশ্যক।", 400);
+    }
+
+    if (userId === session.userId) {
+      return errorResponse("আপনি নিজের অ্যাডমিন অ্যাকাউন্ট মুছে ফেলতে পারবেন না।", 400);
+    }
+
+    const targetUser = await prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        _count: {
+          select: {
+            sessions: true,
+            auditLogs: true,
+            markedAttendances: true,
+            createdNotices: true,
+            teacherAssignments: true,
+          },
+        },
+      },
+    });
+
+    if (!targetUser) {
+      return errorResponse("ব্যবহারকারী পাওয়া যায়নি।", 404);
+    }
+
+    const hasHistory =
+      targetUser._count.auditLogs > 0 ||
+      targetUser._count.markedAttendances > 0 ||
+      targetUser._count.createdNotices > 0 ||
+      targetUser._count.teacherAssignments > 0;
+
+    if (hasHistory) {
+      // Soft-deactivate to preserve database integrity
+      await prisma.user.update({
+        where: { id: userId },
+        data: { status: "INACTIVE" },
+      });
+      await revokeAllUserSessions(userId, "ADMIN_DEACTIVATED_USER");
+
+      await recordAuditLog({
+        userId: session.userId,
+        action: "DEACTIVATE_USER",
+        entityType: "User",
+        entityId: userId,
+        details: { reason: "HISTORICAL_RECORDS_PRESERVED", previousStatus: targetUser.status },
+      });
+
+      return NextResponse.json({
+        success: true,
+        message: "ব্যবহারকারীর পূর্ববর্তী প্রাতিষ্ঠানিক রেকর্ড থাকায় অ্যাকাউন্টটি মুছে ফেলার পরিবর্তে নিষ্ক্রিয় (INACTIVE) করা হয়েছে।",
+      });
+    }
+
+    // Safe deletion if no historical ties
+    await revokeAllUserSessions(userId, "ADMIN_DELETED_USER");
+    await prisma.user.delete({ where: { id: userId } });
+
+    await recordAuditLog({
+      userId: session.userId,
+      action: "DELETE_USER",
+      entityType: "User",
+      entityId: userId,
+      details: { deletedEmail: targetUser.email, deletedName: targetUser.name },
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: "ব্যবহারকারী সফলভাবে মুছে ফেলা হয়েছে।",
+    });
+  } catch (error: any) {
+    console.error("Admin Users DELETE Error:", error);
+    return errorResponse("ইউজার অপসারণ করতে সমস্যা হয়েছে।", 500);
   }
 }

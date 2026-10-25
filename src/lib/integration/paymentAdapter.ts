@@ -16,6 +16,7 @@ import { prisma } from "@/lib/prisma";
 import { PaymentReconciliationRecord, ReconciliationStatus } from "./types";
 import { generateNextReceiptNumber } from "@/lib/feeCalculationService";
 import { recordAuditLog } from "@/lib/security";
+import { emitDomainEvent, processSingleOutboxEvent } from "@/lib/communicationEngine";
 
 const DATA_DIR = path.join(process.cwd(), "data", "integrations");
 const RECON_FILE = path.join(DATA_DIR, "reconciliations.json");
@@ -75,36 +76,177 @@ export async function verifyAndFinalizePayment(params: {
 }): Promise<PaymentVerificationResult> {
   const effectiveTxnRef = params.providerTransactionId.trim();
 
-  // 1. Idempotency & Duplicate Check
-  const existingReceipt = await prisma.paymentReceipt.findFirst({
-    where: {
-      OR: [
-        { transactionId: effectiveTxnRef },
-        ...(params.idempotencyKey ? [{ idempotencyKey: params.idempotencyKey }] : []),
-      ],
-    },
-    include: { invoice: true },
-  });
+  // 1. Authoritative Duplicate / Idempotency Check with in-transaction lock
+  try {
+    const roundedAmount = Math.round(params.amount * 100) / 100;
 
-  if (existingReceipt) {
+    const txResult = await prisma.$transaction(async (tx) => {
+      // In-transaction duplicate check
+      const existingReceipt = await tx.paymentReceipt.findFirst({
+        where: {
+          OR: [
+            { transactionId: effectiveTxnRef },
+            ...(params.idempotencyKey ? [{ idempotencyKey: params.idempotencyKey }] : []),
+          ],
+        },
+        include: { invoice: true },
+      });
+
+      if (existingReceipt) {
+        return [existingReceipt];
+      }
+
+      // Re-fetch authoritative FeeInvoice inside transaction
+      const invoice = await tx.feeInvoice.findUnique({
+        where: { id: params.invoiceId },
+        include: { student: true },
+      });
+
+      if (!invoice) {
+        throw new Error(`ইনভয়েস ${params.invoiceId} পাওয়া যায়নি।`);
+      }
+
+      if (invoice.status === "PAID" || invoice.dueAmount <= 0) {
+        throw new Error("এই ইনভয়েসটির সম্পূর্ণ ফি ইতিপূর্বেই পরিশোধিত।");
+      }
+
+      if (roundedAmount > invoice.dueAmount) {
+        throw new Error(`প্রদত্ত অর্থ (৳ ${roundedAmount}) বকেয়া (৳ ${invoice.dueAmount})-এর চেয়ে বেশি।`);
+      }
+
+      // Resolve digital settlement wallet account (SECTION 3.6: Digital wallet vs physical cash)
+      const accountType =
+        params.provider === "BKASH"
+          ? "BKASH_MERCHANT"
+          : params.provider === "NAGAD"
+          ? "NAGAD_MERCHANT"
+          : "BANK";
+
+      const digitalWallet = await tx.financialAccount.findFirst({
+        where: { type: accountType, isActive: true },
+      });
+
+      const targetFundCode = invoice.fundCode || (invoice.feeType === "FOOD" ? "LILLAH" : "GENERAL");
+      const receiptNumber = await generateNextReceiptNumber(tx);
+      const qrCodeToken = `EHRJ-RCP-${Date.now()}-${crypto.randomBytes(3).toString("hex").toUpperCase()}`;
+
+      const newPaidAmount = Math.round((invoice.paidAmount + roundedAmount) * 100) / 100;
+      const newDueAmount = Math.max(0, Math.round((invoice.dueAmount - roundedAmount) * 100) / 100);
+      const newInvoiceStatus = newDueAmount === 0 ? "PAID" : "PARTIALLY_PAID";
+
+      const r = await tx.paymentReceipt.create({
+        data: {
+          receiptNumber,
+          invoiceId: invoice.id,
+          studentId: invoice.studentId,
+          amount: roundedAmount,
+          paymentMethod: params.provider,
+          transactionId: effectiveTxnRef,
+          paymentStatus: "SUCCESSFUL",
+          fundCode: targetFundCode,
+          financialAccountId: digitalWallet?.id || null,
+          idempotencyKey: params.idempotencyKey || null,
+          receivedByUserId: params.actorUserId || null,
+          receiptDate: new Date(),
+          qrCodeToken,
+          notes: `অনলাইন গেটওয়ে অটো-ভেরিফিকেশন (${params.provider}) - সেটেলমেন্ট ওয়ালেট: ${digitalWallet?.nameBn || "ডিজিটাল মার্চেন্ট"}`,
+        },
+      });
+
+      await tx.feeInvoice.update({
+        where: { id: invoice.id },
+        data: {
+          paidAmount: newPaidAmount,
+          dueAmount: newDueAmount,
+          status: newInvoiceStatus,
+        },
+      });
+
+      // Credit digital settlement wallet atomically
+      if (digitalWallet) {
+        await tx.financialAccount.update({
+          where: { id: digitalWallet.id },
+          data: { currentBalance: { increment: roundedAmount } },
+        });
+      }
+
+      // Record institutional cash ledger
+      const fund = await tx.cashFund.findFirst({ where: { code: targetFundCode } });
+      if (fund) {
+        await tx.cashFund.update({
+          where: { id: fund.id },
+          data: { currentBalance: { increment: roundedAmount } },
+        });
+
+        await tx.cashTransaction.create({
+          data: {
+            fundId: fund.id,
+            type: "INCOME",
+            category: `অনলাইন ফি আদায় (${invoice.feeType}) - ${params.provider}`,
+            amount: roundedAmount,
+            payeeOrPayer: invoice.student.fullNameBn,
+            paymentMethod: params.provider,
+            referenceNo: invoice.invoiceNumber,
+            receiptOrVoucherNo: receiptNumber,
+            approvedByUserId: params.actorUserId || null,
+            transactionDate: new Date(),
+            notes: `গেটওয়ে ট্রানজেকশন আইডি: ${effectiveTxnRef}`,
+          },
+        });
+      }
+
+      // Emit PAYMENT_SUCCESSFUL domain event within the transaction
+      const outbox = await emitDomainEvent({
+        eventType: "PAYMENT_SUCCESSFUL",
+        entityType: "PaymentReceipt",
+        entityId: r.id,
+        payload: {
+          studentId: invoice.studentId,
+          studentNameBn: invoice.student.fullNameBn,
+          amount: roundedAmount,
+          receiptNumber,
+          receiptId: r.id,
+        },
+        idempotencyKey: `payment-successful-${r.id}`,
+        tx,
+      });
+
+      return [r, outbox.id];
+    });
+
+    const receipt = txResult[0];
+    const outboxId = txResult[1];
+
+    if (outboxId) {
+      processSingleOutboxEvent(outboxId).catch((err) =>
+        console.error("Webhook payment outbox processing error:", err)
+      );
+    }
+
+    await recordAuditLog({
+      userId: params.actorUserId,
+      action: "ONLINE_GATEWAY_PAYMENT_VERIFIED",
+      entityType: "PaymentReceipt",
+      entityId: receipt.id,
+      details: {
+        provider: params.provider,
+        providerTransactionId: effectiveTxnRef,
+        receiptNumber: receipt.receiptNumber,
+        invoiceId: params.invoiceId,
+        amount: roundedAmount,
+      },
+    });
+
     return {
       verified: true,
       paymentStatus: "SUCCESSFUL",
       providerTransactionId: effectiveTxnRef,
-      invoiceId: existingReceipt.invoiceId,
-      amount: existingReceipt.amount,
+      invoiceId: receipt.invoiceId,
+      amount: receipt.amount,
       currency: "BDT",
-      receiptNumber: existingReceipt.receiptNumber,
+      receiptNumber: receipt.receiptNumber,
     };
-  }
-
-  // 2. Fetch authoritative FeeInvoice
-  const invoice = await prisma.feeInvoice.findUnique({
-    where: { id: params.invoiceId },
-    include: { student: true },
-  });
-
-  if (!invoice) {
+  } catch (err: any) {
     return {
       verified: false,
       paymentStatus: "FAILED",
@@ -112,121 +254,9 @@ export async function verifyAndFinalizePayment(params: {
       invoiceId: params.invoiceId,
       amount: params.amount,
       currency: "BDT",
-      error: `ইনভয়েস ${params.invoiceId} পাওয়া যায়নি।`,
+      error: err.message || "পেমেন্ট চূড়ান্তকরণ ব্যর্থ হয়েছে।",
     };
   }
-
-  if (invoice.status === "PAID" || invoice.dueAmount <= 0) {
-    return {
-      verified: false,
-      paymentStatus: "FAILED",
-      providerTransactionId: effectiveTxnRef,
-      invoiceId: invoice.id,
-      amount: params.amount,
-      currency: "BDT",
-      error: "এই ইনভয়েসটির সম্পূর্ণ ফি ইতিপূর্বেই পরিশোধিত।",
-    };
-  }
-
-  if (params.amount > invoice.dueAmount) {
-    return {
-      verified: false,
-      paymentStatus: "FAILED",
-      providerTransactionId: effectiveTxnRef,
-      invoiceId: invoice.id,
-      amount: params.amount,
-      currency: "BDT",
-      error: `প্রদত্ত অর্থ (৳ ${params.amount}) বকেয়া (৳ ${invoice.dueAmount})-এর চেয়ে বেশি।`,
-    };
-  }
-
-  // 3. Atomically record receipt, update invoice, and record cash ledger
-  const targetFundCode = invoice.fundCode || (invoice.feeType === "FOOD" ? "LILLAH" : "GENERAL");
-  const receiptNumber = await generateNextReceiptNumber();
-  const qrCodeToken = `EHRJ-RCP-${Date.now()}-${crypto.randomBytes(3).toString("hex").toUpperCase()}`;
-
-  const newPaidAmount = invoice.paidAmount + params.amount;
-  const newDueAmount = Math.max(0, invoice.dueAmount - params.amount);
-  const newInvoiceStatus = newDueAmount === 0 ? "PAID" : "PARTIALLY_PAID";
-
-  const [receipt] = await prisma.$transaction(async (tx) => {
-    const r = await tx.paymentReceipt.create({
-      data: {
-        receiptNumber,
-        invoiceId: invoice.id,
-        studentId: invoice.studentId,
-        amount: params.amount,
-        paymentMethod: params.provider,
-        transactionId: effectiveTxnRef,
-        paymentStatus: "SUCCESSFUL",
-        fundCode: targetFundCode,
-        idempotencyKey: params.idempotencyKey || null,
-        receivedByUserId: params.actorUserId || null,
-        receiptDate: new Date(),
-        qrCodeToken,
-        notes: `অনলাইন পেমেন্ট গেটওয়ে ভেরিফিকেশন (${params.provider})`,
-      },
-    });
-
-    await tx.feeInvoice.update({
-      where: { id: invoice.id },
-      data: {
-        paidAmount: newPaidAmount,
-        dueAmount: newDueAmount,
-        status: newInvoiceStatus,
-      },
-    });
-
-    const fund = await tx.cashFund.findFirst({ where: { code: targetFundCode } });
-    if (fund) {
-      await tx.cashFund.update({
-        where: { id: fund.id },
-        data: { currentBalance: fund.currentBalance + params.amount },
-      });
-
-      await tx.cashTransaction.create({
-        data: {
-          fundId: fund.id,
-          type: "INCOME",
-          category: `অনলাইন ফি আদায় (${invoice.feeType}) - ${params.provider}`,
-          amount: params.amount,
-          payeeOrPayer: invoice.student.fullNameBn,
-          paymentMethod: params.provider,
-          referenceNo: invoice.invoiceNumber,
-          receiptOrVoucherNo: receiptNumber,
-          approvedByUserId: params.actorUserId || null,
-          transactionDate: new Date(),
-          notes: `গেটওয়ে ট্রানজেকশন আইডি: ${effectiveTxnRef}`,
-        },
-      });
-    }
-
-    return [r];
-  });
-
-  await recordAuditLog({
-    userId: params.actorUserId,
-    action: "ONLINE_GATEWAY_PAYMENT_VERIFIED",
-    entityType: "PaymentReceipt",
-    entityId: receipt.id,
-    details: {
-      provider: params.provider,
-      providerTransactionId: effectiveTxnRef,
-      receiptNumber,
-      invoiceNumber: invoice.invoiceNumber,
-      amount: params.amount,
-    },
-  });
-
-  return {
-    verified: true,
-    paymentStatus: "SUCCESSFUL",
-    providerTransactionId: effectiveTxnRef,
-    invoiceId: invoice.id,
-    amount: params.amount,
-    currency: "BDT",
-    receiptNumber,
-  };
 }
 
 /**

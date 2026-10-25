@@ -3,7 +3,7 @@ import { getSeoConfig } from "@/lib/cms";
 
 export default function robots(): MetadataRoute.Robots {
   const seo = getSeoConfig();
-  const baseUrl = seo.canonicalBaseUrl || "https://ehrj-madrasha.edu.bd";
+  const baseUrl = seo.canonicalBaseUrl || "https://www.ehrjmadrasha.com";
 
   return {
     rules: [

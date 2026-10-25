@@ -2,19 +2,20 @@ import { Metadata } from "next";
 import InstitutionalBudgetConsole from "@/components/budget/InstitutionalBudgetConsole";
 
 export const metadata: Metadata = {
-  title: "বাজেট বিচ্যুতি ও ঘাটতি বিশ্লেষণ | EHRJ Admin",
-  description: "পরিকল্পিত ব্যয় বনাম প্রকৃত ব্যয় ও প্রতিশ্রুতির তুলনামূলক বিচ্যুতি বিশ্লেষণ।",
+  title: "বাজেট বিচ্যুতি বিশ্লেষণ ও ব্যয় নিয়ন্ত্রণ | EHRJ Admin",
+  description: "পরিকল্পিত বনাম প্রকৃত ব্যয় বিচ্যুতি ও বাজেট নিয়ন্ত্রণ সতর্কতা।",
 };
 
-export default async function AdminBudgetVariancePage({
+export default async function BudgetVariancePage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+
   return (
     <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
-      <InstitutionalBudgetConsole initialBudgetId={id} initialTab="VARIANCE" />
+      <InstitutionalBudgetConsole initialTab="VARIANCE" initialBudgetId={id} />
     </div>
   );
 }

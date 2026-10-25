@@ -1,0 +1,1671 @@
+[
+  {
+    "id": "EHRJ-VEN-2026-0001",
+    "vendorCode": "VEN-2026-0001",
+    "legalNameBn": "কুমিল্লা মডার্ন প্রেস অ্যান্ড পাবলিকেশন্স",
+    "legalNameEn": "Comilla Modern Press & Publications",
+    "displayName": "মডার্ন প্রেস কুমিল্লা",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "BOOKS",
+    "categoryNameBn": "শিক্ষা ও পাঠ্যবই উপকরণ",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01711223344",
+    "altPhone": "01811223344",
+    "email": "modernpress.comilla@gmail.com",
+    "addressBn": "কান্দিরপাড়, কুমিল্লা সদর, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "tradeLicenseNo": "TRAD/COM/2024/9842",
+    "tinNumber": "784592019482",
+    "binVatNumber": "002948192-0102",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Kandirpar Branch, Comilla",
+    "bankAccountTitle": "Comilla Modern Press & Pub",
+    "bankAccountNumberMasked": "•••• •••• 4589",
+    "contacts": [
+      {
+        "id": "cnt-1",
+        "name": "জনাব মো: রফিকুল ইসলাম",
+        "designation": "ম্যানেজিং ডিরেক্টর",
+        "phone": "01711223344",
+        "email": "rafiq@modernpress.com",
+        "department": "ম্যানেজমেন্ট",
+        "isPrimary": true,
+        "isActive": true
+      },
+      {
+        "id": "cnt-2",
+        "name": "মো: কামাল হোসেন",
+        "designation": "সেলস ও সাপ্লাই ম্যানেজার",
+        "phone": "01811223344",
+        "department": "সাপ্লাই চেইন",
+        "isPrimary": false,
+        "isActive": true
+      }
+    ],
+    "verifications": [
+      {
+        "id": "vfc-1",
+        "type": "TRADE_LICENSE",
+        "titleBn": "ট্রেড লাইসেন্স সত্যতা যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "অধ্যক্ষ কার্যালয়",
+        "verifiedAt": "2026-01-10T10:00:00Z",
+        "expiryDate": "2027-06-30",
+        "notes": "সিটি কর্পোরেশন ট্রেড লাইসেন্স নবায়নকৃত"
+      },
+      {
+        "id": "vfc-2",
+        "type": "BANK_ACCOUNT",
+        "titleBn": "ইসলামী ব্যাংক প্রাতিষ্ঠানিক হিসাব নিশ্চিতকরণ",
+        "status": "VERIFIED",
+        "verifiedBy": "হিসাব বিভাগ",
+        "verifiedAt": "2026-01-10T10:30:00Z",
+        "notes": "চেক কপি ও ব্যাংক স্টেটমেন্ট যাচাইকৃত"
+      },
+      {
+        "id": "ver-trade",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক যাচাইকরণ",
+        "status": "VERIFIED",
+        "verifiedBy": "মুফতি মোহাম্মাদুল্লাহ (মুহতামিম)",
+        "verifiedAt": "2026-09-29T18:13:29.962Z",
+        "notes": "পৌরসভা ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন"
+      }
+    ],
+    "documents": [
+      {
+        "id": "doc-1",
+        "phase29DocToken": "DOC-2026-VEN-001",
+        "documentType": "TRADE_LICENSE",
+        "title": "হালনাগাদ ট্রেড লাইসেন্স ২০২৫-২৬",
+        "fileName": "trade_license_modern_press.pdf",
+        "fileSize": 450200,
+        "uploadedAt": "2026-01-08T09:00:00Z",
+        "expiryDate": "2027-06-30",
+        "isVerified": true
+      },
+      {
+        "id": "doc-1790705591210-ks7d",
+        "documentType": "TRADE_LICENSE",
+        "title": "হালনাগাদ ট্রেড লাইসেন্স ২০২৬",
+        "uploadedAt": "2026-09-29T18:13:11.210Z",
+        "expiryDate": "2027-06-30",
+        "isVerified": true,
+        "verifiedBy": "মুফতি মোহাম্মাদুল্লাহ (মুহতামিম)",
+        "verifiedAt": "2026-09-29T18:13:11.210Z"
+      },
+      {
+        "id": "doc-1790705609974-fbgr",
+        "documentType": "TRADE_LICENSE",
+        "title": "হালনাগাদ ট্রেড লাইসেন্স ২০২৬",
+        "uploadedAt": "2026-09-29T18:13:29.974Z",
+        "expiryDate": "2027-06-30",
+        "isVerified": true,
+        "verifiedBy": "মুফতি মোহাম্মাদুল্লাহ (মুহতামিম)",
+        "verifiedAt": "2026-09-29T18:13:29.974Z"
+      }
+    ],
+    "complianceRecords": [
+      {
+        "id": "cmp-1",
+        "titleBn": "বই মুদ্রণ ও বাঁধাই মানদণ্ড সম্মতি",
+        "status": "COMPLIANT",
+        "checkDate": "2026-01-10",
+        "notes": "কাগজের জিএসএম এবং বাঁধাই স্থায়িত্ব সন্তোষজনক",
+        "assessedBy": "প্রকিউরমেন্ট কমিটি"
+      }
+    ],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 64,
+      "onTimeDeliveryRate": 90,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 2
+    },
+    "notes": "মাদরাসার বার্ষিক কিতাব, খাতা ও ডায়েরি মুদ্রণের প্রধান অনুমোদিত সরবরাহকারী।",
+    "createdBy": "admin",
+    "createdAt": "2026-01-05T10:00:00Z",
+    "updatedBy": "4c5e1400-f60d-48a6-b322-849a46eceae7",
+    "updatedAt": "2026-09-30T04:10:48.758Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0002",
+    "vendorCode": "VEN-2026-0002",
+    "legalNameBn": "ইলিয়টগঞ্জ এগ্রো ফুড অ্যান্ড গ্রেইন সাপ্লায়ার্স",
+    "legalNameEn": "Eliotganj Agro Food & Grain Suppliers",
+    "displayName": "ইলিয়টগঞ্জ এগ্রো ফুডস",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "FOOD",
+    "categoryNameBn": "খাদ্য ও লিল্লাহ বোর্ডিং সামগ্রী",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01722334455",
+    "altPhone": "01922334455",
+    "email": "agro.eliotganj@gmail.com",
+    "addressBn": "ইলিয়টগঞ্জ বাজার, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "tradeLicenseNo": "TRAD/DAUD/2024/1102",
+    "tinNumber": "654129841290",
+    "bankName": "Al-Arafah Islami Bank PLC",
+    "bankBranch": "Eliotganj Bazar Branch",
+    "bankAccountTitle": "Eliotganj Agro Food",
+    "bankAccountNumberMasked": "•••• •••• 9812",
+    "contacts": [
+      {
+        "id": "cnt-3",
+        "name": "হাজী মো: সামসুল হক",
+        "designation": "স্বত্বাধিকারী",
+        "phone": "01722334455",
+        "department": "ম্যানেজমেন্ট",
+        "isPrimary": true,
+        "isActive": true
+      }
+    ],
+    "verifications": [
+      {
+        "id": "vfc-3",
+        "type": "TRADE_LICENSE",
+        "titleBn": "বাজার ইউনিয়ন ট্রেড লাইসেন্স",
+        "status": "VERIFIED",
+        "verifiedBy": "নাজের কার্যালয়",
+        "verifiedAt": "2026-01-12T14:00:00Z",
+        "expiryDate": "2027-06-30"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [
+      {
+        "id": "cmp-2",
+        "titleBn": "খাদ্যের বিশুদ্ধতা ও স্বাস্থ্যবিধি মানদণ্ড",
+        "status": "COMPLIANT",
+        "checkDate": "2026-01-15",
+        "notes": "চাল, ডাল, সরিষার তেল ও মসলার মান শতভাগ হালাল ও ভেজালমুক্ত",
+        "assessedBy": "লিল্লাহ বোর্ডিং পরিদর্শক"
+      }
+    ],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 36,
+      "onTimeDeliveryRate": 98,
+      "qualityComplianceRate": 99,
+      "disputeCount": 0,
+      "averageResponseDays": 0.5
+    },
+    "notes": "লিল্লাহ বোর্ডিংয়ের শিক্ষার্থীদের প্রতিদিনের তাজা খাদ্যশস্য সরবরাহকারী।",
+    "createdBy": "admin",
+    "createdAt": "2026-01-05T10:00:00Z",
+    "updatedBy": "admin",
+    "updatedAt": "2026-01-15T10:00:00Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0003",
+    "vendorCode": "VEN-2026-0003",
+    "legalNameBn": "রহমান বিল্ডার্স অ্যান্ড কনস্ট্রাকশন ইঞ্জিনিয়ারিং",
+    "legalNameEn": "Rahman Builders & Construction Engineering",
+    "displayName": "রহমান বিল্ডার্স",
+    "vendorType": "CONTRACTOR",
+    "categoryCode": "CONSTRUCTION",
+    "categoryNameBn": "রক্ষণাবেক্ষণ ও নির্মাণ উপকরণ",
+    "status": "ACTIVE",
+    "riskLevel": "MEDIUM",
+    "verificationStatus": "VERIFIED",
+    "phone": "01733445566",
+    "email": "contact@rahmanbuilders.com.bd",
+    "addressBn": "শাসনগাছা, কুমিল্লা সদর, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "tradeLicenseNo": "TRAD/COM/2023/5541",
+    "tinNumber": "983412095481",
+    "bankName": "Shahjalal Islami Bank PLC",
+    "bankBranch": "Comilla Branch",
+    "bankAccountTitle": "Rahman Builders & Construction",
+    "bankAccountNumberMasked": "•••• •••• 1123",
+    "contacts": [
+      {
+        "id": "cnt-4",
+        "name": "ইঞ্জি: মো: আতিকুর রহমান",
+        "designation": "প্রধান প্রকৌশলী ও সিইও",
+        "phone": "01733445566",
+        "isPrimary": true,
+        "isActive": true
+      }
+    ],
+    "verifications": [
+      {
+        "id": "vfc-4",
+        "type": "CONTRACT_COMPLIANCE",
+        "titleBn": "নির্মাণ কাজের লাইসেন্স ও নিরাপত্তা সরঞ্জাম",
+        "status": "VERIFIED",
+        "verifiedBy": "উন্নয়ন কমিটি",
+        "verifiedAt": "2026-02-01T11:00:00Z"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 5,
+      "onTimeDeliveryRate": 90,
+      "qualityComplianceRate": 95,
+      "disputeCount": 0,
+      "averageResponseDays": 2
+    },
+    "notes": "মাদরাসার নতুন অ্যাকাডেমিক ভবন সম্প্রসারণ ও চুনকাম কাজের অনুমোদিত ঠিকাদার।",
+    "createdBy": "admin",
+    "createdAt": "2026-02-01T09:00:00Z",
+    "updatedBy": "admin",
+    "updatedAt": "2026-02-01T11:00:00Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0004",
+    "vendorCode": "VEN-2026-0004",
+    "legalNameBn": "মেঘনা টেকনোলজি অ্যান্ড কম্পিউটার ল্যাব সলিউশনস",
+    "legalNameEn": "Meghna Technology & Computer Lab Solutions",
+    "displayName": "মেঘনা টেকনোলজি",
+    "vendorType": "DISTRIBUTOR",
+    "categoryCode": "IT",
+    "categoryNameBn": "কম্পিউটার ও আইটি এক্সেসরিজ",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01744556677",
+    "email": "sales@meghnatech.com.bd",
+    "addressBn": "মুকাম ভ্যালি শপিং কমপ্লেক্স, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [
+      {
+        "id": "cnt-5",
+        "name": "জনাব মো: সজীব আহমেদ",
+        "designation": "সেলস ম্যানেজার",
+        "phone": "01744556677",
+        "isPrimary": true,
+        "isActive": true
+      }
+    ],
+    "verifications": [
+      {
+        "id": "vfc-5",
+        "type": "TRADE_LICENSE",
+        "titleBn": "আইটি ব্যবসা ট্রেড লাইসেন্স",
+        "status": "VERIFIED",
+        "verifiedBy": "আইটি বিভাগ",
+        "verifiedAt": "2026-01-20T10:00:00Z"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 8,
+      "onTimeDeliveryRate": 95,
+      "qualityComplianceRate": 97,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "notes": "অফিস কম্পিউটার, প্রিন্টার ও সিসিটিভি ক্যামেরার অনুমোদিত হার্ডওয়্যার ভেন্ডর।",
+    "createdBy": "admin",
+    "createdAt": "2026-01-18T10:00:00Z",
+    "updatedBy": "admin",
+    "updatedAt": "2026-01-20T10:00:00Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0005",
+    "vendorCode": "VEN-2026-0005",
+    "legalNameBn": "যমুনা স্যানিটারি অ্যান্ড হার্ডওয়্যার স্টোর",
+    "legalNameEn": "Jamuna Sanitary & Hardware Store",
+    "displayName": "যমুনা স্যানিটারি",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "প্লাম্বিং ও পানি ব্যবস্থাপনা সামগ্রী",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01755667788",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড সংলগ্ন, দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [
+      {
+        "id": "cnt-6",
+        "name": "মো: জামিল মিয়া",
+        "designation": "ম্যানেজার",
+        "phone": "01755667788",
+        "isPrimary": true,
+        "isActive": true
+      }
+    ],
+    "verifications": [
+      {
+        "id": "vfc-6",
+        "type": "TRADE_LICENSE",
+        "titleBn": "ট্রেড লাইসেন্স যাচাই",
+        "status": "PENDING",
+        "notes": "কাগজপত্র পর্যালোচনায় রয়েছে"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 0,
+      "qualityComplianceRate": 0,
+      "disputeCount": 0,
+      "averageResponseDays": 0
+    },
+    "notes": "নতুন তালিকাভুক্ত স্থানীয় স্যানিটারি ভেন্ডর।",
+    "createdBy": "admin",
+    "createdAt": "2026-02-10T12:00:00Z",
+    "updatedBy": "admin",
+    "updatedAt": "2026-02-10T12:00:00Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0006",
+    "vendorCode": "VEN-2026-0006",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888675063",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790701263603-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T17:01:03.630Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:01:03.604Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:01:03.630Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0007",
+    "vendorCode": "VEN-2026-0007",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888675063",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790701263628-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:01:03.628Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:01:03.628Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0008",
+    "vendorCode": "VEN-2026-0008",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888708197",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790701421562-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T17:03:41.583Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:03:41.563Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:03:41.584Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0009",
+    "vendorCode": "VEN-2026-0009",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888708197",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790701421574-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:03:41.575Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:03:41.575Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0010",
+    "vendorCode": "VEN-2026-0010",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888453384",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790701497332-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T17:04:57.347Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:04:57.333Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:04:57.348Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0011",
+    "vendorCode": "VEN-2026-0011",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888453384",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790701497342-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:04:57.342Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:04:57.342Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0012",
+    "vendorCode": "VEN-2026-0012",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888216337",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790701514776-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T17:05:14.787Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:05:14.776Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:05:14.788Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0013",
+    "vendorCode": "VEN-2026-0013",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888216337",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790701514781-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:05:14.781Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:05:14.781Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0014",
+    "vendorCode": "VEN-2026-0014",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888880089",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790701533443-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T17:05:33.458Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:05:33.444Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:05:33.459Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0015",
+    "vendorCode": "VEN-2026-0015",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888880089",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790701533451-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:05:33.452Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:05:33.452Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0016",
+    "vendorCode": "VEN-2026-0016",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888627017",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790702019298-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T17:13:39.310Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:13:39.299Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:13:39.311Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0017",
+    "vendorCode": "VEN-2026-0017",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888627017",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790702019305-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:13:39.306Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:13:39.306Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0018",
+    "vendorCode": "VEN-2026-0018",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888794790",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790702608177-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T17:23:28.193Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:23:28.178Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:23:28.194Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0019",
+    "vendorCode": "VEN-2026-0019",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888794790",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790702608185-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:23:28.186Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:23:28.186Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0020",
+    "vendorCode": "VEN-2026-0020",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888570917",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790704608549-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T17:56:48.573Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:56:48.550Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:56:48.574Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0021",
+    "vendorCode": "VEN-2026-0021",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888570917",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790704608563-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T17:56:48.563Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T17:56:48.563Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0022",
+    "vendorCode": "VEN-2026-0022",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888749242",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790705135954-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T18:05:35.977Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T18:05:35.955Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T18:05:35.978Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0023",
+    "vendorCode": "VEN-2026-0023",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888749242",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790705135967-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T18:05:35.968Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T18:05:35.968Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0024",
+    "vendorCode": "VEN-2026-0024",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888743182",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790705194507-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T18:06:34.526Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T18:06:34.508Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T18:06:34.527Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0025",
+    "vendorCode": "VEN-2026-0025",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888743182",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790705194518-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T18:06:34.519Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T18:06:34.519Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0026",
+    "vendorCode": "VEN-2026-0026",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888469192",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790705654682-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T18:14:14.702Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      },
+      {
+        "id": "ver-trade",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক যাচাইকরণ",
+        "status": "VERIFIED",
+        "verifiedBy": "মুফতি মোহাম্মাদুল্লাহ (মুহতামিম)",
+        "verifiedAt": "2026-09-29T18:14:19.647Z",
+        "notes": "মূল কপি অনুমোদিত"
+      }
+    ],
+    "documents": [
+      {
+        "id": "doc-1790705659659-9fr6",
+        "documentType": "TRADE_LICENSE",
+        "title": "ট্রেড লাইসেন্স ২০২৬",
+        "uploadedAt": "2026-09-29T18:14:19.659Z",
+        "isVerified": true,
+        "verifiedBy": "মুফতি মোহাম্মাদুল্লাহ (মুহতামিম)",
+        "verifiedAt": "2026-09-29T18:14:19.659Z"
+      }
+    ],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T18:14:14.684Z",
+    "updatedBy": "4c5e1400-f60d-48a6-b322-849a46eceae7",
+    "updatedAt": "2026-09-29T18:14:19.659Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0027",
+    "vendorCode": "VEN-2026-0027",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888469192",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790705654693-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T18:14:14.694Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T18:14:14.694Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0028",
+    "vendorCode": "VEN-2026-0028",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888208502",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790706164554-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-29T18:22:44.571Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      },
+      {
+        "id": "ver-trade",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক যাচাইকরণ",
+        "status": "VERIFIED",
+        "verifiedBy": "মুফতি মোহাম্মাদুল্লাহ (মুহতামিম)",
+        "verifiedAt": "2026-09-29T18:22:45.779Z",
+        "notes": "মূল কপি অনুমোদিত"
+      }
+    ],
+    "documents": [
+      {
+        "id": "doc-1790706165789-xka0",
+        "phase29DocToken": "DOC-VEN-2026-9999",
+        "documentType": "TRADE_LICENSE",
+        "title": "ট্রেড লাইসেন্স ২০২৬",
+        "uploadedAt": "2026-09-29T18:22:45.789Z",
+        "isVerified": true,
+        "verifiedBy": "মুফতি মোহাম্মাদুল্লাহ (মুহতামিম)",
+        "verifiedAt": "2026-09-29T18:22:45.789Z"
+      }
+    ],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T18:22:44.555Z",
+    "updatedBy": "4c5e1400-f60d-48a6-b322-849a46eceae7",
+    "updatedAt": "2026-09-29T18:22:45.791Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0029",
+    "vendorCode": "VEN-2026-0029",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888208502",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790706164564-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-29T18:22:44.565Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-29T18:22:44.565Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0030",
+    "vendorCode": "VEN-2026-0030",
+    "legalNameBn": "মদিনা ইলেকট্রিক্যাল অ্যান্ড স্যানিটারি স্টোর",
+    "legalNameEn": "Madina Electrical & Sanitary Store",
+    "displayName": "মদিনা ইলেকট্রিক্যাল",
+    "vendorType": "LOCAL_VENDOR",
+    "categoryCode": "PLUMBING",
+    "categoryNameBn": "PLUMBING",
+    "status": "ACTIVE",
+    "riskLevel": "LOW",
+    "verificationStatus": "VERIFIED",
+    "phone": "01888291464",
+    "addressBn": "ইলিয়টগঞ্জ বাস স্ট্যান্ড রোড, দাউদকান্দি, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "bankName": "Islami Bank Bangladesh PLC",
+    "bankBranch": "Daudkandi Branch",
+    "bankAccountNumberMasked": "•••• •••• 5667",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790741448111-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "VERIFIED",
+        "verifiedBy": "মাওলানা আব্দুল বারী (প্রশাসনিক কর্মকর্তা)",
+        "verifiedAt": "2026-09-30T04:10:48.134Z",
+        "notes": "কাগজপত্র ও ট্রেড লাইসেন্স মূল কপি যাচাই সম্পন্ন।"
+      },
+      {
+        "id": "ver-trade",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক যাচাইকরণ",
+        "status": "VERIFIED",
+        "verifiedBy": "মুফতি মোহাম্মাদুল্লাহ (মুহতামিম)",
+        "verifiedAt": "2026-09-30T04:10:49.353Z",
+        "notes": "মূল কপি অনুমোদিত"
+      }
+    ],
+    "documents": [
+      {
+        "id": "doc-1790741449366-hiuc",
+        "phase29DocToken": "DOC-VEN-2026-9999",
+        "documentType": "TRADE_LICENSE",
+        "title": "ট্রেড লাইসেন্স ২০২৬",
+        "uploadedAt": "2026-09-30T04:10:49.366Z",
+        "isVerified": true,
+        "verifiedBy": "মুফতি মোহাম্মাদুল্লাহ (মুহতামিম)",
+        "verifiedAt": "2026-09-30T04:10:49.366Z"
+      }
+    ],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-30T04:10:48.112Z",
+    "updatedBy": "4c5e1400-f60d-48a6-b322-849a46eceae7",
+    "updatedAt": "2026-09-30T04:10:49.367Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0031",
+    "vendorCode": "VEN-2026-0031",
+    "legalNameBn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "legalNameEn": "ডুপ্লিকেট স্টোর টেস্ট",
+    "displayName": "ডুপ্লিকেট স্টোর টেস্ট",
+    "vendorType": "SUPPLIER",
+    "categoryCode": "STATIONERY",
+    "categoryNameBn": "STATIONERY",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01888291464",
+    "addressBn": "দাউদকান্দি",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1790741448125-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "admin-test-01",
+    "createdAt": "2026-09-30T04:10:48.126Z",
+    "updatedBy": "admin-test-01",
+    "updatedAt": "2026-09-30T04:10:48.126Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0032",
+    "vendorCode": "VEN-2026-0032",
+    "legalNameBn": "অডিট টেস্ট ভেন্ডর",
+    "legalNameEn": "অডিট টেস্ট ভেন্ডর",
+    "displayName": "অডিট টেস্ট ভেন্ডর",
+    "vendorType": "COMPANY",
+    "categoryCode": "PRINTING",
+    "categoryNameBn": "PRINTING",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01811111111",
+    "addressBn": "কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1791548778410-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "ceed68a7-ee63-43c2-8a19-f569b098f2c0",
+    "createdAt": "2026-10-09T12:26:18.411Z",
+    "updatedBy": "ceed68a7-ee63-43c2-8a19-f569b098f2c0",
+    "updatedAt": "2026-10-09T12:26:18.411Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0033",
+    "vendorCode": "VEN-2026-0033",
+    "legalNameBn": "মেসার্স শাহজালাল ট্রেডার্স (অডিট টেস্ট)",
+    "legalNameEn": "মেসার্স শাহজালাল ট্রেডার্স (অডিট টেস্ট)",
+    "displayName": "মেসার্স শাহজালাল ট্রেডার্স (অডিট টেস্ট)",
+    "vendorType": "COMPANY",
+    "categoryCode": "PRINTING",
+    "categoryNameBn": "PRINTING",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01799887766",
+    "addressBn": "ইলিয়টগঞ্জ বাজার, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1791553688082-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "createdAt": "2026-10-09T13:48:08.083Z",
+    "updatedBy": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "updatedAt": "2026-10-09T13:48:08.083Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0034",
+    "vendorCode": "VEN-2026-0034",
+    "legalNameBn": "মেসার্স শাহজালাল ট্রেডার্স (অডিট টেস্ট)",
+    "legalNameEn": "মেসার্স শাহজালাল ট্রেডার্স (অডিট টেস্ট)",
+    "displayName": "মেসার্স শাহজালাল ট্রেডার্স (অডিট টেস্ট)",
+    "vendorType": "COMPANY",
+    "categoryCode": "PRINTING",
+    "categoryNameBn": "PRINTING",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01799887766",
+    "addressBn": "ইলিয়টগঞ্জ বাজার, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1791554595538-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "createdAt": "2026-10-09T14:03:15.541Z",
+    "updatedBy": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "updatedAt": "2026-10-09T14:03:15.541Z"
+  },
+  {
+    "id": "EHRJ-VEN-2026-0035",
+    "vendorCode": "VEN-2026-0035",
+    "legalNameBn": "মেসার্স শাহজালাল ট্রেডার্স (অডিট টেস্ট)",
+    "legalNameEn": "মেসার্স শাহজালাল ট্রেডার্স (অডিট টেস্ট)",
+    "displayName": "মেসার্স শাহজালাল ট্রেডার্স (অডিট টেস্ট)",
+    "vendorType": "COMPANY",
+    "categoryCode": "PRINTING",
+    "categoryNameBn": "PRINTING",
+    "status": "PENDING_VERIFICATION",
+    "riskLevel": "LOW",
+    "verificationStatus": "PENDING",
+    "phone": "01799887766",
+    "addressBn": "ইলিয়টগঞ্জ বাজার, কুমিল্লা",
+    "district": "Comilla",
+    "country": "Bangladesh",
+    "contacts": [],
+    "verifications": [
+      {
+        "id": "vfc-1791560136947-1",
+        "type": "IDENTITY",
+        "titleBn": "প্রাতিষ্ঠানিক পরিচয় ও নিবন্ধন যাচাই",
+        "status": "PENDING"
+      }
+    ],
+    "documents": [],
+    "complianceRecords": [],
+    "ratingSummary": {
+      "totalOrdersFulfilled": 0,
+      "onTimeDeliveryRate": 100,
+      "qualityComplianceRate": 100,
+      "disputeCount": 0,
+      "averageResponseDays": 1
+    },
+    "createdBy": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "createdAt": "2026-10-09T15:35:36.948Z",
+    "updatedBy": "8f2ff11f-0782-42de-aaaf-6fe242822864",
+    "updatedAt": "2026-10-09T15:35:36.948Z"
+  }
+]

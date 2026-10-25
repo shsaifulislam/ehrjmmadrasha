@@ -5,29 +5,23 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { prisma } from "./prisma";
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "ehrj-madrasa-digital-campus-secure-production-jwt-secret-key-2026"
-);
+import { getJwtSecretBytes } from "./env";
+
+const JWT_SECRET = getJwtSecretBytes();
+
 
 export const SESSION_COOKIE_NAME = "ehrj_session_token";
 
 const REVOKED_TOKENS_FILE = path.join(process.cwd(), "data", "security", "revoked_tokens.json");
 
-function ensureRevokedTokensStore() {
-  const dir = path.dirname(REVOKED_TOKENS_FILE);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-  if (!fs.existsSync(REVOKED_TOKENS_FILE)) {
-    fs.writeFileSync(REVOKED_TOKENS_FILE, JSON.stringify([], null, 2), "utf-8");
-  }
-}
+import { atomicWriteFileSync, safeReadJsonSync } from "./storageUtils";
 
 export function isTokenRevoked(token: string): boolean {
   try {
-    ensureRevokedTokensStore();
-    const content = fs.readFileSync(REVOKED_TOKENS_FILE, "utf-8");
-    const revoked: Array<{ token: string; revokedAt: string }> = JSON.parse(content || "[]");
+    const revoked = safeReadJsonSync<Array<{ token: string; revokedAt: string }>>(
+      REVOKED_TOKENS_FILE,
+      []
+    );
     return revoked.some((r) => r.token === token);
   } catch {
     return false;
@@ -36,13 +30,23 @@ export function isTokenRevoked(token: string): boolean {
 
 export async function revokeToken(token: string, reason = "Session revoked") {
   try {
-    ensureRevokedTokensStore();
-    const content = fs.readFileSync(REVOKED_TOKENS_FILE, "utf-8");
-    const revoked: Array<{ token: string; revokedAt: string; reason?: string }> = JSON.parse(content || "[]");
-    if (!revoked.some((r) => r.token === token)) {
-      revoked.push({ token, revokedAt: new Date().toISOString(), reason });
-      fs.writeFileSync(REVOKED_TOKENS_FILE, JSON.stringify(revoked, null, 2), "utf-8");
+    const revoked = safeReadJsonSync<Array<{ token: string; revokedAt: string; reason?: string }>>(
+      REVOKED_TOKENS_FILE,
+      []
+    );
+    const MAX_REVOKED_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days (JWTs naturally expire within 7 days)
+    const now = Date.now();
+
+    // Prune expired token revocations to prevent unbounded file growth
+    const activeRevoked = revoked.filter(
+      (r) => now - new Date(r.revokedAt).getTime() < MAX_REVOKED_AGE_MS
+    );
+
+    if (!activeRevoked.some((r) => r.token === token)) {
+      activeRevoked.push({ token, revokedAt: new Date().toISOString(), reason });
     }
+    atomicWriteFileSync(REVOKED_TOKENS_FILE, JSON.stringify(activeRevoked, null, 2));
+
     // Also remove from prisma.session
     await prisma.session.deleteMany({
       where: { token },
@@ -69,11 +73,14 @@ export interface SessionPayload {
   name: string;
 }
 
+import crypto from "crypto";
+
 export async function createSessionToken(
   payload: SessionPayload,
   options?: { ipAddress?: string; userAgent?: string; persist?: boolean }
 ): Promise<string> {
-  const token = await new SignJWT({ ...payload })
+  const jti = crypto.randomUUID();
+  const token = await new SignJWT({ ...payload, jti })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("7d")
@@ -103,7 +110,7 @@ export async function verifySessionToken(token: string): Promise<SessionPayload 
     return null;
   }
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, JWT_SECRET, { clockTolerance: 30 });
     return payload as unknown as SessionPayload;
   } catch {
     return null;
@@ -111,24 +118,34 @@ export async function verifySessionToken(token: string): Promise<SessionPayload 
 }
 
 export async function setAuthCookie(token: string) {
-  const cookieStore = cookies();
-  cookieStore.set(SESSION_COOKIE_NAME, token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 7 * 24 * 60 * 60, // 7 days
-  });
+  try {
+    const cookieStore = await cookies();
+    cookieStore.set(SESSION_COOKIE_NAME, token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60, // 7 days
+    });
+  } catch {
+    // Outside active Next.js HTTP request scope (e.g. CLI, tests, background workers)
+  }
 }
 
 export async function clearAuthCookie() {
-  const cookieStore = cookies();
-  const token = cookieStore.get(SESSION_COOKIE_NAME)?.value;
-  if (token) {
-    await revokeToken(token, "User Logout");
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(SESSION_COOKIE_NAME)?.value;
+    if (token) {
+      await revokeToken(token, "User Logout");
+    }
+    cookieStore.delete(SESSION_COOKIE_NAME);
+  } catch {
+    // Outside active Next.js HTTP request scope
   }
-  cookieStore.delete(SESSION_COOKIE_NAME);
 }
+
+import { NextResponse } from "next/server";
 
 export async function getCurrentUser(req?: any): Promise<SessionPayload | null> {
   let token: string | undefined;
@@ -148,7 +165,7 @@ export async function getCurrentUser(req?: any): Promise<SessionPayload | null> 
       if (!token) {
         const authHeader = req.headers.get("authorization") || req.headers.get("Authorization");
         if (authHeader && authHeader.startsWith("Bearer ")) {
-          token = authHeader.substring(7);
+          token = authHeader.substring(7).trim();
         }
       }
     }
@@ -156,7 +173,7 @@ export async function getCurrentUser(req?: any): Promise<SessionPayload | null> 
 
   if (!token) {
     try {
-      const cookieStore = cookies();
+      const cookieStore = await cookies();
       token = cookieStore.get(SESSION_COOKIE_NAME)?.value;
     } catch {
       // Outside request context
@@ -172,7 +189,22 @@ export async function getCurrentUser(req?: any): Promise<SessionPayload | null> 
   const payload = await verifySessionToken(token);
   if (!payload) return null;
 
-  // Verify in database that user is active and exists
+  // 1. Authoritative Database Session Check
+  try {
+    const dbSession = await prisma.session.findUnique({
+      where: { token },
+      select: { id: true, expiresAt: true, userId: true },
+    });
+
+    if (!dbSession || new Date() > dbSession.expiresAt) {
+      return null;
+    }
+  } catch (err) {
+    console.error("[Auth] Database session verification error:", err);
+    return null;
+  }
+
+  // 2. Verify in database that user is active and exists
   const user = await prisma.user.findUnique({
     where: { id: payload.userId },
     select: { id: true, username: true, role: true, email: true, name: true, status: true },
@@ -192,6 +224,31 @@ export async function getCurrentUser(req?: any): Promise<SessionPayload | null> 
 }
 
 export const getSessionUser = getCurrentUser;
+
+export async function requireAdminAuth(req?: any, allowedRoles: string[] = ["ADMIN", "PRINCIPAL"]) {
+  const user = await getCurrentUser(req);
+  if (!user) {
+    return {
+      authorized: false as const,
+      user: null,
+      response: NextResponse.json(
+        { error: "অননুমোদিত: অনুগ্রহ করে লগইন করুন (401 Unauthorized)" },
+        { status: 401 }
+      ),
+    };
+  }
+  if (!allowedRoles.includes(user.role)) {
+    return {
+      authorized: false as const,
+      user,
+      response: NextResponse.json(
+        { error: "অননুমোদিত অ্যাক্সেস: এই কার্যক্রমে প্রবেশের প্রশাসনিক অনুমতি নেই (403 Forbidden)" },
+        { status: 403 }
+      ),
+    };
+  }
+  return { authorized: true as const, user, response: null };
+}
 
 export async function revokeAllUserSessions(userId: string, reason = "All sessions revoked") {
   try {

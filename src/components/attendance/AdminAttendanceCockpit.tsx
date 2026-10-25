@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Calendar,
   Lock,
@@ -16,6 +17,8 @@ import {
   Printer,
   X,
   Save,
+  QrCode,
+  Smartphone,
 } from "lucide-react";
 
 interface AdminAttendanceItem {
@@ -33,6 +36,12 @@ interface AdminAttendanceItem {
   classNameBn?: string;
   sectionNameBn?: string | null;
   status: "PRESENT" | "ABSENT" | "LATE" | "LEAVE" | "UNMARKED";
+  checkInTime?: string | null;
+  checkOutTime?: string | null;
+  entryMethod?: string | null;
+  exitMethod?: string | null;
+  checkInSmsSent?: boolean;
+  checkOutSmsSent?: boolean;
   leaveReason?: string | null;
   remarks?: string | null;
   correctionReason?: string | null;
@@ -70,6 +79,67 @@ export default function AdminAttendanceCockpit() {
   const [newLeaveReason, setNewLeaveReason] = useState("");
   const [correctionReason, setCorrectionReason] = useState("");
   const [correcting, setCorrecting] = useState(false);
+
+  // Print Register Modal State
+  const [showPrintModal, setShowPrintModal] = useState(false);
+  const [bulkMarking, setBulkMarking] = useState(false);
+
+  // Batch Mark All Present
+  const handleMarkAllPresent = async () => {
+    if (!selectedClassId) {
+      alert("সকলকে উপস্থিত মার্ক করার পূর্বে একটি নির্দিষ্ট জামাত নির্বাচন করুন।");
+      return;
+    }
+    if (isLocked) {
+      alert("হাজিরা বর্তমানে লক করা আছে। অনুগ্রহ করে প্রথমে আনলক করুন অথবা সংশোধন অপশন ব্যবহার করুন।");
+      return;
+    }
+    if (items.length === 0) {
+      alert("কোনো শিক্ষার্থী পাওয়া যায়নি।");
+      return;
+    }
+    const currentClassName = selectedClassObj?.nameBn || "নির্বাচিত জামাত";
+    if (
+      !confirm(
+        `আপনি কি "${currentClassName}"-এর সকল (${items.length} জন) শিক্ষার্থীকে ${date} তারিখের জন্য উপস্থিত (PRESENT) হিসেবে চিহ্নিত করতে চান?`
+      )
+    ) {
+      return;
+    }
+
+    try {
+      setBulkMarking(true);
+      const records = items.map((it) => ({
+        studentId: it.studentId,
+        status: "PRESENT",
+      }));
+
+      const res = await fetch("/api/admin/attendance", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId: selectedSessionId,
+          classId: selectedClassId,
+          sectionId: selectedSectionId || null,
+          date,
+          records,
+          correctionReason: "অ্যাডমিন কর্তৃক সার্বিক ক্লাসের উপস্থিতি এককালীন চিহ্নিতকরণ",
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setStatusMessage({ type: "success", text: "সকল শিক্ষার্থীকে সফলভাবে উপস্থিত মার্ক করা হয়েছে।" });
+        fetchAttendance();
+      } else {
+        setStatusMessage({ type: "error", text: data.error || "সংরক্ষণ ব্যর্থ হয়েছে।" });
+      }
+    } catch (err) {
+      setStatusMessage({ type: "error", text: "সার্ভার অনুরোধ ব্যর্থ হয়েছে।" });
+    } finally {
+      setBulkMarking(false);
+    }
+  };
 
   // 1. Initial Load of Sessions and Classes
   useEffect(() => {
@@ -278,9 +348,42 @@ export default function AdminAttendanceCockpit() {
             </p>
           </div>
 
-          {/* Lock / Unlock Control */}
-          {selectedClassId && (
-            <div className="flex items-center gap-2">
+          {/* Action Buttons: Kiosk, Print, Mark All Present, Lock/Unlock */}
+          <div className="flex flex-wrap items-center gap-2">
+            <Link
+              href="/admin/attendance/kiosk"
+              target="_blank"
+              className="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm bg-gradient-to-r from-emerald-700 to-green-700 hover:from-emerald-800 hover:to-green-800 text-white"
+              title="ডিজিটাল বায়োমেট্রিক ও কিউআর হাজিরা টার্মিনাল চালু করুন"
+            >
+              <QrCode className="w-3.5 h-3.5" />
+              <span>ডিজিটাল হাজিরা কিয়স্ক</span>
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setShowPrintModal(true)}
+              className="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm bg-emerald-800 hover:bg-emerald-900 text-white"
+              title="দৈনিক হাজিরা শিট প্রিন্ট করুন"
+            >
+              <Printer className="w-3.5 h-3.5" />
+              <span>হাজিরা শিট প্রিন্ট</span>
+            </button>
+
+            {selectedClassId && !isLocked && (
+              <button
+                type="button"
+                onClick={handleMarkAllPresent}
+                disabled={bulkMarking || items.length === 0}
+                className="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm bg-teal-700 hover:bg-teal-800 disabled:opacity-50 text-white"
+                title="সকল শিক্ষার্থীকে উপস্থিত মার্ক করুন"
+              >
+                <UserCheck className="w-3.5 h-3.5" />
+                <span>{bulkMarking ? "মার্কিং হচ্ছে..." : "সকলকে উপস্থিত করুন"}</span>
+              </button>
+            )}
+
+            {selectedClassId && (
               <button
                 type="button"
                 onClick={handleToggleLock}
@@ -291,10 +394,10 @@ export default function AdminAttendanceCockpit() {
                 }`}
               >
                 {isLocked ? <Unlock className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5" />}
-                {isLocked ? "হাজিরা আনলক করুন" : "হাজিরা লক করুন"}
+                <span>{isLocked ? "হাজিরা আনলক করুন" : "হাজিরা লক করুন"}</span>
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         {/* Filter Controls Row */}
@@ -309,7 +412,7 @@ export default function AdminAttendanceCockpit() {
             >
               {sessions.map((s) => (
                 <option key={s.id} value={s.id}>
-                  {s.nameBn} {s.isCurrent ? "(চলতি)" : ""}
+                  {s.name || s.nameBn} {s.isCurrent ? "(চলতি)" : ""}
                 </option>
               ))}
             </select>
@@ -476,6 +579,9 @@ export default function AdminAttendanceCockpit() {
                   <th className="p-3">শিক্ষার্থী</th>
                   <th className="p-3">জামাত ও শাখা</th>
                   <th className="p-3 text-center">হাজিরা স্ট্যাটাস</th>
+                  <th className="p-3 text-center">আগমন (Check-In)</th>
+                  <th className="p-3 text-center">প্রস্থান (Check-Out)</th>
+                  <th className="p-3 text-center">এসএমএস</th>
                   <th className="p-3">ছুটি / মন্তব্য</th>
                   <th className="p-3">অডিট ও সংশোধন কারণ</th>
                   <th className="p-3 text-right">কার্যক্রম</th>
@@ -523,6 +629,58 @@ export default function AdminAttendanceCockpit() {
                           ? "ছুটি"
                           : "চিহ্নিত নয়"}
                       </span>
+                    </td>
+                    {/* Check-In */}
+                    <td className="p-3 text-center font-mono text-[11px]">
+                      {it.checkInTime ? (
+                        <div className="inline-flex flex-col items-center">
+                          <span className="text-emerald-800 font-bold">
+                            {new Date(it.checkInTime).toLocaleTimeString("en-US", {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            })}
+                          </span>
+                          <span className="text-[9px] text-emerald-600 bg-emerald-50 px-1 rounded border border-emerald-200">
+                            {it.entryMethod || "ডিজিটাল"}
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-gray-300">—</span>
+                      )}
+                    </td>
+                    {/* Check-Out */}
+                    <td className="p-3 text-center font-mono text-[11px]">
+                      {it.checkOutTime ? (
+                        <div className="inline-flex flex-col items-center">
+                          <span className="text-amber-800 font-bold">
+                            {new Date(it.checkOutTime).toLocaleTimeString("en-US", {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            })}
+                          </span>
+                          <span className="text-[9px] text-amber-600 bg-amber-50 px-1 rounded border border-amber-200">
+                            {it.exitMethod || "ডিজিটাল"}
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-gray-300">—</span>
+                      )}
+                    </td>
+                    {/* SMS Status */}
+                    <td className="p-3 text-center">
+                      {it.checkInSmsSent || it.checkOutSmsSent ? (
+                        <span
+                          className="inline-flex items-center gap-1 text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 font-semibold"
+                          title="অভিভাবকের মোবাইলে এসএমএস নিশ্চিত হয়েছে"
+                        >
+                          <Smartphone className="w-3 h-3 text-emerald-600" />
+                          প্রেরিত
+                        </span>
+                      ) : (
+                        <span className="text-[10px] text-gray-400">—</span>
+                      )}
                     </td>
                     <td className="p-3 text-gray-600">
                       {it.leaveReason ? (
@@ -664,6 +822,228 @@ export default function AdminAttendanceCockpit() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* 6. Official Printable Attendance Register Modal */}
+      {showPrintModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-4xl w-full p-4 sm:p-8 shadow-2xl space-y-6 my-auto max-h-[95vh] overflow-y-auto print:max-h-none print:overflow-visible print:shadow-none print:m-0 print:p-0">
+            {/* Modal Top Control Bar (Hidden on print) */}
+            <div className="flex items-center justify-between border-b pb-3 print:hidden">
+              <div className="flex items-center gap-2 text-emerald-900 font-bold text-sm">
+                <Printer className="w-5 h-5 text-emerald-700" />
+                <span>দৈনিক শ্রেণি উপস্থিতি রেজিস্টার (প্রিন্ট প্রিভিউ)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="px-4 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
+                >
+                  <Printer className="w-4 h-4" />
+                  <span>এখনই প্রিন্ট করুন</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowPrintModal(false)}
+                  className="p-1.5 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* PRINTABLE DOCUMENT BODY */}
+            <div className="bg-white p-6 sm:p-8 border border-gray-200 rounded-xl space-y-6 print:border-none print:p-0">
+              {/* Institutional Official Letterhead (Strictly ESTD 2021, NO EIIN) */}
+              <div className="text-center space-y-1.5 border-b-2 border-emerald-900 pb-4">
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-12 h-12 rounded-full border-2 border-emerald-800 flex items-center justify-center font-bold text-emerald-800 text-lg">
+                    ই
+                  </div>
+                  <div>
+                    <h1 className="text-xl sm:text-2xl font-black text-emerald-950 font-serif tracking-wide">
+                      ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা
+                    </h1>
+                    <p className="text-xs font-semibold text-emerald-800 tracking-wider">
+                      Eliotganj Hazi Rohmatollah Jamiria Madrasha
+                    </p>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-700 font-medium">
+                  ডাকঘর: ইলিয়টগঞ্জ, উপজেলা: দাউদকান্দি, জেলা: কুমিল্লা | স্থাপিত: ২০২১ ইং (ESTD: 2021)
+                </p>
+                <p className="text-[11px] text-gray-600">
+                  যোগাযোগ: ০১৮৪৫-১৬২৬৬৪, ০১৮২৬-৪১৬৬৯৬ | ইমেইল: ehrjmadrasha@gmail.com
+                </p>
+                <div className="pt-2">
+                  <span className="inline-block px-4 py-1 bg-emerald-900 text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                    দৈনিক শ্রেণি উপস্থিতি রেজিস্টার (Daily Attendance Register)
+                  </span>
+                </div>
+              </div>
+
+              {/* Metadata Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs bg-gray-50 p-3 rounded-lg border border-gray-200 print:bg-white print:border-gray-400">
+                <div>
+                  <span className="text-gray-500 block text-[10px]">তারিখ:</span>
+                  <span className="font-bold text-gray-900 font-mono">{date}</span>
+                </div>
+                <div>
+                  <span className="text-gray-500 block text-[10px]">শিক্ষাবর্ষ:</span>
+                  <span className="font-bold text-gray-900">
+                    {sessions.find((s) => s.id === selectedSessionId)?.name ||
+                      sessions.find((s) => s.id === selectedSessionId)?.nameBn ||
+                      "চলতি শিক্ষাবর্ষ"}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-gray-500 block text-[10px]">জামাত / শ্রেণি:</span>
+                  <span className="font-bold text-emerald-900">
+                    {selectedClassObj?.nameBn || "সার্বিক (সকল জামাত)"}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-gray-500 block text-[10px]">শাখা:</span>
+                  <span className="font-bold text-gray-900">
+                    {selectedClassObj?.sections?.find((s: any) => s.id === selectedSectionId)?.nameBn ||
+                      "সকল শাখা"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Attendance Counts Summary */}
+              <div className="grid grid-cols-5 gap-2 text-center text-xs">
+                <div className="p-2 border rounded bg-gray-50 font-semibold print:bg-white">
+                  <div className="text-[10px] text-gray-500">মোট শিক্ষার্থী</div>
+                  <div className="text-sm font-bold font-mono">{items.length}</div>
+                </div>
+                <div className="p-2 border border-emerald-300 rounded bg-emerald-50 text-emerald-900 font-semibold print:bg-white">
+                  <div className="text-[10px] text-emerald-700">উপস্থিত</div>
+                  <div className="text-sm font-bold font-mono">{summary.presentCount}</div>
+                </div>
+                <div className="p-2 border border-rose-300 rounded bg-rose-50 text-rose-900 font-semibold print:bg-white">
+                  <div className="text-[10px] text-rose-700">অনুপস্থিত</div>
+                  <div className="text-sm font-bold font-mono">{summary.absentCount}</div>
+                </div>
+                <div className="p-2 border border-blue-300 rounded bg-blue-50 text-blue-900 font-semibold print:bg-white">
+                  <div className="text-[10px] text-blue-700">ছুটি / লেট</div>
+                  <div className="text-sm font-bold font-mono">
+                    {summary.leaveCount + summary.lateCount}
+                  </div>
+                </div>
+                <div className="p-2 border border-emerald-400 rounded bg-emerald-100/50 text-emerald-950 font-semibold print:bg-white">
+                  <div className="text-[10px] text-emerald-800">উপস্থিতির হার</div>
+                  <div className="text-sm font-bold font-mono">
+                    {summary.attendanceRate?.toFixed(1) || 0}%
+                  </div>
+                </div>
+              </div>
+
+              {/* Attendance Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs border border-gray-300 border-collapse">
+                  <thead className="bg-gray-100 text-gray-800 font-bold border-b border-gray-300">
+                    <tr>
+                      <th className="p-2 border border-gray-300 text-center w-10">ক্রম</th>
+                      <th className="p-2 border border-gray-300 text-center w-14">রোল</th>
+                      <th className="p-2 border border-gray-300">শিক্ষার্থীর নাম ও ছাত্র আইডি</th>
+                      <th className="p-2 border border-gray-300">পিতার নাম ও যোগাযোগ</th>
+                      <th className="p-2 border border-gray-300 text-center w-24">স্ট্যাটাস</th>
+                      <th className="p-2 border border-gray-300">ছুটির কারণ / মন্তব্য</th>
+                      <th className="p-2 border border-gray-300 text-center w-24">শিক্ষকের স্বাক্ষর</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {items.map((it, idx) => (
+                      <tr key={it.studentId} className="border-b border-gray-200">
+                        <td className="p-2 border border-gray-300 text-center font-mono">{idx + 1}</td>
+                        <td className="p-2 border border-gray-300 text-center font-bold font-mono text-emerald-900">
+                          {it.rollNumber || "—"}
+                        </td>
+                        <td className="p-2 border border-gray-300">
+                          <div className="font-bold text-gray-900">{it.fullNameBn}</div>
+                          <div className="text-[10px] text-gray-500 font-mono">{it.studentIdNumber}</div>
+                        </td>
+                        <td className="p-2 border border-gray-300">
+                          <div>{it.fatherNameBn || "—"}</div>
+                          <div className="text-[10px] text-gray-500 font-mono">{it.fatherPhone || "—"}</div>
+                        </td>
+                        <td className="p-2 border border-gray-300 text-center font-semibold">
+                          <span
+                            className={
+                              it.status === "PRESENT"
+                                ? "text-emerald-700 font-bold"
+                                : it.status === "ABSENT"
+                                ? "text-rose-700 font-bold"
+                                : it.status === "LEAVE"
+                                ? "text-blue-700 font-bold"
+                                : it.status === "LATE"
+                                ? "text-amber-700 font-bold"
+                                : "text-gray-400"
+                            }
+                          >
+                            {it.status === "PRESENT"
+                              ? "উপস্থিত"
+                              : it.status === "ABSENT"
+                              ? "অনুপস্থিত"
+                              : it.status === "LEAVE"
+                              ? "ছুটি"
+                              : it.status === "LATE"
+                              ? "দেরি"
+                              : "—"}
+                          </span>
+                        </td>
+                        <td className="p-2 border border-gray-300 text-[11px] text-gray-600">
+                          {it.leaveReason || it.correctionReason || it.remarks || "—"}
+                        </td>
+                        <td className="p-2 border border-gray-300 text-center text-gray-300 font-mono text-[10px]">
+                          —
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Official Signatures */}
+              <div className="pt-12 grid grid-cols-2 gap-8 text-center text-xs">
+                <div>
+                  <div className="border-t border-gray-400 pt-2 font-semibold text-gray-800">
+                    শ্রেণি শিক্ষকের স্বাক্ষর ও তারিখ
+                  </div>
+                  <p className="text-[10px] text-gray-500">দায়িত্বপ্রাপ্ত শিক্ষক</p>
+                </div>
+                <div>
+                  <div className="border-t border-gray-400 pt-2 font-bold text-gray-900">
+                    মাওলানা মো: আবুল কালাম সরকার
+                  </div>
+                  <p className="text-[10px] text-gray-600 font-medium">মুহতামিম / অধ্যক্ষ</p>
+                  <p className="text-[9px] text-gray-400">ইলিয়টগঞ্জ হাজী রহমাতুল্লাহ্ জমিরীয়া মাদরাসা</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Bottom Actions */}
+            <div className="flex justify-end gap-2 pt-3 border-t print:hidden">
+              <button
+                type="button"
+                onClick={() => setShowPrintModal(false)}
+                className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-xs font-semibold hover:bg-gray-50"
+              >
+                বন্ধ করুন
+              </button>
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="px-5 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow"
+              >
+                <Printer className="w-4 h-4" />
+                <span>প্রিন্ট করুন</span>
+              </button>
+            </div>
           </div>
         </div>
       )}

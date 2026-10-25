@@ -1,0 +1,420 @@
+[
+  {
+    "id": "b879696a-ad3a-4eca-96cc-83db8d52d40e",
+    "studentId": "29acfb75-320c-4923-bd4e-ee7435a3d4b9",
+    "studentNameBn": "মুহাম্মাদ তালহা (E2E_1791543957219)",
+    "studentIdNumber": "EHRJ-2026-0107",
+    "rollNumber": 1,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "paraNumber": 5,
+      "surahName": "সূরা আন-নিসা",
+      "ayatRange": "আয়াত ১-২০",
+      "pageNumber": 85,
+      "quality": "MUMTAZ",
+      "remarks": "মাশাআল্লাহ, তেলাওয়াত ও তাজবীদ অত্যন্ত সুন্দর ও সুস্পষ্ট।"
+    },
+    "sabqi": {
+      "paraNumber": 4,
+      "pagesRange": "পৃষ্ঠা ৭০-৭৫",
+      "quality": "JAYYID_JIDDAN",
+      "remarks": "মাখরাজ ঠিক আছে।"
+    },
+    "manzil": {
+      "paraRange": "পারা ১-২",
+      "quality": "MUMTAZ",
+      "remarks": "পোক্ত ইয়াদ।"
+    },
+    "totalParasCompleted": 4,
+    "currentSabaqPara": 5,
+    "remarks": "প্রতিদিনের মতো ধারাবাহিক অনুশীলন বজায় রাখবে।",
+    "recordedBy": "মাওলানা আহমাদ উল্লাহ (উস্তাদ)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.884Z"
+  },
+  {
+    "id": "9b7aa72e-11b1-40a9-b4dd-3bd73927956c",
+    "studentId": "f3822b9d-0bf2-4584-9b8f-06a5c609b9ca",
+    "studentNameBn": "মুহাম্মদ আব্দুর রহমান",
+    "studentIdNumber": "EHRJ-2026-0002",
+    "rollNumber": 2,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 23,
+      "surahName": "সূরা ইয়াসীন",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "JAYYID"
+    },
+    "sabqi": {
+      "para": 23,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "JAYYID_JIDDAN"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 22,
+    "currentSabaqPara": 23,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "cbb0bbb2-4830-44c5-80d7-19eb3005a2ad",
+    "studentId": "e1b6e090-6e29-4711-b901-acd8e7086719",
+    "studentNameBn": "মুহাম্মাদ তালহা (E2E_1791542746806)",
+    "studentIdNumber": "EHRJ-2026-0106",
+    "rollNumber": 2,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 19,
+      "surahName": "সূরা আল-ফুরকান",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "JAYYID"
+    },
+    "sabqi": {
+      "para": 19,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "JAYYID_JIDDAN"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 18,
+    "currentSabaqPara": 19,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "7cfa1946-d31f-406f-be79-33f8d9695d60",
+    "studentId": "a8e7f71a-308a-4fe1-9a82-d0bfef6ca97e",
+    "studentNameBn": "মুহাম্মাদ তালহা (E2E_1791540284887)",
+    "studentIdNumber": "EHRJ-2026-0105",
+    "rollNumber": 3,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 16,
+      "surahName": "সূরা আল-কাহফ",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "MUMTAZ"
+    },
+    "sabqi": {
+      "para": 16,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "MUMTAZ"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 15,
+    "currentSabaqPara": 16,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "00db27cd-c517-45c7-80f9-95960572cbc6",
+    "studentId": "dabeec96-6d27-4fe4-ac03-dc8cd5a95c2f",
+    "studentNameBn": "মুহাম্মাদ তালহা (E2E_1791538825388)",
+    "studentIdNumber": "EHRJ-2026-0104",
+    "rollNumber": 4,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 12,
+      "surahName": "সূরা ইউসুফ",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "MUMTAZ"
+    },
+    "sabqi": {
+      "para": 12,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "MUMTAZ"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 11,
+    "currentSabaqPara": 12,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "6c279cb5-0f35-446e-bdc4-ce051f1d70ba",
+    "studentId": "dddcb128-a328-43a2-9aa9-5310e2d8844d",
+    "studentNameBn": "তালহা বিন উবাইদুল্লাহ",
+    "studentIdNumber": "EHRJ-2026-0103",
+    "rollNumber": 5,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 9,
+      "surahName": "সূরা আল-আনফাল",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "JAYYID_JIDDAN"
+    },
+    "sabqi": {
+      "para": 9,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "JAYYID_JIDDAN"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 8,
+    "currentSabaqPara": 9,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "0808a21a-f8ac-486c-8011-c0d2330c8ac5",
+    "studentId": "c1e22bb5-90f5-4e82-86a5-3ed537bcc5c1",
+    "studentNameBn": "তালহা বিন উবাইদুল্লাহ",
+    "studentIdNumber": "EHRJ-2026-0102",
+    "rollNumber": 6,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 6,
+      "surahName": "সূরা আল-মায়িদাহ",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "JAYYID"
+    },
+    "sabqi": {
+      "para": 6,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "JAYYID_JIDDAN"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 5,
+    "currentSabaqPara": 6,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "bfcc1115-2050-4272-9fbd-98b110ded724",
+    "studentId": "e691d7a1-aac6-4ce0-8ad2-6749c9c46d75",
+    "studentNameBn": "তালহা বিন উবাইদুল্লাহ",
+    "studentIdNumber": "EHRJ-2026-0101",
+    "rollNumber": 7,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 4,
+      "surahName": "সূরা আলে ইমরান",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "MUMTAZ"
+    },
+    "sabqi": {
+      "para": 4,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "MUMTAZ"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 3,
+    "currentSabaqPara": 4,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "e05139c4-9fca-46ed-86cb-5f218475e249",
+    "studentId": "307f507e-bc98-4565-a610-e35726f3e3f2",
+    "studentNameBn": "মুহাম্মদ তৌহিদ হাসান (Audit 15)",
+    "studentIdNumber": "EHRJ-2026-0100",
+    "rollNumber": 8,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 2,
+      "surahName": "সূরা আল-বাক্বারাহ",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "MUMTAZ"
+    },
+    "sabqi": {
+      "para": 2,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "MUMTAZ"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 1,
+    "currentSabaqPara": 2,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "f428fc7f-c2d5-4ac6-b72f-b09aab5bb58b",
+    "studentId": "cede96bb-9f35-470a-b5e4-e22feb141742",
+    "studentNameBn": "মুহাম্মাদ তালহা (E2E_1791442239785)",
+    "studentIdNumber": "EHRJ-2026-0099",
+    "rollNumber": 9,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 1,
+      "surahName": "সূরা আল-বাক্বারাহ",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "JAYYID_JIDDAN"
+    },
+    "sabqi": {
+      "para": 1,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "JAYYID_JIDDAN"
+    },
+    "manzil": {
+      "paraRange": "পারা ১",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 0,
+    "currentSabaqPara": 1,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "34a544ea-261d-4bea-8c66-c75e24986e51",
+    "studentId": "79b89571-fc9d-43f0-943d-fa5c33befef5",
+    "studentNameBn": "মুহাম্মদ সালমান ফারসি (Student C - Day Care)",
+    "studentIdNumber": "EHRJ-26-HC58a0c2",
+    "rollNumber": 10,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 30,
+      "surahName": "খতমে কুরআন (দাওরাতুল হিফজ)",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "JAYYID"
+    },
+    "sabqi": {
+      "para": 30,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "JAYYID_JIDDAN"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 30,
+    "currentSabaqPara": 30,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "72c334ed-8cf1-44aa-8578-114e4ac904b4",
+    "studentId": "b873ad05-403e-4075-bcc1-c5d3ea624ed5",
+    "studentNameBn": "মুহাম্মদ আব্দুর রহমান (Student B - Guardian B Child)",
+    "studentIdNumber": "EHRJ-26-HB80e2f6",
+    "rollNumber": 11,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 15,
+      "surahName": "সূরা বনি ইসরাঈল",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "MUMTAZ"
+    },
+    "sabqi": {
+      "para": 15,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "MUMTAZ"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 14,
+    "currentSabaqPara": 15,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  },
+  {
+    "id": "a4c12ded-75b4-417b-a25b-bfee1b512cf3",
+    "studentId": "d3c6861f-3f54-4b72-8f4a-397353d3acec",
+    "studentNameBn": "মুহাম্মদ আব্দুল্লাহ (Student A - Resident Test)",
+    "studentIdNumber": "EHRJ-26-HAc1bb3c",
+    "rollNumber": 12,
+    "date": "2026-10-10",
+    "attendance": "PRESENT",
+    "sabaq": {
+      "para": 8,
+      "surahName": "সূরা আল-আন'আম",
+      "ayahRange": "আয়াত ১ - ২৫",
+      "pages": "পৃষ্ঠা ২",
+      "quality": "MUMTAZ"
+    },
+    "sabqi": {
+      "para": 8,
+      "pages": "পৃষ্ঠা ১-৫",
+      "quality": "MUMTAZ"
+    },
+    "manzil": {
+      "paraRange": "পারা 1",
+      "portion": "১ম রুবু' / কোয়ার্টার পারা",
+      "quality": "MUMTAZ"
+    },
+    "totalParasCompleted": 7,
+    "currentSabaqPara": 8,
+    "remarks": "মাশাআল্লাহ, তিলাওয়াত সাবলীল ও তাজবীদসম্মত ছিল।",
+    "recordedBy": "মুফতি মাহমুদুল হাসান (হিফজ প্রধান)",
+    "createdAt": "2026-10-10T14:02:30.850Z",
+    "updatedAt": "2026-10-10T14:02:30.850Z"
+  }
+]

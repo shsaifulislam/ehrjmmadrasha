@@ -8,10 +8,23 @@ import { PublicContactPayload } from "./types";
 import { escapePlainText } from "./contentSanitizer";
 import { prisma } from "@/lib/prisma";
 
-// In-memory rate limiting map: ip -> timestamps
+// In-memory rate limiting map: ip -> timestamps with TTL pruning and bounded capacity
 const RATE_LIMIT_MAP = new Map<string, number[]>();
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 const MAX_SUBMISSIONS_PER_WINDOW = 5;
+const MAX_CONTACT_ENTRIES = 2000;
+let lastContactCleanup = Date.now();
+
+function purgeExpiredContactEntries(now: number) {
+  RATE_LIMIT_MAP.forEach((ts: number[], ip: string) => {
+    const valid = ts.filter((t: number) => now - t < RATE_LIMIT_WINDOW_MS);
+    if (valid.length === 0) {
+      RATE_LIMIT_MAP.delete(ip);
+    } else {
+      RATE_LIMIT_MAP.set(ip, valid);
+    }
+  });
+}
 
 export interface ContactProcessResult {
   success: boolean;
@@ -37,8 +50,18 @@ export async function processPublicContactSubmission(
     };
   }
 
-  // 2. IP Rate Limiting Check
+  // 2. IP Rate Limiting Check & Opportunistic Cleanup
   const now = Date.now();
+  if (now - lastContactCleanup > 60000 || RATE_LIMIT_MAP.size > MAX_CONTACT_ENTRIES) {
+    purgeExpiredContactEntries(now);
+    lastContactCleanup = now;
+
+    if (RATE_LIMIT_MAP.size >= MAX_CONTACT_ENTRIES) {
+      const oldestIp = RATE_LIMIT_MAP.keys().next().value;
+      if (oldestIp) RATE_LIMIT_MAP.delete(oldestIp);
+    }
+  }
+
   const timestamps = (RATE_LIMIT_MAP.get(clientIp) || []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
   if (timestamps.length >= MAX_SUBMISSIONS_PER_WINDOW) {
     return {

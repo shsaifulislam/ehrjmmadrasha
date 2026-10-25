@@ -7,7 +7,8 @@ import { recordAuditLog } from "@/lib/security";
  * GET /api/admin/library/books/[id]
  * Get book details with copies and circulation history
  */
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
@@ -55,7 +56,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
  * PUT /api/admin/library/books/[id]
  * Update book details
  */
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {
@@ -146,7 +148,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
  * DELETE /api/admin/library/books/[id]
  * Archive book if no copies are currently ISSUED
  */
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

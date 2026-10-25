@@ -6,7 +6,8 @@ import { returnBookCopy } from "@/lib/libraryEngine";
  * POST /api/admin/library/issues/[id]/return
  * Return an issued book, calculate fine, and trigger Phase 6 invoice if applicable
  */
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

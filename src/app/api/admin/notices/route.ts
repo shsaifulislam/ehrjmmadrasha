@@ -99,8 +99,8 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const user = await getSessionUser();
-    if (!user || user.role !== "ADMIN") {
-      return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস। শুধুমাত্র অ্যাডমিন নোটিশ তৈরি করতে পারবেন।" }, { status: 403 });
+    if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
+      return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস। শুধুমাত্র অ্যাডমিন ও মুহতামিম নোটিশ তৈরি করতে পারবেন।" }, { status: 403 });
     }
 
     const body = await req.json();

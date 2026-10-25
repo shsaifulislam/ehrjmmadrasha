@@ -152,5 +152,71 @@
     "lastUsedAt": "2026-09-29T07:15:22.330Z",
     "revokedAt": "2026-09-29T07:15:22.333Z",
     "revokedReason": "Security audit test revocation"
+  },
+  {
+    "id": "KEY-MUTK9MEF-2EAB5D",
+    "name": "BISE Madrasah Board Sync Partner",
+    "keyPrefix": "ehrj_live_d8f441...",
+    "keyHash": "ee3131e8c2671fa62e708c1fd892982974c74008f0e7a1820c6a4eed4ced5c10",
+    "owner": "Bangladesh Madrasah Education Board",
+    "ownerType": "EXTERNAL_INSTITUTION",
+    "scopes": [
+      "students:read",
+      "attendance:read"
+    ],
+    "environment": "PRODUCTION",
+    "rateLimitPerMin": 120,
+    "status": "REVOKED",
+    "expiresAt": "2027-01-02T08:30:40.551Z",
+    "createdBy": "SYSTEM_TEST",
+    "createdAt": "2026-10-04T08:30:40.551Z",
+    "updatedAt": "2026-10-04T08:30:40.565Z",
+    "lastUsedAt": "2026-10-04T08:30:40.562Z",
+    "revokedAt": "2026-10-04T08:30:40.565Z",
+    "revokedReason": "Security audit test revocation"
+  },
+  {
+    "id": "KEY-MUTKCNY5-524892",
+    "name": "BISE Madrasah Board Sync Partner",
+    "keyPrefix": "ehrj_live_cf859c...",
+    "keyHash": "239a6673e86950f8a0aa43fb81fcf188df5e304c8720fb8617487587fbd1ae19",
+    "owner": "Bangladesh Madrasah Education Board",
+    "ownerType": "EXTERNAL_INSTITUTION",
+    "scopes": [
+      "students:read",
+      "attendance:read"
+    ],
+    "environment": "PRODUCTION",
+    "rateLimitPerMin": 120,
+    "status": "REVOKED",
+    "expiresAt": "2027-01-02T08:33:02.525Z",
+    "createdBy": "SYSTEM_TEST",
+    "createdAt": "2026-10-04T08:33:02.525Z",
+    "updatedAt": "2026-10-04T08:33:02.536Z",
+    "lastUsedAt": "2026-10-04T08:33:02.534Z",
+    "revokedAt": "2026-10-04T08:33:02.536Z",
+    "revokedReason": "Security audit test revocation"
+  },
+  {
+    "id": "KEY-MUTKQ3HG-45AD74",
+    "name": "BISE Madrasah Board Sync Partner",
+    "keyPrefix": "ehrj_live_d380df...",
+    "keyHash": "0c1401ffb71b675a24fb1ab05f04415552356f1fece204709c929af2faf0f381",
+    "owner": "Bangladesh Madrasah Education Board",
+    "ownerType": "EXTERNAL_INSTITUTION",
+    "scopes": [
+      "students:read",
+      "attendance:read"
+    ],
+    "environment": "PRODUCTION",
+    "rateLimitPerMin": 120,
+    "status": "REVOKED",
+    "expiresAt": "2027-01-02T08:43:29.188Z",
+    "createdBy": "SYSTEM_TEST",
+    "createdAt": "2026-10-04T08:43:29.189Z",
+    "updatedAt": "2026-10-04T08:43:29.197Z",
+    "lastUsedAt": "2026-10-04T08:43:29.194Z",
+    "revokedAt": "2026-10-04T08:43:29.197Z",
+    "revokedReason": "Security audit test revocation"
   }
 ]

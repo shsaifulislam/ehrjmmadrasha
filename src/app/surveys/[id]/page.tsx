@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import {
   ClipboardCheck,
   CheckCircle,
@@ -223,8 +225,10 @@ export default function TakeSurveyPage() {
 
   // Active form view
   return (
-    <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto space-y-8">
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans text-slate-900 selection:bg-[#0D5C3A] selection:text-white">
+      <Navbar />
+
+      <main className="flex-1 max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:px-8 w-full space-y-8">
         {/* Navigation back */}
         <Link
           href="/surveys"
@@ -498,7 +502,9 @@ export default function TakeSurveyPage() {
             <span>{isSubmitting ? "দাখিল হচ্ছে..." : "চূড়ান্তভাবে দাখিল করুন (Submit Feedback)"}</span>
           </button>
         </div>
-      </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }

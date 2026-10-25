@@ -44,6 +44,8 @@ export type JobHandler<T = any, R = any> = (job: AutomationJob<T>) => Promise<R>
 const GOVERNANCE_DIR = path.join(process.cwd(), "data", "governance");
 const JOBS_FILE = path.join(GOVERNANCE_DIR, "automation_jobs.json");
 
+import { atomicWriteFileSync, safeReadJsonSync } from "../storageUtils";
+
 function ensureDirectory() {
   if (!fs.existsSync(GOVERNANCE_DIR)) {
     fs.mkdirSync(GOVERNANCE_DIR, { recursive: true });
@@ -52,21 +54,11 @@ function ensureDirectory() {
 
 export function loadAutomationJobs(): AutomationJob[] {
   ensureDirectory();
-  if (!fs.existsSync(JOBS_FILE)) {
-    return [];
-  }
-  try {
-    const raw = fs.readFileSync(JOBS_FILE, "utf-8");
-    return JSON.parse(raw);
-  } catch (err) {
-    console.error("Failed to parse automation_jobs.json:", err);
-    return [];
-  }
+  return safeReadJsonSync<AutomationJob[]>(JOBS_FILE, []);
 }
 
 function saveAutomationJobs(jobs: AutomationJob[]): void {
-  ensureDirectory();
-  fs.writeFileSync(JOBS_FILE, JSON.stringify(jobs, null, 2), "utf-8");
+  atomicWriteFileSync(JOBS_FILE, JSON.stringify(jobs, null, 2));
 }
 
 class JobQueueRegistry {
@@ -255,3 +247,91 @@ export function getJobQueueMetrics(): {
     cancelled: jobs.filter((j) => j.status === "CANCELLED").length,
   };
 }
+
+/**
+ * Sweeps the queue on server startup to reconcile any jobs that were abruptly left in
+ * RUNNING status due to a process crash or restart.
+ */
+export function reconcileOrphanedJobsOnBoot(): number {
+  ensureDirectory();
+  const jobs = loadAutomationJobs();
+  let changed = 0;
+
+  for (let i = 0; i < jobs.length; i++) {
+    const job = jobs[i];
+    if (job.status === "RUNNING") {
+      changed += 1;
+      if (job.attempts < job.maxAttempts) {
+        job.status = "RETRYING";
+        job.error = "Server process crashed/restarted while job was running";
+        const delayMs = Math.pow(2, job.attempts) * 1000;
+        job.nextRetryAt = new Date(Date.now() + delayMs).toISOString();
+      } else {
+        job.status = "DEAD_LETTER";
+        job.error = `Max attempts (${job.maxAttempts}) reached. Server restarted during final attempt.`;
+        job.completedAt = new Date().toISOString();
+      }
+      jobs[i] = job;
+    }
+  }
+
+  if (changed > 0) {
+    saveAutomationJobs(jobs);
+    console.log(`[JobQueue] Reconciled ${changed} orphaned RUNNING jobs from prior server session.`);
+  }
+
+  return changed;
+}
+
+/**
+ * Scans for jobs scheduled to retry whose backoff period has expired, and processes them.
+ */
+export async function processDueScheduledJobs(): Promise<number> {
+  const jobs = loadAutomationJobs();
+  const now = Date.now();
+  const dueJobs = jobs.filter(
+    (j) =>
+      j.status === "RETRYING" &&
+      j.nextRetryAt &&
+      new Date(j.nextRetryAt).getTime() <= now
+  );
+
+  let processedCount = 0;
+  for (const job of dueJobs) {
+    try {
+      await executeJob(job.jobId);
+      processedCount++;
+    } catch (err) {
+      console.error(`[JobQueue Worker] Failed to process scheduled retry for job ${job.jobId}:`, err);
+    }
+  }
+
+  return processedCount;
+}
+
+let workerTimer: NodeJS.Timeout | null = null;
+
+/**
+ * Initializes the automated self-healing background queue runner.
+ */
+export function startJobQueueWorker(intervalMs: number = 60000): void {
+  if (workerTimer) return;
+
+  // Run initial boot sweep for orphaned RUNNING jobs
+  reconcileOrphanedJobsOnBoot();
+
+  workerTimer = setInterval(async () => {
+    try {
+      await processDueScheduledJobs();
+    } catch (err) {
+      console.error("[JobQueue Worker Error]", err);
+    }
+  }, intervalMs);
+
+  if (workerTimer.unref) {
+    workerTimer.unref();
+  }
+
+  console.log(`[JobQueue] Background retry drainer active (interval: ${intervalMs}ms).`);
+}
+

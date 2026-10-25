@@ -607,7 +607,7 @@ export default function DataQualityDashboard() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
-                    {overview?.authoritativeDomains.map((dom) => (
+                    {(overview?.authoritativeDomains || []).map((dom) => (
                       <tr key={dom.domain} className="hover:bg-slate-50/80 transition">
                         <td className="py-3 px-4 font-mono font-bold text-slate-800">{dom.domain}</td>
                         <td className="py-3 px-4 font-medium text-slate-900">{dom.nameBn}</td>
@@ -993,7 +993,7 @@ export default function DataQualityDashboard() {
                 <span className="text-xs text-slate-500">রিপোর্ট আইডি: {reconciliation?.id}</span>
               </div>
               <div className="divide-y divide-slate-100 text-xs">
-                {reconciliation?.items.map((item) => (
+                {(reconciliation?.items || []).map((item) => (
                   <div key={item.id} className="p-4 hover:bg-slate-50 transition flex flex-col md:flex-row md:items-center justify-between gap-3">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">

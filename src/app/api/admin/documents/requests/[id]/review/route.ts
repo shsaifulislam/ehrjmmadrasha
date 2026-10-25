@@ -8,7 +8,8 @@ import { calculateStudentFee, generateNextInvoiceNumber } from "@/lib/feeCalcula
  * POST /api/admin/documents/requests/[id]/review
  * Review, approve, or reject a document request
  */
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

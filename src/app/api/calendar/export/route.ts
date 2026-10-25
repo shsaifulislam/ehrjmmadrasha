@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getUnifiedCalendar } from "@/lib/calendar/unifiedCalendarProjection";
 import { generateIcsCalendar } from "@/lib/calendar/icsExportEngine";
+import { getSessionUser } from "@/lib/auth";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
+    const sessionUser = await getSessionUser(request);
     const { searchParams } = new URL(request.url);
 
     const now = new Date();
@@ -12,8 +16,8 @@ export async function GET(request: NextRequest) {
 
     const startDate = searchParams.get("start") || defaultStart;
     const endDate = searchParams.get("end") || defaultEnd;
-    const userRole = searchParams.get("role") || "PUBLIC";
-    const userId = searchParams.get("userId") || undefined;
+    const userRole = sessionUser ? sessionUser.role : "PUBLIC";
+    const userId = sessionUser ? sessionUser.userId : undefined;
     const title = searchParams.get("title") || "EHRJ Madrasha Calendar";
 
     // Obtain strictly authorized events

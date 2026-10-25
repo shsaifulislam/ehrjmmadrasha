@@ -1,0 +1,678 @@
+[
+  {
+    "id": "AUDIT-CMP-1790736617959-c09d",
+    "entityType": "REMEDIATION",
+    "entityId": "EHRJ-REM-CMP-2026-0002",
+    "action": "REMEDIATION_VERIFIED_AND_CLOSED",
+    "actorId": "EMP-0001",
+    "actorName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "actorRole": "PRINCIPAL",
+    "timestamp": "2026-09-30T02:50:17.959Z",
+    "changes": {
+      "isVerified": true,
+      "verificationNotes": "ব্যাংক থেকে সিলযুক্ত ফ্রেশ কপি সংগৃহীত ও সংযুক্ত করা হয়েছে।"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617953-559b",
+    "entityType": "REMEDIATION",
+    "entityId": "EHRJ-REM-CMP-2026-0002",
+    "action": "REMEDIATION_CREATED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:50:17.953Z",
+    "changes": {
+      "newRemediation": {
+        "id": "EHRJ-REM-CMP-2026-0002",
+        "obligationId": "EHRJ-COMP-2026-0005",
+        "problem": "ব্যাংক চালানের একটি কপিতে হিসাব শাখার সিলের অস্পষ্টতা",
+        "rootCause": "প্রক্রিয়াগত বিলম্ব ও প্রিন্টারের কালি স্বল্পতা",
+        "correctiveAction": "ব্যাংক থেকে নতুন প্রত্যায়িত কপি সংগ্রহপূর্বক ফাইলে সংরক্ষণ",
+        "ownerId": "EMP-0005",
+        "ownerName": "মুহাম্মদ আব্দুল্লাহ",
+        "dueDate": "2026-04-10",
+        "isVerified": false,
+        "status": "OPEN",
+        "createdAt": "2026-09-30T02:50:17.949Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617945-6374",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-CMP-2026-0002",
+    "action": "EXCEPTION_APPROVED",
+    "actorId": "EMP-0001",
+    "actorName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "actorRole": "PRINCIPAL",
+    "timestamp": "2026-09-30T02:50:17.945Z",
+    "changes": {
+      "decision": "APPROVED",
+      "reason": "বোর্ডের সার্ভার রক্ষণাবেক্ষণ সাপেক্ষে সাময়িক হার্ডকপি বিকল্প অনুমোদন করা হলো।"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617936-b533",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-CMP-2026-0002",
+    "action": "EXCEPTION_REQUESTED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:50:17.936Z",
+    "changes": {
+      "newException": {
+        "id": "EHRJ-EXC-CMP-2026-0002",
+        "obligationId": "EHRJ-COMP-2026-0005",
+        "requirementId": "EHRJ-REQ-CMP-2026-0006",
+        "reason": "বোর্ড অনলাইন পোর্টালে সার্ভার ডাউন থাকায় হার্ডকপি দাখিলের সাময়িক অনুমোদন",
+        "scope": "অনলাইন পোর্টাল জটিলতা ছাড়",
+        "startDate": "2026-03-01",
+        "endDate": "2026-04-15",
+        "compensatingControl": "জেলা শিক্ষা অফিসে সশরীরে হার্ডকপি জমা দিয়ে প্রাপ্তি স্বীকার সংরক্ষণ",
+        "requestedBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "status": "REQUESTED",
+        "reviewDate": "2026-04-15",
+        "createdAt": "2026-09-30T02:50:17.932Z",
+        "updatedAt": "2026-09-30T02:50:17.932Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617926-e39a",
+    "entityType": "REVIEW",
+    "entityId": "EHRJ-REV-CMP-2026-0003",
+    "action": "COMPLIANCE_REVIEW_CONDUCTED",
+    "actorId": "EMP-0001",
+    "actorName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "actorRole": "PRINCIPAL",
+    "timestamp": "2026-09-30T02:50:17.926Z",
+    "changes": {
+      "review": {
+        "id": "EHRJ-REV-CMP-2026-0003",
+        "obligationId": "EHRJ-COMP-2026-0005",
+        "requirementId": "EHRJ-REQ-CMP-2026-0006",
+        "reviewerId": "EMP-0001",
+        "reviewerName": "মুহতামিম / অধ্যক্ষ সাহেব",
+        "reviewerRole": "PRINCIPAL",
+        "reviewDate": "2026-09-30",
+        "evidenceReviewed": [
+          "EHRJ-EVD-CMP-2026-0005"
+        ],
+        "checklistAnswers": {
+          "requirementExists": true,
+          "evidenceAvailable": true,
+          "responsibleAssigned": true,
+          "deadlineMet": true,
+          "requiredDocumentValid": true,
+          "requiredApprovalObtained": true,
+          "requiredReportSubmitted": true
+        },
+        "decision": "COMPLIANT",
+        "findingsNotes": "বোর্ড স্বীকৃতি নবায়ন চালান ও প্রমাণপত্র শতভাগ সন্তোষজনক।",
+        "remediationRequired": false,
+        "nextReviewDate": "2027-01-10",
+        "createdAt": "2026-09-30T02:50:17.919Z"
+      },
+      "decision": "COMPLIANT"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617914-38d8",
+    "entityType": "EVIDENCE",
+    "entityId": "EHRJ-EVD-CMP-2026-0005",
+    "action": "EVIDENCE_VERIFIED",
+    "actorId": "EMP-0001",
+    "actorName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "actorRole": "PRINCIPAL",
+    "timestamp": "2026-09-30T02:50:17.914Z",
+    "changes": {
+      "status": "VERIFIED",
+      "notes": "চালান যাচাইকৃত ও ব্যাংক সিল স্বাক্ষরিত পাওয়া গেছে।"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617907-232e",
+    "entityType": "EVIDENCE",
+    "entityId": "EHRJ-EVD-CMP-2026-0005",
+    "action": "EVIDENCE_RECORDED",
+    "actorId": "EMP-0012",
+    "actorName": "মাওলানা মোহাম্মদ রফিক",
+    "actorRole": "TEACHER",
+    "timestamp": "2026-09-30T02:50:17.908Z",
+    "changes": {
+      "newEvidence": {
+        "id": "EHRJ-EVD-CMP-2026-0005",
+        "obligationId": "EHRJ-COMP-2026-0005",
+        "title": "সোনালী ব্যাংক চালান রশিদ - পাঠদান নবায়ন ফি",
+        "source": "সোনালী ব্যাংক পিএলসি, ইলিয়টগঞ্জ শাখা",
+        "evidenceType": "SUBMISSION_RECEIPT",
+        "fileToken": "DOC-EVD-2026-CHALAN-0012",
+        "hash": "d39521fb40ab07c70e3a1326ddd98e6ae3f98424d7ff9e7482948f0b5e2a1b18",
+        "dateCollected": "2026-09-30",
+        "expiryDate": "2026-12-31",
+        "collectorId": "EMP-0012",
+        "collectorName": "মাওলানা মোহাম্মদ রফিক",
+        "verificationStatus": "PENDING",
+        "createdAt": "2026-09-30T02:50:17.899Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617894-3bd4",
+    "entityType": "OBLIGATION",
+    "entityId": "EHRJ-COMP-2026-0005",
+    "action": "OWNER_REASSIGNED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:50:17.895Z",
+    "changes": {
+      "previousOwner": "মাওলানা মোহাম্মদ রফিক",
+      "newOwner": "মুহাম্মদ আব্দুল্লাহ"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617887-695b",
+    "entityType": "OBLIGATION",
+    "entityId": "EHRJ-COMP-2026-0005",
+    "action": "STATUS_UPDATED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:50:17.887Z",
+    "changes": {
+      "previousStatus": "NOT_STARTED",
+      "newStatus": "IN_PROGRESS",
+      "notes": "চালান ফর্ম পূরণ চলছে"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617880-db4f",
+    "entityType": "OBLIGATION",
+    "entityId": "EHRJ-COMP-2026-0005",
+    "action": "OBLIGATION_CREATED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:50:17.880Z",
+    "changes": {
+      "newObligation": {
+        "id": "EHRJ-COMP-2026-0005",
+        "requirementId": "EHRJ-REQ-CMP-2026-0006",
+        "title": "বোর্ড স্বীকৃতি নবায়ন ফি জমাদান ও চালান স্লিপ সংরক্ষণ",
+        "description": "সোনালী ব্যাংকে বোর্ড ফি জমা দিয়ে চালানের স্ক্যান কপি সংরক্ষণ করা।",
+        "ownerId": "EMP-0012",
+        "ownerName": "মাওলানা মোহাম্মদ রফিক",
+        "ownerRole": "সহকারী প্রধান শিক্ষক",
+        "reviewerId": "EMP-0001",
+        "reviewerName": "মুহতামিম / অধ্যক্ষ সাহেব",
+        "responsibilityType": "RESPONSIBLE",
+        "frequency": "ANNUAL",
+        "startDate": "2026-01-01",
+        "dueDate": "2026-04-30",
+        "deadlineSource": "বোর্ড প্রজ্ঞাপন সময়সীমা",
+        "status": "NOT_STARTED",
+        "evidenceIds": [],
+        "createdAt": "2026-09-30T02:50:17.876Z",
+        "updatedAt": "2026-09-30T02:50:17.876Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617870-8560",
+    "entityType": "REQUIREMENT",
+    "entityId": "EHRJ-REQ-CMP-2026-0006",
+    "action": "APPLICABILITY_CHANGED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:50:17.870Z",
+    "changes": {
+      "isApplicable": true,
+      "reason": "পুনরায় সমগ্র মাদরাসায় প্রযোজ্য ঘোষণা",
+      "reviewer": "মুহতামিম / অধ্যক্ষ সাহেব"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617862-7eba",
+    "entityType": "REQUIREMENT",
+    "entityId": "EHRJ-REQ-CMP-2026-0006",
+    "action": "APPLICABILITY_CHANGED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:50:17.862Z",
+    "changes": {
+      "isApplicable": false,
+      "reason": "শুধুমাত্র কারিগরি শাখার জন্য প্রযোজ্য হওয়ায় সাধারণ শাখায় রেয়াত প্রদান।",
+      "reviewer": "মুহতামিম / অধ্যক্ষ সাহেব"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617853-5a01",
+    "entityType": "REQUIREMENT",
+    "entityId": "EHRJ-REQ-CMP-2026-0006",
+    "action": "REQUIREMENT_VERSION_INCREMENTED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:50:17.853Z",
+    "changes": {
+      "previous": {
+        "id": "EHRJ-REQ-CMP-2026-0006",
+        "version": 1,
+        "title": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড বার্ষিক পাঠদান অনুমতি নবায়ন",
+        "description": "২০২৬ শিক্ষাবর্ষের স্বীকৃতি ও পাঠদান অনুমতি নবায়নের আবেদন বোর্ড সমীপে দাখিল।",
+        "source": "AUTHORITY",
+        "sourceReference": "BMEB/Renewal/2026/08",
+        "isLegallyMandatedVerified": true,
+        "authoritativeSourceRef": "বোর্ড স্বীকৃতি বিধিমালা ২০২৪",
+        "jurisdiction": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড (ঢাকা)",
+        "category": "ACADEMIC_CURRICULUM",
+        "applicabilityScope": "INSTITUTION_WIDE",
+        "isApplicable": true,
+        "effectiveDate": "2026-01-01",
+        "reviewDate": "2026-12-31",
+        "status": "ACTIVE",
+        "createdBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "updatedBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "createdAt": "2026-09-30T02:50:17.834Z",
+        "updatedAt": "2026-09-30T02:50:17.834Z"
+      },
+      "updated": {
+        "id": "EHRJ-REQ-CMP-2026-0006",
+        "version": 2,
+        "title": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড বার্ষিক পাঠদান ও দাখিল অনুমতি নবায়ন (সংশোধিত)",
+        "description": "২০২৬ শিক্ষাবর্ষের স্বীকৃতি ও পাঠদান অনুমতি নবায়নের আবেদন বোর্ড সমীপে দাখিল।",
+        "source": "AUTHORITY",
+        "sourceReference": "BMEB/Renewal/2026/08",
+        "isLegallyMandatedVerified": true,
+        "authoritativeSourceRef": "বোর্ড স্বীকৃতি বিধিমালা ২০২৪",
+        "jurisdiction": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড (ঢাকা)",
+        "category": "ACADEMIC_CURRICULUM",
+        "applicabilityScope": "INSTITUTION_WIDE",
+        "isApplicable": true,
+        "effectiveDate": "2026-01-01",
+        "reviewDate": "2026-12-31",
+        "status": "ACTIVE",
+        "createdBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "updatedBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "createdAt": "2026-09-30T02:50:17.834Z",
+        "updatedAt": "2026-09-30T02:50:17.849Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736617840-bffd",
+    "entityType": "REQUIREMENT",
+    "entityId": "EHRJ-REQ-CMP-2026-0006",
+    "action": "REQUIREMENT_CREATED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:50:17.842Z",
+    "changes": {
+      "newRequirement": {
+        "id": "EHRJ-REQ-CMP-2026-0006",
+        "version": 1,
+        "title": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড বার্ষিক পাঠদান অনুমতি নবায়ন",
+        "description": "২০২৬ শিক্ষাবর্ষের স্বীকৃতি ও পাঠদান অনুমতি নবায়নের আবেদন বোর্ড সমীপে দাখিল।",
+        "source": "AUTHORITY",
+        "sourceReference": "BMEB/Renewal/2026/08",
+        "isLegallyMandatedVerified": true,
+        "authoritativeSourceRef": "বোর্ড স্বীকৃতি বিধিমালা ২০২৪",
+        "jurisdiction": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড (ঢাকা)",
+        "category": "ACADEMIC_CURRICULUM",
+        "applicabilityScope": "INSTITUTION_WIDE",
+        "isApplicable": true,
+        "effectiveDate": "2026-01-01",
+        "reviewDate": "2026-12-31",
+        "status": "ACTIVE",
+        "createdBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "updatedBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "createdAt": "2026-09-30T02:50:17.834Z",
+        "updatedAt": "2026-09-30T02:50:17.834Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260136-b1e7",
+    "entityType": "REMEDIATION",
+    "entityId": "EHRJ-REM-CMP-2026-0001",
+    "action": "REMEDIATION_VERIFIED_AND_CLOSED",
+    "actorId": "EMP-0001",
+    "actorName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "actorRole": "PRINCIPAL",
+    "timestamp": "2026-09-30T02:44:20.136Z",
+    "changes": {
+      "isVerified": true,
+      "verificationNotes": "ব্যাংক থেকে সিলযুক্ত ফ্রেশ কপি সংগৃহীত ও সংযুক্ত করা হয়েছে।"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260130-eb61",
+    "entityType": "REMEDIATION",
+    "entityId": "EHRJ-REM-CMP-2026-0001",
+    "action": "REMEDIATION_CREATED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:44:20.131Z",
+    "changes": {
+      "newRemediation": {
+        "id": "EHRJ-REM-CMP-2026-0001",
+        "obligationId": "EHRJ-COMP-2026-0004",
+        "problem": "ব্যাংক চালানের একটি কপিতে হিসাব শাখার সিলের অস্পষ্টতা",
+        "rootCause": "প্রক্রিয়াগত বিলম্ব ও প্রিন্টারের কালি স্বল্পতা",
+        "correctiveAction": "ব্যাংক থেকে নতুন প্রত্যায়িত কপি সংগ্রহপূর্বক ফাইলে সংরক্ষণ",
+        "ownerId": "EMP-0005",
+        "ownerName": "মুহাম্মদ আব্দুল্লাহ",
+        "dueDate": "2026-04-10",
+        "isVerified": false,
+        "status": "OPEN",
+        "createdAt": "2026-09-30T02:44:20.128Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260124-659e",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-CMP-2026-0001",
+    "action": "EXCEPTION_APPROVED",
+    "actorId": "EMP-0001",
+    "actorName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "actorRole": "PRINCIPAL",
+    "timestamp": "2026-09-30T02:44:20.124Z",
+    "changes": {
+      "decision": "APPROVED",
+      "reason": "বোর্ডের সার্ভার রক্ষণাবেক্ষণ সাপেক্ষে সাময়িক হার্ডকপি বিকল্প অনুমোদন করা হলো।"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260114-b69e",
+    "entityType": "EXCEPTION",
+    "entityId": "EHRJ-EXC-CMP-2026-0001",
+    "action": "EXCEPTION_REQUESTED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:44:20.114Z",
+    "changes": {
+      "newException": {
+        "id": "EHRJ-EXC-CMP-2026-0001",
+        "obligationId": "EHRJ-COMP-2026-0004",
+        "requirementId": "EHRJ-REQ-CMP-2026-0005",
+        "reason": "বোর্ড অনলাইন পোর্টালে সার্ভার ডাউন থাকায় হার্ডকপি দাখিলের সাময়িক অনুমোদন",
+        "scope": "অনলাইন পোর্টাল জটিলতা ছাড়",
+        "startDate": "2026-03-01",
+        "endDate": "2026-04-15",
+        "compensatingControl": "জেলা শিক্ষা অফিসে সশরীরে হার্ডকপি জমা দিয়ে প্রাপ্তি স্বীকার সংরক্ষণ",
+        "requestedBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "status": "REQUESTED",
+        "reviewDate": "2026-04-15",
+        "createdAt": "2026-09-30T02:44:20.111Z",
+        "updatedAt": "2026-09-30T02:44:20.111Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260106-fe24",
+    "entityType": "REVIEW",
+    "entityId": "EHRJ-REV-CMP-2026-0002",
+    "action": "COMPLIANCE_REVIEW_CONDUCTED",
+    "actorId": "EMP-0001",
+    "actorName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "actorRole": "PRINCIPAL",
+    "timestamp": "2026-09-30T02:44:20.107Z",
+    "changes": {
+      "review": {
+        "id": "EHRJ-REV-CMP-2026-0002",
+        "obligationId": "EHRJ-COMP-2026-0004",
+        "requirementId": "EHRJ-REQ-CMP-2026-0005",
+        "reviewerId": "EMP-0001",
+        "reviewerName": "মুহতামিম / অধ্যক্ষ সাহেব",
+        "reviewerRole": "PRINCIPAL",
+        "reviewDate": "2026-09-30",
+        "evidenceReviewed": [
+          "EHRJ-EVD-CMP-2026-0004"
+        ],
+        "checklistAnswers": {
+          "requirementExists": true,
+          "evidenceAvailable": true,
+          "responsibleAssigned": true,
+          "deadlineMet": true,
+          "requiredDocumentValid": true,
+          "requiredApprovalObtained": true,
+          "requiredReportSubmitted": true
+        },
+        "decision": "COMPLIANT",
+        "findingsNotes": "বোর্ড স্বীকৃতি নবায়ন চালান ও প্রমাণপত্র শতভাগ সন্তোষজনক।",
+        "remediationRequired": false,
+        "nextReviewDate": "2027-01-10",
+        "createdAt": "2026-09-30T02:44:20.100Z"
+      },
+      "decision": "COMPLIANT"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260095-a194",
+    "entityType": "EVIDENCE",
+    "entityId": "EHRJ-EVD-CMP-2026-0004",
+    "action": "EVIDENCE_VERIFIED",
+    "actorId": "EMP-0001",
+    "actorName": "মুহতামিম / অধ্যক্ষ সাহেব",
+    "actorRole": "PRINCIPAL",
+    "timestamp": "2026-09-30T02:44:20.095Z",
+    "changes": {
+      "status": "VERIFIED",
+      "notes": "চালান যাচাইকৃত ও ব্যাংক সিল স্বাক্ষরিত পাওয়া গেছে।"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260088-c93e",
+    "entityType": "EVIDENCE",
+    "entityId": "EHRJ-EVD-CMP-2026-0004",
+    "action": "EVIDENCE_RECORDED",
+    "actorId": "EMP-0012",
+    "actorName": "মাওলানা মোহাম্মদ রফিক",
+    "actorRole": "TEACHER",
+    "timestamp": "2026-09-30T02:44:20.088Z",
+    "changes": {
+      "newEvidence": {
+        "id": "EHRJ-EVD-CMP-2026-0004",
+        "obligationId": "EHRJ-COMP-2026-0004",
+        "title": "সোনালী ব্যাংক চালান রশিদ - পাঠদান নবায়ন ফি",
+        "source": "সোনালী ব্যাংক পিএলসি, ইলিয়টগঞ্জ শাখা",
+        "evidenceType": "SUBMISSION_RECEIPT",
+        "fileToken": "DOC-EVD-2026-CHALAN-0012",
+        "hash": "f3349a8481bdae083c9acae004c2fcb9f6d03094298670e22ed8d8552133ed50",
+        "dateCollected": "2026-09-30",
+        "expiryDate": "2026-12-31",
+        "collectorId": "EMP-0012",
+        "collectorName": "মাওলানা মোহাম্মদ রফিক",
+        "verificationStatus": "PENDING",
+        "createdAt": "2026-09-30T02:44:20.080Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260074-ab10",
+    "entityType": "OBLIGATION",
+    "entityId": "EHRJ-COMP-2026-0004",
+    "action": "OWNER_REASSIGNED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:44:20.074Z",
+    "changes": {
+      "previousOwner": "মাওলানা মোহাম্মদ রফিক",
+      "newOwner": "মুহাম্মদ আব্দুল্লাহ"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260066-02c6",
+    "entityType": "OBLIGATION",
+    "entityId": "EHRJ-COMP-2026-0004",
+    "action": "STATUS_UPDATED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:44:20.066Z",
+    "changes": {
+      "previousStatus": "NOT_STARTED",
+      "newStatus": "IN_PROGRESS",
+      "notes": "চালান ফর্ম পূরণ চলছে"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260060-99a2",
+    "entityType": "OBLIGATION",
+    "entityId": "EHRJ-COMP-2026-0004",
+    "action": "OBLIGATION_CREATED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:44:20.060Z",
+    "changes": {
+      "newObligation": {
+        "id": "EHRJ-COMP-2026-0004",
+        "requirementId": "EHRJ-REQ-CMP-2026-0005",
+        "title": "বোর্ড স্বীকৃতি নবায়ন ফি জমাদান ও চালান স্লিপ সংরক্ষণ",
+        "description": "সোনালী ব্যাংকে বোর্ড ফি জমা দিয়ে চালানের স্ক্যান কপি সংরক্ষণ করা।",
+        "ownerId": "EMP-0012",
+        "ownerName": "মাওলানা মোহাম্মদ রফিক",
+        "ownerRole": "সহকারী প্রধান শিক্ষক",
+        "reviewerId": "EMP-0001",
+        "reviewerName": "মুহতামিম / অধ্যক্ষ সাহেব",
+        "responsibilityType": "RESPONSIBLE",
+        "frequency": "ANNUAL",
+        "startDate": "2026-01-01",
+        "dueDate": "2026-04-30",
+        "deadlineSource": "বোর্ড প্রজ্ঞাপন সময়সীমা",
+        "status": "NOT_STARTED",
+        "evidenceIds": [],
+        "createdAt": "2026-09-30T02:44:20.056Z",
+        "updatedAt": "2026-09-30T02:44:20.056Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260051-b984",
+    "entityType": "REQUIREMENT",
+    "entityId": "EHRJ-REQ-CMP-2026-0005",
+    "action": "APPLICABILITY_CHANGED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:44:20.051Z",
+    "changes": {
+      "isApplicable": true,
+      "reason": "পুনরায় সমগ্র মাদরাসায় প্রযোজ্য ঘোষণা",
+      "reviewer": "মুহতামিম / অধ্যক্ষ সাহেব"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260042-cfb1",
+    "entityType": "REQUIREMENT",
+    "entityId": "EHRJ-REQ-CMP-2026-0005",
+    "action": "APPLICABILITY_CHANGED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:44:20.042Z",
+    "changes": {
+      "isApplicable": false,
+      "reason": "শুধুমাত্র কারিগরি শাখার জন্য প্রযোজ্য হওয়ায় সাধারণ শাখায় রেয়াত প্রদান।",
+      "reviewer": "মুহতামিম / অধ্যক্ষ সাহেব"
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260034-ae2a",
+    "entityType": "REQUIREMENT",
+    "entityId": "EHRJ-REQ-CMP-2026-0005",
+    "action": "REQUIREMENT_VERSION_INCREMENTED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:44:20.034Z",
+    "changes": {
+      "previous": {
+        "id": "EHRJ-REQ-CMP-2026-0005",
+        "version": 1,
+        "title": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড বার্ষিক পাঠদান অনুমতি নবায়ন",
+        "description": "২০২৬ শিক্ষাবর্ষের স্বীকৃতি ও পাঠদান অনুমতি নবায়নের আবেদন বোর্ড সমীপে দাখিল।",
+        "source": "AUTHORITY",
+        "sourceReference": "BMEB/Renewal/2026/08",
+        "isLegallyMandatedVerified": true,
+        "authoritativeSourceRef": "বোর্ড স্বীকৃতি বিধিমালা ২০২৪",
+        "jurisdiction": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড (ঢাকা)",
+        "category": "ACADEMIC_CURRICULUM",
+        "applicabilityScope": "INSTITUTION_WIDE",
+        "isApplicable": true,
+        "effectiveDate": "2026-01-01",
+        "reviewDate": "2026-12-31",
+        "status": "ACTIVE",
+        "createdBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "updatedBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "createdAt": "2026-09-30T02:44:20.011Z",
+        "updatedAt": "2026-09-30T02:44:20.011Z"
+      },
+      "updated": {
+        "id": "EHRJ-REQ-CMP-2026-0005",
+        "version": 2,
+        "title": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড বার্ষিক পাঠদান ও দাখিল অনুমতি নবায়ন (সংশোধিত)",
+        "description": "২০২৬ শিক্ষাবর্ষের স্বীকৃতি ও পাঠদান অনুমতি নবায়নের আবেদন বোর্ড সমীপে দাখিল।",
+        "source": "AUTHORITY",
+        "sourceReference": "BMEB/Renewal/2026/08",
+        "isLegallyMandatedVerified": true,
+        "authoritativeSourceRef": "বোর্ড স্বীকৃতি বিধিমালা ২০২৪",
+        "jurisdiction": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড (ঢাকা)",
+        "category": "ACADEMIC_CURRICULUM",
+        "applicabilityScope": "INSTITUTION_WIDE",
+        "isApplicable": true,
+        "effectiveDate": "2026-01-01",
+        "reviewDate": "2026-12-31",
+        "status": "ACTIVE",
+        "createdBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "updatedBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "createdAt": "2026-09-30T02:44:20.011Z",
+        "updatedAt": "2026-09-30T02:44:20.031Z"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-CMP-1790736260017-7f77",
+    "entityType": "REQUIREMENT",
+    "entityId": "EHRJ-REQ-CMP-2026-0005",
+    "action": "REQUIREMENT_CREATED",
+    "actorId": "ADMIN-01",
+    "actorName": "অ্যাডমিনিস্ট্রেটর",
+    "actorRole": "ADMIN",
+    "timestamp": "2026-09-30T02:44:20.024Z",
+    "changes": {
+      "newRequirement": {
+        "id": "EHRJ-REQ-CMP-2026-0005",
+        "version": 1,
+        "title": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড বার্ষিক পাঠদান অনুমতি নবায়ন",
+        "description": "২০২৬ শিক্ষাবর্ষের স্বীকৃতি ও পাঠদান অনুমতি নবায়নের আবেদন বোর্ড সমীপে দাখিল।",
+        "source": "AUTHORITY",
+        "sourceReference": "BMEB/Renewal/2026/08",
+        "isLegallyMandatedVerified": true,
+        "authoritativeSourceRef": "বোর্ড স্বীকৃতি বিধিমালা ২০২৪",
+        "jurisdiction": "বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড (ঢাকা)",
+        "category": "ACADEMIC_CURRICULUM",
+        "applicabilityScope": "INSTITUTION_WIDE",
+        "isApplicable": true,
+        "effectiveDate": "2026-01-01",
+        "reviewDate": "2026-12-31",
+        "status": "ACTIVE",
+        "createdBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "updatedBy": "অ্যাডমিনিস্ট্রেটর (ADMIN-01)",
+        "createdAt": "2026-09-30T02:44:20.011Z",
+        "updatedAt": "2026-09-30T02:44:20.011Z"
+      }
+    }
+  }
+]

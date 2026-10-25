@@ -6,7 +6,8 @@ import { markBookCopyDamaged } from "@/lib/libraryEngine";
  * POST /api/admin/library/copies/[id]/damaged
  * Record damage for a copy and apply fine if active borrower is responsible
  */
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   try {
     const user = await getSessionUser();
     if (!user || user.role !== "ADMIN") {

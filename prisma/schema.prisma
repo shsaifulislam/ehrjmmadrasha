@@ -140,6 +140,7 @@ model AcademicSession {
   transportRequests      TransportRequest[]
   transportHistories     TransportAssignmentHistory[]
   transportRules         TransportRule[]
+  studentLeaveRequests   StudentLeaveRequest[]
 }
 
 model JamatClass {
@@ -272,6 +273,10 @@ model Student {
   transportRequests      TransportRequest[]
   transportHistories     TransportAssignmentHistory[]
   supportRequests        SupportRequest[]
+  paymentIntents         PaymentIntent[]
+  leaveRequests          StudentLeaveRequest[]
+  correctionRequests     DataCorrectionRequest[]
+  biometricScanLogs      BiometricScanLog[]
 }
 
 model Guardian {
@@ -293,6 +298,52 @@ model Guardian {
   residentialRequests ResidentialRequest[]
   transportRequests   TransportRequest[]
   supportRequests     SupportRequest[]
+  leaveRequests       StudentLeaveRequest[]
+  correctionRequests  DataCorrectionRequest[]
+}
+
+model StudentLeaveRequest {
+  id          String          @id @default(uuid())
+  studentId   String
+  guardianId  String
+  sessionId   String?
+  startDate   DateTime
+  endDate     DateTime
+  reason      String
+  status      String          @default("SUBMITTED") // SUBMITTED, UNDER_REVIEW, APPROVED, REJECTED, CLOSED, CANCELLED
+  adminNote   String?
+  reviewedBy  String?
+  reviewedAt  DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  student     Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  guardian    Guardian        @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+  session     AcademicSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+
+  @@index([studentId, guardianId, status])
+}
+
+model DataCorrectionRequest {
+  id              String    @id @default(uuid())
+  studentId       String?
+  guardianId      String?
+  legacyStudentId String?
+  studentIdNumber String
+  guardianNameBn  String?
+  requestedFields String
+  reasonBn        String
+  status          String    @default("SUBMITTED") // SUBMITTED, UNDER_REVIEW, APPROVED, REJECTED
+  reviewedBy      String?
+  reviewedAt      DateTime?
+  reviewNotes     String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  student         Student?  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  guardian        Guardian? @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+
+  @@index([studentId, guardianId, status])
 }
 
 model GuardianStudent {
@@ -417,6 +468,13 @@ model Attendance {
   sectionId        String?
   date             DateTime
   status           String          // PRESENT, ABSENT, LATE, LEAVE
+  checkInTime      DateTime?
+  checkOutTime     DateTime?
+  entryMethod      String?         // QR_CODE, FINGERPRINT, FACE_RECOGNITION, PIN_ENTRY, MANUAL
+  exitMethod       String?         // QR_CODE, FINGERPRINT, FACE_RECOGNITION, PIN_ENTRY, MANUAL
+  checkInSmsSent   Boolean         @default(false)
+  checkOutSmsSent  Boolean         @default(false)
+  deviceUid        String?
   remarks          String?
   leaveReason      String?
   markedByUserId   String?
@@ -456,6 +514,26 @@ model AttendanceLock {
 
   @@unique([sessionId, classId, sectionId, date])
   @@index([sessionId, classId, date])
+}
+
+model BiometricScanLog {
+  id              String   @id @default(uuid())
+  studentId       String
+  date            DateTime @default(now())
+  scanType        String   // CHECK_IN, CHECK_OUT
+  method          String   // QR_CODE, FINGERPRINT, FACE_RECOGNITION, PIN_ENTRY
+  deviceUid       String?
+  status          String   @default("SUCCESS") // SUCCESS, REJECTED, DUPLICATE, WARNING
+  smsSent         Boolean  @default(false)
+  smsDestination  String?
+  smsDeliveryId   String?
+  remarks         String?
+  createdAt       DateTime @default(now())
+
+  student         Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId, date])
+  @@index([date, scanType])
 }
 
 // -------------------------------------------------------------
@@ -651,6 +729,7 @@ model FeeInvoice {
   refunds       Refund[]
   documentRequests DocumentRequest[]
   libraryIssues    LibraryIssue[]
+  paymentIntents PaymentIntent[]
 
   @@index([studentId, sessionId, status])
 }
@@ -673,10 +752,11 @@ model PaymentReceipt {
   studentId       String
   amount          Float
   paymentMethod   String        // CASH, BKASH, NAGAD, ROCKET, BANK
-  transactionId   String?
-  paymentStatus   String        @default("SUCCESSFUL") // PENDING, SUCCESSFUL, FAILED, CANCELLED, REFUNDED
+  transactionId   String?       @unique // Database-enforced uniqueness
+  paymentStatus   String        @default("SUCCESSFUL") // PENDING, SUCCESSFUL, FAILED, CANCELLED, REFUNDED, PARTIALLY_REFUNDED, PENDING_VERIFICATION
   idempotencyKey  String?       @unique
   fundCode        String        @default("GENERAL") // GENERAL, LILLAH, ZAKAT, CONSTRUCTION, ORPHAN_SUPPORT
+  financialAccountId String?
   receivedByUserId String?
   receiptDate     DateTime      @default(now())
   qrCodeToken     String        @unique
@@ -686,6 +766,72 @@ model PaymentReceipt {
   invoice         FeeInvoice    @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   student         Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
   refunds         Refund[]
+
+  @@index([transactionId])
+  @@index([studentId, paymentStatus])
+}
+
+model PaymentIntent {
+  id                    String        @id @default(uuid())
+  intentNumber          String        @unique // e.g. "PI-2026-00001"
+  invoiceId             String
+  studentId             String
+  guardianUserId        String
+  amount                Float
+  currency              String        @default("BDT")
+  provider              String        // BKASH, NAGAD, BANK
+  gatewayPaymentId      String?       @unique // External ID, e.g. bKash paymentID
+  gatewayTransactionId  String?       @unique // External TrxID from gateway
+  status                String        @default("CREATED") // CREATED, PENDING, PROCESSING, SUCCESSFUL, FAILED, CANCELLED, EXPIRED
+  idempotencyKey        String        @unique
+  checkoutUrl           String?
+  clientCallbackUrl     String?
+  expiresAt             DateTime
+  rawGatewayResponse    String?       // JSON metadata
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  invoice               FeeInvoice    @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  student               Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([guardianUserId, status])
+  @@index([gatewayPaymentId])
+}
+
+model InboundWebhookEvent {
+  id                    String        @id @default(uuid())
+  webhookId             String        @unique // e.g. "WH-IN-..."
+  provider              String        // BKASH, NAGAD, BANK
+  eventType             String
+  payloadHash           String
+  signature             String?
+  signatureStatus       String        // VERIFIED, INVALID, MISSING
+  processingStatus      String        // PROCESSED, FAILED, DEAD_LETTER, DUPLICATE
+  idempotencyKey        String        @unique
+  correlationId         String?
+  attemptCount          Int           @default(1)
+  error                 String?
+  receivedAt            DateTime      @default(now())
+  processedAt           DateTime?
+
+  @@index([provider, eventType])
+  @@index([processingStatus])
+}
+
+model DeadLetterQueue {
+  id                    String        @id @default(uuid())
+  source                String        // INBOUND_WEBHOOK, OUTBOUND_WEBHOOK, RECONCILIATION
+  referenceId           String
+  provider              String?
+  eventType             String
+  lastError             String
+  attempts              Int           @default(1)
+  correlationId         String?
+  resolutionStatus      String        @default("PENDING") // PENDING, RESOLVED, IGNORED
+  quarantinedAt         DateTime      @default(now())
+  resolvedAt            DateTime?
+
+  @@index([source, resolutionStatus])
 }
 
 model FinancialAssistance {
@@ -763,20 +909,24 @@ model FeeStructure {
 }
 
 model Refund {
-  id               String          @id @default(uuid())
-  refundNumber     String          @unique // e.g. "EHRJ-RFD-2026-00001"
-  paymentId        String
-  invoiceId        String
-  amount           Float
-  reason           String
-  approvedByUserId String?
-  refundMethod     String          @default("CASH")
-  refundDate       DateTime        @default(now())
-  fundCode         String          @default("GENERAL")
-  createdAt        DateTime        @default(now())
+  id                        String          @id @default(uuid())
+  refundNumber              String          @unique // e.g. "EHRJ-RFD-2026-00001"
+  paymentId                 String
+  invoiceId                 String
+  amount                    Float
+  reason                    String
+  status                    String          @default("EXECUTED") // PENDING_APPROVAL, APPROVED, REJECTED, EXECUTED
+  approvedByUserId          String?
+  principalApprovedByUserId String?
+  principalDecisionDate     DateTime?
+  rejectionReason           String?
+  refundMethod              String          @default("CASH")
+  refundDate                DateTime        @default(now())
+  fundCode                  String          @default("GENERAL")
+  createdAt                 DateTime        @default(now())
 
-  payment          PaymentReceipt  @relation(fields: [paymentId], references: [id], onDelete: Cascade)
-  invoice          FeeInvoice      @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  payment                   PaymentReceipt  @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  invoice                   FeeInvoice      @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
 }
 
 model Scholarship {

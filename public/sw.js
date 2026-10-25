@@ -76,13 +76,19 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // B. Static Assets (Images, Next.js static files) -> Cache First
+  // B. Static Assets (Images, Icons, Media) -> Cache First
+  // Note: Do NOT cache /_next/static/ internal JS chunks here. Next.js handles immutable HTTP
+  // caching headers for hashed chunks. Intercepting Next.js internal JS chunks via SW Cache-First
+  // causes stale chunk mismatches and TypeError: undefined.call() across builds and HMR.
   if (
-    url.pathname.startsWith("/_next/static/") ||
+    url.pathname.startsWith("/_next/image") ||
     url.pathname.startsWith("/images/") ||
     url.pathname.endsWith(".jpg") ||
+    url.pathname.endsWith(".jpeg") ||
     url.pathname.endsWith(".png") ||
-    url.pathname.endsWith(".svg")
+    url.pathname.endsWith(".svg") ||
+    url.pathname.endsWith(".webp") ||
+    url.pathname.endsWith(".ico")
   ) {
     event.respondWith(
       caches.match(request).then((cached) => {

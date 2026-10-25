@@ -52,7 +52,7 @@ export function escapePlainText(text: string): string {
 export function isSafeExternalUrl(urlStr: string): boolean {
   if (!urlStr || typeof urlStr !== "string") return false;
   try {
-    const parsed = new URL(urlStr, "https://ehrj-madrasha.edu.bd");
+    const parsed = new URL(urlStr, "https://www.ehrjmadrasha.com");
     return parsed.protocol === "http:" || parsed.protocol === "https:";
   } catch {
     return false;

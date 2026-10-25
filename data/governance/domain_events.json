@@ -242,5 +242,56 @@
     "correlationId": "EVT-2026-000014",
     "schemaVersion": "1.0",
     "idempotencyKey": "test_evt_phase28_1790666122445"
+  },
+  {
+    "eventId": "EVT-2026-000015",
+    "eventType": "STUDENT_CREATED",
+    "occurredAt": "2026-10-04T08:30:40.596Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "ADMISSION",
+    "entityType": "Student",
+    "entityId": "STU-TEST-9999",
+    "payload": {
+      "studentName": "টেস্ট শিক্ষার্থী",
+      "classCode": "CLASS_1"
+    },
+    "correlationId": "EVT-2026-000015",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "test_evt_phase28_1791102640595"
+  },
+  {
+    "eventId": "EVT-2026-000016",
+    "eventType": "STUDENT_CREATED",
+    "occurredAt": "2026-10-04T08:33:02.564Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "ADMISSION",
+    "entityType": "Student",
+    "entityId": "STU-TEST-9999",
+    "payload": {
+      "studentName": "টেস্ট শিক্ষার্থী",
+      "classCode": "CLASS_1"
+    },
+    "correlationId": "EVT-2026-000016",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "test_evt_phase28_1791102782563"
+  },
+  {
+    "eventId": "EVT-2026-000017",
+    "eventType": "STUDENT_CREATED",
+    "occurredAt": "2026-10-04T08:43:29.222Z",
+    "actorType": "SYSTEM_AUTOMATION",
+    "actorId": "SYSTEM",
+    "sourceModule": "ADMISSION",
+    "entityType": "Student",
+    "entityId": "STU-TEST-9999",
+    "payload": {
+      "studentName": "টেস্ট শিক্ষার্থী",
+      "classCode": "CLASS_1"
+    },
+    "correlationId": "EVT-2026-000017",
+    "schemaVersion": "1.0",
+    "idempotencyKey": "test_evt_phase28_1791103409220"
   }
 ]

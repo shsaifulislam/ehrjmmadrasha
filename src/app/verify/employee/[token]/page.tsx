@@ -1,16 +1,19 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { CheckCircle, XCircle, ShieldCheck, Building, User, Calendar, Award } from "lucide-react";
 
-export default function PublicEmployeeVerifyPage({ params }: { params: { token: string } }) {
+export default function PublicEmployeeVerifyPage() {
+  const params = useParams();
+  const token = params?.token as string;
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
     async function verify() {
       try {
-        const res = await fetch(`/api/public/hr/verify/${params.token}`);
+        const res = await fetch(`/api/public/hr/verify/${token}`);
         const result = await res.json();
         setData(result);
       } catch (e) {
@@ -19,10 +22,10 @@ export default function PublicEmployeeVerifyPage({ params }: { params: { token: 
         setLoading(false);
       }
     }
-    if (params.token) {
+    if (token) {
       verify();
     }
-  }, [params.token]);
+  }, [token]);
 
   return (
     <div className="min-h-screen bg-[#F9F8F3] py-12 px-4 sm:px-6 flex items-center justify-center">

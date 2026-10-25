@@ -102,3 +102,54 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: error.message || "সার্ভার এরর" }, { status: 500 });
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const user = await getCurrentUser();
+    if (!user || user.role !== "ADMIN") {
+      return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ error: "আইডি আবশ্যক।" }, { status: 400 });
+    }
+
+    const existing = await prisma.examType.findUnique({
+      where: { id },
+      include: {
+        _count: {
+          select: { exams: true },
+        },
+      },
+    });
+
+    if (!existing) {
+      return NextResponse.json({ error: "পরীক্ষার ধরন পাওয়া যায়নি।" }, { status: 404 });
+    }
+
+    if (existing._count.exams > 0) {
+      return NextResponse.json(
+        { error: "এই ধরনের অধীনে ইতিমধ্যে পরীক্ষা তৈরি করা রয়েছে। এটি মুছে ফেলা সম্ভব নয়।" },
+        { status: 400 }
+      );
+    }
+
+    await prisma.examType.delete({ where: { id } });
+
+    await recordAuditLog({
+      userId: user.userId,
+      action: "EXAM_TYPE_DELETED",
+      entityType: "ExamType",
+      entityId: id,
+      details: { code: existing.code, nameBn: existing.nameBn },
+    });
+
+    return NextResponse.json({ message: "পরীক্ষার ধরন সফলভাবে অপসারিত হয়েছে।" });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message || "সার্ভার এরর" }, { status: 500 });
+  }
+}
+

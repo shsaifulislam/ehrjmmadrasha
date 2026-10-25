@@ -1,0 +1,102 @@
+{
+  "admission": {
+    "isOpen": true,
+    "sessionName": "২০২৬",
+    "closedMessage": "ভর্তি সাময়িকভাবে বন্ধ আছে। টেস্ট নোটিশ।",
+    "helplinePhone": "01845-162664",
+    "updatedAt": "2026-10-06T20:47:36.480Z"
+  },
+  "paymentMethods": [
+    {
+      "id": "pm-bkash-01",
+      "type": "BKASH",
+      "nameBn": "বিকাশ (bKash)",
+      "accountNumber": "01845162664",
+      "accountType": "MERCHANT",
+      "instructions": "বিকাশ অ্যাপের 'Payment' অথবা 'Send Money' অপশন ব্যবহার করে নির্ধারিত ফি/অনুদান পরিশোধ করুন এবং প্রাপ্ত ট্রানজেকশন আইডি (TrxID) নিচে প্রদান করুন।",
+      "isEnabled": true,
+      "apiMode": "SANDBOX",
+      "updatedAt": "2026-10-06T20:43:08.959Z"
+    },
+    {
+      "id": "pm-nagad-01",
+      "type": "NAGAD",
+      "nameBn": "নগদ (Nagad)",
+      "accountNumber": "01826416696",
+      "accountType": "MERCHANT",
+      "instructions": "নগদ অ্যাপ বা *167# ডায়াল করে পেমেন্ট সম্পন্ন করুন এবং ট্রানজেকশন আইডি সাবমিট করুন।",
+      "isEnabled": true,
+      "apiMode": "SANDBOX",
+      "updatedAt": "2026-10-06T20:43:08.959Z"
+    },
+    {
+      "id": "pm-bank-01",
+      "type": "BANK",
+      "nameBn": "অফিসিয়াল ব্যাংক একাউন্ট (Bank Deposit)",
+      "accountNumber": "",
+      "accountType": "BANK_ACCOUNT",
+      "bankName": "",
+      "branchName": "",
+      "accountHolderName": "",
+      "routingNumber": "",
+      "instructions": "মাদরাসার অফিসিয়াল ব্যাংক একাউন্টে ট্রান্সফার করার জন্য অ্যাডমিন প্যানেল থেকে তথ্য কনফিগার করা হলে এখানে প্রদর্শিত হবে।",
+      "isEnabled": false,
+      "updatedAt": "2026-10-06T20:43:08.959Z"
+    },
+    {
+      "id": "pm-1791319389108-o48k",
+      "type": "BKASH",
+      "nameBn": "বিকাশ মার্চেন্ট (নতুন টেস্ট)",
+      "accountNumber": "01845162664",
+      "accountType": "MERCHANT",
+      "instructions": "বিকাশ অ্যাপের মাধ্যমে পেমেন্ট করুন।",
+      "isEnabled": true,
+      "apiMode": "SANDBOX",
+      "updatedAt": "2026-10-06T20:43:09.109Z"
+    },
+    {
+      "id": "pm-1791319435854-xngs",
+      "type": "BKASH",
+      "nameBn": "বিকাশ মার্চেন্ট (নতুন টেস্ট)",
+      "accountNumber": "01845162664",
+      "accountType": "MERCHANT",
+      "instructions": "বিকাশ অ্যাপের মাধ্যমে পেমেন্ট করুন।",
+      "isEnabled": true,
+      "apiMode": "SANDBOX",
+      "updatedAt": "2026-10-06T20:43:55.855Z"
+    },
+    {
+      "id": "pm-1791319656589-458t",
+      "type": "BKASH",
+      "nameBn": "বিকাশ মার্চেন্ট (নতুন টেস্ট)",
+      "accountNumber": "01845162664",
+      "accountType": "MERCHANT",
+      "instructions": "বিকাশ অ্যাপের মাধ্যমে পেমেন্ট করুন।",
+      "isEnabled": true,
+      "apiMode": "SANDBOX",
+      "updatedAt": "2026-10-06T20:47:36.590Z"
+    }
+  ],
+  "documentAutomation": {
+    "autoIssueIdCardOnAdmission": true,
+    "autoIssueAdmissionConfirmation": true,
+    "autoIssueHifzCertificateOnCompletion": true,
+    "autoIssueMishkatCertificateOnCompletion": true,
+    "autoIssueDawraCertificateOnCompletion": true,
+    "autoIssueCharacterCertificate": false,
+    "autoIssueTestimonial": false,
+    "autoIssuePratyayan": false,
+    "autoIssueTC": false,
+    "authorizedSignatoryTitleBn": "মুহতামিম ও অধ্যক্ষ",
+    "authorizedSignatoryName": "মাওলানা মহা. আবুল কালাম সরকার",
+    "updatedAt": "2026-10-07T18:33:53.499Z",
+    "settings": {
+      "autoIssueStudentIdOnAdmission": true,
+      "autoIssueAdmissionConfirmation": true,
+      "autoIssueHifzCertificateOnCompletion": true,
+      "autoIssueMishkatCertificateOnCompletion": true,
+      "autoIssueDawraCertificateOnCompletion": true,
+      "autoIssuePratyayanOnRequest": false
+    }
+  }
+}

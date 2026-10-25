@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   try {
     const user = await getSessionUser();
-    if (!user) {
-      return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস।" }, { status: 403 });
+    if (!user || (user.role !== "ADMIN" && user.role !== "PRINCIPAL")) {
+      return NextResponse.json({ error: "অননুমোদিত অ্যাক্সেস: কেবলমাত্র অ্যাডমিন বা অধ্যক্ষের জন্য প্রযোজ্য।" }, { status: 403 });
     }
 
     const classes = await prisma.jamatClass.findMany({

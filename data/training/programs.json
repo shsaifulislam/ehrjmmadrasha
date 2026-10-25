@@ -1,5 +1,141 @@
 [
   {
+    "id": "EHRJ-TRN-2026-5847",
+    "trainingCode": "EHRJ-TRN-2026-5847",
+    "titleBn": "পরীক্ষামূলক তাজবীদ কর্মশালা",
+    "titleEn": "Experimental Tajweed Workshop",
+    "trainingType": "QURAN_TAHFEEZ_PEDAGOGY",
+    "deliveryMethod": "WORKSHOP",
+    "description": "টেস্টিং উদ্দেশ্যে তৈরি প্রোগ্রাম",
+    "objectivesBn": [],
+    "ownerDepartment": "ACADEMIC",
+    "instructorName": "মাওলানা ক্বারী হাবিবুল্লাহ সাহেব",
+    "instructorRole": "প্রধান ক্বারী",
+    "totalHours": 10,
+    "mandatoryStatus": "MANDATORY",
+    "targetDesignations": [],
+    "targetDepartments": [],
+    "prerequisites": [],
+    "requiredSopIds": [],
+    "capacity": 2,
+    "attendanceThresholdPercentage": 80,
+    "requiresAssessment": true,
+    "passPercentage": 70,
+    "requiresInstructorApproval": true,
+    "issuesCertificate": true,
+    "status": "DRAFT",
+    "currentVersion": 1,
+    "modules": [],
+    "sessions": [],
+    "assessment": {
+      "id": "ASS-TEST-001",
+      "trainingProgramId": "EHRJ-TRN-2026-5847",
+      "titleBn": "তাজবীদ ও মাখরাজ পরীক্ষা",
+      "passPercentage": 70,
+      "totalPoints": 20,
+      "questions": [
+        {
+          "id": "q1",
+          "questionBn": "কুরআনে হরফে ইখফা কয়টি?",
+          "type": "MCQ",
+          "options": [
+            "১০টি",
+            "১৫টি",
+            "১২টি",
+            "১৪টি"
+          ],
+          "correctAnswer": "১৫টি",
+          "points": 10
+        },
+        {
+          "id": "q2",
+          "questionBn": "গুন্নাহ ছাড়া ঈদগাম হরফ কয়টি?",
+          "type": "MCQ",
+          "options": [
+            "২টি (র, লাম)",
+            "৪টি",
+            "৬টি",
+            "৩টি"
+          ],
+          "correctAnswer": "২টি (র, লাম)",
+          "points": 10
+        }
+      ]
+    },
+    "createdBy": "এডমিন সাহেব",
+    "createdAt": "2026-09-29T17:23:35.761Z",
+    "updatedBy": "এডমিন সাহেব",
+    "updatedAt": "2026-09-29T17:23:35.836Z"
+  },
+  {
+    "id": "EHRJ-TRN-2026-5060",
+    "trainingCode": "EHRJ-TRN-2026-5060",
+    "titleBn": "পরীক্ষামূলক তাজবীদ কর্মশালা",
+    "titleEn": "Experimental Tajweed Workshop",
+    "trainingType": "QURAN_TAHFEEZ_PEDAGOGY",
+    "deliveryMethod": "WORKSHOP",
+    "description": "টেস্টিং উদ্দেশ্যে তৈরি প্রোগ্রাম",
+    "objectivesBn": [],
+    "ownerDepartment": "ACADEMIC",
+    "instructorName": "মাওলানা ক্বারী হাবিবুল্লাহ সাহেব",
+    "instructorRole": "প্রধান ক্বারী",
+    "totalHours": 10,
+    "mandatoryStatus": "MANDATORY",
+    "targetDesignations": [],
+    "targetDepartments": [],
+    "prerequisites": [],
+    "requiredSopIds": [],
+    "capacity": 2,
+    "attendanceThresholdPercentage": 80,
+    "requiresAssessment": true,
+    "passPercentage": 70,
+    "requiresInstructorApproval": true,
+    "issuesCertificate": true,
+    "status": "DRAFT",
+    "currentVersion": 1,
+    "modules": [],
+    "sessions": [],
+    "assessment": {
+      "id": "ASS-TEST-001",
+      "trainingProgramId": "EHRJ-TRN-2026-5060",
+      "titleBn": "তাজবীদ ও মাখরাজ পরীক্ষা",
+      "passPercentage": 70,
+      "totalPoints": 20,
+      "questions": [
+        {
+          "id": "q1",
+          "questionBn": "কুরআনে হরফে ইখফা কয়টি?",
+          "type": "MCQ",
+          "options": [
+            "১০টি",
+            "১৫টি",
+            "১২টি",
+            "১৪টি"
+          ],
+          "correctAnswer": "১৫টি",
+          "points": 10
+        },
+        {
+          "id": "q2",
+          "questionBn": "গুন্নাহ ছাড়া ঈদগাম হরফ কয়টি?",
+          "type": "MCQ",
+          "options": [
+            "২টি (র, লাম)",
+            "৪টি",
+            "৬টি",
+            "৩টি"
+          ],
+          "correctAnswer": "২টি (র, লাম)",
+          "points": 10
+        }
+      ]
+    },
+    "createdBy": "এডমিন সাহেব",
+    "createdAt": "2026-09-29T17:13:47.075Z",
+    "updatedBy": "এডমিন সাহেব",
+    "updatedAt": "2026-09-29T17:13:47.145Z"
+  },
+  {
     "id": "EHRJ-TRN-2026-3609",
     "trainingCode": "EHRJ-TRN-2026-3609",
     "titleBn": "পরীক্ষামূলক তাজবীদ কর্মশালা",

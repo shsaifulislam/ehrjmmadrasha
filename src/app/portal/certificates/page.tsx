@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function PortalCertificatesPage() {
-  redirect("/portal?tab=CERTIFICATES");
+  redirect("/portal?tab=DOCUMENTS");
 }

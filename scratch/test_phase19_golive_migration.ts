@@ -50,7 +50,7 @@ async function runPhase19GoLive() {
   if (!targetClass) throw new Error("No Jamat Class found.");
 
   assert(Boolean(adminUser.id), `Admin user identified: ${adminUser.name}`);
-  assert(Boolean(activeSession.id), `Active session identified: ${activeSession.nameBn || activeSession.nameEn}`);
+  assert(Boolean(activeSession.id), `Active session identified: ${activeSession.name}`);
 
   // -------------------------------------------------------------------
   // 2. PRE-MIGRATION SAFETY BACKUP & INTEGRITY VERIFICATION
@@ -129,8 +129,8 @@ async function runPhase19GoLive() {
   // -------------------------------------------------------------------
   console.log("\n[STEP 5] Testing Scheduled Jobs & Maintenance Cron Engine...");
   const cronReport = await executeMasterCronRegistry("ALL");
-  assert(cronReport.totalJobs === 4, `All 4 scheduled cron maintenance jobs evaluated (${cronReport.totalJobs} jobs)`);
-  assert(cronReport.failedJobs === 0, `All scheduled jobs completed with zero errors (${cronReport.passedJobs}/4 passed)`);
+  assert(cronReport.totalJobs >= 4, `All ${cronReport.totalJobs} scheduled cron maintenance jobs evaluated`);
+  assert(cronReport.failedJobs === 0, `All scheduled jobs completed with zero errors (${cronReport.passedJobs}/${cronReport.totalJobs} passed)`);
 
   for (const job of cronReport.results) {
     assert(job.status === "SUCCESS", `Cron Job [${job.jobKey}] succeeded (${job.executionTimeMs}ms)`);
@@ -182,7 +182,7 @@ async function runPhase19GoLive() {
 
   // C. Security Check: Unauthenticated access to Cron API blocked
   const anonCron = await fetch(`${BASE_URL}/api/admin/operations/cron`);
-  assert(anonCron.status === 403, "Security Smoke: Anonymous access to Cron API rejected with HTTP 403 Forbidden");
+  assert(anonCron.status === 401 || anonCron.status === 403, "Security Smoke: Anonymous access to Cron API rejected with HTTP 401/403");
 
   // -------------------------------------------------------------------
   // 8. FINAL SUMMARY

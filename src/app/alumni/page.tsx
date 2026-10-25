@@ -19,6 +19,8 @@ import {
   Calendar,
 } from "lucide-react";
 import { INSTITUTION_INFO } from "@/lib/constants";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function AlumniLandingPage() {
   const [stats, setStats] = useState<any>({
@@ -44,48 +46,56 @@ export default function AlumniLandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 pb-16">
-      {/* Top Banner / Hero */}
-      <div className="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-emerald-800/40 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.15),transparent_50%)]" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center sm:text-left sm:flex sm:items-center sm:justify-between">
-            <div className="space-y-4 max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                <Sparkles className="w-3.5 h-3.5" /> {INSTITUTION_INFO.code} প্রাক্তন ছাত্র ও সুধী সমাজ ফোরাম
-              </div>
-              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight font-serif">
-                ইলিয়টগঞ্জ মাদরাসা অ্যালামনাই নেটওয়ার্ক
-              </h1>
-              <p className="text-lg text-emerald-100/90 leading-relaxed font-sans">
-                প্রতিষ্ঠানের অতীত গৌরব, বর্তমান সম্প্রীতি এবং ভবিষ্যৎ প্রজন্মের অগ্রযাত্রাকে একসূত্রে গাঁথা।
-                হাফেজ, আলেম ও শিক্ষার্থীদের আজীবন ভ্রাতৃত্ব ও সেবামূলক প্ল্যাটফর্ম।
-              </p>
-              <div className="flex flex-wrap gap-3 pt-2">
-                <Link
-                  href="/alumni/directory"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-950/20 transition-all text-sm"
-                >
-                  <Search className="w-4 h-4" /> অ্যালামনাই ডিরেক্টরি খুঁজুন
-                </Link>
-                <Link
-                  href="/portal/alumni"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur transition-all text-sm"
-                >
-                  <UserCheck className="w-4 h-4" /> অ্যালামনাই পোর্টাল লগইন / প্রোফাইল
-                </Link>
-              </div>
-            </div>
-            <div className="mt-8 sm:mt-0 flex justify-center">
-              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-emerald-800/50 border border-emerald-600/40 p-4 flex flex-col items-center justify-center text-center shadow-2xl backdrop-blur">
-                <GraduationCap className="w-12 h-12 text-emerald-300 mb-2" />
-                <span className="text-xs font-bold text-emerald-200">প্রতিষ্ঠা সাল</span>
-                <span className="text-xl font-extrabold text-white">{INSTITUTION_INFO.establishedEn}</span>
-              </div>
-            </div>
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-[#0D5C3A] selection:text-white">
+      <Navbar />
+
+      {/* 1. HERO SECTION */}
+      <section className="page-hero py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
+        <div className="absolute inset-0 page-hero-grid opacity-20 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#D4AF37]/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto relative z-10 space-y-5">
+          <div className="inline-flex items-center gap-2 bg-black/40 border border-[#D4AF37]/50 px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+            <span className="text-amber-200 text-xs font-semibold">
+              প্রাক্তন ছাত্র ও সুধী সমাজ ফোরাম
+            </span>
+          </div>
+
+          <div className="font-arabic text-[#D4AF37] text-2xl sm:text-3xl tracking-widest drop-shadow-sm">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black font-display text-white tracking-tight leading-tight">
+            ইলিয়টগঞ্জ মাদরাসা{" "}
+            <span className="gold-gradient-text inline-block">
+              অ্যালামনাই নেটওয়ার্ক
+            </span>
+          </h1>
+
+          <p className="text-sm sm:text-base lg:text-lg text-emerald-100/90 max-w-2xl mx-auto font-light leading-relaxed">
+            প্রতিষ্ঠানের অতীত গৌরব, বর্তমান সম্প্রীতি এবং ভবিষ্যৎ প্রজন্মের অগ্রযাত্রাকে একসূত্রে গাঁথা। হাফেজ, আলেম ও শিক্ষার্থীদের আজীবন ভ্রাতৃত্বের মঞ্চ।
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <Link
+              href="/alumni/directory"
+              className="btn-gold px-6 py-3 rounded-xl text-xs sm:text-sm font-black flex items-center gap-2 shadow-lg"
+            >
+              <Search className="w-4 h-4" />
+              <span>অ্যালামনাই ডিরেক্টরি খুঁজুন</span>
+            </Link>
+            <Link
+              href="/portal/alumni"
+              className="btn-emerald px-6 py-3 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 backdrop-blur-md"
+            >
+              <UserCheck className="w-4 h-4 text-[#D4AF37]" />
+              <span>অ্যালামনাই পোর্টাল লগইন</span>
+            </Link>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Institutional Invariant & Privacy Callout */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
@@ -260,6 +270,7 @@ export default function AlumniLandingPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

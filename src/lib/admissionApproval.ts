@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { hashPassword } from "@/lib/auth";
 import { generateStudentIdNumber, getNextRollNumber } from "@/lib/studentId";
 import { recordAuditLog } from "@/lib/security";
 
@@ -84,10 +85,32 @@ export async function approveAdmissionTransaction(
   }
 
   const sessionId = session.id;
-  const classId = application.desiredClassId;
+  
+  // Resolve valid JamatClass ID to avoid foreign key violations if application used a name or legacy code
+  let validClass = await prisma.jamatClass.findUnique({ where: { id: application.desiredClassId } });
+  if (!validClass) {
+    validClass = await prisma.jamatClass.findFirst({
+      where: {
+        OR: [
+          { nameBn: application.desiredClassId },
+          { nameEn: application.desiredClassId },
+          { code: application.desiredClassId },
+        ],
+      },
+    });
+  }
+  if (!validClass) {
+    validClass = await prisma.jamatClass.findFirst({ where: { isActive: true } });
+  }
+  const classId = validClass ? validClass.id : application.desiredClassId;
   const sectionId = assignedSectionId || application.desiredSectionId || null;
 
-  // Execute atomic database transaction
+  // Precompute password hash outside of the database transaction to prevent transaction timeout
+  const cleanPhone = (application.guardianPhone || "").replace(/\D/g, "");
+  const initialPassword = `Ehrj@${cleanPhone.slice(-4) || "2026"}`;
+  const precomputedPasswordHash = await hashPassword(initialPassword);
+
+  // Execute atomic database transaction with increased timeout
   const result = await prisma.$transaction(async (tx) => {
     // Re-verify status inside transaction for strict concurrency isolation
     const currentApp = await tx.application.findUnique({
@@ -113,7 +136,7 @@ export async function approveAdmissionTransaction(
       }
       studentIdNumber = student.studentIdNumber;
     } else {
-      studentIdNumber = await generateStudentIdNumber(currentYear);
+      studentIdNumber = await generateStudentIdNumber(currentYear, tx);
 
       student = await tx.student.create({
         data: {
@@ -141,7 +164,41 @@ export async function approveAdmissionTransaction(
       });
     }
 
-    // B. Guardian Creation & Linking
+    // B. Guardian User Account & Profile Provisioning
+    let guardianUser = await tx.user.findFirst({
+      where: {
+        OR: [
+          { phone: application.guardianPhone },
+          ...(application.guardianEmail ? [{ email: application.guardianEmail.toLowerCase().trim() }] : []),
+        ],
+      },
+    });
+
+    const cleanPhone = application.guardianPhone.replace(/\D/g, "");
+    const initialPassword = `Ehrj@${cleanPhone.slice(-4) || "2026"}`;
+
+    if (!guardianUser) {
+      const generatedUsername = `guardian_${cleanPhone || Math.floor(100000 + Math.random() * 900000)}`;
+      const guardianEmail = application.guardianEmail
+        ? application.guardianEmail.toLowerCase().trim()
+        : `${generatedUsername}@guardian.ehrj.local`;
+
+      // Use precomputed password hash (calculated outside transaction for performance)
+      const passwordHash = precomputedPasswordHash;
+
+      guardianUser = await tx.user.create({
+        data: {
+          name: application.guardianName,
+          username: generatedUsername,
+          email: guardianEmail,
+          phone: application.guardianPhone,
+          passwordHash,
+          role: "GUARDIAN",
+          status: "ACTIVE",
+        },
+      });
+    }
+
     let guardian = await tx.guardian.findUnique({
       where: { phone: application.guardianPhone },
     });
@@ -149,12 +206,18 @@ export async function approveAdmissionTransaction(
     if (!guardian) {
       guardian = await tx.guardian.create({
         data: {
+          userId: guardianUser.id,
           fullNameBn: application.guardianName,
           phone: application.guardianPhone,
           email: application.guardianEmail || null,
           relation: application.guardianRelation || "FATHER",
           address: application.guardianAddress || application.address,
         },
+      });
+    } else if (!guardian.userId) {
+      guardian = await tx.guardian.update({
+        where: { id: guardian.id },
+        data: { userId: guardianUser.id },
       });
     }
 
@@ -286,12 +349,17 @@ export async function approveAdmissionTransaction(
     return {
       student,
       guardian,
+      guardianUser,
+      initialPassword: initialPassword || `Ehrj@${cleanPhone.slice(-4) || "2026"}`,
       enrollment,
       invoice,
       studentIdNumber,
       rollNumber: nextRoll,
       updatedApplication,
     };
+  }, {
+    timeout: 30000,
+    maxWait: 15000,
   });
 
   // H. Send Congratulations Email if Guardian Email exists (Outside transaction, non-blocking)
@@ -300,6 +368,7 @@ export async function approveAdmissionTransaction(
       where: { id: application.desiredClassId },
     });
     const className = jamatClass ? jamatClass.nameBn : "মাদরাসা শ্রেণি";
+    const defaultPassword = result.initialPassword || `Ehrj@${application.guardianPhone.replace(/\D/g, "").slice(-4) || "2026"}`;
 
     import("@/lib/mail").then(({ sendAdmissionApprovalEmail }) => {
       sendAdmissionApprovalEmail({
@@ -308,8 +377,23 @@ export async function approveAdmissionTransaction(
         studentIdNumber: result.studentIdNumber,
         className,
         rollNumber: result.rollNumber,
+        portalUsername: result.guardianUser?.username || application.guardianPhone,
+        defaultPassword,
+        guardianPhone: application.guardianPhone,
       }).catch((err) => console.error("Email approval notification error:", err));
     });
+  }
+
+  // I. Automatic Document Issuance Engine (Student ID Card + Admission Confirmation)
+  try {
+    const { triggerAdmissionApprovedAutomation } = await import("@/lib/documentAutomation");
+    await triggerAdmissionApprovedAutomation({
+      studentId: result.student.id,
+      adminUserId,
+      sessionId,
+    });
+  } catch (docErr) {
+    console.error("Admission auto-document generation error:", docErr);
   }
 
   return {
