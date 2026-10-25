@@ -38,6 +38,7 @@ yarn-error.log*
 next-env.d.ts
 
 # prisma sqlite database
+/.next_isolated_build/
 prisma/*.db*
 prisma/*.bak*
 prisma/*.corrupted*
